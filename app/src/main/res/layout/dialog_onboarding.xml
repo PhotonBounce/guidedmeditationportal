@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/onboardingTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to SoundPad!"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp" />
+
+    <TextView
+        android:id="@+id/onboardingDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="• 3 free sounds
+• 11 premium sounds
+• Sleep timer, background playback, and more!
+Upgrade anytime for all features."
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/onboardingOk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Started" />
+
+</LinearLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.SoundPad" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/accent_purple</item>
+        <item name="colorPrimaryVariant">@color/deep_navy</item>
+        <item name="colorOnPrimary">@color/text_primary</item>
+        <item name="colorSecondary">@color/accent_teal</item>
+        <item name="colorOnSecondary">@color/deep_navy</item>
+        <item name="colorSurface">@color/card_bg</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorBackground">@color/deep_navy</item>
+        <item name="colorOnBackground">@color/text_primary</item>
+        <item name="android:windowBackground">@color/deep_navy</item>
+        <item name="android:statusBarColor">@color/deep_navy</item>
+        <item name="android:navigationBarColor">@color/deep_navy</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- Dark alert dialog style -->
+    <style name="AlertDialogDark" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="colorSurface">@color/card_bg</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:background">@color/card_bg</item>
+        <item name="buttonBarPositiveButtonStyle">@style/AlertBtn</item>
+        <item name="buttonBarNegativeButtonStyle">@style/AlertBtn</item>
+        <item name="buttonBarNeutralButtonStyle">@style/AlertBtn</item>
+    </style>
+
+    <style name="AlertBtn" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/accent_purple</item>
+    </style>
+
+</resources>
