@@ -13,6 +13,7 @@
     <string name="premium_desc">Unlock all 14 sounds · Remove ads · 8-hour timer</string>
     <string name="btn_unlock">Unlock — $3.99</string>
     <string name="btn_subscribe">$1.99 / month</string>
+    <string name="btn_subscribe_yearly">$14.99 / year (save 37%)</string>
 
     <!-- Timer -->
     <string name="timer_off">No Timer</string>
@@ -22,11 +23,36 @@
     <string name="notif_channel_name">SoundPad Playback</string>
     <string name="notif_channel_desc">Background sleep sound playback</string>
     <string name="notif_action_stop">Stop</string>
-</resources>
 
-    <!-- About/Legal/Support -->
+    <!-- About / Legal / Support -->
     <string name="about_title">About SoundPad</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="terms_of_service">Terms of Service</string>
     <string name="contact_support">Contact Support</string>
-    <string name="about_menu">About & Legal</string>
+    <string name="about_menu">About &amp; Legal</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_credits">Made with ♥ by Photon Bounce • photon-bounce.com</string>
+
+    <!-- Rewarded ads (also see rewarded_ad_strings.xml) -->
+    <string name="reward_unlock_cta">Watch ad — unlock for tonight</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_menu">Settings</string>
+    <string name="settings_haptics">Haptic feedback</string>
+    <string name="settings_haptics_desc">Subtle vibrations on taps</string>
+    <string name="settings_ui_sounds">UI sounds</string>
+    <string name="settings_ui_sounds_desc">Soft tap and chime sounds</string>
+    <string name="settings_manage_subscription">Manage subscription</string>
+    <string name="settings_reset_consent">Reset ad preferences</string>
+    <string name="settings_replay_onboarding">Replay onboarding</string>
+    <string name="settings_consent_reset_done">Ad consent reset — you\'ll be asked again next launch</string>
+    <string name="settings_onboarding_reset_done">Onboarding will replay on next launch</string>
+
+    <!-- Misc UI -->
+    <string name="now_playing_placeholder">Tap a sound to begin</string>
+    <string name="play_last">▶ Play Last</string>
+    <string name="play_stop">⏹ Stop</string>
+    <string name="timer">⏱ Timer</string>
+    <string name="cancel_timer">Cancel Timer</string>
+</resources>

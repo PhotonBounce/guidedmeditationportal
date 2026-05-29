@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SoundPad</string>
+    <string name="app_tagline">Dormir · Se concentrer · Se détendre</string>
+
+    <string name="sound_white">Bruit Blanc</string>
+    <string name="sound_pink">Bruit Rose</string>
+    <string name="sound_brown">Bruit Brun</string>
+
+    <string name="premium_title">SoundPad Pro</string>
+    <string name="premium_desc">Débloquer les 14 sons · Sans publicité · Minuteur 8 heures</string>
+    <string name="btn_unlock">Débloquer — 3,99 $</string>
+    <string name="btn_subscribe">1,99 $ / mois</string>
+    <string name="btn_subscribe_yearly">14,99 $ / an (économisez 37%)</string>
+
+    <string name="timer_off">Pas de Minuteur</string>
+    <string name="sweet_dreams">Beaux rêves 🌙</string>
+
+    <string name="notif_channel_name">Lecture SoundPad</string>
+    <string name="notif_channel_desc">Lecture des sons de sommeil en arrière-plan</string>
+    <string name="notif_action_stop">Arrêter</string>
+
+    <string name="about_title">À propos de SoundPad</string>
+    <string name="privacy_policy">Politique de confidentialité</string>
+    <string name="terms_of_service">Conditions d\'utilisation</string>
+    <string name="contact_support">Contacter le support</string>
+    <string name="about_menu">À propos &amp; Mentions légales</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_credits">Fait avec ♥ par Photon Bounce • photon-bounce.com</string>
+
+    <string name="reward_unlock_cta">Regarder une pub — débloquer ce soir</string>
+
+    <string name="settings_title">Paramètres</string>
+    <string name="settings_menu">Paramètres</string>
+    <string name="settings_haptics">Retour haptique</string>
+    <string name="settings_haptics_desc">Vibrations subtiles au toucher</string>
+    <string name="settings_ui_sounds">Sons d\'interface</string>
+    <string name="settings_ui_sounds_desc">Sons doux de tape et de cloche</string>
+    <string name="settings_manage_subscription">Gérer l\'abonnement</string>
+    <string name="settings_reset_consent">Réinitialiser les préférences publicitaires</string>
+    <string name="settings_replay_onboarding">Rejouer l\'introduction</string>
+    <string name="settings_consent_reset_done">Consentement réinitialisé — réapparaîtra au prochain lancement</string>
+    <string name="settings_onboarding_reset_done">L\'introduction réapparaîtra au prochain lancement</string>
+
+    <string name="now_playing_placeholder">Touchez un son pour commencer</string>
+    <string name="play_last">▶ Jouer le Dernier</string>
+    <string name="play_stop">⏹ Arrêter</string>
+    <string name="timer">⏱ Minuteur</string>
+    <string name="cancel_timer">Annuler le Minuteur</string>
+</resources>

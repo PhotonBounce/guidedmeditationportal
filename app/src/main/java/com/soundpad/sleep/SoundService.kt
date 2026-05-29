@@ -5,8 +5,12 @@ import android.content.Intent
 import android.media.AudioAttributes
 import android.media.AudioFocusRequest
 import android.media.AudioManager
+import android.media.MediaPlayer
 import android.os.*
+import android.support.v4.media.session.MediaSessionCompat
+import android.support.v4.media.session.PlaybackStateCompat
 import androidx.core.app.NotificationCompat
+import androidx.media.app.NotificationCompat.MediaStyle
 
 class SoundService : Service() {
 
@@ -20,7 +24,12 @@ class SoundService : Service() {
     }
 
     private val engine = AudioEngine()
+    private var mediaPlayer: MediaPlayer? = null
     private val binder = SoundBinder()
+    @Volatile private var currentVolume: Float = 0.7f
+
+    private val fadeHandler = Handler(Looper.getMainLooper())
+    private var fadeRunnable: Runnable? = null
 
     @Volatile var currentSound: SoundType = SoundType.WHITE_NOISE
         private set
@@ -28,6 +37,7 @@ class SoundService : Service() {
     private lateinit var audioManager: AudioManager
     private var focusRequest: AudioFocusRequest? = null
     private var wakeLock: PowerManager.WakeLock? = null
+    private lateinit var mediaSession: MediaSessionCompat
 
     inner class SoundBinder : Binder() {
         fun service() = this@SoundService
@@ -42,6 +52,26 @@ class SoundService : Service() {
         isRunning = true
         audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
         createNotificationChannel()
+        initMediaSession()
+    }
+
+    private fun initMediaSession() {
+        mediaSession = MediaSessionCompat(this, "SoundPad").apply {
+            setCallback(object : MediaSessionCompat.Callback() {
+                override fun onStop() { stopSelf() }
+                override fun onPause() { stopSelf() }
+            })
+            setPlaybackState(
+                PlaybackStateCompat.Builder()
+                    .setState(PlaybackStateCompat.STATE_PLAYING, 0L, 1f)
+                    .setActions(
+                        PlaybackStateCompat.ACTION_STOP or
+                        PlaybackStateCompat.ACTION_PAUSE
+                    )
+                    .build()
+            )
+            isActive = true
+        }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -57,19 +87,151 @@ class SoundService : Service() {
         requestAudioFocus()
         startForeground(NOTIF_ID, buildNotification())
 
-        if (engine.isPlaying()) {
-            engine.changeSound(currentSound)
-        } else {
-            engine.start(currentSound)
-        }
+        // Don't start a single sound if mix mode is already active —
+        // this can happen when applyMix() calls startForegroundService() after
+        // doStartMix() has already been invoked on the bound service.
+        if (!isMixMode) startSound(currentSound)
         updateNotification()
         return START_STICKY
     }
 
-    override fun onDestroy() {
+    private fun startSound(type: SoundType) {
+        if (type.rawResId != 0) {
+            // File-backed: use MediaPlayer, stop synthesizer
+            engine.stop()
+            releaseMediaPlayer()
+            mediaPlayer = MediaPlayer.create(this, type.rawResId)?.apply {
+                isLooping = true
+                setVolume(currentVolume, currentVolume)
+                start()
+            }
+        } else {
+            // Synthesized: use AudioEngine, stop MediaPlayer
+            releaseMediaPlayer()
+            if (engine.isPlaying()) engine.changeSound(type) else engine.start(type)
+        }
+    }
+
+    private fun releaseMediaPlayer() {
+        mediaPlayer?.run { if (isPlaying) stop(); release() }
+        mediaPlayer = null
+    }
+
+    // ── Mix Mode — up to 3 simultaneous sound layers ─────────────────────────
+
+    private data class MixLayer(
+        val type: SoundType,
+        val player: MediaPlayer?,
+        val engine: AudioEngine?,
+        var currentVol: Float = 0.7f
+    )
+
+    private val mixLayers = mutableListOf<MixLayer>()
+    var isMixMode = false
+        private set
+
+    /** Replaces any current playback with up to 3 layered sounds, fading in over ~2 s. */
+    fun startMix(layerDefs: List<Pair<SoundType, Float>>) {
+        cancelFade()
         engine.stop()
+        releaseMediaPlayer()
+        stopAllMixLayers()
+        isMixMode = true
+        // Start all layers silently; fadeIn() will ramp to target volumes
+        for ((type, vol) in layerDefs) {
+            if (type.rawResId != 0) {
+                val mp = MediaPlayer.create(this, type.rawResId)?.apply {
+                    isLooping = true
+                    setVolume(0f, 0f)
+                    start()
+                }
+                mixLayers.add(MixLayer(type, mp, null, 0f))
+            } else {
+                val eng = AudioEngine().apply {
+                    setVolume(0f)
+                    start(type)
+                }
+                mixLayers.add(MixLayer(type, null, eng, 0f))
+            }
+        }
+        updateNotification()
+        fadeIn(layerDefs)
+    }
+
+    /** Fades out all mix layers over ~1.2 s then stops. */
+    fun stopMix() {
+        if (!isMixMode) return
+        cancelFade()
+        val capturedVols = mixLayers.map { it.type to it.currentVol }
+        val steps = 15
+        var step = 0
+        fadeRunnable = object : Runnable {
+            override fun run() {
+                step++
+                val progress = 1f - (step.toFloat() / steps)
+                capturedVols.forEach { (type, vol) ->
+                    setMixLayerVolume(type, vol * maxOf(progress, 0f))
+                }
+                if (step < steps) {
+                    fadeHandler.postDelayed(this, 80L)
+                } else {
+                    stopAllMixLayers()
+                    isMixMode = false
+                    updateNotification()
+                }
+            }
+        }
+        fadeHandler.post(fadeRunnable!!)
+    }
+
+    fun setMixLayerVolume(type: SoundType, vol: Float) {
+        mixLayers.find { it.type == type }?.apply {
+            currentVol = vol
+            player?.setVolume(vol, vol)
+            engine?.setVolume(vol)
+        }
+    }
+
+    fun getMixLayerTypes(): List<SoundType> = mixLayers.map { it.type }
+
+    private fun fadeIn(targets: List<Pair<SoundType, Float>>) {
+        val steps = 20
+        var step = 0
+        fadeRunnable = object : Runnable {
+            override fun run() {
+                if (!isMixMode) return
+                step++
+                val progress = step.toFloat() / steps
+                targets.forEach { (type, vol) ->
+                    setMixLayerVolume(type, vol * minOf(progress, 1f))
+                }
+                if (step < steps) fadeHandler.postDelayed(this, 100L)
+            }
+        }
+        fadeHandler.post(fadeRunnable!!)
+    }
+
+    private fun cancelFade() {
+        fadeRunnable?.let { fadeHandler.removeCallbacks(it) }
+        fadeRunnable = null
+    }
+
+    private fun stopAllMixLayers() {
+        for (layer in mixLayers) {
+            layer.player?.runCatching { if (isPlaying) stop(); release() }
+            layer.engine?.stop()
+        }
+        mixLayers.clear()
+    }
+
+    override fun onDestroy() {
+        cancelFade()
+        stopAllMixLayers()
+        engine.stop()
+        releaseMediaPlayer()
         abandonAudioFocus()
         wakeLock?.release()
+        runCatching { mediaSession.isActive = false; mediaSession.release() }
         isRunning = false
         super.onDestroy()
     }
@@ -79,13 +241,22 @@ class SoundService : Service() {
     // ─────────────────────────────────────────────────────────────────────────
 
     fun changeSound(type: SoundType) {
+        // Switching to single sound exits mix mode
+        if (isMixMode) { cancelFade(); stopAllMixLayers(); isMixMode = false }
         currentSound = type
-        engine.changeSound(type)
+        startSound(type)
         updateNotification()
     }
 
-    fun setVolume(vol: Float) = engine.setVolume(vol)
-    fun isPlaying() = engine.isPlaying()
+    fun setVolume(vol: Float) {
+        currentVolume = vol
+        engine.setVolume(vol)
+        mediaPlayer?.setVolume(vol, vol)
+    }
+    fun isPlaying() = when {
+        isMixMode -> mixLayers.isNotEmpty()
+        else      -> engine.isPlaying() || mediaPlayer?.isPlaying == true
+    }
 
     // ─────────────────────────────────────────────────────────────────────────
     // Audio focus
@@ -101,10 +272,10 @@ class SoundService : Service() {
                 .setAudioAttributes(attrs)
                 .setOnAudioFocusChangeListener { change ->
                     when (change) {
-                        AudioManager.AUDIOFOCUS_LOSS                 -> engine.setVolume(0f)
-                        AudioManager.AUDIOFOCUS_LOSS_TRANSIENT       -> engine.setVolume(0.25f)
-                        AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> engine.setVolume(0.4f)
-                        AudioManager.AUDIOFOCUS_GAIN                 -> engine.setVolume(0.7f)
+                        AudioManager.AUDIOFOCUS_LOSS                 -> setVolume(0f)
+                        AudioManager.AUDIOFOCUS_LOSS_TRANSIENT       -> setVolume(0.25f * currentVolume)
+                        AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> setVolume(0.4f * currentVolume)
+                        AudioManager.AUDIOFOCUS_GAIN                 -> setVolume(currentVolume)
                     }
                 }
                 .build()
@@ -160,12 +331,30 @@ class SoundService : Service() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
+        val notifTitle = if (isMixMode && mixLayers.isNotEmpty())
+            "🎛️  Mix · " + mixLayers.joinToString(" + ") { it.type.emoji }
+        else
+            "${currentSound.emoji}  ${currentSound.displayName}"
+        val notifSubtext = if (isMixMode) "Mix Studio" else currentSound.category
+
         return NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("SoundPad")
-            .setContentText("${currentSound.emoji} ${currentSound.displayName}")
+            .setContentTitle(notifTitle)
+            .setContentText("SoundPad · Playing")
+            .setSubText(notifSubtext)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentIntent(openIntent)
-            .addAction(android.R.drawable.ic_delete, "Stop", stopIntent)
+            .addAction(
+                NotificationCompat.Action(
+                    android.R.drawable.ic_delete, "Stop", stopIntent
+                )
+            )
+            .setStyle(
+                MediaStyle()
+                    .setMediaSession(mediaSession.sessionToken)
+                    .setShowActionsInCompactView(0)
+            )
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+            .setCategory(NotificationCompat.CATEGORY_TRANSPORT)
             .setOngoing(true)
             .setSilent(true)
             .build()

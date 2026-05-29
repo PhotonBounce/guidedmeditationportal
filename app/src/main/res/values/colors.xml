@@ -1,27 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Backgrounds -->
-    <color name="deep_navy">#0D0D1F</color>
-    <color name="card_bg">#16162A</color>
-    <color name="card_active">#22223E</color>
-    <color name="card_premium_bg">#1C1A10</color>
+    <!-- ── Cosmic backgrounds ──────────────────────────────────────────────── -->
+    <color name="cosmic_indigo_top">#0B0B1E</color>
+    <color name="cosmic_indigo_mid">#10112E</color>
+    <color name="cosmic_indigo_bottom">#1A0F2E</color>
+
+    <!-- Legacy alias (still referenced by some layouts/styles) -->
+    <color name="deep_navy">#0B0B1E</color>
+
+    <!-- ── Cards / surfaces ────────────────────────────────────────────────── -->
+    <color name="card_bg">#16162E</color>
+    <color name="card_active">#231D3E</color>
+    <color name="card_active_glow">#3A2D6E</color>
+    <color name="card_premium_bg">#1F1A12</color>
     <color name="card_border">#2A2A4A</color>
+    <color name="card_border_active">#A78BFA</color>
 
-    <!-- Accents -->
-    <color name="accent_purple">#7B5EA7</color>
-    <color name="accent_purple_light">#9B7ED0</color>
-    <color name="accent_teal">#4ECDC4</color>
+    <!-- ── Aurora accents ──────────────────────────────────────────────────── -->
+    <color name="accent_iris">#A78BFA</color>          <!-- new primary purple -->
+    <color name="accent_purple">#A78BFA</color>        <!-- alias for back-compat -->
+    <color name="accent_purple_light">#C4B5FD</color>
+    <color name="accent_purple_deep">#7B5EA7</color>
+    <color name="accent_teal">#7DD3FC</color>           <!-- soft cyan -->
+    <color name="accent_aurora">#5EEAD4</color>
+    <color name="accent_rose">#FB7185</color>
     <color name="premium_gold">#F5C842</color>
+    <color name="premium_gold_light">#FFE38A</color>
 
-    <!-- Text -->
-    <color name="text_primary">#FFFFFF</color>
-    <color name="text_secondary">#8888AA</color>
+    <!-- ── Text ────────────────────────────────────────────────────────────── -->
+    <color name="text_primary">#F8FAFC</color>
+    <color name="text_secondary">#9CA3CC</color>
+    <color name="text_tertiary">#6B6D8F</color>
 
-    <!-- Misc -->
-    <color name="ripple_color">#33FFFFFF</color>
-    <color name="playing_green">#4CAF50</color>
+    <!-- ── Misc / system ───────────────────────────────────────────────────── -->
+    <color name="ripple_color">#33A78BFA</color>
+    <color name="playing_green">#5EEAD4</color>
+    <color name="star_white">#F8FAFC</color>
+    <color name="star_glow">#80A78BFA</color>
+    <color name="nebula_purple">#22A78BFA</color>
+    <color name="nebula_teal">#1A7DD3FC</color>
 
-    <!-- System (status bar) -->
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+
+    <!-- ── Category accent colors (sound card top stripe + header) ──────────── -->
+    <color name="cat_noise">#A78BFA</color>       <!-- purple — Noise -->
+    <color name="cat_nature">#5EEAD4</color>      <!-- teal   — Nature -->
+    <color name="cat_mechanical">#7DD3FC</color>  <!-- sky    — Mechanical -->
+    <color name="cat_synthetic">#FB7185</color>   <!-- rose   — Synthetic -->
+    <color name="cat_ambient">#34D399</color>     <!-- green  — Ambient Music -->
+    <color name="cat_energy">#FB923C</color>      <!-- orange — Energy Music -->
+
 </resources>

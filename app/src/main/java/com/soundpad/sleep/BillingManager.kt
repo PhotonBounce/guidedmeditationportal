@@ -1,17 +1,23 @@
 package com.soundpad.sleep
 
 import android.app.Activity
+import android.util.Log
 import com.android.billingclient.api.*
 import kotlinx.coroutines.*
 
 /**
  * Wraps Google Play Billing Library 6.x.
  *
- * Products to create in Google Play Console:
- *   In-app product  → soundpad_pro         ($3.99 one-time)  "SoundPad Pro"
- *   Subscription    → soundpad_ultimate    ($1.99/month)     "SoundPad Ultimate"
+ * Products to create in Google Play Console (Monetize → Products):
+ *   In-app product  → soundpad_pro          ($3.99 one-time)   "SoundPad Pro"
+ *   Subscription    → soundpad_ultimate     ($1.99 / month)    "SoundPad Ultimate (Monthly)"
+ *   Subscription    → soundpad_yearly       ($14.99 / year)    "SoundPad Ultimate (Yearly)"
  *
- * Both are treated as "premium" in this app — either unlocks everything.
+ * Any active purchase of any SKU unlocks all 14 sounds + removes ads.
+ *
+ * IMPORTANT: products must be ACTIVE in Play Console before billing returns
+ * product details. Until then, queryProductDetails returns an empty list
+ * and the purchase flow silently no-ops — that's expected.
  */
 class BillingManager(
     private val activity: Activity,
@@ -19,11 +25,14 @@ class BillingManager(
 ) : PurchasesUpdatedListener {
 
     companion object {
+        const val TAG          = "SoundPadBilling"
         const val SKU_PRO      = "soundpad_pro"
         const val SKU_ULTIMATE = "soundpad_ultimate"
+        const val SKU_YEARLY   = "soundpad_yearly"
     }
 
     private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
+    @Volatile private var connected = false
 
     private val client = BillingClient.newBuilder(activity)
         .setListener(this)
@@ -31,14 +40,26 @@ class BillingManager(
         .build()
 
     init {
+        connect()
+    }
+
+    private fun connect() {
         client.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(result: BillingResult) {
                 if (result.responseCode == BillingClient.BillingResponseCode.OK) {
+                    connected = true
                     queryPurchases()
+                } else {
+                    Log.w(TAG, "Billing setup failed: ${result.debugMessage}")
                 }
             }
             override fun onBillingServiceDisconnected() {
-                // Retry handled by the Play Store — no manual retry needed
+                connected = false
+                // Reconnect with simple back-off (Play Store handles its own retry)
+                scope.launch {
+                    delay(2000)
+                    if (!connected) runCatching { connect() }
+                }
             }
         })
     }
@@ -48,8 +69,16 @@ class BillingManager(
     // ─────────────────────────────────────────────────────────────────────────
 
     override fun onPurchasesUpdated(result: BillingResult, purchases: List<Purchase>?) {
-        if (result.responseCode == BillingClient.BillingResponseCode.OK) {
-            purchases?.forEach { acknowledge(it) }
+        when (result.responseCode) {
+            BillingClient.BillingResponseCode.OK -> {
+                purchases?.forEach { acknowledge(it) }
+            }
+            BillingClient.BillingResponseCode.USER_CANCELED -> {
+                Log.d(TAG, "User cancelled purchase")
+            }
+            else -> {
+                Log.w(TAG, "Purchase update error ${result.responseCode}: ${result.debugMessage}")
+            }
         }
     }
 
@@ -58,10 +87,11 @@ class BillingManager(
     // ─────────────────────────────────────────────────────────────────────────
 
     fun queryPurchases() {
+        if (!connected) return
         scope.launch {
             var hasPremium = false
 
-            // Check one-time purchases
+            // One-time INAPP purchase
             val inappResult = client.queryPurchasesAsync(
                 QueryPurchasesParams.newBuilder()
                     .setProductType(BillingClient.ProductType.INAPP)
@@ -72,9 +102,11 @@ class BillingManager(
                     p.products.contains(SKU_PRO) &&
                     p.purchaseState == Purchase.PurchaseState.PURCHASED
                 }
+                // Auto-acknowledge any unacked purchases (otherwise Google refunds after 3 days!)
+                inappResult.purchasesList.forEach { if (!it.isAcknowledged) acknowledge(it) }
             }
 
-            // Check subscriptions
+            // Subscriptions (monthly + yearly)
             val subsResult = client.queryPurchasesAsync(
                 QueryPurchasesParams.newBuilder()
                     .setProductType(BillingClient.ProductType.SUBS)
@@ -82,9 +114,10 @@ class BillingManager(
             )
             if (subsResult.billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
                 hasPremium = hasPremium || subsResult.purchasesList.any { p ->
-                    p.products.contains(SKU_ULTIMATE) &&
+                    (p.products.contains(SKU_ULTIMATE) || p.products.contains(SKU_YEARLY)) &&
                     p.purchaseState == Purchase.PurchaseState.PURCHASED
                 }
+                subsResult.purchasesList.forEach { if (!it.isAcknowledged) acknowledge(it) }
             }
 
             onPremiumChanged(hasPremium)
@@ -96,12 +129,17 @@ class BillingManager(
     // ─────────────────────────────────────────────────────────────────────────
 
     /** One-time purchase: SoundPad Pro ($3.99) */
-    fun purchasePro() = launchPurchase(SKU_PRO, BillingClient.ProductType.INAPP)
-
+    fun purchasePro()      = launchPurchase(SKU_PRO,      BillingClient.ProductType.INAPP)
     /** Monthly subscription: SoundPad Ultimate ($1.99/month) */
     fun purchaseUltimate() = launchPurchase(SKU_ULTIMATE, BillingClient.ProductType.SUBS)
+    /** Yearly subscription: SoundPad Ultimate ($14.99/year — save 37% vs monthly) */
+    fun purchaseYearly()   = launchPurchase(SKU_YEARLY,   BillingClient.ProductType.SUBS)
 
     private fun launchPurchase(productId: String, productType: String) {
+        if (!connected) {
+            Log.w(TAG, "Billing not connected — ignoring purchase")
+            return
+        }
         scope.launch {
             val result = client.queryProductDetails(
                 QueryProductDetailsParams.newBuilder()
@@ -116,7 +154,11 @@ class BillingManager(
                     .build()
             )
 
-            val productDetails = result.productDetailsList?.firstOrNull() ?: return@launch
+            val productDetails = result.productDetailsList?.firstOrNull()
+            if (productDetails == null) {
+                Log.w(TAG, "No product details for $productId — is it Active in Play Console?")
+                return@launch
+            }
 
             val paramsBuilder = BillingFlowParams.ProductDetailsParams.newBuilder()
                 .setProductDetails(productDetails)
@@ -124,7 +166,11 @@ class BillingManager(
             // Subscriptions need an offer token
             if (productType == BillingClient.ProductType.SUBS) {
                 val offerToken = productDetails.subscriptionOfferDetails
-                    ?.firstOrNull()?.offerToken ?: return@launch
+                    ?.firstOrNull()?.offerToken
+                if (offerToken == null) {
+                    Log.w(TAG, "No subscription offer for $productId")
+                    return@launch
+                }
                 paramsBuilder.setOfferToken(offerToken)
             }
 
@@ -139,7 +185,7 @@ class BillingManager(
     }
 
     // ─────────────────────────────────────────────────────────────────────────
-    // Acknowledge purchase (required — else Google refunds after 3 days)
+    // Acknowledge purchase (REQUIRED — else Google refunds after 3 days)
     // ─────────────────────────────────────────────────────────────────────────
 
     private fun acknowledge(purchase: Purchase) {
@@ -156,12 +202,14 @@ class BillingManager(
             )
             if (result.responseCode == BillingClient.BillingResponseCode.OK) {
                 onPremiumChanged(true)
+            } else {
+                Log.w(TAG, "Acknowledge failed: ${result.debugMessage}")
             }
         }
     }
 
     fun destroy() {
         scope.cancel()
-        client.endConnection()
+        runCatching { client.endConnection() }
     }
 }

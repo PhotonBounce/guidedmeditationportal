@@ -1,38 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center_horizontal">
+    android:background="@color/deep_navy">
 
-    <TextView
-        android:id="@+id/aboutTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="About SoundPad"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
-
-    <Button
-        android:id="@+id/privacyPolicy"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Privacy Policy" />
+        android:orientation="vertical"
+        android:padding="24dp">
 
-    <Button
-        android:id="@+id/terms"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Terms of Service"
-        android:layout_marginTop="8dp" />
+        <TextView
+            android:id="@+id/aboutTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="🌙 SoundPad"
+            android:textColor="@color/text_primary"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/contactSupport"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Contact Support"
-        android:layout_marginTop="8dp" />
+        <TextView
+            android:id="@+id/aboutVersion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            tools:text="Version 1.0.1" />
 
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="6dp"
+            android:text="@string/about_credits"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/card_border" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/privacyPolicy"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_policy"
+            android:textColor="@color/accent_teal"
+            app:strokeColor="@color/accent_teal" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/terms"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/terms_of_service"
+            android:textColor="@color/accent_teal"
+            app:strokeColor="@color/accent_teal" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/contactSupport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/contact_support"
+            android:textColor="@color/text_primary"
+            app:backgroundTint="@color/accent_purple" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/visitWebsite"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="🌐  photon-bounce.com"
+            android:textColor="@color/accent_iris"
+            app:strokeColor="@color/accent_iris" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/restorePurchases"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Restore Purchases"
+            android:textColor="@color/text_secondary" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

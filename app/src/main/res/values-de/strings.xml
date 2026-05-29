@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SoundPad</string>
+    <string name="app_tagline">Schlafen · Fokussieren · Entspannen</string>
+
+    <string name="sound_white">Weißes Rauschen</string>
+    <string name="sound_pink">Rosa Rauschen</string>
+    <string name="sound_brown">Braunes Rauschen</string>
+
+    <string name="premium_title">SoundPad Pro</string>
+    <string name="premium_desc">Alle 14 Klänge freischalten · Werbefrei · 8-Stunden-Timer</string>
+    <string name="btn_unlock">Freischalten — $3,99</string>
+    <string name="btn_subscribe">$1,99 / Monat</string>
+    <string name="btn_subscribe_yearly">$14,99 / Jahr (37% sparen)</string>
+
+    <string name="timer_off">Kein Timer</string>
+    <string name="sweet_dreams">Süße Träume 🌙</string>
+
+    <string name="notif_channel_name">SoundPad Wiedergabe</string>
+    <string name="notif_channel_desc">Hintergrund-Schlafklänge</string>
+    <string name="notif_action_stop">Stopp</string>
+
+    <string name="about_title">Über SoundPad</string>
+    <string name="privacy_policy">Datenschutzerklärung</string>
+    <string name="terms_of_service">Nutzungsbedingungen</string>
+    <string name="contact_support">Support kontaktieren</string>
+    <string name="about_menu">Info &amp; Rechtliches</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_credits">Mit ♥ von Photon Bounce • photon-bounce.com</string>
+
+    <string name="reward_unlock_cta">Werbung ansehen — heute Nacht freischalten</string>
+
+    <string name="settings_title">Einstellungen</string>
+    <string name="settings_menu">Einstellungen</string>
+    <string name="settings_haptics">Haptisches Feedback</string>
+    <string name="settings_haptics_desc">Sanfte Vibrationen beim Tippen</string>
+    <string name="settings_ui_sounds">UI-Sounds</string>
+    <string name="settings_ui_sounds_desc">Leise Tipp- und Glockentöne</string>
+    <string name="settings_manage_subscription">Abo verwalten</string>
+    <string name="settings_reset_consent">Werbeeinstellungen zurücksetzen</string>
+    <string name="settings_replay_onboarding">Einführung wiederholen</string>
+    <string name="settings_consent_reset_done">Einwilligung zurückgesetzt — wird beim nächsten Start neu abgefragt</string>
+    <string name="settings_onboarding_reset_done">Einführung erscheint beim nächsten Start</string>
+
+    <string name="now_playing_placeholder">Tippe einen Klang an</string>
+    <string name="play_last">▶ Letzten abspielen</string>
+    <string name="play_stop">⏹ Stopp</string>
+    <string name="timer">⏱ Timer</string>
+    <string name="cancel_timer">Timer abbrechen</string>
+</resources>

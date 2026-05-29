@@ -1,22 +1,32 @@
-// This is a stub for session-based premium unlock. Integrate with PrefsManager and RewardedAdManager.
 package com.soundpad.sleep
 
-import android.content.Context
-
+/**
+ * Tracks "watched-ad-to-unlock" sounds for the current app session.
+ * Resets on process death — that's the deal we offered users.
+ *
+ * Held in-memory only; not persisted to SharedPreferences so the unlock
+ * cleanly expires when the user closes the app.
+ */
 object SessionPremiumManager {
-    private const val KEY_SESSION_PREMIUM = "session_premium"
+    private val unlocked = mutableSetOf<SoundType>()
 
-    fun isSessionPremium(context: Context): Boolean {
-        val prefs = context.getSharedPreferences("soundpad_prefs", Context.MODE_PRIVATE)
-        return prefs.getBoolean(KEY_SESSION_PREMIUM, false)
+    /** Grant a single premium sound for the rest of the session. */
+    fun unlock(type: SoundType) { unlocked.add(type) }
+
+    /**
+     * Unlock ALL premium sounds for this session — free daily trial.
+     * Free users get to experience every sound once per session.
+     * Ads are still shown; upgrading removes ads permanently.
+     */
+    fun unlockAll() {
+        unlocked.addAll(SoundType.values().filter { it.isPremium })
     }
 
-    fun setSessionPremium(context: Context, value: Boolean) {
-        val prefs = context.getSharedPreferences("soundpad_prefs", Context.MODE_PRIVATE)
-        prefs.edit().putBoolean(KEY_SESSION_PREMIUM, value).apply()
-    }
+    /** True if the user has watched an ad for this sound this session. */
+    fun isUnlocked(type: SoundType): Boolean = type in unlocked
 
-    fun clearSessionPremium(context: Context) {
-        setSessionPremium(context, false)
-    }
+    /** True if any session unlock exists (used to decide whether to keep ads). */
+    fun hasAnyUnlock(): Boolean = unlocked.isNotEmpty()
+
+    fun clear() = unlocked.clear()
 }

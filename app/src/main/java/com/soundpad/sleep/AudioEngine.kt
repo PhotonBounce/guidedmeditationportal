@@ -15,6 +15,7 @@ class AudioEngine {
     companion object {
         const val SAMPLE_RATE = 44100
         const val BUFFER_SIZE = 4096
+        val TWO_PI = 2.0 * PI
     }
 
     private var audioTrack: AudioTrack? = null
@@ -192,6 +193,7 @@ class AudioEngine {
                 SoundType.SPACESHIP   -> spaceship()
                 SoundType.WOMB        -> womb()
                 SoundType.CRYSTAL     -> crystal()
+                else                  -> 0f  // file-backed sounds handled by MediaPlayer
             }
             buf[i] = (raw.coerceIn(-1f, 1f) * Short.MAX_VALUE).toInt().toShort()
             n++
@@ -397,7 +399,4 @@ class AudioEngine {
         n=0L
     }
 
-    private companion object {
-        val TWO_PI = 2.0 * PI
-    }
 }

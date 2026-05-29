@@ -5,16 +5,59 @@ plugins {
 
 android {
     namespace 'com.soundpad.sleep'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.soundpad.sleep"
         minSdk 21
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
+        targetSdk 35
+        versionCode 4
+        versionName "1.0.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // Enable runtime support for vector launcher fallback on API < 26
+        vectorDrawables.useSupportLibrary = true
+
+        // ── AdMob unit IDs ──────────────────────────────────────────────
+        // Currently set to Google's official TEST IDs. Replace with your
+        // real IDs from AdMob console before publishing — just edit these
+        // three values and rebuild.
+        buildConfigField "String", "ADMOB_APP_ID",
+            "\"ca-app-pub-3940256099942544~3347511713\""
+        // Also expose to AndroidManifest as ${admobAppId}
+        manifestPlaceholders.admobAppId = "ca-app-pub-3940256099942544~3347511713"
+        buildConfigField "String", "ADMOB_BANNER_UNIT_ID",
+            "\"ca-app-pub-3940256099942544/6300978111\""
+        buildConfigField "String", "ADMOB_INTERSTITIAL_UNIT_ID",
+            "\"ca-app-pub-3940256099942544/1033173712\""
+        buildConfigField "String", "ADMOB_REWARDED_UNIT_ID",
+            "\"ca-app-pub-3940256099942544/5224354917\""
+    }
+
+    // ────────────────────────────────────────────────────────────────────
+    // Signing
+    //   Fill in your keystore path/passwords (or use environment variables
+    //   in CI) AFTER you generate the keystore. See LAUNCH_CHECKLIST.md.
+    // ────────────────────────────────────────────────────────────────────
+    signingConfigs {
+        release {
+            // To enable: put values in ~/.gradle/gradle.properties or env vars
+            //   SOUNDPAD_KEYSTORE=/path/to/soundpad-release.jks
+            //   SOUNDPAD_KEY_ALIAS=soundpad-key
+            //   SOUNDPAD_STORE_PASSWORD=...
+            //   SOUNDPAD_KEY_PASSWORD=...
+            def ksPath  = System.getenv("SOUNDPAD_KEYSTORE")  ?: project.findProperty("SOUNDPAD_KEYSTORE")
+            def ksAlias = System.getenv("SOUNDPAD_KEY_ALIAS") ?: project.findProperty("SOUNDPAD_KEY_ALIAS")
+            def ksPw    = System.getenv("SOUNDPAD_STORE_PASSWORD") ?: project.findProperty("SOUNDPAD_STORE_PASSWORD")
+            def keyPw   = System.getenv("SOUNDPAD_KEY_PASSWORD") ?: project.findProperty("SOUNDPAD_KEY_PASSWORD")
+            if (ksPath && new File(ksPath).exists()) {
+                storeFile     file(ksPath)
+                storePassword ksPw
+                keyAlias      ksAlias
+                keyPassword   keyPw
+            }
+        }
     }
 
     buildTypes {
@@ -22,6 +65,10 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // Only attach signing config if a keystore exists (lets debug-only devs build)
+            if (signingConfigs.release.storeFile != null) {
+                signingConfig signingConfigs.release
+            }
         }
         debug {
             applicationIdSuffix ".debug"
@@ -40,16 +87,27 @@ android {
 
     buildFeatures {
         viewBinding true
+        buildConfig true
+    }
+
+    // Make sure release builds don't crash on missing google-services.json
+    // (Firebase analytics gracefully no-ops without it)
+    packaging {
+        resources {
+            excludes += ['META-INF/LICENSE*', 'META-INF/NOTICE*', 'META-INF/AL2.0', 'META-INF/LGPL2.1']
+        }
     }
 }
 
 dependencies {
     // Core Android
     implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.core:core-splashscreen:1.0.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.recyclerview:recyclerview:1.3.2'
+    implementation 'androidx.media:media:1.7.0'    // MediaSession + MediaStyle
 
     // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
@@ -57,13 +115,20 @@ dependencies {
     // Google Play Billing (for in-app purchases & subscriptions)
     implementation 'com.android.billingclient:billing-ktx:6.2.1'
 
-    // AdMob (for free tier ads and rewarded ads)
+    // AdMob (for free tier banner, rewarded, and interstitial ads)
     implementation 'com.google.android.gms:play-services-ads:23.1.0'
 
-    // Firebase Analytics
-    implementation platform('com.google.firebase:firebase-bom:32.7.0')
-    implementation 'com.google.firebase:firebase-analytics-ktx'
+    // User Messaging Platform (GDPR/CCPA consent for AdMob in EU/UK)
+    implementation 'com.google.android.ump:user-messaging-platform:2.2.0'
+
+    // Play In-App Review (3-5x higher completion than market:// intent)
+    implementation 'com.google.android.play:review-ktx:2.0.1'
 
     // Lifecycle
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
+
+    // Tests
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }

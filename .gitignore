@@ -1,0 +1,69 @@
+# Gradle
+.gradle/
+build/
+local.properties
+*.iml
+.idea/
+captures/
+
+# Keystores — NEVER commit
+*.jks
+*.keystore
+keystore.properties
+
+# Signed artifacts
+app/release/
+app/build/outputs/
+
+# Android SDK tools (local install, not part of source)
+.tools/
+
+# Debug / proof screenshots at root (not app assets)
+after_tap.png
+app_clean.png
+check.png
+clean.png
+fast.png
+full.png
+imm.png
+nodialog.png
+notif.png
+noui.png
+now.png
+pg.png
+phone_screen.png
+playing.png
+playing2.png
+playing3.png
+playing4.png
+playing_gpu.png
+proof1.png
+proof_gpu.png
+q.png
+resume.png
+s1.png
+s_main.png
+screen.png
+screen1.png
+screen2.png
+screen3.png
+screen_fresh.png
+screen_now.png
+screenshot1.png
+stable.png
+tap2.png
+ui.xml
+notes.txt
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Rendered PNGs are committed (Play Store needs them)
+# but raw temp files are not
+*.tmp
+*.log
+
+# Editor
+*.swp
+.vscode/

@@ -5,11 +5,11 @@
     android:id="@+id/cardRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
+    android:layout_margin="7dp"
     android:clickable="true"
     android:focusable="true"
     app:cardBackgroundColor="@color/card_bg"
-    app:cardCornerRadius="18dp"
+    app:cardCornerRadius="20dp"
     app:cardElevation="0dp"
     app:strokeColor="@color/card_border"
     app:strokeWidth="1dp"
@@ -20,36 +20,44 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Card body -->
+        <!-- Category accent stripe at top (colour set programmatically per category) -->
+        <View
+            android:id="@+id/vCategoryAccent"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/accent_iris" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:gravity="center">
 
-            <!-- Emoji icon -->
             <TextView
                 android:id="@+id/tvEmoji"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="38sp"
+                android:textSize="46sp"
                 android:text="🔊" />
 
-            <!-- Sound name -->
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/text_primary"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:maxLines="2"
+                android:letterSpacing="0.02"
+                android:fontFamily="sans-serif-medium"
                 android:text="Sound Name" />
 
-            <!-- Lock badge (premium) -->
             <TextView
                 android:id="@+id/tvLock"
                 android:layout_width="wrap_content"
@@ -57,16 +65,17 @@
                 android:layout_marginTop="4dp"
                 android:text="🔒"
                 android:textSize="11sp"
+                android:textColor="@color/text_secondary"
                 android:visibility="gone" />
 
         </LinearLayout>
 
-        <!-- Active playing indicator bar (bottom accent) -->
+        <!-- Playing bar at bottom (tinted to category colour programmatically) -->
         <View
             android:id="@+id/vPlayingBar"
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:background="@color/accent_purple"
+            android:background="@color/accent_iris"
             android:visibility="gone" />
 
     </LinearLayout>
