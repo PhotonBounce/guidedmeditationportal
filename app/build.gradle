@@ -42,21 +42,14 @@ android {
     // ────────────────────────────────────────────────────────────────────
     signingConfigs {
         release {
-            // To enable: put values in ~/.gradle/gradle.properties or env vars
-            //   SOUNDPAD_KEYSTORE=/path/to/soundpad-release.jks
-            //   SOUNDPAD_KEY_ALIAS=soundpad-key
-            //   SOUNDPAD_STORE_PASSWORD=...
-            //   SOUNDPAD_KEY_PASSWORD=...
             def ksPath  = System.getenv("SOUNDPAD_KEYSTORE")  ?: project.findProperty("SOUNDPAD_KEYSTORE")
             def ksAlias = System.getenv("SOUNDPAD_KEY_ALIAS") ?: project.findProperty("SOUNDPAD_KEY_ALIAS")
             def ksPw    = System.getenv("SOUNDPAD_STORE_PASSWORD") ?: project.findProperty("SOUNDPAD_STORE_PASSWORD")
             def keyPw   = System.getenv("SOUNDPAD_KEY_PASSWORD") ?: project.findProperty("SOUNDPAD_KEY_PASSWORD")
-            if (ksPath && new File(ksPath).exists()) {
-                storeFile     file(ksPath)
-                storePassword ksPw
-                keyAlias      ksAlias
-                keyPassword   keyPw
-            }
+            storeFile     ksPath ? file(ksPath) : null
+            storePassword ksPw
+            keyAlias      ksAlias
+            keyPassword   keyPw
         }
     }
 
@@ -65,10 +58,7 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            // Only attach signing config if a keystore exists (lets debug-only devs build)
-            if (signingConfigs.release.storeFile != null) {
-                signingConfig signingConfigs.release
-            }
+            signingConfig signingConfigs.release
         }
         debug {
             applicationIdSuffix ".debug"
