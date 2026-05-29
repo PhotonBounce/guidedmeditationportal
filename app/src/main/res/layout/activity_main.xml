@@ -61,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="SoundPad"
+                    android:text="ZenPulse"
                     android:textColor="@color/text_primary"
                     android:textSize="28sp"
                     android:textStyle="bold"
@@ -105,7 +105,7 @@
                         android:scaleType="centerCrop"
                         android:clipToOutline="true"
                         android:background="@drawable/bg_cosmic_gradient"
-                        android:contentDescription="SoundPad" />
+                        android:contentDescription="ZenPulse" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -124,7 +124,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="SoundPad"
+                                android:text="ZenPulse"
                                 android:textColor="@color/text_primary"
                                 android:textSize="15sp"
                                 android:textStyle="bold" />
@@ -143,7 +143,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Sleep · Focus · Sport Recovery"
+                            android:text="Sleep · Focus · Workout"
                             android:textColor="@color/accent_teal"
                             android:textSize="11sp"
                             android:textStyle="bold"
@@ -405,7 +405,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="✨ SoundPad Pro"
+                        android:text="✨ ZenPulse Pro"
                         android:textColor="@color/premium_gold_light"
                         android:textSize="18sp"
                         android:textStyle="bold" />

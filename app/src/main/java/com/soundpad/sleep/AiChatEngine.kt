@@ -225,12 +225,12 @@ class AiChatEngine(private val context: Context) {
         "- AI binaural beat overlays\n" +
         "- Text-to-soundscape generation\n" +
         "- Voice Q&A tuning with ARIA\n\n" +
-        "Unlock via SoundPad Pro on the main screen! 🌟",
+        "Unlock via ZenPulse Pro on the main screen! 🌟",
         null
     )
 
     private fun handleVip(): Pair<String, SoundType?> = Pair(
-        "🌟 SoundPad VIP — Your AI Sound Laboratory\n\n" +
+        "🌟 ZenPulse VIP — Your AI Sound Laboratory\n\n" +
         "Everything you unlock:\n\n" +
         "All 35+ premium sounds\n" +
         "ARIA Mix Studio — blend any 2 sounds\n" +
@@ -244,7 +244,7 @@ class AiChatEngine(private val context: Context) {
         "\$1.99/month — try anytime\n" +
         "\$14.99/year — best value (save 37%!)\n" +
         "\$3.99 one-time — lifetime access\n\n" +
-        "Tap SoundPad Pro on the main screen to upgrade! 🚀",
+        "Tap ZenPulse Pro on the main screen to upgrade! 🚀",
         null
     )
 
@@ -277,7 +277,7 @@ class AiChatEngine(private val context: Context) {
         val msgs = listOf(
             "You're welcome! Sweet dreams and good vibes 🌙 ARIA is always here when you need the perfect soundscape.",
             "That makes ARIA happy! 🤖 Your rest matters — I'll keep learning your patterns for smarter recommendations.",
-            "Excellent! Consistency is key — using SoundPad nightly trains your brain to associate these sounds with sleep. You're building a superpower! 💪🌙"
+            "Excellent! Consistency is key — using ZenPulse nightly trains your brain to associate these sounds with sleep. You're building a superpower! 💪🌙"
         )
         return Pair(msgs[turnsCount % msgs.size], null)
     }
@@ -354,7 +354,7 @@ class AiChatEngine(private val context: Context) {
 
     private fun handleAmbient(): Pair<String, SoundType?> = Pair(
         "🌌 Ambient Music — Designed for the Mind\n\n" +
-        "SoundPad features 19 original ambient tracks plus 3 energy music pieces:\n\n" +
+        "ZenPulse features 19 original ambient tracks plus 3 energy music pieces:\n\n" +
         "Ambient 01–19: atmospheric, non-repetitive, no melody to hook the mind\n" +
         "Energy 01–03: upbeat, focus-driving, binaural-infused\n\n" +
         "Ambient music without a recognisable melody prevents the brain from " +

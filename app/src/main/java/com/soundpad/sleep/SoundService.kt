@@ -56,7 +56,7 @@ class SoundService : Service() {
     }
 
     private fun initMediaSession() {
-        mediaSession = MediaSessionCompat(this, "SoundPad").apply {
+        mediaSession = MediaSessionCompat(this, "ZenPulse").apply {
             setCallback(object : MediaSessionCompat.Callback() {
                 override fun onStop() { stopSelf() }
                 override fun onPause() { stopSelf() }
@@ -308,7 +308,7 @@ class SoundService : Service() {
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val ch = NotificationChannel(
-                CHANNEL_ID, "SoundPad Playback",
+                CHANNEL_ID, "ZenPulse Playback",
                 NotificationManager.IMPORTANCE_LOW
             ).apply {
                 description = "Sleep sound playback controls"
@@ -339,7 +339,7 @@ class SoundService : Service() {
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(notifTitle)
-            .setContentText("SoundPad · Playing")
+            .setContentText("ZenPulse · Playing")
             .setSubText(notifSubtext)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentIntent(openIntent)

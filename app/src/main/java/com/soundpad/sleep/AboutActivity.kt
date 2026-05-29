@@ -40,7 +40,7 @@ class AboutActivity : AppCompatActivity() {
         binding.contactSupport.setOnClickListener {
             val intent = Intent(Intent.ACTION_SENDTO).apply {
                 data = Uri.parse("mailto:$SUPPORT_EMAIL")
-                putExtra(Intent.EXTRA_SUBJECT, "SoundPad Support — v${BuildConfig.VERSION_NAME}")
+                putExtra(Intent.EXTRA_SUBJECT, "ZenPulse Support — v${BuildConfig.VERSION_NAME}")
             }
             try { startActivity(intent) }
             catch (e: ActivityNotFoundException) {

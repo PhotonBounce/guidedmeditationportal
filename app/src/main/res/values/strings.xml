@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SoundPad</string>
-    <string name="app_tagline">Sleep · Focus · Relax</string>
+    <string name="app_name">ZenPulse</string>
+    <string name="app_tagline">Sleep · Focus · Workout</string>
 
     <!-- Sounds -->
     <string name="sound_white">White Noise</string>
@@ -9,7 +9,7 @@
     <string name="sound_brown">Brown Noise</string>
 
     <!-- Premium -->
-    <string name="premium_title">SoundPad Pro</string>
+    <string name="premium_title">ZenPulse Pro</string>
     <string name="premium_desc">Unlock all 14 sounds · Remove ads · 8-hour timer</string>
     <string name="btn_unlock">Unlock — $3.99</string>
     <string name="btn_subscribe">$1.99 / month</string>
@@ -20,12 +20,12 @@
     <string name="sweet_dreams">Sweet dreams 🌙</string>
 
     <!-- Notifications -->
-    <string name="notif_channel_name">SoundPad Playback</string>
+    <string name="notif_channel_name">ZenPulse Playback</string>
     <string name="notif_channel_desc">Background sleep sound playback</string>
     <string name="notif_action_stop">Stop</string>
 
     <!-- About / Legal / Support -->
-    <string name="about_title">About SoundPad</string>
+    <string name="about_title">About ZenPulse</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="terms_of_service">Terms of Service</string>
     <string name="contact_support">Contact Support</string>

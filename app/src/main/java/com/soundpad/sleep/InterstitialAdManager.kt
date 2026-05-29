@@ -28,7 +28,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 class InterstitialAdManager(private val context: Context) {
 
     companion object {
-        private const val TAG = "SoundPadInterstitial"
+        private const val TAG = "ZenPulseInterstitial"
         // Centralized in BuildConfig (see app/build.gradle).
         private val UNIT_ID get() = BuildConfig.ADMOB_INTERSTITIAL_UNIT_ID
 

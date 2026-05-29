@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SoundPad</string>
-    <string name="app_tagline">Schlafen · Fokussieren · Entspannen</string>
+    <string name="app_name">ZenPulse</string>
+    <string name="app_tagline">Schlafen · Fokus · Training</string>
 
     <string name="sound_white">Weißes Rauschen</string>
     <string name="sound_pink">Rosa Rauschen</string>
     <string name="sound_brown">Braunes Rauschen</string>
 
-    <string name="premium_title">SoundPad Pro</string>
+    <string name="premium_title">ZenPulse Pro</string>
     <string name="premium_desc">Alle 14 Klänge freischalten · Werbefrei · 8-Stunden-Timer</string>
     <string name="btn_unlock">Freischalten — $3,99</string>
     <string name="btn_subscribe">$1,99 / Monat</string>
@@ -16,11 +16,11 @@
     <string name="timer_off">Kein Timer</string>
     <string name="sweet_dreams">Süße Träume 🌙</string>
 
-    <string name="notif_channel_name">SoundPad Wiedergabe</string>
+    <string name="notif_channel_name">ZenPulse Wiedergabe</string>
     <string name="notif_channel_desc">Hintergrund-Schlafklänge</string>
     <string name="notif_action_stop">Stopp</string>
 
-    <string name="about_title">Über SoundPad</string>
+    <string name="about_title">Über ZenPulse</string>
     <string name="privacy_policy">Datenschutzerklärung</string>
     <string name="terms_of_service">Nutzungsbedingungen</string>
     <string name="contact_support">Support kontaktieren</string>

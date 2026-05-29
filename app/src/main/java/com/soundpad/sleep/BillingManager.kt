@@ -9,9 +9,9 @@ import kotlinx.coroutines.*
  * Wraps Google Play Billing Library 6.x.
  *
  * Products to create in Google Play Console (Monetize → Products):
- *   In-app product  → soundpad_pro          ($3.99 one-time)   "SoundPad Pro"
- *   Subscription    → soundpad_ultimate     ($1.99 / month)    "SoundPad Ultimate (Monthly)"
- *   Subscription    → soundpad_yearly       ($14.99 / year)    "SoundPad Ultimate (Yearly)"
+ *   In-app product  → zenpulse_pro          ($3.99 one-time)   "ZenPulse Pro"
+ *   Subscription    → zenpulse_ultimate     ($1.99 / month)    "ZenPulse Ultimate (Monthly)"
+ *   Subscription    → zenpulse_yearly       ($14.99 / year)    "ZenPulse Ultimate (Yearly)"
  *
  * Any active purchase of any SKU unlocks all 14 sounds + removes ads.
  *
@@ -25,10 +25,10 @@ class BillingManager(
 ) : PurchasesUpdatedListener {
 
     companion object {
-        const val TAG          = "SoundPadBilling"
-        const val SKU_PRO      = "soundpad_pro"
-        const val SKU_ULTIMATE = "soundpad_ultimate"
-        const val SKU_YEARLY   = "soundpad_yearly"
+        const val TAG          = "ZenPulseBilling"
+        const val SKU_PRO      = "zenpulse_pro"
+        const val SKU_ULTIMATE = "zenpulse_ultimate"
+        const val SKU_YEARLY   = "zenpulse_yearly"
     }
 
     private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())

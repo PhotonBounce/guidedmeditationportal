@@ -8,7 +8,7 @@ Every field Google will ask you to fill, pre-written. Don't think, paste.
 
 | Field | Value |
 |---|---|
-| App name | SoundPad — Sleep & Focus Noise |
+| App name | ZenPulse — Sleep, Focus & Workout Sounds |
 | Default language | English – en-US |
 | App or game | App |
 | Free or paid | Free |
@@ -20,7 +20,7 @@ Every field Google will ask you to fill, pre-written. Don't think, paste.
 
 ### Privacy policy
 ```
-https://soundpad-sleep.github.io/privacy.html
+https://www.photon-bounce.com/soundpad/privacy
 ```
 
 ### App access
@@ -107,12 +107,12 @@ Expected rating: **Everyone**
 
 ### App name
 ```
-SoundPad — Sleep & Focus Noise
+ZenPulse — Sleep, Focus & Workout Sounds
 ```
 
 ### Short description (80 chars max — this is 79)
 ```
-White noise, brown noise, rain, ocean & sleep sounds. Fall asleep faster.
+Sleep sounds, focus noise & workout energy — calm your mind, fuel your grind.
 ```
 
 ### Full description (paste verbatim)
@@ -145,12 +145,12 @@ Made for restless sleepers, focused workers, anxious minds, and tired parents. �
 
 ### Category
 - App category: **Health & Fitness**
-- Tags (add up to 5): Sleep, Meditation, Relaxation, Focus, White Noise
+- Tags (add up to 5): Sleep, Meditation, Relaxation, Focus, Workout
 
 ### Contact details
 - Email: `soundpad.sleep@gmail.com`  *(create this Gmail if you haven't)*
 - Phone: leave blank
-- Website: `https://soundpad-sleep.github.io`
+- Website: `https://www.photon-bounce.com`
 
 ### External marketing
 - Allow Google to use your app to promote in ads: **Yes** (free reach)
@@ -172,9 +172,9 @@ Made for restless sleepers, focused workers, anxious minds, and tired parents. �
 ### One-time
 | Field | Value |
 |---|---|
-| Product ID | `soundpad_pro` |
-| Name | SoundPad Pro |
-| Description | Unlock all 14 sounds and remove ads forever |
+| Product ID | `zenpulse_pro` |
+| Name | ZenPulse Pro |
+| Description | Unlock all sounds and remove ads forever |
 | Default price | $3.99 USD |
 | Status | **Active** |
 
@@ -183,9 +183,9 @@ Made for restless sleepers, focused workers, anxious minds, and tired parents. �
 ### Monthly
 | Field | Value |
 |---|---|
-| Product ID | `soundpad_ultimate` |
-| Name | SoundPad Ultimate (Monthly) |
-| Benefit | "Unlock all 14 premium sounds + remove ads, billed monthly" |
+| Product ID | `zenpulse_ultimate` |
+| Name | ZenPulse Ultimate (Monthly) |
+| Benefit | "Unlock all premium sounds + remove ads, billed monthly" |
 | Base plan ID | `monthly-autorenew` |
 | Renewal type | Auto-renewing |
 | Billing period | 1 month |
@@ -196,8 +196,8 @@ Made for restless sleepers, focused workers, anxious minds, and tired parents. �
 ### Yearly
 | Field | Value |
 |---|---|
-| Product ID | `soundpad_yearly` |
-| Name | SoundPad Ultimate (Yearly) |
+| Product ID | `zenpulse_yearly` |
+| Name | ZenPulse Ultimate (Yearly) |
 | Benefit | "All Ultimate features. Best value — save 37%." |
 | Base plan ID | `yearly-autorenew` |
 | Renewal type | Auto-renewing |
@@ -215,17 +215,18 @@ Made for restless sleepers, focused workers, anxious minds, and tired parents. �
 
 ### Release name
 ```
-1.0.1 — Launch
+1.0.3 — Launch
 ```
 
 ### What's new in this release (≤500 chars)
 ```
-🌙 Welcome to SoundPad — your new bedtime ritual.
+⚡ Welcome to ZenPulse — your sound companion for sleep, focus, and recovery.
 
 • 14 sleep & focus sounds: white, pink, brown, blue, violet noise + rain, ocean, fire, wind, thunder, fan + 3 original synthetics
+• Mix Studio — blend two sounds, save custom mixes
+• ARIA AI sound science assistant
 • Sleep timer up to 8 hours
-• Background playback — screen off, app closed, still playing
-• Optional rewarded ads to try premium sounds free
+• Background playback — screen off, still playing
 • One-time $3.99 or subscription with free trial
 ```
 
@@ -252,6 +253,6 @@ Made for restless sleepers, focused workers, anxious minds, and tired parents. �
 | 0 (live) | Reply "thanks!" to every install/review. Post your first TikTok: "Brown noise for ADHD focus — try it" with a 15s loop of the app playing |
 | +1 | Post Reddit: r/sleep, r/ADHD, r/InsomniaHelp — "made a free white noise app, would love feedback" |
 | +3 | Add a second TikTok: "I tested pink vs brown noise for 30 days" |
-| +7 | Enable a Play Store experiment: A/B test "$2.99" vs "$3.99" for soundpad_pro |
+| +7 | Enable a Play Store experiment: A/B test "$2.99" vs "$3.99" for zenpulse_pro |
 | +14 | First weekly retention review in Play Console → Statistics |
 | +30 | If installs > 1k: add interstitial-on-stop for free users (3× ad revenue) |

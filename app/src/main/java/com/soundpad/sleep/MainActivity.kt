@@ -419,7 +419,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         AlertDialog.Builder(this, R.style.AlertDialogDark)
-            .setTitle("Unlock SoundPad")
+            .setTitle("Unlock ZenPulse")
             .setItems(labels.toTypedArray()) { _, i -> actions[i]() }
             .setNegativeButton("Not Now", null)
             .show()
@@ -427,7 +427,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showSubscribeDialog() {
         AlertDialog.Builder(this, R.style.AlertDialogDark)
-            .setTitle("🌟 SoundPad Ultimate")
+            .setTitle("🌟 ZenPulse Ultimate")
             .setMessage(
                 "Unlock everything with a subscription:\n\n" +
                 "• All premium sounds (synthesized + ambient + energy)\n" +

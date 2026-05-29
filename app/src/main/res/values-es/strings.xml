@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SoundPad</string>
-    <string name="app_tagline">Dormir · Concentrarse · Relajarse</string>
+    <string name="app_name">ZenPulse</string>
+    <string name="app_tagline">Dormir · Concentrarse · Entrenar</string>
 
     <string name="sound_white">Ruido Blanco</string>
     <string name="sound_pink">Ruido Rosa</string>
     <string name="sound_brown">Ruido Marrón</string>
 
-    <string name="premium_title">SoundPad Pro</string>
+    <string name="premium_title">ZenPulse Pro</string>
     <string name="premium_desc">Desbloquea los 14 sonidos · Sin anuncios · Temporizador de 8 horas</string>
     <string name="btn_unlock">Desbloquear — $3.99</string>
     <string name="btn_subscribe">$1.99 / mes</string>
@@ -16,11 +16,11 @@
     <string name="timer_off">Sin Temporizador</string>
     <string name="sweet_dreams">Dulces sueños 🌙</string>
 
-    <string name="notif_channel_name">Reproducción SoundPad</string>
+    <string name="notif_channel_name">Reproducción ZenPulse</string>
     <string name="notif_channel_desc">Reproducción de sonidos para dormir en segundo plano</string>
     <string name="notif_action_stop">Detener</string>
 
-    <string name="about_title">Acerca de SoundPad</string>
+    <string name="about_title">Acerca de ZenPulse</string>
     <string name="privacy_policy">Política de Privacidad</string>
     <string name="terms_of_service">Términos del Servicio</string>
     <string name="contact_support">Contactar Soporte</string>
