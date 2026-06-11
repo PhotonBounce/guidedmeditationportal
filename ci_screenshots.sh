@@ -4,6 +4,12 @@
 set -x
 OUT=store_screenshots
 mkdir -p "$OUT"
+PKG=com.auroramind.meditation
+
+# Let the system settle after boot — launcher ANRs are common right after.
+sleep 30
+adb shell input keyevent KEYCODE_WAKEUP
+adb shell wm dismiss-keyguard || true
 
 adb install -r app/build/outputs/apk/debug/app-debug.apk
 
@@ -34,9 +40,41 @@ sys.exit(1)
 PYEOF
 }
 
+# Dismisses any "isn't responding" ANR dialog (taps Wait for our app, Close for others).
+dismiss_anr() {
+  coords=$(find_node "Close app")
+  [ -n "$coords" ] && adb shell input tap $coords && sleep 1
+  coords=$(find_node "isn't responding")
+  if [ -n "$coords" ]; then
+    coords=$(find_node "Wait")
+    [ -n "$coords" ] && adb shell input tap $coords && sleep 1
+  fi
+  return 0
+}
+
+# True when our app's window has focus.
+app_focused() {
+  adb shell dumpsys window 2>/dev/null | grep -E "mCurrentFocus|mFocusedApp" | grep -q "$PKG"
+}
+
+# Launches the app and blocks until it actually holds the foreground.
+launch_app() {
+  for attempt in 1 2 3; do
+    adb shell am start -n "$PKG/.SplashActivity"
+    for i in $(seq 1 15); do
+      sleep 2
+      dismiss_anr
+      app_focused && return 0
+    done
+  done
+  echo "FATAL: app never reached foreground"
+  return 1
+}
+
 # Taps the node matching $1, scrolling down up to 3 screens to find it.
 tap() {
   for i in 1 2 3 4; do
+    dismiss_anr
     coords=$(find_node "$1")
     if [ -n "$coords" ]; then
       adb shell input tap $coords
@@ -61,6 +99,11 @@ scroll_top() {
 }
 
 shot() {
+  dismiss_anr
+  if ! app_focused; then
+    echo "WARN: app not focused before $1 — relaunching"
+    launch_app
+  fi
   adb exec-out screencap -p > "$OUT/$1.png"
   echo "captured $1"
 }
@@ -74,8 +117,8 @@ adb shell am broadcast -a com.android.systemui.demo -e command notifications -e 
 adb shell am broadcast -a com.android.systemui.demo -e command network -e wifi -e fully true -e level 4
 
 # ── launch & first-run dialogs ───────────────────────────────────────────────
-adb shell am start -n com.auroramind.meditation/.SplashActivity
-sleep 10
+launch_app || exit 1
+sleep 5
 tap_if_present "Allow"            # POST_NOTIFICATIONS permission (API 33+)
 tap_if_present "Get Started"      # onboarding dialog
 sleep 2

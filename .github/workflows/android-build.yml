@@ -94,6 +94,8 @@ jobs:
           api-level: 34
           arch: x86_64
           profile: pixel_6
+          ram-size: 4096M
+          cores: 3
           disable-animations: true
           emulator-options: -no-snapshot -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
           script: |
