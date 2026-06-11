@@ -103,9 +103,10 @@ jobs:
             ./ci_screenshots.sh
 
       - name: Upload screenshots
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: store-screenshots
           path: store_screenshots/
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 14

@@ -70,6 +70,13 @@ launch_app() {
     done
   done
   echo "FATAL: app never reached foreground"
+  echo "--- window focus ---"
+  adb shell dumpsys window 2>/dev/null | grep -E "mCurrentFocus|mFocusedApp" || true
+  echo "--- recent crashes ---"
+  adb logcat -d 2>/dev/null | grep -E "FATAL EXCEPTION|AndroidRuntime|Process .* has died" | tail -40 || true
+  echo "--- full logcat tail for our app ---"
+  adb logcat -d 2>/dev/null | grep "auroramind" | tail -60 || true
+  adb exec-out screencap -p > "$OUT/debug_fail.png" || true
   return 1
 }
 
