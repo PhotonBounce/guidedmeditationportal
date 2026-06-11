@@ -4,20 +4,38 @@
 set -x
 OUT=store_screenshots
 mkdir -p "$OUT"
-# Debug builds append ".debug" to the applicationId; classes keep the base package.
 PKG=com.auroramind.meditation.debug
-LAUNCH_COMPONENT="com.auroramind.meditation.debug/com.auroramind.meditation.SplashActivity"
+LAUNCH_COMPONENT="$PKG/com.auroramind.meditation.SplashActivity"
+PREFS_FILE=meditation_portal_prefs.xml
 
-# Let the system settle after boot — launcher ANRs are common right after.
-sleep 30
+# Suppress system ANR / crash dialogs (e.g. "Quickstep isn't responding") so they
+# can never draw over the app or steal window focus from the automation.
+adb shell settings put global hide_error_dialogs 1
+# Let the system settle after boot, then wake & unlock.
+sleep 25
 adb shell input keyevent KEYCODE_WAKEUP
 adb shell wm dismiss-keyguard || true
 
-# -g pre-grants all runtime permissions so no permission dialog can cover the app
+# -g pre-grants all runtime permissions so no permission dialog can appear.
 adb install -r -g app/build/outputs/apk/debug/app-debug.apk
 
+# ── Pre-seed prefs so the onboarding dialog never shows ──────────────────────
+# The app is debuggable, so run-as lets us write its SharedPreferences. We launch
+# once to create the data dir, write onboarding_shown=true, then force-stop. The
+# next launch skips onboarding entirely — no modal dialog to fight.
+adb shell am start -n "$LAUNCH_COMPONENT"
+sleep 12
+adb shell "run-as $PKG mkdir -p /data/data/$PKG/shared_prefs" || true
+adb shell "run-as $PKG sh -c 'cat > /data/data/$PKG/shared_prefs/$PREFS_FILE'" <<'XML'
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<map>
+    <boolean name="onboarding_shown" value="true" />
+</map>
+XML
+adb shell am force-stop "$PKG"
+sleep 2
+
 # ── helpers ──────────────────────────────────────────────────────────────────
-# Finds a UI node whose text OR content-desc contains $1; prints "x y" of center.
 # Matches against text, content-desc AND resource-id, case-insensitively.
 find_node() {
   adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
@@ -47,38 +65,6 @@ sys.exit(1)
 PYEOF
 }
 
-# Dismisses an "isn't responding" ANR dialog — only acts if one is actually
-# present, so it never false-taps the live UI.
-dismiss_anr() {
-  if [ -n "$(find_node "isn't responding")" ]; then
-    coords=$(find_node "Wait")          # keep waiting for OUR app
-    [ -z "$coords" ] && coords=$(find_node "Close app")
-    [ -n "$coords" ] && adb shell input tap $coords && sleep 1
-  fi
-  return 0
-}
-
-# Waits for the onboarding dialog to appear (it renders a beat after MainActivity
-# loads), then taps its button by resource-id until the dialog is gone. Polling
-# for appearance first avoids the race where an early check sees no dialog and
-# wrongly concludes there's nothing to dismiss.
-dismiss_onboarding() {
-  local seen=0
-  for i in $(seq 1 30); do
-    btn=$(find_node "onboardingOk")
-    if [ -n "$btn" ]; then
-      seen=1
-      adb shell input tap $btn
-      sleep 2
-      continue
-    fi
-    # Button gone: done if we already dismissed it, else keep waiting for it.
-    [ "$seen" = "1" ] && return 0
-    sleep 2
-  done
-  return 0
-}
-
 # True when our app's window has focus.
 app_focused() {
   adb shell dumpsys window 2>/dev/null | grep -E "mCurrentFocus|mFocusedApp" | grep -q "$PKG"
@@ -90,13 +76,6 @@ launch_app() {
     adb shell am start -n "$LAUNCH_COMPONENT"
     for i in $(seq 1 15); do
       sleep 2
-      dismiss_anr
-      # A system permission dialog steals window focus from the app — accept it
-      # so the focus check underneath can see the real foreground activity.
-      if adb shell dumpsys window 2>/dev/null | grep mCurrentFocus | grep -q permissioncontroller; then
-        tap_if_present "Allow"
-        tap_if_present "While using the app"
-      fi
       app_focused && return 0
     done
   done
@@ -105,8 +84,6 @@ launch_app() {
   adb shell dumpsys window 2>/dev/null | grep -E "mCurrentFocus|mFocusedApp" || true
   echo "--- recent crashes ---"
   adb logcat -d 2>/dev/null | grep -E "FATAL EXCEPTION|AndroidRuntime|Process .* has died" | tail -40 || true
-  echo "--- full logcat tail for our app ---"
-  adb logcat -d 2>/dev/null | grep "auroramind" | tail -60 || true
   adb exec-out screencap -p > "$OUT/debug_fail.png" || true
   return 1
 }
@@ -114,7 +91,6 @@ launch_app() {
 # Taps the node matching $1, scrolling down up to 3 screens to find it.
 tap() {
   for i in 1 2 3 4; do
-    dismiss_anr
     coords=$(find_node "$1")
     if [ -n "$coords" ]; then
       adb shell input tap $coords
@@ -127,19 +103,11 @@ tap() {
   return 1
 }
 
-# Taps without scrolling (for dialogs/permission prompts that may not appear).
-tap_if_present() {
-  coords=$(find_node "$1")
-  [ -n "$coords" ] && adb shell input tap $coords && sleep 2
-  return 0
-}
-
 scroll_top() {
   for i in 1 2 3; do adb shell input swipe 540 800 540 1900 300; sleep 1; done
 }
 
 shot() {
-  dismiss_anr
   if ! app_focused; then
     echo "WARN: app not focused before $1 — relaunching"
     launch_app
@@ -156,12 +124,9 @@ adb shell am broadcast -a com.android.systemui.demo -e command battery -e level 
 adb shell am broadcast -a com.android.systemui.demo -e command notifications -e visible false
 adb shell am broadcast -a com.android.systemui.demo -e command network -e wifi -e fully true -e level 4
 
-# ── launch & first-run dialogs ───────────────────────────────────────────────
+# ── launch (onboarding already suppressed) ───────────────────────────────────
 launch_app || exit 1
-sleep 5
-tap_if_present "Allow"            # POST_NOTIFICATIONS permission (API 33+)
-dismiss_onboarding               # onboarding dialog (retries until gone)
-sleep 2
+sleep 4
 
 # ── 1. Home idle ─────────────────────────────────────────────────────────────
 scroll_top
@@ -185,7 +150,6 @@ sleep 7
 shot 04_breathing
 adb shell input keyevent KEYCODE_BACK
 sleep 2
-dismiss_onboarding
 
 # ── 5. Spirit chat ───────────────────────────────────────────────────────────
 scroll_top
