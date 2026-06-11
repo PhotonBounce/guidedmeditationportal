@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
-# Drives the app on the CI emulator and captures Play Store screenshots.
-# Run by the android-emulator-runner step — adb is already connected.
+# Captures Play Store screenshots on the CI emulator (Pixel 6, 1080x2400).
+#
+# The app's home/splash run a 60fps Canvas animation that never idles, so
+# `uiautomator dump` (which waits for idle) times out and returns nothing.
+# We therefore drive the UI with FIXED proportional coordinates instead of
+# querying the view tree. Resolution is pinned by the pixel_6 profile.
 set -x
 OUT=store_screenshots
 mkdir -p "$OUT"
@@ -8,21 +12,16 @@ PKG=com.auroramind.meditation.debug
 LAUNCH_COMPONENT="$PKG/com.auroramind.meditation.SplashActivity"
 PREFS_FILE=meditation_portal_prefs.xml
 
-# Suppress system ANR / crash dialogs (e.g. "Quickstep isn't responding") so they
-# can never draw over the app or steal window focus from the automation.
+# Suppress system ANR / crash dialogs so they can't draw over the app.
 adb shell settings put global hide_error_dialogs 1
-# Let the system settle after boot, then wake & unlock.
 sleep 25
 adb shell input keyevent KEYCODE_WAKEUP
 adb shell wm dismiss-keyguard || true
 
-# -g pre-grants all runtime permissions so no permission dialog can appear.
+# -g pre-grants runtime permissions so no permission dialog appears.
 adb install -r -g app/build/outputs/apk/debug/app-debug.apk
 
-# ── Pre-seed prefs so the onboarding dialog never shows ──────────────────────
-# The app is debuggable, so run-as lets us write its SharedPreferences. We launch
-# once to create the data dir, write onboarding_shown=true, then force-stop. The
-# next launch skips onboarding entirely — no modal dialog to fight.
+# ── Pre-seed prefs so onboarding never shows (app is debuggable) ─────────────
 adb shell am start -n "$LAUNCH_COMPONENT"
 sleep 12
 adb shell "run-as $PKG mkdir -p /data/data/$PKG/shared_prefs" || true
@@ -35,135 +34,73 @@ XML
 adb shell am force-stop "$PKG"
 sleep 2
 
-# ── helpers ──────────────────────────────────────────────────────────────────
-# Matches against text, content-desc AND resource-id, case-insensitively.
-find_node() {
-  adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
-  adb pull /sdcard/ui.xml /tmp/ui.xml >/dev/null 2>&1
-  python3 - "$1" <<'PYEOF'
-import re, sys
-q = sys.argv[1].lower()
-try:
-    xml = open('/tmp/ui.xml', encoding='utf-8', errors='replace').read()
-except FileNotFoundError:
-    sys.exit(1)
-for m in re.finditer(r'<node[^>]*>', xml):
-    n = m.group(0)
-    t = re.search(r'text="([^"]*)"', n)
-    d = re.search(r'content-desc="([^"]*)"', n)
-    r = re.search(r'resource-id="([^"]*)"', n)
-    hay = '|'.join([(t.group(1) if t else ''),
-                    (d.group(1) if d else ''),
-                    (r.group(1) if r else '')]).lower()
-    if q in hay:
-        b = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', n)
-        if b:
-            print((int(b.group(1)) + int(b.group(3))) // 2,
-                  (int(b.group(2)) + int(b.group(4))) // 2)
-            sys.exit(0)
-sys.exit(1)
-PYEOF
-}
-
-# True when our app's window has focus.
-app_focused() {
-  adb shell dumpsys window 2>/dev/null | grep -E "mCurrentFocus|mFocusedApp" | grep -q "$PKG"
-}
-
-# Launches the app and blocks until it actually holds the foreground.
-launch_app() {
-  for attempt in 1 2 3; do
-    adb shell am start -n "$LAUNCH_COMPONENT"
-    for i in $(seq 1 15); do
-      sleep 2
-      app_focused && return 0
-    done
-  done
-  echo "FATAL: app never reached foreground"
-  echo "--- window focus ---"
-  adb shell dumpsys window 2>/dev/null | grep -E "mCurrentFocus|mFocusedApp" || true
-  echo "--- recent crashes ---"
-  adb logcat -d 2>/dev/null | grep -E "FATAL EXCEPTION|AndroidRuntime|Process .* has died" | tail -40 || true
-  adb exec-out screencap -p > "$OUT/debug_fail.png" || true
-  return 1
-}
-
-# Taps the node matching $1, scrolling down up to 3 screens to find it.
-tap() {
-  for i in 1 2 3 4; do
-    coords=$(find_node "$1")
-    if [ -n "$coords" ]; then
-      adb shell input tap $coords
-      sleep 2
-      return 0
-    fi
-    [ $i -lt 4 ] && adb shell input swipe 540 1700 540 800 400 && sleep 1
-  done
-  echo "WARN: UI node '$1' not found"
-  return 1
-}
-
-scroll_top() {
-  for i in 1 2 3; do adb shell input swipe 540 800 540 1900 300; sleep 1; done
-}
-
-shot() {
-  if ! app_focused; then
-    echo "WARN: app not focused before $1 — relaunching"
-    launch_app
-  fi
-  adb exec-out screencap -p > "$OUT/$1.png"
-  echo "captured $1"
-}
-
 # ── clean status bar via SystemUI demo mode ─────────────────────────────────
 adb shell settings put global sysui_demo_allowed 1
-adb shell am broadcast -a com.android.systemui.demo -e command enter
-adb shell am broadcast -a com.android.systemui.demo -e command clock -e hhmm 0900
-adb shell am broadcast -a com.android.systemui.demo -e command battery -e level 100 -e plugged false
-adb shell am broadcast -a com.android.systemui.demo -e command notifications -e visible false
-adb shell am broadcast -a com.android.systemui.demo -e command network -e wifi -e fully true -e level 4
+demo() { adb shell am broadcast -a com.android.systemui.demo -e command "$@" >/dev/null; }
+demo enter
+demo clock -e hhmm 0900
+demo battery -e level 100 -e plugged false
+demo notifications -e visible false
+demo network -e wifi -e fully true -e level 4
 
-# ── launch (onboarding already suppressed) ───────────────────────────────────
-launch_app || exit 1
-sleep 4
+tap()    { adb shell input tap "$1" "$2"; sleep 2; }
+back()   { adb shell input keyevent KEYCODE_BACK; sleep 2; }
+shot()   { adb exec-out screencap -p > "$OUT/$1.png"; echo "captured $1"; }
+home_focused() { adb shell dumpsys window 2>/dev/null | grep -E "mCurrentFocus|mFocusedApp" | grep -q "MainActivity"; }
 
-# ── 1. Home idle ─────────────────────────────────────────────────────────────
+# Launch and wait until MainActivity (not the splash) holds focus.
+launch_home() {
+  adb shell am start -n "$LAUNCH_COMPONENT"
+  for i in $(seq 1 20); do
+    sleep 2
+    home_focused && { sleep 2; return 0; }
+  done
+  echo "WARN: MainActivity not confirmed focused"
+  adb shell dumpsys window 2>/dev/null | grep -E "mCurrentFocus|mFocusedApp" || true
+  return 0
+}
+
+# Swipes (1080x2400 coordinate space)
+scroll_top()  { for i in 1 2 3; do adb shell input swipe 540 700 540 2000 300; sleep 1; done; }
+scroll_down() { adb shell input swipe 540 1800 540 700 400; sleep 2; }
+
+# ── Drive the app ────────────────────────────────────────────────────────────
+launch_home
+
+# 1. Home idle (top of screen)
 scroll_top
 shot 01_home_idle
 
-# ── 2. Home playing (scrub bar visible) ──────────────────────────────────────
-tap "Tonglen"
+# 2. Sound grid — scroll down to reveal the meditation cards
+scroll_down
+scroll_down
+shot 03_sound_grid
+
+# 2b. Play a meditation, then show the playing home with scrub bar
+tap 270 1180          # first card in the grid
 sleep 5
 scroll_top
 shot 02_home_playing
 
-# ── 3. Sound grid ────────────────────────────────────────────────────────────
-adb shell input swipe 540 1700 540 600 500
-sleep 1
-shot 03_sound_grid
-
-# ── 4. Breathing coach ───────────────────────────────────────────────────────
+# 4. Breathing coach — Breathe card (left tool card)
 scroll_top
-tap "Breathe"
+tap 310 1245
 sleep 7
 shot 04_breathing
-adb shell input keyevent KEYCODE_BACK
-sleep 2
+back
 
-# ── 5. Spirit chat ───────────────────────────────────────────────────────────
+# 5. Spirit — bottom-nav Spirit tab (center)
 scroll_top
-tap "Spirit"
-sleep 4
+tap 540 2315
+sleep 5
 shot 05_spirit
-adb shell input keyevent KEYCODE_BACK
-sleep 2
+back
 
-# ── 6. Progress dialog ───────────────────────────────────────────────────────
+# 6. Progress dialog — overflow menu (3-dot top-right) → My Progress (2nd item)
 scroll_top
-tap "More options"
+tap 1020 60
 sleep 1
-tap "My Progress"
+tap 850 270
 sleep 2
 shot 06_progress
 
