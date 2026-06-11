@@ -14,16 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <ImageView
-        android:id="@+id/ivWatermarkLogo"
-        android:layout_width="260dp"
-        android:layout_height="260dp"
-        android:layout_gravity="center"
-        android:src="@drawable/appicon"
-        android:alpha="0.20"
-        android:scaleType="fitCenter"
-        android:importantForAccessibility="no"
-        app:layout_anchorGravity="center" />
+    <!-- watermark logo removed per UX review — top logo (ivTopLogo) is sufficient -->
 
     <!-- ── Main vertical container ──────────────────────────────────────── -->
     <LinearLayout
