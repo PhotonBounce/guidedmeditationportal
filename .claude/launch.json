@@ -1,0 +1,29 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "docs (privacy/terms pages)",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8000", "--directory", "docs"],
+      "port": 8000
+    },
+    {
+      "name": "marketing (Play Store asset templates)",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8001", "--directory", "marketing"],
+      "port": 8001
+    },
+    {
+      "name": "occupantkiller",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["D:\\occupantkiller\\occupantkiller\\server.js"],
+      "port": 3000
+    },
+    {
+      "name": "libaix",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["D:\\libaix-main\\app.py"],
+      "port": 5000
+    }
+  ]
+}

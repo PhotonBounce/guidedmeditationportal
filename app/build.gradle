@@ -4,35 +4,22 @@ plugins {
 }
 
 android {
-    namespace 'com.soundpad.sleep'
+    namespace 'com.auroramind.meditation'
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.soundpad.sleep"
+        applicationId "com.auroramind.meditation"
         minSdk 21
         targetSdk 35
-        versionCode 4
-        versionName "1.0.3"
+        versionCode 10
+        versionName "1.3.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         // Enable runtime support for vector launcher fallback on API < 26
         vectorDrawables.useSupportLibrary = true
 
-        // ── AdMob unit IDs ──────────────────────────────────────────────
-        // Currently set to Google's official TEST IDs. Replace with your
-        // real IDs from AdMob console before publishing — just edit these
-        // three values and rebuild.
-        buildConfigField "String", "ADMOB_APP_ID",
-            "\"ca-app-pub-3940256099942544~3347511713\""
-        // Also expose to AndroidManifest as ${admobAppId}
-        manifestPlaceholders.admobAppId = "ca-app-pub-3940256099942544~3347511713"
-        buildConfigField "String", "ADMOB_BANNER_UNIT_ID",
-            "\"ca-app-pub-3940256099942544/6300978111\""
-        buildConfigField "String", "ADMOB_INTERSTITIAL_UNIT_ID",
-            "\"ca-app-pub-3940256099942544/1033173712\""
-        buildConfigField "String", "ADMOB_REWARDED_UNIT_ID",
-            "\"ca-app-pub-3940256099942544/5224354917\""
+        // AdMob Configuration is separated into debug (safe test IDs) and release (real production IDs) build types below.
     }
 
     // ────────────────────────────────────────────────────────────────────
@@ -42,10 +29,10 @@ android {
     // ────────────────────────────────────────────────────────────────────
     signingConfigs {
         release {
-            def ksPath  = System.getenv("SOUNDPAD_KEYSTORE")  ?: project.findProperty("SOUNDPAD_KEYSTORE")
-            def ksAlias = System.getenv("SOUNDPAD_KEY_ALIAS") ?: project.findProperty("SOUNDPAD_KEY_ALIAS")
-            def ksPw    = System.getenv("SOUNDPAD_STORE_PASSWORD") ?: project.findProperty("SOUNDPAD_STORE_PASSWORD")
-            def keyPw   = System.getenv("SOUNDPAD_KEY_PASSWORD") ?: project.findProperty("SOUNDPAD_KEY_PASSWORD")
+            def ksPath  = System.getenv("MEDITATION_KEYSTORE")  ?: project.findProperty("MEDITATION_KEYSTORE")
+            def ksAlias = System.getenv("MEDITATION_KEY_ALIAS") ?: project.findProperty("MEDITATION_KEY_ALIAS")
+            def ksPw    = System.getenv("MEDITATION_STORE_PASSWORD") ?: project.findProperty("MEDITATION_STORE_PASSWORD")
+            def keyPw   = System.getenv("MEDITATION_KEY_PASSWORD") ?: project.findProperty("MEDITATION_KEY_PASSWORD")
             storeFile     ksPath ? file(ksPath) : null
             storePassword ksPw
             keyAlias      ksAlias
@@ -59,10 +46,37 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+
+            // ── Production AdMob Settings (REAL IDs for users) ──────────────
+            buildConfigField "String", "ADMOB_APP_ID",
+                "\"ca-app-pub-7584543130600454~5089915421\""
+            manifestPlaceholders.admobAppId = "ca-app-pub-7584543130600454~5089915421"
+
+            // Banner1 — live banner unit
+            buildConfigField "String", "ADMOB_BANNER_UNIT_ID",
+                "\"ca-app-pub-7584543130600454/8383813088\""
+            // Interstitial — live unit for this app ("Guided Meditation Interstitial ad")
+            buildConfigField "String", "ADMOB_INTERSTITIAL_UNIT_ID",
+                "\"ca-app-pub-7584543130600454/4340930215\""
+            // Rewarded ad 1 — live rewarded unit for this app
+            buildConfigField "String", "ADMOB_REWARDED_UNIT_ID",
+                "\"ca-app-pub-7584543130600454/5844593893\""
         }
         debug {
             applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
+
+            // ── Debug AdMob Settings (SAFE Google Test IDs) ──────────────────
+            buildConfigField "String", "ADMOB_APP_ID",
+                "\"ca-app-pub-3940256099942544~3347511713\""
+            manifestPlaceholders.admobAppId = "ca-app-pub-3940256099942544~3347511713"
+
+            buildConfigField "String", "ADMOB_BANNER_UNIT_ID",
+                "\"ca-app-pub-3940256099942544/6300978111\""
+            buildConfigField "String", "ADMOB_INTERSTITIAL_UNIT_ID",
+                "\"ca-app-pub-3940256099942544/1033173712\""
+            buildConfigField "String", "ADMOB_REWARDED_UNIT_ID",
+                "\"ca-app-pub-3940256099942544/5224354917\""
         }
     }
 

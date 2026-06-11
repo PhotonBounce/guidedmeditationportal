@@ -207,11 +207,15 @@ or up to 8 hours.
 2. Upload your `.aab` file from `app/release/`
 3. Write release notes:
    ```
-   🌙 Initial release
-   • White, Pink, and Brown noise FREE
-   • 11 additional premium sounds
-   • Sleep timer up to 8 hours
-   • Plays with screen off
+   1.0.5 — Brand Update & Bug Fixes
+   • Completed brand transition from SoundPad/ZenPulse to Ausis.
+   • Upgraded AI assistant to AusisBot.
+   • Decluttered the main dashboard by moving the app description card to the onboarding screens.
+   • Replaced moon/eclipse toolbar icons with the premium new Ausis app icon.
+   • Resolved layout inflation and Switch view crashes on physical devices.
+   • Fixed bottom navigation menu transition issues.
+   • Integrated production-ready AdMob support for release configurations.
+   • Updated privacy policy and terms links to point to the new branded paths.
    ```
 4. Click **Review release**, then **Start rollout to Production**
 5. Google reviews the app — usually **3–7 days** for the first submission

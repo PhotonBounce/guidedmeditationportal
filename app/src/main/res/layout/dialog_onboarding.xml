@@ -7,30 +7,93 @@
     android:padding="24dp"
     android:background="@color/card_bg">
 
-    <TextView
-        android:id="@+id/onboardingTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="⚡ Welcome to ZenPulse"
-        android:textColor="@color/text_primary"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="12dp" />
-
-    <TextView
-        android:id="@+id/onboardingDesc"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Fall asleep faster with scientifically-designed noise.\n\n• 3 free sounds (White, Pink, Brown)\n• 11 premium sounds (Ocean, Rain, Fire…)\n• 8-hour sleep timer\n• Plays with screen off\n\nUpgrade anytime to unlock everything."
-        android:textColor="@color/text_secondary"
-        android:textSize="14sp"
-        android:lineSpacingExtra="4dp"
-        android:layout_marginBottom="20dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/onboardingTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🌙 Welcome to Guided Meditation Portal"
+                android:textColor="@color/text_primary"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/onboardingDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Narrated guided meditations paired with calming soundscapes — designed to help you breathe slower, settle a busy mind, and rest more deeply.\n\n• 3 free guided meditations to start your practice\n• 23 narrated guided meditations in all\n• A breathing coach &amp; a companion called Spirit\n• Plays with screen off\n\nUpgrade anytime to unlock everything."
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="What brings you here?"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/onboardingGoals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/goalSleep"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🌙 Sleep better" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/goalStress"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🌬️ Less stress" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/goalFocus"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🎯 Focus" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/goalGrounding"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🌿 Feel grounded" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/goalCompassion"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🤍 Be kinder to myself" />
+            </com.google.android.material.chip.ChipGroup>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/onboardingOk"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_marginTop="12dp"
         android:text="Get Started"
         android:textColor="@color/text_primary"
         app:backgroundTint="@color/accent_purple"

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@color/card_bg">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🎛️ Equalizer &amp; Spectrum"
+        android:textColor="@color/text_primary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="14dp" />
+
+    <!-- Visualizer wrapper -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        app:cardBackgroundColor="#2600E5FF"
+        app:cardCornerRadius="10dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/card_border"
+        android:layout_marginBottom="18dp">
+
+        <com.auroramind.meditation.VisualEqualizerView
+            android:id="@+id/visualizer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="12dp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Bass -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="4dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Bass (Low)"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvBassPct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100%"
+            android:textColor="@color/accent_teal"
+            android:textSize="13sp"
+            android:fontFamily="monospace" />
+    </LinearLayout>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/sliderBass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:valueFrom="0.2"
+        android:valueTo="2.0"
+        android:value="1.0"
+        android:layout_marginBottom="12dp"
+        app:thumbColor="@color/accent_teal"
+        app:trackColorActive="@color/accent_teal"
+        app:trackColorInactive="@color/card_border" />
+
+    <!-- Mid -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="4dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Mids (Voice)"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvMidPct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100%"
+            android:textColor="@color/accent_iris"
+            android:textSize="13sp"
+            android:fontFamily="monospace" />
+    </LinearLayout>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/sliderMid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:valueFrom="0.2"
+        android:valueTo="2.0"
+        android:value="1.0"
+        android:layout_marginBottom="12dp"
+        app:thumbColor="@color/accent_iris"
+        app:trackColorActive="@color/accent_iris"
+        app:trackColorInactive="@color/card_border" />
+
+    <!-- Treble -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="4dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Treble (High)"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvTreblePct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100%"
+            android:textColor="@color/premium_gold"
+            android:textSize="13sp"
+            android:fontFamily="monospace" />
+    </LinearLayout>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/sliderTreble"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:valueFrom="0.2"
+        android:valueTo="2.0"
+        android:value="1.0"
+        android:layout_marginBottom="18dp"
+        app:thumbColor="@color/premium_gold"
+        app:trackColorActive="@color/premium_gold"
+        app:trackColorInactive="@color/card_border" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnResetEq"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset to Flat"
+            android:textColor="@color/text_secondary" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDoneEq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:textColor="@color/text_primary"
+            app:backgroundTint="@color/accent_purple"
+            app:cornerRadius="18dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

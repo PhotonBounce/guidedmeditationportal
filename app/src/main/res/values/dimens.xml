@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Phone defaults (overridden for sw600dp / sw720dp tablets) -->
+    <dimen name="content_horizontal_padding">16dp</dimen>
+    <dimen name="hero_text_size">17sp</dimen>
+    <dimen name="card_text_size">15sp</dimen>
+</resources>

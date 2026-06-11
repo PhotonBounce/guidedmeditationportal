@@ -80,4 +80,16 @@
 
     </LinearLayout>
 
+    <!-- Favorite star badge — top-right; visibility toggled programmatically -->
+    <TextView
+        android:id="@+id/tvFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="8dp"
+        android:text="⭐"
+        android:textSize="13sp"
+        android:visibility="gone" />
+
 </com.google.android.material.card.MaterialCardView>

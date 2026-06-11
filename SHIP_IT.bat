@@ -1,6 +1,6 @@
 @echo off
 REM =========================================================================
-REM  SoundPad - SHIP IT  (one-button installer, ASCII-only)
+REM  Guided Meditation Portal - SHIP IT  (one-button installer, ASCII-only)
 REM =========================================================================
 setlocal enableextensions
 cd /d "%~dp0"
@@ -8,7 +8,7 @@ cd /d "%~dp0"
 cls
 echo.
 echo  =================================================================
-echo    SoundPad - Ship It
+echo    Guided Meditation Portal - Ship It
 echo  =================================================================
 echo    Plug your phone in with USB Debugging enabled.
 echo    Accept the RSA prompt on the phone when it appears.

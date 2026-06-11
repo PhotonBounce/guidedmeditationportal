@@ -1,37 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ZenPulse</string>
-    <string name="app_tagline">Sleep · Focus · Workout</string>
-
-    <!-- Sounds -->
-    <string name="sound_white">White Noise</string>
-    <string name="sound_pink">Pink Noise</string>
-    <string name="sound_brown">Brown Noise</string>
+    <string name="app_name">Guided Meditation Portal</string>
+    <string name="app_tagline">Breathe · Reflect · Restore</string>
 
     <!-- Premium -->
-    <string name="premium_title">ZenPulse Pro</string>
-    <string name="premium_desc">Unlock all 14 sounds · Remove ads · 8-hour timer</string>
-    <string name="btn_unlock">Unlock — $3.99</string>
-    <string name="btn_subscribe">$1.99 / month</string>
-    <string name="btn_subscribe_yearly">$14.99 / year (save 37%)</string>
+    <string name="premium_title">Portal Unlock</string>
+    <string name="premium_desc">Unlock the full guided meditation library · Spirit companion · Meditation alarm · Remove ads</string>
+    <string name="btn_unlock">Unlock forever — $2.00</string>
+    <string name="premium_coming_soon">🔜 More meditations &amp; new languages coming soon!</string>
+    <string name="widget_description">Your meditation streak + today\'s quick technique</string>
 
     <!-- Timer -->
     <string name="timer_off">No Timer</string>
-    <string name="sweet_dreams">Sweet dreams 🌙</string>
+    <string name="sweet_dreams">Rest easy 🌙</string>
 
     <!-- Notifications -->
-    <string name="notif_channel_name">ZenPulse Playback</string>
-    <string name="notif_channel_desc">Background sleep sound playback</string>
+    <string name="notif_channel_name">Portal Playback</string>
+    <string name="notif_channel_desc">Background meditation playback</string>
     <string name="notif_action_stop">Stop</string>
 
     <!-- About / Legal / Support -->
-    <string name="about_title">About ZenPulse</string>
+    <string name="about_title">About Guided Meditation Portal</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="terms_of_service">Terms of Service</string>
     <string name="contact_support">Contact Support</string>
     <string name="about_menu">About &amp; Legal</string>
     <string name="about_version">Version %1$s</string>
-    <string name="about_credits">Made with ♥ by Photon Bounce • photon-bounce.com</string>
+    <string name="about_credits">Made with ♥ by Aurora Mind • auroramind.app</string>
 
     <!-- Rewarded ads (also see rewarded_ad_strings.xml) -->
     <string name="reward_unlock_cta">Watch ad — unlock for tonight</string>
@@ -50,7 +45,7 @@
     <string name="settings_onboarding_reset_done">Onboarding will replay on next launch</string>
 
     <!-- Misc UI -->
-    <string name="now_playing_placeholder">Tap a sound to begin</string>
+    <string name="now_playing_placeholder">Tap a meditation to begin</string>
     <string name="play_last">▶ Play Last</string>
     <string name="play_stop">⏹ Stop</string>
     <string name="timer">⏱ Timer</string>

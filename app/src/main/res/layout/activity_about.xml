@@ -14,13 +14,27 @@
         android:padding="24dp">
 
         <TextView
+            android:id="@+id/btnAboutBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="←  Back"
+            android:textColor="@color/accent_purple_light"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
             android:id="@+id/aboutTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="⚡ ZenPulse"
+            android:text="🪷 Guided Meditation Portal"
             android:textColor="@color/text_primary"
-            android:textSize="28sp"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
         <TextView
@@ -83,7 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="🌐  photon-bounce.com"
+            android:text="🌐  auroramind.app"
             android:textColor="@color/accent_iris"
             app:strokeColor="@color/accent_iris" />
 

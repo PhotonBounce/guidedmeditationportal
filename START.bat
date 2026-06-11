@@ -1,6 +1,6 @@
 @echo off
 REM =========================================================================
-REM  SoundPad - Build and run on THIS PC (auto-creates emulator if needed)
+REM  Guided Meditation Portal - Build and run on THIS PC (auto-creates emulator if needed)
 REM =========================================================================
 setlocal enableextensions enabledelayedexpansion
 cd /d "%~dp0"
@@ -8,12 +8,17 @@ cd /d "%~dp0"
 cls
 echo.
 echo  =================================================================
-echo    SoundPad - Build and run on this PC
+echo    Guided Meditation Portal - Build and run on this PC
 echo  =================================================================
 echo.
 
 REM --- Java ----------------------------------------------------------------
 set "JAVA_HOME=C:\Program Files\Eclipse Adoptium\jdk-17.0.19.10-hotspot"
+if not exist "%JAVA_HOME%\bin\java.exe" (
+    if exist ".tools\jdk\bin\java.exe" (
+        set "JAVA_HOME=%CD%\.tools\jdk"
+    )
+)
 set "PATH=%JAVA_HOME%\bin;%PATH%"
 
 java -version >nul 2>&1
@@ -35,7 +40,7 @@ set "AVDMGR=%SDK_TOOLS%\cmdline-tools\12.0\bin\avdmanager.bat"
 REM Tell all tools to use the writable local SDK
 set "ANDROID_SDK_ROOT=%SDK_MAIN%"
 set "SYSIMG=system-images;android-34;google_apis;x86_64"
-set "AVD_NAME=SoundPadPC"
+set "AVD_NAME=MeditationPortalPC"
 
 if not exist "%ADB%" (
     echo [ERROR] adb.exe not found: %ADB%
@@ -127,11 +132,11 @@ echo.
 echo [4/5] Starting emulator on your PC screen...
 call :COUNT_DEVICES DEVCOUNT
 if !DEVCOUNT! EQU 0 (
-    start "" "%EMULATOR%" -avd "%AVD_NAME%" -no-snapshot-load -no-boot-anim -gpu swiftshader_indirect
+    start "" "%EMULATOR%" -avd "%AVD_NAME%" -no-snapshot-load -no-boot-anim -gpu angle_indirect
     echo  Emulator launching, waiting for boot...
     set /a WAIT=0
     :wait_online
-        timeout /t 4 /nobreak >nul
+        ping -n 5 127.0.0.1 >nul
         set /a WAIT+=4
         call :COUNT_DEVICES DEVCOUNT
         if !DEVCOUNT! GTR 0 goto :wait_boot
@@ -150,7 +155,7 @@ if !DEVCOUNT! EQU 0 (
 echo  Device online, waiting for full boot...
 set /a WAIT=0
 :boot_loop
-    timeout /t 3 /nobreak >nul
+    ping -n 4 127.0.0.1 >nul
     set /a WAIT+=3
     for /f "tokens=*" %%B in ('"%ADB%" shell getprop sys.boot_completed 2^>nul') do (
         if "%%B"=="1" goto :settle
@@ -161,15 +166,15 @@ goto :boot_loop
 
 :settle
 echo  Boot complete. Waiting for system to settle...
-timeout /t 10 /nobreak >nul
+ping -n 11 127.0.0.1 >nul
 REM Restart ADB server so it re-discovers the emulator after the boot reconnect
 "%ADB%" kill-server >nul 2>&1
 "%ADB%" start-server >nul 2>&1
-timeout /t 3 /nobreak >nul
+ping -n 4 127.0.0.1 >nul
 
 :install
 echo.
-echo [5/5] Installing SoundPad...
+echo [5/5] Installing Guided Meditation Portal...
 "%ADB%" install -r "%APK%"
 if errorlevel 1 (
     echo.
@@ -180,11 +185,11 @@ if errorlevel 1 (
 REM --- Launch --------------------------------------------------------------
 echo.
 echo  Launching app...
-"%ADB%" shell am start -n "com.soundpad.sleep.debug/com.soundpad.sleep.MainActivity"
+"%ADB%" shell am start -n "com.auroramind.meditation.debug/com.auroramind.meditation.MainActivity"
 
 echo.
 echo  =================================================================
-echo    SoundPad is running on your PC!
+echo    Guided Meditation Portal is running on your PC!
 echo  =================================================================
 echo.
 pause

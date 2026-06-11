@@ -1,6 +1,6 @@
 @echo off
 REM =========================================================================
-REM  SoundPad - diagnostic helper (ASCII-only)
+REM  Guided Meditation Portal - diagnostic helper (ASCII-only)
 REM  Double-click and tell me what it prints.
 REM =========================================================================
 setlocal enableextensions
@@ -10,7 +10,7 @@ if exist ".tools\env.bat" call ".tools\env.bat"
 
 echo.
 echo  =================================================================
-echo    SoundPad - diagnostic report
+echo    Guided Meditation Portal - diagnostic report
 echo  =================================================================
 echo.
 
@@ -41,14 +41,23 @@ if exist "app\build\outputs\apk\debug\app-debug.apk" (
 )
 echo.
 
-echo --- App installed on phone? ----------------------------------------
-adb shell pm list packages com.soundpad.sleep 2>&1
+echo --- Release AAB exists? --------------------------------------------
+if exist "app\build\outputs\bundle\release\app-release.aab" (
+    echo OK  app-release.aab exists
+    dir /b "app\build\outputs\bundle\release\app-release.aab"
+) else (
+    echo NO  No release AAB found. Run build_release_aab.bat to create one.
+)
 echo.
-echo (If you see "package:com.soundpad.sleep.debug" the install worked.)
+
+echo --- App installed on phone? ----------------------------------------
+adb shell pm list packages com.auroramind.meditation 2>&1
+echo.
+echo (If you see "package:com.auroramind.meditation.debug" the install worked.)
 echo.
 
 echo --- Try launching it -----------------------------------------------
-adb shell monkey -p com.soundpad.sleep.debug -c android.intent.category.LAUNCHER 1 2>&1
+adb shell monkey -p com.auroramind.meditation.debug -c android.intent.category.LAUNCHER 1 2>&1
 echo.
 
 echo  =================================================================

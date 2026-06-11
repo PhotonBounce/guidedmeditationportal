@@ -1,6 +1,7 @@
 @echo off
 REM =========================================================================
-REM  SoundPad - Robust phone installer (ASCII-only for cmd.exe compatibility)
+REM  Guided Meditation Portal - Robust phone installer
+REM  (ASCII-only for cmd.exe compatibility)
 REM =========================================================================
 setlocal enableextensions enabledelayedexpansion
 cd /d "%~dp0"
@@ -8,7 +9,7 @@ cd /d "%~dp0"
 cls
 echo.
 echo  =================================================================
-echo    SoundPad - installing to your phone
+echo    Guided Meditation Portal - installing to your phone
 echo  =================================================================
 echo.
 
@@ -37,16 +38,17 @@ if not exist "local.properties" (
 REM --- 1. Build the APK ---------------------------------------------------
 set "APK=app\build\outputs\apk\debug\app-debug.apk"
 set "APK_DIR=app\build\outputs\apk\debug"
-if not exist "%APK%" (
-    echo [step 1] Building debug APK ^(first build ~3 minutes^)...
-    call gradlew.bat assembleDebug --no-daemon
-    if errorlevel 1 (
-        echo.
-        echo BUILD FAILED. Scroll up - paste me the last 30 lines.
-        pause & exit /b 1
-    )
-) else (
-    echo [step 1] APK already built - skipping rebuild.
+if exist "%APK%" (
+    echo [step 1] Cleaning older build to force a fresh recompilation...
+    del /f /q "%APK%"
+)
+
+echo [step 1] Building fresh debug APK...
+call gradlew.bat assembleDebug --no-daemon
+if errorlevel 1 (
+    echo.
+    echo BUILD FAILED. Scroll up - paste me the last 30 lines.
+    pause & exit /b 1
 )
 
 if not exist "%APK%" (
@@ -75,7 +77,7 @@ REM --- 3. Restart adb server ----------------------------------------------
 echo          Restarting adb server...
 "!ADB!" kill-server  >nul 2>&1
 "!ADB!" start-server >nul 2>&1
-timeout /t 2 /nobreak >nul
+ping -n 3 127.0.0.1 >nul
 echo.
 
 REM --- 4. Wait up to 30s for a device -------------------------------------
@@ -89,7 +91,7 @@ for /l %%i in (1,1,15) do (
         if not "%%a"=="" if "%%b"=="device" set "FOUND=%%a"
     )
     if defined FOUND goto device_ready
-    timeout /t 2 /nobreak >nul
+    ping -n 3 127.0.0.1 >nul
 )
 
 REM --- No device --> manual sideload -------------------------------------
@@ -115,7 +117,7 @@ echo          Found device: !FOUND!
 echo.
 
 REM --- Install ------------------------------------------------------------
-echo [step 4] Installing SoundPad...
+echo [step 4] Installing Guided Meditation Portal...
 "!ADB!" -s "!FOUND!" install -r -t "%APK%"
 if errorlevel 1 (
     echo.
@@ -124,12 +126,12 @@ if errorlevel 1 (
 )
 
 echo.
-echo          Launching SoundPad on the phone...
-"!ADB!" -s "!FOUND!" shell monkey -p com.soundpad.sleep.debug -c android.intent.category.LAUNCHER 1 >nul 2>&1
+echo          Launching Guided Meditation Portal on the phone...
+"!ADB!" -s "!FOUND!" shell monkey -p com.auroramind.meditation.debug -c android.intent.category.LAUNCHER 1 >nul 2>&1
 
 echo.
 echo  =================================================================
-echo    DONE - check your phone, SoundPad should be open.
+echo    DONE - check your phone, Guided Meditation Portal should be open.
 echo  =================================================================
 echo.
 pause
@@ -156,7 +158,7 @@ echo      C) WhatsApp/Telegram/Messages it to yourself, tap on phone
 echo.
 echo    When you tap the APK on the phone, Android asks
 echo    "Allow install from this source?" - tap Allow, then Install.
-echo    SoundPad icon appears on your home screen.
+echo    Guided Meditation Portal icon appears on your home screen.
 echo  =================================================================
 echo.
 

@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ZenPulse</string>
-    <string name="app_tagline">Dormir · Se concentrer · S\'entraîner</string>
+    <string name="app_name">Guided Meditation Portal</string>
+    <string name="app_tagline">Respirer · Réfléchir · Restaurer</string>
 
-    <string name="sound_white">Bruit Blanc</string>
-    <string name="sound_pink">Bruit Rose</string>
-    <string name="sound_brown">Bruit Brun</string>
+    <!-- Premium -->
+    <string name="premium_title">Débloquer le Portal</string>
+    <string name="premium_desc">Toute la bibliothèque de méditations · Spirit · Alarme de méditation · Sans publicité</string>
+    <string name="btn_unlock">Débloquer pour toujours — 2,00 $</string>
+    <string name="premium_coming_soon">🔜 Plus de méditations &amp; nouvelles langues bientôt!</string>
 
-    <string name="premium_title">ZenPulse Pro</string>
-    <string name="premium_desc">Débloquer les 14 sons · Sans publicité · Minuteur 8 heures</string>
-    <string name="btn_unlock">Débloquer — 3,99 $</string>
-    <string name="btn_subscribe">1,99 $ / mois</string>
-    <string name="btn_subscribe_yearly">14,99 $ / an (économisez 37%)</string>
+    <!-- Timer -->
+    <string name="timer_off">Pas de minuteur</string>
+    <string name="sweet_dreams">Bonne récupération 🌙</string>
 
-    <string name="timer_off">Pas de Minuteur</string>
-    <string name="sweet_dreams">Beaux rêves 🌙</string>
-
-    <string name="notif_channel_name">Lecture ZenPulse</string>
-    <string name="notif_channel_desc">Lecture des sons de sommeil en arrière-plan</string>
+    <!-- Notifications -->
+    <string name="notif_channel_name">Lecture Portal</string>
+    <string name="notif_channel_desc">Lecture de méditations en arrière-plan</string>
     <string name="notif_action_stop">Arrêter</string>
 
-    <string name="about_title">À propos de ZenPulse</string>
+    <!-- About / Legal / Support -->
+    <string name="about_title">À propos de Guided Meditation Portal</string>
     <string name="privacy_policy">Politique de confidentialité</string>
     <string name="terms_of_service">Conditions d\'utilisation</string>
     <string name="contact_support">Contacter le support</string>
     <string name="about_menu">À propos &amp; Mentions légales</string>
     <string name="about_version">Version %1$s</string>
-    <string name="about_credits">Fait avec ♥ par Photon Bounce • photon-bounce.com</string>
+    <string name="about_credits">Fait avec ♥ par Aurora Mind • auroramind.app</string>
 
+    <!-- Rewarded ads -->
     <string name="reward_unlock_cta">Regarder une pub — débloquer ce soir</string>
 
+    <!-- Settings -->
     <string name="settings_title">Paramètres</string>
     <string name="settings_menu">Paramètres</string>
     <string name="settings_haptics">Retour haptique</string>
@@ -42,9 +43,10 @@
     <string name="settings_consent_reset_done">Consentement réinitialisé — réapparaîtra au prochain lancement</string>
     <string name="settings_onboarding_reset_done">L\'introduction réapparaîtra au prochain lancement</string>
 
-    <string name="now_playing_placeholder">Touchez un son pour commencer</string>
-    <string name="play_last">▶ Jouer le Dernier</string>
+    <!-- Misc UI -->
+    <string name="now_playing_placeholder">Touchez une méditation pour commencer</string>
+    <string name="play_last">▶ Jouer le dernier</string>
     <string name="play_stop">⏹ Arrêter</string>
     <string name="timer">⏱ Minuteur</string>
-    <string name="cancel_timer">Annuler le Minuteur</string>
+    <string name="cancel_timer">Annuler le minuteur</string>
 </resources>

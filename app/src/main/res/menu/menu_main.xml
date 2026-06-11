@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/menu_journeys"
+        android:title="🗺️ Journeys"
+        android:showAsAction="never" />
+    <item
+        android:id="@+id/menu_progress"
+        android:title="📈 My Progress"
+        android:showAsAction="never" />
+    <item
+        android:id="@+id/menu_share"
+        android:title="💌 Share with a friend"
+        android:showAsAction="never" />
+    <item
+        android:id="@+id/menu_equalizer"
+        android:title="🎛️ Equalizer"
+        android:showAsAction="never" />
+    <item
         android:id="@+id/menu_settings"
         android:title="@string/settings_menu"
         android:showAsAction="never" />

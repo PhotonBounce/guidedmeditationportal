@@ -8,7 +8,7 @@
     android:paddingTop="4dp"
     android:paddingBottom="4dp">
 
-    <!-- ARIA (AI) message bubble — left-aligned -->
+    <!-- Spirit (AI) message bubble — left-aligned -->
     <LinearLayout
         android:id="@+id/bubbleAria"
         android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
             android:textColor="@color/text_primary"
             android:textSize="13.5sp"
             android:lineSpacingMultiplier="1.4"
-            tools:text="Hello! I'm ARIA, your AI sleep assistant." />
+            tools:text="Hello! I'm Spirit, your meditation companion." />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSoundChip"
@@ -45,7 +45,7 @@
             app:strokeColor="@color/accent_iris"
             app:strokeWidth="1dp"
             tools:visibility="visible"
-            tools:text="▶ Play 🌸 Pink Noise" />
+            tools:text="▶ Play 🌙 Nowhere You Need to Be" />
 
     </LinearLayout>
 

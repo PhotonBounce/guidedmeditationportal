@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Spirit tab — Flame / consciousness orb -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Outer flame body -->
+    <path
+        android:fillColor="@color/text_primary"
+        android:pathData="M12,2C9.5,5.5 7,9 7,13C7,16.9 9.1,20 12,21C14.9,20 17,16.9 17,13C17,9 14.5,5.5 12,2Z"/>
+
+    <!-- Inner glow / transparency cutout rendered as a darker overlay -->
+    <path
+        android:fillColor="#33000000"
+        android:pathData="M12,7C11,9.2 10,11 10,13C10,14.8 10.9,16.3 12,17C13.1,16.3 14,14.8 14,13C14,11 13,9.2 12,7Z"/>
+
+</vector>

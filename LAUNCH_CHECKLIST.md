@@ -240,14 +240,18 @@ This usually takes 1 form submission. Match the answers above to what
 
 1. **Production → Create new release**
 2. Upload `app-release.aab` from Phase 5
-3. Release name: `1.0.1 — first launch`
+3. Release name: `1.0.5 — Brand Update & Bug Fixes`
 4. Release notes:
    ```
-   🌙 Welcome to SoundPad — your new bedtime ritual.
-   • 14 sleep & focus sounds
-   • Up to 8-hour timer
-   • Background playback
-   • Watch an ad to try premium sounds
+   1.0.5 — Brand Update & Bug Fixes
+   • Completed brand transition from SoundPad/ZenPulse to Ausis.
+   • Upgraded AI assistant to AusisBot.
+   • Decluttered the main dashboard by moving the app description card to the onboarding screens.
+   • Replaced moon/eclipse toolbar icons with the premium new Ausis app icon.
+   • Resolved layout inflation and Switch view crashes on physical devices.
+   • Fixed bottom navigation menu transition issues.
+   • Integrated production-ready AdMob support for release configurations.
+   • Updated privacy policy and terms links to point to the new branded paths.
    ```
 5. **Review release → Start rollout to Production**
 6. Google reviews in 3–7 days for first submission.

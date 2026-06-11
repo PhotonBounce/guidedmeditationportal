@@ -1,6 +1,6 @@
 @echo off
 REM =========================================================================
-REM  SoundPad - Zero-install environment bootstrapper
+REM  Guided Meditation Portal - Zero-install environment bootstrapper
 REM
 REM  What this does (no admin required, ~5 minutes first run):
 REM    1. Downloads JDK 17 (Eclipse Temurin) into .tools\jdk
@@ -22,7 +22,7 @@ set "CMDLINE=%SDK_HOME%\cmdline-tools\latest"
 if not exist "%TOOLS%" mkdir "%TOOLS%"
 
 echo.
-echo === SoundPad environment bootstrap ===
+echo === Guided Meditation Portal environment bootstrap ===
 echo Installing into: %TOOLS%
 echo.
 

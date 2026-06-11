@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Unlock/Premium tab — Diamond gem (luxury / premium feel) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Gem outline — top facet -->
+    <path
+        android:fillColor="@color/text_primary"
+        android:pathData="M12,2 L20,9 L12,22 L4,9 Z"/>
+
+    <!-- Darker inner facets for depth -->
+    <path
+        android:fillColor="#33000000"
+        android:pathData="M12,2 L4,9 L12,13 Z"/>
+
+    <!-- Horizontal girdle line (separates crown from pavilion) -->
+    <path
+        android:fillColor="#22000000"
+        android:pathData="M4,9 L20,9 L12,13 Z"/>
+
+</vector>

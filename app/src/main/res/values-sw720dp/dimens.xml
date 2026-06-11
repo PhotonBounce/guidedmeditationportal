@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 10-inch tablet padding overrides -->
+    <dimen name="content_horizontal_padding">64dp</dimen>
+    <dimen name="hero_text_size">38sp</dimen>
+    <dimen name="card_text_size">17sp</dimen>
+</resources>

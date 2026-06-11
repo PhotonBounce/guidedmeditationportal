@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/tab_sounds"
+        android:icon="@drawable/ic_tab_sounds"
+        android:title="Sounds" />
+
+    <item
+        android:id="@+id/tab_alarm"
+        android:icon="@drawable/ic_tab_alarm"
+        android:title="Alarm" />
+
+    <item
+        android:id="@+id/tab_aria"
+        android:icon="@drawable/ic_tab_aria"
+        android:title="Spirit" />
+
+    <item
+        android:id="@+id/tab_settings"
+        android:icon="@drawable/ic_tab_settings"
+        android:title="Settings" />
+
+    <item
+        android:id="@+id/tab_unlock"
+        android:icon="@drawable/ic_tab_unlock"
+        android:title="Unlock" />
+
+</menu>

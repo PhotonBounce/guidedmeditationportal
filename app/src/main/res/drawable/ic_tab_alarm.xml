@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Alarm tab — Crescent moon with a small star -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Crescent moon (classic path) -->
+    <path
+        android:fillColor="@color/text_primary"
+        android:pathData="M21,12.79A9,9 0,1 1,11.21,3 7,7 0,0 0,21,12.79Z"/>
+
+    <!-- Star top-right sparkle: small 4-point star -->
+    <path
+        android:fillColor="@color/text_primary"
+        android:pathData="M19,4 L19.6,5.8 L21.4,6.4 L19.6,7 L19,8.8 L18.4,7 L16.6,6.4 L18.4,5.8 Z"/>
+
+</vector>

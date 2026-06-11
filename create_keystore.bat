@@ -1,6 +1,7 @@
 @echo off
 REM =========================================================================
-REM  Create the SoundPad release-signing keystore (do this ONCE, ever)
+REM  Create the Guided Meditation Portal release-signing keystore
+REM  (do this ONCE, ever)
 REM
 REM  *** BACK UP THE .jks FILE TO GOOGLE DRIVE + A USB STICK ***
 REM  *** WRITE DOWN THE PASSWORD IN A PASSWORD MANAGER       ***
@@ -18,7 +19,7 @@ if errorlevel 1 (
     pause & exit /b 1
 )
 
-set "KEYSTORE_PATH=%USERPROFILE%\soundpad-release.jks"
+set "KEYSTORE_PATH=%USERPROFILE%\meditation-portal-release.jks"
 if exist "%KEYSTORE_PATH%" (
     echo [WARN] %KEYSTORE_PATH% already exists. Not overwriting.
     echo         Move or rename it first if you need to recreate.
@@ -26,9 +27,9 @@ if exist "%KEYSTORE_PATH%" (
 )
 
 echo.
-echo === Creating SoundPad release keystore ===
+echo === Creating Guided Meditation Portal release keystore ===
 echo Path: %KEYSTORE_PATH%
-echo Alias: soundpad-key
+echo Alias: meditation-key
 echo Validity: 9125 days (25 years)
 echo.
 echo You'll be prompted for:
@@ -36,7 +37,7 @@ echo   - A keystore password (use a strong one - SAVE IT)
 echo   - Your name / org / city info (any values are fine - not public)
 echo.
 
-keytool -genkey -v -keystore "%KEYSTORE_PATH%" -alias soundpad-key -keyalg RSA -keysize 2048 -validity 9125
+keytool -genkey -v -keystore "%KEYSTORE_PATH%" -alias meditation-key -keyalg RSA -keysize 2048 -validity 9125
 
 if errorlevel 1 (
     echo [ERROR] Keystore creation failed.
@@ -51,10 +52,10 @@ echo   1. Back up %KEYSTORE_PATH% to Google Drive + USB stick
 echo   2. Save the password in a password manager
 echo   3. Add these to %USERPROFILE%\.gradle\gradle.properties:
 echo.
-echo        SOUNDPAD_KEYSTORE=%KEYSTORE_PATH%
-echo        SOUNDPAD_KEY_ALIAS=soundpad-key
-echo        SOUNDPAD_STORE_PASSWORD=^<the password you chose^>
-echo        SOUNDPAD_KEY_PASSWORD=^<the password you chose^>
+echo        MEDITATION_KEYSTORE=%KEYSTORE_PATH%
+echo        MEDITATION_KEY_ALIAS=meditation-key
+echo        MEDITATION_STORE_PASSWORD=^<the password you chose^>
+echo        MEDITATION_KEY_PASSWORD=^<the password you chose^>
 echo.
 echo   4. Run build_release_aab.bat to produce your upload artifact.
 echo.

@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ZenPulse</string>
-    <string name="app_tagline">Dormir · Concentrarse · Entrenar</string>
+    <string name="app_name">Guided Meditation Portal</string>
+    <string name="app_tagline">Respirar · Reflexionar · Restaurar</string>
 
-    <string name="sound_white">Ruido Blanco</string>
-    <string name="sound_pink">Ruido Rosa</string>
-    <string name="sound_brown">Ruido Marrón</string>
+    <!-- Premium -->
+    <string name="premium_title">Desbloqueo del Portal</string>
+    <string name="premium_desc">Desbloquea toda la biblioteca de meditaciones · Spirit · Alarma de meditación · Sin anuncios</string>
+    <string name="btn_unlock">Desbloquear para siempre — $2.00</string>
+    <string name="premium_coming_soon">🔜 ¡Más meditaciones y nuevos idiomas próximamente!</string>
 
-    <string name="premium_title">ZenPulse Pro</string>
-    <string name="premium_desc">Desbloquea los 14 sonidos · Sin anuncios · Temporizador de 8 horas</string>
-    <string name="btn_unlock">Desbloquear — $3.99</string>
-    <string name="btn_subscribe">$1.99 / mes</string>
-    <string name="btn_subscribe_yearly">$14.99 / año (ahorra 37%)</string>
-
+    <!-- Timer -->
     <string name="timer_off">Sin Temporizador</string>
-    <string name="sweet_dreams">Dulces sueños 🌙</string>
+    <string name="sweet_dreams">Descansa bien 🌙</string>
 
-    <string name="notif_channel_name">Reproducción ZenPulse</string>
-    <string name="notif_channel_desc">Reproducción de sonidos para dormir en segundo plano</string>
+    <!-- Notifications -->
+    <string name="notif_channel_name">Reproducción Portal</string>
+    <string name="notif_channel_desc">Reproducción de meditaciones en segundo plano</string>
     <string name="notif_action_stop">Detener</string>
 
-    <string name="about_title">Acerca de ZenPulse</string>
+    <!-- About / Legal / Support -->
+    <string name="about_title">Acerca de Guided Meditation Portal</string>
     <string name="privacy_policy">Política de Privacidad</string>
     <string name="terms_of_service">Términos del Servicio</string>
     <string name="contact_support">Contactar Soporte</string>
     <string name="about_menu">Acerca de y Legal</string>
     <string name="about_version">Versión %1$s</string>
-    <string name="about_credits">Hecho con ♥ por Photon Bounce • photon-bounce.com</string>
+    <string name="about_credits">Hecho con ♥ por Aurora Mind • auroramind.app</string>
 
+    <!-- Rewarded ads -->
     <string name="reward_unlock_cta">Ver anuncio — desbloquear esta noche</string>
 
+    <!-- Settings -->
     <string name="settings_title">Ajustes</string>
     <string name="settings_menu">Ajustes</string>
     <string name="settings_haptics">Vibración háptica</string>
@@ -42,7 +43,8 @@
     <string name="settings_consent_reset_done">Consentimiento restablecido — se preguntará de nuevo al iniciar</string>
     <string name="settings_onboarding_reset_done">La introducción se repetirá al iniciar</string>
 
-    <string name="now_playing_placeholder">Toca un sonido para empezar</string>
+    <!-- Misc UI -->
+    <string name="now_playing_placeholder">Toca una meditación para empezar</string>
     <string name="play_last">▶ Reproducir Último</string>
     <string name="play_stop">⏹ Detener</string>
     <string name="timer">⏱ Temporizador</string>

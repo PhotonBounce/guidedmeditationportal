@@ -1,0 +1,98 @@
+{
+  "_created_at": "2026-06-09T21:21:52.509138+00:00",
+  "_updated_at": "2026-06-09T21:21:52.509138+00:00",
+  "last_scan": "2026-06-09T21:21:52.509138+00:00",
+  "manifest": {
+    "scanned_at": "2026-06-09T21:21:52.507144+00:00",
+    "modules": {
+      "neural_network.py": {
+        "exists": false
+      },
+      "vectorizer.py": {
+        "exists": false
+      },
+      "knowledge_base.py": {
+        "exists": false
+      },
+      "train.py": {
+        "exists": false
+      },
+      "train_knowledge.py": {
+        "exists": false
+      },
+      "app.py": {
+        "exists": false
+      },
+      "admin.py": {
+        "exists": false
+      },
+      "admin_chatbot.py": {
+        "exists": false
+      },
+      "project_memory.py": {
+        "exists": false
+      },
+      "ml_engine.py": {
+        "exists": false
+      },
+      "crawler.py": {
+        "exists": false
+      },
+      "forum_crawler.py": {
+        "exists": false
+      },
+      "site_crawler.py": {
+        "exists": false
+      },
+      "file_processor.py": {
+        "exists": false
+      },
+      "digest_engine.py": {
+        "exists": false
+      },
+      "local_scheduler.py": {
+        "exists": false
+      },
+      "libaix_brain.py": {
+        "exists": false
+      },
+      "ml_watcher.py": {
+        "exists": false
+      }
+    },
+    "routes": [],
+    "tests": {},
+    "data_files": [
+      "data\\.secret_key",
+      "data\\memory\\project_memory.json"
+    ],
+    "model_files": [],
+    "templates": [],
+    "configs": [],
+    "agents": [
+      "developer",
+      "tester",
+      "reviewer",
+      "researcher",
+      "deployer",
+      "libaix-brain",
+      "ml-watcher"
+    ],
+    "stats": {
+      "total_python_lines": 0,
+      "total_functions": 0,
+      "total_modules": 0,
+      "total_routes": 0,
+      "total_tests": 0,
+      "total_test_files": 0,
+      "total_data_files": 2,
+      "total_model_files": 0,
+      "total_templates": 0,
+      "total_agents": 7
+    }
+  },
+  "health_score": 0,
+  "gaps": [],
+  "auto_mode": false,
+  "cycle_count": 0
+}

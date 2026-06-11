@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/deep_navy"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/btnAlarmBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="←  Back"
+            android:textColor="@color/accent_purple_light"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/alarmTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏰ Meditation Alarm"
+            android:textColor="@color/text_primary"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Wake gently — to a guided track or a soft synthesized tone."
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchAlarmEnabled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Alarm enabled"
+            android:textColor="@color/text_primary"
+            android:textSize="15sp" />
+
+        <TimePicker
+            android:id="@+id/timePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_gravity="center_horizontal"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            android:timePickerMode="spinner" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Wake sound"
+            android:textColor="@color/text_primary"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/radioSourceType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <RadioButton
+                android:id="@+id/radioTone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="🔔 Gentle tone"
+                android:textColor="@color/text_secondary" />
+
+            <RadioButton
+                android:id="@+id/radioTrack"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="🧘 Guided track"
+                android:textColor="@color/text_secondary" />
+        </RadioGroup>
+
+        <Spinner
+            android:id="@+id/spinnerSound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            android:popupBackground="@color/card_bg"
+            android:spinnerMode="dropdown" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveAlarm"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="28dp"
+            android:text="Save Alarm"
+            android:textColor="@color/text_primary"
+            android:background="@drawable/bg_play_button_gradient"
+            app:cornerRadius="24dp"
+            app:backgroundTint="@null" />
+
+        <TextView
+            android:id="@+id/alarmStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:textColor="@color/accent_teal"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+</ScrollView>

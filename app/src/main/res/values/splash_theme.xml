@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Launched at app start, swapped to Theme.SoundPad once UI is ready -->
-    <style name="Theme.SoundPad.Splash" parent="Theme.SplashScreen">
+    <!-- Full-screen theme for SplashActivity — no action bar, no system UI chrome -->
+    <style name="Theme.MeditationPortal.FullScreen" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowBackground">@color/cosmic_indigo_top</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="colorPrimary">@color/accent_iris</item>
+    </style>
+
+    <!-- Launched at app start, swapped to Theme.MeditationPortal once UI is ready -->
+    <style name="Theme.MeditationPortal.Splash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/cosmic_indigo_top</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/appicon</item>
         <item name="windowSplashScreenAnimationDuration">600</item>
         <item name="windowSplashScreenIconBackgroundColor">@color/cosmic_indigo_top</item>
-        <item name="postSplashScreenTheme">@style/Theme.SoundPad</item>
+        <item name="postSplashScreenTheme">@style/Theme.MeditationPortal</item>
     </style>
 
 </resources>
