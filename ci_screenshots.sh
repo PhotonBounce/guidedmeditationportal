@@ -4,7 +4,9 @@
 set -x
 OUT=store_screenshots
 mkdir -p "$OUT"
-PKG=com.auroramind.meditation
+# Debug builds append ".debug" to the applicationId; classes keep the base package.
+PKG=com.auroramind.meditation.debug
+LAUNCH_COMPONENT="com.auroramind.meditation.debug/com.auroramind.meditation.SplashActivity"
 
 # Let the system settle after boot — launcher ANRs are common right after.
 sleep 30
@@ -60,7 +62,7 @@ app_focused() {
 # Launches the app and blocks until it actually holds the foreground.
 launch_app() {
   for attempt in 1 2 3; do
-    adb shell am start -n "$PKG/.SplashActivity"
+    adb shell am start -n "$LAUNCH_COMPONENT"
     for i in $(seq 1 15); do
       sleep 2
       dismiss_anr
