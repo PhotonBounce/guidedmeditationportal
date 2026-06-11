@@ -81,6 +81,17 @@ class MainActivity : AppCompatActivity() {
     // ── Session timer ───────────────────────────────────────────────────────────
     private var countdown: CountDownTimer? = null
 
+    // ── Scrub bar ───────────────────────────────────────────────────────────────
+    /** True while the user is dragging the scrub thumb — pauses position polling. */
+    private var userScrubbing = false
+    private val scrubHandler = Handler(Looper.getMainLooper())
+    private val scrubPoll = object : Runnable {
+        override fun run() {
+            updateScrubBar()
+            scrubHandler.postDelayed(this, 500)
+        }
+    }
+
     // ─────────────────────────────────────────────────────────────────────────
     // Lifecycle
     // ─────────────────────────────────────────────────────────────────────────
@@ -186,9 +197,11 @@ class MainActivity : AppCompatActivity() {
 
         refreshStats()
         syncUI()
+        scrubHandler.post(scrubPoll)
     }
 
     override fun onPause() {
+        scrubHandler.removeCallbacks(scrubPoll)
         bannerAdView?.pause()
         super.onPause()
     }
@@ -384,6 +397,53 @@ class MainActivity : AppCompatActivity() {
                 binding.tvBgVolPct.text = "${(value * 100).toInt()}%"
             }
         }
+        setupScrubBar()
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // Scrub bar
+    // ─────────────────────────────────────────────────────────────────────────
+
+    private fun setupScrubBar() {
+        binding.sliderScrub.addOnSliderTouchListener(
+            object : com.google.android.material.slider.Slider.OnSliderTouchListener {
+                override fun onStartTrackingTouch(slider: com.google.android.material.slider.Slider) {
+                    userScrubbing = true
+                }
+                override fun onStopTrackingTouch(slider: com.google.android.material.slider.Slider) {
+                    userScrubbing = false
+                    val dur = service?.getDurationMs() ?: 0
+                    if (dur > 0) {
+                        service?.seekTo((slider.value * dur).toInt())
+                        haptic.tick()
+                    }
+                }
+            }
+        )
+        // Live elapsed-label preview while dragging, before the seek commits.
+        binding.sliderScrub.addOnChangeListener { _, value, fromUser ->
+            if (fromUser) {
+                val dur = service?.getDurationMs() ?: 0
+                if (dur > 0) binding.tvScrubElapsed.text = formatMs((value * dur).toInt())
+            }
+        }
+    }
+
+    private fun updateScrubBar() {
+        if (userScrubbing) return
+        val svc = service ?: return
+        if (!svc.isPlaying()) return
+        val dur = svc.getDurationMs()
+        if (dur <= 0) return
+        val pos = svc.getPositionMs().coerceIn(0, dur)
+        binding.sliderScrub.value = pos.toFloat() / dur
+        binding.tvScrubElapsed.text = formatMs(pos)
+        binding.tvScrubTotal.text = formatMs(dur)
+    }
+
+    private fun formatMs(ms: Int): String {
+        val totalSec = ms / 1000
+        return "%d:%02d".format(totalSec / 60, totalSec % 60)
     }
 
     private fun setupBgMusicSpinner() {
@@ -953,10 +1013,12 @@ class MainActivity : AppCompatActivity() {
         // Idle = slim bar (now-playing line + Play + Timer). Playing = full controls.
         val secondary = if (playing) View.VISIBLE else View.GONE
         binding.rowVolume.visibility   = secondary
+        binding.rowScrub.visibility    = secondary
         binding.btnPrevious.visibility = secondary
         binding.btnNext.visibility     = secondary
         binding.btnRepeat.visibility   = secondary
         binding.btnRandom.visibility   = secondary
+        if (playing) updateScrubBar() else binding.sliderScrub.value = 0f
 
         adapter.update(current, premium)
 
