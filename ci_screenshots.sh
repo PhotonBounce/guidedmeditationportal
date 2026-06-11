@@ -43,15 +43,27 @@ sys.exit(1)
 PYEOF
 }
 
-# Dismisses any "isn't responding" ANR dialog (taps Wait for our app, Close for others).
+# Dismisses an "isn't responding" ANR dialog — only acts if one is actually
+# present, so it never false-taps the live UI.
 dismiss_anr() {
-  coords=$(find_node "Close app")
-  [ -n "$coords" ] && adb shell input tap $coords && sleep 1
-  coords=$(find_node "isn't responding")
-  if [ -n "$coords" ]; then
-    coords=$(find_node "Wait")
+  if [ -n "$(find_node "isn't responding")" ]; then
+    coords=$(find_node "Wait")          # keep waiting for OUR app
+    [ -z "$coords" ] && coords=$(find_node "Close app")
     [ -n "$coords" ] && adb shell input tap $coords && sleep 1
   fi
+  return 0
+}
+
+# Taps "Get Started" repeatedly until the onboarding dialog is gone. The dialog
+# renders a beat after the app reaches the foreground, so a single early tap
+# misses it — retry until its text disappears.
+dismiss_onboarding() {
+  for i in $(seq 1 12); do
+    [ -z "$(find_node "What brings you here")" ] && return 0
+    coords=$(find_node "Get Started")
+    [ -n "$coords" ] && adb shell input tap $coords
+    sleep 2
+  done
   return 0
 }
 
@@ -136,7 +148,7 @@ adb shell am broadcast -a com.android.systemui.demo -e command network -e wifi -
 launch_app || exit 1
 sleep 5
 tap_if_present "Allow"            # POST_NOTIFICATIONS permission (API 33+)
-tap_if_present "Get Started"      # onboarding dialog
+dismiss_onboarding               # onboarding dialog (retries until gone)
 sleep 2
 
 # ── 1. Home idle ─────────────────────────────────────────────────────────────
@@ -161,7 +173,7 @@ sleep 7
 shot 04_breathing
 adb shell input keyevent KEYCODE_BACK
 sleep 2
-tap_if_present "Get Started"
+dismiss_onboarding
 
 # ── 5. Spirit chat ───────────────────────────────────────────────────────────
 scroll_top
