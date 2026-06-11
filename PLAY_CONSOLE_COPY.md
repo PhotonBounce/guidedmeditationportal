@@ -1,7 +1,7 @@
 # Play Console — Copy-Paste Reference (Guided Meditation Portal)
 
 Every field Google asks for, pre-written for the current app. Paste verbatim.
-Last updated for **v1.3.0 (versionCode 10)**.
+Last updated for **v1.4.0 (versionCode 11)**.
 
 ---
 
@@ -34,10 +34,10 @@ Calm your mind: guided meditations, breathing, streaks & a gentle companion.
 ```
 Guided Meditation Portal — a calmer mind, one breath at a time.
 
-Thirty-eight guided meditations & soundscapes, a breathing coach, an on-device companion called Spirit, and a gentle meditation alarm — wrapped in a living, deep-pink cosmic interface that shifts color with every track. No subscriptions. No clutter. Just calm.
+55+ tracks across four genres, a breathing coach, an on-device companion called Spirit, and a gentle meditation alarm — wrapped in a living, deep-pink cosmic interface that shifts color with every track. No subscriptions. No clutter. Just calm.
 
-🧘 38 MEDITATIONS & SOUNDSCAPES
-Softly narrated sessions for sleep, stress & anxiety, grounding, and self-compassion. Now featuring lo-fi beats in our "Focus Music" genre and electronic waves in our "Energy Music" genre. Start free with three full meditations — unlock the rest forever for one tiny price.
+🧘 55+ TRACKS · 4 GENRES
+Guided Meditations: softly narrated sessions for sleep, stress & anxiety, grounding, and self-compassion. Focus Music: lo-fi beats and ambient loops for deep work. Energy Music: electronic soundscapes to spark drive. Ambient Background: atmospheric underlays to layer beneath any session. Start free with three full meditations — unlock the rest forever for one tiny price.
 
 🫧 BREATHING COACH & QUICK CALM
 Follow a glowing orb through calming box-breathing (in 4, hold 4, out 4, hold 4), with gentle audio chime beeps at the top and bottom of the cycle so you can practice with eyes closed. Or tap Quick Calm for a 60-second reset whenever the day gets loud.
@@ -66,8 +66,8 @@ Drift off with a fade-out timer up to 8 hours. Shuffle, repeat, and queue the wh
 📲 HOME-SCREEN WIDGET
 Keep your streak and today's quick technique one tap from your home screen.
 
-💎 14-DAY FREE TRIAL & ONE-TIME UNLOCK
-Try the entire app — all 38 tracks, Spirit, and the meditation alarm — completely free for 14 days. After the trial, a single $2.00 unlock gives you everything forever. No subscriptions, no recurring charges, and no surprise renewals. More meditations and new languages are on the way.
+💎 TRY FREE & ONE-TIME UNLOCK
+Start with three full meditations free, plus a free daily taste of the entire library. A single $2.00 unlock then gives you everything — all 55+ tracks, Spirit, and the meditation alarm — forever. No subscriptions, no recurring charges, and no surprise renewals. More meditations and new languages are on the way.
 
 Made with ♥ for restless sleepers, anxious minds, and anyone seeking a few quiet minutes. 🌙
 
@@ -94,7 +94,7 @@ Spirit offers general wellness guidance and is not a substitute for professional
 |---|---|---|
 | App icon | 512×512 PNG, no alpha | `app/src/main/appicon/play_store_icon_512.png` |
 | Feature graphic | 1024×500 PNG | `marketing/feature_graphic.png` |
-| Phone screenshots | 1080×2400 PNG, 2–8 | `qa_full/Q02_home_idle.png`, `Q03_home_playing.png`, `Q06_breathing.png`, `Q07_spirit.png`, `Q11_progress.png` (retake on a clean device for production) |
+| Phone screenshots | 1080×2400 PNG, 2–8 | **Retake on v1.4.0 build** — old qa_full/ shots show the removed watermark and lack the scrub bar. Shot-list in `LAUNCH_CHECKLIST.md` §3 |
 
 > The QA screenshots are from a debug device with a status-bar clock/notch.
 > For polished store screenshots, capture on your phone with a clean status bar,
@@ -148,47 +148,43 @@ Security: ✓ Encrypted in transit. (Do not claim independent security review.)
 
 ### Release name
 ```
-1.3.0 — Streaks, Journeys, Breathing Coach & Sound Fixes
+1.4.0 — New Genres, Scrub Bar & Track Names
 ```
 
 ### What's new (≤500 chars)
 ```
-• New: practice streaks, progress stats, and a home-screen widget.
-• New: interactive breathing coach + 60-second Quick Calm.
-• New: multi-day Journeys and "browse by goal" mood filters.
-• New: daily reminders that teach a quick technique.
-• Favorites, sharper deep-pink theme, and a livelier splash.
-• Fixed audio playback, added back buttons, and improved text contrast throughout.
+• New: Focus Music & Energy Music genres — 23 fresh tracks.
+• New: scrub bar — drag to any point in a track.
+• Every background track now has a proper name.
+• Cleaner home screen and a refreshed cosmic backdrop.
+• Plus all of 1.3: streaks, Journeys, breathing coach, widget & reminders.
 ```
 
 **What's new — German (de-DE)**
 ```
-• Neu: Serien, Fortschritts-Statistiken und ein Startbildschirm-Widget.
-• Neu: interaktiver Atemcoach + 60-Sekunden-Quick-Calm.
-• Neu: mehrtägige Reisen und Stimmungs-Filter.
-• Neu: tägliche Erinnerungen mit einer kurzen Technik.
-• Favoriten, kräftigeres Pink-Design und ein lebendigerer Start.
-• Audio-Wiedergabe repariert, Zurück-Buttons ergänzt, Textkontrast verbessert.
+• Neu: Focus- & Energy-Musik — 23 neue Tracks.
+• Neu: Fortschrittsleiste — springe an jede Stelle im Track.
+• Alle Hintergrund-Tracks haben jetzt richtige Namen.
+• Aufgeräumter Startbildschirm und frischerer kosmischer Hintergrund.
+• Plus alles aus 1.3: Serien, Reisen, Atemcoach, Widget & Erinnerungen.
 ```
 
 **What's new — French (fr-FR)**
 ```
-• Nouveau : séries, statistiques de progrès et widget d'écran d'accueil.
-• Nouveau : coach respiratoire interactif + Quick Calm de 60 secondes.
-• Nouveau : parcours sur plusieurs jours et filtres par humeur.
-• Nouveau : rappels quotidiens avec une technique rapide.
-• Favoris, thème rose plus net et démarrage plus vivant.
-• Lecture audio corrigée, boutons retour ajoutés, contraste du texte amélioré.
+• Nouveau : musiques Focus & Energy — 23 nouveaux titres.
+• Nouveau : barre de lecture — naviguez à n'importe quel point du titre.
+• Chaque piste d'ambiance porte désormais un vrai nom.
+• Écran d'accueil épuré et fond cosmique rafraîchi.
+• Plus tout de la 1.3 : séries, parcours, coach respiratoire, widget.
 ```
 
 **What's new — Spanish (es-419)**
 ```
-• Nuevo: rachas, estadísticas de progreso y widget de pantalla de inicio.
-• Nuevo: coach de respiración interactivo + Quick Calm de 60 segundos.
-• Nuevo: viajes de varios días y filtros por estado de ánimo.
-• Nuevo: recordatorios diarios con una técnica rápida.
-• Favoritos, tema rosa más nítido y un inicio más vivo.
-• Audio reparado, botones de regreso añadidos, contraste de texto mejorado.
+• Nuevo: música Focus & Energy — 23 pistas nuevas.
+• Nuevo: barra de progreso — salta a cualquier punto de la pista.
+• Cada pista de fondo ahora tiene un nombre propio.
+• Pantalla de inicio más limpia y fondo cósmico renovado.
+• Más todo lo de la 1.3: rachas, viajes, coach de respiración, widget.
 ```
 
 ---

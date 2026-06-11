@@ -1,307 +1,75 @@
-# SoundPad — Launch Checklist
+# Guided Meditation Portal — v1.4.0 Deployment Checklist
 
-The fastest path from "code is ready" to "earning revenue on Google Play."
-Follow this in order — every step is required.
-
----
-
-## Phase 0 — Build it on your machine (today, 30 minutes)
-
-You need Android Studio (or just the command-line gradle wrapper + Android SDK).
-
-### Option A — Android Studio (recommended for first-timers)
-
-1. Install Android Studio: https://developer.android.com/studio
-2. **File → Open** → select `D:\sleepapprepo`
-3. Wait for Gradle sync (first time downloads ~500 MB)
-4. Connect your Galaxy 14 via USB. Enable USB debugging:
-   - Settings → About phone → tap **Build number** 7 times
-   - Settings → Developer options → enable **USB debugging**
-5. Allow USB debugging when prompted on the phone
-6. Click ▶ Run. The app installs in ~30 seconds.
-
-### Option B — Command line (fastest if you already have the SDK)
-
-```bash
-cd D:\sleepapprepo
-.\gradlew.bat installDebug      # builds + installs to attached device
-# Or for a release-signed APK:
-.\gradlew.bat assembleRelease
-adb install app\build\outputs\apk\release\app-release.apk
-```
-
-Don't have the gradle wrapper jar yet? Easiest: open the project in Android
-Studio once — it'll create `gradle\wrapper\gradle-wrapper.jar` automatically.
-
-### What to test on the phone
-
-Run through the manual QA checklist at the bottom of `QA_REPORT.md`.
-Anything broken → fix → rebuild → reinstall.
+Everything between "code is ready" and "live on Google Play."
+Status legend: ✅ done · 🔲 your action needed
 
 ---
 
-## Phase 1 — Host your privacy policy & terms (10 minutes)
+## 1. Build artifacts
 
-Google Play **requires** a hosted URL. GitHub Pages is the cheapest path.
+- ✅ Code complete & pushed (PR #1, branch `claude/intelligent-gauss-oexa4d`)
+- ✅ CI debug APK builds green (GitHub Actions → latest run → Artifacts)
+- 🔲 **Merge PR #1 to main**
+- 🔲 **Signed release AAB** — on your PC:
+  ```
+  cd D:\guidedmeditationapp
+  git pull origin main
+  build_release_aab.bat
+  ```
+  Output: `app\build\outputs\bundle\release\app-release.aab` (v1.4.0, code 11)
 
-1. Create a free GitHub account if you don't have one
-2. Create a new public repo called `soundpad-app` (or any name)
-3. Add two files to the repo's root:
-   - `privacy.md` — copy/paste contents of `PRIVACY_POLICY.md`
-   - `terms.md`   — copy/paste contents of `TERMS_OF_SERVICE.md`
-4. Repo → Settings → Pages → Source: `main` branch / root → Save
-5. Wait ~60 seconds. Your URLs will be:
-   - `https://<your-username>.github.io/soundpad-app/privacy`
-   - `https://<your-username>.github.io/soundpad-app/terms`
-6. Open `app/src/main/java/com/soundpad/sleep/AboutActivity.kt` and replace
-   the `PRIVACY_URL` / `TERMS_URL` / `SUPPORT_EMAIL` constants.
+## 2. On-device QA (your phone — 10 minutes)
 
----
+Install the debug APK first (`INSTALL_TO_PHONE.bat`), then verify:
 
-## Phase 2 — Google Play Console (one-time, ~30 minutes)
+- 🔲 Sound plays audibly (volume slider ≥ 70%)
+- 🔲 **Scrub bar**: appears while playing, drag → audio jumps, time labels update
+- 🔲 Background watermark logo is GONE (only top logo remains)
+- 🔲 BGM dropdown shows new names (Soft Horizons, Still Waters, Dusk Veil…) — no "Untitled"
+- 🔲 No track list shows two near-identical adjacent names
+- 🔲 Focus Music + Energy Music sections present in library
+- 🔲 Alarm screen: back button works, time-picker readable
+- 🔲 Breathing coach, Spirit chat, Progress dialog all open & readable
 
-> You said you're already authenticating — this is what to do once that's done.
+## 3. Store screenshots (your phone — 15 minutes)
 
-1. Go to https://play.google.com/console (you've already paid the $25)
-2. Click **Create app**
-   - App name: **SoundPad — Sleep & Focus Noise**
-   - Default language: English (US)
-   - App or game: **App**
-   - Free or paid: **Free**
-   - Accept declarations
-3. Complete the **Dashboard → setup tasks**:
-   - App access → "All functionality available without restrictions"
-   - Ads → **Yes, contains ads**
-   - Content rating → fill questionnaire (you'll get "Everyone")
-   - Target audience → 18+ (or 13+; avoid <13 to skip COPPA paperwork)
-   - News app → No
-   - Data safety → see Phase 4
+The old `qa_full/` shots show the removed watermark and lack the scrub bar — **retake these 6** on the v1.4.0 build with a clean status bar:
 
----
-
-## Phase 3 — AdMob (15 minutes, do this BEFORE Phase 4)
-
-1. https://admob.google.com → sign in
-2. **Apps → Add App → Android → No, app is not on a store yet** (for now)
-3. App name: SoundPad. Copy your **App ID** — format `ca-app-pub-XXXXXX~XXXXXX`
-4. Inside that app, **Add Ad Unit** three times:
-   - Banner — name "SoundPad Banner"   → copy unit ID
-   - Rewarded — name "SoundPad Unlock" → copy unit ID
-   - (Optional) Interstitial later
-5. In your code, replace the three test IDs:
-   - `app/src/main/AndroidManifest.xml` → `APPLICATION_ID` meta-data
-   - `app/src/main/res/layout/activity_main.xml` → `AdView ads:adUnitId`
-   - `app/src/main/java/com/soundpad/sleep/RewardedAdManager.kt` → `UNIT_ID`
-
-> Until your real IDs propagate (~24h after first request), expect "no fill"
-> — that's normal. Test IDs always fill.
-
----
-
-## Phase 4 — In-app products (10 minutes)
-
-In Play Console → your app → **Monetize → Products**:
-
-### One-time product
-| Field | Value |
-|---|---|
-| Product ID | `soundpad_pro` *(must match exactly)* |
-| Name | SoundPad Pro |
-| Description | Unlock all 14 sounds and remove ads forever |
-| Price | $3.99 |
-| Status | **Active** |
-
-### Subscription — Monthly
-**Monetize → Subscriptions → Create**
-| Field | Value |
-|---|---|
-| Product ID | `soundpad_ultimate` |
-| Name | SoundPad Ultimate (Monthly) |
-| Base plan ID | `monthly` |
-| Billing period | 1 month |
-| Price | $1.99 |
-| Free trial | 3 days (huge boost to conversion) |
-| Status | **Active** |
-
-### Subscription — Yearly  (this is your highest-LTV product)
-| Field | Value |
-|---|---|
-| Product ID | `soundpad_yearly` |
-| Name | SoundPad Ultimate (Yearly) |
-| Base plan ID | `yearly` |
-| Billing period | 1 year |
-| Price | $14.99 |
-| Free trial | 7 days |
-| Status | **Active** |
-
-> **Why yearly first:** sleep apps see 60–80% of revenue from yearly subs
-> once they're offered. The $14.99/yr vs $1.99×12=$23.88 framing converts.
-
----
-
-## Phase 5 — Sign the release build (one time, keep keystore SAFE forever)
-
-In Android Studio: **Build → Generate Signed Bundle / APK → Android App Bundle**.
-
-- Create new keystore: save to e.g. `D:\soundpad-release.jks` — back it up to
-  Google Drive AND a USB drive. If you lose it, you can never update the
-  app on Play again.
-- Key alias: `soundpad-key`
-- Validity: 25 years
-- Use a strong password — store it in a password manager.
-
-Then build the release `.aab`. It lands in `app\release\app-release.aab`.
-
-> **Optional:** to enable command-line release builds, edit
-> `~/.gradle/gradle.properties` and add:
-> ```
-> SOUNDPAD_KEYSTORE=D:\\soundpad-release.jks
-> SOUNDPAD_KEY_ALIAS=soundpad-key
-> SOUNDPAD_STORE_PASSWORD=...
-> SOUNDPAD_KEY_PASSWORD=...
-> ```
-> Then `gradlew bundleRelease` produces a signed AAB.
-
----
-
-## Phase 6 — Store listing (30 minutes)
-
-Play Console → **Grow → Store presence → Main store listing**:
-
-### Short description (80 chars)
-> White noise, brown noise, rain, ocean & sleep sounds. Fall asleep faster.
-
-### Full description (use as-is)
-```
-SoundPad is your sleep and focus multi-tool. Scientifically-tuned noise
-colors and immersive nature sounds mask distractions, calm racing minds,
-and help you fall asleep faster — or focus deeper during work and study.
-
-🔊 14 HIGH-QUALITY SOUNDS
-• White Noise — masks all frequencies equally
-• Pink Noise — warm, natural, the most popular sleep sound
-• Brown Noise — deep bass rumble, loved for ADHD focus
-• Blue Noise — crisp masking for tinnitus relief
-• Violet Noise — ultra-bright for extreme masking
-• Gentle Rain · Ocean Waves · Campfire · Forest Wind · Thunder Roll
-• Box Fan — classic bedroom hum
-• Spaceship · Womb Sounds · Crystal Bowls — original synthetics
-
-⏱ SLEEP TIMER — Set it and forget it: 15 minutes to 8 hours.
-
-🎚 VOLUME CONTROL — Fine-tune the perfect masking level.
-
-🔋 BACKGROUND PLAYBACK — Screen off, phone locked, app closed — keeps playing.
-
-✨ SOUNDPAD PRO
-• One-time unlock: $3.99 — own it forever, remove all ads
-• Monthly subscription: $1.99/month — 3-day free trial
-• Yearly subscription: $14.99/year — 7-day free trial, save 37%
-
-Made for restless sleepers, focused workers, anxious minds, and tired
-parents. 🌙
-```
-
-### Required assets
-
-| Asset | Size | Notes |
+| # | Screen | State to capture |
 |---|---|---|
-| App icon | 512×512 PNG | Make one in Canva ("moon app icon"). The in-app launcher is already set up. |
-| Feature graphic | 1024×500 PNG | Required. Show the app + tagline. |
-| Phone screenshots | 1080×1920+ | Minimum 2, recommended 4–8. Take live on your Galaxy 14: Power+Volume-Down. |
-| Tablet screenshots | optional | Skip for v1 |
+| 1 | Home idle | Top logo, stats banner, daily quote visible |
+| 2 | Home playing | Track playing — scrub bar + full transport visible |
+| 3 | Sound grid | Guided Meditations section, monochrome cards |
+| 4 | Breathing coach | Mid-inhale, glowing orb |
+| 5 | Spirit chat | Welcome message + quick chips |
+| 6 | Progress dialog | Streak, 7-day chart, community counter |
 
-### Tag the right categories
-- Category: **Health & Fitness**
-- Tags: Sleep, Meditation, Relaxation, White noise, Focus
-- Email: your real email (won't be public unless you toggle it)
-- Website: your GitHub Pages URL or a Linktree
+Save as 1080×2400 PNG → upload directly to Play Console (2–8 allowed).
 
----
+## 4. Play Console assets (ready now)
 
-## Phase 7 — Data safety form (15 minutes)
+- ✅ Feature graphic 1024×500: `marketing/feature_graphic.png` (v1.4.0 — regenerated)
+- ✅ App icon 512×512: `app/src/main/appicon/play_store_icon_512.png`
+- ✅ All listing text: `PLAY_CONSOLE_COPY.md` (updated for v1.4.0 — paste verbatim)
+- ✅ Release notes EN/DE/FR/ES: in `PLAY_CONSOLE_COPY.md` → "What's new"
 
-Play Console → **App content → Data safety**. Answer:
+## 5. Play Console steps (one sitting, ~20 minutes)
 
-- Does your app collect or share data? **Yes** (because of AdMob)
-- Data types collected:
-  - **Device or other IDs** (Advertising ID) — for ads — not shared
-  - **App activity** (crash reports) — for app functionality — not shared
-  - **In-app purchase status** — for app functionality — not shared
-- Is data encrypted in transit? **Yes** (HTTPS by default)
-- Can users request deletion? **Yes** — they can uninstall
+1. 🔲 Upload `app-release.aab` → Production → Create new release
+2. 🔲 Release name: `1.4.0 — New Genres, Scrub Bar & Track Names`
+3. 🔲 Paste "What's new" (all 4 languages from PLAY_CONSOLE_COPY.md)
+4. 🔲 Replace feature graphic + screenshots
+5. 🔲 Update full description (from PLAY_CONSOLE_COPY.md — track count is now 55+)
+6. 🔲 Verify in-app product `meditation_portal_unlock` is **Active at $2.00**
+7. 🔲 Submit for review
 
-This usually takes 1 form submission. Match the answers above to what
-`PRIVACY_POLICY.md` says, otherwise Play will reject.
+## 6. Website
 
----
+- 🔲 FTP `meditation-portal-site.zip` to photon-bounce.com (or run `ftp_deploy.py`)
+- 🔲 Verify privacy/terms URLs resolve (Play requires them live):
+  - https://www.photon-bounce.com/meditation-portal/privacy.html
+  - https://www.photon-bounce.com/meditation-portal/terms.html
 
-## Phase 8 — Submit & wait (5 minutes + 3–7 days review)
+## 7. Known content debt (post-launch OK)
 
-1. **Production → Create new release**
-2. Upload `app-release.aab` from Phase 5
-3. Release name: `1.0.5 — Brand Update & Bug Fixes`
-4. Release notes:
-   ```
-   1.0.5 — Brand Update & Bug Fixes
-   • Completed brand transition from SoundPad/ZenPulse to Ausis.
-   • Upgraded AI assistant to AusisBot.
-   • Decluttered the main dashboard by moving the app description card to the onboarding screens.
-   • Replaced moon/eclipse toolbar icons with the premium new Ausis app icon.
-   • Resolved layout inflation and Switch view crashes on physical devices.
-   • Fixed bottom navigation menu transition issues.
-   • Integrated production-ready AdMob support for release configurations.
-   • Updated privacy policy and terms links to point to the new branded paths.
-   ```
-5. **Review release → Start rollout to Production**
-6. Google reviews in 3–7 days for first submission.
-
----
-
-## Phase 9 — After launch: monetization optimization
-
-These move the needle 5–10×, in order of impact:
-
-| Lever | Effort | Impact |
-|---|---|---|
-| **TikTok organic** — post "Brown noise for ADHD focus" demo videos, link to Play | 1h/day | Highest. Niche has millions of monthly searches. |
-| **ASO** — get keywords into title: "SoundPad — White Noise · Brown Noise · Sleep Sounds" | 5min | High. Edit in Play Console store listing. |
-| **A/B test pricing** — try $2.99 one-time vs $3.99, $0.99 monthly vs $1.99 | weekly | Medium-high. Play Console → Experiments. |
-| **Yearly promo** — first month, mark yearly as "limited launch price" | 5min | Medium. Anchors LTV upward. |
-| **Reply to every review** in first 90 days | 5min/day | Boosts ranking algorithm dramatically. |
-| **Add interstitial on stop** (free tier only) | 1h dev | Medium. Triples ad revenue but watch retention. |
-| **Add presets / mixer** (premium feature) | weekend | Medium. Higher perceived value → better conversion. |
-| **Cross-promote with another free indie app** | varies | Low-medium, free traffic. |
-
----
-
-## Phase 10 — Optional later: iOS build
-
-React Native or Flutter port doubles addressable market. Sleep apps make
-~2× as much per user on iOS due to higher willingness to pay. Plan for
-month 3+ after you've validated on Android.
-
----
-
-## What's already done in the code — quick reference
-
-- ✅ 14 sounds with DSP synthesis (no audio files needed)
-- ✅ Freemium model (3 free / 11 premium)
-- ✅ One-time IAP + monthly + **yearly** subscription
-- ✅ Rewarded ad flow ("watch ad → unlock for tonight")
-- ✅ Banner ads for free users
-- ✅ Sleep timer (15min → 8h)
-- ✅ Foreground service + wake lock for background playback
-- ✅ Adaptive launcher icon (works API 21–34)
-- ✅ ProGuard rules for release shrinking
-- ✅ Toolbar + About / Privacy / Terms / Support / Restore Purchases
-- ✅ Onboarding dialog on first launch
-- ✅ Rate-us prompt after 3 sessions
-- ✅ Signing config (env-var driven)
-- ✅ Hosted privacy policy & terms templates
-
----
-
-*The shortest path to first dollar: finish Phase 0–5 today (test ads still
-work for installs), submit Phase 6–8 tomorrow, wait 3–7 days, then start
-posting "brown noise ADHD" TikToks the moment you go live.*
+- 16 meditation mp3s contain a spoken "long pause" artifact (list in `_transcripts.json` audit) — re-record when convenient, same filenames in `app/src/main/res/raw/`, then bump versionCode and re-release.
