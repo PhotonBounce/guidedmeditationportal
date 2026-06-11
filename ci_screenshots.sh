@@ -18,12 +18,13 @@ adb install -r -g app/build/outputs/apk/debug/app-debug.apk
 
 # ── helpers ──────────────────────────────────────────────────────────────────
 # Finds a UI node whose text OR content-desc contains $1; prints "x y" of center.
+# Matches against text, content-desc AND resource-id, case-insensitively.
 find_node() {
   adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
   adb pull /sdcard/ui.xml /tmp/ui.xml >/dev/null 2>&1
   python3 - "$1" <<'PYEOF'
 import re, sys
-q = sys.argv[1]
+q = sys.argv[1].lower()
 try:
     xml = open('/tmp/ui.xml', encoding='utf-8', errors='replace').read()
 except FileNotFoundError:
@@ -32,7 +33,10 @@ for m in re.finditer(r'<node[^>]*>', xml):
     n = m.group(0)
     t = re.search(r'text="([^"]*)"', n)
     d = re.search(r'content-desc="([^"]*)"', n)
-    hay = (t.group(1) if t else '') + '|' + (d.group(1) if d else '')
+    r = re.search(r'resource-id="([^"]*)"', n)
+    hay = '|'.join([(t.group(1) if t else ''),
+                    (d.group(1) if d else ''),
+                    (r.group(1) if r else '')]).lower()
     if q in hay:
         b = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', n)
         if b:
@@ -54,14 +58,22 @@ dismiss_anr() {
   return 0
 }
 
-# Taps "Get Started" repeatedly until the onboarding dialog is gone. The dialog
-# renders a beat after the app reaches the foreground, so a single early tap
-# misses it — retry until its text disappears.
+# Waits for the onboarding dialog to appear (it renders a beat after MainActivity
+# loads), then taps its button by resource-id until the dialog is gone. Polling
+# for appearance first avoids the race where an early check sees no dialog and
+# wrongly concludes there's nothing to dismiss.
 dismiss_onboarding() {
-  for i in $(seq 1 12); do
-    [ -z "$(find_node "What brings you here")" ] && return 0
-    coords=$(find_node "Get Started")
-    [ -n "$coords" ] && adb shell input tap $coords
+  local seen=0
+  for i in $(seq 1 30); do
+    btn=$(find_node "onboardingOk")
+    if [ -n "$btn" ]; then
+      seen=1
+      adb shell input tap $btn
+      sleep 2
+      continue
+    fi
+    # Button gone: done if we already dismissed it, else keep waiting for it.
+    [ "$seen" = "1" ] && return 0
     sleep 2
   done
   return 0
