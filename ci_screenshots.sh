@@ -13,7 +13,8 @@ sleep 30
 adb shell input keyevent KEYCODE_WAKEUP
 adb shell wm dismiss-keyguard || true
 
-adb install -r app/build/outputs/apk/debug/app-debug.apk
+# -g pre-grants all runtime permissions so no permission dialog can cover the app
+adb install -r -g app/build/outputs/apk/debug/app-debug.apk
 
 # ── helpers ──────────────────────────────────────────────────────────────────
 # Finds a UI node whose text OR content-desc contains $1; prints "x y" of center.
@@ -66,6 +67,12 @@ launch_app() {
     for i in $(seq 1 15); do
       sleep 2
       dismiss_anr
+      # A system permission dialog steals window focus from the app — accept it
+      # so the focus check underneath can see the real foreground activity.
+      if adb shell dumpsys window 2>/dev/null | grep mCurrentFocus | grep -q permissioncontroller; then
+        tap_if_present "Allow"
+        tap_if_present "While using the app"
+      fi
       app_focused && return 0
     done
   done
