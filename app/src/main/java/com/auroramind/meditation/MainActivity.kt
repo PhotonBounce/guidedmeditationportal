@@ -81,6 +81,17 @@ class MainActivity : AppCompatActivity() {
     // ── Session timer ───────────────────────────────────────────────────────────
     private var countdown: CountDownTimer? = null
 
+    // ── Scrub bar ───────────────────────────────────────────────────────────────
+    /** True while the user is dragging the scrub thumb — pauses position polling. */
+    private var userScrubbing = false
+    private val scrubHandler = Handler(Looper.getMainLooper())
+    private val scrubPoll = object : Runnable {
+        override fun run() {
+            updateScrubBar()
+            scrubHandler.postDelayed(this, 500)
+        }
+    }
+
     // ─────────────────────────────────────────────────────────────────────────
     // Lifecycle
     // ─────────────────────────────────────────────────────────────────────────
@@ -186,9 +197,11 @@ class MainActivity : AppCompatActivity() {
 
         refreshStats()
         syncUI()
+        scrubHandler.post(scrubPoll)
     }
 
     override fun onPause() {
+        scrubHandler.removeCallbacks(scrubPoll)
         bannerAdView?.pause()
         super.onPause()
     }
@@ -233,6 +246,7 @@ class MainActivity : AppCompatActivity() {
         billing.destroy()
         countdown?.cancel()
         playButtonAnimator?.cancel()
+        scrubHandler.removeCallbacksAndMessages(null)
         super.onDestroy()
     }
 
@@ -337,6 +351,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.cardAiChat.setOnClickListener {
             haptic.tick(); sfx.tap()
+            if (service?.isPlaying() == true) stopSound()
             val intent = Intent(this, AiChatActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
             }
@@ -345,6 +360,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.cardAlarm.setOnClickListener {
             haptic.tick(); sfx.tap()
+            if (service?.isPlaying() == true) stopSound()
             val intent = Intent(this, AlarmActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
             }
@@ -384,6 +400,53 @@ class MainActivity : AppCompatActivity() {
                 binding.tvBgVolPct.text = "${(value * 100).toInt()}%"
             }
         }
+        setupScrubBar()
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // Scrub bar
+    // ─────────────────────────────────────────────────────────────────────────
+
+    private fun setupScrubBar() {
+        binding.sliderScrub.addOnSliderTouchListener(
+            object : com.google.android.material.slider.Slider.OnSliderTouchListener {
+                override fun onStartTrackingTouch(slider: com.google.android.material.slider.Slider) {
+                    userScrubbing = true
+                }
+                override fun onStopTrackingTouch(slider: com.google.android.material.slider.Slider) {
+                    userScrubbing = false
+                    val dur = service?.getDurationMs() ?: 0
+                    if (dur > 0) {
+                        service?.seekTo((slider.value * dur).toInt())
+                        haptic.tick()
+                    }
+                }
+            }
+        )
+        // Live elapsed-label preview while dragging, before the seek commits.
+        binding.sliderScrub.addOnChangeListener { _, value, fromUser ->
+            if (fromUser) {
+                val dur = service?.getDurationMs() ?: 0
+                if (dur > 0) binding.tvScrubElapsed.text = formatMs((value * dur).toInt())
+            }
+        }
+    }
+
+    private fun updateScrubBar() {
+        if (userScrubbing) return
+        val svc = service ?: return
+        if (!svc.isPlaying()) return
+        val dur = svc.getDurationMs()
+        if (dur <= 0) return
+        val pos = svc.getPositionMs().coerceIn(0, dur)
+        binding.sliderScrub.value = (pos.toFloat() / dur).coerceIn(0f, 1f)
+        binding.tvScrubElapsed.text = formatMs(pos)
+        binding.tvScrubTotal.text = formatMs(dur)
+    }
+
+    private fun formatMs(ms: Int): String {
+        val totalSec = ms / 1000
+        return "%d:%02d".format(totalSec / 60, totalSec % 60)
     }
 
     private fun setupBgMusicSpinner() {
@@ -461,6 +524,7 @@ class MainActivity : AppCompatActivity() {
         binding.cardBreathe.setOnClickListener {
             haptic.click(); sfx.chime()
             binding.nightSky.react(NightSkyView.ReactionKind.TIMER)
+            if (service?.isPlaying() == true) stopSound()
             startActivity(Intent(this, BreathingActivity::class.java))
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
@@ -470,6 +534,7 @@ class MainActivity : AppCompatActivity() {
             haptic.click(); sfx.chime()
             binding.nightSky.react(NightSkyView.ReactionKind.PLAY)
             Toast.makeText(this, "⚡ 60-second reset — follow the orb", Toast.LENGTH_SHORT).show()
+            if (service?.isPlaying() == true) stopSound()
             startActivity(Intent(this, BreathingActivity::class.java))
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
@@ -750,6 +815,19 @@ class MainActivity : AppCompatActivity() {
         // ── Chameleon: shift the entire background palette to this track's hue ──
         binding.nightSky.setThemeColor(type.themeColor)
 
+        // ── Auto-BGM: pick a random background track on fresh play if none selected ──
+        if (!isSwitch) {
+            val currentBg = BgMusicType.fromName(prefs.getBgMusicTrack())
+            if (currentBg == BgMusicType.NONE) {
+                val randomBg = BgMusicType.values()
+                    .filter { it != BgMusicType.NONE }
+                    .random()
+                prefs.setBgMusicTrack(randomBg.name)
+                val idx = BgMusicType.values().indexOf(randomBg).coerceAtLeast(0)
+                binding.spinnerBgMusic.setSelection(idx)
+            }
+        }
+
         prefs.setLastSound(type)
         prefs.incrementPlayCount(type)
 
@@ -953,10 +1031,12 @@ class MainActivity : AppCompatActivity() {
         // Idle = slim bar (now-playing line + Play + Timer). Playing = full controls.
         val secondary = if (playing) View.VISIBLE else View.GONE
         binding.rowVolume.visibility   = secondary
+        binding.rowScrub.visibility    = secondary
         binding.btnPrevious.visibility = secondary
         binding.btnNext.visibility     = secondary
         binding.btnRepeat.visibility   = secondary
         binding.btnRandom.visibility   = secondary
+        if (playing) updateScrubBar() else binding.sliderScrub.value = 0f
 
         adapter.update(current, premium)
 
@@ -1101,6 +1181,7 @@ class MainActivity : AppCompatActivity() {
                 else              -> null
             }
             if (targetClass != null) {
+                if (service?.isPlaying() == true) stopSound()
                 val intent = Intent(this, targetClass).apply {
                     flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                 }

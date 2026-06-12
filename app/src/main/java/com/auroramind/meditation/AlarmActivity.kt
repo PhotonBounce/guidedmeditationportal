@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.auroramind.meditation.databinding.ActivityAlarmBinding
 
@@ -101,6 +102,9 @@ class AlarmActivity : AppCompatActivity() {
 
         AlarmScheduler.reschedule(this)
         updateStatus()
+        val timeStr = "%02d:%02d".format(hour, minute)
+        val msg = if (enabled) "✅ Alarm saved — rings at $timeStr" else "Alarm disabled"
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
     private fun canScheduleExact(): Boolean {

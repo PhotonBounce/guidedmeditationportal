@@ -98,7 +98,7 @@ class SoundService : Service() {
         }
 
         val name = intent?.getStringExtra("SOUND_TYPE") ?: currentSound.name
-        currentSound = SoundType.valueOf(name)
+        currentSound = runCatching { SoundType.valueOf(name) }.getOrDefault(currentSound)
 
         acquireWakeLock()
         requestAudioFocus()
@@ -315,6 +315,17 @@ class SoundService : Service() {
     }
 
     fun isPlaying() = mediaPlayer?.isPlaying == true
+
+    /** Current playback position in ms, or 0 if nothing is loaded. */
+    fun getPositionMs(): Int = runCatching { mediaPlayer?.currentPosition ?: 0 }.getOrDefault(0)
+
+    /** Total duration of the current track in ms, or 0 if nothing is loaded. */
+    fun getDurationMs(): Int = runCatching { mediaPlayer?.duration ?: 0 }.getOrDefault(0)
+
+    /** Scrub to an absolute position in the current track. */
+    fun seekTo(positionMs: Int) {
+        runCatching { mediaPlayer?.seekTo(positionMs.coerceIn(0, getDurationMs())) }
+    }
 
     // ─────────────────────────────────────────────────────────────────────────
     // Audio focus

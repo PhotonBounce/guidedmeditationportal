@@ -89,7 +89,12 @@ jobs:
         run: |
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
-          git pull --rebase origin ${{ github.ref_name }} || true
           git add ${{ matrix.outdir }}/ || true
           git diff --cached --quiet && echo "nothing to commit" || git commit -m "chore: ${{ matrix.profile }} tablet screenshots from emulator"
-          git push origin ${{ github.ref_name }} || (git pull --rebase origin ${{ github.ref_name }} && git push origin ${{ github.ref_name }})
+          # Drop stray emulator/gradle work-tree changes so rebase can run,
+          # then retry the push a few times in case the matrix jobs race.
+          git checkout -- . || true
+          for i in 1 2 3 4; do
+            git pull --rebase origin ${{ github.ref_name }} && git push origin ${{ github.ref_name }} && break
+            sleep 5
+          done

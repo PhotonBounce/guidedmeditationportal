@@ -84,23 +84,24 @@ def font(path_opts, size):
             continue
     return ImageFont.load_default()
 
-F = "C:/Windows/Fonts/"
-title_f = font([F + "seguisb.ttf", F + "arialbd.ttf", F + "segoeui.ttf"], 70)
-tag_f   = font([F + "segoeui.ttf", F + "arial.ttf"], 34)
-sub_f   = font([F + "segoeui.ttf", F + "arial.ttf"], 25)
+FW = "C:/Windows/Fonts/"
+FL = "/usr/share/fonts/truetype/"
+title_f = font([FW + "seguisb.ttf", FW + "arialbd.ttf", FL + "liberation/LiberationSans-Bold.ttf", FL + "dejavu/DejaVuSans-Bold.ttf"], 58)
+tag_f   = font([FW + "segoeui.ttf", FW + "arial.ttf", FL + "liberation/LiberationSans-Regular.ttf", FL + "dejavu/DejaVuSans.ttf"], 34)
+sub_f   = font([FW + "segoeui.ttf", FW + "arial.ttf", FL + "liberation/LiberationSans-Regular.ttf", FL + "dejavu/DejaVuSans.ttf"], 25)
 
 tx = 470  # text column start
 d = ImageDraw.Draw(bg, "RGBA")
 
 # Title (two lines, glow + white)
-d.text((tx, 150), "Guided", font=title_f, fill=(255, 255, 255, 255))
-d.text((tx, 225), "Meditation Portal", font=title_f, fill=(255, 255, 255, 255))
+d.text((tx, 155), "Guided", font=title_f, fill=(255, 255, 255, 255))
+d.text((tx, 220), "Meditation Portal", font=title_f, fill=(255, 255, 255, 255))
 
 # Tagline
-d.text((tx, 320), "Breathe  ·  Reflect  ·  Restore", font=tag_f, fill=PINK_L + (255,))
+d.text((tx, 320), "Breathe  ·  Focus  ·  Restore", font=tag_f, fill=PINK_L + (255,))
 
 # Sub-line
-d.text((tx, 372), "23 meditations · breathing coach · streaks · no subscriptions",
+d.text((tx, 372), "55+ tracks · 4 genres · one-time unlock",
        font=sub_f, fill=(210, 180, 200, 255))
 
 bg.convert("RGB").save(OUT, "PNG")
