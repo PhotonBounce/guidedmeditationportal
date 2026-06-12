@@ -5,6 +5,8 @@ name: APK to Website
 # login because the repo is private; the website does not).
 
 on:
+  push:
+    branches: [main, claude/intelligent-gauss-oexa4d]
   workflow_dispatch:
     inputs:
       ftp_pass:
@@ -27,5 +29,5 @@ jobs:
 
       - name: Upload APK via FTP
         env:
-          FTP_PASS: ${{ inputs.ftp_pass }}
+          FTP_PASS: ${{ inputs.ftp_pass || secrets.FTP_PASS }}
         run: python3 push_apk_to_site.py
