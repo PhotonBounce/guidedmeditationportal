@@ -17,6 +17,11 @@ adb shell settings put global hide_error_dialogs 1
 sleep 25
 adb shell input keyevent KEYCODE_WAKEUP
 adb shell wm dismiss-keyguard || true
+# Tablets boot landscape; lock the display to portrait so the portrait-locked
+# app and our scaled tap coordinates line up.
+adb shell settings put system accelerometer_rotation 0
+adb shell settings put system user_rotation 0
+sleep 2
 adb install -r -g app/build/outputs/apk/debug/app-debug.apk
 
 # Actual screen size → scale factors from the 1080x2400 baseline
@@ -66,11 +71,13 @@ press_until() {
 fresh_home() {
   adb shell am force-stop "$PKG"
   sleep 1
-  adb shell am start -n "$LAUNCH_COMPONENT"
+  adb shell am start -W -n "$LAUNCH_COMPONENT"
   for i in $(seq 1 20); do
     sleep 2
     focused "MainActivity" && break
   done
+  # Surface any crash so CI logs explain a launcher-only screenshot.
+  adb logcat -d | grep -E "FATAL EXCEPTION|AndroidRuntime.*$PKG" | tail -20 || true
   sleep 4
 }
 
