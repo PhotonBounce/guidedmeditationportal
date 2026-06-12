@@ -72,8 +72,10 @@ fresh_home() {
 
 # ── Drive the app ────────────────────────────────────────────────────────────
 
-# 1. Home idle
+# 1. Home idle — the splash runs a Canvas animation that fades for ~2.5s after
+# MainActivity gains focus, so give it extra settle time before the first shot.
 fresh_home
+sleep 6
 shot 01_home_idle
 
 # 2. Home playing — press the PLAY LAST button (always visible, near the bottom)
