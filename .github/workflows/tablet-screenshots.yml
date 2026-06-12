@@ -1,0 +1,95 @@
+name: Tablet Screenshots
+
+# Captures real 7" and 10" tablet screenshots on emulators and commits them
+# to the branch for Play Console upload.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - profile: Nexus 7
+            outdir: store_screenshots_tablet7
+          - profile: Nexus 10
+            outdir: store_screenshots_tablet10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/.ghcup \
+                      /usr/local/share/boost "$AGENT_TOOLSDIRECTORY" \
+                      /usr/local/lib/android/sdk/ndk || true
+          sudo docker image prune --all --force || true
+          df -h /
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: ${{ runner.os }}-gradle-
+
+      - name: Build debug APK
+        run: |
+          chmod +x ./gradlew
+          ./gradlew assembleDebug --stacktrace
+
+      - name: Capture tablet screenshots on emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          arch: x86_64
+          target: google_apis
+          profile: ${{ matrix.profile }}
+          ram-size: 4096M
+          cores: 3
+          disable-animations: true
+          emulator-options: -no-snapshot -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
+          script: |
+            chmod +x ./ci_tablet_screenshots.sh
+            ./ci_tablet_screenshots.sh ${{ matrix.outdir }}
+
+      - name: Upload screenshots artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.outdir }}
+          path: ${{ matrix.outdir }}/
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Commit screenshots to branch
+        if: always()
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git pull --rebase origin ${{ github.ref_name }} || true
+          git add ${{ matrix.outdir }}/ || true
+          git diff --cached --quiet && echo "nothing to commit" || git commit -m "chore: ${{ matrix.profile }} tablet screenshots from emulator"
+          git push origin ${{ github.ref_name }} || (git pull --rebase origin ${{ github.ref_name }} && git push origin ${{ github.ref_name }})
