@@ -246,6 +246,7 @@ class MainActivity : AppCompatActivity() {
         billing.destroy()
         countdown?.cancel()
         playButtonAnimator?.cancel()
+        scrubHandler.removeCallbacksAndMessages(null)
         super.onDestroy()
     }
 
@@ -438,7 +439,7 @@ class MainActivity : AppCompatActivity() {
         val dur = svc.getDurationMs()
         if (dur <= 0) return
         val pos = svc.getPositionMs().coerceIn(0, dur)
-        binding.sliderScrub.value = pos.toFloat() / dur
+        binding.sliderScrub.value = (pos.toFloat() / dur).coerceIn(0f, 1f)
         binding.tvScrubElapsed.text = formatMs(pos)
         binding.tvScrubTotal.text = formatMs(dur)
     }

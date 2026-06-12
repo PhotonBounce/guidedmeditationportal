@@ -98,7 +98,7 @@ class SoundService : Service() {
         }
 
         val name = intent?.getStringExtra("SOUND_TYPE") ?: currentSound.name
-        currentSound = SoundType.valueOf(name)
+        currentSound = runCatching { SoundType.valueOf(name) }.getOrDefault(currentSound)
 
         acquireWakeLock()
         requestAudioFocus()
