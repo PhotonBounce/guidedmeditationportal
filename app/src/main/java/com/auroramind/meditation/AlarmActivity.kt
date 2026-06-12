@@ -101,6 +101,9 @@ class AlarmActivity : AppCompatActivity() {
 
         AlarmScheduler.reschedule(this)
         updateStatus()
+        val timeStr = "%02d:%02d".format(hour, minute)
+        val msg = if (enabled) "✅ Alarm saved — rings at $timeStr" else "Alarm disabled"
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
     private fun canScheduleExact(): Boolean {

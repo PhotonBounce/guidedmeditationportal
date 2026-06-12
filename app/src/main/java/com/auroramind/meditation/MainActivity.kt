@@ -350,6 +350,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.cardAiChat.setOnClickListener {
             haptic.tick(); sfx.tap()
+            if (service?.isPlaying() == true) stopSound()
             val intent = Intent(this, AiChatActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
             }
@@ -358,6 +359,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.cardAlarm.setOnClickListener {
             haptic.tick(); sfx.tap()
+            if (service?.isPlaying() == true) stopSound()
             val intent = Intent(this, AlarmActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
             }
@@ -521,6 +523,7 @@ class MainActivity : AppCompatActivity() {
         binding.cardBreathe.setOnClickListener {
             haptic.click(); sfx.chime()
             binding.nightSky.react(NightSkyView.ReactionKind.TIMER)
+            if (service?.isPlaying() == true) stopSound()
             startActivity(Intent(this, BreathingActivity::class.java))
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
@@ -530,6 +533,7 @@ class MainActivity : AppCompatActivity() {
             haptic.click(); sfx.chime()
             binding.nightSky.react(NightSkyView.ReactionKind.PLAY)
             Toast.makeText(this, "⚡ 60-second reset — follow the orb", Toast.LENGTH_SHORT).show()
+            if (service?.isPlaying() == true) stopSound()
             startActivity(Intent(this, BreathingActivity::class.java))
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
@@ -809,6 +813,19 @@ class MainActivity : AppCompatActivity() {
 
         // ── Chameleon: shift the entire background palette to this track's hue ──
         binding.nightSky.setThemeColor(type.themeColor)
+
+        // ── Auto-BGM: pick a random background track on fresh play if none selected ──
+        if (!isSwitch) {
+            val currentBg = BgMusicType.fromName(prefs.getBgMusicTrack())
+            if (currentBg == BgMusicType.NONE) {
+                val randomBg = BgMusicType.values()
+                    .filter { it != BgMusicType.NONE }
+                    .random()
+                prefs.setBgMusicTrack(randomBg.name)
+                val idx = BgMusicType.values().indexOf(randomBg).coerceAtLeast(0)
+                binding.spinnerBgMusic.setSelection(idx)
+            }
+        }
 
         prefs.setLastSound(type)
         prefs.incrementPlayCount(type)
@@ -1163,6 +1180,7 @@ class MainActivity : AppCompatActivity() {
                 else              -> null
             }
             if (targetClass != null) {
+                if (service?.isPlaying() == true) stopSound()
                 val intent = Intent(this, targetClass).apply {
                     flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                 }
