@@ -1,10 +1,10 @@
 """
-Deploy the Guided Meditation Portal website to photon-bounce.com/ausis.
+Deploy the Guided Meditation Portal website to photon-bounce.com/guidedmeditation.
 
 Usage (on your PC, from the repo root):
     python ftp_deploy.py
 
-Uploads everything inside meditation-portal-site.zip to public_html/ausis/.
+Uploads everything inside meditation-portal-site.zip to public_html/guidedmeditation/.
 The password is asked at runtime (or set the FTP_PASS environment variable)
 so credentials never live in the repository.
 """
@@ -18,7 +18,7 @@ from ftplib import FTP
 HOST = "ftp.photon-bounce.com"
 USER = "photonb"
 ZIP = "meditation-portal-site.zip"
-REMOTE_ROOT = "public_html/ausis"
+REMOTE_ROOT = "public_html/guidedmeditation"
 
 
 def main():
