@@ -2,6 +2,12 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "ausis-web",
+      "runtimeExecutable": "C:\\Users\\fucktrumpandrednecks\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "runtimeArgs": ["D:\\sleepapprepo\\_dev_range_server.py", "8901"],
+      "port": 8901
+    },
+    {
       "name": "docs (privacy/terms pages)",
       "runtimeExecutable": "python",
       "runtimeArgs": ["-m", "http.server", "8000", "--directory", "docs"],
