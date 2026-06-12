@@ -31,20 +31,26 @@ Install the debug APK first (`INSTALL_TO_PHONE.bat`), then verify:
 - 🔲 Alarm screen: back button works, time-picker readable
 - 🔲 Breathing coach, Spirit chat, Progress dialog all open & readable
 
-## 3. Store screenshots (your phone — 15 minutes)
+## 3. Store screenshots
 
-The old `qa_full/` shots show the removed watermark and lack the scrub bar — **retake these 6** on the v1.4.0 build with a clean status bar:
+✅ **3 ready now** in `store_screenshots/` (1080×2400, captured on CI emulator,
+v1.4.0, clean status bar) — Play allows 2–8, so these alone are enough to publish:
 
-| # | Screen | State to capture |
-|---|---|---|
-| 1 | Home idle | Top logo, stats banner, daily quote visible |
-| 2 | Home playing | Track playing — scrub bar + full transport visible |
-| 3 | Sound grid | Guided Meditations section, monochrome cards |
-| 4 | Breathing coach | Mid-inhale, glowing orb |
-| 5 | Spirit chat | Welcome message + quick chips |
-| 6 | Progress dialog | Streak, 7-day chart, community counter |
+| File | Screen |
+|---|---|
+| `01_home.png` | Home — logo, stats banner, daily quote, tool cards |
+| `02_breathing.png` | Box Breathing — glowing orb mid-inhale |
+| `03_spirit.png` | Spirit chat — welcome message + quick chips |
 
-Save as 1080×2400 PNG → upload directly to Play Console (2–8 allowed).
+🔲 Optional extras to snap on your phone (2 min, makes the listing stronger):
+
+| Screen | State to capture |
+|---|---|
+| Home playing | Track playing — **scrub bar** + full transport visible |
+| Sound library | Scrolled to Guided Meditations / Focus / Energy sections |
+| Progress dialog | Streak, 7-day chart, community counter |
+
+Save as PNG → upload directly to Play Console.
 
 ## 4. Play Console assets (ready now)
 
