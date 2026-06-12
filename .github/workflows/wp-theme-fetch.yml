@@ -7,32 +7,34 @@ on:
         description: 'FTP password'
         required: true
 
+permissions:
+  contents: write
+
 jobs:
   fetch-theme:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Download child theme files via FTP
         run: |
           pip install -q ftputil
           python3 << 'PYEOF'
-          import ftputil, os, pathlib
+          import ftputil, os
 
           HOST = 'ftp.photon-bounce.com'
           USER = 'photonb'
           PASS = '${{ inputs.ftp_pass }}'
 
           with ftputil.FTPHost(HOST, USER, PASS) as ftp:
-              # List all themes
               themes = ftp.listdir('public_html/wp-content/themes')
               print("Themes:", themes)
-
-              # Download each theme's style.css and functions.php
               for theme in themes:
                   base = f'public_html/wp-content/themes/{theme}'
                   os.makedirs(f'wp-theme-dump/{theme}', exist_ok=True)
-                  for fname in ['style.css', 'functions.php', 'front-page.php', 'home.php', 'header.php', 'index.php']:
+                  for fname in ['style.css', 'functions.php', 'front-page.php', 'home.php', 'header.php', 'index.php', 'footer.php']:
                       remote = f'{base}/{fname}'
                       local  = f'wp-theme-dump/{theme}/{fname}'
                       try:
@@ -47,5 +49,5 @@ jobs:
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
           git add wp-theme-dump/
-          git commit -m "chore: dump WordPress child theme files for inspection" || echo "nothing to commit"
-          git push origin ${{ github.ref_name }}
+          git diff --cached --quiet && echo "nothing to commit" || git commit -m "chore: dump WordPress child theme files"
+          git push origin main

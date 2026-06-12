@@ -1,6 +1,6 @@
 name: Deploy Website
 
-# Uploads meditation-portal-site.zip contents to photon-bounce.com/guidedmeditation via FTP.
+# Uploads meditation-portal-site.zip contents to photon-bounce.com/ausis via FTP.
 # Triggered manually; the FTP password is passed as a run input (private repo)
 # and only ever handed to the script through an environment variable.
 
