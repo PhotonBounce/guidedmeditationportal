@@ -7,6 +7,9 @@ on:
         description: 'FTP password'
         required: true
 
+permissions:
+  contents: write
+
 jobs:
   fetch-theme:
     runs-on: ubuntu-latest
@@ -31,7 +34,7 @@ jobs:
               for theme in themes:
                   base = f'public_html/wp-content/themes/{theme}'
                   os.makedirs(f'wp-theme-dump/{theme}', exist_ok=True)
-                  for fname in ['style.css', 'functions.php', 'front-page.php', 'home.php', 'header.php', 'index.php']:
+                  for fname in ['style.css', 'functions.php', 'front-page.php', 'home.php', 'header.php', 'index.php', 'footer.php']:
                       remote = f'{base}/{fname}'
                       local  = f'wp-theme-dump/{theme}/{fname}'
                       try:
