@@ -175,6 +175,23 @@
                     android:clickable="true"
                     android:focusable="true" />
 
+                <!-- Debug-only: walk the funnel without active subscription SKUs.
+                     Shown only in debug builds; production keeps the hard paywall. -->
+                <TextView
+                    android:id="@+id/previewLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Preview without paying (debug)"
+                    android:textColor="@color/text_tertiary"
+                    android:textSize="12sp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="gone" />
+
             </LinearLayout>
 
         </LinearLayout>

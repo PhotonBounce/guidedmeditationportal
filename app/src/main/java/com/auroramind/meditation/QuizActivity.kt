@@ -84,7 +84,7 @@ class QuizActivity : AppCompatActivity() {
         habitStats = HabitStatsManager(this)
         haptic = HapticHelper(this)
         sfx = SoundEffects(this)
-        billing = BillingManager(this) { premium -> if (premium) runOnUiThread { goToMain() } }
+        billing = BillingManager(this) { premium -> if (premium) runOnUiThread { goToDashboard() } }
 
         binding.btnContinue.setOnClickListener {
             haptic.click(); sfx.tap()
@@ -94,6 +94,17 @@ class QuizActivity : AppCompatActivity() {
             sfx.tap()
             billing.queryPurchases()
             Toast.makeText(this, "Checking for an existing subscription…", Toast.LENGTH_SHORT).show()
+        }
+
+        // Debug builds can walk past the paywall before subscription SKUs exist,
+        // so the full funnel is testable on the debug APK. Hidden in release.
+        if (BuildConfig.DEBUG) {
+            binding.previewLink.visibility = View.VISIBLE
+            binding.previewLink.setOnClickListener {
+                sfx.tap()
+                persistProfile()
+                goToDashboard()
+            }
         }
 
         renderStep()
@@ -211,8 +222,8 @@ class QuizActivity : AppCompatActivity() {
         prefs.setQuizCompleted(true)
     }
 
-    private fun goToMain() {
-        startActivity(Intent(this, MainActivity::class.java))
+    private fun goToDashboard() {
+        startActivity(Intent(this, DashboardActivity::class.java))
         finish()
     }
 

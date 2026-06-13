@@ -127,6 +127,13 @@
             </intent-filter>
         </activity>
 
+        <!-- UnBound home / dashboard (days free, money saved, panic button) -->
+        <activity
+            android:name=".DashboardActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MeditationPortal" />
+
         <!-- Foreground service for background audio playback -->
         <service
             android:name=".SoundService"
