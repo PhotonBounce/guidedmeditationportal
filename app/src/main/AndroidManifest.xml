@@ -134,6 +134,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.MeditationPortal" />
 
+        <!-- Affirmation player — habit-aware lines cross-fading over a soundscape -->
+        <activity
+            android:name=".AffirmationPlayerActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MeditationPortal.FullScreen" />
+
         <!-- Foreground service for background audio playback -->
         <service
             android:name=".SoundService"

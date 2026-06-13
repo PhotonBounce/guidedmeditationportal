@@ -33,11 +33,10 @@ class DashboardActivity : AppCompatActivity() {
         haptic = HapticHelper(this)
         sfx = SoundEffects(this)
 
-        // Today's affirmation. Until the dedicated affirmation player ships, this
-        // opens the existing audio library, which serves the soundscapes.
+        // Today's affirmation session — habit-aware lines over a soundscape.
         binding.btnAffirmation.setOnClickListener {
             haptic.click(); sfx.tap()
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, AffirmationPlayerActivity::class.java))
         }
 
         // Panic button — ride out the urge with a paced breath, and bank the win.
