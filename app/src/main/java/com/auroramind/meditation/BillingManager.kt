@@ -26,6 +26,13 @@ class BillingManager(
     companion object {
         const val TAG        = "PortalBilling"
         const val SKU_UNLOCK = "meditation_portal_unlock"
+
+        // Quit-habit + affirmations subscriptions.
+        // Create these in Play Console → Monetize → Subscriptions before they
+        // resolve; until ACTIVE, queryProductDetails returns empty and the
+        // purchase flow no-ops (same behaviour as the one-time unlock below).
+        const val SKU_ANNUAL  = "unbound_annual"
+        const val SKU_MONTHLY = "unbound_monthly"
     }
 
     private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
@@ -103,6 +110,20 @@ class BillingManager(
                 inappResult.purchasesList.forEach { if (!it.isAcknowledged) acknowledge(it) }
             }
 
+            // Active SUBS subscription (annual or monthly)
+            val subsResult = client.queryPurchasesAsync(
+                QueryPurchasesParams.newBuilder()
+                    .setProductType(BillingClient.ProductType.SUBS)
+                    .build()
+            )
+            if (subsResult.billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                hasPremium = hasPremium || subsResult.purchasesList.any { p ->
+                    (p.products.contains(SKU_ANNUAL) || p.products.contains(SKU_MONTHLY)) &&
+                    p.purchaseState == Purchase.PurchaseState.PURCHASED
+                }
+                subsResult.purchasesList.forEach { if (!it.isAcknowledged) acknowledge(it) }
+            }
+
             onPremiumChanged(hasPremium)
         }
     }
@@ -113,6 +134,12 @@ class BillingManager(
 
     /** One-time unlock purchase: removes ads, opens the full library ($0.49) */
     fun purchaseUnlock() = launchPurchase(SKU_UNLOCK, BillingClient.ProductType.INAPP)
+
+    /** Annual subscription — the primary plan offered on the post-quiz paywall. */
+    fun purchaseAnnual() = launchPurchase(SKU_ANNUAL, BillingClient.ProductType.SUBS)
+
+    /** Monthly subscription — the secondary plan on the paywall. */
+    fun purchaseMonthly() = launchPurchase(SKU_MONTHLY, BillingClient.ProductType.SUBS)
 
     private fun launchPurchase(productId: String, productType: String) {
         if (!connected) {
