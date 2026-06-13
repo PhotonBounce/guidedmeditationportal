@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/bg_cosmic_gradient"
+    android:padding="24dp">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- ── Quiz step ──────────────────────────────────────────────── -->
+            <LinearLayout
+                android:id="@+id/quizGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/progressText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.05"
+                    tools:text="STEP 1 OF 5" />
+
+                <TextView
+                    android:id="@+id/questionTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:textColor="@color/text_primary"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:lineSpacingExtra="2dp"
+                    tools:text="What are you breaking free from?" />
+
+                <TextView
+                    android:id="@+id/questionSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="3dp"
+                    tools:text="Pick the one that fits best." />
+
+                <RadioGroup
+                    android:id="@+id/optionsRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp" />
+
+                <LinearLayout
+                    android:id="@+id/optionsCheckContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:visibility="gone" />
+
+                <EditText
+                    android:id="@+id/freedomInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/card_bg"
+                    android:padding="16dp"
+                    android:hint="e.g. waking up clear-headed, present with my kids…"
+                    android:textColorHint="@color/text_tertiary"
+                    android:textColor="@color/text_primary"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:minLines="2"
+                    android:gravity="top"
+                    android:importantForAutofill="no"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <!-- ── Paywall (shown after the last step) ────────────────────── -->
+            <LinearLayout
+                android:id="@+id/paywallGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/paywallTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Your free-from plan is ready"
+                    android:textColor="@color/text_primary"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/paywallSub"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="3dp"
+                    tools:text="A daily affirmation path built around your triggers, plus a panic button for the hard moments." />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp"
+                    android:lineSpacingExtra="6dp"
+                    android:text="✓ Daily audio affirmations over calming soundscapes\n✓ Track every clean day and the money you save\n✓ One-tap panic button to ride out cravings\n✓ Milestone celebrations that keep you going" />
+
+                <RadioGroup
+                    android:id="@+id/planGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp">
+
+                    <RadioButton
+                        android:id="@+id/planAnnual"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:padding="14dp"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        android:text="Annual — best value  ·  $39.99/yr" />
+
+                    <RadioButton
+                        android:id="@+id/planMonthly"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="14dp"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        android:text="Monthly  ·  $9.99/mo" />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/paywallNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/text_tertiary"
+                    android:textSize="12sp"
+                    android:text="Cancel anytime in Google Play. Subscription renews automatically." />
+
+                <TextView
+                    android:id="@+id/restoreLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Restore purchase"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:text="Continue"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        app:backgroundTint="@color/accent_iris"
+        app:cornerRadius="26dp" />
+
+</LinearLayout>
