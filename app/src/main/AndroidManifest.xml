@@ -132,6 +132,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.MeditationPortal.FullScreen" />
 
+        <!-- Milestone celebration — gold particle burst on clean-time milestones -->
+        <activity
+            android:name=".MilestoneActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MeditationPortal.FullScreen" />
+
         <!-- Foreground service for background audio playback -->
         <service
             android:name=".SoundService"

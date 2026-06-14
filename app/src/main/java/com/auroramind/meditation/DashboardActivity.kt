@@ -51,6 +51,11 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
 
+        binding.shareBtn.setOnClickListener {
+            haptic.click(); sfx.tap()
+            shareProgress()
+        }
+
         binding.resetLink.setOnClickListener { confirmRelapse() }
     }
 
@@ -82,7 +87,27 @@ class DashboardActivity : AppCompatActivity() {
     private fun celebrateMilestoneIfAny() {
         val milestone = habitStats.consumeNewMilestone() ?: return
         sfx.chime()
-        Toast.makeText(this, "🎉  $milestone-day milestone — keep going!", Toast.LENGTH_LONG).show()
+        startActivity(
+            Intent(this, MilestoneActivity::class.java)
+                .putExtra(MilestoneActivity.EXTRA_DAYS, milestone)
+        )
+    }
+
+    private fun shareProgress() {
+        val days = habitStats.daysClean()
+        val habit = habitDisplay(prefs.getHabitType())
+        val money = "$" + String.format("%.2f", habitStats.moneySaved())
+        val text = "🔥 $days ${if (days == 1) "day" else "days"} free from $habit with Power of Mind — " +
+            "$money saved and counting. Break free, one clean day at a time."
+        startActivity(
+            Intent.createChooser(
+                Intent(Intent.ACTION_SEND).apply {
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, text)
+                },
+                "Share your progress"
+            )
+        )
     }
 
     private fun confirmRelapse() {
