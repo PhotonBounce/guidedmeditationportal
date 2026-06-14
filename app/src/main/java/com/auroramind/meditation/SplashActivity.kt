@@ -404,8 +404,8 @@ private class SplashCanvas(context: Context) : View(context) {
             glowPaint.typeface = textPaint.typeface
             glowPaint.textAlign = Paint.Align.CENTER
             glowPaint.letterSpacing = textPaint.letterSpacing
-            canvas.drawText("MIND & BODY SHIELD", cx, titleY, glowPaint)
-            canvas.drawText("MIND & BODY SHIELD", cx, titleY, textPaint)
+            canvas.drawText("POWER OF MIND", cx, titleY, glowPaint)
+            canvas.drawText("POWER OF MIND", cx, titleY, textPaint)
         }
 
         // ── Tagline ───────────────────────────────────────────────────────

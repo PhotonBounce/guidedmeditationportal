@@ -1,4 +1,4 @@
-/* Mind & Body Shield — microsite interactions + in-browser app demo */
+/* Power of Mind — microsite interactions + in-browser app demo */
 (function () {
   "use strict";
   const reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
@@ -100,7 +100,7 @@
     welcome: () => `
       <div style="margin:auto;text-align:center">
         <div style="font-size:46px">🛡️</div>
-        <h4 style="text-align:center">Mind &amp; Body Shield</h4>
+        <h4 style="text-align:center">Power of Mind</h4>
         <p class="sub" style="text-align:center">Break free from the habit holding you back. Build your plan in four taps.</p>
       </div>
       <button class="pill" data-action="go" data-to="q_habit">Begin</button>`,
