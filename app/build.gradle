@@ -29,10 +29,10 @@ android {
     // ────────────────────────────────────────────────────────────────────
     signingConfigs {
         release {
-            def ksPath  = System.getenv("MEDITATION_KEYSTORE")  ?: project.findProperty("MEDITATION_KEYSTORE")
-            def ksAlias = System.getenv("MEDITATION_KEY_ALIAS") ?: project.findProperty("MEDITATION_KEY_ALIAS")
-            def ksPw    = System.getenv("MEDITATION_STORE_PASSWORD") ?: project.findProperty("MEDITATION_STORE_PASSWORD")
-            def keyPw   = System.getenv("MEDITATION_KEY_PASSWORD") ?: project.findProperty("MEDITATION_KEY_PASSWORD")
+            def ksPath  = System.getenv("POM_KEYSTORE")  ?: project.findProperty("POM_KEYSTORE")
+            def ksAlias = System.getenv("POM_KEY_ALIAS") ?: project.findProperty("POM_KEY_ALIAS")
+            def ksPw    = System.getenv("POM_STORE_PASSWORD") ?: project.findProperty("POM_STORE_PASSWORD")
+            def keyPw   = System.getenv("POM_KEY_PASSWORD") ?: project.findProperty("POM_KEY_PASSWORD")
             storeFile     ksPath ? file(ksPath) : null
             storePassword ksPw
             keyAlias      ksAlias
