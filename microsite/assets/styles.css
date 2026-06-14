@@ -159,6 +159,10 @@ section{padding:clamp(70px,10vw,130px) clamp(18px,6vw,40px);max-width:var(--maxw
 .player-bar{display:flex;justify-content:space-between;margin-bottom:6px}
 .link-row{text-align:center;color:var(--gold);font-size:13px;margin-top:12px;cursor:pointer;padding:6px}
 .link-row.faint{color:var(--faint)}
+.lib-card{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:12px;padding:13px 14px;margin-top:9px;cursor:pointer;transition:.2s}
+.lib-card:hover{border-color:var(--gold);background:rgba(255,201,94,.08)}
+.lib-emoji{font-size:22px}
+.lib-title{flex:1;color:var(--cream);font-size:15px;font-weight:600}
 .orb-mini{width:66px;height:66px;margin:0 auto 10px;border-radius:50%;
   background:radial-gradient(circle at 50% 62%,#FFF1CC,#FFB347 45%,#E8742B);
   box-shadow:0 0 28px rgba(255,150,60,.6);animation:breathe 4.5s ease-in-out infinite}

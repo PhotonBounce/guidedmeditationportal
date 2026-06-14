@@ -97,6 +97,17 @@
   ];
   let step = 0;
 
+  // Affirmation library — mirrors AffirmationContent.THEMES in the app
+  const THEMES = [["free", "I Am Free", "🕊️"], ["craving", "Craving Crusher", "🛡️"], ["morning", "Morning Power", "🌅"], ["calm", "Calm & Steady", "🌿"], ["sleep", "Sleep & Release", "🌙"]];
+  const THEME_LINES = {
+    free: ["I am free, one breath at a time.", "I am not my habit — I am the one who chose to stop.", "Every clean hour is rebuilding me.", "I choose the person I am becoming."],
+    craving: ["This craving will pass — whether I feed it or not.", "I can feel the urge and still not move.", "The wave rises, the wave falls. I am the shore.", "Five minutes — I only need to outlast five minutes."],
+    morning: ["Today I begin clean and clear.", "I decide who I am today, and I choose free.", "My energy is mine to spend on what matters."],
+    calm: ["My calm belongs to me.", "I breathe in steadiness, I breathe out the urge.", "I am grounded, I am safe, I am enough."],
+    sleep: ["I let go of today and rest in my progress.", "My body heals as I sleep, clean and calm.", "Tomorrow I wake up free."],
+  };
+  let activeLines = null;
+
   const optRow = (label) => `<div class="opt" data-pick>${label}</div>`;
 
   function quizScreen() {
@@ -149,12 +160,16 @@
       </div>
       <div class="mini-card"><span>💰  Money saved</span><b data-money style="color:var(--gold)">$0.00</b></div>
       <div class="mini-card"><span>🛡️  Urges beaten</span><b style="color:var(--amber)">4</b></div>
-      <button class="pill" data-action="player">▶   Today's affirmation</button>
+      <button class="pill" data-action="library">▶   Today's affirmation</button>
       <button class="panic" data-action="player">🆘   I'm having an urge</button>
       <div class="link-row faint" data-action="milestone">I slipped — reset my counter</div>`,
+    library: () => `
+      <div class="player-bar"><span style="flex:1;font-family:'Iowan Old Style',Georgia,serif;font-size:20px;color:var(--cream)">Affirmations</span><span class="ic" data-action="dashboard">✕</span></div>
+      <p class="sub" style="margin-bottom:10px">Pick a set and let each line land over the soundscape.</p>
+      ${THEMES.map((t) => `<div class="lib-card" data-theme="${t[0]}"><span class="lib-emoji">${t[2]}</span><span class="lib-title">${t[1]}</span><span style="color:var(--gold)">▶</span></div>`).join("")}`,
     player: () => `
       <div class="player-bar"><span class="ic">🔈</span><span class="ic" data-action="dashboard">✕</span></div>
-      <div class="aff-line" data-aff>${affLines()[0]}</div>
+      <div class="aff-line" data-aff>${(activeLines || affLines())[0]}</div>
       <div class="aff-cap">♪  Breathe slowly · let each line land</div>
       <button class="pill ghost" data-action="dashboard" style="margin-top:14px">Done</button>`,
     milestone: () => `
@@ -188,7 +203,7 @@
     }, 28);
   }
   function runPlayer(el) {
-    const lines = affLines(), target = el.querySelector("[data-aff]"); let i = 0;
+    const lines = activeLines || affLines(), target = el.querySelector("[data-aff]"); let i = 0;
     cycleTimer = setInterval(() => {
       target.style.opacity = 0;
       setTimeout(() => { i = (i + 1) % lines.length; target.textContent = lines[i]; target.style.opacity = 1; }, 500);
@@ -233,11 +248,14 @@
       return;
     }
 
+    const lib = e.target.closest("[data-theme]");
+    if (lib) { activeLines = THEME_LINES[lib.dataset.theme] || null; show("player"); return; }
+
     const act = e.target.closest("[data-action]");
     if (!act) return;
     const a = act.dataset.action;
     if (a === "startquiz") { step = 0; show("quiz"); }
-    else show(a);
+    else { if (a === "player") activeLines = null; show(a); }
   });
 
   show("welcome");
