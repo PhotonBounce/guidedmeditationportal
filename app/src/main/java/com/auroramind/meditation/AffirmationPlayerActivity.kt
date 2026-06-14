@@ -1,5 +1,6 @@
 package com.auroramind.meditation
 
+import android.content.res.AssetFileDescriptor
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
@@ -25,6 +26,8 @@ class AffirmationPlayerActivity : AppCompatActivity() {
     private var index = 0
     private var muted = false
     private var mediaPlayer: MediaPlayer? = null
+    private var voicePlayer: MediaPlayer? = null
+    private var voiceAfd: AssetFileDescriptor? = null
 
     private val advance = object : Runnable {
         override fun run() {
@@ -50,6 +53,7 @@ class AffirmationPlayerActivity : AppCompatActivity() {
         StatsManager(this).recordSessionStart()
 
         startSoundscape(prefs)
+        startVoiceIfAvailable(prefs)
 
         binding.muteBtn.setOnClickListener {
             muted = !muted
@@ -72,6 +76,30 @@ class AffirmationPlayerActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * If the user has bundled spoken affirmation audio under assets/affirmations/,
+     * play a track (habit-matched when possible) over the soundscape and show its
+     * title. No audio bundled -> this no-ops and the text affirmations carry the
+     * session.
+     */
+    private fun startVoiceIfAvailable(prefs: PrefsManager) {
+        val tracks = AffirmationLibrary.list(this)
+        val track = AffirmationLibrary.pick(
+            tracks, prefs.getHabitType(), StatsManager(this).totalSessions()
+        ) ?: return
+        runCatching {
+            val afd = assets.openFd(track.asset)
+            voiceAfd = afd
+            voicePlayer = MediaPlayer().apply {
+                setDataSource(afd.fileDescriptor, afd.startOffset, afd.length)
+                setOnPreparedListener { it.start() }
+                setOnErrorListener { _, _, _ -> true }
+                prepareAsync()
+            }
+            binding.caption.text = "♪  ${track.title}"
+        }
+    }
+
     private fun crossFadeTo(text: String) {
         binding.affirmationText.animate()
             .alpha(0f)
@@ -87,6 +115,10 @@ class AffirmationPlayerActivity : AppCompatActivity() {
         handler.removeCallbacksAndMessages(null)
         mediaPlayer?.run { if (isPlaying) stop(); release() }
         mediaPlayer = null
+        voicePlayer?.run { runCatching { if (isPlaying) stop() }; release() }
+        voicePlayer = null
+        runCatching { voiceAfd?.close() }
+        voiceAfd = null
         super.onDestroy()
     }
 
