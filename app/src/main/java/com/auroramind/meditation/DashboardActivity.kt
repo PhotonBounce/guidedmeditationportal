@@ -46,6 +46,11 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(Intent(this, BreathingActivity::class.java))
         }
 
+        binding.settingsBtn.setOnClickListener {
+            haptic.click(); sfx.tap()
+            startActivity(Intent(this, SettingsActivity::class.java))
+        }
+
         binding.resetLink.setOnClickListener { confirmRelapse() }
     }
 
