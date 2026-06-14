@@ -117,7 +117,7 @@
         <activity
             android:name=".QuizActivity"
             android:exported="true"
-            android:label="UnBound (beta)"
+            android:label="Mind &amp; Body Shield"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.MeditationPortal">
