@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Guided Meditation Portal</string>
-    <string name="app_tagline">Breathe · Reflect · Restore</string>
+    <string name="app_name">Mind &amp; Body Shield</string>
+    <string name="app_tagline">Break free · Stay free</string>
 
     <!-- Premium -->
     <string name="premium_title">Portal Unlock</string>

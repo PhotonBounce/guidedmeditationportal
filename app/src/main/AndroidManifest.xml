@@ -110,22 +110,13 @@
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
 
-        <!-- UnBound onboarding quiz + paywall (quit-habit + affirmations app).
-             Temporary secondary launcher ("UnBound (beta)") so the new funnel can
-             be tested on the debug APK without disturbing the existing
-             Splash → Main flow. Real entry wiring lands with the Dashboard. -->
+        <!-- Onboarding quiz + paywall — entered from the splash on first run. -->
         <activity
             android:name=".QuizActivity"
-            android:exported="true"
-            android:label="Mind &amp; Body Shield"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
-            android:theme="@style/Theme.MeditationPortal">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/Theme.MeditationPortal" />
 
         <!-- UnBound home / dashboard (days free, money saved, panic button) -->
         <activity
