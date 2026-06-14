@@ -142,6 +142,27 @@ section{padding:clamp(70px,10vw,130px) clamp(18px,6vw,40px);max-width:var(--maxw
 .foot-links a:hover{color:var(--gold)}
 .foot-fine{color:var(--faint);font-size:12px;max-width:620px;margin:0 auto;line-height:1.6}
 
+/* ---- faithful emulator screens (mirror the real app) ---- */
+.opts-wrap{display:flex;flex-direction:column;margin-top:6px}
+.aff-input{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:13px;color:var(--cream);font-size:14px;margin-top:8px;width:100%;font-family:inherit}
+.aff-input::placeholder{color:var(--faint)}
+.benefit{color:var(--cream);font-size:13px;line-height:1.6;margin:3px 0}
+.plan-opt{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:9px;font-size:14px;color:var(--cream);cursor:pointer;transition:.2s}
+.plan-opt:first-of-type{margin-top:18px}
+.plan-opt.sel{border-color:var(--gold);background:rgba(255,201,94,.08)}
+.plan-opt b{color:var(--gold)}
+.plan-opt span{color:var(--muted);font-size:13px}
+.dash-head{display:flex;align-items:center;gap:4px;margin-bottom:6px}
+.ic{color:var(--muted);font-size:18px;padding:4px 6px;cursor:pointer;border-radius:8px;transition:.2s}
+.ic:hover{color:var(--gold);background:rgba(255,201,94,.08)}
+.card-hero{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:18px;padding:24px 16px;text-align:center;margin-bottom:12px}
+.player-bar{display:flex;justify-content:space-between;margin-bottom:6px}
+.link-row{text-align:center;color:var(--gold);font-size:13px;margin-top:12px;cursor:pointer;padding:6px}
+.link-row.faint{color:var(--faint)}
+.orb-mini{width:66px;height:66px;margin:0 auto 10px;border-radius:50%;
+  background:radial-gradient(circle at 50% 62%,#FFF1CC,#FFB347 45%,#E8742B);
+  box-shadow:0 0 28px rgba(255,150,60,.6);animation:breathe 4.5s ease-in-out infinite}
+
 /* ---- eye candy: energy field, sound toggle, ripple, tilt, button shine ---- */
 #energy{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 .logo-orb,.hero-title{transition:transform .25s ease-out}
