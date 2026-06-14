@@ -5,7 +5,7 @@ Runs on a GitHub Actions runner (which can reach FTP port 21 — the cloud dev
 container cannot). The password is read from the FTP_PASS environment variable
 and is never hardcoded or printed.
 
-Target: public_html/shield  ->  http://photon-bounce.com/shield/
+Target: public_html/pom  ->  http://photon-bounce.com/pom/
 """
 import os
 from ftplib import FTP
@@ -13,7 +13,7 @@ from ftplib import FTP
 HOST = "ftp.photon-bounce.com"
 USER = "photonb"
 LOCAL_DIR = "microsite"
-REMOTE_DIR = "public_html/shield"
+REMOTE_DIR = "public_html/pom"
 
 
 def main():
@@ -58,7 +58,7 @@ def main():
             count += 1
 
     ftp.quit()
-    print(f"=== Done: {count} files. Live at http://photon-bounce.com/shield/ ===")
+    print(f"=== Done: {count} files. Live at http://photon-bounce.com/pom/ ===")
 
 
 if __name__ == "__main__":
