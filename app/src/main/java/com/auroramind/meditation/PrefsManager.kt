@@ -205,6 +205,26 @@ class PrefsManager(context: Context) {
         prefs.getString(KEY_GOAL, null)?.let { runCatching { Mood.valueOf(it) }.getOrNull() }
     fun setGoal(mood: Mood) = prefs.edit { putString(KEY_GOAL, mood.name) }
 
+    // ── Quit-habit profile (captured during the onboarding quiz) ────────────────
+    // Identity/preferences for the quit-habit side. Numeric "clean time" state
+    // (quit date, daily cost, relapses) lives in HabitStatsManager instead.
+
+    /** The habit the user is breaking free from, e.g. "vaping" or "doomscrolling". */
+    fun getHabitType(): String = prefs.getString(KEY_HABIT_TYPE, "") ?: ""
+    fun setHabitType(type: String) = prefs.edit { putString(KEY_HABIT_TYPE, type) }
+
+    /** The user's selected triggers, e.g. "stress", "boredom", "social". */
+    fun getTriggers(): Set<String> = prefs.getStringSet(KEY_TRIGGERS, emptySet()) ?: emptySet()
+    fun setTriggers(triggers: Set<String>) = prefs.edit { putStringSet(KEY_TRIGGERS, triggers) }
+
+    /** Free-text "what freedom means to me" — personalizes affirmation selection. */
+    fun getFreedomGoal(): String = prefs.getString(KEY_FREEDOM_GOAL, "") ?: ""
+    fun setFreedomGoal(text: String) = prefs.edit { putString(KEY_FREEDOM_GOAL, text) }
+
+    /** True once the onboarding quiz has been completed (gates the hard paywall). */
+    fun isQuizCompleted(): Boolean = prefs.getBoolean(KEY_QUIZ_DONE, false)
+    fun setQuizCompleted(v: Boolean) = prefs.edit { putBoolean(KEY_QUIZ_DONE, v) }
+
     // ── Journeys (multi-day programs) ───────────────────────────────────────────
     /** Days completed for a program (0 = not started, N = N days done). */
     fun getProgramProgress(programId: String): Int =
@@ -258,6 +278,10 @@ class PrefsManager(context: Context) {
         private const val KEY_ALARM_TONE        = "alarm_tone"
         private const val KEY_FAVORITES         = "favorites"
         private const val KEY_GOAL              = "primary_goal"
+        private const val KEY_HABIT_TYPE        = "habit_type"
+        private const val KEY_TRIGGERS          = "habit_triggers"
+        private const val KEY_FREEDOM_GOAL      = "freedom_goal"
+        private const val KEY_QUIZ_DONE         = "quiz_completed"
         private const val KEY_REMINDER_ON       = "reminder_enabled"
         private const val KEY_REMINDER_HOUR     = "reminder_hour"
         private const val KEY_REMINDER_MINUTE   = "reminder_minute"

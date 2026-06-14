@@ -109,6 +109,28 @@
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
 
+        <!-- Onboarding quiz + paywall — entered from the splash on first run. -->
+        <activity
+            android:name=".QuizActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.MeditationPortal" />
+
+        <!-- UnBound home / dashboard (days free, money saved, panic button) -->
+        <activity
+            android:name=".DashboardActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MeditationPortal" />
+
+        <!-- Affirmation player — habit-aware lines cross-fading over a soundscape -->
+        <activity
+            android:name=".AffirmationPlayerActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MeditationPortal.FullScreen" />
+
         <!-- Foreground service for background audio playback -->
         <service
             android:name=".SoundService"

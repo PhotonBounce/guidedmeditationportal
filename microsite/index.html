@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Power of Mind — Break free, one clean day at a time</title>
+<meta name="description" content="Power of Mind helps you quit the habit holding you back — vaping, doomscrolling, drinking — with daily audio affirmations, a clean-day tracker, and a one-tap panic button for cravings." />
+<meta name="theme-color" content="#140d08" />
+<meta property="og:title" content="Power of Mind" />
+<meta property="og:description" content="Quit the habit. Rewire your mind with daily audio affirmations." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+
+<!-- ambient layers: drifting embers + living energy field -->
+<canvas id="embers" aria-hidden="true"></canvas>
+<canvas id="energy" aria-hidden="true"></canvas>
+
+<!-- parallax glow layers -->
+<div class="bg-glows" aria-hidden="true">
+  <div class="glow glow-a" data-depth="0.10"></div>
+  <div class="glow glow-b" data-depth="0.18"></div>
+  <div class="glow glow-c" data-depth="0.28"></div>
+</div>
+
+<header class="nav">
+  <a class="brand" href="#top">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 64 64" width="34" height="34">
+        <defs>
+          <radialGradient id="flame" cx="50%" cy="60%" r="60%">
+            <stop offset="0%" stop-color="#FFE6A8"/>
+            <stop offset="45%" stop-color="#FFB347"/>
+            <stop offset="100%" stop-color="#E8742B"/>
+          </radialGradient>
+        </defs>
+        <circle cx="32" cy="32" r="28" fill="none" stroke="url(#flame)" stroke-width="3" opacity="0.85"/>
+        <path d="M32 16 C 38 26, 44 30, 40 40 C 38 46, 26 46, 24 40 C 22 34, 28 32, 28 26 C 30 30, 33 28, 32 16 Z" fill="url(#flame)"/>
+      </svg>
+    </span>
+    <span class="brand-name">Power&nbsp;of&nbsp;Mind</span>
+  </a>
+  <nav class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#demo">Try the demo</a>
+    <a href="#start">Get started</a>
+    <button id="soundToggle" class="sound-toggle" aria-label="Toggle sound">🔈</button>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ───────────────────────── HERO ───────────────────────── -->
+  <section class="hero">
+    <div class="hero-inner reveal">
+      <div class="logo-orb" aria-hidden="true">
+        <div class="orb-ring"></div>
+        <div class="orb-flame">
+          <svg viewBox="0 0 120 120" width="160" height="160">
+            <defs>
+              <radialGradient id="bigflame" cx="50%" cy="62%" r="58%">
+                <stop offset="0%" stop-color="#FFF1CC"/>
+                <stop offset="40%" stop-color="#FFB347"/>
+                <stop offset="100%" stop-color="#D9631F"/>
+              </radialGradient>
+            </defs>
+            <path d="M60 22 C 72 44, 84 52, 76 72 C 71 86, 49 86, 44 72 C 40 60, 52 56, 52 42 C 56 52, 62 48, 60 22 Z" fill="url(#bigflame)"/>
+          </svg>
+        </div>
+      </div>
+      <p class="eyebrow">DAILY AUDIO AFFIRMATIONS · CLEAN-DAY TRACKER</p>
+      <h1 class="hero-title">Break free,<br><span class="grad">one clean day at a time.</span></h1>
+      <p class="hero-sub">Quit the habit holding you back — vaping, doomscrolling, drinking — and rewire your mind with spoken affirmations, a clean-day streak, money saved, and a one-tap panic button for the moment a craving hits.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#demo">▶ &nbsp;Try the live demo</a>
+        <a class="btn btn-ghost" href="#start">Get it on Android</a>
+      </div>
+    </div>
+    <a class="scroll-cue" href="#features" aria-label="Scroll down"><span></span></a>
+  </section>
+
+  <!-- ──────────────────────── STATS BAND ──────────────────── -->
+  <section class="stats">
+    <div class="stat reveal"><div class="stat-num" data-count="365">0</div><div class="stat-label">days, tracked to the hour</div></div>
+    <div class="stat reveal"><div class="stat-num" data-prefix="$" data-count="1840">0</div><div class="stat-label">saved on an average quit</div></div>
+    <div class="stat reveal"><div class="stat-num" data-count="40">0</div><div class="stat-label">affirmations, voiced over soundscapes</div></div>
+  </section>
+
+  <!-- ──────────────────────── FEATURES ────────────────────── -->
+  <section id="features" class="features">
+    <h2 class="section-title reveal">Everything you need to stay free</h2>
+    <div class="grid">
+      <article class="card reveal">
+        <div class="card-icon">🔥</div>
+        <h3>Clean-day streak</h3>
+        <p>A hero counter shows exactly how long you've been free, down to the hour. Miss a day? A forgiving grace keeps your momentum.</p>
+      </article>
+      <article class="card reveal">
+        <div class="card-icon">🎧</div>
+        <h3>Audio affirmations</h3>
+        <p>Spoken "I am…" affirmations, tuned to your habit and triggers, played over calming soundscapes. Build the identity of someone who's already free.</p>
+      </article>
+      <article class="card reveal">
+        <div class="card-icon">🆘</div>
+        <h3>Panic button</h3>
+        <p>The instant a craving hits, one tap starts a paced breath and a craving-crusher affirmation. Ride the urge out — it always passes.</p>
+      </article>
+      <article class="card reveal">
+        <div class="card-icon">💰</div>
+        <h3>Money saved</h3>
+        <p>Every clean day turns the cash you'd have burned into a number that keeps climbing. Watch it grow.</p>
+      </article>
+      <article class="card reveal">
+        <div class="card-icon">🏆</div>
+        <h3>Milestones</h3>
+        <p>Day 1, 7, 30, 90, a year — each milestone lands with a celebration and a fresh affirmation made for the moment.</p>
+      </article>
+      <article class="card reveal">
+        <div class="card-icon">🛡️</div>
+        <h3>Private by design</h3>
+        <p>Your progress lives on your device. No account required, nothing sold. Just you, your streak, and your reasons.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ──────────────────────── LIVE DEMO ───────────────────── -->
+  <section id="demo" class="demo">
+    <div class="demo-copy reveal">
+      <h2 class="section-title">See it in your hand</h2>
+      <p>This is the real flow — the onboarding quiz, your dashboard, and an affirmation session — running right here in your browser with sample data. Tap through it.</p>
+      <ul class="demo-points">
+        <li>Personalized in four quick questions</li>
+        <li>A dashboard that turns clean time into proof</li>
+        <li>Affirmations that cycle like the real player</li>
+      </ul>
+      <p class="demo-note">Demo only — sample data, no sign-up, not the full library.</p>
+    </div>
+
+    <!-- phone mockup driven by app.js -->
+    <div class="phone reveal" aria-label="App demo">
+      <div class="phone-notch"></div>
+      <div id="appScreen" class="phone-screen"><!-- app.js renders here --></div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────── GET STARTED ─────────────────── -->
+  <section id="start" class="start">
+    <div class="start-inner reveal">
+      <h2 class="section-title">Your first clean day starts now</h2>
+      <p>Power of Mind is coming to Google Play. Take the 60-second assessment and let your plan build itself.</p>
+      <div class="cta-row center">
+        <a class="btn btn-primary" href="#demo">Take the assessment</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="foot-brand">Power of Mind</div>
+  <nav class="foot-links">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="#features">Features</a>
+  </nav>
+  <p class="foot-fine">© 2026 Power of Mind. Not medical advice; not a substitute for professional treatment. If you are in crisis, contact local emergency services.</p>
+</footer>
+
+<script src="assets/fx.js" defer></script>
+<script src="assets/app.js" defer></script>
+</body>
+</html>

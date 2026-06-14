@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/bg_cosmic_gradient">
+
+    <TextView
+        android:id="@+id/muteBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:layout_margin="12dp"
+        android:padding="10dp"
+        android:text="🔊"
+        android:textSize="20sp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <TextView
+        android:id="@+id/closeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_margin="12dp"
+        android:padding="10dp"
+        android:text="✕"
+        android:textColor="@color/text_secondary"
+        android:textSize="22sp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <TextView
+        android:id="@+id/affirmationText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center"
+        android:textColor="@color/text_primary"
+        android:textSize="28sp"
+        android:lineSpacingExtra="6dp"
+        tools:text="I am stronger than this craving." />
+
+    <TextView
+        android:id="@+id/caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="36dp"
+        android:text="Breathe slowly  ·  let each line land"
+        android:textColor="@color/text_tertiary"
+        android:textSize="13sp" />
+
+</FrameLayout>

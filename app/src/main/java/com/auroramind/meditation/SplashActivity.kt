@@ -58,10 +58,12 @@ class SplashActivity : AppCompatActivity() {
         // Play chime sound effect
         try { SoundEffects(this).chime() } catch (_: Exception) {}
 
-        // Advance to MainActivity after the animation finishes
+        // Advance after the animation finishes — into the quit-habit + affirmations
+        // flow: the onboarding quiz on first run, the dashboard on later launches.
         handler.postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            val next = if (PrefsManager(this).isQuizCompleted())
+                DashboardActivity::class.java else QuizActivity::class.java
+            startActivity(Intent(this, next))
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
         }, SPLASH_DURATION_MS)
@@ -402,8 +404,8 @@ private class SplashCanvas(context: Context) : View(context) {
             glowPaint.typeface = textPaint.typeface
             glowPaint.textAlign = Paint.Align.CENTER
             glowPaint.letterSpacing = textPaint.letterSpacing
-            canvas.drawText("GUIDED MEDITATION PORTAL", cx, titleY, glowPaint)
-            canvas.drawText("GUIDED MEDITATION PORTAL", cx, titleY, textPaint)
+            canvas.drawText("POWER OF MIND", cx, titleY, glowPaint)
+            canvas.drawText("POWER OF MIND", cx, titleY, textPaint)
         }
 
         // ── Tagline ───────────────────────────────────────────────────────
