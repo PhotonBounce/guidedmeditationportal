@@ -72,7 +72,7 @@ class NightSkyView @JvmOverloads constructor(
         isAntiAlias = true
     }
     private val starGlowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = 0x55E91E8C.toInt()
+        color = 0x55FFC95E.toInt()
         isAntiAlias = true
         maskFilter = BlurMaskFilter(8f, BlurMaskFilter.Blur.NORMAL)
     }
@@ -82,7 +82,7 @@ class NightSkyView @JvmOverloads constructor(
     private val portalRingPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         isAntiAlias = true
         style = Paint.Style.STROKE
-        color = 0x66E91E8C.toInt()
+        color = 0x66FFC95E.toInt()
     }
     private val orbPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         isAntiAlias = true
@@ -111,7 +111,7 @@ class NightSkyView @JvmOverloads constructor(
                     x = Random.nextFloat(),
                     y = Random.nextFloat(),
                     size = 28f + Random.nextFloat() * 36f,
-                    color = if (it % 2 == 0) 0x33FF80C8.toInt() else 0x33FFD6EC.toInt(),
+                    color = if (it % 2 == 0) 0x33FFE6A8.toInt() else 0x33FFE6C8.toInt(),
                     driftX = (Random.nextFloat() - 0.5f) * 0.018f,
                     driftY = (Random.nextFloat() - 0.5f) * 0.018f,
                     pulseSpeed = 0.15f + Random.nextFloat() * 0.25f,
@@ -138,18 +138,18 @@ class NightSkyView @JvmOverloads constructor(
 
     private val ripples = ArrayDeque<Ripple>()
     @Volatile private var pulseEnergy = 0f          // 0..1, decays each frame
-    @Volatile private var pulseTint = 0xE91E8C      // current accent tint, blends toward this
+    @Volatile private var pulseTint = 0xFFC95E      // current accent tint, blends toward this
 
     // ── Chameleon theme color — smoothly lerps toward the playing track's hue ──
-    @Volatile private var chameleonTarget = 0xE91E8C   // RRGGBB — target color
-    @Volatile private var chameleonCurrent = 0xE91E8C  // RRGGBB — interpolated current
+    @Volatile private var chameleonTarget = 0xFFC95E   // RRGGBB — target color
+    @Volatile private var chameleonCurrent = 0xFFC95E  // RRGGBB — interpolated current
     @Volatile private var chameleonSpeed = 0.012f      // lerp factor per frame (~0.7s to blend)
 
     /** Kinds of user action the background can react to — each gets its own hue & punch. */
     enum class ReactionKind(val tint: Int, val punch: Float) {
-        PLAY(0xE91E8C, 0.9f),       // deep pink — starting a soundscape
+        PLAY(0xFFC95E, 0.9f),       // deep pink — starting a soundscape
         PAUSE(0x9C4A7A, 0.45f),     // muted rose — settling down
-        SELECT(0xFF80C8, 0.7f),     // soft pink — choosing a track
+        SELECT(0xFFE6A8, 0.7f),     // soft pink — choosing a track
         CHAT(0xF06292, 0.65f),      // warm pink — talking with Spirit
         UNLOCK(0xFFD27D, 1.0f),     // warm gold — celebratory, the big moment
         TIMER(0x67E8C9, 0.55f),     // teal — calm focus cue
@@ -365,7 +365,7 @@ class NightSkyView @JvmOverloads constructor(
             }
 
             starPaint.alpha = (alpha * 255).toInt()
-            starPaint.color = if (s.depth == 2) 0xFFFF80C8.toInt() else Color.WHITE
+            starPaint.color = if (s.depth == 2) 0xFFFFE6A8.toInt() else Color.WHITE
             canvas.drawCircle(cx, cy, size, starPaint)
         }
     }

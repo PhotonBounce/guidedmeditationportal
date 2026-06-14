@@ -1,63 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- ── Cosmic backgrounds ──────────────────────────────────────────────── -->
-    <color name="cosmic_indigo_top">#0B0B1E</color>
-    <color name="cosmic_indigo_mid">#10112E</color>
-    <color name="cosmic_indigo_bottom">#0E1B3A</color>
+    <!-- ══ Power of Mind — warm gold/copper brand palette ══
+         Resource names are kept stable (incl. legacy "cosmic"/"pink"/"teal"
+         aliases) so every layout and view keeps resolving; only the values
+         changed, re-skinning the whole app to match the icon + microsite. -->
 
-    <!-- Legacy alias (still referenced by some layouts/styles) -->
-    <color name="deep_navy">#0B0B1E</color>
+    <!-- ── Backgrounds (warm near-black → ember-brown gradient) ─────────────── -->
+    <color name="cosmic_indigo_top">#140D08</color>
+    <color name="cosmic_indigo_mid">#1D130B</color>
+    <color name="cosmic_indigo_bottom">#241910</color>
+    <color name="deep_navy">#140D08</color>
 
     <!-- ── Cards / surfaces ────────────────────────────────────────────────── -->
-    <color name="card_bg">#16162E</color>
-    <color name="card_active">#2A0D1E</color>
-    <color name="card_active_glow">#3D1530</color>
-    <color name="card_premium_bg">#1F1A12</color>
-    <color name="card_border">#2A2A4A</color>
-    <color name="card_border_active">#E91E8C</color>
+    <color name="card_bg">#241910</color>
+    <color name="card_active">#2C2013</color>
+    <color name="card_active_glow">#3A2A18</color>
+    <color name="card_premium_bg">#2A2013</color>
+    <color name="card_border">#3A2A18</color>
+    <color name="card_border_active">#FFC95E</color>
 
-    <!-- ── Deep-pink accent palette ──────────────────────────────────────── -->
-    <color name="accent_iris">#E91E8C</color>          <!-- primary accent — deep magenta pink -->
-    <color name="accent_purple">#E91E8C</color>        <!-- alias for back-compat -->
-    <color name="accent_purple_light">#FF80C8</color>
-    <color name="accent_purple_deep">#9C0060</color>
-    <color name="accent_teal">#7DD3FC</color>           <!-- soft cyan — complementary cool -->
-    <color name="accent_aurora">#5EEAD4</color>
-    <color name="accent_rose">#FB7185</color>
-    <color name="premium_gold">#F5C842</color>
-    <color name="premium_gold_light">#FFE38A</color>
+    <!-- ── Gold/copper accent palette ──────────────────────────────────────── -->
+    <color name="accent_iris">#FFC95E</color>          <!-- primary accent — warm gold -->
+    <color name="accent_purple">#FFC95E</color>        <!-- alias for back-compat -->
+    <color name="accent_purple_light">#FFE6A8</color>
+    <color name="accent_purple_deep">#E8742B</color>
+    <color name="accent_teal">#FFB347</color>           <!-- amber — secondary accent -->
+    <color name="accent_aurora">#FFB347</color>
+    <color name="accent_rose">#E8742B</color>           <!-- ember — alert / panic -->
+    <color name="premium_gold">#FFC95E</color>
+    <color name="premium_gold_light">#FFE6A8</color>
 
-    <!-- ── Text ────────────────────────────────────────────────────────────── -->
-    <color name="text_primary">#F8FAFC</color>
-    <color name="text_secondary">#D1A3BC</color>
-    <color name="text_tertiary">#8B6B7A</color>
+    <!-- ── Text (cream on warm dark) ───────────────────────────────────────── -->
+    <color name="text_primary">#F5EEE6</color>
+    <color name="text_secondary">#CBB89F</color>
+    <color name="text_tertiary">#9C886C</color>
 
     <!-- ── Misc / system ───────────────────────────────────────────────────── -->
-    <color name="ripple_color">#33E91E8C</color>
-    <color name="playing_green">#5EEAD4</color>
-    <color name="star_white">#F8FAFC</color>
-    <color name="star_glow">#80E91E8C</color>
-    <color name="nebula_purple">#22E91E8C</color>
-    <color name="nebula_teal">#1A7DD3FC</color>
+    <color name="ripple_color">#33FFC95E</color>
+    <color name="playing_green">#FFB347</color>
+    <color name="star_white">#F5EEE6</color>
+    <color name="star_glow">#80E8742B</color>
+    <color name="nebula_purple">#22E8742B</color>
+    <color name="nebula_teal">#1AFFB347</color>
 
-    <!-- ── Portal eye-candy (parallax glow rings, drifting orbs, breathing pulse) ── -->
-    <color name="portal_glow_outer">#1AE91E8C</color>
-    <color name="portal_glow_inner">#40FF80C8</color>
-    <color name="portal_ring">#66E91E8C</color>
-    <color name="lotus_pink">#FF80C8</color>
-    <color name="moon_glow">#FFD6EC</color>
-    <color name="breath_teal">#5EEAD4</color>
+    <!-- ── Eye-candy (glow rings, drifting orbs, breathing pulse) ───────────── -->
+    <color name="portal_glow_outer">#1AE8742B</color>
+    <color name="portal_glow_inner">#40FFB347</color>
+    <color name="portal_ring">#66FFC95E</color>
+    <color name="lotus_pink">#FFB347</color>
+    <color name="moon_glow">#FFE6C8</color>
+    <color name="breath_teal">#FFB347</color>
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="ic_launcher_background">#0D0D2A</color>
+    <color name="ic_launcher_background">#140D08</color>
 
-    <!-- ── Category accent colors (sound card top stripe + header) ──────────── -->
-    <color name="cat_noise">#E91E8C</color>       <!-- deep pink — primary -->
-    <color name="cat_nature">#5EEAD4</color>      <!-- teal   — Nature -->
-    <color name="cat_mechanical">#7DD3FC</color>  <!-- sky    — Mechanical -->
-    <color name="cat_synthetic">#FB7185</color>   <!-- rose   — Synthetic -->
-    <color name="cat_ambient">#FF80C8</color>     <!-- soft pink — Ambient/Guided -->
-    <color name="cat_energy">#FB923C</color>      <!-- orange — Energy Music -->
+    <!-- ── Category accent colors ──────────────────────────────────────────── -->
+    <color name="cat_noise">#FFC95E</color>
+    <color name="cat_nature">#FFB347</color>
+    <color name="cat_mechanical">#E8943A</color>
+    <color name="cat_synthetic">#E8742B</color>
+    <color name="cat_ambient">#FFE6A8</color>
+    <color name="cat_energy">#FB923C</color>
 
 </resources>

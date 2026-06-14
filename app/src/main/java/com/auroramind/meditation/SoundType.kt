@@ -29,7 +29,7 @@ enum class SoundType(
      * The app background, nebula, portal rings and card highlights all
      * smoothly shift to this hue when the track starts playing.
      */
-    val themeColor: Int = Color.parseColor("#E91E8C"),
+    val themeColor: Int = Color.parseColor("#FFC95E"),
     /** Primary mood/goal this track serves — drives filter chips & recommendations. */
     val mood: Mood = Mood.GROUNDING,
 ) {
@@ -72,7 +72,7 @@ enum class SoundType(
     SOHAM(
         "Soham", "An ancient yogic practice of listening to the natural mantra of the breath",
         "🧘", true, "Guided Meditations", R.raw.soham,
-        Color.parseColor("#E91E8C"), Mood.SLEEP,
+        Color.parseColor("#FFC95E"), Mood.SLEEP,
     ),
     VIPASSANA(
         "Vipassana", "A systematic body-scanning practice to sharpen awareness and release tension",

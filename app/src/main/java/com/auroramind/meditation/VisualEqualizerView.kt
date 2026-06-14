@@ -20,7 +20,7 @@ class VisualEqualizerView @JvmOverloads constructor(
 ) : View(context, attrs, defStyle) {
 
     private val barPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = 0xFF5EEAD4.toInt() // Teal accent (matching mix/eq theme)
+        color = 0xFFFFB347.toInt() // Teal accent (matching mix/eq theme)
         style = Paint.Style.FILL
     }
 

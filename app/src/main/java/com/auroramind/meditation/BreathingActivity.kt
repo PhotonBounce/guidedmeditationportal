@@ -36,7 +36,7 @@ class BreathingActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         val root = FrameLayout(this).apply {
-            setBackgroundColor(Color.parseColor("#0B0B1E"))
+            setBackgroundColor(Color.parseColor("#140D08"))
             layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
             )
@@ -63,7 +63,7 @@ class BreathingActivity : AppCompatActivity() {
         })
         header.addView(TextView(this).apply {
             text = "Follow the orb · 4 seconds each phase"
-            setTextColor(Color.parseColor("#FF80C8"))
+            setTextColor(Color.parseColor("#FFE6A8"))
             textSize = 13f
             gravity = Gravity.CENTER
             val t = (6 * resources.displayMetrics.density).toInt()
@@ -77,7 +77,7 @@ class BreathingActivity : AppCompatActivity() {
         val done = MaterialButton(this).apply {
             text = "Done"
             cornerRadius = (24 * resources.displayMetrics.density).toInt()
-            backgroundTintList = android.content.res.ColorStateList.valueOf(Color.parseColor("#E91E8C"))
+            backgroundTintList = android.content.res.ColorStateList.valueOf(Color.parseColor("#FFC95E"))
             setTextColor(Color.WHITE)
             setOnClickListener { finish() }
         }
@@ -119,7 +119,7 @@ private class BreathingView(context: Context, attrs: AttributeSet? = null) : Vie
     private val ringPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.STROKE
         strokeWidth = 3f
-        color = Color.argb(120, 255, 128, 200)
+        color = Color.argb(120, 255, 230, 168)
     }
     private val labelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = Color.WHITE
@@ -127,7 +127,7 @@ private class BreathingView(context: Context, attrs: AttributeSet? = null) : Vie
         typeface = Typeface.create("sans-serif-light", Typeface.NORMAL)
     }
     private val countPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.parseColor("#FF80C8")
+        color = Color.parseColor("#FFE6A8")
         textAlign = Paint.Align.CENTER
         typeface = Typeface.create("sans-serif", Typeface.BOLD)
     }
@@ -180,13 +180,13 @@ private class BreathingView(context: Context, attrs: AttributeSet? = null) : Vie
         canvas.drawCircle(cx, cy, maxR, ringPaint)
 
         // Glow halo
-        glowPaint.color = Color.argb(110, 233, 30, 140)
+        glowPaint.color = Color.argb(110, 255, 201, 94)
         canvas.drawCircle(cx, cy, r * 1.05f, glowPaint)
 
         // Orb with radial gradient
         orbPaint.shader = RadialGradient(
             cx, cy, r.coerceAtLeast(1f),
-            Color.parseColor("#FF80C8"), Color.parseColor("#E91E8C"),
+            Color.parseColor("#FFE6A8"), Color.parseColor("#FFC95E"),
             Shader.TileMode.CLAMP
         )
         canvas.drawCircle(cx, cy, r, orbPaint)

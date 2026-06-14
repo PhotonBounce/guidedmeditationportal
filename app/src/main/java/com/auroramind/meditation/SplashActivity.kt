@@ -89,10 +89,10 @@ private class SplashCanvas(context: Context) : View(context) {
     }
 
     // ── Colors ───────────────────────────────────────────────────────────────
-    private val PINK   = Color.parseColor("#E91E8C")
-    private val PINK_L = Color.parseColor("#FF80C8")
-    private val TEAL   = Color.parseColor("#5EEAD4")
-    private val DARK   = Color.parseColor("#0B0B1E")
+    private val PINK   = Color.parseColor("#FFC95E")
+    private val PINK_L = Color.parseColor("#FFE6A8")
+    private val TEAL   = Color.parseColor("#FFB347")
+    private val DARK   = Color.parseColor("#140D08")
 
     // ── Paints ───────────────────────────────────────────────────────────────
     private val bgPaint  = Paint().apply { color = DARK }
@@ -100,7 +100,7 @@ private class SplashCanvas(context: Context) : View(context) {
         style       = Paint.Style.STROKE
         strokeWidth = 1.4f
         strokeCap   = Paint.Cap.ROUND
-        color       = Color.argb(160, 233, 30, 140)   // translucent pink
+        color       = Color.argb(160, 255, 201, 94)   // translucent pink
     }
     private val ringPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.STROKE
@@ -204,9 +204,9 @@ private class SplashCanvas(context: Context) : View(context) {
     private val orbs: List<Orb> = buildList {
         val rng = kotlin.random.Random(7)
         val colors = listOf(
-            Color.argb(50, 233, 30, 140),
-            Color.argb(40, 255, 128, 200),
-            Color.argb(35, 94, 234, 212),
+            Color.argb(50, 255, 201, 94),
+            Color.argb(40, 255, 230, 168),
+            Color.argb(35, 255, 179, 71),
             Color.argb(45, 255, 215, 0),
         )
         repeat(6) { i ->
@@ -273,7 +273,7 @@ private class SplashCanvas(context: Context) : View(context) {
         canvas.drawRect(0f, 0f, w, h, bgPaint)
         nebulaPaint.shader = RadialGradient(
             w * 0.5f, h * 0.45f, h * 0.65f,
-            Color.argb(55, 233, 30, 140),
+            Color.argb(55, 255, 201, 94),
             Color.TRANSPARENT,
             Shader.TileMode.CLAMP
         )
@@ -297,7 +297,7 @@ private class SplashCanvas(context: Context) : View(context) {
             val twinkle = (sin(t * s.twinkleHz * 2f * PI.toFloat() + s.twinklePhase) + 1f) / 2f
             val alpha = s.alpha * (0.5f + twinkle * 0.5f)
             if (s.depth == 2) {
-                glowPaint.color = Color.argb((alpha * 60).toInt(), 255, 128, 200)
+                glowPaint.color = Color.argb((alpha * 60).toInt(), 255, 230, 168)
                 canvas.drawCircle(px, py, s.size * d * 3f, glowPaint)
             }
             starPaint.alpha = (alpha * 255).toInt()
@@ -315,7 +315,7 @@ private class SplashCanvas(context: Context) : View(context) {
             ringPaint.strokeWidth = (1f + (1f - phase) * 2.5f) * d
             ringPaint.color = Color.argb(
                 ((fade * 80)).toInt().coerceIn(0, 255),
-                233, 30, 140
+                255, 201, 94
             )
             canvas.drawCircle(cx, cy, r, ringPaint)
         }
@@ -353,14 +353,14 @@ private class SplashCanvas(context: Context) : View(context) {
         for ((a, b) in sphereEdgesLat) {
             val pa = projected[a] ?: continue
             val pb = projected[b] ?: continue
-            wirePaint.color = Color.argb(140, 233, 30, 140)
+            wirePaint.color = Color.argb(140, 255, 201, 94)
             canvas.drawLine(pa.x, pa.y, pb.x, pb.y, wirePaint)
         }
         // Draw longitude edges (slightly brighter)
         for ((a, b) in sphereEdgesLon) {
             val pa = projected[a] ?: continue
             val pb = projected[b] ?: continue
-            wirePaint.color = Color.argb(100, 255, 128, 200)
+            wirePaint.color = Color.argb(100, 255, 230, 168)
             canvas.drawLine(pa.x, pa.y, pb.x, pb.y, wirePaint)
         }
 
@@ -374,7 +374,7 @@ private class SplashCanvas(context: Context) : View(context) {
 
             // Soft pink glow halo behind the logo (pulses with the breath)
             val glowA = (90 + (sin(t * 0.9f) + 1f) * 35f).toInt().coerceIn(0, 200)
-            logoGlowPaint.color = Color.argb((glowA * ease).toInt(), 233, 30, 140)
+            logoGlowPaint.color = Color.argb((glowA * ease).toInt(), 255, 201, 94)
             canvas.drawCircle(cx, cy, logoR * 1.06f, logoGlowPaint)
 
             // Clip to a circle and draw the app icon filling it
@@ -388,7 +388,7 @@ private class SplashCanvas(context: Context) : View(context) {
 
             // Crisp pink ring framing the logo
             ringPaint.strokeWidth = 2.5f * d
-            ringPaint.color = Color.argb((200 * ease).toInt(), 255, 128, 200)
+            ringPaint.color = Color.argb((200 * ease).toInt(), 255, 230, 168)
             canvas.drawCircle(cx, cy, logoR, ringPaint)
         }
 
@@ -399,7 +399,7 @@ private class SplashCanvas(context: Context) : View(context) {
             textPaint.textSize = titleSize
             textPaint.color    = Color.argb((titleAlpha * 255).toInt(), 248, 250, 252)
             // Glow under
-            glowPaint.color = Color.argb((titleAlpha * 100).toInt(), 233, 30, 140)
+            glowPaint.color = Color.argb((titleAlpha * 100).toInt(), 255, 201, 94)
             glowPaint.textSize = titleSize
             glowPaint.typeface = textPaint.typeface
             glowPaint.textAlign = Paint.Align.CENTER
@@ -412,7 +412,7 @@ private class SplashCanvas(context: Context) : View(context) {
         if (taglineAlpha > 0f) {
             val tagY = cy + sphereRadius + 118f * d
             tagPaint.textSize = (12f * d).coerceAtLeast(11f)
-            tagPaint.color    = Color.argb((taglineAlpha * 180).toInt(), 255, 128, 200)
+            tagPaint.color    = Color.argb((taglineAlpha * 180).toInt(), 255, 230, 168)
             canvas.drawText("Breathe  ·  Reflect  ·  Restore", cx, tagY, tagPaint)
         }
     }
