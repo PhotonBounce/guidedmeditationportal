@@ -62,4 +62,39 @@ object AffirmationContent {
         val specific = byHabit[habitType].orEmpty()
         return (opener + specific + general).distinct()
     }
+
+    data class Theme(val id: String, val title: String, val emoji: String, val lines: List<String>)
+
+    /** Browsable affirmation sets shown in the library. */
+    val THEMES = listOf(
+        Theme("free", "I Am Free", "🕊️", listOf(
+            "I am free, one breath at a time.",
+            "I am not my habit — I am the one who chose to stop.",
+            "Every clean hour is rebuilding me.",
+            "I choose the person I am becoming.",
+            "Freedom feels better than the habit ever did.")),
+        Theme("craving", "Craving Crusher", "🛡️", listOf(
+            "This craving will pass — whether I feed it or not.",
+            "I can feel the urge and still not move.",
+            "The wave rises, the wave falls. I am the shore.",
+            "I've ridden this out before. I do it again now.",
+            "Five minutes — I only need to outlast five minutes.")),
+        Theme("morning", "Morning Power", "🌅", listOf(
+            "Today I begin clean and clear.",
+            "I decide who I am today, and I choose free.",
+            "My energy is mine to spend on what matters.",
+            "I meet this day with a steady mind.")),
+        Theme("calm", "Calm & Steady", "🌿", listOf(
+            "My calm belongs to me.",
+            "I breathe in steadiness, I breathe out the urge.",
+            "I am grounded, I am safe, I am enough.",
+            "Stillness is my strength.")),
+        Theme("sleep", "Sleep & Release", "🌙", listOf(
+            "I let go of today and rest in my progress.",
+            "My body heals as I sleep, clean and calm.",
+            "I release what I cannot control.",
+            "Tomorrow I wake up free.")),
+    )
+
+    fun getTheme(id: String?): Theme? = THEMES.firstOrNull { it.id == id }
 }

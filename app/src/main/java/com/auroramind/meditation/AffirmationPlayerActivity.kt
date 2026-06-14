@@ -44,7 +44,8 @@ class AffirmationPlayerActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val prefs = PrefsManager(this)
-        lines = AffirmationContent.forHabit(prefs.getHabitType(), prefs.getFreedomGoal())
+        val theme = AffirmationContent.getTheme(intent.getStringExtra(EXTRA_THEME))
+        lines = theme?.lines ?: AffirmationContent.forHabit(prefs.getHabitType(), prefs.getFreedomGoal())
         if (lines.isEmpty()) lines = listOf("I am free, one breath at a time.")
 
         binding.affirmationText.text = lines[0]
@@ -123,6 +124,7 @@ class AffirmationPlayerActivity : AppCompatActivity() {
     }
 
     companion object {
+        const val EXTRA_THEME = "theme"
         private const val HOLD_MS = 6500L
         private const val SOUND_VOLUME = 0.5f
     }
