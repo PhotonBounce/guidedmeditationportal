@@ -14,8 +14,9 @@
 </head>
 <body>
 
-<!-- ambient particle canvas (embers drifting up) -->
+<!-- ambient layers: drifting embers + living energy field -->
 <canvas id="embers" aria-hidden="true"></canvas>
+<canvas id="energy" aria-hidden="true"></canvas>
 
 <!-- parallax glow layers -->
 <div class="bg-glows" aria-hidden="true">
@@ -45,6 +46,7 @@
     <a href="#features">Features</a>
     <a href="#demo">Try the demo</a>
     <a href="#start">Get started</a>
+    <button id="soundToggle" class="sound-toggle" aria-label="Toggle sound">🔈</button>
   </nav>
 </header>
 
@@ -165,6 +167,7 @@
   <p class="foot-fine">© 2026 Power of Mind. Not medical advice; not a substitute for professional treatment. If you are in crisis, contact local emergency services.</p>
 </footer>
 
+<script src="assets/fx.js" defer></script>
 <script src="assets/app.js" defer></script>
 </body>
 </html>

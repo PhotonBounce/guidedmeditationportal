@@ -142,6 +142,21 @@ section{padding:clamp(70px,10vw,130px) clamp(18px,6vw,40px);max-width:var(--maxw
 .foot-links a:hover{color:var(--gold)}
 .foot-fine{color:var(--faint);font-size:12px;max-width:620px;margin:0 auto;line-height:1.6}
 
+/* ---- eye candy: energy field, sound toggle, ripple, tilt, button shine ---- */
+#energy{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.logo-orb,.hero-title{transition:transform .25s ease-out}
+.card{transition:transform .25s ease,border-color .3s ease,box-shadow .3s;transform-style:preserve-3d;will-change:transform}
+.btn,.pill{position:relative;overflow:hidden}
+.btn::before{content:"";position:absolute;top:0;left:-130%;width:55%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);transition:left .6s ease}
+.btn:hover::before{left:150%}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.32);transform:scale(0);
+  animation:rip .65s ease-out;pointer-events:none}
+@keyframes rip{to{transform:scale(2.4);opacity:0}}
+.sound-toggle{background:rgba(255,201,94,.08);border:1px solid rgba(255,201,94,.3);color:var(--gold);
+  width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:14px;line-height:1;transition:.2s}
+.sound-toggle:hover{background:rgba(255,201,94,.18);transform:scale(1.1)}
+
 /* ---- responsive ---- */
 @media (max-width:820px){
   .demo{grid-template-columns:1fr;gap:36px}
