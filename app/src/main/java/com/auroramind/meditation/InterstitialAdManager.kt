@@ -121,3 +121,4 @@ class InterstitialAdManager(private val context: Context) {
         lastShownAt = now
         return true
     }
+}

@@ -69,7 +69,7 @@
   const screen = document.getElementById("appScreen");
   if (!screen) return;
 
-  const state = { habit: "vaping", habitLabel: "vaping", cost: 7, days: 7, triggers: new Set() };
+  const state = { habit: "vaping", habitLabel: "vaping", cost: 7, days: 7, triggers: new Set(), premium: false };
 
   // Mirrors AffirmationContent.kt
   const AFF = {
@@ -98,13 +98,15 @@
   let step = 0;
 
   // Affirmation library — mirrors AffirmationContent.THEMES in the app
-  const THEMES = [["free", "I Am Free", "🕊️"], ["craving", "Craving Crusher", "🛡️"], ["morning", "Morning Power", "🌅"], ["calm", "Calm & Steady", "🌿"], ["sleep", "Sleep & Release", "🌙"]];
+  const THEMES = [["free", "I Am Free", "🕊️", false], ["craving", "Craving Crusher", "🛡️", true], ["morning", "Morning Power", "🌅", true], ["calm", "Calm & Steady", "🌿", true], ["sleep", "Sleep & Release", "🌙", true], ["strength", "Strength & Resolve", "💪", true], ["worth", "Worthy & Whole", "✨", true]];
   const THEME_LINES = {
-    free: ["I am free, one breath at a time.", "I am not my habit — I am the one who chose to stop.", "Every clean hour is rebuilding me.", "I choose the person I am becoming."],
+    free: ["I am free, one breath at a time.", "I am not my habit — I am the one who chose to stop.", "Every clean hour is rebuilding me.", "I choose the person I am becoming.", "Freedom feels better than the habit ever did."],
     craving: ["This craving will pass — whether I feed it or not.", "I can feel the urge and still not move.", "The wave rises, the wave falls. I am the shore.", "Five minutes — I only need to outlast five minutes."],
-    morning: ["Today I begin clean and clear.", "I decide who I am today, and I choose free.", "My energy is mine to spend on what matters."],
-    calm: ["My calm belongs to me.", "I breathe in steadiness, I breathe out the urge.", "I am grounded, I am safe, I am enough."],
-    sleep: ["I let go of today and rest in my progress.", "My body heals as I sleep, clean and calm.", "Tomorrow I wake up free."],
+    morning: ["Today I begin clean and clear.", "I decide who I am today, and I choose free.", "My energy is mine to spend on what matters.", "I rise, and I rise free."],
+    calm: ["My calm belongs to me.", "I breathe in steadiness, I breathe out the urge.", "I am grounded, I am safe, I am enough.", "Stillness is my strength."],
+    sleep: ["I let go of today and rest in my progress.", "My body heals as I sleep, clean and calm.", "Tomorrow I wake up free.", "I release what I cannot control."],
+    strength: ["I am stronger than this craving.", "My resolve is deeper than any urge.", "I keep my promises to myself.", "I am built for this."],
+    worth: ["I am worthy of the clean life I'm building.", "I am enough, exactly as I am right now.", "I deserve to feel good without it.", "My value was never in the habit."],
   };
   let activeLines = null;
 
@@ -139,14 +141,13 @@
     paywall: () => `
       <h4>Your free-from plan is ready</h4>
       <p class="sub">A daily affirmation path built around your triggers to help you stay free from ${habitWord()} — plus a one-tap panic button for the hard moments.</p>
-      <div class="benefit">✓ Daily audio affirmations over calming soundscapes</div>
+      <div class="benefit">✓ All 7 affirmation themes unlocked</div>
+      <div class="benefit">✓ No ads</div>
       <div class="benefit">✓ Track every clean day and the money you save</div>
-      <div class="benefit">✓ One-tap panic button to ride out cravings</div>
-      <div class="benefit">✓ Milestone celebrations that keep you going</div>
-      <div class="plan-opt sel" data-plan><b>Annual — best value</b><span>$39.99/yr</span></div>
-      <div class="plan-opt" data-plan>Monthly<span>$9.99/mo</span></div>
-      <button class="pill" data-action="dashboard">Start my journey</button>
-      <div class="link-row" data-action="dashboard">Preview the app (demo)</div>`,
+      <div class="benefit">✓ One-tap panic button + milestone celebrations</div>
+      <div class="plan-opt sel" data-plan><b>Annual — unlock everything</b><span>$1.99/yr</span></div>
+      <button class="pill" data-action="subscribe">Start my journey</button>
+      <div class="link-row" data-action="freetier">Maybe later — continue free</div>`,
     dashboard: () => `
       <div class="dash-head">
         <span class="sub" style="flex:1">Stay free today.</span>
@@ -166,7 +167,7 @@
     library: () => `
       <div class="player-bar"><span style="flex:1;font-family:'Iowan Old Style',Georgia,serif;font-size:20px;color:var(--cream)">Affirmations</span><span class="ic" data-action="dashboard">✕</span></div>
       <p class="sub" style="margin-bottom:10px">Pick a set and let each line land over the soundscape.</p>
-      ${THEMES.map((t) => `<div class="lib-card" data-theme="${t[0]}"><span class="lib-emoji">${t[2]}</span><span class="lib-title">${t[1]}</span><span style="color:var(--gold)">▶</span></div>`).join("")}`,
+      ${THEMES.map((t) => { const locked = t[3] && !state.premium; return `<div class="lib-card" data-theme="${t[0]}"><span class="lib-emoji">${t[2]}</span><span class="lib-title">${t[1]}</span><span style="color:var(--gold)">${locked ? "🔒" : "▶"}</span></div>`; }).join("")}`,
     player: () => `
       <div class="player-bar"><span class="ic">🔈</span><span class="ic" data-action="dashboard">✕</span></div>
       <div class="aff-line" data-aff>${(activeLines || affLines())[0]}</div>
@@ -249,12 +250,18 @@
     }
 
     const lib = e.target.closest("[data-theme]");
-    if (lib) { activeLines = THEME_LINES[lib.dataset.theme] || null; show("player"); return; }
+    if (lib) {
+      const t = THEMES.find((x) => x[0] === lib.dataset.theme);
+      if (t && t[3] && !state.premium) { show("paywall"); return; }
+      activeLines = THEME_LINES[lib.dataset.theme] || null; show("player"); return;
+    }
 
     const act = e.target.closest("[data-action]");
     if (!act) return;
     const a = act.dataset.action;
     if (a === "startquiz") { step = 0; show("quiz"); }
+    else if (a === "subscribe") { state.premium = true; show("dashboard"); }
+    else if (a === "freetier") { state.premium = false; show("dashboard"); }
     else { if (a === "player") activeLines = null; show(a); }
   });
 
