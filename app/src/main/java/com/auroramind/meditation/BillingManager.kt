@@ -38,6 +38,14 @@ class BillingManager(
     private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
     @Volatile private var connected = false
 
+    private val prefs = PrefsManager(activity)
+
+    /** Persist entitlement so DashboardActivity / the library can read it, then notify. */
+    private fun notifyPremium(premium: Boolean) {
+        prefs.setPremium(premium)
+        onPremiumChanged(premium)
+    }
+
     private val client = BillingClient.newBuilder(activity)
         .setListener(this)
         .enablePendingPurchases()
@@ -124,7 +132,7 @@ class BillingManager(
                 subsResult.purchasesList.forEach { if (!it.isAcknowledged) acknowledge(it) }
             }
 
-            onPremiumChanged(hasPremium)
+            notifyPremium(hasPremium)
         }
     }
 
@@ -197,7 +205,7 @@ class BillingManager(
     private fun acknowledge(purchase: Purchase) {
         if (purchase.purchaseState != Purchase.PurchaseState.PURCHASED) return
         if (purchase.isAcknowledged) {
-            onPremiumChanged(true)
+            notifyPremium(true)
             return
         }
         scope.launch {
@@ -207,7 +215,7 @@ class BillingManager(
                     .build()
             )
             if (result.responseCode == BillingClient.BillingResponseCode.OK) {
-                onPremiumChanged(true)
+                notifyPremium(true)
             } else {
                 Log.w(TAG, "Acknowledge failed: ${result.debugMessage}")
             }

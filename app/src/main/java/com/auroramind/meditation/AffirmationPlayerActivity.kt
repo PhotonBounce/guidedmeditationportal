@@ -28,6 +28,7 @@ class AffirmationPlayerActivity : AppCompatActivity() {
     private var mediaPlayer: MediaPlayer? = null
     private var voicePlayer: MediaPlayer? = null
     private var voiceAfd: AssetFileDescriptor? = null
+    private var interstitial: InterstitialAdManager? = null
 
     private val advance = object : Runnable {
         override fun run() {
@@ -53,6 +54,11 @@ class AffirmationPlayerActivity : AppCompatActivity() {
         // Credit today's session toward the streak.
         StatsManager(this).recordSessionStart()
 
+        // Free tier: warm up an interstitial to show when the session is closed.
+        if (!prefs.isPremium()) {
+            interstitial = InterstitialAdManager(this).also { it.preload() }
+        }
+
         startSoundscape(prefs)
         startVoiceIfAvailable(prefs)
 
@@ -62,9 +68,20 @@ class AffirmationPlayerActivity : AppCompatActivity() {
             mediaPlayer?.setVolume(v, v)
             binding.muteBtn.text = if (muted) "🔇" else "🔊"
         }
-        binding.closeBtn.setOnClickListener { finish() }
+        binding.closeBtn.setOnClickListener { closeSession() }
 
         handler.postDelayed(advance, HOLD_MS)
+    }
+
+    /** Close the session, showing a free-tier interstitial on every 2nd finish. */
+    private fun closeSession() {
+        val mgr = interstitial
+        if (mgr != null) {
+            val prefs = PrefsManager(this)
+            prefs.incrementStopCount()
+            if (prefs.getStopCount() % 2 == 0 && mgr.maybeShowThen(this) { finish() }) return
+        }
+        finish()
     }
 
     private fun startSoundscape(prefs: PrefsManager) {

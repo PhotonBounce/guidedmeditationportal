@@ -25,8 +25,10 @@ These don't affect the debug build you're testing; do them when ready to publish
    match. Note the code `namespace` deliberately stays `com.auroramind.meditation`, so the
    launch activity is still `com.auroramind.meditation.SplashActivity` — that's normal,
    applicationId (store identity) and namespace (code package) are independent.
-2. **AdMob.** The release build uses the old app's AdMob IDs (`app/build.gradle`, release
-   block). Create a new AdMob app + ad units and swap them in, or remove ads entirely.
+2. **AdMob.** ✅ Done — the release build uses the Power of Mind AdMob app
+   `ca-app-pub-7584543130600454~8331616858` with its banner + interstitial units.
+   Ads show to free users only (banner on the dashboard, interstitial on every 2nd
+   finished session); subscribers are ad-free. No rewarded unit yet — add one if wanted.
 3. **Support email / website** in the privacy + terms pages are `support@photon-bounce.com`
    — change if needed.
 
@@ -52,7 +54,9 @@ Or build locally with `START.bat`.
 5. **Privacy policy** → `http://photon-bounce.com/pom/privacy.html`
 6. **Content rating** questionnaire → likely Teen (supportive references to quitting).
 7. **Data safety** form → per `play-store/LISTING.md`.
-8. **Monetize → Subscriptions** → create `pom_annual` ($39.99/yr) and `pom_monthly` ($9.99/mo).
+8. **Monetize → Subscriptions** → create `pom_annual` at **$1.99/year** (annual only —
+   monthly was dropped). The free tier is ad-supported with the "I Am Free" theme; the
+   subscription removes ads and unlocks all 7 affirmation themes.
 9. Promote internal → closed → production when happy.
 
 ## 5. Web (marketing site + legal)

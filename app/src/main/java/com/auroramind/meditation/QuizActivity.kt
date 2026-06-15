@@ -32,6 +32,7 @@ class QuizActivity : AppCompatActivity() {
 
     private var stepIndex = 0
     private var onPaywall = false
+    private var upgradeOnly = false
 
     private val singleAnswers = HashMap<Int, String>()
     private val multiAnswers = HashMap<Int, MutableSet<String>>()
@@ -84,7 +85,12 @@ class QuizActivity : AppCompatActivity() {
         habitStats = HabitStatsManager(this)
         haptic = HapticHelper(this)
         sfx = SoundEffects(this)
-        billing = BillingManager(this) { premium -> if (premium) runOnUiThread { goToDashboard() } }
+        // Entered from a locked theme in the library? Jump straight to the paywall,
+        // and on success just return (the library refreshes), don't restart the funnel.
+        upgradeOnly = intent.getBooleanExtra(EXTRA_UPGRADE_ONLY, false)
+        billing = BillingManager(this) { premium ->
+            if (premium) runOnUiThread { if (upgradeOnly) finish() else goToDashboard() }
+        }
 
         binding.btnContinue.setOnClickListener {
             haptic.click(); sfx.tap()
@@ -96,18 +102,18 @@ class QuizActivity : AppCompatActivity() {
             Toast.makeText(this, "Checking for an existing subscription…", Toast.LENGTH_SHORT).show()
         }
 
-        // Debug builds can walk past the paywall before subscription SKUs exist,
-        // so the full funnel is testable on the debug APK. Hidden in release.
-        if (BuildConfig.DEBUG) {
-            binding.previewLink.visibility = View.VISIBLE
-            binding.previewLink.setOnClickListener {
-                sfx.tap()
-                persistProfile()
-                goToDashboard()
-            }
+        // Free tier: anyone can skip the subscription and use the app with ads +
+        // the free affirmation theme. Always available (not debug-only).
+        binding.previewLink.visibility = View.VISIBLE
+        binding.previewLink.text = "Maybe later — continue free"
+        binding.previewLink.setOnClickListener {
+            sfx.tap()
+            if (upgradeOnly) { finish(); return@setOnClickListener }
+            persistProfile()
+            goToDashboard()
         }
 
-        renderStep()
+        if (upgradeOnly) showPaywall() else renderStep()
     }
 
     private fun renderStep() {
@@ -202,15 +208,19 @@ class QuizActivity : AppCompatActivity() {
         binding.paywallGroup.visibility = View.VISIBLE
         binding.btnContinue.text = "Start my journey"
 
+        // Single annual plan at $1.99/yr — monthly removed.
+        binding.planMonthly.visibility = View.GONE
+        binding.planAnnual.isChecked = true
+        binding.planAnnual.text = "Annual  ·  \$1.99/year — unlock everything, no ads"
+
         val habit = habitLabelLower(singleAnswers[0])
         binding.paywallSub.text =
-            "A daily affirmation path built around your triggers to help you stay free from $habit — plus a one-tap panic button for the hard moments."
+            "Unlock every affirmation theme and remove ads — your daily path to stay free from $habit, plus a one-tap panic button for the hard moments."
     }
 
     private fun startSubscription() {
-        persistProfile()
-        val annual = binding.planGroup.checkedRadioButtonId != binding.planMonthly.id
-        if (annual) billing.purchaseAnnual() else billing.purchaseMonthly()
+        if (!upgradeOnly) persistProfile()
+        billing.purchaseAnnual()
     }
 
     private fun persistProfile() {
@@ -254,5 +264,10 @@ class QuizActivity : AppCompatActivity() {
     override fun onDestroy() {
         billing.destroy()
         super.onDestroy()
+    }
+
+    companion object {
+        /** Launch QuizActivity straight to the paywall (e.g. from a locked theme). */
+        const val EXTRA_UPGRADE_ONLY = "upgrade_only"
     }
 }

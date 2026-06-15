@@ -93,4 +93,31 @@ class InterstitialAdManager(private val context: Context) {
         lastShownAt = now
         return true
     }
-}
+
+    /**
+     * Show the interstitial now (used at a natural break like closing an
+     * affirmation session), then run [onDone] when it's dismissed. Respects the
+     * frequency cap and silently returns false if no ad is ready — the caller
+     * should fall back to running [onDone] itself.
+     */
+    fun maybeShowThen(activity: Activity, onDone: () -> Unit): Boolean {
+        val now = System.currentTimeMillis()
+        if (now - lastShownAt < MIN_INTERVAL_MS) return false
+        val current = ad ?: return false
+        current.fullScreenContentCallback = object : FullScreenContentCallback() {
+            override fun onAdDismissedFullScreenContent() {
+                ad = null
+                preload()
+                onDone()
+            }
+            override fun onAdFailedToShowFullScreenContent(e: AdError) {
+                Log.w(TAG, "Interstitial show failed: ${e.message}")
+                ad = null
+                preload()
+                onDone()
+            }
+        }
+        current.show(activity)
+        lastShownAt = now
+        return true
+    }

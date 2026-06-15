@@ -8,12 +8,11 @@ class PrefsManager(context: Context) {
     private val prefs = context.getSharedPreferences("meditation_portal_prefs", Context.MODE_PRIVATE)
 
     // ── Premium status ────────────────────────────────────────────────────────
-    fun isPremium(): Boolean {
-        if (prefs.getBoolean(KEY_PREMIUM, false)) return true
-        val firstInstall = getFirstInstallTime()
-        val trialMs = 14L * 24 * 60 * 60 * 1000L
-        return (System.currentTimeMillis() - firstInstall < trialMs)
-    }
+    // Power of Mind is freemium: premium == an active subscription (persisted by
+    // BillingManager). Free users get ads + the free affirmation theme; premium
+    // removes ads and unlocks every theme. (No time-boxed trial — that doesn't
+    // fit an ad-supported free tier.)
+    fun isPremium(): Boolean = prefs.getBoolean(KEY_PREMIUM, false)
     fun setPremium(v: Boolean) = prefs.edit { putBoolean(KEY_PREMIUM, v) }
 
     private fun getFirstInstallTime(): Long {

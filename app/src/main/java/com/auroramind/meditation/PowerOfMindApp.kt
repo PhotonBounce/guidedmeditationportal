@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.os.Build
 import android.util.Log
+import com.google.android.gms.ads.MobileAds
 import java.io.File
 import java.io.PrintWriter
 import java.io.StringWriter
@@ -21,6 +22,10 @@ class PowerOfMindApp : Application() {
     override fun onCreate() {
         super.onCreate()
         CrashReporter.install(this)
+        // Initialize the ads SDK once for the whole app so the free-tier banner
+        // (dashboard) and interstitial (after a session) can load. Premium users
+        // simply never request an ad. Guarded so an ad misconfig can't crash launch.
+        runCatching { MobileAds.initialize(this) {} }
     }
 }
 

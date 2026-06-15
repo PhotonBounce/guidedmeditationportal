@@ -14,27 +14,27 @@ import com.google.android.material.card.MaterialCardView
 
 /**
  * The affirmation library — the heart of the "affirmations" side of the app.
- * Lists themed affirmation sets (plus any bundled spoken tracks); tapping one
- * opens [AffirmationPlayerActivity] for that theme. Built programmatically to
- * match the gold brand without a dedicated layout/adapter.
+ * Lists themed affirmation sets; the free starter theme ("I Am Free") opens
+ * immediately, the rest are locked until the user subscribes — tapping a locked
+ * theme opens the paywall. Cards are rebuilt in [onResume] so the library
+ * unlocks the instant a purchase completes and the user returns.
  */
 class AffirmationLibraryActivity : AppCompatActivity() {
+
+    private lateinit var col: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val d = resources.displayMetrics.density
         fun dp(v: Int) = (v * d).toInt()
-        val gold = ContextCompat.getColor(this, R.color.accent_iris)
         val cream = ContextCompat.getColor(this, R.color.text_primary)
         val muted = ContextCompat.getColor(this, R.color.text_secondary)
-        val cardBg = ContextCompat.getColor(this, R.color.card_bg)
-        val border = ContextCompat.getColor(this, R.color.card_border)
 
         val scroll = ScrollView(this).apply {
             setBackgroundResource(R.drawable.bg_cosmic_gradient)
             isFillViewport = true
         }
-        val col = LinearLayout(this).apply {
+        col = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(dp(24), dp(40), dp(24), dp(32))
         }
@@ -50,28 +50,56 @@ class AffirmationLibraryActivity : AppCompatActivity() {
             setPadding(0, dp(6), 0, dp(20))
         })
 
-        val bundled = AffirmationLibrary.list(this).size
-        for (t in AffirmationContent.THEMES) {
-            col.addView(themeCard(t.emoji, t.title, "${t.lines.size} affirmations", gold, cream, muted, cardBg, border, dp(0)) {
-                startActivity(
-                    Intent(this, AffirmationPlayerActivity::class.java)
-                        .putExtra(AffirmationPlayerActivity.EXTRA_THEME, t.id)
-                )
-            })
-        }
-        if (bundled > 0) {
-            col.addView(themeCard("🎧", "Your spoken tracks", "$bundled recorded", gold, cream, muted, cardBg, border, dp(0)) {
-                startActivity(Intent(this, AffirmationPlayerActivity::class.java))
-            })
-        }
-
         scroll.addView(col)
         setContentView(scroll)
     }
 
+    override fun onResume() {
+        super.onResume()
+        renderThemes()
+    }
+
+    private fun renderThemes() {
+        val gold = ContextCompat.getColor(this, R.color.accent_iris)
+        val cream = ContextCompat.getColor(this, R.color.text_primary)
+        val muted = ContextCompat.getColor(this, R.color.text_secondary)
+        val cardBg = ContextCompat.getColor(this, R.color.card_bg)
+        val border = ContextCompat.getColor(this, R.color.card_border)
+
+        // Drop any previously-rendered cards, keeping the two header views.
+        while (col.childCount > 2) col.removeViewAt(2)
+
+        val premium = PrefsManager(this).isPremium()
+        for (t in AffirmationContent.THEMES) {
+            val locked = t.premium && !premium
+            val subtitle = if (locked) "🔒  Premium — tap to unlock" else "${t.lines.size} affirmations"
+            col.addView(themeCard(t.emoji, t.title, subtitle, locked, gold, cream, muted, cardBg, border) {
+                if (locked) {
+                    startActivity(
+                        Intent(this, QuizActivity::class.java)
+                            .putExtra(QuizActivity.EXTRA_UPGRADE_ONLY, true)
+                    )
+                } else {
+                    startActivity(
+                        Intent(this, AffirmationPlayerActivity::class.java)
+                            .putExtra(AffirmationPlayerActivity.EXTRA_THEME, t.id)
+                    )
+                }
+            })
+        }
+
+        // Bundled spoken recordings (if any) are a premium perk.
+        val bundled = AffirmationLibrary.list(this).size
+        if (bundled > 0 && premium) {
+            col.addView(themeCard("🎧", "Your spoken tracks", "$bundled recorded", false, gold, cream, muted, cardBg, border) {
+                startActivity(Intent(this, AffirmationPlayerActivity::class.java))
+            })
+        }
+    }
+
     private fun themeCard(
-        emoji: String, title: String, subtitle: String,
-        gold: Int, cream: Int, muted: Int, cardBg: Int, border: Int, unused: Int,
+        emoji: String, title: String, subtitle: String, locked: Boolean,
+        gold: Int, cream: Int, muted: Int, cardBg: Int, border: Int,
         onClick: () -> Unit,
     ): MaterialCardView {
         val d = resources.displayMetrics.density
@@ -97,9 +125,9 @@ class AffirmationLibraryActivity : AppCompatActivity() {
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
         }
         txt.addView(TextView(this).apply { text = title; setTextColor(cream); textSize = 17f; setTypeface(typeface, Typeface.BOLD) })
-        txt.addView(TextView(this).apply { text = subtitle; setTextColor(muted); textSize = 13f })
+        txt.addView(TextView(this).apply { text = subtitle; setTextColor(if (locked) gold else muted); textSize = 13f })
         row.addView(txt)
-        row.addView(TextView(this).apply { text = "▶"; setTextColor(gold); textSize = 18f })
+        row.addView(TextView(this).apply { text = if (locked) "🔒" else "▶"; setTextColor(gold); textSize = 18f })
         card.addView(row)
         return card
     }
