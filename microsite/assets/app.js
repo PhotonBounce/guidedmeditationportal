@@ -169,10 +169,9 @@
       <p class="sub" style="margin-bottom:10px">Pick a set and let each line land over the soundscape.</p>
       ${THEMES.map((t) => { const locked = t[3] && !state.premium; return `<div class="lib-card" data-theme="${t[0]}"><span class="lib-emoji">${t[2]}</span><span class="lib-title">${t[1]}</span><span style="color:var(--gold)">${locked ? "🔒" : "▶"}</span></div>`; }).join("")}`,
     player: () => `
-      <div class="player-bar"><span class="ic">🔈</span><span class="ic" data-action="dashboard">✕</span></div>
+      <div class="player-bar"><span class="ic" data-mute>🔊</span><span class="ic" data-action="dashboard">✕</span></div>
       <div class="aff-line" data-aff>${(activeLines || affLines())[0]}</div>
-      <div class="aff-cap">♪  Breathe slowly · let each line land</div>
-      <button class="pill ghost" data-action="dashboard" style="margin-top:14px">Done</button>`,
+      <div class="aff-cap">Breathe slowly · let each line land</div>`,
     milestone: () => `
       <div style="margin:auto;text-align:center">
         <div style="font-size:48px">🏆</div>
@@ -186,6 +185,7 @@
   let cycleTimer = null;
   function show(id) {
     if (cycleTimer) { clearInterval(cycleTimer); cycleTimer = null; }
+    stopAudio();
     const html = typeof screens[id] === "function" ? screens[id]() : screens[id];
     screen.innerHTML = `<div class="scr">${html}</div>`;
     const el = screen.firstElementChild;
@@ -203,12 +203,40 @@
       dEl.textContent = Math.floor(d); mEl.textContent = "$" + m.toFixed(2);
     }, 28);
   }
+  // Spoken affirmations (Web Speech) + a soft ambient pad so the player actually
+  // "plays" like the app: each line is read aloud as it crossfades in.
+  let speakOn = true, audioCtx = null, ambient = null;
+  function speak(text) {
+    if (!speakOn || !("speechSynthesis" in window)) return;
+    try {
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.rate = 0.84; u.pitch = 1; u.volume = 1;
+      speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+  function startAmbient() {
+    if (!speakOn || ambient) return;
+    try {
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      const g = audioCtx.createGain(); g.gain.value = 0.05; g.connect(audioCtx.destination);
+      const lp = audioCtx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 520; lp.connect(g);
+      const a = audioCtx.createOscillator(); a.type = "sine"; a.frequency.value = 146.83; a.connect(lp);
+      const b = audioCtx.createOscillator(); b.type = "sine"; b.frequency.value = 220; b.detune.value = 3; b.connect(lp);
+      a.start(); b.start(); ambient = { a, b };
+    } catch (e) {}
+  }
+  function stopAudio() {
+    try { if ("speechSynthesis" in window) speechSynthesis.cancel(); } catch (e) {}
+    if (ambient) { try { ambient.a.stop(); ambient.b.stop(); } catch (e) {} ambient = null; }
+  }
   function runPlayer(el) {
     const lines = activeLines || affLines(), target = el.querySelector("[data-aff]"); let i = 0;
+    startAmbient(); speak(lines[0]);
     cycleTimer = setInterval(() => {
       target.style.opacity = 0;
-      setTimeout(() => { i = (i + 1) % lines.length; target.textContent = lines[i]; target.style.opacity = 1; }, 500);
-    }, 4000);
+      setTimeout(() => { i = (i + 1) % lines.length; target.textContent = lines[i]; target.style.opacity = 1; speak(lines[i]); }, 500);
+    }, 5500);
   }
 
   // advance enable/disable for the Continue button
@@ -254,6 +282,13 @@
       const t = THEMES.find((x) => x[0] === lib.dataset.theme);
       if (t && t[3] && !state.premium) { show("paywall"); return; }
       activeLines = THEME_LINES[lib.dataset.theme] || null; show("player"); return;
+    }
+
+    const mute = e.target.closest("[data-mute]");
+    if (mute) {
+      speakOn = !speakOn; mute.textContent = speakOn ? "🔊" : "🔇";
+      if (speakOn) startAmbient(); else stopAudio();
+      return;
     }
 
     const act = e.target.closest("[data-action]");

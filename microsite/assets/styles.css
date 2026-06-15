@@ -128,7 +128,7 @@ section{padding:clamp(70px,10vw,130px) clamp(18px,6vw,40px);max-width:var(--maxw
   border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin-top:10px;font-size:14px}
 .mini-card b{color:var(--gold)}
 .aff-line{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;
-  font-family:"Iowan Old Style",Georgia,serif;font-size:23px;line-height:1.4;color:var(--cream);padding:0 6px;
+  font-family:"Iowan Old Style",Georgia,serif;font-size:26px;line-height:1.4;color:var(--cream);padding:0 6px;
   transition:opacity .6s ease}
 .aff-cap{text-align:center;color:var(--faint);font-size:12px;margin-top:14px}
 .panic{margin-top:10px;border:1px solid var(--ember);color:#ffd9b8;background:transparent;border-radius:40px;padding:12px;font-weight:700;cursor:pointer}
