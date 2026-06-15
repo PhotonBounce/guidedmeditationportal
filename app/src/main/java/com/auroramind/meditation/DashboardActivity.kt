@@ -2,9 +2,13 @@ package com.auroramind.meditation
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -134,13 +138,53 @@ class DashboardActivity : AppCompatActivity() {
         val best = maxOf(habitStats.longestCleanDays(), days)
         binding.habitSub.text = "free from $habit  ·  best: $best ${if (best == 1) "day" else "days"}"
 
+        // Milestone progress ring + caption.
+        val next = HabitStatsManager.MILESTONES.firstOrNull { it > days } ?: 365
+        binding.ring.setProgress(if (next > 0) days.toFloat() / next else 1f)
+        val left = next - days
+        binding.nextMilestone.text = "✦ $left ${if (left == 1) "day" else "days"} to your $next-day milestone"
+
+        // Last-7-days streak strip.
+        renderStreak(days.coerceIn(0, 7))
+
         binding.moneyValue.text = "$" + String.format("%.2f", habitStats.moneySaved())
         binding.urgesValue.text = habitStats.urgesResisted().toString()
 
+        // "Your why" card — the freedom goal captured in the quiz.
         val freedom = prefs.getFreedomGoal()
-        binding.dashGreeting.text = if (freedom.isNotBlank()) "Toward: $freedom" else "Stay free today."
+        binding.dashGreeting.text = "Stay free today."
+        if (freedom.isNotBlank()) {
+            binding.whyText.text = freedom
+            binding.whyCard.visibility = View.VISIBLE
+        } else {
+            binding.whyCard.visibility = View.GONE
+        }
 
         celebrateMilestoneIfAny()
+    }
+
+    private fun renderStreak(filled: Int) {
+        val strip = binding.streakStrip
+        strip.removeAllViews()
+        val d = resources.displayMetrics.density
+        val size = (16 * d).toInt()
+        val gap = (8 * d).toInt()
+        for (i in 0 until 7) {
+            val dot = View(this)
+            val lp = LinearLayout.LayoutParams(size, size)
+            if (i > 0) lp.marginStart = gap
+            dot.layoutParams = lp
+            dot.background = GradientDrawable().apply {
+                shape = GradientDrawable.OVAL
+                if (i < filled) {
+                    setColor(Color.parseColor("#FFB347"))
+                } else {
+                    setColor(Color.parseColor("#22FFFFFF"))
+                    setStroke((1 * d).toInt(), Color.parseColor("#3A2A18"))
+                }
+            }
+            strip.addView(dot)
+        }
     }
 
     private fun celebrateMilestoneIfAny() {

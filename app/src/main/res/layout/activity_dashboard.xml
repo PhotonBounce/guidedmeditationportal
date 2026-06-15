@@ -80,36 +80,113 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:padding="28dp">
+                android:padding="24dp">
 
-                <TextView
-                    android:id="@+id/daysNumber"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/accent_iris"
-                    android:textSize="64sp"
-                    android:textStyle="bold"
-                    tools:text="7" />
+                <FrameLayout
+                    android:layout_width="172dp"
+                    android:layout_height="172dp">
 
-                <TextView
-                    android:id="@+id/daysLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:letterSpacing="0.08"
-                    tools:text="DAYS FREE" />
+                    <com.auroramind.meditation.RingView
+                        android:id="@+id/ring"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/daysNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/accent_iris"
+                            android:textSize="52sp"
+                            android:textStyle="bold"
+                            tools:text="7" />
+
+                        <TextView
+                            android:id="@+id/daysLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.08"
+                            tools:text="DAYS FREE" />
+                    </LinearLayout>
+                </FrameLayout>
 
                 <TextView
                     android:id="@+id/habitSub"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="14dp"
                     android:gravity="center"
                     android:textColor="@color/text_secondary"
                     android:textSize="13sp"
                     tools:text="free from vaping  ·  best: 12 days" />
+
+                <TextView
+                    android:id="@+id/nextMilestone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:textColor="@color/accent_iris"
+                    android:textSize="13sp"
+                    tools:text="✦ 7 days to your 14-day milestone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 7-day streak strip (dots populated in code) -->
+        <LinearLayout
+            android:id="@+id/streakStrip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp" />
+
+        <!-- Your why (the freedom goal captured in the quiz) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/whyCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/card_premium_bg"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/card_border_active"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="YOUR WHY"
+                    android:textColor="@color/accent_iris"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.18" />
+
+                <TextView
+                    android:id="@+id/whyText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp"
+                    android:textStyle="italic"
+                    android:lineSpacingExtra="2dp"
+                    tools:text="waking up clear-headed and present with my kids" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

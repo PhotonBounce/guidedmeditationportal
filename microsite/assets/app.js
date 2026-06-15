@@ -69,7 +69,9 @@
   const screen = document.getElementById("appScreen");
   if (!screen) return;
 
-  const state = { habit: "vaping", habitLabel: "vaping", cost: 7, days: 7, triggers: new Set(), premium: false };
+  const state = { habit: "vaping", habitLabel: "vaping", cost: 7, days: 7, triggers: new Set(), premium: false, freedom: "" };
+
+  const MILESTONES = [1, 3, 7, 14, 30, 60, 90, 180, 365];
 
   // Mirrors AffirmationContent.kt
   const AFF = {
@@ -154,7 +156,13 @@
       <div class="plan-opt sel" data-plan><b>Annual — unlock everything</b><span>$1.99/yr</span></div>
       <button class="pill" data-action="subscribe">Start my journey</button>
       <div class="link-row" data-action="freetier">Maybe later — continue free</div>`,
-    dashboard: () => `
+    dashboard: () => {
+      const next = MILESTONES.find((m) => m > state.days) || 365;
+      const frac = Math.min(state.days / next, 1);
+      const filled = Math.min(state.days, 7);
+      const why = (state.freedom && state.freedom.trim()) || "waking up clear-headed and present";
+      const dots = Array.from({ length: 7 }, (_, i) => `<span class="dot${i < filled ? " on" : ""}"></span>`).join("");
+      return `
       <div class="dash-head">
         <img class="dash-logo" src="assets/logo.png" alt="" />
         <span class="sub" style="flex:1">Stay free today.</span>
@@ -162,15 +170,18 @@
         <span class="ic" data-action="profile" title="You">◉</span>
       </div>
       <div class="card-hero">
-        <div class="hero-num" data-days>0</div>
-        <div class="hero-cap">DAYS FREE</div>
+        <div class="ring" style="--p:${frac}"><div class="ring-inner"><div class="hero-num" data-days>0</div><div class="hero-cap">DAYS FREE</div></div></div>
         <div class="hero-habit">free from ${habitWord()} · best: ${state.days} days</div>
+        <div class="next-ms">✦ ${next - state.days} days to your ${next}-day milestone</div>
       </div>
+      <div class="streak">${dots}</div>
+      <div class="why-card"><span class="why-label">YOUR WHY</span><p>${why}</p></div>
       <div class="mini-card"><span><i class="chip">💰</i>Money saved</span><b data-money style="color:var(--gold)">$0.00</b></div>
       <div class="mini-card"><span><i class="chip">🛡️</i>Urges beaten</span><b style="color:var(--amber)">4</b></div>
       <button class="pill" data-action="library">▶   Today's affirmation</button>
       <button class="panic" data-action="player">🆘   I'm having an urge</button>
-      <div class="link-row faint" data-action="milestone">I slipped — reset my counter</div>`,
+      <div class="link-row faint" data-action="milestone">I slipped — reset my counter</div>`;
+    },
     library: () => `
       <div class="player-bar"><span style="flex:1;font-family:'Iowan Old Style',Georgia,serif;font-size:20px;color:var(--cream)">Affirmations</span><span class="ic" data-action="dashboard">✕</span></div>
       <p class="sub" style="margin-bottom:10px">Pick a set and let each line land over the soundscape.</p>
@@ -221,12 +232,16 @@
   }
 
   function animateDash(el) {
-    const dEl = el.querySelector("[data-days]"), mEl = el.querySelector("[data-money]");
-    const money = state.days * state.cost; let d = 0, m = 0;
+    const dEl = el.querySelector("[data-days]"), mEl = el.querySelector("[data-money]"), ring = el.querySelector(".ring");
+    const money = state.days * state.cost;
+    const targetP = ring ? parseFloat(ring.style.getPropertyValue("--p")) || 0 : 0;
+    if (ring) ring.style.setProperty("--p", "0");
+    let d = 0, m = 0, p = 0;
     const t = setInterval(() => {
-      d += state.days / 28; m += money / 28;
-      if (d >= state.days) { d = state.days; m = money; clearInterval(t); }
+      d += state.days / 28; m += money / 28; p += targetP / 28;
+      if (d >= state.days) { d = state.days; m = money; p = targetP; clearInterval(t); }
       dEl.textContent = Math.floor(d); mEl.textContent = "$" + m.toFixed(2);
+      if (ring) ring.style.setProperty("--p", String(Math.min(p, targetP)));
     }, 28);
   }
   // Spoken affirmations (Web Speech) + a soft ambient pad so the player actually
@@ -298,6 +313,10 @@
       if (q.type === "cost" && sel) {
         const found = q.opts.find((o) => o[0] === sel.textContent.trim());
         if (found) state.cost = found[1];
+      }
+      if (q.type === "text") {
+        const inp = screen.querySelector("[data-text]");
+        if (inp && inp.value.trim()) state.freedom = inp.value.trim();
       }
       if (step < QUIZ.length - 1) { step++; show("quiz"); } else { show("paywall"); }
       return;

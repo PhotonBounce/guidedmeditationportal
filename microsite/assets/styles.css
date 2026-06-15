@@ -212,6 +212,18 @@ section{padding:clamp(70px,10vw,130px) clamp(18px,6vw,40px);max-width:var(--maxw
 .pill:active,.panic:active{transform:scale(.97)}
 .pill:hover{box-shadow:0 6px 22px rgba(255,150,60,.38)}
 .lib-card:active,.opt:active,.plan-opt:active{transform:scale(.985)}
+.ring{width:150px;height:150px;border-radius:50%;margin:0 auto 2px;display:flex;align-items:center;justify-content:center;
+  background:conic-gradient(var(--gold) calc(var(--p,0)*360deg),rgba(255,255,255,.07) 0)}
+.ring-inner{width:122px;height:122px;border-radius:50%;background:#19110a;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .hero-num{font-size:46px}
+.ring .hero-cap{font-size:10px;margin-top:2px}
+.next-ms{text-align:center;color:var(--gold);font-size:12px;margin-top:12px;opacity:.92}
+.streak{display:flex;justify-content:center;gap:8px;margin:14px 0 2px}
+.dot{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid var(--line)}
+.dot.on{background:radial-gradient(circle at 50% 38%,#FFE6A8,#FFB347);border-color:transparent;box-shadow:0 0 9px rgba(255,179,71,.55)}
+.why-card{background:rgba(255,201,94,.06);border:1px solid rgba(255,201,94,.25);border-radius:14px;padding:12px 14px;margin-top:8px}
+.why-label{color:var(--gold);font-size:10px;letter-spacing:.18em;font-weight:700}
+.why-card p{color:var(--cream);font-size:14px;margin:5px 0 0;font-style:italic;line-height:1.45}
 
 /* ---- responsive ---- */
 @media (max-width:820px){
