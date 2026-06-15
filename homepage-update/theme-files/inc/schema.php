@@ -268,26 +268,8 @@ function pb_aurora_meta_basics() {
 	if ( defined( 'WPSEO_VERSION' ) || defined( 'RANK_MATH_VERSION' ) || defined( 'SEOPRESS_VERSION' ) || defined( 'AIOSEO_VERSION' ) ) {
 		return; // a dedicated SEO plugin owns these tags
 	}
-	$desc = '';
-	if ( is_front_page() ) {
-		$desc = get_bloginfo( 'description' );
-		if ( ! $desc ) {
-			$desc = 'Photon Bounce builds custom web apps, AI agents & chatbots, 3D/AR experiences, SEO and brand systems — fixed-price, fast, and fully owned by you.';
-		}
-	} elseif ( is_singular() ) {
-		$post = get_post();
-		$desc = wp_strip_all_tags( (string) get_the_excerpt( $post ) );
-		if ( ! $desc && $post ) { $desc = wp_trim_words( wp_strip_all_tags( $post->post_content ), 32 ); }
-	} elseif ( is_category() || is_tag() || is_tax() ) {
-		$desc = wp_strip_all_tags( (string) term_description() );
-	} elseif ( is_post_type_archive() ) {
-		$desc = wp_strip_all_tags( (string) get_the_archive_description() );
-	}
-	$desc = trim( preg_replace( '/\s+/', ' ', (string) $desc ) );
-	if ( $desc !== '' ) {
-		echo "\n<meta name=\"description\" content=\"" . esc_attr( wp_html_excerpt( $desc, 160, '' ) ) . "\">";
-	}
-
+	// NOTE: the meta description is already emitted in functions.php — we only add the
+	// canonical + robots tags that were missing, so the description is never duplicated.
 	$canonical = '';
 	if ( is_singular() ) {
 		$canonical = get_permalink();
