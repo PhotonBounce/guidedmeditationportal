@@ -154,6 +154,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.MeditationPortal" />
 
+        <!-- Insights — stats + savings chart -->
+        <activity
+            android:name=".InsightsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MeditationPortal" />
+
         <!-- Foreground service for background audio playback -->
         <service
             android:name=".SoundService"

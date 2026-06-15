@@ -76,6 +76,11 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(Intent(this, ResourcesActivity::class.java))
         }
 
+        binding.insightsLink.setOnClickListener {
+            haptic.click(); sfx.tap()
+            startActivity(Intent(this, InsightsActivity::class.java))
+        }
+
         binding.resetLink.setOnClickListener { confirmRelapse() }
     }
 

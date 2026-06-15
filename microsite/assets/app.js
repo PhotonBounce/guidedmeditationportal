@@ -189,7 +189,8 @@
     player: () => `
       <div class="player-bar"><span class="ic" data-mute>🔊</span><span class="ic" data-action="dashboard">✕</span></div>
       <div class="aff-line" data-aff>${(activeLines || affLines())[0]}</div>
-      <div class="aff-cap">Breathe slowly · let each line land</div>`,
+      <div class="aff-cap">Breathe slowly · let each line land</div>
+      <div class="sound-row">${["Embers", "Rain", "Ocean", "Forest", "Silence"].map((s, i) => `<span class="sound-chip${i === 0 ? " on" : ""}" data-sound="${s}">${s}</span>`).join("")}</div>`,
     milestone: () => `
       <div class="confetti-wrap" aria-hidden="true">${Array.from({ length: 14 }, (_, i) => `<span class="confetti c${i % 5}" style="left:${(i * 7 + 5) % 100}%;animation-delay:${(i % 7) * 0.18}s"></span>`).join("")}</div>
       <div style="margin:auto;text-align:center;position:relative;z-index:1">
@@ -218,6 +219,34 @@
         <div class="share-brand">◇ Power of Mind</div>
       </div>
       <button class="pill" data-action="dashboard">Share ▸</button>`,
+    calendar: () => {
+      const cells = 35, filled = Math.min(state.days, cells);
+      const grid = Array.from({ length: cells }, (_, i) => {
+        const on = i >= cells - filled;
+        const today = i === cells - 1;
+        return `<span class="cal-cell${on ? " on" : ""}${today ? " today" : ""}"></span>`;
+      }).join("");
+      return `
+      <div class="dash-head"><span style="flex:1;font-family:'Iowan Old Style',Georgia,serif;font-size:20px;color:var(--cream)">Your calendar</span><span class="ic" data-action="profile">✕</span></div>
+      <p class="sub" style="margin-bottom:12px">Every gold day is a day you stayed free.</p>
+      <div class="cal-head">${["S", "M", "T", "W", "T", "F", "S"].map((w) => `<span>${w}</span>`).join("")}</div>
+      <div class="cal-grid">${grid}</div>
+      <p class="next-ms" style="margin-top:16px">🔥 ${state.days}-day streak · keep it glowing</p>`;
+    },
+    insights: () => {
+      const saved = Math.round(state.days * state.cost);
+      const bars = Array.from({ length: 7 }, (_, i) => `<span class="bar" style="height:${(20 + (i + 1) / 7 * 75).toFixed(0)}%"></span>`).join("");
+      return `
+      <div class="dash-head"><span style="flex:1;font-family:'Iowan Old Style',Georgia,serif;font-size:20px;color:var(--cream)">Insights</span><span class="ic" data-action="profile">✕</span></div>
+      <div class="stat-grid">
+        <div class="stat-box"><b>${state.days}</b><span>days free</span></div>
+        <div class="stat-box"><b>$${saved}</b><span>saved</span></div>
+        <div class="stat-box"><b>4</b><span>urges beaten</span></div>
+        <div class="stat-box"><b>${state.days}</b><span>best streak</span></div>
+      </div>
+      <p class="sub" style="margin:18px 0 8px">Money saved, building daily</p>
+      <div class="bar-chart">${bars}</div>`;
+    },
     resources: () => `
       <div class="dash-head"><span style="flex:1;font-family:'Iowan Old Style',Georgia,serif;font-size:20px;color:var(--cream)">Get help now</span></div>
       <p class="sub" style="margin-bottom:12px">A craving is temporary. If it's too much, reach a real person — free, confidential, any time.</p>
@@ -234,6 +263,8 @@
       <div class="mini-card"><span><i class="chip">🔥</i>Current streak</span><b style="color:var(--gold)">${state.days} days</b></div>
       <div class="mini-card"><span><i class="chip">🏆</i>Best streak</span><b style="color:var(--gold)">${state.days} days</b></div>
       <div class="mini-card"><span><i class="chip">🛡️</i>Urges beaten</span><b style="color:var(--amber)">4</b></div>
+      <div class="mini-card" data-action="calendar" style="cursor:pointer"><span><i class="chip">📅</i>Streak calendar</span><span style="color:var(--gold)">›</span></div>
+      <div class="mini-card" data-action="insights" style="cursor:pointer"><span><i class="chip">📊</i>Insights</span><span style="color:var(--gold)">›</span></div>
       <button class="pill" data-action="share">✦  Share my progress</button>
       ${state.premium ? "" : `<div class="link-row" data-action="paywall">Go Premium · $1.99/yr →</div>`}`,
   };
@@ -361,6 +392,13 @@
     if (mute) {
       speakOn = !speakOn; mute.textContent = speakOn ? "🔊" : "🔇";
       if (speakOn) startAmbient(); else stopAudio();
+      return;
+    }
+
+    const sound = e.target.closest("[data-sound]");
+    if (sound) {
+      screen.querySelectorAll(".sound-chip").forEach((c) => c.classList.remove("on"));
+      sound.classList.add("on");
       return;
     }
 

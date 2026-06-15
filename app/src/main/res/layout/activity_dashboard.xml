@@ -302,6 +302,20 @@
             android:focusable="true" />
 
         <TextView
+            android:id="@+id/insightsLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="📊  See your insights"
+            android:textColor="@color/accent_iris"
+            android:textSize="13sp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
             android:id="@+id/resetLink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
