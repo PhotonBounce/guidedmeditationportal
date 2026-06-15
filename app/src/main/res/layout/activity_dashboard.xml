@@ -211,6 +211,20 @@
             app:strokeColor="@color/accent_rose" />
 
         <TextView
+            android:id="@+id/helpLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="🆘  In crisis or struggling? Get help now"
+            android:textColor="@color/accent_rose"
+            android:textSize="13sp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
             android:id="@+id/resetLink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
