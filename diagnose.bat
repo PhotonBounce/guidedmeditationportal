@@ -51,13 +51,13 @@ if exist "app\build\outputs\bundle\release\app-release.aab" (
 echo.
 
 echo --- App installed on phone? ----------------------------------------
-adb shell pm list packages com.auroramind.meditation 2>&1
+adb shell pm list packages com.powerofmind.app 2>&1
 echo.
-echo (If you see "package:com.auroramind.meditation.debug" the install worked.)
+echo (If you see "package:com.powerofmind.app.debug" the install worked.)
 echo.
 
 echo --- Try launching it -----------------------------------------------
-adb shell monkey -p com.auroramind.meditation.debug -c android.intent.category.LAUNCHER 1 2>&1
+adb shell monkey -p com.powerofmind.app.debug -c android.intent.category.LAUNCHER 1 2>&1
 echo.
 
 echo  =================================================================

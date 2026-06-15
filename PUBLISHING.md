@@ -19,11 +19,12 @@ Publishing a crashing build will get the listing rejected or your account flagge
 ## 1. Pre-release code changes (one-time, before the release build)
 These don't affect the debug build you're testing; do them when ready to publish.
 
-1. **Unique applicationId.** Currently `com.auroramind.meditation` (inherited). For a new
-   listing use your own, e.g. in `app/build.gradle`:
-   `applicationId "com.powerofmind.app"`
-   (Then update the launch line in `START.bat` to `com.powerofmind.app.debug/...SplashActivity`.)
-   *Say the word and I'll do this.*
+1. **Unique applicationId.** ✅ Done — set to `com.powerofmind.app` in `app/build.gradle`
+   (the debug build installs as `com.powerofmind.app.debug`). The launch lines in
+   `START.bat`, `start.bat`, `INSTALL_TO_PHONE.bat`, and `diagnose.bat` were updated to
+   match. Note the code `namespace` deliberately stays `com.auroramind.meditation`, so the
+   launch activity is still `com.auroramind.meditation.SplashActivity` — that's normal,
+   applicationId (store identity) and namespace (code package) are independent.
 2. **AdMob.** The release build uses the old app's AdMob IDs (`app/build.gradle`, release
    block). Create a new AdMob app + ad units and swap them in, or remove ads entirely.
 3. **Support email / website** in the privacy + terms pages are `support@photon-bounce.com`

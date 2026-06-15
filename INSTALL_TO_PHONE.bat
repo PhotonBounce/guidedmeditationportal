@@ -127,7 +127,7 @@ if errorlevel 1 (
 
 echo.
 echo          Launching Guided Meditation Portal on the phone...
-"!ADB!" -s "!FOUND!" shell monkey -p com.auroramind.meditation.debug -c android.intent.category.LAUNCHER 1 >nul 2>&1
+"!ADB!" -s "!FOUND!" shell monkey -p com.powerofmind.app.debug -c android.intent.category.LAUNCHER 1 >nul 2>&1
 
 echo.
 echo  =================================================================

@@ -8,7 +8,7 @@ android {
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.auroramind.meditation"
+        applicationId "com.powerofmind.app"
         minSdk 21
         targetSdk 35
         versionCode 10

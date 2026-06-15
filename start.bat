@@ -185,7 +185,7 @@ if errorlevel 1 (
 REM --- Launch --------------------------------------------------------------
 echo.
 echo  Launching app...
-"%ADB%" shell am start -n "com.auroramind.meditation.debug/com.auroramind.meditation.SplashActivity"
+"%ADB%" shell am start -n "com.powerofmind.app.debug/com.auroramind.meditation.SplashActivity"
 
 echo.
 echo  =================================================================
