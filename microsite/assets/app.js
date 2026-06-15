@@ -110,6 +110,12 @@
   };
   let activeLines = null;
 
+  // Bottom navigation — shown on the main app screens.
+  const NAV = [["dashboard", "⌂", "Home"], ["library", "✦", "Affirm"], ["resources", "✚", "Help"], ["profile", "◉", "You"]];
+  const TAB_SCREENS = ["dashboard", "library", "resources", "profile"];
+  const navBar = (active) => `<div class="tabbar">${NAV.map((n) =>
+    `<div class="tab${n[0] === active ? " on" : ""}" data-action="${n[0]}"><span class="tab-ic">${n[1]}</span><span class="tab-lb">${n[2]}</span></div>`).join("")}</div>`;
+
   const optRow = (label) => `<div class="opt" data-pick>${label}</div>`;
 
   function quizScreen() {
@@ -150,17 +156,18 @@
       <div class="link-row" data-action="freetier">Maybe later — continue free</div>`,
     dashboard: () => `
       <div class="dash-head">
+        <img class="dash-logo" src="assets/logo.png" alt="" />
         <span class="sub" style="flex:1">Stay free today.</span>
-        <span class="ic" data-action="player">↗</span>
-        <span class="ic">⚙</span>
+        <span class="ic" data-action="resources" title="Get help">✚</span>
+        <span class="ic" data-action="profile" title="You">◉</span>
       </div>
       <div class="card-hero">
         <div class="hero-num" data-days>0</div>
         <div class="hero-cap">DAYS FREE</div>
         <div class="hero-habit">free from ${habitWord()} · best: ${state.days} days</div>
       </div>
-      <div class="mini-card"><span>💰  Money saved</span><b data-money style="color:var(--gold)">$0.00</b></div>
-      <div class="mini-card"><span>🛡️  Urges beaten</span><b style="color:var(--amber)">4</b></div>
+      <div class="mini-card"><span><i class="chip">💰</i>Money saved</span><b data-money style="color:var(--gold)">$0.00</b></div>
+      <div class="mini-card"><span><i class="chip">🛡️</i>Urges beaten</span><b style="color:var(--amber)">4</b></div>
       <button class="pill" data-action="library">▶   Today's affirmation</button>
       <button class="panic" data-action="player">🆘   I'm having an urge</button>
       <div class="link-row faint" data-action="milestone">I slipped — reset my counter</div>`,
@@ -180,14 +187,33 @@
         <p class="sub" style="text-align:center;margin-top:10px">One week free — momentum is yours.</p>
       </div>
       <button class="pill" data-action="dashboard">Keep going</button>`,
+    resources: () => `
+      <div class="dash-head"><span style="flex:1;font-family:'Iowan Old Style',Georgia,serif;font-size:20px;color:var(--cream)">Get help now</span></div>
+      <p class="sub" style="margin-bottom:12px">A craving is temporary. If it's too much, reach a real person — free, confidential, any time.</p>
+      ${[["Suicide & Crisis Lifeline", "988", "Call or text · 24/7"], ["SAMHSA Helpline", "1-800-662-4357", "Substance-use referrals · 24/7"], ["Quit smoking / vaping", "QUIT-NOW", "Free coaching · 1-800-784-8669"], ["Crisis Text Line", "741741", "Text HOME"], ["Emergency", "911", "Immediate danger"]].map((h) =>
+        `<div class="help-card"><div class="help-tx"><b>${h[0]}</b><span>${h[2]}</span></div><span class="help-num">${h[1]} ▸</span></div>`).join("")}
+      <p class="demo-note" style="margin-top:8px">Not a medical or crisis service.</p>`,
+    profile: () => `
+      <div class="dash-head"><span style="flex:1;font-family:'Iowan Old Style',Georgia,serif;font-size:20px;color:var(--cream)">Your plan</span></div>
+      <div class="card-hero" style="padding:20px 16px">
+        <div class="orb-mini" style="width:52px;height:52px;margin-bottom:8px"></div>
+        <div style="color:var(--cream);font-weight:700;font-size:16px">Free from ${habitWord()}</div>
+        <div class="sub" style="margin:4px 0 0">${state.premium ? "Premium · all themes unlocked" : "Free plan · ad-supported"}</div>
+      </div>
+      <div class="mini-card"><span><i class="chip">🔥</i>Current streak</span><b style="color:var(--gold)">${state.days} days</b></div>
+      <div class="mini-card"><span><i class="chip">🏆</i>Best streak</span><b style="color:var(--gold)">${state.days} days</b></div>
+      <div class="mini-card"><span><i class="chip">🛡️</i>Urges beaten</span><b style="color:var(--amber)">4</b></div>
+      ${state.premium ? "" : `<button class="pill" data-action="paywall">✦  Go Premium · $1.99/yr</button>`}`,
   };
 
   let cycleTimer = null;
   function show(id) {
     if (cycleTimer) { clearInterval(cycleTimer); cycleTimer = null; }
     stopAudio();
-    const html = typeof screens[id] === "function" ? screens[id]() : screens[id];
-    screen.innerHTML = `<div class="scr">${html}</div>`;
+    const hasTabs = TAB_SCREENS.includes(id);
+    let html = typeof screens[id] === "function" ? screens[id]() : screens[id];
+    if (hasTabs) html += navBar(id);
+    screen.innerHTML = `<div class="scr${hasTabs ? " with-tabs" : ""}">${html}</div>`;
     const el = screen.firstElementChild;
     requestAnimationFrame(() => el.classList.add("active"));
     if (id === "dashboard") animateDash(el);
