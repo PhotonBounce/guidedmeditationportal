@@ -68,7 +68,7 @@ class DashboardActivity : AppCompatActivity() {
 
         binding.shareBtn.setOnClickListener {
             haptic.click(); sfx.tap()
-            shareProgress()
+            startActivity(Intent(this, ShareActivity::class.java))
         }
 
         binding.helpLink.setOnClickListener {

@@ -1,5 +1,6 @@
 package com.auroramind.meditation
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
@@ -47,6 +48,13 @@ class InsightsActivity : AppCompatActivity() {
         col.addView(TextView(this).apply {
             text = "Insights"; setTextColor(cream); textSize = 26f
             setTypeface(typeface, Typeface.BOLD)
+        })
+        col.addView(TextView(this).apply {
+            text = "📅  Open streak calendar  ›"
+            setTextColor(gold); textSize = 14f
+            setPadding(0, dp(12), 0, dp(2))
+            isClickable = true; isFocusable = true
+            setOnClickListener { startActivity(Intent(this@InsightsActivity, CalendarActivity::class.java)) }
         })
 
         col.addView(statRow(listOf("$days" to "days free", "$" + String.format("%.0f", saved) to "saved")))

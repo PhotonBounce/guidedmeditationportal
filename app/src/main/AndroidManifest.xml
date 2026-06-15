@@ -161,6 +161,31 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.MeditationPortal" />
 
+        <!-- Streak calendar -->
+        <activity
+            android:name=".CalendarActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MeditationPortal" />
+
+        <!-- Shareable progress card -->
+        <activity
+            android:name=".ShareActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MeditationPortal" />
+
+        <!-- FileProvider for sharing the generated progress-card image -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <!-- Foreground service for background audio playback -->
         <service
             android:name=".SoundService"
