@@ -29,12 +29,14 @@ class AffirmationPlayerActivity : AppCompatActivity() {
     private var voicePlayer: MediaPlayer? = null
     private var voiceAfd: AssetFileDescriptor? = null
     private var interstitial: InterstitialAdManager? = null
+    private lateinit var prefs: PrefsManager
 
     private val advance = object : Runnable {
         override fun run() {
             if (lines.isEmpty()) return
             index = (index + 1) % lines.size
             crossFadeTo(lines[index])
+            updateFav()
             handler.postDelayed(this, HOLD_MS)
         }
     }
@@ -44,12 +46,13 @@ class AffirmationPlayerActivity : AppCompatActivity() {
         binding = ActivityAffirmationPlayerBinding.inflate(layoutInflater)
         setContentView(AuraBackground.wrap(this, binding.root))
 
-        val prefs = PrefsManager(this)
+        prefs = PrefsManager(this)
         val theme = AffirmationContent.getTheme(intent.getStringExtra(EXTRA_THEME))
         lines = theme?.lines ?: AffirmationContent.forHabit(prefs.getHabitType(), prefs.getFreedomGoal())
         if (lines.isEmpty()) lines = listOf("I am free, one breath at a time.")
 
         binding.affirmationText.text = lines[0]
+        updateFav()
 
         // Credit today's session toward the streak.
         StatsManager(this).recordSessionStart()
@@ -68,6 +71,9 @@ class AffirmationPlayerActivity : AppCompatActivity() {
             mediaPlayer?.setVolume(v, v)
             binding.muteBtn.text = if (muted) "🔇" else "🔊"
         }
+        binding.favBtn.setOnClickListener {
+            if (lines.isNotEmpty()) { prefs.toggleAffirmationFavorite(lines[index]); updateFav() }
+        }
         binding.closeBtn.setOnClickListener { closeSession() }
 
         handler.postDelayed(advance, HOLD_MS)
@@ -77,7 +83,6 @@ class AffirmationPlayerActivity : AppCompatActivity() {
     private fun closeSession() {
         val mgr = interstitial
         if (mgr != null) {
-            val prefs = PrefsManager(this)
             prefs.incrementStopCount()
             if (prefs.getStopCount() % 2 == 0 && mgr.maybeShowThen(this) { finish() }) return
         }
@@ -116,6 +121,11 @@ class AffirmationPlayerActivity : AppCompatActivity() {
             }
             binding.caption.text = "♪  ${track.title}"
         }
+    }
+
+    private fun updateFav() {
+        if (lines.isEmpty()) return
+        binding.favBtn.text = if (prefs.isAffirmationFavorite(lines[index])) "♥" else "♡"
     }
 
     private fun crossFadeTo(text: String) {

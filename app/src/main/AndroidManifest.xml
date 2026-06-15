@@ -175,6 +175,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.MeditationPortal" />
 
+        <!-- Favorites — hearted affirmation lines -->
+        <activity
+            android:name=".FavoritesActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MeditationPortal" />
+
         <!-- FileProvider for sharing the generated progress-card image -->
         <provider
             android:name="androidx.core.content.FileProvider"

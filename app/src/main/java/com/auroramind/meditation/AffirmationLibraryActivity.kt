@@ -69,6 +69,11 @@ class AffirmationLibraryActivity : AppCompatActivity() {
         // Drop any previously-rendered cards, keeping the two header views.
         while (col.childCount > 2) col.removeViewAt(2)
 
+        // Favorites shortcut
+        col.addView(themeCard("♥", "Favorites", "your saved lines", false, gold, cream, muted, cardBg, border) {
+            startActivity(Intent(this, FavoritesActivity::class.java))
+        })
+
         val premium = PrefsManager(this).isPremium()
         for (t in AffirmationContent.THEMES) {
             val locked = t.premium && !premium

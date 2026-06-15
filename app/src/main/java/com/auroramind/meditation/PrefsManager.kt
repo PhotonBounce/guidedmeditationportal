@@ -199,6 +199,20 @@ class PrefsManager(context: Context) {
         return SoundType.values().filter { set.contains(it.name) }
     }
 
+    // ── Affirmation-line favorites (heart in the player) ─────────────────────
+    fun getAffirmationFavorites(): Set<String> =
+        prefs.getStringSet(KEY_AFF_FAVS, emptySet())?.toSet() ?: emptySet()
+
+    fun isAffirmationFavorite(line: String): Boolean = getAffirmationFavorites().contains(line)
+
+    /** Toggle a line; returns true if it is now a favorite. */
+    fun toggleAffirmationFavorite(line: String): Boolean {
+        val set = getAffirmationFavorites().toMutableSet()
+        val nowFav = if (set.contains(line)) { set.remove(line); false } else { set.add(line); true }
+        prefs.edit { putStringSet(KEY_AFF_FAVS, set) }
+        return nowFav
+    }
+
     // ── Primary goal (captured during onboarding) ──────────────────────────────
     fun getGoal(): Mood? =
         prefs.getString(KEY_GOAL, null)?.let { runCatching { Mood.valueOf(it) }.getOrNull() }
@@ -276,6 +290,7 @@ class PrefsManager(context: Context) {
         private const val KEY_ALARM_TRACK       = "alarm_track"
         private const val KEY_ALARM_TONE        = "alarm_tone"
         private const val KEY_FAVORITES         = "favorites"
+        private const val KEY_AFF_FAVS          = "affirmation_favorites"
         private const val KEY_GOAL              = "primary_goal"
         private const val KEY_HABIT_TYPE        = "habit_type"
         private const val KEY_TRIGGERS          = "habit_triggers"

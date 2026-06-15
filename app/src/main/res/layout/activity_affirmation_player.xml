@@ -20,6 +20,21 @@
         android:focusable="true" />
 
     <TextView
+        android:id="@+id/favBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="12dp"
+        android:padding="10dp"
+        android:text="♡"
+        android:textColor="@color/accent_rose"
+        android:textSize="22sp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <TextView
         android:id="@+id/closeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
