@@ -20,6 +20,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Lint theme PHP (abort deploy on any syntax error)
+        run: |
+          set -e
+          for f in $(find homepage-update/theme-files -name '*.php'); do
+            echo "php -l $f"
+            php -l "$f"
+          done
+
       - name: Deploy homepage via FTP (backs up live files first)
         env:
           FTP_PASS: ${{ inputs.ftp_pass }}
