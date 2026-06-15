@@ -179,7 +179,7 @@
       <div class="mini-card"><span><i class="chip">💰</i>Money saved</span><b data-money style="color:var(--gold)">$0.00</b></div>
       <div class="mini-card"><span><i class="chip">🛡️</i>Urges beaten</span><b style="color:var(--amber)">4</b></div>
       <button class="pill" data-action="library">▶   Today's affirmation</button>
-      <button class="panic" data-action="player">🆘   I'm having an urge</button>
+      <button class="panic" data-action="breathe">🆘   I'm having an urge</button>
       <div class="link-row faint" data-action="milestone">I slipped — reset my counter</div>`;
     },
     library: () => `
@@ -191,13 +191,33 @@
       <div class="aff-line" data-aff>${(activeLines || affLines())[0]}</div>
       <div class="aff-cap">Breathe slowly · let each line land</div>`,
     milestone: () => `
-      <div style="margin:auto;text-align:center">
-        <div style="font-size:48px">🏆</div>
+      <div class="confetti-wrap" aria-hidden="true">${Array.from({ length: 14 }, (_, i) => `<span class="confetti c${i % 5}" style="left:${(i * 7 + 5) % 100}%;animation-delay:${(i % 7) * 0.18}s"></span>`).join("")}</div>
+      <div style="margin:auto;text-align:center;position:relative;z-index:1">
+        <div class="ms-badge">🏆</div>
         <div class="hero-num">${state.days}</div>
         <div class="hero-cap">DAYS FREE</div>
-        <p class="sub" style="text-align:center;margin-top:10px">One week free — momentum is yours.</p>
+        <p class="sub" style="text-align:center;margin-top:10px">A week clean — and you can feel it. Momentum is yours.</p>
+        <p class="ms-aff">"I am proud of how far I've already come."</p>
       </div>
-      <button class="pill" data-action="dashboard">Keep going</button>`,
+      <button class="pill" data-action="share">✦  Share my win</button>
+      <div class="link-row" data-action="dashboard">Keep going</div>`,
+    breathe: () => `
+      <div class="player-bar"><span style="flex:1"></span><span class="ic" data-action="dashboard">✕</span></div>
+      <div class="breathe-wrap">
+        <div class="breathe-orb"><span data-breathe>Breathe in</span></div>
+        <p class="breathe-cap">Ride the wave — the urge always passes.</p>
+      </div>
+      <button class="pill" data-action="player">Play a craving-crusher ▸</button>`,
+    share: () => `
+      <div class="player-bar"><span style="flex:1;font-family:'Iowan Old Style',Georgia,serif;font-size:18px;color:var(--cream)">Share your progress</span><span class="ic" data-action="dashboard">✕</span></div>
+      <div class="share-card">
+        <img class="share-logo" src="assets/logo.png" alt="" />
+        <div class="share-num">${state.days}</div>
+        <div class="share-cap">DAYS FREE</div>
+        <div class="share-line">$${(state.days * state.cost).toFixed(0)} saved · free from ${habitWord()}</div>
+        <div class="share-brand">◇ Power of Mind</div>
+      </div>
+      <button class="pill" data-action="dashboard">Share ▸</button>`,
     resources: () => `
       <div class="dash-head"><span style="flex:1;font-family:'Iowan Old Style',Georgia,serif;font-size:20px;color:var(--cream)">Get help now</span></div>
       <p class="sub" style="margin-bottom:12px">A craving is temporary. If it's too much, reach a real person — free, confidential, any time.</p>
@@ -214,7 +234,8 @@
       <div class="mini-card"><span><i class="chip">🔥</i>Current streak</span><b style="color:var(--gold)">${state.days} days</b></div>
       <div class="mini-card"><span><i class="chip">🏆</i>Best streak</span><b style="color:var(--gold)">${state.days} days</b></div>
       <div class="mini-card"><span><i class="chip">🛡️</i>Urges beaten</span><b style="color:var(--amber)">4</b></div>
-      ${state.premium ? "" : `<button class="pill" data-action="paywall">✦  Go Premium · $1.99/yr</button>`}`,
+      <button class="pill" data-action="share">✦  Share my progress</button>
+      ${state.premium ? "" : `<div class="link-row" data-action="paywall">Go Premium · $1.99/yr →</div>`}`,
   };
 
   let cycleTimer = null;
@@ -229,6 +250,7 @@
     requestAnimationFrame(() => el.classList.add("active"));
     if (id === "dashboard") animateDash(el);
     if (id === "player") runPlayer(el);
+    if (id === "breathe") runBreathe(el);
   }
 
   function animateDash(el) {
@@ -278,6 +300,12 @@
       target.style.opacity = 0;
       setTimeout(() => { i = (i + 1) % lines.length; target.textContent = lines[i]; target.style.opacity = 1; speak(lines[i]); }, 500);
     }, 5500);
+  }
+  function runBreathe(el) {
+    const label = el.querySelector("[data-breathe]"); if (!label) return;
+    const phases = ["Breathe in", "Hold", "Breathe out", "Hold"]; let i = 0;
+    label.textContent = phases[0];
+    cycleTimer = setInterval(() => { i = (i + 1) % phases.length; label.textContent = phases[i]; }, 4000);
   }
 
   // advance enable/disable for the Continue button
