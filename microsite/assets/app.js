@@ -69,7 +69,7 @@
   const screen = document.getElementById("appScreen");
   if (!screen) return;
 
-  const state = { habit: "vaping", habitLabel: "vaping", cost: 7, days: 7, triggers: new Set(), premium: false, freedom: "" };
+  const state = { habit: "vaping", habitLabel: "vaping", cost: 7, days: 7, triggers: new Set(), premium: false, freedom: "", favorites: new Set(["I am free, one breath at a time.", "Every clean hour is rebuilding me."]) };
 
   const MILESTONES = [1, 3, 7, 14, 30, 60, 90, 180, 365];
 
@@ -178,6 +178,7 @@
       </div>
       <div class="streak">${dots}</div>
       <div class="why-card"><span class="why-label">YOUR WHY</span><p>${why}</p></div>
+      <div class="aotd-card" data-action="player"><span class="aotd-label">TODAY'S AFFIRMATION</span><p>"${affLines()[0]}"</p><span class="aotd-go">▶ Play</span></div>
       <div class="mini-card"><span><i class="chip">💰</i>Money saved</span><b data-money style="color:var(--gold)">$0.00</b></div>
       <div class="mini-card"><span><i class="chip">🛡️</i>Urges beaten</span><b style="color:var(--amber)">4</b></div>
       <button class="pill" data-action="library">▶   Today's affirmation</button>
@@ -187,12 +188,23 @@
     library: () => `
       <div class="player-bar"><span style="flex:1;font-family:'Iowan Old Style',Georgia,serif;font-size:20px;color:var(--cream)">Affirmations</span><span class="ic" data-action="dashboard">✕</span></div>
       <p class="sub" style="margin-bottom:10px">Pick a set and let each line land over the soundscape.</p>
+      <div class="lib-card" data-action="favorites"><span class="lib-emoji">♥</span><span class="lib-title">Favorites</span><span style="color:var(--gold)">${state.favorites.size}</span></div>
       ${THEMES.map((t) => { const locked = t[3] && !state.premium; return `<div class="lib-card" data-theme="${t[0]}"><span class="lib-emoji">${t[2]}</span><span class="lib-title">${t[1]}</span><span style="color:var(--gold)">${locked ? "🔒" : "▶"}</span></div>`; }).join("")}`,
     player: () => `
-      <div class="player-bar"><span class="ic" data-mute>🔊</span><span class="ic" data-action="dashboard">✕</span></div>
+      <div class="player-bar"><span style="display:flex;gap:6px"><span class="ic" data-mute>🔊</span><span class="ic" data-fav>♡</span></span><span class="ic" data-action="dashboard">✕</span></div>
       <div class="aff-line" data-aff>${(activeLines || affLines())[0]}</div>
       <div class="aff-cap">Breathe slowly · let each line land</div>
       <div class="sound-row">${["Embers", "Rain", "Ocean", "Forest", "Silence"].map((s, i) => `<span class="sound-chip${i === 0 ? " on" : ""}" data-sound="${s}">${s}</span>`).join("")}</div>`,
+    favorites: () => {
+      const favs = [...state.favorites];
+      const body = favs.length
+        ? favs.map((l) => `<div class="fav-card"><span class="fav-heart">♥</span><span>${l}</span></div>`).join("")
+        : `<p class="sub">Tap the heart in any session to save the lines that land.</p>`;
+      return `
+      <div class="player-bar"><span style="flex:1;font-family:'Iowan Old Style',Georgia,serif;font-size:20px;color:var(--cream)">Favorites</span><span class="ic" data-action="library">✕</span></div>
+      <p class="sub" style="margin-bottom:10px">The affirmations that landed for you.</p>
+      ${body}`;
+    },
     milestone: () => `
       <div class="confetti-wrap" aria-hidden="true">${Array.from({ length: 14 }, (_, i) => `<span class="confetti c${i % 5}" style="left:${(i * 7 + 5) % 100}%;animation-delay:${(i % 7) * 0.18}s"></span>`).join("")}</div>
       <div style="margin:auto;text-align:center;position:relative;z-index:1">
@@ -344,11 +356,12 @@
     if (ambient) { try { ambient.a.stop(); ambient.b.stop(); } catch (e) {} ambient = null; }
   }
   function runPlayer(el) {
-    const lines = activeLines || affLines(), target = el.querySelector("[data-aff]"); let i = 0;
-    startAmbient(); speak(lines[0]);
+    const lines = activeLines || affLines(), target = el.querySelector("[data-aff]"), fav = el.querySelector("[data-fav]"); let i = 0;
+    const setHeart = () => { if (fav) fav.textContent = state.favorites.has(lines[i]) ? "♥" : "♡"; };
+    startAmbient(); speak(lines[0]); setHeart();
     cycleTimer = setInterval(() => {
       target.style.opacity = 0;
-      setTimeout(() => { i = (i + 1) % lines.length; target.textContent = lines[i]; target.style.opacity = 1; speak(lines[i]); }, 500);
+      setTimeout(() => { i = (i + 1) % lines.length; target.textContent = lines[i]; target.style.opacity = 1; speak(lines[i]); setHeart(); }, 500);
     }, 5500);
   }
   function runBreathe(el) {
@@ -432,6 +445,17 @@
     }
     const tog = e.target.closest("[data-toggle]");
     if (tog) { tog.classList.toggle("on"); tog.textContent = tog.classList.contains("on") ? "●" : "○"; return; }
+
+    const fav = e.target.closest("[data-fav]");
+    if (fav) {
+      const aff = screen.querySelector("[data-aff]");
+      const line = aff && aff.textContent;
+      if (line) {
+        if (state.favorites.has(line)) { state.favorites.delete(line); fav.textContent = "♡"; }
+        else { state.favorites.add(line); fav.textContent = "♥"; fav.classList.remove("pop"); void fav.offsetWidth; fav.classList.add("pop"); }
+      }
+      return;
+    }
 
     const act = e.target.closest("[data-action]");
     if (!act) return;
