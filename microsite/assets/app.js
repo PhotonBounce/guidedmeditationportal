@@ -139,10 +139,11 @@
 
   const screens = {
     welcome: () => `
-      <div style="margin:auto;text-align:center">
-        <div class="orb-mini" aria-hidden="true"></div>
-        <h4 style="text-align:center">Power of Mind</h4>
-        <p class="sub" style="text-align:center">Break free from the habit holding you back. Build your plan in a minute.</p>
+      <div class="intro">
+        <div class="intro-logo"><span class="pulse-ring"></span><span class="pulse-ring r2"></span><img src="assets/logo.png" alt="" /></div>
+        <h4 style="text-align:center;margin-top:18px">Power of Mind</h4>
+        <p class="eyebrow-mini">BREAK FREE · ONE CLEAN DAY AT A TIME</p>
+        <p class="sub" style="text-align:center">Quit the habit holding you back and rewire your mind with daily affirmations.</p>
       </div>
       <button class="pill" data-action="startquiz">Begin</button>`,
     quiz: quizScreen,
@@ -166,6 +167,7 @@
       <div class="dash-head">
         <img class="dash-logo" src="assets/logo.png" alt="" />
         <span class="sub" style="flex:1">Stay free today.</span>
+        <span class="ic" data-action="coach" title="Coach">◍</span>
         <span class="ic" data-action="resources" title="Get help">✚</span>
         <span class="ic" data-action="profile" title="You">◉</span>
       </div>
@@ -247,6 +249,25 @@
       <p class="sub" style="margin:18px 0 8px">Money saved, building daily</p>
       <div class="bar-chart">${bars}</div>`;
     },
+    coach: () => `
+      <div class="dash-head"><span style="flex:1;font-family:'Iowan Old Style',Georgia,serif;font-size:20px;color:var(--cream)">Your coach</span><span class="ic" data-action="dashboard">✕</span></div>
+      <div class="chat">
+        <div class="msg coach">Hey — I'm glad you're here. What's coming up for you right now?</div>
+        <div class="msg user">I'm getting a craving 😣</div>
+        <div class="msg coach">A craving is a wave — it rises, peaks, and passes, usually within a few minutes. You don't have to fight it; you just have to outlast it. Want to ride it out together?</div>
+      </div>
+      <div class="chat-chips">
+        <span class="chip-btn" data-action="breathe">Breathe with me</span>
+        <span class="chip-btn" data-action="library">Play an affirmation</span>
+      </div>
+      <div class="chat-input"><span>Type a message…</span><span class="chat-send">➤</span></div>`,
+    reminder: () => `
+      <div class="dash-head"><span style="flex:1;font-family:'Iowan Old Style',Georgia,serif;font-size:20px;color:var(--cream)">Daily reminder</span><span class="ic" data-action="profile">✕</span></div>
+      <p class="sub" style="margin-bottom:12px">A gentle nudge each day to listen and stay on track.</p>
+      <div class="mini-card"><span><i class="chip">🔔</i>Daily reminder</span><span class="toggle on" data-toggle>●</span></div>
+      <div class="reminder-time">8:00 <span>AM</span></div>
+      <div class="time-chips">${["7:00", "8:00", "9:00", "20:00", "21:00"].map((t, i) => `<span class="time-chip${i === 1 ? " on" : ""}" data-time="${t}">${t}</span>`).join("")}</div>
+      <p class="demo-note" style="margin-top:14px">Uses a local notification — no account, nothing leaves your phone.</p>`,
     resources: () => `
       <div class="dash-head"><span style="flex:1;font-family:'Iowan Old Style',Georgia,serif;font-size:20px;color:var(--cream)">Get help now</span></div>
       <p class="sub" style="margin-bottom:12px">A craving is temporary. If it's too much, reach a real person — free, confidential, any time.</p>
@@ -260,11 +281,9 @@
         <div style="color:var(--cream);font-weight:700;font-size:16px">Free from ${habitWord()}</div>
         <div class="sub" style="margin:4px 0 0">${state.premium ? "Premium · all themes unlocked" : "Free plan · ad-supported"}</div>
       </div>
-      <div class="mini-card"><span><i class="chip">🔥</i>Current streak</span><b style="color:var(--gold)">${state.days} days</b></div>
-      <div class="mini-card"><span><i class="chip">🏆</i>Best streak</span><b style="color:var(--gold)">${state.days} days</b></div>
-      <div class="mini-card"><span><i class="chip">🛡️</i>Urges beaten</span><b style="color:var(--amber)">4</b></div>
       <div class="mini-card" data-action="calendar" style="cursor:pointer"><span><i class="chip">📅</i>Streak calendar</span><span style="color:var(--gold)">›</span></div>
       <div class="mini-card" data-action="insights" style="cursor:pointer"><span><i class="chip">📊</i>Insights</span><span style="color:var(--gold)">›</span></div>
+      <div class="mini-card" data-action="reminder" style="cursor:pointer"><span><i class="chip">🔔</i>Daily reminder</span><span style="color:var(--gold)">›</span></div>
       <button class="pill" data-action="share">✦  Share my progress</button>
       ${state.premium ? "" : `<div class="link-row" data-action="paywall">Go Premium · $1.99/yr →</div>`}`,
   };
@@ -401,6 +420,18 @@
       sound.classList.add("on");
       return;
     }
+
+    const tchip = e.target.closest("[data-time]");
+    if (tchip) {
+      screen.querySelectorAll(".time-chip").forEach((c) => c.classList.remove("on"));
+      tchip.classList.add("on");
+      const [hh, mm] = tchip.dataset.time.split(":"); const h = +hh;
+      const disp = screen.querySelector(".reminder-time");
+      if (disp) disp.innerHTML = `${((h + 11) % 12) + 1}:${mm} <span>${h < 12 ? "AM" : "PM"}</span>`;
+      return;
+    }
+    const tog = e.target.closest("[data-toggle]");
+    if (tog) { tog.classList.toggle("on"); tog.textContent = tog.classList.contains("on") ? "●" : "○"; return; }
 
     const act = e.target.closest("[data-action]");
     if (!act) return;
