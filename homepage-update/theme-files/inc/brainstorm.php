@@ -170,59 +170,120 @@ function pb_aurora_brainstorm_openai( $key, $msg, $history, $context = [] ) {
 }
 
 function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
-	$lower = strtolower( $msg );
+	$raw    = trim( $msg );
+	$lower  = ' ' . strtolower( $raw ) . ' ';
+	$email  = get_theme_mod( 'pb_contact_email', 'hello@photon-bounce.com' );
+	$book   = esc_url( home_url( '/book/' ) );
+	$invest = esc_url( home_url( '/invest/' ) );
+	$words  = str_word_count( $raw );
+	$turn   = is_array( $history ) ? count( $history ) : 0;
+	$has    = function ( $needles ) use ( $lower ) {
+		foreach ( (array) $needles as $n ) { if ( strpos( $lower, $n ) !== false ) { return true; } }
+		return false;
+	};
+	// Join lines with <br> (replies render as innerHTML, so real \n would collapse).
+	$nl = function ( array $lines ) {
+		return implode( '<br>', array_filter( $lines, static function ( $l ) { return $l !== null; } ) );
+	};
 
-	// Detect intent → recommend a real tier from the menu (no invented projects).
-	$rec = null;
-	$cat = function ( $needles ) use ( $lower ) { foreach ( (array) $needles as $n ) { if ( strpos( $lower, $n ) !== false ) { return true; } } return false; };
-	if ( $cat( [ 'landing', 'one-pager', 'one page', 'one-page' ] ) ) {
-		$rec = [ 'Web Builds — Micro Page', '$40', '/#pricing' ];
-	} elseif ( $cat( [ 'shop', 'store', 'ecommerce', 'product page', 'sell online' ] ) ) {
-		$rec = [ 'Web Builds — Full Site', '$300', '/#pricing' ];
-	} elseif ( $cat( [ 'webgl', 'three.js', 'shader', 'particle', '3d hero' ] ) ) {
-		$rec = [ 'Web Builds — Pro Site + WebGL', '$600', '/#pricing' ];
-	} elseif ( $cat( [ 'saas', 'dashboard', 'portal', 'app with auth', 'user accounts' ] ) ) {
-		$rec = [ 'Web Builds — SaaS / App', '$750', '/#pricing' ];
-	} elseif ( $cat( [ 'agent', 'gpt', 'rag', 'chat', 'voicebot', 'concierge' ] ) ) {
-		$rec = [ 'AI Builds — Custom Agent', '$565', '/#pricing' ];
-	} elseif ( $cat( [ 'seo', 'rank', 'ranking', 'google' ] ) ) {
-		$rec = [ 'SEO — Growth/mo', '$115/mo', '/#pricing' ];
-	} elseif ( $cat( [ 'aeo', 'chatgpt cite', 'perplexity', 'llm citation' ] ) ) {
-		$rec = [ 'AEO — Setup', '$100', '/#pricing' ];
-	} elseif ( $cat( [ 'logo', 'brand', 'identity', 'rebrand' ] ) ) {
-		$rec = [ 'Brand — Mini Identity', '$115', '/#pricing' ];
-	} elseif ( $cat( [ 'invest', 'idea', 'startup', 'mvp' ] ) ) {
-		$rec = [ 'Investment marketplace — 50 ideas, MVPs from ~$150', '/invest/' ];
-	}
-
-	$lines = [];
-	$lines[] = "Got it. Here is what I think fits:";
-	if ( $rec ) {
-		if ( count( $rec ) === 3 ) {
-			$lines[] = '• Closest tier: **' . $rec[0] . '** — ' . $rec[1] . ' (see ' . home_url( $rec[2] ) . ')';
-		} else {
-			$lines[] = '• Closest fit: **' . $rec[0] . '** (see ' . home_url( $rec[1] ) . ')';
-		}
-	} else {
-		$lines[] = "• Tell me one of: landing page, full site, WebGL hero, SaaS, AI agent, SEO, brand, or pick from the investment marketplace.";
-	}
-
-	// Real RAG hits only — never invented projects.
+	// Real related work (RAG) as inline links — never invented.
+	$related = '';
 	if ( ! empty( $context['links'] ) ) {
-		$lines[] = "";
-		$lines[] = "Stuff already on this site that might be relevant:";
-		foreach ( array_slice( $context['links'], 0, 3 ) as $l ) {
-			$lines[] = '• ' . ucfirst( str_replace( 'pb_', '', $l['type'] ) ) . ': "' . $l['title'] . '" — ' . $l['url'];
+		$rel = [];
+		foreach ( array_slice( $context['links'], 0, 2 ) as $l ) {
+			$rel[] = '<a href="' . esc_url( $l['url'] ) . '">' . esc_html( $l['title'] ) . '</a>';
 		}
+		if ( $rel ) { $related = 'Related work on this site: ' . implode( ' &middot; ', $rel ) . '.'; }
 	}
 
-	$lines[] = "";
-	$lines[] = "Two questions to lock scope:";
-	$lines[] = "1. What budget range are you in? (under $100, $100-$500, $500-$1.5k, more)";
-	$lines[] = "2. Hard deadline, or flexible?";
-	$lines[] = "";
-	$lines[] = "Or say **book** and I will hand you a 30-min call slot.";
-	return implode( "\n", $lines );
+	// 1) Greeting / short opener.
+	if ( $turn < 2 && $words <= 4 && $has( [ ' hi ', ' hey', 'hello', ' yo ', ' sup', 'howdy', 'good morning', 'good afternoon', 'good evening', 'hola' ] ) ) {
+		return "Hey &mdash; I&rsquo;m Photon, the studio concierge. Tell me what you want to build and I&rsquo;ll point you to the right service and price. Most people start with a <strong>website or store</strong>, an <strong>AI agent / chatbot</strong>, a <strong>3D / AR experience</strong>, <strong>SEO</strong>, or a <strong>brand</strong>. What&rsquo;s the project?";
+	}
+
+	// 2) Booking / live call.
+	if ( $has( [ 'book', 'schedule', 'call me', ' a call', 'meeting', 'consult', 'zoom', 'phone' ] ) ) {
+		return $nl( [
+			"Let&rsquo;s talk live &mdash; grab a free 30-minute call at <a href=\"{$book}\">{$book}</a>, or phone / WhatsApp <strong>857-316-5054</strong>.",
+			'',
+			"Tell me the project and a rough budget first and I&rsquo;ll show up with a tier and a fixed price already mapped out.",
+		] );
+	}
+
+	// 3) Human / contact.
+	if ( $has( [ 'human', 'real person', 'someone', 'email', 'contact', 'get in touch', 'reach you' ] ) ) {
+		return $nl( [
+			'Easiest paths: email <strong>' . esc_html( $email ) . '</strong>, or call / WhatsApp <strong>857-316-5054</strong>. I can also book a free 30-min call at <a href="' . $book . '">' . $book . '</a>.',
+			'',
+			"While you&rsquo;re here, what are you building? I&rsquo;ll scope it and quote a tier right now.",
+		] );
+	}
+
+	// 4) Service intent → a real tier with a benefit.
+	$rec = null;
+	if ( $has( [ 'landing', 'one-pager', 'one page', 'one-page', 'single page' ] ) ) {
+		$rec = [ 'a Micro Page', '$40', 'a fast one-page site that loads instantly and converts' ];
+	} elseif ( $has( [ 'shop', 'store', 'ecommerce', 'e-commerce', 'product page', 'sell online', 'checkout' ] ) ) {
+		$rec = [ 'a Full Site', '$300', 'multi-page with a product / checkout flow, SEO-mapped' ];
+	} elseif ( $has( [ 'webgl', 'three.js', 'threejs', 'shader', 'particle', '3d hero', 'animated' ] ) ) {
+		$rec = [ 'a Pro Site + WebGL', '$600', 'a 3D / animated hero that makes you look years ahead' ];
+	} elseif ( $has( [ 'saas', 'dashboard', 'portal', 'web app', 'login', 'accounts', ' auth' ] ) ) {
+		$rec = [ 'a SaaS / App build', '$750', 'auth, dashboards and a real backend' ];
+	} elseif ( $has( [ 'agent', 'chatbot', 'chat bot', ' gpt', ' rag', 'voicebot', 'concierge', 'assistant', 'ai bot' ] ) ) {
+		$rec = [ 'a Custom AI Agent', '$565', 'an LLM agent trained on your content &mdash; a Concierge bot like me is $190' ];
+	} elseif ( $has( [ ' seo', 'rank', 'google', 'traffic', 'search engine' ] ) ) {
+		$rec = [ 'SEO Growth', '$115/mo', 'technical fixes plus content so you actually rank &mdash; a one-off Audit is $30' ];
+	} elseif ( $has( [ ' aeo', 'perplexity', 'llm citation', 'ai search', 'chatgpt cite' ] ) ) {
+		$rec = [ 'AEO Setup', '$100', 'so ChatGPT and Perplexity cite you by name' ];
+	} elseif ( $has( [ 'logo', 'brand', 'identity', 'rebrand' ] ) ) {
+		$rec = [ 'a Mini Identity', '$115', 'logo, palette, type and basic guidelines &mdash; just a logo is $30' ];
+	} elseif ( $has( [ 'invest', 'startup idea', ' mvp', 'co-build', 'equity', 'my own product' ] ) ) {
+		return $nl( [
+			"Sounds like you want to build a product, not just a page. I keep 50 ready-to-build SaaS / AI / physics concepts at <a href=\"{$invest}\">{$invest}</a> with MVP / Beta / Full pricing and 3 / 6 / 12-month plans (30% down).",
+			'',
+			"Tell me your industry and budget and I&rsquo;ll suggest a couple that fit.",
+		] );
+	}
+
+	if ( $rec ) {
+		return $nl( [
+			"For that, the closest fit is <strong>{$rec[0]}</strong> &mdash; {$rec[1]} &mdash; {$rec[2]}.",
+			$related ? '' : null,
+			$related ?: null,
+			'',
+			"Two quick things to lock it down: what&rsquo;s your rough budget, and is there a hard deadline? Say <strong>book</strong> any time for a free 30-min call.",
+		] );
+	}
+
+	// 5) Pricing without a clear service yet.
+	if ( $has( [ 'how much', 'price', 'pricing', 'cost', 'budget', ' rate', 'quote', 'estimate', 'afford', 'expensive', 'cheap' ] ) ) {
+		return $nl( [
+			"Here&rsquo;s the quick map &mdash; fixed prices, pay by Cash App, crypto, check or wire:",
+			'',
+			"&bull; <strong>Websites</strong> &mdash; Micro $40 &middot; Simple $115 &middot; Full $300 &middot; Pro+WebGL $600 &middot; SaaS $750",
+			"&bull; <strong>AI</strong> &mdash; Prompt pack $25 &middot; Concierge bot $190 &middot; Custom agent $565 &middot; Agent+app $1,185",
+			"&bull; <strong>SEO</strong> &mdash; Audit $30 &middot; Starter $75 &middot; Growth $115/mo",
+			"&bull; <strong>Brand</strong> &mdash; Logo $30 &middot; Mini $115 &middot; Full $350",
+			'',
+			"Which is closest to what you need? Tell me that and your budget and I&rsquo;ll narrow it to one tier.",
+		] );
+	}
+
+	// 6) Thanks / small-talk close.
+	if ( $words <= 4 && $has( [ 'thank', 'thanks', ' thx', 'appreciate', 'cool', 'awesome', 'nice', 'great', ' ok ', 'okay' ] ) ) {
+		return 'Anytime! When you&rsquo;re ready, book a free 30-min call at <a href="' . $book . '">' . $book . '</a> or email <strong>' . esc_html( $email ) . '</strong>. Describe your project whenever and I&rsquo;ll map it to a price on the spot.';
+	}
+
+	// 7) Fallback — coherent and forward-moving.
+	return $nl( [
+		"Got it. So I can point you to the right service and price, which of these is closest?",
+		'',
+		"&bull; a <strong>website or store</strong> &middot; an <strong>AI agent / chatbot</strong> &middot; a <strong>3D / AR experience</strong> &middot; <strong>SEO</strong> &middot; a <strong>brand</strong>",
+		$related ? '' : null,
+		$related ?: null,
+		'',
+		"Or just describe the project in a sentence and I&rsquo;ll quote a tier. Prefer to talk? <strong>857-316-5054</strong> or book at <a href=\"{$book}\">{$book}</a>.",
+	] );
 }
 
 /**
@@ -252,7 +313,7 @@ function pb_aurora_brainstorm_render() {
 		<form class="pb-brain__form" data-pb-brain-form data-pb-rest="<?php echo esc_url( rest_url( 'pb/v1/brainstorm' ) ); ?>">
 			<textarea class="pb-brain__input" data-pb-brain-input rows="2" placeholder="What do you want to build? (Shift+Enter for newline)" required maxlength="2000"></textarea>
 			<div class="pb-brain__row">
-				<button type="button" class="pb-brain__mic" data-pb-brain-mic aria-label="Talk instead of type" title="Voice input">🎙</button>
+				<button type="button" class="pb-brain__mic" data-pb-brain-mic aria-label="Talk instead of type" title="Voice input"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1.5a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0v-7a3 3 0 0 0-3-3z"/><path d="M19 11v.5a7 7 0 0 1-14 0V11"/><line x1="12" y1="18.5" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg></button>
 				<button type="submit" class="pb-btn pb-btn--primary pb-btn--sm">Send</button>
 			</div>
 		</form>

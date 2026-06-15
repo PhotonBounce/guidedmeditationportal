@@ -307,18 +307,41 @@
     orb.style.position = 'fixed';
   }
 
-  // Form submission
+  // Form submission + two-way voice
   if (form && input && log) {
     const restUrl = window.PB_AURORA?.restUrl || '';
     // Prefer the absolute REST URL embedded on the form (like the subscribe form),
     // so the endpoint resolves even if PB_AURORA isn't localized on the live host.
     const endpoint = form.dataset.pbRest || (restUrl + 'pb/v1/brainstorm');
+    const voiceEndpoint = restUrl ? (restUrl + 'pb/v1/voice') : '';
     let history = [];
+    let voiceMode = false;   // becomes true once the visitor talks -> bot replies aloud
+    let listening = false;
+    let currentAudio = null;
+
+    // Strip HTML to plain text (for TTS + history).
+    function plain(html) {
+      const d = document.createElement('div');
+      d.innerHTML = html;
+      return (d.textContent || d.innerText || '').replace(/\s+/g, ' ').trim();
+    }
+
+    // Bot replies may be HTML (local responder) or markdown (LLM). Normalize either
+    // into safe HTML so nothing renders as run-on text or literal ** / \n.
+    function format(text) {
+      if (/<(a|strong|br|ul|ol|li|p|em)\b/i.test(text)) return text;
+      return text
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\[([^\]]+)\]\((https?:[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+        .replace(/(^|[\s(])((?:https?:\/\/|www\.)[^\s<)]+)/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>')
+        .replace(/\n/g, '<br>');
+    }
 
     function addMsg(text, cls) {
       const div = document.createElement('div');
       div.className = 'pb-brain__msg pb-brain__msg--' + cls;
-      div.innerHTML = text;
+      div.innerHTML = cls === 'bot' ? format(text) : text.replace(/</g, '&lt;');
       log.appendChild(div);
       log.scrollTop = log.scrollHeight;
     }
@@ -330,6 +353,79 @@
       log.appendChild(div);
       log.scrollTop = log.scrollHeight;
       return div;
+    }
+
+    // --- Voice output: ElevenLabs proxy, browser TTS fallback ---
+    function stopSpeaking() {
+      if (currentAudio) { try { currentAudio.pause(); } catch (e) {} currentAudio = null; }
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+    }
+    async function speak(htmlOrText) {
+      if (localStorage.getItem('pb_voice_muted') === '1') return;
+      const said = plain(htmlOrText);
+      if (!said) return;
+      stopSpeaking();
+      if (voiceEndpoint) {
+        try {
+          const r = await fetch(voiceEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: said })
+          });
+          if (r.ok) {
+            const blob = await r.blob();
+            if (blob && blob.size > 0 && (blob.type || '').indexOf('audio') === 0) {
+              const url = URL.createObjectURL(blob);
+              currentAudio = new Audio(url);
+              currentAudio.onended = () => { URL.revokeObjectURL(url); currentAudio = null; maybeListen(); };
+              await currentAudio.play();
+              return;
+            }
+          }
+        } catch (e) {}
+      }
+      if (window.speechSynthesis) {
+        const u = new SpeechSynthesisUtterance(said);
+        u.rate = 1.0; u.pitch = 1.05;
+        u.onend = () => maybeListen();
+        window.speechSynthesis.speak(u);
+      }
+    }
+
+    // --- Voice input: speech recognition ---
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let rec = null;
+    if (SR && micBtn) {
+      rec = new SR();
+      rec.continuous = false;
+      rec.interimResults = false;
+      rec.lang = 'en-US';
+      rec.onresult = e => {
+        const transcript = e.results[0][0].transcript;
+        input.value = transcript;
+        listening = false;
+        micBtn.classList.remove('is-recording');
+        voiceMode = true;
+        form.dispatchEvent(new Event('submit'));
+      };
+      rec.onerror = () => { listening = false; micBtn.classList.remove('is-recording'); };
+      rec.onend = () => { listening = false; micBtn.classList.remove('is-recording'); };
+      micBtn.addEventListener('click', () => {
+        if (listening) { try { rec.stop(); } catch (e) {} listening = false; voiceMode = false; micBtn.classList.remove('is-recording'); stopSpeaking(); return; }
+        stopSpeaking();
+        try { rec.start(); listening = true; voiceMode = true; micBtn.classList.add('is-recording'); } catch (e) {}
+      });
+    } else if (micBtn) {
+      micBtn.style.display = 'none';
+    }
+    // After the bot finishes speaking, listen again for a hands-free back-and-forth.
+    function maybeListen() {
+      if (!rec || !voiceMode || !brain || brain.hidden) return;
+      setTimeout(() => {
+        if (voiceMode && !listening && brain && !brain.hidden) {
+          try { rec.start(); listening = true; micBtn.classList.add('is-recording'); } catch (e) {}
+        }
+      }, 400);
     }
 
     form.addEventListener('submit', async e => {
@@ -349,41 +445,25 @@
         const data = await r.json();
         if (data.ok !== false && data.reply) {
           addMsg(data.reply, 'bot');
+          if (voiceMode) speak(data.reply);
           history.push({ role: 'user', content: text });
-          history.push({ role: 'assistant', content: data.reply });
+          history.push({ role: 'assistant', content: plain(data.reply) });
           if (history.length > 20) history = history.slice(-20);
+          if (data.closed) voiceMode = false;
         } else {
           addMsg('Photon is offline right now. Email ' + (window.PB_AURORA?.email || 'hello@photon-bounce.com') + ' and we will pick it up.', 'bot');
         }
       } catch (err) {
         typing.remove();
-        addMsg('Connection hiccup. Try again or email us directly.', 'bot');
+        addMsg('Connection hiccup. Try again, or email us directly.', 'bot');
       }
     });
 
-    // Voice input (Web Speech API)
-    if (micBtn && window.webkitSpeechRecognition) {
-      const rec = new webkitSpeechRecognition();
-      rec.continuous = false;
-      rec.interimResults = false;
-      rec.lang = 'en-US';
-      micBtn.addEventListener('click', () => {
-        try {
-          rec.start();
-          micBtn.classList.add('is-recording');
-        } catch (e) {}
-      });
-      rec.onresult = e => {
-        const transcript = e.results[0][0].transcript;
-        input.value = transcript;
-        micBtn.classList.remove('is-recording');
-        form.dispatchEvent(new Event('submit'));
-      };
-      rec.onerror = () => micBtn.classList.remove('is-recording');
-      rec.onend = () => micBtn.classList.remove('is-recording');
-    } else if (micBtn) {
-      micBtn.style.display = 'none';
-    }
+    // Stop voice + listening when the chat closes.
+    closeBtns.forEach(b => b.addEventListener('click', () => {
+      voiceMode = false; listening = false; stopSpeaking();
+      if (rec) { try { rec.stop(); } catch (e) {} }
+    }));
   }
 })();
 

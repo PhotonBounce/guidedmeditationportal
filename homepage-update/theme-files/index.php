@@ -50,6 +50,63 @@
 </section>
 
 <!-- ============================================
+     MY APPS — first-party products (lead with what's shipped)
+     ============================================ -->
+<section class="pb-section pb-myapps" id="my-apps" data-pb-reveal="">
+	<div class="pb-section__head">
+		<h2 class="pb-aurora-text">My Apps</h2>
+		<p>Products I design, build and ship end-to-end &mdash; live and playable right now.</p>
+	</div>
+	<div class="pb-myapps__strip">
+		<a class="pb-arch-card" href="<?php echo esc_url( home_url( '/occupantkiller/' ) ); ?>" target="_blank" rel="noopener" data-pb-ripple="">
+			<figure class="pb-arch-card__thumb"><img src="<?php echo esc_url( home_url( '/wp-content/uploads/photon-apps/occupantkiller.jpg' ) ); ?>" alt="OccupantKiller browser FPS" loading="lazy"></figure>
+			<div class="pb-arch-card__body">
+				<p class="pb-arch-card__cat">Browser Game &middot; 3D / WebGL</p>
+				<h3 class="pb-arch-card__title">OccupantKiller</h3>
+				<p class="pb-arch-card__excerpt">Browser-native tactical FPS in Three.js &mdash; 39 weapons, FPV drones, armored vehicles, 19 maps. Runs 100% in-browser, no install.</p>
+				<span class="pb-arch-card__cta">Play it &rarr;</span>
+			</div>
+		</a>
+		<a class="pb-arch-card" href="<?php echo esc_url( home_url( '/ausis/' ) ); ?>" target="_blank" rel="noopener" data-pb-ripple="">
+			<figure class="pb-arch-card__thumb"><img src="<?php echo esc_url( home_url( '/wp-content/uploads/photon-apps/ausis.jpg' ) ); ?>" alt="Ausis audio app" loading="lazy"></figure>
+			<div class="pb-arch-card__body">
+				<p class="pb-arch-card__cat">Mobile App &middot; Audio / AI</p>
+				<h3 class="pb-arch-card__title">Ausis</h3>
+				<p class="pb-arch-card__excerpt">Sleep, focus &amp; workout soundscapes &mdash; 35+ sources, a layered Mix Studio, brainwave entrainment and an AI sound advisor. $1.99 lifetime.</p>
+				<span class="pb-arch-card__cta">Visit microsite &rarr;</span>
+			</div>
+		</a>
+		<a class="pb-arch-card" href="<?php echo esc_url( home_url( '/guidedmeditation/' ) ); ?>" target="_blank" rel="noopener" data-pb-ripple="">
+			<figure class="pb-arch-card__thumb"><img src="<?php echo esc_url( home_url( '/wp-content/uploads/photon-apps/guidedmed.jpg' ) ); ?>" alt="Guided Meditation Portal" loading="lazy"></figure>
+			<div class="pb-arch-card__body">
+				<p class="pb-arch-card__cat">Mobile App &middot; Wellness / AI</p>
+				<h3 class="pb-arch-card__title">Guided Meditation Portal</h3>
+				<p class="pb-arch-card__excerpt">23 guided practices, an on-device &ldquo;Spirit&rdquo; AI companion and gentle alarms. Privacy-first, one-time $2, zero subscriptions or tracking.</p>
+				<span class="pb-arch-card__cta">Visit microsite &rarr;</span>
+			</div>
+		</a>
+		<a class="pb-arch-card" href="<?php echo esc_url( home_url( '/govdao/' ) ); ?>" target="_blank" rel="noopener" data-pb-ripple="">
+			<figure class="pb-arch-card__thumb"><img src="<?php echo esc_url( home_url( '/wp-content/uploads/photon-apps/govdao.jpg' ) ); ?>" alt="GovDAO on-chain governance" loading="lazy"></figure>
+			<div class="pb-arch-card__body">
+				<p class="pb-arch-card__cat">Web3 &middot; On-chain Governance</p>
+				<h3 class="pb-arch-card__title">GovDAO</h3>
+				<p class="pb-arch-card__excerpt">An on-chain governance kernel &mdash; proposals, equal-weight voting, timelocked execution, treasury caps and emergency guardians, with a mobile client.</p>
+				<span class="pb-arch-card__cta">Visit microsite &rarr;</span>
+			</div>
+		</a>
+		<a class="pb-arch-card" href="<?php echo esc_url( home_url( '/friendai/' ) ); ?>" target="_blank" rel="noopener" data-pb-ripple="">
+			<figure class="pb-arch-card__thumb"><img src="<?php echo esc_url( home_url( '/wp-content/uploads/photon-apps/friendai.jpg' ) ); ?>" alt="Friendai AI companion" loading="lazy"></figure>
+			<div class="pb-arch-card__body">
+				<p class="pb-arch-card__cat">Mobile App &middot; AI / Eldercare</p>
+				<h3 class="pb-arch-card__title">Friendai</h3>
+				<p class="pb-arch-card__excerpt">A warm, hands-free AI companion for seniors and people living with Alzheimer&rsquo;s or dementia &mdash; always-available chat, one-tap caregiver calling, EN + RU.</p>
+				<span class="pb-arch-card__cta">Visit microsite &rarr;</span>
+			</div>
+		</a>
+	</div>
+</section>
+
+<!-- ============================================
      REELS -- Video proof right after intro
      ============================================ -->
 <section class="pb-section pb-reels" id="reels" data-pb-reveal="" aria-label="Featured app videos">
@@ -113,130 +170,47 @@
 	<?php pb_aurora_portfolio_floaters_render( 8, true ); ?>
 	<?php endif; ?>
 
+	<?php
+	$pb_grid = get_posts( [
+		'post_type'      => 'pb_project',
+		'post_status'    => 'publish',
+		'posts_per_page' => 9,
+		'orderby'        => 'date',
+		'order'          => 'DESC',
+		'no_found_rows'  => true,
+	] );
+	if ( $pb_grid ) : ?>
 	<div class="pb-archive-grid" style="margin-top:32px;">
-		<a class="pb-arch-card" href="<?php echo esc_url( home_url( '/construction-company-website-blog-development/' ) ); ?>" data-pb-ripple="">
-			<figure class="pb-arch-card__thumb"><img src="<?php echo esc_url( home_url( '/wp-content/uploads/2024/10/Website-and-Advanced-Blog-Development.png' ) ); ?>" alt="Construction Company Website &amp; Blog Development" loading="lazy"></figure>
+		<?php
+		$pb_shown = 0;
+		foreach ( $pb_grid as $pb_p ) :
+			$pb_title = get_the_title( $pb_p );
+			// Honor explicit removals; never resurrect retired case studies.
+			if ( preg_match( '/krav\s*maga|resist\s*beurocracy|nft\s*website/i', $pb_title ) ) { continue; }
+			if ( $pb_shown >= 6 ) { break; }
+			$pb_shown++;
+			$pb_ext   = (string) get_post_meta( $pb_p->ID, '_pb_external_url', true );
+			$pb_href  = $pb_ext ?: get_permalink( $pb_p );
+			$pb_tgt   = $pb_ext ? ' target="_blank" rel="noopener"' : '';
+			$pb_thumb = get_the_post_thumbnail_url( $pb_p, 'large' );
+			$pb_terms = get_the_terms( $pb_p->ID, 'pb_project_cat' );
+			$pb_cat   = ( $pb_terms && ! is_wp_error( $pb_terms ) ) ? $pb_terms[0]->name : 'Selected Work';
+			$pb_exc   = wp_trim_words( wp_strip_all_tags( (string) get_the_excerpt( $pb_p ) ), 20 );
+			?>
+		<a class="pb-arch-card" href="<?php echo esc_url( $pb_href ); ?>"<?php echo $pb_tgt; ?> data-pb-ripple="">
+			<figure class="pb-arch-card__thumb"><?php if ( $pb_thumb ) : ?><img src="<?php echo esc_url( $pb_thumb ); ?>" alt="<?php echo esc_attr( $pb_title ); ?>" loading="lazy"><?php endif; ?></figure>
 			<div class="pb-arch-card__body">
-				<p class="pb-arch-card__cat">Branding &amp; Web Development</p>
-				<h3 class="pb-arch-card__title">Construction Company Website &amp; Blog Development</h3>
-				<p class="pb-arch-card__excerpt">Urban Shore Builders -- comprehensive website and advanced blog development.</p>
+				<p class="pb-arch-card__cat"><?php echo esc_html( $pb_cat ); ?></p>
+				<h3 class="pb-arch-card__title"><?php echo esc_html( $pb_title ); ?></h3>
+				<?php if ( $pb_exc ) : ?><p class="pb-arch-card__excerpt"><?php echo esc_html( $pb_exc ); ?></p><?php endif; ?>
 				<span class="pb-arch-card__cta">View case &rarr;</span>
 			</div>
 		</a>
-		<a class="pb-arch-card" href="<?php echo esc_url( home_url( '/nft-website/' ) ); ?>" data-pb-ripple="">
-			<figure class="pb-arch-card__thumb"><img src="<?php echo esc_url( home_url( '/wp-content/uploads/2023/04/website-design.jpg' ) ); ?>" alt="NFT Website" loading="lazy"></figure>
-			<div class="pb-arch-card__body">
-				<p class="pb-arch-card__cat">Branding &amp; Web Development</p>
-				<h3 class="pb-arch-card__title">NFT Website</h3>
-				<p class="pb-arch-card__excerpt">ResistBeurocracy.io -- crypto integration, smart contracts, and minting.</p>
-				<span class="pb-arch-card__cta">View case &rarr;</span>
-			</div>
-		</a>
-		<a class="pb-arch-card" href="<?php echo esc_url( home_url( '/martial-arts-krav-maga-video-capture/' ) ); ?>" data-pb-ripple="">
-			<figure class="pb-arch-card__thumb"><img src="<?php echo esc_url( home_url( '/wp-content/uploads/2023/04/krav-maga-thumb.png' ) ); ?>" alt="Martial Arts Krav Maga Video Capture" loading="lazy"></figure>
-			<div class="pb-arch-card__body">
-				<p class="pb-arch-card__cat">Video Production</p>
-				<h3 class="pb-arch-card__title">Martial Arts - Krav Maga Video Capture</h3>
-				<p class="pb-arch-card__excerpt">Seminar video capture and production for a professional K.A.M.I. trainer.</p>
-				<span class="pb-arch-card__cta">View case &rarr;</span>
-			</div>
-		</a>
-		<a class="pb-arch-card" href="<?php echo esc_url( home_url( '/particle-nucleus-activity/' ) ); ?>" data-pb-ripple="">
-			<figure class="pb-arch-card__thumb"><img src="<?php echo esc_url( home_url( '/wp-content/uploads/2023/03/Screenshot_20230320_115326_Chrome.jpg' ) ); ?>" alt="Particle Nucleus Activity" loading="lazy"></figure>
-			<div class="pb-arch-card__body">
-				<p class="pb-arch-card__cat">3D / VR / AR</p>
-				<h3 class="pb-arch-card__title">Particle Nucleus Activity</h3>
-				<p class="pb-arch-card__excerpt">Dynamic activity of a nucleus within a particle -- creative animation.</p>
-				<span class="pb-arch-card__cta">View case &rarr;</span>
-			</div>
-		</a>
-		<a class="pb-arch-card" href="<?php echo esc_url( home_url( '/augmented-reality-lungs-research-app/' ) ); ?>" data-pb-ripple="">
-			<figure class="pb-arch-card__thumb"><img src="<?php echo esc_url( home_url( '/wp-content/uploads/2023/03/Screenshot_20230320_114316_Chrome-e1679328218254.jpg' ) ); ?>" alt="Augmented Reality - Lungs Research App" loading="lazy"></figure>
-			<div class="pb-arch-card__body">
-				<p class="pb-arch-card__cat">3D / VR / AR</p>
-				<h3 class="pb-arch-card__title">Augmented Reality - Lungs Research App</h3>
-				<p class="pb-arch-card__excerpt">Unity3D-built AR app for HoloLens and Oculus -- lungs research.</p>
-				<span class="pb-arch-card__cta">View case &rarr;</span>
-			</div>
-		</a>
-		<a class="pb-arch-card" href="<?php echo esc_url( home_url( '/3d-animation/' ) ); ?>" data-pb-ripple="">
-			<figure class="pb-arch-card__thumb"><img src="<?php echo esc_url( home_url( '/wp-content/uploads/2023/03/Screenshot_20230320_114403_Chrome.jpg' ) ); ?>" alt="3D Animation" loading="lazy"></figure>
-			<div class="pb-arch-card__body">
-				<p class="pb-arch-card__cat">3D / VR / AR</p>
-				<h3 class="pb-arch-card__title">3D Animation</h3>
-				<p class="pb-arch-card__excerpt">Social media marketing animated scene -- 3D Studio Max + Vray.</p>
-				<span class="pb-arch-card__cta">View case &rarr;</span>
-			</div>
-		</a>
-		<a class="pb-arch-card" href="<?php echo esc_url( home_url( '/ar-augmented-reality-app/' ) ); ?>" data-pb-ripple="">
-			<figure class="pb-arch-card__thumb"><img src="<?php echo esc_url( home_url( '/wp-content/uploads/2022/09/Screenshot-2022-09-29-3.21.14-PM-e1664479559915.png' ) ); ?>" alt="AR Augmented Reality App" loading="lazy"></figure>
-			<div class="pb-arch-card__body">
-				<p class="pb-arch-card__cat">3D / VR / AR</p>
-				<h3 class="pb-arch-card__title">AR Augmented Reality App</h3>
-				<p class="pb-arch-card__excerpt">Unity3D AR app to study an AC motor up close.</p>
-				<span class="pb-arch-card__cta">View case &rarr;</span>
-			</div>
-		</a>
+		<?php endforeach; ?>
 	</div>
+	<?php endif; ?>
 	<div style="text-align:center;margin-top:32px;">
 		<a class="pb-btn pb-btn--primary" href="<?php echo esc_url( home_url( '/portfolio/' ) ); ?>">View All Projects <span aria-hidden="true">&rarr;</span></a>
-	</div>
-</section>
-
-<!-- ============================================
-     MY APPS — first-party apps strip (appended; original content untouched)
-     ============================================ -->
-<section class="pb-section pb-myapps" id="my-apps" data-pb-reveal="">
-	<div class="pb-section__head">
-		<h2 class="pb-aurora-text">My Apps</h2>
-		<p>Products I design, build and ship end-to-end &mdash; live and playable right now.</p>
-	</div>
-	<div class="pb-myapps__strip">
-		<a class="pb-arch-card" href="<?php echo esc_url( home_url( '/occupantkiller/' ) ); ?>" target="_blank" rel="noopener" data-pb-ripple="">
-			<figure class="pb-arch-card__thumb"><img src="<?php echo esc_url( home_url( '/wp-content/uploads/photon-apps/occupantkiller.jpg' ) ); ?>" alt="OccupantKiller browser FPS" loading="lazy"></figure>
-			<div class="pb-arch-card__body">
-				<p class="pb-arch-card__cat">Browser Game &middot; 3D / WebGL</p>
-				<h3 class="pb-arch-card__title">OccupantKiller</h3>
-				<p class="pb-arch-card__excerpt">Browser-native tactical FPS in Three.js &mdash; 39 weapons, FPV drones, armored vehicles, 19 maps. Runs 100% in-browser, no install.</p>
-				<span class="pb-arch-card__cta">Play it &rarr;</span>
-			</div>
-		</a>
-		<a class="pb-arch-card" href="<?php echo esc_url( home_url( '/ausis/' ) ); ?>" target="_blank" rel="noopener" data-pb-ripple="">
-			<figure class="pb-arch-card__thumb"><img src="<?php echo esc_url( home_url( '/wp-content/uploads/photon-apps/ausis.jpg' ) ); ?>" alt="Ausis audio app" loading="lazy"></figure>
-			<div class="pb-arch-card__body">
-				<p class="pb-arch-card__cat">Mobile App &middot; Audio / AI</p>
-				<h3 class="pb-arch-card__title">Ausis</h3>
-				<p class="pb-arch-card__excerpt">Sleep, focus &amp; workout soundscapes &mdash; 35+ sources, a layered Mix Studio, brainwave entrainment and an AI sound advisor. $1.99 lifetime.</p>
-				<span class="pb-arch-card__cta">Visit microsite &rarr;</span>
-			</div>
-		</a>
-		<a class="pb-arch-card" href="<?php echo esc_url( home_url( '/guidedmeditation/' ) ); ?>" target="_blank" rel="noopener" data-pb-ripple="">
-			<figure class="pb-arch-card__thumb"><img src="<?php echo esc_url( home_url( '/wp-content/uploads/photon-apps/guidedmed.jpg' ) ); ?>" alt="Guided Meditation Portal" loading="lazy"></figure>
-			<div class="pb-arch-card__body">
-				<p class="pb-arch-card__cat">Mobile App &middot; Wellness / AI</p>
-				<h3 class="pb-arch-card__title">Guided Meditation Portal</h3>
-				<p class="pb-arch-card__excerpt">23 guided practices, an on-device &ldquo;Spirit&rdquo; AI companion and gentle alarms. Privacy-first, one-time $2, zero subscriptions or tracking.</p>
-				<span class="pb-arch-card__cta">Visit microsite &rarr;</span>
-			</div>
-		</a>
-		<a class="pb-arch-card" href="<?php echo esc_url( home_url( '/govdao/' ) ); ?>" target="_blank" rel="noopener" data-pb-ripple="">
-			<figure class="pb-arch-card__thumb"><img src="<?php echo esc_url( home_url( '/wp-content/uploads/photon-apps/govdao.jpg' ) ); ?>" alt="GovDAO on-chain governance" loading="lazy"></figure>
-			<div class="pb-arch-card__body">
-				<p class="pb-arch-card__cat">Web3 &middot; On-chain Governance</p>
-				<h3 class="pb-arch-card__title">GovDAO</h3>
-				<p class="pb-arch-card__excerpt">An on-chain governance kernel &mdash; proposals, equal-weight voting, timelocked execution, treasury caps and emergency guardians, with a mobile client.</p>
-				<span class="pb-arch-card__cta">Visit microsite &rarr;</span>
-			</div>
-		</a>
-		<a class="pb-arch-card" href="<?php echo esc_url( home_url( '/friendai/' ) ); ?>" target="_blank" rel="noopener" data-pb-ripple="">
-			<figure class="pb-arch-card__thumb"><img src="<?php echo esc_url( home_url( '/wp-content/uploads/photon-apps/friendai.jpg' ) ); ?>" alt="Friendai AI companion" loading="lazy"></figure>
-			<div class="pb-arch-card__body">
-				<p class="pb-arch-card__cat">Mobile App &middot; AI / Eldercare</p>
-				<h3 class="pb-arch-card__title">Friendai</h3>
-				<p class="pb-arch-card__excerpt">A warm, hands-free AI companion for seniors and people living with Alzheimer&rsquo;s or dementia &mdash; always-available chat, one-tap caregiver calling, EN + RU.</p>
-				<span class="pb-arch-card__cta">Visit microsite &rarr;</span>
-			</div>
-		</a>
 	</div>
 </section>
 
@@ -278,54 +252,7 @@
 	</div>
 </section>
 
-<!-- Matrix separator: process &rarr; testimonials -->
-<div class="pb-matrix-wrap" aria-hidden="true">
-	<canvas class="pb-matrix-sep"></canvas>
-	<div class="pb-matrix__label">Compiling testimonials&hellip;</div>
-</div>
-
-<!-- ============================================
-     TESTIMONIALS + TRUST LOGOS
-     ============================================ -->
-<section class="pb-section pb-testimonials" id="testimonials" data-pb-reveal="">
-	<div class="pb-section__head">
-		<h2 class="pb-aurora-text">Receipts</h2>
-		<p>Selected feedback from founders, agency partners, and research teams.</p>
-	</div>
-	<div class="pb-testimonials__rail">
-		<figure class="pb-testimonial" style="--pb-i:0">
-			<blockquote>"Dmitriy shipped our entire SaaS marketing site in three weeks -- design system, AI demo, blog, billing flow. Lighthouse hit 99 on launch day."</blockquote>
-			<figcaption><span class="pb-testimonial__name">Founder</span> &middot; early-stage SaaS &middot; Boston</figcaption>
-		</figure>
-		<figure class="pb-testimonial" style="--pb-i:1">
-			<blockquote>"The AR research app he built became part of our published paper. Mocap pipeline, particle visualizer, the whole thing -- clean code and clear comms."</blockquote>
-			<figcaption><span class="pb-testimonial__name">Research Lead</span> &middot; medical AR study</figcaption>
-		</figure>
-		<figure class="pb-testimonial" style="--pb-i:2">
-			<blockquote>"We white-labeled him on three brand projects. Designs landed first revision every time. Fastest contractor we have ever shared a Figma file with."</blockquote>
-			<figcaption><span class="pb-testimonial__name">Creative Director</span> &middot; NY agency</figcaption>
-		</figure>
-		<figure class="pb-testimonial" style="--pb-i:3">
-			<blockquote>"He fine-tuned a private LLM on our 8,000-page knowledge base, deployed it self-hosted, and trained our team on it. Two weeks. No drama."</blockquote>
-			<figcaption><span class="pb-testimonial__name">CTO</span> &middot; industrial automation</figcaption>
-		</figure>
-	</div>
-</section>
-
-<section class="pb-section pb-logos" data-pb-reveal="" aria-label="Trusted by">
-	<p class="pb-eyebrow pb-logos__eyebrow">TRUSTED BY FOUNDERS, AGENCIES &amp; RESEARCHERS</p>
-	<div class="pb-logos__strip">
-		<span class="pb-logo">SaaS &middot; Y Combinator alum</span>
-		<span class="pb-logo">NY brand agency</span>
-		<span class="pb-logo">University AR study</span>
-		<span class="pb-logo">Industrial automation</span>
-		<span class="pb-logo">Crypto exchange (closed)</span>
-		<span class="pb-logo">Indie game studio</span>
-		<span class="pb-logo">Healthcare R&amp;D</span>
-	</div>
-</section>
-
-<!-- Matrix separator: testimonials &rarr; pricing -->
+<!-- Matrix separator: process &rarr; pricing -->
 <div class="pb-matrix-wrap" aria-hidden="true">
 	<canvas class="pb-matrix-sep"></canvas>
 	<div class="pb-matrix__label">Calculating engagement vectors&hellip;</div>
@@ -527,7 +454,7 @@
 			<input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="pb-field--honeypot">
 			<button class="pb-btn pb-btn--primary" type="submit" data-pb-track="exit-submit">Send me the playbook &rarr;</button>
 			<p class="pb-exit__msg" data-pb-lead-msg="" role="status" aria-live="polite"></p>
-			<p class="pb-exit__legal">No spam. Unsubscribe anytime. Read by ~1,200 founders + designers.</p>
+			<p class="pb-exit__legal">No spam. Unsubscribe anytime. One click to leave.</p>
 		</form>
 	</div>
 </div>

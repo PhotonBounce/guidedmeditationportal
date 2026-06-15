@@ -35,6 +35,46 @@ UPLOADS_ROOT = "public_html/wp-content/uploads/photon-apps"
 BACKUP_DIR = os.path.join("homepage-backup", datetime.now().strftime("%Y%m%d-%H%M%S"))
 
 
+def backup_tree(ftp, remote_dir, local_dir):
+    """Recursively download an entire live directory before we touch anything."""
+    os.makedirs(local_dir, exist_ok=True)
+    entries = []
+    try:
+        entries = list(ftp.mlsd(remote_dir))
+    except Exception:
+        # Server without MLSD: fall back to NLST + cwd probing.
+        try:
+            names = ftp.nlst(remote_dir)
+        except error_perm:
+            return
+        cur = ftp.pwd()
+        for n in names:
+            base = posixpath.basename(n.rstrip("/"))
+            if base in (".", "..", ""):
+                continue
+            remote = posixpath.join(remote_dir, base)
+            is_dir = False
+            try:
+                ftp.cwd(remote); ftp.cwd(cur); is_dir = True
+            except error_perm:
+                is_dir = False
+            entries.append((base, {"type": "dir" if is_dir else "file"}))
+    for name, facts in entries:
+        if name in (".", ".."):
+            continue
+        typ = facts.get("type", "file")
+        remote = posixpath.join(remote_dir, name)
+        if typ == "dir":
+            backup_tree(ftp, remote, os.path.join(local_dir, name))
+        elif typ == "file":
+            local = os.path.join(local_dir, name)
+            try:
+                with open(local, "wb") as fh:
+                    ftp.retrbinary(f"RETR {remote}", fh.write)
+            except error_perm:
+                pass
+
+
 def main():
     password = os.environ.get("FTP_PASS") or getpass.getpass(f"FTP password for {USER}@{HOST}: ")
 
@@ -55,6 +95,14 @@ def main():
         print(f"       Themes present: {sorted(themes)}")
         ftp.quit(); sys.exit(1)
     print(f"[OK] Found live theme '{THEME}'")
+
+    # Full safety net: snapshot the ENTIRE live theme before overwriting anything.
+    print(f"\nBacking up the full live theme '{THEME}' -> {BACKUP_DIR}/theme-full/{THEME}/ ...")
+    try:
+        backup_tree(ftp, THEME_ROOT, os.path.join(BACKUP_DIR, "theme-full", THEME))
+        print("[OK] Full theme backup complete")
+    except Exception as e:
+        print(f"[warn] Full theme backup hit an issue ({e}); per-file backups below still run.")
 
     made = set()
 
