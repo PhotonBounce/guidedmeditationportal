@@ -47,20 +47,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
 
-            // ── Production AdMob Settings (REAL IDs for users) ──────────────
+            // ── Production AdMob — Power of Mind (publisher ca-app-pub-7584543130600454) ──
             buildConfigField "String", "ADMOB_APP_ID",
-                "\"ca-app-pub-7584543130600454~5089915421\""
-            manifestPlaceholders.admobAppId = "ca-app-pub-7584543130600454~5089915421"
+                "\"ca-app-pub-7584543130600454~8331616858\""
+            manifestPlaceholders.admobAppId = "ca-app-pub-7584543130600454~8331616858"
 
-            // Banner1 — live banner unit
+            // Banner — ad unit "powerofmindbanner1"
             buildConfigField "String", "ADMOB_BANNER_UNIT_ID",
-                "\"ca-app-pub-7584543130600454/8383813088\""
-            // Interstitial — live unit for this app ("Guided Meditation Interstitial ad")
+                "\"ca-app-pub-7584543130600454/7141824113\""
+            // Interstitial — ad unit "powerofmindintersticial1"
             buildConfigField "String", "ADMOB_INTERSTITIAL_UNIT_ID",
-                "\"ca-app-pub-7584543130600454/4340930215\""
-            // Rewarded ad 1 — live rewarded unit for this app
+                "\"ca-app-pub-7584543130600454/4734857475\""
+            // Rewarded — no unit created for Power of Mind yet. Empty string so the
+            // rewarded loader fails closed (no-ops) instead of serving another app's
+            // unit; wire a real ID here if/when rewarded ads are added.
             buildConfigField "String", "ADMOB_REWARDED_UNIT_ID",
-                "\"ca-app-pub-7584543130600454/5844593893\""
+                "\"\""
         }
         debug {
             applicationIdSuffix ".debug"
