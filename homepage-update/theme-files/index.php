@@ -145,6 +145,15 @@
 		<h2 class="pb-aurora-text">Capabilities</h2>
 		<p>Four pillars, one studio. Every pixel, every endpoint, every shader -- owned end-to-end.</p>
 	</div>
+	<nav class="pb-services__links" aria-label="Services" style="text-align:center;margin:0 auto 26px;max-width:880px;line-height:2.1;">
+		Explore:
+		<a href="<?php echo esc_url( home_url( '/web-development/' ) ); ?>">Web Development</a> &middot;
+		<a href="<?php echo esc_url( home_url( '/ai-agents/' ) ); ?>">AI Agents &amp; Chatbots</a> &middot;
+		<a href="<?php echo esc_url( home_url( '/3d-webgl/' ) ); ?>">3D &amp; WebGL</a> &middot;
+		<a href="<?php echo esc_url( home_url( '/seo/' ) ); ?>">SEO</a> &middot;
+		<a href="<?php echo esc_url( home_url( '/aeo/' ) ); ?>">AEO</a> &middot;
+		<a href="<?php echo esc_url( home_url( '/branding/' ) ); ?>">Branding</a>
+	</nav>
 	<div class="pb-services__grid">
 		<article class="pb-service" data-tilt="" style="--pb-i:0"><div class="pb-service__chrome"></div><h3>SAAS / Web / SEO / SMM</h3><p>Responsive sites, performance-tuned, SEO-mapped, social-amplified. From marketing pages to full SaaS dashboards.</p></article>
 		<article class="pb-service" data-tilt="" style="--pb-i:1"><div class="pb-service__chrome"></div><h3>UI / UX / Branding</h3><p>Identity systems, illustrations, technical diagrams, UI concepts -- paired with hands-on UX research and product design.</p></article>

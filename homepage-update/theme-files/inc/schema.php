@@ -405,3 +405,6 @@ function pb_aurora_schema_enhanced() {
 		'@graph'   => $graph,
 	], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . "</script>\n";
 }
+
+// SEO service landing pages (loaded here so they activate without editing functions.php).
+require_once __DIR__ . '/service-pages.php';
