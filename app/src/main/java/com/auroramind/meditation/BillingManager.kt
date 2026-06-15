@@ -31,8 +31,8 @@ class BillingManager(
         // Create these in Play Console → Monetize → Subscriptions before they
         // resolve; until ACTIVE, queryProductDetails returns empty and the
         // purchase flow no-ops (same behaviour as the one-time unlock below).
-        const val SKU_ANNUAL  = "unbound_annual"
-        const val SKU_MONTHLY = "unbound_monthly"
+        const val SKU_ANNUAL  = "pom_annual"
+        const val SKU_MONTHLY = "pom_monthly"
     }
 
     private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
