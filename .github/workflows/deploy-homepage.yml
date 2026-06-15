@@ -1,0 +1,34 @@
+name: Deploy Homepage
+
+# Uploads the photon-bounce.com homepage update (My Apps strip + chatbot fixes)
+# to the live theme via FTP. Triggered manually; you type the FTP password into
+# the "Run workflow" box, so the password is never stored in the repo.
+# Before overwriting, it backs up the current live files and uploads them as an
+# artifact you can download from the run page.
+
+on:
+  workflow_dispatch:
+    inputs:
+      ftp_pass:
+        description: FTP password
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy homepage via FTP (backs up live files first)
+        env:
+          FTP_PASS: ${{ inputs.ftp_pass }}
+        run: python3 homepage_deploy.py
+
+      - name: Upload backup of overwritten live files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-theme-backup
+          path: homepage-backup/
+          if-no-files-found: warn

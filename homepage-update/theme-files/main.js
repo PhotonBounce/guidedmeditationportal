@@ -1,0 +1,507 @@
+/* Photon-Bounce Aurora v1.8.2 — main interaction bundle */
+(() => {
+  'use strict';
+
+  /* ── Site music (MP3 autoplay with interaction fallback) ── */
+  (function initMusic() {
+    const tracks = [
+      (window.PB_AURORA?.themeUrl || '') + '/../media/sitemusic/pb1.mp3',
+      (window.PB_AURORA?.themeUrl || '') + '/../media/sitemusic/pb2.mp3',
+    ].filter(Boolean);
+    if (!tracks.length) return;
+    let current = 0;
+    const audio = new Audio();
+    audio.loop = false;
+    audio.volume = 0.25;
+    function playNext() {
+      audio.src = tracks[current % tracks.length];
+      audio.play().catch(() => {});
+      current++;
+    }
+    audio.addEventListener('ended', playNext);
+    playNext();
+    function resumeOnInteraction() {
+      if (audio.paused) { playNext(); }
+      document.removeEventListener('click', resumeOnInteraction);
+      document.removeEventListener('touchstart', resumeOnInteraction);
+    }
+    document.addEventListener('click', resumeOnInteraction);
+    document.addEventListener('touchstart', resumeOnInteraction);
+
+    // Header mute toggle
+    var toggle = document.getElementById('pb-music-toggle');
+    if (toggle) {
+      toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        audio.muted = !audio.muted;
+        toggle.classList.toggle('is-muted', audio.muted);
+        toggle.innerHTML = audio.muted ? '<span aria-hidden="true">&#128263;</span>' : '<span aria-hidden="true">&#127925;</span>';
+      });
+    }
+  })();
+
+  /* ── Sound effects on buttons / links ── */
+  (function initSfx() {
+    const ctx = typeof AudioContext !== 'undefined' ? new AudioContext() : null;
+    if (!ctx) return;
+    function blip(freq, duration, type) {
+      freq = freq || 880; duration = duration || 0.06; type = type || 'sine';
+      if (ctx.state === 'suspended') ctx.resume();
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = type;
+      o.frequency.setValueAtTime(freq, ctx.currentTime);
+      g.gain.setValueAtTime(0.08, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+      o.connect(g);
+      g.connect(ctx.destination);
+      o.start();
+      o.stop(ctx.currentTime + duration);
+    }
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('button, .pb-btn, a, [data-pb-ripple], summary');
+      if (!btn) return;
+      if (btn.closest('.pb-brain__form, .pb-exit__form, .pb-footer__subscribe, [data-pb-subscribe-form]')) { blip(660, 0.05); return; }
+      if (btn.closest('[data-pb-cat-tabs]')) { blip(1100, 0.04); return; }
+      blip(880, 0.05);
+    });
+  })();
+
+  /* Scroll reveal */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add('is-revealed');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('[data-pb-reveal]').forEach((el) => revealObserver.observe(el));
+
+  /* Pricing category tabs */
+  document.querySelectorAll('[data-pb-cat-tabs]').forEach((tablist) => {
+    const tabs = tablist.querySelectorAll('[data-cat]');
+    const panels = tablist.parentElement.querySelectorAll('[data-cat-panel]');
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const cat = tab.dataset.cat;
+        tabs.forEach((t) => { t.classList.toggle('is-on', t === tab); t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); });
+        panels.forEach((p) => { p.classList.toggle('is-on', p.dataset.catPanel === cat); });
+      });
+    });
+  });
+
+  /* Pricing calculator */
+  document.querySelectorAll('[data-pb-calc]').forEach((calc) => {
+    const typeEl = calc.querySelector('[data-calc-type]');
+    const pagesEl = calc.querySelector('[data-calc-pages]');
+    const pagesOut = calc.querySelector('[data-calc-pages-out]');
+    const aiSelect = calc.querySelector('[data-calc-ai-feat]');
+    const seoEl = calc.querySelector('[data-calc-seo]');
+    const seoOut = calc.querySelector('[data-calc-seo-out]');
+    const rushEl = calc.querySelector('[data-calc-rush]');
+    const priceEl = calc.querySelector('[data-calc-price]');
+
+    const base = { micro: 40, simple: 115, full: 300, webgl: 600, saas: 750, ai: 900 };
+    const pageCost = { micro: 0, simple: 15, full: 25, webgl: 35, saas: 40, ai: 45 };
+    const seoCost = [0, 30, 75, 150, 250, 400];
+
+    function recalc() {
+      const type = typeEl?.value || 'simple';
+      const pages = parseInt(pagesEl?.value || 5, 10);
+      const seo = parseInt(seoEl?.value || 2, 10);
+      const rush = rushEl?.checked ? 1.4 : 1;
+      let aiSum = 0;
+      if (aiSelect && aiSelect.value) {
+        aiSum = parseInt(aiSelect.value.split(':')[1] || 0, 10);
+      }
+      if (pagesOut) pagesOut.textContent = pages;
+      if (seoOut) seoOut.textContent = seo;
+      const low = Math.round(((base[type] || 115) + (pages - 1) * (pageCost[type] || 15) + aiSum + (seoCost[seo] || 0)) * rush);
+      const high = Math.round(low * 1.25);
+      if (priceEl) priceEl.innerHTML = '$' + low.toLocaleString() + ' - $' + high.toLocaleString();
+    }
+    typeEl?.addEventListener('change', recalc);
+    pagesEl?.addEventListener('input', recalc);
+    seoEl?.addEventListener('input', recalc);
+    rushEl?.addEventListener('change', recalc);
+    aiSelect?.addEventListener('change', recalc);
+    recalc();
+  });
+
+  /* Build form toggle */
+  const buildForm = document.querySelector('[data-build-form]');
+  const buildGrid = document.querySelector('.pb-build__grid');
+  document.querySelectorAll('[data-build-kind]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const kind = btn.dataset.buildKind;
+      const price = btn.dataset.buildPrice;
+      const label = btn.dataset.buildLabel;
+      const titleEl = buildForm?.querySelector('[data-build-form-title]');
+      if (titleEl) titleEl.textContent = label;
+      buildGrid?.classList.add('is-hidden');
+      buildForm?.removeAttribute('hidden');
+    });
+  });
+  document.querySelectorAll('[data-build-cancel]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      buildForm?.setAttribute('hidden', '');
+      buildGrid?.classList.remove('is-hidden');
+    });
+  });
+
+  /* Footer subscribe */
+  document.querySelectorAll('[data-pb-subscribe-form]').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msg = form.querySelector('[data-pb-subscribe-msg]');
+      const fd = new FormData(form);
+      const body = {};
+      fd.forEach((v, k) => { body[k] = v; });
+      try {
+        const res = await fetch(form.dataset.pbRest || (PB_AURORA?.restUrl + 'pb/v1/subscribe'), {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
+        });
+        const data = await res.json();
+        if (msg) { msg.textContent = data.ok ? 'Subscribed! Welcome aboard.' : (data.error || 'Could not subscribe.'); msg.className = 'pb-footer__subscribe-status pb-subscribe__msg ' + (data.ok ? 'is-ok' : 'is-err'); }
+      } catch (err) {
+        if (msg) { msg.textContent = 'Network error.'; msg.className = 'pb-footer__subscribe-status pb-subscribe__msg is-err'; }
+      }
+    });
+  });
+
+  /* Lead form wiring (exit modal + any [data-pb-lead-form]) */
+  document.querySelectorAll('[data-pb-lead-form]').forEach((form) => {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const msg = form.querySelector('[data-pb-lead-msg]');
+      const fd = new FormData(form);
+      const data = {};
+      fd.forEach(function(v, k){ data[k] = v; });
+      data.ref = location.href;
+      if (!data.email || !/.+@.+\..+/.test(data.email)) {
+        if (msg) { msg.textContent = 'Please enter a valid email.'; msg.className = 'pb-exit__msg is-err'; }
+        return;
+      }
+      if (msg) { msg.textContent = 'Sending…'; msg.className = 'pb-exit__msg is-pending'; }
+      fetch(form.dataset.pbRest || (PB_AURORA?.restUrl + 'pb/v1/lead'), {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data),
+      }).then(function(r){ return r.json(); }).then(function(j){
+        if (j && j.ok) {
+          var playbook = j.playbook || '/playbook/';
+          if (msg) { msg.innerHTML = 'Got it — the playbook is on its way to your inbox. Or <a href="' + playbook + '" target="_blank" rel="noopener" style="color:#ffd400;text-decoration:underline">read it right now in your browser →</a>'; msg.className = 'pb-exit__msg is-ok'; }
+          form.reset();
+          try { window.open(playbook, '_blank', 'noopener'); } catch (e) {}
+        } else {
+          if (msg) { msg.textContent = (j && j.error) ? ('Hmm: ' + j.error) : 'Something blocked the send. Try again?'; msg.className = 'pb-exit__msg is-err'; }
+        }
+      }).catch(function(){ if (msg) { msg.textContent = 'Network error. Try again?'; msg.className = 'pb-exit__msg is-err'; } });
+    });
+  });
+
+  /* Sticky bottom bar */
+  var stick = document.getElementById('pb-stickbar');
+  if (stick) {
+    var dismissed = false;
+    try { dismissed = localStorage.getItem('pb_stick_dismiss_v1') === '1'; } catch (e) {}
+    var closeBtn = stick.querySelector('[data-pb-stickbar-close]');
+    if (closeBtn) closeBtn.addEventListener('click', function(){
+      stick.hidden = true; dismissed = true;
+      try { localStorage.setItem('pb_stick_dismiss_v1', '1'); } catch (e) {}
+    });
+    window.addEventListener('scroll', function() {
+      if (dismissed) return;
+      if ((window.scrollY || 0) > 600) { if (stick.hidden) stick.hidden = false; }
+    }, { passive: true });
+  }
+
+  /* Exit modal (explicit open only) */
+  var exitEl = document.getElementById('pb-exit');
+  function closeExit() {
+    if (!exitEl || exitEl.hidden) return;
+    exitEl.hidden = true;
+    document.body.classList.remove('pb-no-scroll');
+    try { localStorage.setItem('pb_exit_seen_v1', '1'); } catch (e) {}
+  }
+  if (exitEl) {
+    exitEl.querySelectorAll('[data-pb-exit-close]').forEach(function(b){ b.addEventListener('click', closeExit); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeExit(); });
+    window.pbOpenPlaybook = function() { exitEl.hidden = false; document.body.classList.add('pb-no-scroll'); };
+    document.querySelectorAll('[data-pb-open-exit], [data-pb-open-playbook]').forEach(function(b){
+      b.addEventListener('click', function(e){ e.preventDefault(); window.pbOpenPlaybook(); });
+    });
+  }
+
+  /* Tel / WhatsApp decoder */
+  function decode(b64) { try { return atob(b64); } catch (e) { return ''; } }
+  function bindTel(sel, attr) {
+    document.querySelectorAll(sel).forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        var url = decode(a.getAttribute(attr));
+        if (!url) return;
+        e.preventDefault();
+        if (url.indexOf('tel:') === 0) location.href = url;
+        else window.open(url, '_blank', 'noopener');
+      }, { passive: false });
+    });
+  }
+  bindTel('[data-pb-tel]', 'data-pb-tel');
+  bindTel('[data-pb-wa]',  'data-pb-wa');
+
+  /* Mobile nav toggle */
+  const navToggle = document.querySelector('[data-pb-nav-toggle]');
+  const nav = document.getElementById('pb-nav');
+  if (navToggle && nav) {
+    navToggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+})();
+
+
+/* ================================================================
+   CHATBOT / CONCIERGE FIX — open/close + form handling
+   ================================================================ */
+(function () {
+  'use strict';
+  const brain = document.getElementById('pb-brain');
+  const openBtns = document.querySelectorAll('[data-pb-brainstorm-open], [data-pb-open-orb]');
+  const closeBtns = document.querySelectorAll('[data-pb-brainstorm-close]');
+  const form = document.querySelector('[data-pb-brain-form]');
+  const input = document.querySelector('[data-pb-brain-input]');
+  const log = document.querySelector('[data-pb-brain-log]');
+  const micBtn = document.querySelector('[data-pb-brain-mic]');
+  const orb = document.querySelector('.pb-orb');
+
+  // (Auto-open removed — the chat opens only when the visitor clicks the orb,
+  //  so it never starts talking on its own on page load.)
+
+  function openBrain() {
+    if (!brain) return;
+    brain.hidden = false;
+    document.documentElement.classList.add('pb-brain-open');
+    if (input) input.focus();
+  }
+
+  function closeBrain() {
+    if (!brain) return;
+    brain.hidden = true;
+    document.documentElement.classList.remove('pb-brain-open');
+  }
+
+  openBtns.forEach(btn => btn.addEventListener('click', openBrain));
+  closeBtns.forEach(btn => btn.addEventListener('click', closeBrain));
+
+  // Close on backdrop click or Escape
+  if (brain) {
+    brain.addEventListener('click', e => {
+      if (e.target === brain) closeBrain();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && !brain.hidden) closeBrain();
+    });
+  }
+
+  // Orb z-index fix
+  if (orb) {
+    orb.style.zIndex = '99999';
+    orb.style.position = 'fixed';
+  }
+
+  // Form submission
+  if (form && input && log) {
+    const restUrl = window.PB_AURORA?.restUrl || '';
+    // Prefer the absolute REST URL embedded on the form (like the subscribe form),
+    // so the endpoint resolves even if PB_AURORA isn't localized on the live host.
+    const endpoint = form.dataset.pbRest || (restUrl + 'pb/v1/brainstorm');
+    let history = [];
+
+    function addMsg(text, cls) {
+      const div = document.createElement('div');
+      div.className = 'pb-brain__msg pb-brain__msg--' + cls;
+      div.innerHTML = text;
+      log.appendChild(div);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function addTyping() {
+      const div = document.createElement('div');
+      div.className = 'pb-brain__msg pb-brain__msg--bot pb-brain__typing';
+      div.innerHTML = '<span></span><span></span><span></span>';
+      log.appendChild(div);
+      log.scrollTop = log.scrollHeight;
+      return div;
+    }
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (!text) return;
+      addMsg(text, 'user');
+      input.value = '';
+      const typing = addTyping();
+      try {
+        const r = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text, history: history, path: location.pathname, title: document.title })
+        });
+        typing.remove();
+        const data = await r.json();
+        if (data.ok !== false && data.reply) {
+          addMsg(data.reply, 'bot');
+          history.push({ role: 'user', content: text });
+          history.push({ role: 'assistant', content: data.reply });
+          if (history.length > 20) history = history.slice(-20);
+        } else {
+          addMsg('Photon is offline right now. Email ' + (window.PB_AURORA?.email || 'hello@photon-bounce.com') + ' and we will pick it up.', 'bot');
+        }
+      } catch (err) {
+        typing.remove();
+        addMsg('Connection hiccup. Try again or email us directly.', 'bot');
+      }
+    });
+
+    // Voice input (Web Speech API)
+    if (micBtn && window.webkitSpeechRecognition) {
+      const rec = new webkitSpeechRecognition();
+      rec.continuous = false;
+      rec.interimResults = false;
+      rec.lang = 'en-US';
+      micBtn.addEventListener('click', () => {
+        try {
+          rec.start();
+          micBtn.classList.add('is-recording');
+        } catch (e) {}
+      });
+      rec.onresult = e => {
+        const transcript = e.results[0][0].transcript;
+        input.value = transcript;
+        micBtn.classList.remove('is-recording');
+        form.dispatchEvent(new Event('submit'));
+      };
+      rec.onerror = () => micBtn.classList.remove('is-recording');
+      rec.onend = () => micBtn.classList.remove('is-recording');
+    } else if (micBtn) {
+      micBtn.style.display = 'none';
+    }
+  }
+})();
+
+/* ================================================================
+   MATRIX SEPARATOR — canvas code rain with 3D rotation effect
+   ================================================================ */
+(function () {
+  'use strict';
+  const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEF<>/{}[];=+*$#@!';
+  const seps = document.querySelectorAll('.pb-matrix-sep');
+
+  seps.forEach(canvas => {
+    const ctx = canvas.getContext('2d');
+    let w, h, drops = [];
+    const fontSize = 16;
+    let columns;
+
+    function resize() {
+      const parent = canvas.parentElement;
+      if (!parent) return;
+      w = canvas.width = parent.offsetWidth;
+      h = canvas.height = parent.offsetHeight;
+      columns = Math.floor(w / fontSize);
+      drops = [];
+      for (let i = 0; i < columns; i++) {
+        drops[i] = Math.random() * -100;
+      }
+    }
+
+    let frame = 0;
+    function draw() {
+      ctx.fillStyle = 'rgba(5, 6, 11, 0.08)';
+      ctx.fillRect(0, 0, w, h);
+      ctx.font = 'bold ' + fontSize + 'px JetBrains Mono, monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const char = chars[Math.floor(Math.random() * chars.length)];
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+
+        // 3D rotation effect via skew + scale
+        ctx.save();
+        ctx.translate(x + fontSize/2, y);
+        const rot = Math.sin(frame * 0.02 + i * 0.1) * 0.15;
+        const scale = 0.8 + Math.sin(frame * 0.03 + i * 0.2) * 0.2;
+        ctx.rotate(rot);
+        ctx.scale(scale, scale);
+
+        // Glow head
+        ctx.shadowColor = '#00d8ff';
+        ctx.shadowBlur = 8;
+        ctx.fillStyle = '#00d8ff';
+        ctx.fillText(char, -fontSize/2, 0);
+        ctx.shadowBlur = 0;
+        ctx.restore();
+
+        // Trail
+        if (y > fontSize * 2) {
+          ctx.fillStyle = 'rgba(0, 216, 255, 0.15)';
+          ctx.fillText(char, x, y - fontSize);
+        }
+
+        if (y > h && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+      frame++;
+      requestAnimationFrame(draw);
+    }
+
+    resize();
+    draw();
+    window.addEventListener('resize', resize);
+  });
+})();
+
+/* ================================================================
+   PARALLAX + SCROLL REVEAL for desktop and mobile
+   ================================================================ */
+(function () {
+  'use strict';
+  const isMobile = window.matchMedia('(pointer: coarse)').matches;
+
+  // Parallax on data-parallax elements (subtle, performant)
+  const parallaxEls = document.querySelectorAll('[data-parallax]');
+  if (parallaxEls.length && !isMobile) {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const y = window.scrollY;
+          parallaxEls.forEach(el => {
+            const speed = parseFloat(el.dataset.parallax) || 0.3;
+            const rect = el.getBoundingClientRect();
+            const offset = (rect.top + y) * speed;
+            el.style.transform = 'translateY(' + (y * speed - offset) + 'px)';
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+
+  // Scroll reveal with IntersectionObserver
+  const revealEls = document.querySelectorAll('[data-pb-reveal]');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('is-revealed'));
+  }
+})();
