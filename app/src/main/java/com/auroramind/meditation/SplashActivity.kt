@@ -122,7 +122,7 @@ private class SplashCanvas(context: Context) : View(context) {
     private val nebulaPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
     // ── App logo (the hero of the splash) ─────────────────────────────────────
-    private val logo = BitmapFactory.decodeResource(resources, R.drawable.appicon)
+    private val logo: Bitmap? = runCatching { BitmapFactory.decodeResource(resources, R.drawable.appicon) }.getOrNull()
     private val logoPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { isFilterBitmap = true }
     private val logoGlowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         maskFilter = BlurMaskFilter(34f, BlurMaskFilter.Blur.NORMAL)
@@ -383,7 +383,7 @@ private class SplashCanvas(context: Context) : View(context) {
             canvas.clipPath(clip)
             val dst = RectF(cx - logoR, cy - logoR, cx + logoR, cy + logoR)
             logoPaint.alpha = (255 * ease).toInt()
-            canvas.drawBitmap(logo, null, dst, logoPaint)
+            logo?.let { canvas.drawBitmap(it, null, dst, logoPaint) }
             canvas.restoreToCount(save)
 
             // Crisp pink ring framing the logo
