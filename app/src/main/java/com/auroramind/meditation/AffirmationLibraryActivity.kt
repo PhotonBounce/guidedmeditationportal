@@ -51,7 +51,7 @@ class AffirmationLibraryActivity : AppCompatActivity() {
         })
 
         scroll.addView(col)
-        setContentView(scroll)
+        setContentView(AuraBackground.wrap(this, scroll))
     }
 
     override fun onResume() {

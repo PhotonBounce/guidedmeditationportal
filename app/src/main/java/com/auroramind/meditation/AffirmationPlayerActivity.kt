@@ -42,7 +42,7 @@ class AffirmationPlayerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAffirmationPlayerBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(AuraBackground.wrap(this, binding.root))
 
         val prefs = PrefsManager(this)
         val theme = AffirmationContent.getTheme(intent.getStringExtra(EXTRA_THEME))

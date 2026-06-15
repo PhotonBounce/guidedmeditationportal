@@ -79,7 +79,7 @@ class QuizActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityQuizBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(AuraBackground.wrap(this, binding.root))
 
         prefs = PrefsManager(this)
         habitStats = HabitStatsManager(this)

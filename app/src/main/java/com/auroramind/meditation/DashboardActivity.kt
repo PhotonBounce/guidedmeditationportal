@@ -34,7 +34,7 @@ class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDashboardBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(AuraBackground.wrap(this, binding.root))
 
         prefs = PrefsManager(this)
         habitStats = HabitStatsManager(this)
