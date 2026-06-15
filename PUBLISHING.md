@@ -3,10 +3,18 @@
 Everything needed to ship: web, APK/AAB, and Google Play. Work top to bottom.
 
 ## ⛔ 0. Fix the crash first
-The app currently crashes on launch on the test device. **Do not publish until that's
-fixed.** Run `crashlog.bat` (or `adb logcat -d AndroidRuntime:E *:S`) right after it
-crashes and send the `FATAL EXCEPTION` block. Publishing a crashing build will get the
-listing rejected or your account flagged.
+The app reportedly crashed on launch on the test device. **Do not publish until that's
+confirmed fixed.**
+
+The build now **reports its own crashes** — no adb needed:
+1. Install the new debug APK (rebuild from **Actions → "Android Build"**).
+2. If it crashes, **just reopen the app**. The first screen now shows the exact stack
+   trace with **Share** / **Copy** buttons — send me that and I'll fix the precise line.
+3. (Optional fallback) `crashlog.bat` or `adb logcat -d AndroidRuntime:E *:S` still works.
+
+This build also hardens the launch path: the splash tolerates a missing icon, UI sound
+effects can never crash the process, and a global handler catches anything else.
+Publishing a crashing build will get the listing rejected or your account flagged.
 
 ## 1. Pre-release code changes (one-time, before the release build)
 These don't affect the debug build you're testing; do them when ready to publish.

@@ -58,29 +58,33 @@ class SoundEffects(private val context: Context) {
             if (!systemSoundsEnabled()) return
         }
         thread(isDaemon = true, name = "SfxPlayer") {
-            val track = AudioTrack.Builder()
-                .setAudioAttributes(
-                    AudioAttributes.Builder()
-                        .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
-                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                        .build()
-                )
-                .setAudioFormat(
-                    AudioFormat.Builder()
-                        .setSampleRate(SR)
-                        .setEncoding(AudioFormat.ENCODING_PCM_16BIT)
-                        .setChannelMask(AudioFormat.CHANNEL_OUT_MONO)
-                        .build()
-                )
-                .setBufferSizeInBytes(buffer.size * 2)
-                .setTransferMode(AudioTrack.MODE_STATIC)
-                .build()
-            track.setVolume(gain)
-            track.write(buffer, 0, buffer.size)
-            track.play()
-            // Let it drain then release
-            Thread.sleep(((buffer.size * 1000L) / SR) + 50)
-            runCatching { track.stop(); track.release() }
+            // A UI sound is never worth crashing the app: some OEM audio HALs throw
+            // from AudioTrack build/write/play. Swallow it — silence beats a crash.
+            runCatching {
+                val track = AudioTrack.Builder()
+                    .setAudioAttributes(
+                        AudioAttributes.Builder()
+                            .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                            .build()
+                    )
+                    .setAudioFormat(
+                        AudioFormat.Builder()
+                            .setSampleRate(SR)
+                            .setEncoding(AudioFormat.ENCODING_PCM_16BIT)
+                            .setChannelMask(AudioFormat.CHANNEL_OUT_MONO)
+                            .build()
+                    )
+                    .setBufferSizeInBytes(buffer.size * 2)
+                    .setTransferMode(AudioTrack.MODE_STATIC)
+                    .build()
+                track.setVolume(gain)
+                track.write(buffer, 0, buffer.size)
+                track.play()
+                // Let it drain then release
+                Thread.sleep(((buffer.size * 1000L) / SR) + 50)
+                runCatching { track.stop(); track.release() }
+            }
         }
     }
 

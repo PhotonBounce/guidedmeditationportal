@@ -1,6 +1,8 @@
 package com.auroramind.meditation
 
 import android.animation.ValueAnimator
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.graphics.*
@@ -8,6 +10,10 @@ import android.os.*
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.DecelerateInterpolator
+import android.widget.ScrollView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -44,6 +50,21 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // If the previous launch crashed, surface the captured trace first so it can
+        // be shared — no adb required. Only on a clean start do we play the splash.
+        val crash = runCatching { CrashReporter.read(this) }.getOrNull()
+        if (!crash.isNullOrBlank()) {
+            if (runCatching { showCrashDialog(crash) }.isFailure) {
+                CrashReporter.clear(this)
+                startNext()
+            }
+            return
+        }
+
+        setupSplash()
+    }
+
+    private fun setupSplash() {
         // Full-screen immersive: no status bar, no nav bar
         WindowCompat.setDecorFitsSystemWindows(window, false)
         WindowInsetsControllerCompat(window, window.decorView).apply {
@@ -60,18 +81,75 @@ class SplashActivity : AppCompatActivity() {
 
         // Advance after the animation finishes — into the quit-habit + affirmations
         // flow: the onboarding quiz on first run, the dashboard on later launches.
-        handler.postDelayed({
-            val next = if (PrefsManager(this).isQuizCompleted())
-                DashboardActivity::class.java else QuizActivity::class.java
-            startActivity(Intent(this, next))
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-            finish()
-        }, SPLASH_DURATION_MS)
+        handler.postDelayed({ startNext() }, SPLASH_DURATION_MS)
+    }
+
+    private fun startNext() {
+        val next = if (PrefsManager(this).isQuizCompleted())
+            DashboardActivity::class.java else QuizActivity::class.java
+        startActivity(Intent(this, next))
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+        finish()
+    }
+
+    /**
+     * Shows the persisted stack trace from the previous (crashed) run with Share /
+     * Copy actions, then continues into the app. This is the recovery path for "the
+     * app crashed but I can't get logcat" — the user can hand over the exact trace.
+     */
+    private fun showCrashDialog(trace: String) {
+        // Plain dark backdrop behind the dialog (the canvas isn't set up on this path).
+        setContentView(View(this).apply { setBackgroundColor(Color.parseColor("#140D08")) })
+
+        val pad = (16 * resources.displayMetrics.density).toInt()
+        val text = TextView(this).apply {
+            text = trace
+            setTextIsSelectable(true)
+            textSize = 12f
+            setTextColor(Color.parseColor("#F5EEE6"))
+            typeface = Typeface.MONOSPACE
+            setPadding(pad, pad, pad, pad)
+        }
+        val scroll = ScrollView(this).apply { addView(text) }
+
+        AlertDialog.Builder(this, R.style.AlertDialogDark)
+            .setTitle("Last run crashed — tap Share to send this")
+            .setView(scroll)
+            .setCancelable(false)
+            .setPositiveButton("Share") { _, _ ->
+                runCatching {
+                    startActivity(
+                        Intent.createChooser(
+                            Intent(Intent.ACTION_SEND).apply {
+                                type = "text/plain"
+                                putExtra(Intent.EXTRA_TEXT, trace)
+                            },
+                            "Share crash report"
+                        )
+                    )
+                }
+                CrashReporter.clear(this)
+                startNext()
+            }
+            .setNeutralButton("Copy") { _, _ ->
+                runCatching {
+                    val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                    cm.setPrimaryClip(ClipData.newPlainText("Power of Mind crash", trace))
+                    Toast.makeText(this, "Crash report copied", Toast.LENGTH_SHORT).show()
+                }
+                CrashReporter.clear(this)
+                startNext()
+            }
+            .setNegativeButton("Dismiss") { _, _ ->
+                CrashReporter.clear(this)
+                startNext()
+            }
+            .show()
     }
 
     override fun onDestroy() {
         handler.removeCallbacksAndMessages(null)
-        canvas.stop()
+        if (::canvas.isInitialized) canvas.stop()
         super.onDestroy()
     }
 }
