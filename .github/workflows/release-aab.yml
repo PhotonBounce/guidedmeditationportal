@@ -2,14 +2,19 @@ name: Release AAB (signed)
 
 # Builds a Play Store-ready, signed Android App Bundle.
 #
-# Add these repository secrets first (Settings -> Secrets and variables -> Actions):
-#   POM_KEYSTORE_BASE64  base64 of the upload keystore (.jks)
-#   POM_STORE_PASSWORD   keystore password
-#   POM_KEY_PASSWORD     key password
-#   POM_KEY_ALIAS        key alias (e.g. powerofmind)
+# Secrets used (Settings -> Secrets and variables -> Actions):
+#   POM_KEYSTORE_BASE64  base64 of the upload keystore (.jks) — OPTIONAL.
+#                        If missing OR the cert is expired/not-yet-valid, the
+#                        workflow generates a fresh, correctly-dated keystore
+#                        on the runner (whose clock is NTP-synced UTC) and
+#                        publishes it as the `upload-keystore` artifact so you
+#                        can persist it for future updates.
+#   POM_STORE_PASSWORD   keystore password (required)
+#   POM_KEY_PASSWORD     key password (defaults to store password if unset)
+#   POM_KEY_ALIAS        key alias (defaults to "powerofmind")
 #
-# Then run this workflow (Actions -> Release AAB -> Run workflow) and download
-# the signed .aab from the run's Artifacts to upload in the Play Console.
+# Run this workflow, then download the signed .aab from the run's Artifacts to
+# upload in the Play Console.
 
 on:
   workflow_dispatch:
@@ -29,13 +34,70 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Decode upload keystore
+      - name: Prepare a currently-valid signing keystore
+        id: keystore
         env:
           KS_B64: ${{ secrets.POM_KEYSTORE_BASE64 }}
+          POM_STORE_PASSWORD: ${{ secrets.POM_STORE_PASSWORD }}
+          POM_KEY_PASSWORD: ${{ secrets.POM_KEY_PASSWORD }}
+          POM_KEY_ALIAS: ${{ secrets.POM_KEY_ALIAS }}
         run: |
-          # certutil on Windows adds -----BEGIN/END CERTIFICATE----- headers and CR line endings.
-          # Strip them so base64 -d works on Linux regardless of how the secret was encoded.
-          echo "$KS_B64" | sed '/^-----/d' | tr -d '\r' | base64 -d > "$RUNNER_TEMP/upload.jks"
+          set -euo pipefail
+          KS="$RUNNER_TEMP/upload.jks"
+          ALIAS="${POM_KEY_ALIAS:-powerofmind}"
+          STOREPW="$POM_STORE_PASSWORD"
+          KEYPW="${POM_KEY_PASSWORD:-$POM_STORE_PASSWORD}"
+          NOW=$(date -u +%s)
+          NEED_GEN=1
+
+          # Try to decode the provided secret. certutil (Windows) wraps base64 in
+          # -----BEGIN/END CERTIFICATE----- headers with CR line endings — strip them.
+          if [ -n "${KS_B64:-}" ]; then
+            echo "$KS_B64" | sed '/^-----/d' | tr -d '\r' | base64 -d > "$KS" 2>/dev/null || true
+            if [ -s "$KS" ] && keytool -exportcert -keystore "$KS" -alias "$ALIAS" \
+                   -storepass "$STOREPW" -rfc > "$RUNNER_TEMP/cert.pem" 2>/dev/null; then
+              NB=$(openssl x509 -in "$RUNNER_TEMP/cert.pem" -noout -startdate | cut -d= -f2)
+              NA=$(openssl x509 -in "$RUNNER_TEMP/cert.pem" -noout -enddate   | cut -d= -f2)
+              NB_E=$(date -u -d "$NB" +%s); NA_E=$(date -u -d "$NA" +%s)
+              echo "Provided keystore cert valid: $NB  ->  $NA"
+              if [ "$NB_E" -le "$NOW" ] && [ "$NOW" -le "$NA_E" ]; then
+                echo "Provided keystore is currently valid — using it."
+                NEED_GEN=0
+              else
+                echo "Provided keystore cert is NOT currently valid (clock-skew at creation) — regenerating."
+              fi
+            else
+              echo "Provided secret missing/undecodable for alias '$ALIAS' — regenerating."
+            fi
+          else
+            echo "No POM_KEYSTORE_BASE64 secret set — generating a keystore."
+          fi
+
+          if [ "$NEED_GEN" -eq 1 ]; then
+            rm -f "$KS"
+            # Backdate the cert 2 days so it is unambiguously already valid for any
+            # reviewer/server clock, regardless of timezone.
+            START=$(date -u -d '2 days ago' '+%Y/%m/%d %H:%M:%S')
+            keytool -genkeypair -v \
+              -keystore "$KS" -alias "$ALIAS" \
+              -keyalg RSA -keysize 2048 -validity 10000 \
+              -storepass "$STOREPW" -keypass "$KEYPW" \
+              -startdate "$START" \
+              -dname "CN=Power Of Mind, OU=Mobile, O=PhotonBounce, L=Unknown, ST=Unknown, C=US"
+            echo "Generated keystore with start date $START (UTC)."
+            # Publish base64 for the user to persist as the POM_KEYSTORE_BASE64 secret.
+            base64 -w0 "$KS" > "$RUNNER_TEMP/upload.jks.b64"
+            cp "$KS" "$RUNNER_TEMP/powerofmind-upload.jks"
+            {
+              echo "generated=true"
+            } >> "$GITHUB_OUTPUT"
+          else
+            echo "generated=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          # Show the final cert window for the record.
+          keytool -list -v -keystore "$KS" -alias "$ALIAS" -storepass "$STOREPW" \
+            | grep -E "Valid from|Owner|SHA256" || true
 
       - name: Build signed release AAB
         env:
@@ -52,5 +114,16 @@ jobs:
         with:
           name: power-of-mind-release-aab
           path: app/build/outputs/bundle/release/app-release.aab
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Publish generated keystore (persist this!)
+        if: steps.keystore.outputs.generated == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: upload-keystore-KEEP-SAFE
+          path: |
+            ${{ runner.temp }}/powerofmind-upload.jks
+            ${{ runner.temp }}/upload.jks.b64
           if-no-files-found: error
           retention-days: 14
