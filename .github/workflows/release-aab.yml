@@ -32,7 +32,10 @@ jobs:
       - name: Decode upload keystore
         env:
           KS_B64: ${{ secrets.POM_KEYSTORE_BASE64 }}
-        run: echo "$KS_B64" | base64 -d > "$RUNNER_TEMP/upload.jks"
+        run: |
+          # certutil on Windows adds -----BEGIN/END CERTIFICATE----- headers and CR line endings.
+          # Strip them so base64 -d works on Linux regardless of how the secret was encoded.
+          echo "$KS_B64" | sed '/^-----/d' | tr -d '\r' | base64 -d > "$RUNNER_TEMP/upload.jks"
 
       - name: Build signed release AAB
         env:
