@@ -1,16 +1,19 @@
 name: Deploy Website
 
-# Uploads the Mind & Body Shield microsite (microsite/) to
-# photon-bounce.com/shield via FTP. Triggered manually; the FTP password is
-# passed as a run input (private repo) and only ever handed to the script
-# through an environment variable — never committed or printed.
+# Uploads the Power of Mind microsite (microsite/) to
+# photon-bounce.com/pom via FTP. Triggered manually.
+#
+# The FTP password is read from the FTP_PASS repository secret (preferred) or,
+# if that secret is not set, from the ftp_pass run input as a fallback. It is
+# only ever handed to the script through an environment variable — never
+# committed or printed.
 
 on:
   workflow_dispatch:
     inputs:
       ftp_pass:
-        description: FTP password
-        required: true
+        description: FTP password (only needed if the FTP_PASS secret is not set)
+        required: false
         type: string
 
 jobs:
@@ -21,5 +24,5 @@ jobs:
 
       - name: Upload microsite via FTP
         env:
-          FTP_PASS: ${{ inputs.ftp_pass }}
+          FTP_PASS: ${{ secrets.FTP_PASS || inputs.ftp_pass }}
         run: python3 deploy_shield.py
