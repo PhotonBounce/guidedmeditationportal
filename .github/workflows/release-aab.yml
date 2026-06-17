@@ -18,6 +18,11 @@ name: Release AAB (signed)
 
 on:
   workflow_dispatch:
+    inputs:
+      regenerate_keystore:
+        description: 'Force-generate a fresh, backdated signing key on the runner (ignore the secret). Use this to fix a "certificate not yet valid" rejection caused by a skewed local clock. Download the published keystore artifact afterward and save it as POM_KEYSTORE_BASE64 for future updates.'
+        type: boolean
+        default: false
 
 jobs:
   bundle:
@@ -41,6 +46,7 @@ jobs:
           POM_STORE_PASSWORD: ${{ secrets.POM_STORE_PASSWORD }}
           POM_KEY_PASSWORD: ${{ secrets.POM_KEY_PASSWORD }}
           POM_KEY_ALIAS: ${{ secrets.POM_KEY_ALIAS }}
+          FORCE_GEN: ${{ inputs.regenerate_keystore }}
         run: |
           set -euo pipefail
           KS="$RUNNER_TEMP/upload.jks"
@@ -52,7 +58,9 @@ jobs:
 
           # Try to decode the provided secret. certutil (Windows) wraps base64 in
           # -----BEGIN/END CERTIFICATE----- headers with CR line endings — strip them.
-          if [ -n "${KS_B64:-}" ]; then
+          if [ "${FORCE_GEN:-false}" = "true" ]; then
+            echo "regenerate_keystore=true — ignoring any provided secret and generating a fresh, backdated key."
+          elif [ -n "${KS_B64:-}" ]; then
             echo "$KS_B64" | sed '/^-----/d' | tr -d '\r' | base64 -d > "$KS" 2>/dev/null || true
             if [ -s "$KS" ] && keytool -exportcert -keystore "$KS" -alias "$ALIAS" \
                    -storepass "$STOREPW" -rfc > "$RUNNER_TEMP/cert.pem" 2>/dev/null; then
