@@ -42,6 +42,8 @@ function pb_aurora_service_pages() {
 				[ 'How much does a custom website cost?', 'Sites are fixed-price: a one-page Micro build is $40, a full multi-page site is $300, and a SaaS app with auth and a backend starts at $750. You get a written scope before any work starts.' ],
 				[ 'How long does a website take?', 'A Micro page ships in a few days, a full site in about two weeks, and a SaaS build in 4–8 weeks. You get weekly demo links so you always see progress.' ],
 				[ 'Do I own the code?', 'Yes, 100%. You receive the full source and a handoff package — no proprietary lock-in and no required monthly fee.' ],
+				[ 'Can you work with my existing site or CMS?', 'Yes — fixes, redesigns, and feature additions to existing WordPress, Webflow, or custom-code sites are scoped exactly like new builds. A quick audit first tells me what the existing code needs.' ],
+				[ 'What is included in the handoff package?', 'Full source code, database export if applicable, all login credentials, a short documentation file, and any brand or style assets used. Nothing stays on my end that belongs to you.' ],
 			],
 		],
 		'ai-agents' => [
@@ -67,6 +69,8 @@ function pb_aurora_service_pages() {
 				[ 'How much does an AI chatbot cost?', 'A drop-in Concierge bot trained on your content is $190; a Custom Agent with retrieval and tool integrations is $565; an agent bundled with a full app is $1,185. All fixed-price.' ],
 				[ 'Can the bot use my own documents?', 'Yes — that is the point. It uses retrieval (RAG) over your site, documents, and knowledge base so answers are grounded in your real content, not generic guesses.' ],
 				[ 'Can it talk out loud / take voice?', 'Yes. Agents can run as text, or as voice with speech-in and natural speech-out (ElevenLabs), on the web or over the phone/WhatsApp.' ],
+				[ 'How do you train the bot on my content?', 'Your documents, site pages, and knowledge base are chunked and indexed into a vector store (RAG). The agent queries that index before every reply, so every answer is grounded in your actual content rather than generic LLM knowledge.' ],
+				[ 'What language models does it use?', 'Typically GPT-4o-mini for speed and cost, or GPT-4o for complex reasoning. We can also run on Claude, Gemini, or a self-hosted model if your data-residency requirements call for it.' ],
 			],
 		],
 		'3d-webgl' => [
@@ -90,6 +94,8 @@ function pb_aurora_service_pages() {
 				[ 'How much does a 3D / WebGL website cost?', 'A full site with a signature WebGL hero is $600; larger custom 3D work — configurators, physics demos, AR apps — is scoped from $1,500. Fixed price after a short discovery call.' ],
 				[ 'Will it run on mobile?', 'Yes. Every 3D build is performance-tuned and tier-scaled so it stays smooth on phones and low-end devices, with graceful fallbacks.' ],
 				[ 'Do you build AR/VR too?', 'Yes — WebXR in-browser AR, plus Unity-based AR/VR research apps for HoloLens, Quest, and mobile.' ],
+				[ 'Can I embed 3D into my existing site?', '3D components are delivered as a standalone JS embed or iframe that drops into any site — WordPress, Webflow, Squarespace, or custom — without rebuilding the rest of your page.' ],
+				[ 'What 3D file formats do you accept?', 'glTF / GLB is the preferred web format. We also accept FBX, OBJ, STL, and native Blender files and handle the optimization, compression, and export pipeline.' ],
 			],
 		],
 		'seo' => [
@@ -115,6 +121,8 @@ function pb_aurora_service_pages() {
 				[ 'How much does SEO cost?', 'A one-off technical audit is $30, a Starter on-page package is $75, and ongoing Growth SEO is $115/mo. No long lock-in — month to month.' ],
 				[ 'How long until I see results?', 'Technical and on-page wins can show in weeks; competitive content rankings typically take 3–6 months. The audit tells you which wins are fastest for your site.' ],
 				[ 'Do you do local SEO?', 'Yes — Google Business Profile setup and local schema are part of the work, which is often the fastest path to nearby, high-intent leads.' ],
+				[ 'Do you do link building?', 'Growth and Authority tiers include targeted outreach and link acquisition. Starter focuses on technical and on-page fixes first — link building only delivers full value once the foundation is clean.' ],
+				[ 'What does the monthly SEO report include?', 'Keyword ranking changes, page-level traffic from Search Console, Core Web Vitals snapshot, and the exact tasks completed that month — one clear page, not an auto-generated wall of numbers.' ],
 			],
 		],
 		'aeo' => [
@@ -139,6 +147,8 @@ function pb_aurora_service_pages() {
 				[ 'What is AEO?', 'Answer Engine Optimization is the practice of structuring your content so AI assistants like ChatGPT and Perplexity cite your business when people ask related questions — the AI-era complement to SEO.' ],
 				[ 'How much does AEO cost?', 'An AEO audit is $40, a full setup (FAQ + speakable schema and LLM-friendly content) is $100, and ongoing citation tracking is $90/mo.' ],
 				[ 'Is AEO different from SEO?', 'They overlap but differ: SEO ranks you in search results; AEO gets you quoted inside AI answers. The same well-structured content can win both.' ],
+				[ 'How do I know if AI engines are citing me?', 'The AEO Retainer tracks citations monthly by querying ChatGPT, Perplexity, and Gemini with the questions most relevant to your business and recording whether your brand appears in each answer.' ],
+				[ 'Does my site need structured data already?', 'No — FAQ, speakable, and entity schema are all added as part of the AEO Setup. We also verify that AI crawler access (GPTBot, PerplexityBot, ClaudeBot) is not accidentally blocked in your robots.txt.' ],
 			],
 		],
 		'branding' => [
@@ -163,6 +173,8 @@ function pb_aurora_service_pages() {
 				[ 'How much does a logo cost?', 'A standalone logo is $30. A Mini Identity (logo, palette, type, basic guidelines) is $115, and a Full Identity system is $350.' ],
 				[ 'What files do I get?', 'Production-ready files for web and print (vector + raster), plus a short guideline doc so your brand stays consistent everywhere.' ],
 				[ 'Can you do my brand and website together?', 'Yes, and that is usually the best value — a brand build pairs directly with a website build so the identity ships live, not just in a PDF.' ],
+				[ 'How long does a brand project take?', 'A Logo turnaround is 2–4 days. A Mini Identity is about a week. A Full Identity with templates, usage guidelines, and social assets typically takes 2–3 weeks.' ],
+				[ 'Do I own the copyright to my logo?', 'Yes, outright. Copyright transfers to you with the final delivery. No license fees, no royalties, and no restriction on where or how you use it — print, web, merchandise, whatever you need.' ],
 			],
 		],
 	];

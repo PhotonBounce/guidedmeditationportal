@@ -269,6 +269,59 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre) Tech stack / what technologies.
+	if ( $has( [ 'tech stack', 'what technologies', 'what do you use', 'what language', 'what framework', 'built with', 'built in', 'coding language', 'development stack', 'programming language' ] ) ) {
+		return $nl( [
+			"Stack depends on the project:",
+			'',
+			"&bull; <strong>Web</strong> &mdash; PHP / WordPress, React / Next.js, vanilla JS, Three.js / WebGL",
+			"&bull; <strong>AI</strong> &mdash; GPT-4o / Claude / Gemini via API, LangChain, Pinecone / pgvector for RAG",
+			"&bull; <strong>Mobile</strong> &mdash; Kotlin (Android), React Native (cross-platform)",
+			"&bull; <strong>3D</strong> &mdash; Three.js, WebXR, Blender, Unity (AR/VR)",
+			"&bull; <strong>Backend</strong> &mdash; Node.js, Python, PostgreSQL, REST / JSON",
+			'',
+			"Every handoff includes source code + docs &mdash; no proprietary tooling that locks you in. What are you building?",
+		] );
+	}
+
+	// 0d-pre2) Testimonials / reviews.
+	if ( $has( [ 'testimonials', 'reviews', 'client feedback', 'clients say', 'success stories', 'references', 'worked with you before', 'what do clients think' ] ) ) {
+		return $nl( [
+			"Honest answer: the live apps are the best testimonials. You can play <strong><a href=\"/occupantkiller/\">OccupantKiller</a></strong> right now, use <strong><a href=\"/ausis/\">Ausis</a></strong>, or talk to me &mdash; I&rsquo;m the AI concierge Dmitriy built.",
+			'',
+			"Portfolio with case notes is at <a href=\"/portfolio/\">/portfolio/</a>. For direct references, email <strong>hello@photon-bounce.com</strong> and I can connect you with past clients who agreed to chat.",
+		] );
+	}
+
+	// 0d-pre3) Solo / team size.
+	if ( $has( [ 'do you work alone', 'is this a team', 'who will work on my project', 'how many developers', 'is it just you', 'one person', 'freelancer', 'agency or freelance' ] ) ) {
+		return $nl( [
+			"It&rsquo;s Dmitriy &mdash; solo, end-to-end. No project managers, no hand-offs between developers, no communication overhead.",
+			'',
+			"The upside: one person owns the whole build, the quality is consistent, and you always know who to call. The tradeoff: I run 1–2 client slots at a time, so availability matters &mdash; ask early if you have a tight deadline.",
+		] );
+	}
+
+	// 0d-pre4) Platform-builder alternatives (Shopify / Squarespace / Webflow).
+	if ( $has( [ 'shopify', 'squarespace', 'webflow', ' wix', 'godaddy website', 'platform builder', 'no-code', 'nocode', 'template site', 'vs shopify', 'vs squarespace', 'vs webflow' ] ) ) {
+		return $nl( [
+			"Good question. Platform builders (Shopify, Squarespace, Webflow) are fast and cheap if your needs fit their templates &mdash; but you pay ongoing monthly fees, own nothing, and hit walls the moment you need custom logic.",
+			'',
+			"Photon-Bounce builds custom, so you get: full source ownership, no monthly platform fee, and zero limits on what the site can do. A <strong>Simple Site</strong> at $115 is the custom alternative to a template site. A <strong>Full Site</strong> at $300 matches what you&rsquo;d pay Squarespace or Webflow in 3–4 months.",
+			'',
+			"Want a custom build, or are you open to migrating from one of those platforms?",
+		] );
+	}
+
+	// 0d-pre5) NDA / confidentiality.
+	if ( $has( [ ' nda', 'non-disclosure', 'confidentiality', 'is my idea safe', 'will you share my idea', 'keep it secret', 'sign an nda', 'intellectual property', 'ip agreement' ] ) ) {
+		return $nl( [
+			"Happy to sign an NDA before any detailed conversation. Email <strong>hello@photon-bounce.com</strong> or book a free call at <a href=\"/book/\">/book/</a> and we can have a mutual NDA signed same day.",
+			'',
+			"By default I treat every client project as confidential and don&rsquo;t discuss details publicly without permission. IP for all custom work transfers to you on final payment.",
+		] );
+	}
+
 	// 0d) WordPress / CMS specific.
 	if ( $has( [ 'wordpress', ' woocommerce', ' woo ', 'wp theme', 'wp plugin', 'cms', 'content management' ] ) ) {
 		return $nl( [
