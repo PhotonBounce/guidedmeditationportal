@@ -414,8 +414,7 @@
           });
         }
       }
-      chatMsgs.push({ text: text, cls: cls });
-      saveChat();
+      if (cls !== 'err') { chatMsgs.push({ text: text, cls: cls }); saveChat(); }
       log.scrollTop = log.scrollHeight;
     }
 
@@ -579,11 +578,11 @@
           if (history.length > 20) history = history.slice(-20);
           if (data.closed) voiceMode = false;
         } else {
-          addMsg('Photon is offline right now. Email ' + (window.PB_AURORA?.email || 'hello@photon-bounce.com') + ' and we will pick it up.', 'bot');
+          addMsg('Photon is offline right now. Email ' + (window.PB_AURORA?.email || 'hello@photon-bounce.com') + ' and we will pick it up.', 'err');
         }
       } catch (err) {
         typing.remove();
-        addMsg('Connection hiccup. Try again, or email us directly.', 'bot');
+        addMsg('Connection hiccup — try again, or email us directly.', 'err');
       }
     });
 

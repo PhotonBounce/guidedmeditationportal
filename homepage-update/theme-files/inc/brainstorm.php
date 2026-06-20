@@ -485,6 +485,53 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre9-y) CMS / WordPress training and content editing help.
+	if ( $has( [ 'how do i edit', 'how do i update', 'how do i add', 'how do i change', 'cms training', 'wordpress training', 'how to use wordpress', 'how to update my site', 'can you teach me', 'show me how to', 'how to edit content', 'post a blog', 'add a page', 'change my homepage', 'update images', 'content management' ] ) ) {
+		return $nl( [
+			"Every build comes with a <strong>handoff session</strong> &mdash; a 30-min screen-share walkthrough of how to manage your own site. Here&rsquo;s what&rsquo;s covered:",
+			'',
+			"&bull; Adding / editing pages and posts in the WordPress block editor (Gutenberg)",
+			"&bull; Swapping images, logos, and featured photos",
+			"&bull; Managing navigation menus and widget areas",
+			"&bull; Updating pricing, testimonials, or portfolio items",
+			"&bull; Viewing Google Analytics / Search Console basics",
+			'',
+			"For clients who want more: <strong>extended CMS training</strong> (additional 1-hr session, screen-recorded for your team) is available for $75.",
+			'',
+			"Is this for you or for a team that will be updating the site?",
+		] );
+	}
+
+	// 0d-pre9-z) Photography / creative visual assets.
+	if ( $has( [ 'product photography', 'brand photography', 'lifestyle photos', 'photos for my site', 'photo editing', 'photo retouching', 'headshots', 'need photos', 'stock photos', 'custom photography', 'shoot my products', 'photography service', 'image creation', 'ai generated images', 'ai images for site' ] ) ) {
+		return $nl( [
+			"Photography and visual assets aren&rsquo;t an in-house service, but here&rsquo;s how clients typically handle it:",
+			'',
+			"&bull; <strong>Stock photos</strong> &mdash; I can source from Unsplash, Pexels, or licensed Shutterstock on your behalf (included in any build)",
+			"&bull; <strong>AI-generated images</strong> &mdash; Midjourney or DALL-E prompts for custom hero imagery, patterns, or product mockups; add ~$50&ndash;$75 for a full image set",
+			"&bull; <strong>Existing photos</strong> &mdash; I&rsquo;ll retouch, crop, and optimize any images you send (WebP conversion, lazy-loading, alt-text for SEO)",
+			"&bull; <strong>Referral</strong> &mdash; if you need real product or brand photography, I work with a photographer in my network and can intro you",
+			'',
+			"What kind of imagery are you missing right now?",
+		] );
+	}
+
+	// 0d-pre9-z2) Print / physical / merchandise design.
+	if ( $has( [ 'business cards', 'flyer design', 'print design', 'brochure', 'banner design', 'merchandise design', 't-shirt design', 'poster design', 'print materials', 'physical materials', 'packaging design', 'label design', 'sticker design', 'billboard', 'physical product design', 'rack card' ] ) ) {
+		return $nl( [
+			"Print and merchandise design is available as part of the <strong>Brand</strong> service. Here&rsquo;s the scope:",
+			'',
+			"&bull; <strong>Business cards</strong> &mdash; double-sided, print-ready PDF/AI at 300 dpi; $25 flat",
+			"&bull; <strong>Flyer / poster</strong> &mdash; one-sided or folded; from $35",
+			"&bull; <strong>Brochure (tri-fold or bi-fold)</strong> &mdash; from $55",
+			"&bull; <strong>Merch (t-shirt / tote / mug)</strong> &mdash; vector artwork for print-on-demand platforms (Printful, Printify); from $45 per item",
+			"&bull; <strong>Packaging / labels</strong> &mdash; scoped per complexity; start at $75",
+			'',
+			"All files delivered in both web-ready (PNG/JPG) and print-ready (PDF/AI/EPS) formats.",
+			"What do you need designed?",
+		] );
+	}
+
 	// 0d-pre9-p) Availability / when can you start.
 	if ( $has( [ 'when can you start', 'when are you available', "what's your availability", 'what is your availability', 'how soon can you', 'are you available', 'available now', 'how long is your waitlist', 'lead time', 'earliest start', 'kickoff date', 'next opening', 'are you booking', 'taking on clients' ] ) ) {
 		return $nl( [

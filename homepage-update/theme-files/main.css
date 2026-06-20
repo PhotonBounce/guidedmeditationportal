@@ -2888,6 +2888,12 @@ border-radius: 50%; cursor: pointer; font-size: 16px;
 .pb-brain__msg--bot:hover .pb-brain__copy{ opacity:1; }
 .pb-brain__copy:hover{ color:rgba(255,212,0,.9); }
 .pb-brain__copy:focus-visible{ opacity:1; outline:1px solid rgba(255,212,0,.5); border-radius:3px; }
+/* Error messages (transient — not saved to sessionStorage) */
+.pb-brain__msg--err{
+  align-self:stretch; max-width:100%;
+  background:rgba(220,50,50,.08); border:1px solid rgba(220,80,80,.25);
+  color:rgba(255,190,190,.9); font-size:13px; font-style:italic;
+}
 .pb-brain__char-count{
   display:block; text-align:right; font-size:11px; color:rgba(244,246,251,.3);
   padding:2px 4px 0; transition:color .2s;

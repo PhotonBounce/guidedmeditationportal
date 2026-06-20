@@ -305,9 +305,9 @@ function pb_aurora_schema_enhanced() {
 	$site_url = home_url( '/' );
 	$graph    = [];
 
-	// LocalBusiness (for local SEO + trust signals)
+	// LocalBusiness + ProfessionalService (dual-type for richer Google entity classification)
 	$graph[] = [
-		'@type'       => 'LocalBusiness',
+		'@type'       => [ 'LocalBusiness', 'ProfessionalService' ],
 		'@id'         => $site_url . '#localbusiness',
 		'name'        => 'Photon Bounce',
 		'description' => 'Custom web apps, AI integrations, 3D/AR experiences, and SaaS platforms for founders and research teams.',
