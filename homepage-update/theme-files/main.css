@@ -2880,6 +2880,15 @@ border-radius: 50%; cursor: pointer; font-size: 16px;
 .pb-brain__chips-followup{ border-top:none; margin-top:6px; padding-top:6px; transition:opacity .35s ease,transform .35s ease; }
 .pb-chips-entering{ opacity:0; transform:translateY(10px); }
 .pb-brain__msg--bot{ position:relative; padding-right:28px; }
+/* Message timestamp — hidden by default, shown on hover */
+.pb-brain__ts{
+  display:block; font-size:10px; color:rgba(255,255,255,.25);
+  margin-top:4px; opacity:0; transition:opacity .2s;
+  pointer-events:none; user-select:none;
+}
+.pb-brain__msg--me .pb-brain__ts{ text-align:right; }
+.pb-brain__msg--bot .pb-brain__ts{ text-align:left; }
+.pb-brain__msg:hover .pb-brain__ts{ opacity:1; }
 .pb-brain__copy{
   position:absolute; top:6px; right:4px;
   background:none; border:none; color:rgba(255,255,255,.3); cursor:pointer;

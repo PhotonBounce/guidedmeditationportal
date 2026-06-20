@@ -561,6 +561,49 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre14-a) Web scraping / workflow automation / API integration.
+	if ( $has( [ 'web scraping', 'data scraping', 'scrape website', 'scrape data', 'automate workflow', 'workflow automation', 'zapier alternative', 'make.com', 'api integration', 'connect apis', 'data pipeline', 'webhook integration', 'third-party api', 'integrate crm', 'integrate stripe', 'integrate api', 'n8n', 'automation script' ] ) ) {
+		return $nl( [
+			"Automation and API integration are fully in scope &mdash; here&rsquo;s how it typically breaks down:",
+			'',
+			"&bull; <strong>Web scraping</strong> &mdash; Python (Beautiful Soup / Playwright) or Node.js (Puppeteer) depending on JavaScript rendering and anti-bot measures; from <strong>$150</strong>",
+			"&bull; <strong>Workflow automation</strong> &mdash; Zapier, Make.com, or self-hosted n8n; trigger &rarr; action chains; custom webhook endpoint build included",
+			"&bull; <strong>API integration</strong> &mdash; REST or GraphQL; OAuth 2, API key, and JWT auth patterns; any public or private API",
+			"&bull; <strong>Data pipeline</strong> &mdash; ETL script (fetch &rarr; transform &rarr; store); cron-triggered or webhook-triggered; outputs to DB / CSV / Google Sheets / Airtable",
+			"&bull; <strong>Common APIs bundled at no extra cost</strong> &mdash; Stripe, WooCommerce webhooks, Mailchimp, SendGrid, Google Sheets, HubSpot",
+			'',
+			"What are you trying to connect or automate?",
+		] );
+	}
+
+	// 0d-pre14-b) Social media strategy / content calendar.
+	if ( $has( [ 'social media strategy', 'content calendar', 'social media content', 'instagram strategy', 'tiktok strategy', 'linkedin content', 'twitter strategy', 'social media marketing', 'content plan', 'posting schedule', 'social content plan', 'content creation strategy', 'social media help' ] ) ) {
+		return $nl( [
+			"Social media strategy isn&rsquo;t the primary service, but Photon Bounce&rsquo;s work plugs into it:",
+			'',
+			"&bull; <strong>Brand identity</strong> &mdash; every social profile designed in one kit: headers, profile image, story templates, post grid look; part of the Brand service",
+			"&bull; <strong>Content repurposing engine</strong> &mdash; SEO articles automatically formatted into social-ready excerpt cards (Open Graph + schema); saves manual work",
+			"&bull; <strong>AI content toolkit</strong> &mdash; custom Claude or GPT system prompt tuned to your brand voice; drop in a topic, get a post in your style",
+			"&bull; <strong>What&rsquo;s not covered</strong> &mdash; scheduling, community management, or posting &mdash; for that, use Buffer or Hootsuite",
+			'',
+			"Are you looking for the brand design layer, the content strategy layer, or a writing toolkit?",
+		] );
+	}
+
+	// 0d-pre14-c) Podcast website / audio player / voice app.
+	if ( $has( [ 'podcast website', 'podcast player', 'audio player', 'voice app', 'podcast hosting', 'podcast setup', 'audio content', 'audio streaming', 'podcast directory', 'spotify embed', 'soundcloud embed', 'podcast page', 'rss feed podcast', 'show notes', 'wavesurfer' ] ) ) {
+		return $nl( [
+			"Podcast and audio integration are available &mdash; here&rsquo;s the full picture:",
+			'',
+			"&bull; <strong>Podcast website</strong> &mdash; custom HTML5 player or Spotify / SoundCloud embed; episode archive with show notes + transcripts; RSS feed for Apple / Spotify directories; from <strong>$500</strong> in the Web service",
+			"&bull; <strong>Waveform player</strong> &mdash; WaveSurfer.js for immersive audio landing pages; scrub + play; responsive; can visualize any hosted audio file",
+			"&bull; <strong>Podcast hosting</strong> &mdash; not in-house; recommend Buzzsprout, Transistor, or Anchor (free) &mdash; I build the site that lists and embeds your episodes",
+			"&bull; <strong>Voice UX</strong> &mdash; browser SpeechSynthesis + SpeechRecognition APIs (like this chatbot); bundled into SaaS builds; Alexa / Google Assistant skills out of current scope",
+			'',
+			"Is this a podcast site, an embedded audio player, or a voice-driven interface?",
+		] );
+	}
+
 	// 0d-pre13-a) White-label / reseller / agency partnership.
 	if ( $has( [ 'white label', 'white-label', 'resell', 'reseller', 'agency reselling', 'rebrand for clients', 'white label solution', 'agency white label', 'client reselling', 'under my brand', 'under our brand', 'agency partnership', 'dev partnership', 'whitelabel' ] ) ) {
 		return $nl( [

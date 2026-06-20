@@ -410,6 +410,13 @@
         });
         div.appendChild(cpBtn);
       }
+      // Timestamp badge — revealed on hover via CSS opacity transition
+      var _tsEl = document.createElement('time');
+      _tsEl.className = 'pb-brain__ts';
+      var _tn = new Date();
+      _tsEl.textContent = _tn.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      _tsEl.setAttribute('datetime', _tn.toISOString());
+      div.appendChild(_tsEl);
       log.appendChild(div);
       // After the 2nd bot message (first substantive reply), inject follow-up action chips.
       if (cls === 'bot') {
