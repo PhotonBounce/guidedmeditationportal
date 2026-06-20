@@ -19,8 +19,8 @@ function pb_aurora_schema_emit() {
 
 	$graph = [];
 
-	// Organization
-	$graph[] = array_filter( [
+	// Organization (with optional AggregateRating — configure via Customizer)
+	$org = array_filter( [
 		'@type'         => 'Organization',
 		'@id'           => $site_url . '#organization',
 		'name'          => $site_name,
@@ -37,6 +37,18 @@ function pb_aurora_schema_emit() {
 			get_theme_mod( 'pb_social_instagram', '' ),
 		] ),
 	] );
+	$rating_val = get_theme_mod( 'pb_rating_value', '' );
+	$review_cnt = get_theme_mod( 'pb_review_count', '' );
+	if ( $rating_val && $review_cnt ) {
+		$org['aggregateRating'] = [
+			'@type'       => 'AggregateRating',
+			'ratingValue' => (float) $rating_val,
+			'reviewCount' => (int) $review_cnt,
+			'bestRating'  => 5,
+			'worstRating' => 1,
+		];
+	}
+	$graph[] = $org;
 
 	// Person (Dmitriy)
 	$graph[] = [

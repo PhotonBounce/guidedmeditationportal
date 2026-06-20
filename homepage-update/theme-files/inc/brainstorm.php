@@ -514,6 +514,49 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre9-s) ADA / accessibility / WCAG compliance.
+	if ( $has( [ 'ada compliant', 'accessible website', 'accessibility', 'screen reader', 'wcag', '508 compliance', 'disability access', 'aria labels', 'color contrast', 'keyboard navigation', 'blind user', 'visually impaired', 'accessibility audit', 'is it accessible', 'make it accessible' ] ) ) {
+		return $nl( [
+			"Accessibility is baked in at every tier &mdash; not an add-on. Here&rsquo;s what&rsquo;s included by default:",
+			'',
+			"&bull; <strong>WCAG 2.1 AA</strong> &mdash; semantic HTML, proper heading hierarchy, focus indicators, skip-nav link",
+			"&bull; <strong>ARIA labels</strong> &mdash; on all interactive elements (forms, buttons, modals, sliders)",
+			"&bull; <strong>Color contrast</strong> &mdash; minimum 4.5:1 for body text, 3:1 for large text",
+			"&bull; <strong>Keyboard navigation</strong> &mdash; every interactive element reachable and operable by keyboard alone",
+			"&bull; <strong>Screen reader testing</strong> &mdash; VoiceOver (macOS / iOS) and NVDA (Windows)",
+			'',
+			"Need a formal <strong>accessibility audit report</strong> (for legal/grant compliance)? That&rsquo;s available as a standalone deliverable &mdash; ask about it.",
+		] );
+	}
+
+	// 0d-pre9-t) Payment plan / installments.
+	if ( $has( [ 'pay in installments', 'payment plan', 'split the payment', 'split payment', 'pay monthly', 'pay over time', 'deposit and balance', '50% deposit', '50 percent deposit', 'milestone payment', 'down payment', 'can i pay later', 'partial payment', 'pay in stages' ] ) ) {
+		return $nl( [
+			"Yes &mdash; all builds follow a milestone payment structure:",
+			'',
+			"&bull; <strong>50% upfront</strong> to kick off the project (covers design + initial dev)",
+			"&bull; <strong>50% on delivery</strong> before the site goes live or the APK is handed over",
+			'',
+			"For larger builds ($750+), a 3-milestone split is available on request:",
+			"<strong>33% kick-off &rarr; 33% first-build review &rarr; 33% on launch.</strong>",
+			'',
+			"Payment is via Stripe (card / Apple Pay / Google Pay) or Cash App ($photonbounce). Crypto on request.",
+		] );
+	}
+
+	// 0d-pre9-u) Native mobile app (iOS / Android).
+	if ( $has( [ 'ios app', 'android app', 'native app', 'native mobile app', 'app store', 'google play', 'react native', 'flutter', 'native vs web', 'publish to app store', 'submit to app store', 'mobile app development', 'apk', 'ipa file', 'cross-platform app' ] ) ) {
+		return $nl( [
+			"Native mobile apps are in scope &mdash; here&rsquo;s how the tiers map:",
+			'',
+			"&bull; <strong>PWA (Progressive Web App)</strong> &mdash; installable on home screen, works offline, push notifications. Builds into the SaaS/App tier at $750. Looks and feels native on Android; iOS has slightly more limitations.",
+			"&bull; <strong>React Native</strong> &mdash; true native builds for iOS + Android from one codebase. Custom quote, typically $1,500&ndash;$3,000 depending on feature depth.",
+			"&bull; <strong>App Store / Google Play submission</strong> &mdash; I handle signing, screenshots, store listing, and the review process. Included in React Native scope.",
+			'',
+			"What&rsquo;s the app for? Describe the core feature and I&rsquo;ll recommend the right approach.",
+		] );
+	}
+
 	// 0d-pre9-r) Migration / site rebuild from another platform.
 	if ( $has( [ 'moving from wix', 'moving from squarespace', 'moving from shopify', 'leaving wix', 'leaving squarespace', 'leaving shopify', 'migrate from', 'site migration', 'content migration', 'migrate my site', 'rebuild my old site', 'rebuild my current site', 'replace my old site', 'switch to wordpress', 'switch from wix', 'switch from squarespace' ] ) ) {
 		return $nl( [

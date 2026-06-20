@@ -351,6 +351,7 @@
     let voiceMode = false;   // becomes true once the visitor talks -> bot replies aloud
     let listening = false;
     let currentAudio = null;
+    var chatMsgs = []; // persisted to sessionStorage for cross-reload chat restore
 
     // Strip HTML to plain text (for TTS + history).
     function plain(html) {
@@ -413,7 +414,21 @@
           });
         }
       }
+      chatMsgs.push({ text: text, cls: cls });
+      saveChat();
       log.scrollTop = log.scrollHeight;
+    }
+
+    function saveChat() {
+      try { sessionStorage.setItem('pb_chat_v1', JSON.stringify(chatMsgs)); } catch(e) {}
+    }
+
+    function clearChat() {
+      chatMsgs = []; history = [];
+      try { sessionStorage.removeItem('pb_chat_v1'); } catch(e) {}
+      while (log.children.length > 1) log.removeChild(log.lastChild);
+      var chips = brain.querySelector('.pb-brain__chips');
+      if (chips) chips.style.display = '';
     }
 
     function addTyping() {
@@ -461,6 +476,15 @@
         window.speechSynthesis.speak(u);
       }
     }
+
+    // Restore previous conversation from sessionStorage (survives page reload).
+    (function restoreChat() {
+      try {
+        var saved = JSON.parse(sessionStorage.getItem('pb_chat_v1') || 'null');
+        if (!Array.isArray(saved) || !saved.length) return;
+        saved.forEach(function(m) { if (m.text && m.cls) addMsg(m.text, m.cls); });
+      } catch(e) {}
+    })();
 
     // --- Voice input: speech recognition ---
     // Quick-reply chips: clicking a chip fills + submits the textarea
@@ -586,7 +610,35 @@
       if (muted) stopSpeaking();
     });
     var brainHead = document.querySelector('.pb-brain__head');
-    if (brainHead) brainHead.appendChild(muteBtn);
+    if (brainHead) {
+      // "New conversation" reset button — clears log + sessionStorage
+      var newChatBtn = document.createElement('button');
+      newChatBtn.type = 'button';
+      newChatBtn.className = 'pb-brain__newchat';
+      newChatBtn.title = 'Start new conversation';
+      newChatBtn.setAttribute('aria-label', 'Start new conversation');
+      newChatBtn.innerHTML = '&#x21BA;';
+      newChatBtn.addEventListener('click', function() {
+        clearChat();
+        voiceMode = false; listening = false; stopSpeaking();
+        if (rec) { try { rec.stop(); } catch(e) {} }
+        hideListeningBanner();
+      });
+      // Wrap buttons in a flex row so they sit next to the close button
+      var btnGroup = brainHead.querySelector('.pb-brain__head-btns');
+      if (!btnGroup) {
+        btnGroup = document.createElement('div');
+        btnGroup.className = 'pb-brain__head-btns';
+        btnGroup.style.cssText = 'display:flex;align-items:center;gap:6px;flex-shrink:0;';
+        var closeBtn = brainHead.querySelector('[data-pb-brainstorm-close]');
+        if (closeBtn) { brainHead.removeChild(closeBtn); btnGroup.appendChild(newChatBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(closeBtn); }
+        else { btnGroup.appendChild(newChatBtn); btnGroup.appendChild(muteBtn); }
+        brainHead.appendChild(btnGroup);
+      } else {
+        btnGroup.insertBefore(newChatBtn, btnGroup.firstChild);
+        btnGroup.appendChild(muteBtn);
+      }
+    }
   }
 })();
 
