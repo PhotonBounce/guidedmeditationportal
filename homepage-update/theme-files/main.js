@@ -410,6 +410,26 @@
         });
         div.appendChild(cpBtn);
       }
+      // "Was this helpful?" thumbs — hidden until hover; GA4 event on selection
+      if (cls === 'bot') {
+        var _fbDiv = document.createElement('div');
+        _fbDiv.className = 'pb-brain__fb';
+        _fbDiv.setAttribute('aria-label', 'Was this helpful?');
+        var _upBtn = document.createElement('button');
+        _upBtn.type = 'button'; _upBtn.className = 'pb-brain__fb-btn';
+        _upBtn.setAttribute('aria-label', 'Helpful'); _upBtn.innerHTML = '&#128077;';
+        var _dnBtn = document.createElement('button');
+        _dnBtn.type = 'button'; _dnBtn.className = 'pb-brain__fb-btn';
+        _dnBtn.setAttribute('aria-label', 'Not helpful'); _dnBtn.innerHTML = '&#128078;';
+        var _pbFbLock = function(chosen) {
+          [_upBtn, _dnBtn].forEach(function(b) { b.disabled = true; b.style.opacity = b === chosen ? '1' : '0.2'; });
+          try { if (window.gtag) window.gtag('event', 'chat_feedback', { value: chosen === _upBtn ? 1 : 0, event_category: 'chatbot' }); } catch(e) {}
+        };
+        _upBtn.addEventListener('click', function() { _pbFbLock(_upBtn); });
+        _dnBtn.addEventListener('click', function() { _pbFbLock(_dnBtn); });
+        _fbDiv.appendChild(_upBtn); _fbDiv.appendChild(_dnBtn);
+        div.appendChild(_fbDiv);
+      }
       // Timestamp badge — revealed on hover via CSS opacity transition
       var _tsEl = document.createElement('time');
       _tsEl.className = 'pb-brain__ts';

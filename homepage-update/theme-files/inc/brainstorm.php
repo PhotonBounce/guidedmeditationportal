@@ -561,6 +561,53 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre15-a) Blockchain / Web3 / smart contracts / NFTs / dApps.
+	if ( $has( [ 'blockchain', 'web3', 'smart contract', ' nft ', 'nft marketplace', 'defi', 'cryptocurrency', 'crypto wallet', 'dapp', 'decentralized', 'solidity', 'ethereum', 'polygon', ' token ', 'web3 integration', 'metamask', 'walletconnect', 'ipfs', 'solana', 'base chain', 'layer 2' ] ) ) {
+		return $nl( [
+			"Web3 and blockchain projects are in scope &mdash; here&rsquo;s the current capability:",
+			'',
+			"&bull; <strong>Smart contracts</strong> &mdash; Solidity (ERC-20, ERC-721, ERC-1155); Hardhat dev environment; strongly recommend an audit before mainnet deploy",
+			"&bull; <strong>dApp frontend</strong> &mdash; ethers.js / wagmi + Next.js; MetaMask + WalletConnect integration; ENS name resolution",
+			"&bull; <strong>NFT marketplace</strong> &mdash; custom OpenSea-style or simple storefront; IPFS / Pinata for metadata and media",
+			"&bull; <strong>Token gating</strong> &mdash; restrict content or features to wallet holders; WP plugin or custom API middleware",
+			"&bull; <strong>Crypto payments</strong> &mdash; Coinbase Commerce or direct wallet address on any WP / Next.js build",
+			'',
+			"Quotes from <strong>$750+</strong>; smart contract audit adds cost but is strongly recommended.",
+			"What chain &mdash; Ethereum, Polygon, Solana, Base, or something else?",
+		] );
+	}
+
+	// 0d-pre15-b) No-code / low-code tools / Webflow / Bubble / Framer.
+	if ( $has( [ 'no-code', 'low-code', 'nocode', 'webflow', 'bubble.io', 'framer', 'squarespace', ' wix ', 'no code tool', 'should i use webflow', 'webflow vs wordpress', 'webflow vs custom', 'framer vs', 'vs squarespace', 'vs webflow', 'bubble vs', 'vs wordpress', 'which platform' ] ) ) {
+		return $nl( [
+			"Photon Bounce builds custom (WordPress or Next.js / React), not Webflow, Wix, or Squarespace &mdash; but here&rsquo;s an honest comparison:",
+			'',
+			"&bull; <strong>Webflow / Framer</strong> &mdash; great for design-heavy marketing sites with a designer who knows them; limited custom functionality; harder to hand off to devs",
+			"&bull; <strong>Squarespace / Wix</strong> &mdash; fastest for solo businesses with simple needs; very limited custom logic; platform lock-in",
+			"&bull; <strong>WordPress</strong> &mdash; best for CMS-heavy sites with client-editable content; huge plugin ecosystem; Photon Bounce&rsquo;s primary stack",
+			"&bull; <strong>Next.js / React</strong> &mdash; best for apps, dashboards, interactive tools, real user accounts, or high-performance sites",
+			'',
+			"Custom is worth it when you need: custom functionality, real performance, no platform ceiling, or you&rsquo;re scaling beyond what a template handles.",
+			"What does the site need to do that a template can&rsquo;t handle?",
+		] );
+	}
+
+	// 0d-pre15-c) Data visualization / charts / dashboards / analytics.
+	if ( $has( [ 'data visualization', 'data viz', ' chart ', 'graphs', 'dashboard analytics', 'interactive chart', 'd3.js', 'chart.js', 'recharts', 'data dashboard', 'reporting dashboard', 'analytics dashboard', 'charting library', 'visualize data', 'echarts', 'leaflet', 'mapbox' ] ) ) {
+		return $nl( [
+			"Data visualization is fully in scope &mdash; here&rsquo;s the library decision matrix:",
+			'',
+			"&bull; <strong>Chart.js</strong> &mdash; fastest for common types (line, bar, pie, doughnut, radar); lightweight; included free in SaaS / App builds",
+			"&bull; <strong>D3.js</strong> &mdash; maximum flexibility; custom layouts, force-directed graphs, geographic maps; complex builds from <strong>$400</strong>",
+			"&bull; <strong>Recharts / Nivo</strong> &mdash; React-native; great for Next.js dashboards; clean declarative API",
+			"&bull; <strong>Leaflet.js / Mapbox GL</strong> &mdash; geographic data + choropleth maps; custom tile layers; works offline with cached tiles",
+			"&bull; <strong>Apache ECharts</strong> &mdash; heavy-duty; large data volumes; excellent for financial or operational dashboards",
+			"&bull; <strong>Live data</strong> &mdash; pulls from REST API or WebSocket; updates in real time without page reload",
+			'',
+			"How much data, how often does it update, and does it need interactive filtering?",
+		] );
+	}
+
 	// 0d-pre14-a) Web scraping / workflow automation / API integration.
 	if ( $has( [ 'web scraping', 'data scraping', 'scrape website', 'scrape data', 'automate workflow', 'workflow automation', 'zapier alternative', 'make.com', 'api integration', 'connect apis', 'data pipeline', 'webhook integration', 'third-party api', 'integrate crm', 'integrate stripe', 'integrate api', 'n8n', 'automation script' ] ) ) {
 		return $nl( [
