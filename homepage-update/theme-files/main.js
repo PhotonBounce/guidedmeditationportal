@@ -606,7 +606,10 @@
       addMsg(text, 'user');
       input.value = '';
       input.style.height = 'auto';
+      const sendBtn = form.querySelector('[type="submit"]');
       const typing = addTyping();
+      input.disabled = true;
+      if (sendBtn) { sendBtn.disabled = true; sendBtn.textContent = '…'; }
       try {
         const r = await fetch(endpoint, {
           method: 'POST',
@@ -628,6 +631,10 @@
       } catch (err) {
         typing.remove();
         addMsg('Connection hiccup — try again, or email us directly.', 'err');
+      } finally {
+        input.disabled = false;
+        if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = 'Send'; }
+        input.focus();
       }
     });
 

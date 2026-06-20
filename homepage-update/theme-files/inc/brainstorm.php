@@ -561,6 +561,53 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre12-a) SaaS user onboarding / activation flow.
+	if ( $has( [ 'onboarding flow', 'user onboarding', 'welcome flow', 'getting started flow', 'activation flow', 'onboarding checklist', 'onboarding wizard', 'new user flow', 'product tour', 'guided tour', 'user activation', 'first-time user', 'setup wizard' ] ) ) {
+		return $nl( [
+			"User onboarding is included in the SaaS / App build &mdash; here&rsquo;s how it typically scopes:",
+			'',
+			"&bull; <strong>Welcome wizard</strong> &mdash; multi-step modal on first login; collects preferences; saves to user meta; progress bar",
+			"&bull; <strong>Onboarding checklist</strong> &mdash; floating widget with completion % (like Intercom); each task links to the relevant screen",
+			"&bull; <strong>Email drip sequence</strong> &mdash; D0 welcome, D3 feature tips, D7 spotlight; triggered via WP Cron or Zapier; MJML-templated",
+			"&bull; <strong>Empty-state prompts</strong> &mdash; custom illustrations + CTA for &ldquo;add your first item&rdquo; screens",
+			"&bull; <strong>Product tour</strong> &mdash; Shepherd.js sequential tooltips; skip / resume state stored in localStorage",
+			'',
+			"What does a user need to do to reach their first &ldquo;aha moment&rdquo;?",
+		] );
+	}
+
+	// 0d-pre12-b) Maintenance / support / monthly retainer.
+	if ( $has( [ 'maintenance plan', 'support retainer', 'monthly retainer', 'ongoing support', 'website maintenance', 'update plan', 'care plan', 'post-launch support', 'site support', 'bug fixes ongoing', 'manage my site', 'keep my site updated', 'site maintenance', 'hosting management' ] ) ) {
+		return $nl( [
+			"Monthly care plans are available after launch:",
+			'',
+			"&bull; <strong>Basic &mdash; $99/mo</strong> &mdash; WP core / plugin / security updates, daily backups, uptime monitoring",
+			"&bull; <strong>Growth &mdash; $199/mo</strong> &mdash; everything in Basic + up to 4 content edits/mo, Core Web Vitals check, priority email support",
+			"&bull; <strong>Pro &mdash; $349/mo</strong> &mdash; everything in Growth + 2 dev hours/mo (bug fixes, small features), A/B test setup, monthly analytics report",
+			'',
+			"All plans billed monthly, cancel any time. What do you currently have for maintenance?",
+		] );
+	}
+
+	// 0d-pre12-c) Video / animation / explainer video.
+	if ( $has( [ 'explainer video', 'animated video', 'product video', 'demo video', 'screen recording', 'lottie animation', 'svg animation', 'video editing', 'video production', 'motion graphics', 'product demo', 'walkthrough video', 'promo video', 'rive animation', 'hero animation' ] ) ) {
+		return $nl( [
+			"Video and animation options &mdash; here&rsquo;s what&rsquo;s available:",
+			'',
+			"<strong>UI / web animations (bundled into builds):</strong>",
+			"&bull; <strong>Lottie</strong> &mdash; JSON animations that drop into any web page; lightweight, loop-able, responsive",
+			"&bull; <strong>Rive</strong> &mdash; interactive state-machine animations for heroes, loaders, empty states",
+			"&bull; <strong>CSS / GSAP</strong> &mdash; scroll-triggered reveals, parallax, morphing shapes",
+			'',
+			"<strong>Standalone video (referred to trusted editors):</strong>",
+			"&bull; Screen recording + voiceover walkthrough &mdash; from <strong>$150</strong>",
+			"&bull; Animated explainer (whiteboard / motion) &mdash; partner studio from <strong>$400&ndash;$800</strong>",
+			"&bull; Product demo with CTA overlay (embeddable) &mdash; from <strong>$99</strong>",
+			'',
+			"Is this for a UI animation inside the site, or a standalone video?",
+		] );
+	}
+
 	// 0d-pre11-a) Community / forum / online community platform.
 	if ( $has( [ 'community site', 'online community', 'forum site', 'discussion board', 'membership community', 'discord-like', 'reddit-like', 'peer community', 'community platform', 'social network', 'q&a platform', 'knowledge base community', 'private community', 'members-only forum', 'support forum', 'user forum' ] ) ) {
 		return $nl( [

@@ -2919,6 +2919,9 @@ border-radius: 50%; cursor: pointer; font-size: 16px;
 }
 .pb-brain__export:hover{ border-color:rgba(100,200,255,.6); color:rgba(100,200,255,.9); }
 .pb-brain__export:focus-visible{ outline:1px solid rgba(100,200,255,.5); border-radius:50%; }
+/* Submit guard — visual disabled state during API fetch */
+.pb-brain__input:disabled{ opacity:.45; cursor:not-allowed; resize:none; }
+.pb-brain__form button[type="submit"]:disabled{ opacity:.45; cursor:not-allowed; pointer-events:none; }
 /* Scroll-to-bottom floating button inside the chat drawer */
 .pb-brain__scroll-down{
   position:absolute; bottom:86px; right:14px; z-index:20;
