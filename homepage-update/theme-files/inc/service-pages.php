@@ -227,6 +227,26 @@ function pb_aurora_service_title( $parts ) {
 	return $parts;
 }
 
+/** BreadcrumbList per service page (Home → Services → Page). */
+add_action( 'wp_head', 'pb_aurora_service_breadcrumb', 7 );
+function pb_aurora_service_breadcrumb() {
+	if ( ! is_page() ) { return; }
+	$slug = get_post_field( 'post_name', get_queried_object_id() );
+	$svc  = pb_aurora_service_pages();
+	if ( ! isset( $svc[ $slug ] ) ) { return; }
+	$site_url = home_url( '/' );
+	$payload = [
+		'@context'        => 'https://schema.org',
+		'@type'           => 'BreadcrumbList',
+		'itemListElement' => [
+			[ '@type' => 'ListItem', 'position' => 1, 'name' => 'Home',     'item' => $site_url ],
+			[ '@type' => 'ListItem', 'position' => 2, 'name' => 'Services', 'item' => $site_url . 'services/' ],
+			[ '@type' => 'ListItem', 'position' => 3, 'name' => $svc[ $slug ]['h1'], 'item' => $site_url . $slug . '/' ],
+		],
+	];
+	echo "\n<script type=\"application/ld+json\">" . wp_json_encode( $payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . "</script>\n";
+}
+
 /** Service + Offer JSON-LD per service page (rich results for service searches). */
 add_action( 'wp_head', 'pb_aurora_service_schema', 8 );
 function pb_aurora_service_schema() {

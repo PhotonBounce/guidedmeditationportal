@@ -561,6 +561,49 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre11-a) Community / forum / online community platform.
+	if ( $has( [ 'community site', 'online community', 'forum site', 'discussion board', 'membership community', 'discord-like', 'reddit-like', 'peer community', 'community platform', 'social network', 'q&a platform', 'knowledge base community', 'private community', 'members-only forum', 'support forum', 'user forum' ] ) ) {
+		return $nl( [
+			"Community and forum sites are a good fit &mdash; here&rsquo;s how they typically scope:",
+			'',
+			"&bull; <strong>Basic forum (Q&amp;A / support)</strong> &mdash; bbPress on WordPress; threaded replies, category routing, user roles; bundled into <strong>SaaS / App $750</strong>",
+			"&bull; <strong>Private membership community</strong> &mdash; MemberPress or Restrict Content Pro; gated content, community areas, membership tiers; <strong>SaaS / App $750+</strong>",
+			"&bull; <strong>Full social / community platform</strong> &mdash; BuddyBoss or custom Next.js + real-time features (WebSockets); <strong>custom quote from $1,500</strong>",
+			'',
+			"Key decisions: is it open or invite-only? Do you need real-time messaging? Paid tiers? I can scope around those.",
+		] );
+	}
+
+	// 0d-pre11-b) Gamification / points / leaderboards / achievements.
+	if ( $has( [ 'gamification', 'points system', 'leaderboard', 'badges', 'achievements', 'reward system', 'loyalty program', 'streak tracking', 'progress tracker', 'xp system', 'level up', 'user levels', 'referral rewards', 'incentive system', 'engagement mechanics' ] ) ) {
+		return $nl( [
+			"Gamification layers well on top of SaaS, community, or e-learning builds. Here&rsquo;s what&rsquo;s feasible:",
+			'',
+			"&bull; <strong>Points &amp; XP</strong> &mdash; custom database table; action hooks award points (post, comment, purchase, referral)",
+			"&bull; <strong>Badges &amp; achievements</strong> &mdash; SVG badge set + unlock logic; displayed on user profile",
+			"&bull; <strong>Leaderboard</strong> &mdash; real-time or cached; global or per-cohort; CSV export for ops",
+			"&bull; <strong>Streaks</strong> &mdash; last-active timestamp check; streak broken if gap &gt; N days",
+			"&bull; <strong>Reward redemption</strong> &mdash; coupon codes, feature unlocks, or physical reward triggers via webhook",
+			'',
+			"Gamification is an add-on to any SaaS/App build &mdash; typically +$200&ndash;$400 depending on complexity.",
+			"What behaviour are you trying to incentivise?",
+		] );
+	}
+
+	// 0d-pre11-c) Real-time features / WebSockets / live updates.
+	if ( $has( [ 'real-time', 'real time', 'websockets', 'socket.io', 'live chat', 'live updates', 'live feed', 'collaborative editing', 'google docs like', 'live dashboard', 'pusher', 'ably', 'supabase realtime', 'multiplayer', 'instant notifications', 'push notifications app' ] ) ) {
+		return $nl( [
+			"Real-time features are available &mdash; here&rsquo;s the typical stack depending on use case:",
+			'',
+			"&bull; <strong>Live notifications</strong> &mdash; Pusher or Supabase Realtime; sub-$20/mo for most traffic; integrated into any SaaS build",
+			"&bull; <strong>Live chat (user &harr; user)</strong> &mdash; Socket.io on a Node.js server or Supabase channels; <strong>SaaS / App $750+</strong>",
+			"&bull; <strong>Collaborative editing</strong> (Google Docs-like) &mdash; Y.js (CRDT) + Tiptap editor + WebSocket sync server; complex but doable; <strong>custom quote from $1,500</strong>",
+			"&bull; <strong>Live dashboard / ticker</strong> &mdash; Server-Sent Events (SSE) for one-way streams; lower infra overhead than WebSockets",
+			'',
+			"What&rsquo;s updating in real time &mdash; a chat, a data feed, or collaborative content?",
+		] );
+	}
+
 	// 0d-pre10-a) Admin dashboard / internal tools.
 	if ( $has( [ 'admin dashboard', 'internal tool', 'back-office', 'admin panel', 'management portal', 'internal ops', 'staff portal', 'team dashboard', 'reporting dashboard', 'data dashboard', 'ops tool', 'internal system', 'employee portal', 'admin area', 'control panel', 'crm build', 'custom crm' ] ) ) {
 		return $nl( [

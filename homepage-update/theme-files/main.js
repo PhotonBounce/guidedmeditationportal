@@ -458,6 +458,23 @@
       if (chips) chips.style.display = '';
     }
 
+    function exportChat() {
+      if (!chatMsgs.length) return;
+      var lines = chatMsgs.map(function(m) {
+        return (m.cls === 'bot' ? 'Photon: ' : 'You:    ') + plain(m.text);
+      });
+      var content = 'Photon Bounce — Chat Transcript\n' + new Date().toLocaleString() + '\n' + '────────────────────────────────────────' + '\n\n' + lines.join('\n\n');
+      var blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'pb-chat-' + new Date().toISOString().slice(0, 10) + '.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
     function addTyping() {
       const div = document.createElement('div');
       div.className = 'pb-brain__msg pb-brain__msg--bot pb-brain__typing';
@@ -673,8 +690,15 @@
         btnGroup.className = 'pb-brain__head-btns';
         btnGroup.style.cssText = 'display:flex;align-items:center;gap:6px;flex-shrink:0;';
         var closeBtn = brainHead.querySelector('[data-pb-brainstorm-close]');
-        if (closeBtn) { brainHead.removeChild(closeBtn); btnGroup.appendChild(newChatBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(closeBtn); }
-        else { btnGroup.appendChild(newChatBtn); btnGroup.appendChild(muteBtn); }
+        var exportBtn = document.createElement('button');
+        exportBtn.type = 'button';
+        exportBtn.className = 'pb-brain__export';
+        exportBtn.title = 'Download chat transcript';
+        exportBtn.setAttribute('aria-label', 'Download chat transcript');
+        exportBtn.innerHTML = '&#8659;';
+        exportBtn.addEventListener('click', exportChat);
+        if (closeBtn) { brainHead.removeChild(closeBtn); btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(closeBtn); }
+        else { btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(muteBtn); }
         brainHead.appendChild(btnGroup);
       } else {
         btnGroup.insertBefore(newChatBtn, btnGroup.firstChild);
