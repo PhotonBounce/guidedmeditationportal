@@ -561,6 +561,52 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre16-a) Stripe / subscription billing / SaaS pricing model.
+	if ( $has( [ 'stripe integration', 'stripe setup', 'payment gateway', 'stripe connect', 'subscription billing', 'recurring billing', 'billing portal', 'stripe customer portal', 'usage-based pricing', 'freemium model', 'tiered pricing setup', 'metered billing', 'stripe webhooks', 'stripe subscription', 'payment integration', 'accept payments' ] ) ) {
+		return $nl( [
+			"Stripe is the standard for SaaS billing &mdash; here&rsquo;s how it scopes:",
+			'',
+			"&bull; <strong>Products &amp; prices</strong> &mdash; monthly / annual subscriptions, one-time payments, usage-based metering &mdash; all set up in Stripe + synced to WP user meta",
+			"&bull; <strong>Customer portal</strong> &mdash; Stripe&rsquo;s hosted portal for plan changes, cancellation, invoice history &mdash; zero custom UI needed",
+			"&bull; <strong>Webhooks</strong> &mdash; payment.succeeded, subscription.updated, subscription.deleted &rarr; update WP roles/features automatically",
+			"&bull; <strong>Coupon codes &amp; trials</strong> &mdash; referral discounts, % / fixed coupons, 7/14/30-day trials &mdash; all native to Stripe",
+			"&bull; <strong>Alternatives</strong> &mdash; PayPal, Square, LemonSqueezy, or Paddle if EU tax compliance matters",
+			'',
+			"Covered in the SaaS / App build ($750+). What plan structure &mdash; monthly / annual / per-seat / usage-based?",
+		] );
+	}
+
+	// 0d-pre16-b) UX research / usability testing / design audit.
+	if ( $has( [ 'ux research', 'usability testing', 'user testing', 'user research', 'user interviews', 'usability audit', 'heuristic evaluation', 'accessibility audit', 'a11y audit', 'design audit', 'ux audit', 'ui ux review', 'ux review', 'design review', 'wcag' ] ) ) {
+		return $nl( [
+			"UX and accessibility services are in scope as a project phase or standalone:",
+			'',
+			"&bull; <strong>Heuristic evaluation</strong> &mdash; 10 Nielsen heuristics; report with severity ratings (critical / major / minor); from <strong>$100</strong>",
+			"&bull; <strong>Usability testing</strong> &mdash; task-based remote sessions; 5-user rule; findings report + prioritised fix list",
+			"&bull; <strong>Accessibility audit (WCAG 2.1 AA)</strong> &mdash; axe DevTools automated scan + manual screen reader check (NVDA / VoiceOver); from <strong>$150</strong>",
+			"&bull; <strong>Design audit</strong> &mdash; UX patterns, contrast ratios, typography scale, spacing consistency; Figma annotations",
+			"&bull; <strong>Prototype testing</strong> &mdash; Figma interactive prototype &rarr; test before any code is written",
+			'',
+			"Is the goal to validate a new design, audit an existing site, or improve conversion?",
+		] );
+	}
+
+	// 0d-pre16-c) Cybersecurity / security audit / pen test / hardening.
+	if ( $has( [ 'security audit', 'penetration testing', 'pen test', 'pentest', 'vulnerability scan', 'owasp', 'xss protection', 'sql injection', 'website security', 'security review', 'csrf protection', 'secure code review', 'security hardening', 'brute force protection', 'malware scan', 'hack prevention' ] ) ) {
+		return $nl( [
+			"Security is built into every Photon Bounce build &mdash; and formal audits are available:",
+			'',
+			"&bull; <strong>OWASP Top 10 code review</strong> &mdash; XSS, SQL injection, CSRF, broken auth, insecure direct object refs; report with severity ratings",
+			"&bull; <strong>WordPress hardening</strong> &mdash; brute-force protection, XML-RPC disabled, file permission lockdown, hidden login URL, login 2FA",
+			"&bull; <strong>Dependency scan</strong> &mdash; npm audit + WP plugin vulnerability check; replace flagged packages",
+			"&bull; <strong>Security headers</strong> &mdash; HTTPS / HSTS, CSP, X-Frame-Options, Permissions-Policy, Referrer-Policy; tested with securityheaders.com",
+			"&bull; <strong>Full pen test (OWASP ZAP + manual)</strong> &mdash; from <strong>$300</strong> standalone; from <strong>$150</strong> added to any build",
+			'',
+			"Note: for PCI DSS, SOC 2, or HIPAA compliance you need a certified QSA / auditor &mdash; I can refer one.",
+			"What&rsquo;s the concern &mdash; an existing site with a possible breach, or a new build you want locked down before launch?",
+		] );
+	}
+
 	// 0d-pre15-a) Blockchain / Web3 / smart contracts / NFTs / dApps.
 	if ( $has( [ 'blockchain', 'web3', 'smart contract', ' nft ', 'nft marketplace', 'defi', 'cryptocurrency', 'crypto wallet', 'dapp', 'decentralized', 'solidity', 'ethereum', 'polygon', ' token ', 'web3 integration', 'metamask', 'walletconnect', 'ipfs', 'solana', 'base chain', 'layer 2' ] ) ) {
 		return $nl( [

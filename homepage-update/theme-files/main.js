@@ -734,8 +734,22 @@
         exportBtn.setAttribute('aria-label', 'Download chat transcript');
         exportBtn.innerHTML = '&#8659;';
         exportBtn.addEventListener('click', exportChat);
-        if (closeBtn) { brainHead.removeChild(closeBtn); btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(closeBtn); }
-        else { btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(muteBtn); }
+        var collapseBtn = document.createElement('button');
+        collapseBtn.type = 'button';
+        collapseBtn.className = 'pb-brain__collapse';
+        collapseBtn.title = 'Minimize chat';
+        collapseBtn.setAttribute('aria-label', 'Minimize chat');
+        collapseBtn.innerHTML = '&#8722;';
+        var _brainCollapsed = false;
+        collapseBtn.addEventListener('click', function() {
+          _brainCollapsed = !_brainCollapsed;
+          brain.classList.toggle('is-collapsed', _brainCollapsed);
+          collapseBtn.innerHTML = _brainCollapsed ? '&#9652;' : '&#8722;';
+          collapseBtn.title = _brainCollapsed ? 'Expand chat' : 'Minimize chat';
+          collapseBtn.setAttribute('aria-label', _brainCollapsed ? 'Expand chat' : 'Minimize chat');
+        });
+        if (closeBtn) { brainHead.removeChild(closeBtn); btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(collapseBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(closeBtn); }
+        else { btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(collapseBtn); btnGroup.appendChild(muteBtn); }
         brainHead.appendChild(btnGroup);
       } else {
         btnGroup.insertBefore(newChatBtn, btnGroup.firstChild);

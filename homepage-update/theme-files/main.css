@@ -2944,6 +2944,21 @@ border-radius: 50%; cursor: pointer; font-size: 16px;
 }
 .pb-brain__export:hover{ border-color:rgba(100,200,255,.6); color:rgba(100,200,255,.9); }
 .pb-brain__export:focus-visible{ outline:1px solid rgba(100,200,255,.5); border-radius:50%; }
+/* Minimize / collapse toggle button */
+.pb-brain__collapse{
+  background:none; border:1px solid rgba(255,255,255,.15);
+  color:rgba(255,255,255,.5); width:28px; height:28px; border-radius:50%;
+  font-size:16px; cursor:pointer; display:flex;
+  align-items:center; justify-content:center; flex-shrink:0;
+  transition:.15s; line-height:1;
+}
+.pb-brain__collapse:hover{ border-color:rgba(255,255,255,.4); color:rgba(255,255,255,.9); }
+/* Collapsed state — hides everything below the header */
+.pb-brain.is-collapsed .pb-brain__log,
+.pb-brain.is-collapsed .pb-brain__form,
+.pb-brain.is-collapsed .pb-brain__listening,
+.pb-brain.is-collapsed .pb-brain__scroll-down{ display:none !important; }
+.pb-brain.is-collapsed{ min-height:0; height:auto; }
 /* Submit guard — visual disabled state during API fetch */
 .pb-brain__input:disabled{ opacity:.45; cursor:not-allowed; resize:none; }
 .pb-brain__form button[type="submit"]:disabled{ opacity:.45; cursor:not-allowed; pointer-events:none; }
