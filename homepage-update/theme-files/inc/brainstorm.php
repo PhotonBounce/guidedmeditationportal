@@ -561,6 +561,55 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre10-a) Admin dashboard / internal tools.
+	if ( $has( [ 'admin dashboard', 'internal tool', 'back-office', 'admin panel', 'management portal', 'internal ops', 'staff portal', 'team dashboard', 'reporting dashboard', 'data dashboard', 'ops tool', 'internal system', 'employee portal', 'admin area', 'control panel', 'crm build', 'custom crm' ] ) ) {
+		return $nl( [
+			"Admin dashboards and internal tools are a strong fit here &mdash; they&rsquo;re basically the SaaS/App tier with a private-only audience.",
+			'',
+			"What typically goes into an internal dashboard build:",
+			"&bull; <strong>Role-based access control</strong> &mdash; admins vs. staff vs. read-only views",
+			"&bull; <strong>Data tables with filter / sort / export</strong> &mdash; CSV or PDF export included",
+			"&bull; <strong>Charts and KPI cards</strong> &mdash; Chart.js or D3 connected to your data source",
+			"&bull; <strong>REST or GraphQL API layer</strong> &mdash; so the frontend talks to your existing database",
+			"&bull; <strong>Audit log</strong> &mdash; who changed what, when",
+			'',
+			"Starting at <strong>$750 (SaaS / App tier)</strong>. Custom CRM integrations (Salesforce, HubSpot) scoped separately.",
+			"What data are you displaying, and who are the users?",
+		] );
+	}
+
+	// 0d-pre10-b) Tech stack / framework recommendation.
+	if ( $has( [ 'what tech stack', 'which framework', 'what should i use', 'react vs next', 'next.js or react', 'should i use wordpress', 'technology recommendation', 'what technology', 'which cms', 'best stack for', 'recommend a framework', 'webflow vs wordpress', 'squarespace vs wordpress', 'what do you use', 'tech recommendation', 'which platform should' ] ) ) {
+		return $nl( [
+			"Tech stack recommendation depends on what you&rsquo;re building and who will maintain it. Here&rsquo;s the quick cheat-sheet:",
+			'',
+			"&bull; <strong>WordPress</strong> &mdash; content-heavy sites, blogs, small e-commerce; owner edits content without a dev; $40&ndash;$750",
+			"&bull; <strong>Next.js / React</strong> &mdash; fast interactive apps, SPAs, dashboards; needs a dev to update; $750+",
+			"&bull; <strong>Headless WordPress + Next.js</strong> &mdash; best of both: WP as CMS, Next.js as frontend; SEO-optimized; $750+",
+			"&bull; <strong>Shopify</strong> &mdash; serious e-commerce (1,000+ SKUs, complex fulfillment); if WooCommerce isn&rsquo;t enough",
+			"&bull; <strong>WebGL / Three.js</strong> &mdash; 3D / AR / game-like experiences; standalone or embedded",
+			'',
+			"What&rsquo;s the core use case &mdash; content site, app, store, or something interactive?",
+		] );
+	}
+
+	// 0d-pre10-c) Headless CMS / JAMstack / API-first architecture.
+	if ( $has( [ 'headless cms', 'headless wordpress', 'api-first', 'decoupled frontend', 'jamstack', 'static site generator', 'nextjs headless', 'gatsby', 'sanity.io', 'contentful', 'strapi', 'payload cms', 'directus', 'decoupled cms', 'headless architecture', 'static generation', 'server-side rendering', 'ssr vs ssg', 'edge rendering' ] ) ) {
+		return $nl( [
+			"Headless and JAMstack builds are a specialty here. Here&rsquo;s how the stack typically looks:",
+			'',
+			"&bull; <strong>CMS layer</strong> &mdash; WordPress (REST or WPGraphQL), Sanity.io, or Strapi; content editors get a familiar UI",
+			"&bull; <strong>Frontend</strong> &mdash; Next.js (SSR + ISR for SEO) or Astro (ultra-fast, mostly static)",
+			"&bull; <strong>Hosting</strong> &mdash; Vercel or Netlify for the frontend; WP Engine / Kinsta / SiteGround for the CMS",
+			"&bull; <strong>API layer</strong> &mdash; REST or GraphQL endpoints + webhook revalidation so the static site updates when content changes",
+			'',
+			"<strong>When to go headless:</strong> high-traffic marketing sites that need 95+ Lighthouse, complex content models, or multi-channel publishing (web + mobile + IoT).",
+			"<strong>When to stay coupled:</strong> simpler sites where build complexity isn&rsquo;t worth the gain.",
+			'',
+			"What&rsquo;s the content model and traffic expectation?",
+		] );
+	}
+
 	// 0d-pre9-v) Subscription / recurring billing (SaaS pricing model).
 	if ( $has( [ 'subscription billing', 'recurring billing', 'saas pricing model', 'monthly subscription', 'stripe subscriptions', 'metered billing', 'usage-based pricing', 'per-seat pricing', 'tiered pricing model', 'subscription model', 'revenue subscription', 'billing portal', 'cancel anytime', 'free trial billing', 'freemium model' ] ) ) {
 		return $nl( [

@@ -380,6 +380,28 @@ function pb_aurora_schema_enhanced() {
 			],
 		];
 
+		// Conditional Review schema (testimonials set via Customizer — emitted only when present)
+		$t1_author = get_theme_mod( 'pb_t1_author', '' );
+		$t1_body   = get_theme_mod( 'pb_t1_body', '' );
+		$t2_author = get_theme_mod( 'pb_t2_author', '' );
+		$t2_body   = get_theme_mod( 'pb_t2_body', '' );
+		$testimonials = [
+			[ 'author' => $t1_author, 'body' => $t1_body ],
+			[ 'author' => $t2_author, 'body' => $t2_body ],
+		];
+		foreach ( $testimonials as $t ) {
+			if ( ! empty( $t['author'] ) && ! empty( $t['body'] ) ) {
+				$graph[] = [
+					'@context'     => 'https://schema.org',
+					'@type'        => 'Review',
+					'itemReviewed' => [ '@id' => $site_url . '#organization' ],
+					'reviewRating' => [ '@type' => 'Rating', 'ratingValue' => 5, 'bestRating' => 5 ],
+					'author'       => [ '@type' => 'Person', 'name' => sanitize_text_field( $t['author'] ) ],
+					'reviewBody'   => sanitize_text_field( $t['body'] ),
+				];
+			}
+		}
+
 		// Speakable markup (voice search / AI citation) — broadened selectors
 		$graph[] = [
 			'@type'     => 'WebPage',

@@ -290,6 +290,24 @@
       charCount.classList.toggle('pb-brain__char-count--warn', len >= 1800);
     }
     input.addEventListener('input', resizeInput);
+
+    // Rotate placeholder to inspire questions — only when input is empty and unfocused.
+    var phList = [
+      'What do you want to build?',
+      'What does a marketplace cost?',
+      'How long for an AI chatbot?',
+      'Can you build in 3D / WebGL?',
+      'What is AEO and why does it matter?',
+      'Do you handle SEO + Core Web Vitals?',
+      'How does milestone payment work?',
+    ];
+    var phIdx = 0;
+    setInterval(function() {
+      if (document.activeElement !== input && !input.value) {
+        phIdx = (phIdx + 1) % phList.length;
+        input.placeholder = phList[phIdx];
+      }
+    }, 3500);
   }
 
   // (Auto-open removed — the chat opens only when the visitor clicks the orb,
@@ -399,15 +417,25 @@
           var fu = document.createElement('div');
           fu.className = 'pb-brain__chips pb-brain__chips-followup';
           fu.setAttribute('aria-label', 'Quick actions');
-          fu.innerHTML =
-            '<button type="button" class="pb-brain__chip" data-chip="Book a free 15-min call">&#128197; Book a call</button>' +
-            '<button type="button" class="pb-brain__chip" data-chip="What is the full pricing list?">&#128176; All pricing</button>' +
-            '<button type="button" class="pb-brain__chip" data-chip="Show me your portfolio and past work">&#127912; Portfolio</button>';
+          // Contextual chips — swap out the chip that matches what the user already asked about.
+          var h0 = (log.querySelector('.pb-brain__msg--me') || {}).textContent || '';
+          h0 = h0.toLowerCase();
+          var chipDefs = [
+            { txt: '&#128197; Book a call',   send: 'Book a free 15-min call' },
+            { txt: '&#128176; All pricing',   send: 'What is the full pricing list?' },
+            { txt: '&#127912; Portfolio',     send: 'Show me your portfolio and past work' },
+          ];
+          if (/pric|cost|how much|budget|charg/.test(h0))             chipDefs[1] = { txt: '&#9201; How long?',      send: 'How long does a typical project take from start to launch?' };
+          if (/portfolio|past work|example|case studi|sample/.test(h0)) chipDefs[2] = { txt: '&#128338; Timeline',     send: 'How long does a typical project take from start to launch?' };
+          if (/book|call|meet|schedule|talk|appointment/.test(h0))    chipDefs[0] = { txt: '&#128179; Payment',      send: 'How does payment work — do you require a deposit?' };
+          fu.innerHTML = chipDefs.map(function(c) {
+            return '<button type="button" class="pb-brain__chip" data-chip="' + c.send.replace(/"/g,'&quot;') + '">' + c.txt + '</button>';
+          }).join('');
           log.appendChild(fu);
           fu.querySelectorAll('.pb-brain__chip').forEach(function(chip) {
             chip.addEventListener('click', function() {
               if (!input || !form) return;
-              input.value = chip.dataset.chip || chip.textContent.replace(/^[^\wÀ-￿]+/, '').trim();
+              input.value = chip.dataset.chip;
               fu.style.display = 'none';
               form.dispatchEvent(new Event('submit', { bubbles: true }));
             });
