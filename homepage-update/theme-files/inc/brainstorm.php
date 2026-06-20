@@ -445,6 +445,46 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre9-m) Marketplace / multi-vendor platform.
+	if ( $has( [ 'marketplace', 'multi-vendor', 'two-sided platform', 'airbnb like', 'etsy like', 'uber for', 'buy and sell platform', 'p2p platform', 'peer-to-peer', 'rental marketplace', 'service marketplace', 'vendor marketplace', 'classified ads', 'listing marketplace' ] ) ) {
+		return $nl( [
+			"Two-sided marketplaces are the most complex builds on the menu. Here&rsquo;s what that means for scope:",
+			'',
+			"&bull; A <strong>basic directory or listing site</strong> (post-to-browse, no payments): <strong>SaaS / App</strong> &mdash; $750",
+			"&bull; A <strong>marketplace with payments, escrow, reviews, and user dashboards</strong>: custom quote, typically $1,500&ndash;$3,500 depending on feature depth",
+			'',
+			"The key variables are: do you need escrow/split payouts (Stripe Connect), user verification, a review system, and admin moderation tools? Tell me what your platform does and I&rsquo;ll sketch a tier in one message.",
+		] );
+	}
+
+	// 0d-pre9-n) Nonprofit / charity / NGO.
+	if ( $has( [ 'non-profit', 'nonprofit', 'not for profit', ' ngo ', ' charity', 'charitable', '501c3', '501 c3', 'fundraising site', 'donation page', 'volunteer organization', 'foundation site', 'community org' ] ) ) {
+		return $nl( [
+			"Nonprofits are welcome here &mdash; the same fixed-price menu applies. A few practical notes:",
+			'',
+			"&bull; <strong>Donation pages</strong>: Stripe Checkout or PayPal Giving Fund can be wired in; I don&rsquo;t take a cut, and neither does Stripe for nonprofits with fee-waiver approval.",
+			"&bull; <strong>Grant requirements</strong>: if your funder requires WCAG 2.1 AA accessibility, that&rsquo;s standard in every build at no extra charge.",
+			"&bull; <strong>Recommended starting point</strong>: Simple Site ($115) covers 3&ndash;5 pages, donation form, contact, and full SEO setup &mdash; everything a lean org needs to be credible online.",
+			'',
+			"What does your org do and who are you trying to reach?",
+		] );
+	}
+
+	// 0d-pre9-o) Directory / job board / listing site.
+	if ( $has( [ 'directory site', 'listing site', 'job board', 'jobs site', 'business directory', 'local directory', 'review site', 'property listings', 'real estate listing', 'freelancer directory', 'vendor directory', 'professional directory', 'resource directory', 'link directory' ] ) ) {
+		return $nl( [
+			"Directories and listing sites are <strong>SaaS / App</strong> builds &mdash; from $750 &mdash; because they need a database, a submission form, admin moderation, and search / filter UI.",
+			'',
+			"Common extras that affect scope:",
+			"&bull; <strong>Paid listings / featured spots</strong> &mdash; Stripe integration",
+			"&bull; <strong>User accounts</strong> &mdash; add ~$150&ndash;$200",
+			"&bull; <strong>Map view</strong> &mdash; Google Maps or Mapbox API",
+			"&bull; <strong>Review system</strong> &mdash; adds meaningful complexity",
+			'',
+			"Tell me: is it a job board, a local business directory, a property site, or something else? I&rsquo;ll give you a more precise figure.",
+		] );
+	}
+
 	// 0d-pre9) Domain / hosting questions.
 	if ( $has( [ 'who hosts', 'where is it hosted', 'do you provide hosting', 'hosting included', 'do you host', 'hosting plan', 'domain name', 'do you register', 'buy a domain', 'domain included', 'ssl certificate', 'https', 'server', 'vps', 'cloud hosting', 'where will it live' ] ) ) {
 		return $nl( [

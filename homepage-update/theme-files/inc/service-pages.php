@@ -227,6 +227,43 @@ function pb_aurora_service_title( $parts ) {
 	return $parts;
 }
 
+/** Service + Offer JSON-LD per service page (rich results for service searches). */
+add_action( 'wp_head', 'pb_aurora_service_schema', 8 );
+function pb_aurora_service_schema() {
+	if ( ! is_page() ) { return; }
+	$slug = get_post_field( 'post_name', get_queried_object_id() );
+	$svc  = pb_aurora_service_pages();
+	if ( ! isset( $svc[ $slug ] ) ) { return; }
+	$s        = $svc[ $slug ];
+	$site_url = home_url( '/' );
+	$offers   = [];
+	foreach ( $s['prices'] as $p ) {
+		$raw = preg_replace( '/[^0-9.]/', '', $p[1] );
+		if ( $raw ) {
+			$offers[] = [
+				'@type'         => 'Offer',
+				'name'          => $p[0],
+				'description'   => $p[2],
+				'price'         => $raw,
+				'priceCurrency' => 'USD',
+				'availability'  => 'https://schema.org/InStock',
+				'url'           => $site_url . $slug . '/',
+			];
+		}
+	}
+	$payload = array_filter( [
+		'@context'    => 'https://schema.org',
+		'@type'       => 'Service',
+		'name'        => $s['h1'],
+		'description' => $s['intro'],
+		'url'         => $site_url . $slug . '/',
+		'provider'    => [ '@id' => $site_url . '#organization' ],
+		'areaServed'  => 'Worldwide',
+		'offers'      => $offers ?: null,
+	] );
+	echo "\n<script type=\"application/ld+json\">" . wp_json_encode( $payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . "</script>\n";
+}
+
 /** FAQ JSON-LD per service page (AEO). */
 add_action( 'wp_head', 'pb_aurora_service_faq_schema', 8 );
 function pb_aurora_service_faq_schema() {

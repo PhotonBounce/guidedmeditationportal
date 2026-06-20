@@ -273,11 +273,21 @@
   const orb = document.querySelector('.pb-orb');
 
   // Textarea auto-resize — grows up to 120px, resets to 1 row on submit.
+  // Character counter shows "n / 2000" and turns amber near the limit.
   if (input) {
     input.style.overflowY = 'hidden';
+    var charCount = document.createElement('span');
+    charCount.className = 'pb-brain__char-count';
+    charCount.textContent = '0 / 2000';
+    charCount.setAttribute('aria-live', 'polite');
+    charCount.setAttribute('aria-atomic', 'true');
+    if (input.parentNode) input.parentNode.insertBefore(charCount, input.nextSibling);
     function resizeInput() {
       input.style.height = 'auto';
       input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+      var len = input.value.length;
+      charCount.textContent = len + ' / 2000';
+      charCount.classList.toggle('pb-brain__char-count--warn', len >= 1800);
     }
     input.addEventListener('input', resizeInput);
   }
