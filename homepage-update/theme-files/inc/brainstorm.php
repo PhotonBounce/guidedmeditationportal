@@ -322,6 +322,42 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre6) Deadline / urgency.
+	if ( $has( [ 'urgent', ' asap', 'as soon as possible', 'i need it by', 'need it next week', 'need it this week', 'can you start today', 'can you start tomorrow', 'rush order', 'rush project', 'really fast', 'how soon can', 'what is your earliest' ] ) ) {
+		return $nl( [
+			"Rush timelines are doable for most project types:",
+			'',
+			"&bull; <strong>Micro Page</strong> &mdash; as fast as 24&ndash;48 h",
+			"&bull; <strong>Full Site</strong> &mdash; 1&ndash;2 weeks with rush add-on (+20%)",
+			"&bull; <strong>AI Concierge bot</strong> &mdash; 3&ndash;5 business days",
+			"&bull; <strong>Logo</strong> &mdash; 1&ndash;2 days",
+			'',
+			"Book a quick call at <a href=\"/book/\">/book/</a> with your deadline and I&rsquo;ll confirm whether it fits the current slot. What&rsquo;s the project and the date you need it live?",
+		] );
+	}
+
+	// 0d-pre7) Visitor already has designs / mockups.
+	if ( $has( [ 'i have a figma', 'i have designs', 'i have a design', 'have designs already', 'already designed', 'have a mockup', 'have mockups', 'existing mockup', 'have wireframes', 'have a prototype', 'have a sketch file' ] ) ) {
+		return $nl( [
+			"Perfect &mdash; bring your Figma, XD, Sketch, or even a hand-drawn mockup and I&rsquo;ll build from it pixel-for-pixel. Working from existing designs actually <em>speeds up</em> the build and cuts scope ambiguity.",
+			'',
+			"Just share the file (or a PDF export) when you book. If the mockup is light on mobile layouts or edge states, I&rsquo;ll flag any gaps before starting. What is the project type?",
+		] );
+	}
+
+	// 0d-pre8) Free / very low budget.
+	if ( $has( [ 'for free', 'do it for free', 'pro bono', 'no budget', 'zero budget', 'no money', 'very low budget', 'low budget', 'limited budget', "can't afford", 'too expensive', 'need it cheap', 'need it free' ] ) ) {
+		return $nl( [
+			"Honest answer: the lowest entry point is $40 for a <strong>Micro Page</strong> &mdash; one polished, performant single page.",
+			'',
+			"If that&rsquo;s still out of reach right now, here&rsquo;s what I&rsquo;d suggest:",
+			"&bull; <strong>$50/mo Care Plan</strong> &mdash; includes hosting, maintenance, and up to 2 h/mo of updates, so you build up your site over time.",
+			"&bull; <strong>Free 15-min consultation</strong> at <a href=\"/book/\">/book/</a> &mdash; sometimes the scope is smaller than expected once we talk through it.",
+			'',
+			"What are you trying to build? Let&rsquo;s see if there&rsquo;s a path that fits.",
+		] );
+	}
+
 	// 0d) WordPress / CMS specific.
 	if ( $has( [ 'wordpress', ' woocommerce', ' woo ', 'wp theme', 'wp plugin', 'cms', 'content management' ] ) ) {
 		return $nl( [

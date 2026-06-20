@@ -355,6 +355,21 @@
       const div = document.createElement('div');
       div.className = 'pb-brain__msg pb-brain__msg--' + cls;
       div.innerHTML = cls === 'bot' ? format(text) : text.replace(/</g, '&lt;');
+      if (cls === 'bot' && navigator.clipboard) {
+        var cpBtn = document.createElement('button');
+        cpBtn.type = 'button';
+        cpBtn.className = 'pb-brain__copy';
+        cpBtn.title = 'Copy reply';
+        cpBtn.setAttribute('aria-label', 'Copy reply');
+        cpBtn.innerHTML = '&#128203;';
+        cpBtn.addEventListener('click', function() {
+          navigator.clipboard.writeText(plain(text)).then(function() {
+            cpBtn.innerHTML = '&#10003;';
+            setTimeout(function() { cpBtn.innerHTML = '&#128203;'; }, 1500);
+          });
+        });
+        div.appendChild(cpBtn);
+      }
       log.appendChild(div);
       log.scrollTop = log.scrollHeight;
     }

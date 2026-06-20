@@ -2876,6 +2876,17 @@ border-radius: 50%; cursor: pointer; font-size: 16px;
 }
 .pb-brain__chip:hover{ background:rgba(255,212,0,.15); border-color:rgba(255,212,0,.7); transform:translateY(-1px); }
 .pb-brain__chip:active{ transform:translateY(0); }
+.pb-brain__chip:focus-visible{ outline:2px solid rgba(255,212,0,.7); outline-offset:2px; border-color:rgba(255,212,0,.7); }
+.pb-brain__msg--bot{ position:relative; padding-right:28px; }
+.pb-brain__copy{
+  position:absolute; top:6px; right:4px;
+  background:none; border:none; color:rgba(255,255,255,.3); cursor:pointer;
+  font-size:12px; padding:2px 4px; border-radius:4px; opacity:0;
+  transition: opacity .15s, color .15s;
+}
+.pb-brain__msg--bot:hover .pb-brain__copy{ opacity:1; }
+.pb-brain__copy:hover{ color:rgba(255,212,0,.9); }
+.pb-brain__copy:focus-visible{ opacity:1; outline:1px solid rgba(255,212,0,.5); border-radius:3px; }
 /* ===== Phase W ï¿½ Service catalog tabs, slider calc, payments, invest ===== */
 .pb-cat-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px;padding:0;list-style:none}
 .pb-cat-tab{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:inherit;border-radius:999px;font-size:14px;cursor:pointer;transition:.18s}
