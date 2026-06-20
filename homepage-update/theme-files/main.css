@@ -2931,6 +2931,21 @@ border-radius: 50%; cursor: pointer; font-size: 16px;
   border-color:rgba(220,80,80,.8); color:#ffd0d0;
   background:rgba(220,50,50,.12);
 }
+/* In-chat search bar (Ctrl+F while drawer open) */
+.pb-brain__search{
+  display:none; width:100%; box-sizing:border-box;
+  background:rgba(255,255,255,.06); border:none;
+  border-bottom:1px solid rgba(255,255,255,.12);
+  color:#fff; font-size:13px; outline:none;
+  padding:8px 12px; transition:background .15s,border-color .15s;
+}
+.pb-brain__search--open{ display:block; }
+.pb-brain__search::placeholder{ color:rgba(255,255,255,.3); }
+.pb-brain__search:focus{
+  background:rgba(255,255,255,.09);
+  border-bottom-color:rgba(255,212,0,.45);
+}
+.pb-brain__search::-webkit-search-cancel-button{ cursor:pointer; }
 .pb-brain__char-count{
   display:block; text-align:right; font-size:11px; color:rgba(244,246,251,.3);
   padding:2px 4px 0; transition:color .2s;

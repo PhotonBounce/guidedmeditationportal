@@ -272,6 +272,40 @@
   const micBtn = document.querySelector('[data-pb-brain-mic]');
   const orb = document.querySelector('.pb-orb');
 
+  // In-chat search bar — Ctrl+F while brain is open
+  var _srchInput = document.createElement('input');
+  _srchInput.type = 'search';
+  _srchInput.className = 'pb-brain__search';
+  _srchInput.setAttribute('placeholder', 'Search messages…');
+  _srchInput.setAttribute('aria-label', 'Search chat messages');
+  _srchInput.setAttribute('autocomplete', 'off');
+  if (log && log.parentNode) log.parentNode.insertBefore(_srchInput, log);
+  function _srchFilter() {
+    var q = _srchInput.value.toLowerCase().trim();
+    var msgs = log ? log.querySelectorAll('.pb-brain__msg') : [];
+    [].forEach.call(msgs, function(m) {
+      m.style.opacity = (!q || m.textContent.toLowerCase().indexOf(q) !== -1) ? '' : '0.15';
+    });
+  }
+  function _srchClose() {
+    _srchInput.value = ''; _srchFilter();
+    _srchInput.classList.remove('pb-brain__search--open');
+  }
+  _srchInput.addEventListener('input', _srchFilter);
+  document.addEventListener('keydown', function(e) {
+    var brainVisible = brain && brain.offsetParent !== null;
+    if (e.ctrlKey && (e.key === 'f' || e.key === 'F') && brainVisible) {
+      e.preventDefault();
+      _srchInput.classList.add('pb-brain__search--open');
+      _srchInput.focus();
+      _srchInput.select();
+    }
+    if (e.key === 'Escape' && document.activeElement === _srchInput) { _srchClose(); if (input) input.focus(); }
+  });
+  if (brain) new MutationObserver(function() {
+    if (brain.offsetParent === null) _srchClose();
+  }).observe(brain, { attributes: true, attributeFilter: ['style', 'class'] });
+
   // Textarea auto-resize — grows up to 120px, resets to 1 row on submit.
   // Character counter shows "n / 2000" and turns amber near the limit.
   if (input) {

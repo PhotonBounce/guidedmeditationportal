@@ -561,6 +561,55 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre18-a) WordPress Multisite / multi-site network / multi-tenant.
+	if ( $has( [ 'wordpress multisite', 'multisite', 'multi-site', 'multiple websites', 'site network', 'subdomain network', 'subdirectory sites', 'wpmu', 'multi-tenant wordpress', 'manage multiple sites', 'mainwp', 'managewp', 'network of sites', 'wp network', 'subsite' ] ) ) {
+		return $nl( [
+			"WordPress Multisite (network mode) is fully in scope &mdash; here&rsquo;s how it scopes:",
+			'',
+			"&bull; <strong>Network setup</strong> &mdash; subdomain mode (site1.yourdomain.com) or subdirectory mode (yourdomain.com/site1); wildcard DNS required for subdomains; from <strong>$150</strong> setup",
+			"&bull; <strong>Shared codebase</strong> &mdash; one theme, one plugin install serves all sites; per-site Customizer overrides for colours, logo, content",
+			"&bull; <strong>User management</strong> &mdash; super admin vs. site admin roles; single SSO login across all sites; role sync add-on",
+			"&bull; <strong>Content sharing</strong> &mdash; shared media library, cross-site taxonomy, content mirroring between subsites",
+			"&bull; <strong>MainWP dashboard</strong> &mdash; manage plugin/theme/core updates across 100s of sites from one screen; automated update schedules",
+			"&bull; <strong>Hosting requirement</strong> &mdash; Kinsta and WP Engine support Multisite natively; standard shared hosting usually cannot",
+			'',
+			"How many sites, are they same or different designs, and is user management centralised?",
+		] );
+	}
+
+	// 0d-pre18-b) Digital products / downloadable files / Easy Digital Downloads.
+	if ( $has( [ 'digital product', 'downloadable product', 'sell ebook', 'sell pdf', 'sell template', 'sell digital download', 'sell presets', 'sell fonts', 'digital downloads', 'easy digital downloads', ' edd ', 'sell files', 'digital goods', 'sell software', 'digital storefront', 'gumroad alternative', 'digital store', 'sell downloads', 'license key' ] ) ) {
+		return $nl( [
+			"Selling digital products is a common build &mdash; here&rsquo;s how it scopes:",
+			'',
+			"&bull; <strong>Easy Digital Downloads (EDD)</strong> &mdash; purpose-built for files; per-download pricing, purchase logs, per-email download limits, software licence key add-on; from <strong>$350</strong> standalone",
+			"&bull; <strong>WooCommerce + virtual/downloadable</strong> &mdash; good when you also sell physical goods; same cart, same customer account",
+			"&bull; <strong>File security</strong> &mdash; download links expire (signed S3 URL or WP nonce); files stored outside web root; single-use or count-limited links",
+			"&bull; <strong>Delivery</strong> &mdash; email confirmation with download link; customer dashboard for re-downloads; PDF personalisation (name + order ID stamp) add-on",
+			"&bull; <strong>No transaction tax</strong> &mdash; Stripe direct (no 9% Gumroad fee); Paddle for EU VAT handling",
+			"&bull; <strong>Membership gating</strong> &mdash; lock downloads behind a paywall via MemberPress or Restrict Content Pro",
+			'',
+			"Files only, or a mix of digital + physical? And do you need software licence keys?",
+		] );
+	}
+
+	// 0d-pre18-c) Print-on-demand / merchandise / Printful / Printify.
+	if ( $has( [ 'print on demand', 'printful', 'printify', 'pod store', 'custom merch', 'merchandise store', 'sell t-shirts', 'sell hoodies', 'sell mugs', 'sell merchandise', 'dropship merch', 'custom apparel', 'branded merchandise', 'merch store', 'sell merch', 'print and ship', 'white label merch' ] ) ) {
+		return $nl( [
+			"Print-on-demand merch stores are a clean, no-inventory build &mdash; here&rsquo;s how it works:",
+			'',
+			"&bull; <strong>Printful or Printify</strong> &mdash; WooCommerce plugin syncs products, variants, and pricing automatically; no stock held; fulfilled and shipped directly to the customer",
+			"&bull; <strong>Product range</strong> &mdash; t-shirts, hoodies, mugs, phone cases, posters, tote bags, hats &mdash; all managed from one dashboard",
+			"&bull; <strong>Mockup generation</strong> &mdash; Printful&rsquo;s mockup generator produces product images automatically; no photo shoot needed",
+			"&bull; <strong>Custom branding</strong> &mdash; inside label, packing slip branding, thank-you card insert (Printful Pro)",
+			"&bull; <strong>Order flow</strong> &mdash; customer orders &rarr; WooCommerce webhook &rarr; Printful fulfils &rarr; tracking number emailed automatically",
+			"&bull; <strong>Margin</strong> &mdash; set your own retail price; Printful deducts its base cost before payout; typically 30&ndash;40% margin",
+			"&bull; <strong>From $600</strong> for a basic merch store with custom domain, SSL, WooCommerce, and Printful integration",
+			'',
+			"What products, and is this a merch add-on to an existing site or a standalone store?",
+		] );
+	}
+
 	// 0d-pre17-a) AI image generation / Midjourney / DALL-E / Stable Diffusion.
 	if ( $has( [ 'ai image', 'ai generated image', 'midjourney', 'dall-e', 'stable diffusion', 'ai art', 'image generation', 'text to image', 'ai artwork', 'generative art', 'comfyui', 'image ai', 'ai illustration', 'generate images', 'ai images for site' ] ) ) {
 		return $nl( [
