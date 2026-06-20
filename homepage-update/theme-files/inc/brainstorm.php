@@ -548,6 +548,12 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		$rec = [ 'a Care Plan', '$50/mo', 'monthly updates, backups, performance checks and priority support &mdash; Lite is $15/mo' ];
 	} elseif ( $has( [ ' 3d ', ' ar ', ' vr ', 'augmented reality', 'virtual reality', 'product configurator', 'model viewer', '3d experience', '3d product', 'three.js', 'threejs', 'webgl', 'shader', 'particle', '3d hero', 'animated hero', '3d animation' ] ) ) {
 		$rec = [ 'a 3D / WebGL build', '$600+', 'a Three.js hero, product configurator or full AR / VR experience &mdash; runs 100% in the browser' ];
+	} elseif ( $has( [ 'membership', 'subscription site', 'gated content', 'members only', 'paid community', 'paywall', 'subscribers only', 'member area', 'exclusive content', 'subscription model', 'recurring billing' ] ) ) {
+		$rec = [ 'a SaaS / App build', '$750', 'auth, member tiers, gated content and Stripe recurring billing baked in' ];
+	} elseif ( $has( [ ' blog', 'news site', 'editorial site', 'content site', 'publication', 'magazine site', 'article site', 'news page', 'blog post', 'writing platform', 'longform', 'media site' ] ) ) {
+		$rec = [ 'a Full Site', '$300', 'WordPress with a performance-tuned editorial theme, SEO-structured for articles and search traffic' ];
+	} elseif ( $has( [ 'appointment', 'booking system', 'book a call', 'book an appointment', 'reservation system', 'schedule online', 'calendar booking', 'online booking', 'booking page', 'reserve a slot', 'scheduling page', 'therapy booking', 'consultation booking' ] ) ) {
+		$rec = [ 'a Simple Site', '$115', 'with a Calendly or Acuity embed &mdash; or a custom booking engine in a Full Site ($300) if you need database-level control over slots, reminders, and payments' ];
 	}
 
 	if ( $rec ) {
@@ -575,11 +581,21 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 	}
 
 	// 6) Thanks / small-talk close.
-	if ( $words <= 4 && $has( [ 'thank', 'thanks', ' thx', 'appreciate', 'cool', 'awesome', 'nice', 'great', ' ok ', 'okay' ] ) ) {
+	if ( $words <= 6 && $has( [ 'thank', 'thanks', ' thx', 'appreciate', 'cool', 'awesome', 'nice', 'great', ' ok ', 'okay', 'perfect', 'sounds good', 'got it' ] ) ) {
 		return 'Anytime! When you&rsquo;re ready, book a free 30-min call at <a href="' . $book . '">' . $book . '</a> or email <strong>' . esc_html( $email ) . '</strong>. Describe your project whenever and I&rsquo;ll map it to a price on the spot.';
 	}
 
-	// 7) Fallback — coherent and forward-moving.
+	// 7) Fallback — smarter for long messages vs short dead-ends.
+	if ( $words >= 15 ) {
+		return $nl( [
+			"That sounds like something worth scoping properly. Based on what you described, it&rsquo;s likely a custom build &mdash; the fastest way to get an accurate price is a 15-min call or a written summary.",
+			'',
+			"&bull; <strong>Book a free call</strong>: <a href=\"{$book}\">{$book}</a>",
+			"&bull; <strong>Email a brief</strong>: <strong>" . esc_html( $email ) . "</strong> &mdash; I reply within 24 h with a scope and fixed price",
+			'',
+			"While you decide: is it primarily a <strong>website</strong>, an <strong>app</strong>, an <strong>AI tool</strong>, or <strong>brand / content work</strong>?",
+		] );
+	}
 	return $nl( [
 		"Got it. So I can point you to the right service and price, which of these is closest?",
 		'',

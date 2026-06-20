@@ -272,6 +272,16 @@
   const micBtn = document.querySelector('[data-pb-brain-mic]');
   const orb = document.querySelector('.pb-orb');
 
+  // Textarea auto-resize — grows up to 120px, resets to 1 row on submit.
+  if (input) {
+    input.style.overflowY = 'hidden';
+    function resizeInput() {
+      input.style.height = 'auto';
+      input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+    }
+    input.addEventListener('input', resizeInput);
+  }
+
   // (Auto-open removed — the chat opens only when the visitor clicks the orb,
   //  so it never starts talking on its own on page load.)
 
@@ -480,6 +490,7 @@
       if (!text) return;
       addMsg(text, 'user');
       input.value = '';
+      input.style.height = 'auto';
       const typing = addTyping();
       try {
         const r = await fetch(endpoint, {
