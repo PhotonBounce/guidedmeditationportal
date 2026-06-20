@@ -481,6 +481,21 @@
     function detectLang(text) {
       return /[Ѐ-ӿ]/.test(text) ? 'ru-RU' : 'en-US';
     }
+    // Visual "Listening…" indicator injected into log when voice is active.
+    function showListeningBanner() {
+      if (!log || log.querySelector('.pb-brain__listening')) return;
+      var banner = document.createElement('div');
+      banner.className = 'pb-brain__listening';
+      banner.setAttribute('aria-live', 'assertive');
+      banner.innerHTML = '<span class="pb-brain__listen-dot"></span>Listening…';
+      log.appendChild(banner);
+      log.scrollTop = log.scrollHeight;
+    }
+    function hideListeningBanner() {
+      if (!log) return;
+      var banner = log.querySelector('.pb-brain__listening');
+      if (banner) banner.remove();
+    }
     if (SR && micBtn) {
       rec = new SR();
       rec.continuous = false;
@@ -491,17 +506,17 @@
         input.value = transcript;
         listening = false;
         micBtn.classList.remove('is-recording');
+        hideListeningBanner();
         voiceMode = true;
-        // Switch language for next listen based on what was recognized
         rec.lang = detectLang(transcript);
         form.dispatchEvent(new Event('submit', { bubbles: true }));
       };
-      rec.onerror = () => { listening = false; micBtn.classList.remove('is-recording'); };
-      rec.onend = () => { listening = false; micBtn.classList.remove('is-recording'); };
+      rec.onerror = () => { listening = false; micBtn.classList.remove('is-recording'); hideListeningBanner(); };
+      rec.onend = () => { listening = false; micBtn.classList.remove('is-recording'); hideListeningBanner(); };
       micBtn.addEventListener('click', () => {
-        if (listening) { try { rec.stop(); } catch (e) {} listening = false; voiceMode = false; micBtn.classList.remove('is-recording'); stopSpeaking(); return; }
+        if (listening) { try { rec.stop(); } catch (e) {} listening = false; voiceMode = false; micBtn.classList.remove('is-recording'); hideListeningBanner(); stopSpeaking(); return; }
         stopSpeaking();
-        try { rec.start(); listening = true; voiceMode = true; micBtn.classList.add('is-recording'); } catch (e) {}
+        try { rec.start(); listening = true; voiceMode = true; micBtn.classList.add('is-recording'); showListeningBanner(); } catch (e) {}
       });
     } else if (micBtn) {
       micBtn.style.display = 'none';
@@ -511,7 +526,7 @@
       if (!rec || !voiceMode || !brain || brain.hidden) return;
       setTimeout(() => {
         if (voiceMode && !listening && brain && !brain.hidden) {
-          try { rec.start(); listening = true; micBtn.classList.add('is-recording'); } catch (e) {}
+          try { rec.start(); listening = true; micBtn.classList.add('is-recording'); showListeningBanner(); } catch (e) {}
         }
       }, 400);
     }

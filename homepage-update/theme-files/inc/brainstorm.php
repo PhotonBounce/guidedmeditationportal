@@ -485,6 +485,50 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre9-p) Availability / when can you start.
+	if ( $has( [ 'when can you start', 'when are you available', "what's your availability", 'what is your availability', 'how soon can you', 'are you available', 'available now', 'how long is your waitlist', 'lead time', 'earliest start', 'kickoff date', 'next opening', 'are you booking', 'taking on clients' ] ) ) {
+		return $nl( [
+			"Availability depends on the current queue, but here&rsquo;s how the intake works:",
+			'',
+			"&bull; <strong>Micro &amp; Simple Site</strong> &mdash; typically start within 3&ndash;5 business days of a signed quote",
+			"&bull; <strong>E-commerce &amp; SaaS / App builds</strong> &mdash; kick off within 1&ndash;2 weeks; custom scope needs a 30-min discovery call first",
+			"&bull; <strong>Monthly retainers</strong> (Care Plan, SMM) &mdash; open most months, but limited slots &mdash; first-come first-served",
+			'',
+			"The fastest path is to <strong>share your scope in a message and I&rsquo;ll respond within 24 hours</strong> with a start-date estimate.",
+			'',
+			"Want to book a 15-min call to align on timing?",
+		] );
+	}
+
+	// 0d-pre9-q) Contact form / lead capture page.
+	if ( $has( [ 'contact form', 'lead form', 'lead capture', 'capture leads', 'opt-in form', 'landing page form', 'sign up form', 'email capture', 'coming soon page', 'waitlist page', 'lead magnet page', 'squeeze page', 'lead generation page', 'sign-up form', 'signup form' ] ) ) {
+		return $nl( [
+			"Contact and lead-capture forms are included in every build &mdash; no extras, no plugin fees.",
+			'',
+			"Here&rsquo;s what&rsquo;s covered at each tier:",
+			"&bull; <strong>Micro Page ($40)</strong> &mdash; perfect for a single opt-in, waitlist, or &ldquo;coming soon&rdquo; page",
+			"&bull; <strong>Simple Site ($115+)</strong> &mdash; includes a full contact page, SMTP delivery via your domain, and Mailchimp / ConvertKit connect",
+			"&bull; <strong>Any tier</strong> &mdash; GDPR/CCPA cookie consent, honeypot spam protection, and redirect-after-submit included",
+			'',
+			"Need a dedicated landing page to drive paid traffic? That&rsquo;s a <strong>Micro Page</strong> &mdash; fast to build and easy to A/B test.",
+		] );
+	}
+
+	// 0d-pre9-r) Migration / site rebuild from another platform.
+	if ( $has( [ 'moving from wix', 'moving from squarespace', 'moving from shopify', 'leaving wix', 'leaving squarespace', 'leaving shopify', 'migrate from', 'site migration', 'content migration', 'migrate my site', 'rebuild my old site', 'rebuild my current site', 'replace my old site', 'switch to wordpress', 'switch from wix', 'switch from squarespace' ] ) ) {
+		return $nl( [
+			"Migrations are a regular part of the work here. Here&rsquo;s what happens on a typical platform switch:",
+			'',
+			"&bull; <strong>Content migration</strong> &mdash; pages, posts, images, redirects (301s) handled for you",
+			"&bull; <strong>Domain transfer</strong> &mdash; DNS cutover coordinated so there&rsquo;s zero downtime",
+			"&bull; <strong>SEO preservation</strong> &mdash; existing permalink structure mapped, canonical tags set, Search Console re-verified",
+			"&bull; <strong>Design</strong> &mdash; clean break or close-match to your current look, your call",
+			'',
+			"Migration scope is bundled into the site build price &mdash; no &ldquo;migration surcharge.&rdquo;",
+			"Which platform are you moving from, and roughly how many pages?",
+		] );
+	}
+
 	// 0d-pre9) Domain / hosting questions.
 	if ( $has( [ 'who hosts', 'where is it hosted', 'do you provide hosting', 'hosting included', 'do you host', 'hosting plan', 'domain name', 'do you register', 'buy a domain', 'domain included', 'ssl certificate', 'https', 'server', 'vps', 'cloud hosting', 'where will it live' ] ) ) {
 		return $nl( [

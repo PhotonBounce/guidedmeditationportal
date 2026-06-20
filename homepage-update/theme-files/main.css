@@ -3298,7 +3298,29 @@ border-radius: 50%; cursor: pointer; font-size: 16px;
 /* The Brainstorm drawer (.pb-brain) opens from a fixed corner â pin it
  * to the left to match its trigger orb instead of fighting AI concierge. */
 .pb-brain{ left:22px !important; right:auto !important; }
-@media (max-width:520px){ .pb-brain{ left:8px !important; right:8px !important; width:auto !important; } }
+/* Mobile: full-width with safe-area-inset for iOS notch/home-indicator */
+@media (max-width:520px){
+  .pb-brain{
+    left:8px !important; right:8px !important; width:auto !important;
+    bottom:calc(68px + env(safe-area-inset-bottom,0px)) !important;
+    height:min(82vh,calc(100dvh - 110px - env(safe-area-inset-bottom,0px))) !important;
+    border-radius:14px;
+  }
+}
+/* Voice listening indicator */
+.pb-brain__listening{
+  display:flex; align-items:center; gap:8px;
+  padding:8px 14px; color:#ffd400; font-size:13px;
+  align-self:flex-start;
+}
+.pb-brain__listen-dot{
+  width:8px; height:8px; border-radius:50%; background:#ffd400; flex-shrink:0;
+  animation:pb-listen-pulse 1s ease-in-out infinite;
+}
+@keyframes pb-listen-pulse{
+  0%,100%{ transform:scale(1); opacity:.55; }
+  50%{ transform:scale(1.5); opacity:1; }
+}
 
 /* --- Fix 4: reveal fallback. If the IntersectionObserver fails (slow JS,
  * blocked scripts), content stays at opacity:0 forever. Safety: after a
