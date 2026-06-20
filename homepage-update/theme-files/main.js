@@ -531,7 +531,7 @@
         }
       }
       if (cls !== 'err') { chatMsgs.push({ text: text, cls: cls }); saveChat(); }
-      log.scrollTop = log.scrollHeight;
+      if (_nearBottom()) log.scrollTop = log.scrollHeight;
     }
 
     function saveChat() {
@@ -563,12 +563,14 @@
       URL.revokeObjectURL(url);
     }
 
+    function _nearBottom() { return !log || (log.scrollHeight - log.scrollTop - log.clientHeight) < 90; }
+
     function addTyping() {
       const div = document.createElement('div');
       div.className = 'pb-brain__msg pb-brain__msg--bot pb-brain__typing';
       div.innerHTML = '<span></span><span></span><span></span>';
       log.appendChild(div);
-      log.scrollTop = log.scrollHeight;
+      if (_nearBottom()) log.scrollTop = log.scrollHeight;
       return div;
     }
 
@@ -645,7 +647,7 @@
       banner.setAttribute('aria-live', 'assertive');
       banner.innerHTML = '<span class="pb-brain__listen-dot"></span>Listening…';
       log.appendChild(banner);
-      log.scrollTop = log.scrollHeight;
+      if (_nearBottom()) log.scrollTop = log.scrollHeight;
     }
     function hideListeningBanner() {
       if (!log) return;
@@ -806,8 +808,39 @@
           collapseBtn.title = _brainCollapsed ? 'Expand chat' : 'Minimize chat';
           collapseBtn.setAttribute('aria-label', _brainCollapsed ? 'Expand chat' : 'Minimize chat');
         });
-        if (closeBtn) { brainHead.removeChild(closeBtn); btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(collapseBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(closeBtn); }
-        else { btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(collapseBtn); btnGroup.appendChild(muteBtn); }
+        var helpBtn = document.createElement('button');
+        helpBtn.type = 'button';
+        helpBtn.className = 'pb-brain__help';
+        helpBtn.title = 'Keyboard shortcuts';
+        helpBtn.setAttribute('aria-label', 'Keyboard shortcuts');
+        helpBtn.setAttribute('aria-expanded', 'false');
+        helpBtn.innerHTML = '&#63;';
+        var _helpOpen = false;
+        var _helpPanel = document.createElement('div');
+        _helpPanel.className = 'pb-brain__shortcuts';
+        _helpPanel.setAttribute('role', 'tooltip');
+        _helpPanel.innerHTML = [
+          '<strong>Shortcuts</strong>',
+          '<span><kbd>Ctrl</kbd>+<kbd>/</kbd> Open / close chat</span>',
+          '<span><kbd>Ctrl</kbd>+<kbd>F</kbd> Search messages</span>',
+          '<span><kbd>Shift</kbd>+<kbd>Enter</kbd> New line</span>',
+          '<span><kbd>Enter</kbd> Send message</span>',
+          '<span><kbd>Esc</kbd> Close / cancel search</span>',
+        ].join('');
+        brainHead.appendChild(_helpPanel);
+        helpBtn.addEventListener('click', function() {
+          _helpOpen = !_helpOpen;
+          _helpPanel.classList.toggle('pb-brain__shortcuts--open', _helpOpen);
+          helpBtn.setAttribute('aria-expanded', String(_helpOpen));
+        });
+        document.addEventListener('click', function(e) {
+          if (_helpOpen && !_helpPanel.contains(e.target) && e.target !== helpBtn) {
+            _helpOpen = false; _helpPanel.classList.remove('pb-brain__shortcuts--open');
+            helpBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+        if (closeBtn) { brainHead.removeChild(closeBtn); btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(collapseBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(helpBtn); btnGroup.appendChild(closeBtn); }
+        else { btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(collapseBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(helpBtn); }
         brainHead.appendChild(btnGroup);
       } else {
         btnGroup.insertBefore(newChatBtn, btnGroup.firstChild);

@@ -561,6 +561,56 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre19-a) Subscription box / recurring physical orders / subscription e-commerce.
+	if ( $has( [ 'subscription box', 'subscription service', 'recurring order', 'recurring product', 'monthly box', 'curated box', 'product subscription', 'recurring shipment', 'subscription e-commerce', 'subscription physical', 'monthly subscription', 'box subscription', 'subscribe and save' ] ) ) {
+		return $nl( [
+			"Physical subscription box e-commerce is a well-scoped build &mdash; here&rsquo;s how it works:",
+			'',
+			"&bull; <strong>WooCommerce Subscriptions</strong> &mdash; recurring billing via Stripe; free trial periods; pause, cancel, upgrade/downgrade from customer account; from <strong>$350</strong> + WooCommerce Subscriptions licence",
+			"&bull; <strong>Billing cycles</strong> &mdash; weekly, monthly, quarterly, annually; prorated upgrades and downgrades handled automatically",
+			"&bull; <strong>Box management</strong> &mdash; variant selection per shipment, skip-a-month, gifting, address change from customer portal",
+			"&bull; <strong>Fulfilment</strong> &mdash; ShipStation or EasyPost integration for bulk label generation on billing date; tracking number emailed automatically",
+			"&bull; <strong>Churn prevention</strong> &mdash; dunning emails on failed payment; automatic retry schedule; account reactivation flow",
+			"&bull; <strong>Analytics</strong> &mdash; subscriber MRR, churn rate, and LTV visible in WooCommerce dashboard",
+			'',
+			"What&rsquo;s in the box, how often does it ship, and do customers customise their selection?",
+		] );
+	}
+
+	// 0d-pre19-b) Event ticketing / registration / virtual events.
+	if ( $has( [ 'event ticketing', 'ticket sales', 'event registration', 'ticket website', 'sell tickets', 'virtual event', 'online event', 'event site', 'webinar site', 'conference website', 'summit website', 'ticket booking', 'event management site', 'events calendar', 'event page' ] ) ) {
+		return $nl( [
+			"Event and ticketing sites are a regular build &mdash; here&rsquo;s the scope:",
+			'',
+			"&bull; <strong>Ticketing</strong> &mdash; WooCommerce free/paid ticket products; QR code on confirmation email; printable + mobile-friendly PDF ticket",
+			"&bull; <strong>Registration</strong> &mdash; Gravity Forms with conditional logic, time-slot selection, capacity limits per session",
+			"&bull; <strong>Virtual events</strong> &mdash; Zoom or Google Meet embed; gated livestream; member-only access to recordings after the event",
+			"&bull; <strong>Multi-event calendar</strong> &mdash; The Events Calendar plugin; filterable by date, location, and type; iCal / Google Calendar export",
+			"&bull; <strong>Pricing</strong> &mdash; early-bird pricing (time-limited), promo codes, group discounts, deposit + balance payments",
+			"&bull; <strong>Refund policy</strong> &mdash; Stripe refund rules enforced automatically (e.g. full refund &gt;30 days, 50% within 7 days, no refund same-week)",
+			"&bull; <strong>From $500</strong> single-event page &mdash; <strong>$800+</strong> multi-event calendar with registration and ticketing",
+			'',
+			"Single event or recurring calendar, in-person or virtual, and are tickets free or paid?",
+		] );
+	}
+
+	// 0d-pre19-c) Mobile app vs PWA vs React Native vs Flutter.
+	if ( $has( [ 'mobile app', 'native app', 'ios app', 'android app', 'react native', 'flutter', ' pwa ', 'progressive web app', 'app development', 'mobile app vs website', 'build an app', 'ios development', 'android development', 'hybrid app', 'cross platform app', 'native vs pwa', 'mobile development', 'app vs website' ] ) ) {
+		return $nl( [
+			"Here&rsquo;s the decision framework for mobile app vs PWA &mdash; it comes down to App Store presence and hardware APIs:",
+			'',
+			"&bull; <strong>PWA (Progressive Web App)</strong> &mdash; runs in the browser, installable from Safari/Chrome, offline support, push notifications; no App Store listing; limited iOS support for some device APIs; <em>included in Next.js and WP builds at no extra cost</em>",
+			"&bull; <strong>React Native</strong> &mdash; shared iOS+Android codebase; near-native performance; App Store + Play Store listing; OTA updates without app store review; from <strong>$2,500+</strong>",
+			"&bull; <strong>Flutter</strong> &mdash; beautiful custom UI; single Dart codebase for iOS, Android, and web; fast on older devices; from <strong>$2,500+</strong>",
+			"&bull; <strong>Native Swift / Kotlin</strong> &mdash; maximum hardware access (Bluetooth, NFC, ARKit, CarPlay); highest performance animations; from <strong>$5,000+ per platform</strong> &mdash; referred to specialist partners",
+			'',
+			"<strong>Choose PWA when</strong>: content site, dashboard, SaaS tool with no hardware API needs.",
+			"<strong>Choose React Native / Flutter when</strong>: you need an App Store listing, push-to-App-Store, Bluetooth/NFC/camera/background location, or in-app purchases.",
+			'',
+			"Do you need an App Store listing, and which device hardware features are required?",
+		] );
+	}
+
 	// 0d-pre18-a) WordPress Multisite / multi-site network / multi-tenant.
 	if ( $has( [ 'wordpress multisite', 'multisite', 'multi-site', 'multiple websites', 'site network', 'subdomain network', 'subdirectory sites', 'wpmu', 'multi-tenant wordpress', 'manage multiple sites', 'mainwp', 'managewp', 'network of sites', 'wp network', 'subsite' ] ) ) {
 		return $nl( [
