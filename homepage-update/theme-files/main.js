@@ -495,7 +495,45 @@
       voiceMode = false; listening = false; stopSpeaking();
       if (rec) { try { rec.stop(); } catch (e) {} }
     }));
+
+    // Voice mute toggle injected into chat header
+    var muteBtn = document.createElement('button');
+    muteBtn.type = 'button';
+    muteBtn.className = 'pb-brain__mute';
+    var muted = localStorage.getItem('pb_voice_muted') === '1';
+    muteBtn.innerHTML = muted ? '&#128263;' : '&#128266;';
+    muteBtn.title = 'Toggle voice replies';
+    muteBtn.setAttribute('aria-label', muted ? 'Voice muted' : 'Voice on');
+    muteBtn.style.cssText = 'background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:13px;flex-shrink:0;';
+    muteBtn.addEventListener('click', function() {
+      muted = !muted;
+      localStorage.setItem('pb_voice_muted', muted ? '1' : '0');
+      muteBtn.innerHTML = muted ? '&#128263;' : '&#128266;';
+      muteBtn.setAttribute('aria-label', muted ? 'Voice muted' : 'Voice on');
+      if (muted) stopSpeaking();
+    });
+    var brainHead = document.querySelector('.pb-brain__head');
+    if (brainHead) brainHead.appendChild(muteBtn);
   }
+})();
+
+/* ================================================================
+   ORB ATTENTION PULSE — extra ring after 20s if chat never opened
+   ================================================================ */
+(function () {
+  'use strict';
+  var orbEl = document.querySelector('.pb-orb');
+  var brainEl = document.getElementById('pb-brain');
+  if (!orbEl || !brainEl) return;
+  var cancelled = false;
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('[data-pb-brainstorm-open],[data-pb-open-orb]')) cancelled = true;
+  });
+  setTimeout(function() {
+    if (cancelled || !brainEl.hidden) return;
+    orbEl.classList.add('pb-orb--nudge');
+    setTimeout(function() { orbEl.classList.remove('pb-orb--nudge'); }, 2000);
+  }, 20000);
 })();
 
 /* ================================================================

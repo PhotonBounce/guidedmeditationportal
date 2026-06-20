@@ -196,6 +196,46 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		if ( $rel ) { $related = 'Related work on this site: ' . implode( ' &middot; ', $rel ) . '.'; }
 	}
 
+	// 0) Russian / Cyrillic input — detect and respond in Russian before any other handler.
+	if ( preg_match( '/[\x{0400}-\x{04FF}]/u', $raw ) ) {
+		$ru_greet = $has( [ 'привет', 'здравствуй', 'добрый', 'хай', 'хей', 'здарова', 'что могу', 'расскажи', 'помоги' ] );
+		$ru_price = $has( [ 'сколько стоит', 'цена', 'стоимость', 'расценки', 'прайс', 'бюджет', 'дорого', 'дешево' ] );
+		$ru_web   = $has( [ 'сайт', 'лендинг', 'веб', 'интернет-магазин', 'магазин' ] );
+		$ru_ai    = $has( [ 'чатбот', 'чат-бот', 'бот', 'агент', 'искусственный', 'голосовой' ] );
+		if ( $ru_price ) {
+			return $nl( [
+				"Вот краткий прайс-лист (фиксированные цены):",
+				'',
+				"&bull; <strong>Сайты</strong> &mdash; Микро $40 &middot; Простой $115 &middot; Полный $300 &middot; Pro+WebGL $600 &middot; SaaS $750",
+				"&bull; <strong>AI</strong> &mdash; Пакет подсказок $25 &middot; Чат-бот $190 &middot; Агент $565 &middot; Агент+приложение $1 185",
+				"&bull; <strong>SEO</strong> &mdash; Аудит $30 &middot; Старт $75 &middot; Рост $115/мес",
+				"&bull; <strong>Брендинг</strong> &mdash; Логотип $30 &middot; Мини $115 &middot; Полный $350",
+				'',
+				"Расскажите о проекте и бюджете &mdash; подберу нужный уровень.",
+			] );
+		}
+		if ( $ru_web ) {
+			return $nl( [
+				"Для сайта ближайший вариант: <strong>Простой сайт</strong> &mdash; $115 &mdash; 3–5 страниц, контактная форма, SEO, аналитика. Полный сайт от $300, лендинг от $40.",
+				'',
+				"Какой бюджет и есть ли жёсткий дедлайн?",
+			] );
+		}
+		if ( $ru_ai ) {
+			return $nl( [
+				"Чат-бот «Консьерж» (обученный на вашем контенте) &mdash; $190. Кастомный AI-агент с RAG и интеграциями &mdash; $565. Агент + полное приложение &mdash; $1 185.",
+				'',
+				"Расскажите о проекте: что должен уметь бот и на каком канале работать?",
+			] );
+		}
+		// Generic Russian fallback
+		return $nl( [
+			"Понял вас! Я Фотон &mdash; консьерж студии Photon-Bounce.",
+			'',
+			"Что создаём: <strong>сайт</strong>, <strong>AI-агент</strong>, <strong>3D / WebGL</strong>, <strong>SEO</strong> или <strong>брендинг</strong>? Укажите проект и бюджет &mdash; сразу предложу уровень и цену.",
+		] );
+	}
+
 	// 0a) Studio / capabilities.
 	if ( $has( [ 'who are you', 'what can you do', 'what do you do', 'about photon', 'about the studio', 'tell me about yourself', 'who is this', 'what is this', 'what is photon', 'are you ai', 'are you a bot', 'are you real' ] ) ) {
 		return $nl( [
@@ -226,6 +266,52 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 			"<em>Note:</em> 10% of every crypto payment is donated to the Ukrainian Army Aid-For-Ukraine wallet &mdash; automatically, at our end.",
 			'',
 			"What project are we scoping?",
+		] );
+	}
+
+	// 0d) WordPress / CMS specific.
+	if ( $has( [ 'wordpress', ' woocommerce', ' woo ', 'wp theme', 'wp plugin', 'cms', 'content management' ] ) ) {
+		return $nl( [
+			"We build on WordPress regularly &mdash; custom themes, WooCommerce stores, and plugin development all fall under the <strong>Full Site</strong> ($300) or <strong>SaaS / App</strong> ($750) tier depending on complexity.",
+			'',
+			"Every build includes a handoff with full source so you own it outright &mdash; no proprietary page-builder lock-in. What are you trying to do: new build, redesign, or adding features to an existing WP site?",
+		] );
+	}
+
+	// 0e) Redesign / fix / improve existing site.
+	if ( $has( [ 'redesign', 'refresh', 'update my site', 'fix my site', 'improve my site', 'redo my', 'revamp', 'existing site', 'already have a site', 'my current site', 'my website needs', 'slow website', 'site is slow', 'broken site' ] ) ) {
+		return $nl( [
+			"Redesigns and fixes are scoped the same way as new builds: I audit what&rsquo;s there, write a one-pager, and quote a fixed price.",
+			'',
+			"Quick fixes (speed, SEO, broken pages) usually land in the <strong>Simple Site</strong> tier ($115). A full visual + tech redesign is <strong>Full Site</strong> ($300). Which is closer to what you need?",
+		] );
+	}
+
+	// 0f) Timeline / turnaround questions.
+	if ( $has( [ 'how long', 'how quickly', 'turnaround', 'timeline', 'delivery time', 'when can', 'how fast', 'time to build', 'days to complete', 'weeks to complete' ] ) ) {
+		return $nl( [
+			"Typical timelines &mdash; from scope-sign to launch:",
+			'',
+			"&bull; <strong>Micro Page</strong> ($40) &mdash; 2–4 days",
+			"&bull; <strong>Simple Site</strong> ($115) &mdash; 4–7 days",
+			"&bull; <strong>Full Site</strong> ($300) &mdash; 1–2 weeks",
+			"&bull; <strong>SaaS / App</strong> ($750) &mdash; 4–8 weeks",
+			"&bull; <strong>AI Agent</strong> ($565) &mdash; 1–3 weeks",
+			'',
+			"Rush delivery (×1.4 price) is available if you have a hard deadline. What are you building and when do you need it?",
+		] );
+	}
+
+	// 0g) Startup / new business intent.
+	if ( $has( [ 'startup', 'new business', 'just starting', 'new company', 'early stage', 'side project', 'side hustle', 'bootstrap', 'pre-seed', 'seed stage', 'launch my', 'my idea' ] ) ) {
+		return $nl( [
+			"Welcome &mdash; this is a good place to start. For early-stage and bootstrapped projects I usually recommend:",
+			'',
+			"&bull; <strong>Micro Page</strong> ($40) &mdash; get online fast with a single conversion-focused page",
+			"&bull; <strong>Simple Site</strong> ($115) &mdash; 3–5 pages, SEO, analytics, contact form &mdash; the full starter kit",
+			"&bull; <strong>AI Concierge bot</strong> ($190) &mdash; add a trained chatbot to any of the above",
+			'',
+			"What&rsquo;s the business and who&rsquo;s the target customer?",
 		] );
 	}
 

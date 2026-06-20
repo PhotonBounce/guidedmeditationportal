@@ -2786,6 +2786,8 @@ color: #000;
 .pb-orb__logo svg { width: 16px; height: 16px; }
 @keyframes pb-orb-pulse{ 0%,100%{ transform: scale(1); } 50%{ transform: scale(1.08); } }
 @keyframes pb-orb-ring{ 0%{ transform: scale(.85); opacity:.6; } 100%{ transform: scale(1.4); opacity:0; } }
+@keyframes pb-orb-nudge{ 0%,100%{ box-shadow:0 0 0 0 rgba(255,212,0,.6); } 40%{ box-shadow:0 0 0 16px rgba(255,212,0,0); } 60%{ box-shadow:0 0 0 0 rgba(255,212,0,0); } 80%{ box-shadow:0 0 0 10px rgba(255,212,0,0); } }
+.pb-orb--nudge{ animation: pb-orb-nudge 1s ease-out 2; }
 
 .pb-brain{
 position: fixed;
