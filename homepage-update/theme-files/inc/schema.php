@@ -364,13 +364,21 @@ function pb_aurora_schema_enhanced() {
 			],
 		];
 
-		// Speakable markup (voice search / AI citation)
+		// Speakable markup (voice search / AI citation) — broadened selectors
 		$graph[] = [
 			'@type'     => 'WebPage',
 			'@id'       => $site_url,
 			'speakable' => [
 				'@type'       => 'SpeakableSpecification',
-				'cssSelector' => [ '.pb-hero__title', '.pb-hero__sub', '.pb-section__head h2' ],
+				'cssSelector' => [
+					'.pb-hero__title',
+					'.pb-hero__sub',
+					'.pb-section__head h2',
+					'.pb-section__head p',
+					'.pb-faq__q',
+					'.pb-faq__a',
+					'[data-speakable]',
+				],
 			],
 		];
 

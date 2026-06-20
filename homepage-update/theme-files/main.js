@@ -381,6 +381,28 @@
         div.appendChild(cpBtn);
       }
       log.appendChild(div);
+      // After the 2nd bot message (first substantive reply), inject follow-up action chips.
+      if (cls === 'bot') {
+        var botMsgs = log.querySelectorAll('.pb-brain__msg--bot');
+        if (botMsgs.length === 2 && !log.querySelector('.pb-brain__chips-followup')) {
+          var fu = document.createElement('div');
+          fu.className = 'pb-brain__chips pb-brain__chips-followup';
+          fu.setAttribute('aria-label', 'Quick actions');
+          fu.innerHTML =
+            '<button type="button" class="pb-brain__chip" data-chip="Book a free 15-min call">&#128197; Book a call</button>' +
+            '<button type="button" class="pb-brain__chip" data-chip="What is the full pricing list?">&#128176; All pricing</button>' +
+            '<button type="button" class="pb-brain__chip" data-chip="Show me your portfolio and past work">&#127912; Portfolio</button>';
+          log.appendChild(fu);
+          fu.querySelectorAll('.pb-brain__chip').forEach(function(chip) {
+            chip.addEventListener('click', function() {
+              if (!input || !form) return;
+              input.value = chip.dataset.chip || chip.textContent.replace(/^[^\wÀ-￿]+/, '').trim();
+              fu.style.display = 'none';
+              form.dispatchEvent(new Event('submit', { bubbles: true }));
+            });
+          });
+        }
+      }
       log.scrollTop = log.scrollHeight;
     }
 

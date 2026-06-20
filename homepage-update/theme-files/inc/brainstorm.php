@@ -394,6 +394,57 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre9a) Guarantee / refund / satisfaction policy.
+	if ( $has( [ 'guarantee', 'money back', 'refund', 'satisfaction guarantee', 'what if i\'m not happy', "what if it doesn't work", 'not satisfied', 'can i get a refund', 'what if i don\'t like it', 'risk', 'protected' ] ) ) {
+		return $nl( [
+			"Here&rsquo;s the honest policy:",
+			'',
+			"&bull; Every project starts with a <strong>written scope</strong> you approve before any work begins &mdash; so you&rsquo;re never paying for a surprise.",
+			"&bull; <strong>Two full revision rounds</strong> are included. If the delivered work doesn&rsquo;t match the approved scope, I fix it at no charge.",
+			"&bull; If we&rsquo;re genuinely stuck after two rounds, I&rsquo;ll offer a partial refund on the milestone that missed the mark &mdash; no ghosting, no argument.",
+			'',
+			"What I don&rsquo;t offer: refunds for &ldquo;I changed my mind&rdquo; after delivery, since the work product is already built. That&rsquo;s why the upfront scope doc matters. Any other questions?",
+		] );
+	}
+
+	// 0d-pre9b) White-label / agency sub-contractor work.
+	if ( $has( [ 'white label', 'whitelabel', 'white-label', 'agency work', 'sub-contractor', 'subcontractor', 'work under my brand', 'work under my agency', 'resell your services', 'build for my client', 'under my name', 'agency partner', 'reseller' ] ) ) {
+		return $nl( [
+			"White-label and agency sub-contracting is totally fine &mdash; it&rsquo;s a significant chunk of the work here. How it works:",
+			'',
+			"&bull; I build under your agency brand / NDA. No Photon-Bounce branding in the deliverable unless you want it.",
+			"&bull; Communication style matches your client-facing standard (formal, async, whatever).",
+			"&bull; Pricing is the same fixed-rate menu. No agency markup tier from my side &mdash; your margin is yours to set.",
+			'',
+			"An NDA can be signed before any discussion. What&rsquo;s the project you want to hand off?",
+		] );
+	}
+
+	// 0d-pre9c) GDPR / data protection / privacy / security.
+	if ( $has( [ 'gdpr', 'data protection', 'privacy policy', 'hipaa', 'cookie consent', 'cookie compliance', 'data residency', 'where is my data', 'data stored', 'is it secure', 'security compliance', 'pii', 'user data', 'ccpa', 'cookie banner', 'data privacy' ] ) ) {
+		return $nl( [
+			"Compliance built in, not bolted on:",
+			'',
+			"&bull; <strong>GDPR / CCPA</strong>: cookie consent banner, data processing agreement template, and a privacy policy stub are included in every site build.",
+			"&bull; <strong>Data storage</strong>: nothing is stored on my servers by default &mdash; form data goes to your CRM or inbox; AI conversations are ephemeral (not logged).",
+			"&bull; <strong>Security</strong>: HTTPS always, security headers (CSP, HSTS), WordPress hardening (hidden login, salted keys, file-permission lockdown).",
+			"&bull; <strong>HIPAA</strong>: medical clients need a BAA and a HIPAA-hosting provider (Compliancy Group, Aptible). I can configure the stack; you sign the agreements.",
+			'',
+			"Any specific compliance requirement? I&rsquo;ll tell you upfront if it needs specialist legal counsel vs. a technical implementation.",
+		] );
+	}
+
+	// 0d-pre9d) Email marketing as a content service (campaigns, newsletters — not technical setup).
+	if ( $has( [ 'email marketing', 'email newsletter', 'email campaign', 'email list', 'drip campaign', 'email automation strategy', 'email sequence', 'welcome email', 'newsletter content', 'write my emails', 'email copywriting', 'email funnel', 'email broadcast' ] ) ) {
+		return $nl( [
+			"Email marketing as a <em>content service</em> (writing, strategy, campaigns) falls under the <strong>SMM / Content</strong> tier &mdash; $75/mo for a monthly calendar that covers email sequences or newsletters alongside social.",
+			'',
+			"If you need the <em>technical setup</em> &mdash; Mailchimp / Klaviyo / SendGrid account config, automation flows, list segmentation, pixel firing &mdash; that&rsquo;s an integration task bundled into your site or SaaS build, not a separate line item.",
+			'',
+			"Which side do you need: the writing + strategy, or the technical plumbing?",
+		] );
+	}
+
 	// 0d-pre9) Domain / hosting questions.
 	if ( $has( [ 'who hosts', 'where is it hosted', 'do you provide hosting', 'hosting included', 'do you host', 'hosting plan', 'domain name', 'do you register', 'buy a domain', 'domain included', 'ssl certificate', 'https', 'server', 'vps', 'cloud hosting', 'where will it live' ] ) ) {
 		return $nl( [
