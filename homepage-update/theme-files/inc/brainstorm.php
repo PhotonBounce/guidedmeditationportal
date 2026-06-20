@@ -514,6 +514,49 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre9-v) Subscription / recurring billing (SaaS pricing model).
+	if ( $has( [ 'subscription billing', 'recurring billing', 'saas pricing model', 'monthly subscription', 'stripe subscriptions', 'metered billing', 'usage-based pricing', 'per-seat pricing', 'tiered pricing model', 'subscription model', 'revenue subscription', 'billing portal', 'cancel anytime', 'free trial billing', 'freemium model' ] ) ) {
+		return $nl( [
+			"Subscription billing is a common feature in SaaS builds. Here&rsquo;s how it works in practice:",
+			'',
+			"&bull; <strong>Stripe Billing</strong> &mdash; monthly / annual plans, per-seat, metered, or tiered pricing; handled via Stripe&rsquo;s hosted checkout and billing portal",
+			"&bull; <strong>Free trial &rarr; paid</strong> &mdash; trial period with automatic upgrade via Stripe; no credit card required flows also possible",
+			"&bull; <strong>Webhooks</strong> &mdash; plan changes, cancellations, and failed payments all trigger server-side events your app reacts to in real time",
+			"&bull; <strong>Customer portal</strong> &mdash; Stripe&rsquo;s built-in portal lets subscribers upgrade, downgrade, or cancel without contacting support",
+			'',
+			"This is <strong>SaaS / App tier ($750+)</strong>. Tell me what your plans and pricing tiers look like and I&rsquo;ll scope the billing integration.",
+		] );
+	}
+
+	// 0d-pre9-w) Multilingual / i18n / RTL support.
+	if ( $has( [ 'multiple languages', 'multilingual site', 'bilingual site', 'i18n', 'internationalization', 'translate my site', 'spanish version', 'french version', 'german version', 'arabic site', 'rtl support', 'right to left', 'polylang', 'wpml', 'translation', 'localization', 'multi-language' ] ) ) {
+		return $nl( [
+			"Multilingual sites are supported &mdash; here&rsquo;s the stack depending on scope:",
+			'',
+			"&bull; <strong>2&ndash;3 languages (WordPress)</strong> &mdash; Polylang Free or WPML; manual or machine-translated content; hreflang tags auto-set for SEO",
+			"&bull; <strong>RTL languages (Arabic, Hebrew, Persian)</strong> &mdash; CSS logical properties, font swap, and WP RTL stylesheet; tested on Chrome + Safari mobile",
+			"&bull; <strong>Auto-translation</strong> &mdash; DeepL or Google Translate API can be wired in for automatic translation of new content; add ~$150 to any tier",
+			"&bull; <strong>Language switcher</strong> &mdash; flag dropdown or ISO-code toggle, styled to match your design",
+			'',
+			"How many languages, and do you already have the translated content or do you need auto-translation?",
+		] );
+	}
+
+	// 0d-pre9-x) Performance / page speed / Core Web Vitals.
+	if ( $has( [ 'page speed', 'performance optimization', 'core web vitals', 'lighthouse score', 'slow website', 'lcp', 'cls', 'inp', 'fid', 'first contentful paint', 'time to interactive', 'page load time', 'speed up my site', 'site is slow', 'performance audit', 'gtmetrix', 'pagespeed insights', 'webpagetest' ] ) ) {
+		return $nl( [
+			"Performance is a first-class concern on every build. Here&rsquo;s what&rsquo;s standard:",
+			'',
+			"&bull; <strong>LCP (Largest Contentful Paint)</strong> &mdash; hero images served as WebP + preloaded; critical CSS inlined",
+			"&bull; <strong>CLS (Cumulative Layout Shift)</strong> &mdash; explicit dimensions on all images and embeds; no layout-shifting fonts",
+			"&bull; <strong>INP (Interaction to Next Paint)</strong> &mdash; main-thread work minimized; heavy JS deferred or split",
+			"&bull; <strong>Score target</strong> &mdash; 90+ on Lighthouse Performance for the homepage; service pages typically 85+",
+			"&bull; <strong>Existing site audit</strong> &mdash; if you have a slow live site, I can run a PageSpeed + WebPageTest audit and give you a prioritized fix list",
+			'',
+			"Is this for a new build or an existing site you want optimized?",
+		] );
+	}
+
 	// 0d-pre9-s) ADA / accessibility / WCAG compliance.
 	if ( $has( [ 'ada compliant', 'accessible website', 'accessibility', 'screen reader', 'wcag', '508 compliance', 'disability access', 'aria labels', 'color contrast', 'keyboard navigation', 'blind user', 'visually impaired', 'accessibility audit', 'is it accessible', 'make it accessible' ] ) ) {
 		return $nl( [

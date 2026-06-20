@@ -2903,6 +2903,18 @@ border-radius: 50%; cursor: pointer; font-size: 16px;
 }
 .pb-brain__newchat:hover{ border-color:#ffd400; color:#ffd400; }
 .pb-brain__newchat:focus-visible{ outline:1px solid rgba(255,212,0,.5); border-radius:50%; }
+/* Scroll-to-bottom floating button inside the chat drawer */
+.pb-brain__scroll-down{
+  position:absolute; bottom:86px; right:14px; z-index:20;
+  width:30px; height:30px; border-radius:50%;
+  background:rgba(8,10,18,.9); border:1px solid rgba(255,212,0,.45);
+  color:#ffd400; font-size:17px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; pointer-events:none;
+  transition:opacity .18s;
+}
+.pb-brain__scroll-down.is-visible{ opacity:1; pointer-events:all; }
+.pb-brain__scroll-down:hover{ background:rgba(255,212,0,.1); }
 /* ===== Phase W ï¿½ Service catalog tabs, slider calc, payments, invest ===== */
 .pb-cat-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px;padding:0;list-style:none}
 .pb-cat-tab{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:inherit;border-radius:999px;font-size:14px;cursor:pointer;transition:.18s}

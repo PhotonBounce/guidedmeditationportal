@@ -587,6 +587,21 @@
       }
     });
 
+    // Scroll-to-bottom floating button — appears when log is scrolled up > 60px
+    var scrollDownBtn = document.createElement('button');
+    scrollDownBtn.type = 'button';
+    scrollDownBtn.className = 'pb-brain__scroll-down';
+    scrollDownBtn.setAttribute('aria-label', 'Scroll to latest message');
+    scrollDownBtn.innerHTML = '&#8595;';
+    brain.appendChild(scrollDownBtn);
+    log.addEventListener('scroll', function() {
+      var gap = log.scrollHeight - log.clientHeight - log.scrollTop;
+      scrollDownBtn.classList.toggle('is-visible', gap > 60);
+    });
+    scrollDownBtn.addEventListener('click', function() {
+      log.scrollTop = log.scrollHeight;
+    });
+
     // Stop voice + listening when the chat closes.
     closeBtns.forEach(b => b.addEventListener('click', () => {
       voiceMode = false; listening = false; stopSpeaking();
