@@ -394,6 +394,59 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre9) Domain / hosting questions.
+	if ( $has( [ 'who hosts', 'where is it hosted', 'do you provide hosting', 'hosting included', 'do you host', 'hosting plan', 'domain name', 'do you register', 'buy a domain', 'domain included', 'ssl certificate', 'https', 'server', 'vps', 'cloud hosting', 'where will it live' ] ) ) {
+		return $nl( [
+			"Hosting and domains are part of the setup &mdash; here&rsquo;s how it works:",
+			'',
+			"&bull; <strong>Domain</strong> &mdash; if you don&rsquo;t have one, I help you register it (~$15/yr via Namecheap or Google Domains). You own it; it lives in your account.",
+			"&bull; <strong>Hosting</strong> &mdash; for most sites: managed WordPress on WP Engine or shared hosting via SiteGround (~$5&ndash;15/mo). For SaaS apps: a VPS on DigitalOcean or Railway. I configure everything; you get logins.",
+			"&bull; <strong>SSL (HTTPS)</strong> &mdash; always included, via Let&rsquo;s Encrypt or the host&rsquo;s built-in certificate.",
+			"&bull; <strong>Care Plan ($50/mo)</strong> &mdash; includes hosting management, renewals, and updates so you never have to think about it.",
+			'',
+			"Want me to include hosting setup in your quote?",
+		] );
+	}
+
+	// 0d-pre10) Third-party API / platform integrations.
+	if ( $has( [ 'stripe', ' paypal', 'payment gateway', 'api integration', 'third party api', 'third-party api', 'zapier', 'make.com', 'hubspot', 'salesforce', 'mailchimp', 'klaviyo', 'twilio', 'sendgrid', 'airtable', 'notion api', 'webhook', 'crm integration', 'connect to my', 'integrate with', 'google analytics', 'google maps', 'facebook pixel', 'meta pixel' ] ) ) {
+		return $nl( [
+			"Integrations are a normal part of most builds &mdash; not a paid add-on. What&rsquo;s common in projects here:",
+			'',
+			"&bull; <strong>Payments</strong>: Stripe, PayPal, Square &mdash; checkout flows, subscriptions, webhooks",
+			"&bull; <strong>Automation</strong>: Zapier, Make.com, n8n &mdash; trigger emails, CRM updates, Slack pings",
+			"&bull; <strong>CRM / Email</strong>: HubSpot, Mailchimp, Klaviyo, SendGrid",
+			"&bull; <strong>Analytics</strong>: GA4, Meta Pixel, GTM &mdash; full event setup",
+			"&bull; <strong>Mapping / Comms</strong>: Google Maps, Twilio SMS, WhatsApp API",
+			"&bull; <strong>Databases / No-code</strong>: Airtable, Notion API, Supabase",
+			'',
+			"Tell me which platform and what you need it to do &mdash; I&rsquo;ll confirm it&rsquo;s in scope and whether it affects the price.",
+		] );
+	}
+
+	// 0d-pre11) Demo / live example request.
+	if ( $has( [ 'can i see a demo', 'show me a demo', 'live example', 'working example', 'can you show me', 'see it live', 'link to your work', 'do you have a demo', 'demo site', 'example site', 'see the chatbot', 'try the chatbot', 'see a live', 'show me an example' ] ) ) {
+		return $nl( [
+			"You&rsquo;re already talking to one &mdash; I&rsquo;m the AI concierge built and deployed by Photon Bounce. For other live examples:",
+			'',
+			"&bull; <strong><a href=\"/occupantkiller/\">OccupantKiller</a></strong> &mdash; WebGL 3D shooter, runs in-browser with physics and particle effects",
+			"&bull; <strong><a href=\"/ausis/\">Ausis</a></strong> &mdash; a live Android app (Kotlin, voice-first AI companion)",
+			"&bull; <strong>This site</strong> &mdash; WordPress with a custom AI chatbot, 3D orb, speech synthesis, scroll effects",
+			"&bull; <strong><a href=\"/portfolio/\">Portfolio page</a></strong> &mdash; more case studies with descriptions",
+			'',
+			"For a live walkthrough of what your specific project would look like, book a 15-min call at <a href=\"/book/\">/book/</a>.",
+		] );
+	}
+
+	// 0d-pre12) Referral / warm lead.
+	if ( $has( [ 'someone recommended', 'was referred', 'i was referred', 'my friend told', 'heard about you from', 'recommended by', 'referred by', 'a friend said', 'a colleague mentioned', 'your name came up', 'good things about you' ] ) ) {
+		return $nl( [
+			"Thanks for making the jump &mdash; referrals are how most of the best projects here start.",
+			'',
+			"What&rsquo;s the project? Tell me what you need built (site, app, AI agent, brand) and I&rsquo;ll give you a real ballpark straight away.",
+		] );
+	}
+
 	// 0d) WordPress / CMS specific.
 	if ( $has( [ 'wordpress', ' woocommerce', ' woo ', 'wp theme', 'wp plugin', 'cms', 'content management' ] ) ) {
 		return $nl( [
