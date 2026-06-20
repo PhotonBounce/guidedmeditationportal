@@ -561,6 +561,52 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre17-a) AI image generation / Midjourney / DALL-E / Stable Diffusion.
+	if ( $has( [ 'ai image', 'ai generated image', 'midjourney', 'dall-e', 'stable diffusion', 'ai art', 'image generation', 'text to image', 'ai artwork', 'generative art', 'comfyui', 'image ai', 'ai illustration', 'generate images', 'ai images for site' ] ) ) {
+		return $nl( [
+			"AI image generation is part of the Photo &amp; Asset workflow &mdash; here&rsquo;s what&rsquo;s available:",
+			'',
+			"&bull; <strong>DALL&bull;E 3 / Midjourney</strong> &mdash; hero images, illustrations, backgrounds, icon sets; consistent style from a single style prompt; from <strong>$50</strong> for an asset session",
+			"&bull; <strong>Stable Diffusion / ComfyUI</strong> &mdash; fine-tuned models, LoRA-trained characters, local inference; for brand-consistent repeatable generation",
+			"&bull; <strong>Upscaling</strong> &mdash; Real-ESRGAN for print-quality (300 dpi) versions of any AI image",
+			"&bull; <strong>Optimization</strong> &mdash; all AI images converted to WebP, lazy-loaded, correct alt text for accessibility and SEO",
+			"&bull; <strong>Not suitable for</strong>: faces (accuracy issues), logos (use vector), product photography (use real photos)",
+			'',
+			"Is this for hero art, site illustrations, icon set, backgrounds, or a full asset library?",
+		] );
+	}
+
+	// 0d-pre17-b) Email marketing / newsletter / Mailchimp / ConvertKit.
+	if ( $has( [ 'email marketing', 'newsletter', 'mailchimp', 'convertkit', 'drip email', 'klaviyo', 'email list', 'email campaign', 'email automation', 'email sequence', 'email list building', 'opt-in form', 'lead magnet', 'email funnel', 'email signup', 'mailing list', 'kitcom' ] ) ) {
+		return $nl( [
+			"Email marketing integration is fully supported &mdash; here&rsquo;s how it scopes:",
+			'',
+			"&bull; <strong>Opt-in form</strong> &mdash; custom-styled, connected to Mailchimp / ConvertKit / Klaviyo / Drip via API; lead magnet delivery in the confirmation email",
+			"&bull; <strong>Pop-up / exit-intent</strong> &mdash; timed or scroll-triggered modal; GDPR double-opt-in checkbox included",
+			"&bull; <strong>Form &rarr; CRM</strong> &mdash; form data &rarr; HubSpot, Airtable, or Notion via webhook",
+			"&bull; <strong>Welcome sequence</strong> &mdash; 5-email welcome series built in your ESP; copywriting extra; from <strong>$150 add-on</strong>",
+			"&bull; <strong>ESP recommendations</strong> &mdash; Mailchimp (free to 500 contacts) &middot; Kit / ConvertKit (creators) &middot; Klaviyo (e-commerce / Shopify) &middot; Drip (SaaS)",
+			'',
+			"Do you already have an ESP, and what&rsquo;s the lead magnet or incentive for signing up?",
+		] );
+	}
+
+	// 0d-pre17-c) Custom ML / AI model training / fine-tuning / RAG.
+	if ( $has( [ 'train a model', 'custom ai model', 'machine learning', 'ml model', 'computer vision', 'image recognition', 'natural language processing', ' nlp ', 'fine-tune', 'fine tuning', 'hugging face', 'tensorflow', 'pytorch', 'ai model', 'train gpt', 'rag pipeline', 'retrieval augmented', 'vector database', 'embeddings', 'semantic search', 'custom llm' ] ) ) {
+		return $nl( [
+			"Custom ML and AI model work is in scope &mdash; here&rsquo;s the current capability:",
+			'',
+			"&bull; <strong>LLM fine-tuning</strong> &mdash; GPT-3.5 / GPT-4o fine-tuning for domain-specific tone; open models (Llama 3, Mistral) via QLoRA on GPU; from <strong>$500</strong>",
+			"&bull; <strong>Embeddings + RAG</strong> &mdash; vector DB (Pinecone, Weaviate, Chroma); semantic search over your documents; Q&amp;A bot over a corpus; from <strong>$565</strong>",
+			"&bull; <strong>Computer vision</strong> &mdash; YOLOv8 / ResNet object detection &amp; classification; custom training on a labeled dataset; OpenCV preprocessing",
+			"&bull; <strong>Image classification</strong> &mdash; MobileNet / EfficientNet transfer learning; accurate from ~500 labeled images",
+			"&bull; <strong>Custom AI concierge</strong> &mdash; no fine-tuning needed; specialized system prompt + guardrails + chat widget; from <strong>$190</strong>",
+			"&bull; <strong>Deployment</strong> &mdash; FastAPI endpoint or Vercel Edge Function; auth-protected; streaming responses",
+			'',
+			"What&rsquo;s the problem to solve &mdash; classification, generation, semantic search, or extraction?",
+		] );
+	}
+
 	// 0d-pre16-a) Stripe / subscription billing / SaaS pricing model.
 	if ( $has( [ 'stripe integration', 'stripe setup', 'payment gateway', 'stripe connect', 'subscription billing', 'recurring billing', 'billing portal', 'stripe customer portal', 'usage-based pricing', 'freemium model', 'tiered pricing setup', 'metered billing', 'stripe webhooks', 'stripe subscription', 'payment integration', 'accept payments' ] ) ) {
 		return $nl( [

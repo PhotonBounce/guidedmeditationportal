@@ -430,6 +430,30 @@
         _fbDiv.appendChild(_upBtn); _fbDiv.appendChild(_dnBtn);
         div.appendChild(_fbDiv);
       }
+      // Retry button on API error messages
+      if (cls === 'err') {
+        var _retryBtn = document.createElement('button');
+        _retryBtn.type = 'button';
+        _retryBtn.className = 'pb-brain__retry';
+        _retryBtn.innerHTML = '&#8635; Retry';
+        _retryBtn.setAttribute('aria-label', 'Retry last message');
+        _retryBtn.addEventListener('click', function() {
+          var _userMsgs = log.querySelectorAll('.pb-brain__msg--me');
+          var _lastUserMsg = _userMsgs[_userMsgs.length - 1];
+          var _lastUserText = _lastUserMsg ? _lastUserMsg.textContent.trim() : '';
+          div.remove();
+          if (_lastUserMsg) _lastUserMsg.remove();
+          for (var _ri = chatMsgs.length - 1; _ri >= 0; _ri--) {
+            if (chatMsgs[_ri].cls === 'user') { chatMsgs.splice(_ri, 1); break; }
+          }
+          saveChat();
+          if (_lastUserText && input && form) {
+            input.value = _lastUserText;
+            form.dispatchEvent(new Event('submit', { bubbles: true }));
+          }
+        });
+        div.appendChild(_retryBtn);
+      }
       // Timestamp badge — revealed on hover via CSS opacity transition
       var _tsEl = document.createElement('time');
       _tsEl.className = 'pb-brain__ts';

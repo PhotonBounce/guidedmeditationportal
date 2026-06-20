@@ -2919,6 +2919,18 @@ border-radius: 50%; cursor: pointer; font-size: 16px;
   background:rgba(220,50,50,.08); border:1px solid rgba(220,80,80,.25);
   color:rgba(255,190,190,.9); font-size:13px; font-style:italic;
 }
+/* Retry button inside error messages */
+.pb-brain__retry{
+  display:inline-flex; align-items:center; gap:4px;
+  margin-top:7px; background:none;
+  border:1px solid rgba(220,80,80,.4); border-radius:4px;
+  color:rgba(255,190,190,.8); cursor:pointer;
+  font-size:11px; font-style:normal; padding:3px 8px; transition:.15s;
+}
+.pb-brain__retry:hover{
+  border-color:rgba(220,80,80,.8); color:#ffd0d0;
+  background:rgba(220,50,50,.12);
+}
 .pb-brain__char-count{
   display:block; text-align:right; font-size:11px; color:rgba(244,246,251,.3);
   padding:2px 4px 0; transition:color .2s;
