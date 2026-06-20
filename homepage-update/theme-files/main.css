@@ -4686,3 +4686,31 @@ html.pb-brain-open { overflow: hidden; }
 .pb-orb__logo svg{ width:16px; height:16px; }
 .pb-orb__lab{ color:#fff !important; text-shadow:none; letter-spacing:.02em; white-space:nowrap; font-weight:600; }
 @media(max-width:520px){ .pb-orb__lab{ display:none; } .pb-orb{ padding:12px; } }
+
+/* ===== FAQ accordion (pb-faq) ===== */
+.pb-faq{ padding:60px 0 80px; }
+.pb-faq__list{ display:flex; flex-direction:column; gap:0; max-width:780px; margin:0 auto; }
+.pb-faq__item{
+  border-bottom:1px solid rgba(255,255,255,.08);
+  transition:background .18s;
+}
+.pb-faq__item:first-child{ border-top:1px solid rgba(255,255,255,.08); }
+.pb-faq__q{
+  display:flex; justify-content:space-between; align-items:center; gap:12px;
+  padding:18px 0; cursor:pointer; list-style:none;
+  font:600 15px/1.4 "Space Grotesk",system-ui,sans-serif; color:#f4f6fb;
+  user-select:none;
+}
+.pb-faq__q::after{
+  content:''; flex-shrink:0; width:18px; height:18px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%23ffd400' stroke-width='2' stroke-linecap='round' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") center/contain no-repeat;
+  transition:transform .22s;
+}
+.pb-faq__item[open] .pb-faq__q::after{ transform:rotate(180deg); }
+.pb-faq__q::-webkit-details-marker{ display:none; }
+.pb-faq__a{
+  padding:0 0 18px;
+  font:15px/1.7 "Space Grotesk",system-ui,sans-serif;
+  color:rgba(244,246,251,.72);
+}
+@media(max-width:600px){ .pb-faq__q{ font-size:14px; } .pb-faq__a{ font-size:14px; } }

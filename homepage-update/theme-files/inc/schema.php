@@ -408,3 +408,6 @@ function pb_aurora_schema_enhanced() {
 
 // SEO service landing pages (loaded here so they activate without editing functions.php).
 require_once __DIR__ . '/service-pages.php';
+
+// Home FAQ accordion + FAQPage schema items.
+require_once __DIR__ . '/faq.php';

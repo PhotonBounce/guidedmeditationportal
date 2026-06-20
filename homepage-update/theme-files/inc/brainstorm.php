@@ -322,6 +322,42 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre6a) Non-technical client.
+	if ( $has( [ "i'm not technical", 'i am not technical', 'not a developer', 'not a programmer', "i don't code", 'i cannot code', 'non-technical', 'no coding experience', 'not good with technology', 'i just have an idea', 'just an idea', 'never built a website', "don't understand tech" ] ) ) {
+		return $nl( [
+			"That&rsquo;s completely fine &mdash; most clients come in without any technical background. You describe <em>what</em> the product needs to do and who it&rsquo;s for; I handle every line of code, every design decision, and every server configuration.",
+			'',
+			"During the project you get: a plain-English scope doc, weekly Friday demo links so you can click through the real thing, and async video walkthroughs of any decision that affects you. No jargon, no gatekeeping.",
+			'',
+			"What is the idea? Tell me in plain terms &mdash; even \"I want a website that does X\" is enough to start.",
+		] );
+	}
+
+	// 0d-pre6b) Post-launch support / maintenance.
+	if ( $has( [ 'after launch', 'post launch', 'after delivery', 'what happens after', 'support after', 'ongoing support', 'maintenance plan', 'who maintains', 'updates after', 'will you help after', 'future changes', 'what do i do if something breaks' ] ) ) {
+		return $nl( [
+			"Two options after delivery:",
+			'',
+			"1. <strong>Care Plan &mdash; $50/mo</strong>: hosting, security patches, plugin/dependency updates, uptime monitoring, and up to 2 h/mo of content or code edits. Most clients take this &mdash; it means nothing breaks quietly in the background.",
+			"2. <strong>Ad-hoc hourly support</strong>: if you just need occasional help, I can quote one-off tasks as they come up.",
+			'',
+			"The handoff package (full source + docs) means you&rsquo;re never locked to me &mdash; any developer can take over if you ever want that. Would you like to include a Care Plan in your scope?",
+		] );
+	}
+
+	// 0d-pre6c) Revision / iteration policy.
+	if ( $has( [ 'revisions', 'revision rounds', 'revision policy', 'how many changes', 'how many edits', 'can i change things', 'can i request changes', 'iteration', 'feedback rounds', 'how many times can i change', 'change my mind' ] ) ) {
+		return $nl( [
+			"Every fixed-price project includes <strong>two full revision rounds</strong>:",
+			"&bull; Round 1 &mdash; after the first complete draft is delivered",
+			"&bull; Round 2 &mdash; after Round 1 feedback is implemented",
+			'',
+			"A revision round covers the <em>entire</em> deliverable in one pass &mdash; not per-file or per-element micro-edits spread over weeks. That keeps iteration fast.",
+			'',
+			"If you know ahead of time that your project is likely to need more back-and-forth (unclear requirements, multiple stakeholders, evolving brand), we can agree on a 3-round or retainer arrangement before work starts.",
+		] );
+	}
+
 	// 0d-pre6) Deadline / urgency.
 	if ( $has( [ 'urgent', ' asap', 'as soon as possible', 'i need it by', 'need it next week', 'need it this week', 'can you start today', 'can you start tomorrow', 'rush order', 'rush project', 'really fast', 'how soon can', 'what is your earliest' ] ) ) {
 		return $nl( [
