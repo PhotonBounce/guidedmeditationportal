@@ -561,6 +561,52 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre13-a) White-label / reseller / agency partnership.
+	if ( $has( [ 'white label', 'white-label', 'resell', 'reseller', 'agency reselling', 'rebrand for clients', 'white label solution', 'agency white label', 'client reselling', 'under my brand', 'under our brand', 'agency partnership', 'dev partnership', 'whitelabel' ] ) ) {
+		return $nl( [
+			"White-label and agency partnerships are available:",
+			'',
+			"&bull; <strong>Deliverables</strong> &mdash; shipped without Photon Bounce branding; all code, repos, and assets transfer cleanly to you or your client",
+			"&bull; <strong>Agency rate</strong> &mdash; volume discount available for 3+ projects/year; DM or email for rate card",
+			"&bull; <strong>Branding</strong> &mdash; WP admin footer + email notifications can match your agency domain and logo",
+			"&bull; <strong>Communication</strong> &mdash; I can communicate directly with your client, or stay behind the scenes &mdash; your call",
+			"&bull; <strong>NDA</strong> &mdash; available on request; standard mutual or one-way",
+			"&bull; <strong>No licensing fees</strong> &mdash; no per-project or per-seat charge; clean open transfer",
+			'',
+			"How many projects per year are you looking at, and what&rsquo;s the typical stack?",
+		] );
+	}
+
+	// 0d-pre13-b) CRO / conversion rate optimization.
+	if ( $has( [ 'conversion rate', ' cro ', 'conversion optimization', 'a/b testing', 'ab testing', 'split testing', 'landing page optimization', 'heatmap', 'click tracking', 'funnel analysis', 'bounce rate', 'optimize conversions', 'improve conversions', 'conversion funnel', 'low conversion' ] ) ) {
+		return $nl( [
+			"Conversion rate optimization is available as a project add-on or standalone:",
+			'',
+			"&bull; <strong>A/B testing</strong> &mdash; VWO or Optimizely integration; or lightweight vanilla JS split test with cookie-based assignment and GA4 event tracking",
+			"&bull; <strong>Heatmap &amp; session recording</strong> &mdash; Microsoft Clarity (free) or Hotjar; installed, configured, and dashboard set up",
+			"&bull; <strong>Funnel analysis</strong> &mdash; GA4 conversion events + goal funnels; Looker Studio dashboard; reveals drop-off steps",
+			"&bull; <strong>Landing page variant</strong> &mdash; full new LP variant from <strong>$150</strong>; tested against existing",
+			"&bull; <strong>Speed &rarr; conversions</strong> &mdash; each 1s improvement = up to 7% conversion lift; bundle with Core Web Vitals audit",
+			'',
+			"What&rsquo;s the current conversion rate, and what page or funnel are you focusing on?",
+		] );
+	}
+
+	// 0d-pre13-c) AR / VR / spatial computing / immersive web.
+	if ( $has( [ 'augmented reality', 'ar filter', 'virtual reality', 'vr experience', 'spatial computing', 'apple vision pro', 'webxr', 'ar/vr', 'mixed reality', 'xr experience', 'metaverse', 'immersive experience', '360 video', 'three.js vr', 'aframe', 'model viewer', 'product try-on', 'ar try on' ] ) ) {
+		return $nl( [
+			"AR / VR and immersive web are in scope &mdash; here&rsquo;s the current capability:",
+			'',
+			"&bull; <strong>Web AR (model viewer / product try-on)</strong> &mdash; &lt;model-viewer&gt; with USDZ + GLB; works on iOS Safari and Android Chrome without an app download; bundled into the 3D / WebGL service",
+			"&bull; <strong>WebXR in-browser VR</strong> &mdash; A-Frame or Three.js XR; runs in Meta Quest browser; from <strong>$750</strong>",
+			"&bull; <strong>AR filters (Instagram / TikTok)</strong> &mdash; Spark AR (Meta) or Effect House (TikTok); from <strong>$200 / filter</strong>",
+			"&bull; <strong>Apple Vision Pro (visionOS)</strong> &mdash; SwiftUI spatial apps; scoping available in 2026; DM for timeline",
+			"&bull; <strong>360&deg; video integration</strong> &mdash; pannellum.js or Three.js equirectangular scene; works on desktop + mobile gyro",
+			'',
+			"Is this product visualization, an AR filter, or a full immersive experience?",
+		] );
+	}
+
 	// 0d-pre12-a) SaaS user onboarding / activation flow.
 	if ( $has( [ 'onboarding flow', 'user onboarding', 'welcome flow', 'getting started flow', 'activation flow', 'onboarding checklist', 'onboarding wizard', 'new user flow', 'product tour', 'guided tour', 'user activation', 'first-time user', 'setup wizard' ] ) ) {
 		return $nl( [

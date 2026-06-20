@@ -356,6 +356,7 @@
   if (orb) {
     orb.style.zIndex = '99999';
     orb.style.position = 'fixed';
+    orb.setAttribute('title', 'Chat with Photon · Ctrl+/');
   }
 
   // Form submission + two-way voice
@@ -431,7 +432,9 @@
           fu.innerHTML = chipDefs.map(function(c) {
             return '<button type="button" class="pb-brain__chip" data-chip="' + c.send.replace(/"/g,'&quot;') + '">' + c.txt + '</button>';
           }).join('');
+          fu.classList.add('pb-chips-entering');
           log.appendChild(fu);
+          requestAnimationFrame(function() { requestAnimationFrame(function() { fu.classList.remove('pb-chips-entering'); }); });
           fu.querySelectorAll('.pb-brain__chip').forEach(function(chip) {
             chip.addEventListener('click', function() {
               if (!input || !form) return;
