@@ -196,8 +196,41 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		if ( $rel ) { $related = 'Related work on this site: ' . implode( ' &middot; ', $rel ) . '.'; }
 	}
 
+	// 0a) Studio / capabilities.
+	if ( $has( [ 'who are you', 'what can you do', 'what do you do', 'about photon', 'about the studio', 'tell me about yourself', 'who is this', 'what is this', 'what is photon', 'are you ai', 'are you a bot', 'are you real' ] ) ) {
+		return $nl( [
+			"I&rsquo;m <strong>Photon</strong>, the AI concierge for <a href=\"/\">Photon-Bounce Studio</a> &mdash; a one-person creative-tech studio run by Dmitriy.",
+			'',
+			"We ship: <strong>custom websites &amp; web apps</strong>, <strong>AI agents &amp; chatbots</strong>, <strong>3D / WebGL experiences</strong>, <strong>SEO / AEO</strong>, and <strong>brand identities</strong> &mdash; fixed prices, source files yours to keep. No subscriptions, no lock-in.",
+			'',
+			"What are you trying to build?",
+		] );
+	}
+
+	// 0b) Portfolio / show me your work.
+	if ( $has( [ 'portfolio', 'examples', 'show me', 'past work', 'what have you built', 'case stud', 'your work', 'samples', 'previous work', 'your projects', 'what apps', 'your apps', 'what games', 'show me work' ] ) ) {
+		return $nl( [
+			"Portfolio lives at <a href=\"/portfolio/\">/portfolio/</a> &mdash; projects span web, AI, 3D and brand.",
+			'',
+			"Live apps you can try right now: <strong><a href=\"/occupantkiller/\">OccupantKiller</a></strong> (browser FPS), <strong><a href=\"/ausis/\">Ausis</a></strong> (audio AI), <strong><a href=\"/friendai/\">FriendAI</a></strong> (senior companion), <strong><a href=\"/guidedmeditation/\">Guided Meditation</a></strong>, and <strong><a href=\"/govdao/\">GovDAO</a></strong> (Web3 governance).",
+			'',
+			"Want me to walk you through one, or suggest the closest match to your project?",
+		] );
+	}
+
+	// 0c) Payment / crypto.
+	if ( $has( [ 'crypto', 'bitcoin', ' btc', ' eth ', ' sol ', ' usdc', 'cash app', 'cashapp', 'wire transfer', ' ach ', 'how do i pay', 'payment method', 'accept payments', 'do you take', 'paypal', 'venmo', 'stripe', 'how to pay' ] ) ) {
+		return $nl( [
+			"We accept: <strong>Cash App</strong>, <strong>crypto</strong> (BTC, ETH, SOL, USDC + 100 more via Coinbase Commerce), <strong>check or money order</strong>, and <strong>wire / ACH</strong>. No Stripe or PayPal.",
+			'',
+			"<em>Note:</em> 10% of every crypto payment is donated to the Ukrainian Army Aid-For-Ukraine wallet &mdash; automatically, at our end.",
+			'',
+			"What project are we scoping?",
+		] );
+	}
+
 	// 1) Greeting / short opener.
-	if ( $turn < 2 && $words <= 4 && $has( [ ' hi ', ' hey', 'hello', ' yo ', ' sup', 'howdy', 'good morning', 'good afternoon', 'good evening', 'hola' ] ) ) {
+	if ( $turn < 2 && $has( [ ' hi ', ' hey', 'hello', ' yo ', ' sup', 'howdy', 'good morning', 'good afternoon', 'good evening', 'hola', 'greetings', 'what\'s up', 'whats up' ] ) ) {
 		return "Hey &mdash; I&rsquo;m Photon, the studio concierge. Tell me what you want to build and I&rsquo;ll point you to the right service and price. Most people start with a <strong>website or store</strong>, an <strong>AI agent / chatbot</strong>, a <strong>3D / AR experience</strong>, <strong>SEO</strong>, or a <strong>brand</strong>. What&rsquo;s the project?";
 	}
 
@@ -243,6 +276,14 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 			'',
 			"Tell me your industry and budget and I&rsquo;ll suggest a couple that fit.",
 		] );
+	} elseif ( $has( [ 'mobile app', 'android app', 'ios app', ' flutter', 'react native', 'app store', 'google play', ' apk', 'smartphone app', 'phone app', 'native app' ] ) ) {
+		$rec = [ 'an Agent + App', '$1,185', 'a full mobile app with an AI agent baked in &mdash; or a standalone SaaS / App build from $750 if you skip the AI layer' ];
+	} elseif ( $has( [ 'social media', ' instagram', ' tiktok', ' smm ', 'social content', 'content calendar', 'facebook ads', 'content strategy', 'posting schedule', 'social posts' ] ) ) {
+		$rec = [ 'SMM Content', '$75/mo', 'a monthly social content calendar plus scheduling &mdash; a quick one-off Tune-Up is $25' ];
+	} elseif ( $has( [ 'maintenance', 'support plan', 'care plan', 'monthly retainer', 'keep it running', 'hosting support', 'site upkeep', 'ongoing support', 'website support', 'updates and fixes' ] ) ) {
+		$rec = [ 'a Care Plan', '$50/mo', 'monthly updates, backups, performance checks and priority support &mdash; Lite is $15/mo' ];
+	} elseif ( $has( [ ' 3d ', ' ar ', ' vr ', 'augmented reality', 'virtual reality', 'product configurator', 'model viewer', '3d experience', '3d product', 'three.js', 'threejs', 'webgl', 'shader', 'particle', '3d hero', 'animated hero', '3d animation' ] ) ) {
+		$rec = [ 'a 3D / WebGL build', '$600+', 'a Three.js hero, product configurator or full AR / VR experience &mdash; runs 100% in the browser' ];
 	}
 
 	if ( $rec ) {
@@ -311,7 +352,13 @@ function pb_aurora_brainstorm_render() {
 			</div>
 		</div>
 		<form class="pb-brain__form" data-pb-brain-form data-pb-rest="<?php echo esc_url( rest_url( 'pb/v1/brainstorm' ) ); ?>">
-			<textarea class="pb-brain__input" data-pb-brain-input rows="2" placeholder="What do you want to build? (Shift+Enter for newline)" required maxlength="2000"></textarea>
+			<div class="pb-brain__chips" aria-label="Quick questions">
+				<button type="button" class="pb-brain__chip" data-chip="How much does a website cost?">💻 Website pricing</button>
+				<button type="button" class="pb-brain__chip" data-chip="Tell me about AI agents and chatbots">🤖 AI agents</button>
+				<button type="button" class="pb-brain__chip" data-chip="Show me your portfolio and past work">🎨 Portfolio</button>
+				<button type="button" class="pb-brain__chip" data-chip="What payment methods do you accept?">💳 Payment</button>
+			</div>
+			<textarea class="pb-brain__input" data-pb-brain-input rows="2" placeholder="What do you want to build? (Shift+Enter for newline, Ctrl+/ to toggle)" required maxlength="2000"></textarea>
 			<div class="pb-brain__row">
 				<button type="button" class="pb-brain__mic" data-pb-brain-mic aria-label="Talk instead of type" title="Voice input"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1.5a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0v-7a3 3 0 0 0-3-3z"/><path d="M19 11v.5a7 7 0 0 1-14 0V11"/><line x1="12" y1="18.5" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg></button>
 				<button type="submit" class="pb-btn pb-btn--primary pb-btn--sm">Send</button>

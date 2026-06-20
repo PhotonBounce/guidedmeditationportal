@@ -279,6 +279,11 @@
     if (!brain) return;
     brain.hidden = false;
     document.documentElement.classList.add('pb-brain-open');
+    // Restore chips if the log only has the initial bot message (fresh session)
+    var chips = brain.querySelector('.pb-brain__chips');
+    if (chips && log && log.querySelectorAll('.pb-brain__msg').length <= 1) {
+      chips.style.display = '';
+    }
     if (input) input.focus();
   }
 
@@ -290,6 +295,14 @@
 
   openBtns.forEach(btn => btn.addEventListener('click', openBrain));
   closeBtns.forEach(btn => btn.addEventListener('click', closeBrain));
+
+  // Ctrl+/ (or Cmd+/) toggles the chatbot
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === '/') {
+      e.preventDefault();
+      if (brain && !brain.hidden) { closeBrain(); } else { openBrain(); }
+    }
+  });
 
   // Close on backdrop click or Escape
   if (brain) {
@@ -393,20 +406,38 @@
     }
 
     // --- Voice input: speech recognition ---
+    // Quick-reply chips: clicking a chip fills + submits the textarea
+    document.querySelectorAll('.pb-brain__chip').forEach(function(chip) {
+      chip.addEventListener('click', function() {
+        if (!input || !form) return;
+        input.value = chip.dataset.chip || chip.textContent.replace(/^[^\w]+/, '').trim();
+        form.dispatchEvent(new Event('submit', { bubbles: true }));
+        // Hide chips after first use
+        var chips = document.querySelector('.pb-brain__chips');
+        if (chips) chips.style.display = 'none';
+      });
+    });
+
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     let rec = null;
+    // Detect Cyrillic input and switch recognition language accordingly
+    function detectLang(text) {
+      return /[Ѐ-ӿ]/.test(text) ? 'ru-RU' : 'en-US';
+    }
     if (SR && micBtn) {
       rec = new SR();
       rec.continuous = false;
       rec.interimResults = false;
-      rec.lang = 'en-US';
+      rec.lang = (navigator.language || '').toLowerCase().startsWith('ru') ? 'ru-RU' : 'en-US';
       rec.onresult = e => {
         const transcript = e.results[0][0].transcript;
         input.value = transcript;
         listening = false;
         micBtn.classList.remove('is-recording');
         voiceMode = true;
-        form.dispatchEvent(new Event('submit'));
+        // Switch language for next listen based on what was recognized
+        rec.lang = detectLang(transcript);
+        form.dispatchEvent(new Event('submit', { bubbles: true }));
       };
       rec.onerror = () => { listening = false; micBtn.classList.remove('is-recording'); };
       rec.onend = () => { listening = false; micBtn.classList.remove('is-recording'); };
