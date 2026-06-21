@@ -71,7 +71,9 @@ function route(lower, lastTopic) {
     "sleepwalking","somnambulism",
     "hypersomnia","excessive daytime sleepiness",
     "melatonin","taking melatonin","melatonin supplement",
-    "magnesium for sleep","sleep supplement"]) ||
+    "magnesium for sleep","sleep supplement",
+    "vivid dreams","vivid dream","recurring dreams","recurring dream",
+    "strange dream","weird dream","unsettling dream","dreams every night"]) ||
     anyWord(lower,["nap","rls"])) return "sleep";
   // 7. focus
   if(any(lower,["focus","study","concentrat","productivity","procrastinat","writing","brain fog","adhd",
@@ -103,7 +105,9 @@ function route(lower, lastTopic) {
     "brain training","cognitive training","mental fitness","mental agility",
     "brain fitness","mental sharpness","sharpen my mind",
     "memory improvement","improve my memory","improve memory",
-    "memory exercises","memory training"]) ||
+    "memory exercises","memory training",
+    "revision","revising","revise","exam revision",
+    "pomodoro","pomodoro technique"]) ||
     anyWord(lower,["read","code"])) return "focus";
   // 8. energy
   if(any(lower,["energy","energise","energize","wake up","waking up","uplift","motivat",
@@ -116,7 +120,9 @@ function route(lower, lastTopic) {
     "recharge","recharging","need to recharge","fully recharged",
     "listless","listlessness","vitality","low vitality","no vitality",
     "feel dull","feeling dull","flat energy","energy levels low",
-    "thyroid","thyroid issues","underactive thyroid","hypothyroid","hypothyroidism"])) return "energy";
+    "thyroid","thyroid issues","underactive thyroid","hypothyroid","hypothyroidism",
+    "cortisol","cortisol levels","high cortisol","cortisol spike",
+    "adrenal","adrenals are"])) return "energy";
   // 9. relax
   if(any(lower,["relax","calm","stress","anxiety","anxious","breathe","unwind","nervous","panic",
     "overthink","overthinking","can't stop thinking","cant stop thinking",
@@ -241,6 +247,8 @@ function route(lower, lastTopic) {
     "reframing","cognitive reframing","reframe my thoughts",
     "thought patterns","unhelpful thoughts","unhelpful thinking",
     "mindset shift","shift my mindset","mindset work","growth mindset",
+    "tapping","eft tapping","emotional freedom technique",
+    "acupressure","acupuncture for",
     "self-care","self care","self-care routine","self care routine",
     "self-care practice","taking care of myself","look after myself",
     "evening routine","wind down routine","wind-down routine"])) return "techniques";
@@ -344,6 +352,11 @@ function route(lower, lastTopic) {
     "codependency","codependent","codependent relationship",
     "avoidant attachment","attachment wound","attachment issues",
     "fearful avoidant","disorganized attachment",
+    "divorce","divorcing","getting divorced","filed for divorce",
+    "separation","separated","we're separated","going through a separation",
+    "broke up","broken up","we broke up","just broke up",
+    "she left me","he left me","they left me","my partner left",
+    "ended the relationship","end of relationship","relationship ended",
     "in a funk","bit of a funk","in a bit of a funk",
     "in my feelings","in the dumps","down in the dumps",
     "need hope","need some hope","lost all hope",
@@ -737,6 +750,20 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R106: sleep (vivid/recurring dreams), focus (revision/pomodoro), energy (cortisol/adrenal), techniques (tapping/eft), sadness (divorce/broke up)
+  ["I keep having vivid dreams every night", "", "sleep", "vivid dreams → sleep"],
+  ["I had a really weird recurring dream again", "", "sleep", "recurring dream → sleep"],
+  ["I'm doing exam revision and can't focus", "", "focus", "revision → focus (not sleep — no sleep keyword)"],
+  ["I use the pomodoro technique for deep work", "", "focus", "pomodoro → focus"],
+  ["my cortisol levels feel through the roof", "", "energy", "cortisol → energy"],
+  ["I think I have adrenal issues", "", "energy", "adrenal → energy (not sleep — 'adrenal fatigue' skipped)"],
+  ["I've been doing tapping to manage my mood", "", "techniques", "tapping → techniques"],
+  ["I tried EFT tapping and want to learn more", "", "techniques", "eft tapping → techniques"],
+  ["I'm going through a divorce right now", "", "sadness", "divorce → sadness"],
+  ["we broke up last month and I'm devastated", "", "sadness", "broke up → sadness"],
+  ["she left me and I don't know what to do", "", "sadness", "she left me → sadness"],
+  ["my partner and I just separated", "", "sadness", "separated → sadness"],
 
   // R105: sadness (feel empty/bipolar/manic), overwhelm (caregiver/carer/looking after)
   ["I feel empty inside lately", "", "sadness", "feel empty → sadness"],

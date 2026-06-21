@@ -178,7 +178,9 @@ class AiChatEngine(private val context: Context) {
             "sleepwalking", "somnambulism",
             "hypersomnia", "excessive daytime sleepiness",
             "melatonin", "taking melatonin", "melatonin supplement",
-            "magnesium for sleep", "sleep supplement") ||
+            "magnesium for sleep", "sleep supplement",
+            "vivid dreams", "vivid dream", "recurring dreams", "recurring dream",
+            "strange dream", "weird dream", "unsettling dream", "dreams every night") ||
         anyWord(lower, "nap", "rls") ->
             handleSleep().also { lastTopic = "sleep" }
         any(lower, "focus", "study", "concentrat", "productivity",
@@ -211,7 +213,9 @@ class AiChatEngine(private val context: Context) {
             "brain training", "cognitive training", "mental fitness", "mental agility",
             "brain fitness", "mental sharpness", "sharpen my mind",
             "memory improvement", "improve my memory", "improve memory",
-            "memory exercises", "memory training") ||
+            "memory exercises", "memory training",
+            "revision", "revising", "revise", "exam revision",
+            "pomodoro", "pomodoro technique") ||
         anyWord(lower, "read", "code") ->
             handleFocus().also { lastTopic = "focus" }
         any(lower, "energy", "energise", "energize", "wake up", "waking up",
@@ -225,7 +229,9 @@ class AiChatEngine(private val context: Context) {
             "recharge", "recharging", "need to recharge", "fully recharged",
             "listless", "listlessness", "vitality", "low vitality", "no vitality",
             "feel dull", "feeling dull", "flat energy", "energy levels low",
-            "thyroid", "thyroid issues", "underactive thyroid", "hypothyroid", "hypothyroidism") ->
+            "thyroid", "thyroid issues", "underactive thyroid", "hypothyroid", "hypothyroidism",
+            "cortisol", "cortisol levels", "high cortisol", "cortisol spike",
+            "adrenal", "adrenals are") ->
             handleEnergy().also { lastTopic = "energy" }
         any(lower, "relax", "calm", "stress", "anxiety", "anxious", "breathe",
             "unwind", "nervous", "panic", "overthink", "overthinking",
@@ -360,7 +366,9 @@ class AiChatEngine(private val context: Context) {
             "inner parts", "self parts", "exile", "exiles",
             "reframing", "cognitive reframing", "reframe my thoughts",
             "thought patterns", "unhelpful thoughts", "unhelpful thinking",
-            "mindset shift", "shift my mindset", "mindset work", "growth mindset") ->
+            "mindset shift", "shift my mindset", "mindset work", "growth mindset",
+            "tapping", "eft tapping", "emotional freedom technique",
+            "acupressure", "acupuncture for") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
@@ -477,6 +485,11 @@ class AiChatEngine(private val context: Context) {
             "codependency", "codependent", "codependent relationship",
             "avoidant attachment", "attachment wound", "attachment issues",
             "fearful avoidant", "disorganized attachment",
+            "divorce", "divorcing", "getting divorced", "filed for divorce",
+            "separation", "separated", "we're separated", "going through a separation",
+            "broke up", "broken up", "we broke up", "just broke up",
+            "she left me", "he left me", "they left me", "my partner left",
+            "ended the relationship", "end of relationship", "relationship ended",
             "feel empty", "feeling empty", "emotional emptiness", "inner emptiness",
             "bipolar", "bipolar disorder",
             "manic", "manic episode", "manic phase", "depressive episode",
