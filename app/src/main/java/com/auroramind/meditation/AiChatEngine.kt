@@ -221,6 +221,8 @@ class AiChatEngine(private val context: Context) {
             "fight or flight", "fight-or-flight", "adrenaline spike",
             "on edge", "jittery", "jitters", "butterflies in",
             "trembling", "can't stop shaking", "cant stop shaking",
+            "shortness of breath", "breathlessness", "out of breath",
+            "palpitations", "heart palpitations", "heart flutters",
             "vagus nerve", "vagal", "somatic therapy", "somatic healing", "somatic exercises",
             "nervous system regulation", "regulate my nervous system",
             "drinking to cope", "drink to cope", "alcohol to cope", "drink to forget",
@@ -275,6 +277,7 @@ class AiChatEngine(private val context: Context) {
             "breakup", "broke up", "split up", "feeling blue", "feeling lost",
             "lost and", "i feel lost", "feel so lost", "blue today", "can't find", "lost myself",
             "bereaved", "bereavement", "loss of", "lost someone", "lost my",
+            "losing my", "losing someone", "losing a",
             "passed away", "death of", "missing them", "miss them so",
             "isolated", "feeling isolated", "so isolated",
             "got fired", "just fired", "lost my job", "lost their job", "laid off",
@@ -335,6 +338,8 @@ class AiChatEngine(private val context: Context) {
             "struggle with my body", "hate how i look", "hate my appearance",
             "eating disorder", "disordered eating",
             "anorexia", "anorexic", "bulimia", "bulimic", "binge eating", "binge and purge",
+            "comparing myself", "comparison trap", "always comparing",
+            "compare myself", "social comparison",
             "inner child", "inner child work", "reparenting", "re-parenting",
             "imposter syndrome", "impostor syndrome",
             "feel like a fraud", "feel like such a fraud",
@@ -361,7 +366,8 @@ class AiChatEngine(private val context: Context) {
             "at my limit", "hit my limit", "can't handle it", "cant handle it",
             "can't handle this", "cant handle this",
             "can't keep up", "cant keep up", "hostile work",
-            "drowning in", "drowning at work", "drowning in work") ||
+            "drowning in", "drowning at work", "drowning in work",
+            "hate my job", "hate this job", "hate going to work", "hate my work") ||
         anyWord(lower, "toxic") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
         any(lower, "angry", "furious", "frustrated", "frustration",

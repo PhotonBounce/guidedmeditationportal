@@ -111,6 +111,8 @@ function route(lower, lastTopic) {
     "fight or flight","fight-or-flight","adrenaline spike",
     "on edge","jittery","jitters","butterflies in",
     "trembling","can't stop shaking","cant stop shaking",
+    "shortness of breath","breathlessness","out of breath",
+    "palpitations","heart palpitations","heart flutters",
     "vagus nerve","vagal","somatic therapy","somatic healing","somatic exercises",
     "nervous system regulation","regulate my nervous system"]) ||
     anyWord(lower,["rest","tense"])) return "relax";
@@ -154,6 +156,7 @@ function route(lower, lastTopic) {
     "breakup","broke up","split up",
     "feeling lost","lost and","i feel lost","feel so lost","blue today","can't find","lost myself",
     "bereaved","bereavement","loss of","lost someone",
+    "losing my","losing someone","losing a",
     "passed away","death of","missing them","miss them so",
     "isolated","feeling isolated","so isolated",
     "got fired","just fired","lost my job","lost their job","laid off",
@@ -211,6 +214,8 @@ function route(lower, lastTopic) {
     "struggle with my body","hate how i look","hate my appearance",
     "eating disorder","disordered eating",
     "anorexia","anorexic","bulimia","bulimic","binge eating","binge and purge",
+    "comparing myself","comparison trap","always comparing",
+    "compare myself","social comparison",
     "inner child","inner child work","reparenting","re-parenting",
     "imposter syndrome","impostor syndrome",
     "feel like a fraud","feel like such a fraud",
@@ -235,7 +240,8 @@ function route(lower, lastTopic) {
     "cant handle this","can't keep up","cant keep up","hostile work",
     "single parent","single mum","single mom","single dad",
     "sole parent","solo parenting","solo parent",
-    "drowning in","drowning at work","drowning in work"]) ||
+    "drowning in","drowning at work","drowning in work",
+    "hate my job","hate this job","hate going to work","hate my work"]) ||
     anyWord(lower,["toxic"])) return "overwhelm";
   // 17. anger
   if(any(lower,["angry","furious","frustrated","frustration","rage",
@@ -503,6 +509,14 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R84: relax (shortness of breath/palpitations), sadness (losing my), overwhelm (hate job), shameGuilt (comparing myself)
+  ["i keep getting shortness of breath when anxious", "", "relax", "shortness of breath → relax"],
+  ["i'm having heart palpitations", "", "relax", "heart palpitations → relax"],
+  ["i'm losing my mum to cancer", "", "sadness", "losing my → sadness"],
+  ["i really hate my job and want to quit", "", "overwhelm", "hate my job → overwhelm"],
+  ["i keep comparing myself to everyone on instagram", "", "shameGuilt", "comparing myself → shameGuilt"],
+  ["the comparison trap is exhausting me", "", "shameGuilt", "comparison trap → shameGuilt"],
 
   // R83: shameGuilt (addiction/sobriety/recovery), positive route expansion
   ["i'm dealing with an addiction to alcohol", "", "shameGuilt", "addiction → shameGuilt"],
