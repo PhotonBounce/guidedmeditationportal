@@ -667,6 +667,62 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre45-a) Estate agent / letting agent / property management company website.
+	if ( $has( [ 'estate agent website', 'estate agency website', 'letting agent website', 'letting agency website', 'property management website', 'property agent website', 'property finder website', 'residential estate agent website', 'commercial estate agent website', 'new homes estate agent website', 'independent estate agent website', 'high street estate agent website', 'online estate agent website', 'property developer website', 'buy to let website', 'property investment website', 'landlord letting website' ] ) ) {
+		return $nl( [
+			"Estate agent and letting agent websites convert on local market credibility, instant valuation, and a frictionless applicant journey &mdash; Rightmove/Zoopla integration is mandatory but your own site must do more than duplicate their listings:",
+			'',
+			"&bull; <strong>Property search and listings</strong> &mdash; IDX/property feed from Rightmove or Zoopla syndicated back to your own site; filters (bedrooms / price / type / area); featured properties rotator; from <strong>$400</strong>",
+			"&bull; <strong>Instant valuation tool</strong> &mdash; ValPal / GetAgent / Hometrack embed; captures name + email + phone + address; highest-converting vendor lead magnet; from <strong>$250</strong>",
+			"&bull; <strong>Book a valuation CTA</strong> &mdash; Calendly or custom form; in-person or video; dedicated landing page with sold price evidence in the area; from <strong>$200</strong>",
+			"&bull; <strong>Area guides</strong> &mdash; one page per area covered; schools / transport / restaurants / parks / property price trend; ranks for &ldquo;[area] estate agents&rdquo; and positions you as the local expert; from <strong>$150</strong> per guide",
+			"&bull; <strong>Landlord services page</strong> &mdash; full vs let-only management; fees disclosed (Consumer Rights Act 2015 requires fee transparency for letting agents); EPC / gas safety / EICR compliance note; from <strong>$200</strong>",
+			"&bull; <strong>Sold and let results</strong> &mdash; Land Registry sold prices widget (public data); Google Reviews embed; average days to sell / average % of asking price; from <strong>$200</strong>",
+			"&bull; <strong>Regulatory compliance</strong> &mdash; TPO (The Property Ombudsman) or PRS membership (legally required for letting agents since Oct 2014); NAEA Propertymark logo; client money protection scheme name (required since Apr 2019); ICO registration for GDPR; from <strong>$150</strong>",
+			"&bull; <strong>From $700</strong> listings + valuation tool + book valuation + compliance; <strong>$1,400+</strong> with area guides + landlord page + results",
+			'',
+			"Sales, lettings, or both? Residential or commercial? What areas do you cover? Do you use Rightmove and/or Zoopla?",
+		] );
+	}
+
+	// 0d-pre45-b) Wedding photographer / portrait photographer / event photographer / videographer website.
+	if ( $has( [ 'wedding photographer website', 'wedding photography website', 'portrait photographer website', 'event photographer website', 'commercial photographer website', 'fashion photographer website', 'videographer website', 'wedding videographer website', 'newborn photographer website', 'family photographer website', 'product photographer website', 'headshot photographer website', 'boudoir photographer website', 'documentary photographer website', 'lifestyle photographer website', 'photographer website' ] ) ) {
+		return $nl( [
+			"Photography websites convert on emotional impact first, practical details second &mdash; a prospective couple decides in 8 seconds whether your style matches their vision:",
+			'',
+			"&bull; <strong>Portfolio galleries</strong> &mdash; curated not comprehensive (30 best images convert better than 300 average ones); category tabs (wedding / portrait / commercial / events); lazy-loaded; from <strong>$300</strong>",
+			"&bull; <strong>Full wedding gallery blog posts</strong> &mdash; one full-shoot post per client (with consent); ranks for &ldquo;[venue name] wedding photographer&rdquo; and &ldquo;[area] wedding photography&rdquo;; each post is a landing page for a venue; from <strong>$100</strong> per post",
+			"&bull; <strong>Investment / pricing page</strong> &mdash; the second-most-visited page on photographer sites; hiding prices loses enquiries; package tiers with inclusions listed; from <strong>$250</strong>",
+			"&bull; <strong>About page</strong> &mdash; story of why you shoot; style philosophy; your face (couples hire a person, not a lens); what to expect on the day; from <strong>$200</strong>",
+			"&bull; <strong>Enquiry and booking form</strong> &mdash; date + venue + event type + budget + how they found you; HoneyBook / Pixieset / Studio Ninja CRM for contract and invoice; from <strong>$250</strong>",
+			"&bull; <strong>Venue-specific SEO pages</strong> &mdash; &ldquo;Photography at [venue name]&rdquo;; 10&ndash;30 venues in your area; long-tail search with high buyer intent; from <strong>$100</strong> per page",
+			"&bull; <strong>Instagram feed embed</strong> &mdash; real-time gallery of recent work; social proof; from <strong>$150</strong>",
+			"&bull; <strong>Client gallery portal</strong> &mdash; Pixieset or Pic-Time private delivery; linked from confirmation email; from <strong>$200</strong>",
+			"&bull; <strong>From $600</strong> portfolio + enquiry + pricing; <strong>$1,200+</strong> with venue pages + full-shoot blog + client portal",
+			'',
+			"What type of photography? What areas and venues? Do you shoot video too? Destination weddings?",
+		] );
+	}
+
+	// 0d-pre45-c) Music teacher / piano teacher / music school / music tutor / guitar teacher website.
+	if ( $has( [ 'music teacher website', 'piano teacher website', 'guitar teacher website', 'violin teacher website', 'singing teacher website', 'music school website', 'music tutor website', 'music lessons website', 'drum teacher website', 'cello teacher website', 'trumpet teacher website', 'saxophone teacher website', 'music academy website', 'music studio website', 'online music teacher website', 'music tutoring website' ] ) ) {
+		return $nl( [
+			"Music teacher and music school websites convert on tutor credibility, timetable clarity, and a low-friction trial lesson booking &mdash; parents of young pupils are the primary decision-maker:",
+			'',
+			"&bull; <strong>Tutor profile pages</strong> &mdash; qualifications (ABRSM / Trinity College London / conservatoire training); Grade 8 performance or above; DBS checked; instruments and genres; experience range (beginner to diploma); from <strong>$150</strong> per profile",
+			"&bull; <strong>Lesson types and pricing</strong> &mdash; 30 / 45 / 60-minute options; in-person vs online; group vs 1:1; block booking discount; trial lesson offer; from <strong>$200</strong>",
+			"&bull; <strong>Book a trial lesson</strong> &mdash; Calendly or Acuity; instrument selector + pupil age + experience level; from <strong>$200</strong>",
+			"&bull; <strong>Exam preparation page</strong> &mdash; ABRSM / Trinity College London / Rock School grades 1&ndash;8 + diplomas; syllabi years; what to expect on exam day; from <strong>$200</strong>",
+			"&bull; <strong>Pupil achievements</strong> &mdash; grade pass rates; merit and distinction pupils named with consent; inspires new enquiries; from <strong>$150</strong>",
+			"&bull; <strong>Video performance samples</strong> &mdash; short YouTube clips of pupil performances (parental consent required for under-18s); the most persuasive content on a music teacher site; from <strong>$150</strong>",
+			"&bull; <strong>Safeguarding statement</strong> &mdash; DBS certificate date; safeguarding policy link; parental consent for photos/videos; essential for teaching under-18s; from <strong>$100</strong>",
+			"&bull; <strong>Gift vouchers</strong> &mdash; WooCommerce; Christmas / birthday; &ldquo;gift a trial lesson&rdquo;; from <strong>$150</strong>",
+			"&bull; <strong>From $550</strong> tutor profile + pricing + booking + safeguarding; <strong>$1,100+</strong> with exam prep + achievements + gift vouchers",
+			'',
+			"Solo teacher or a school with multiple tutors? Which instruments? In-person, online, or both? Primarily children or adults?",
+		] );
+	}
+
 	// 0d-pre44-a) Tattoo studio / tattoo artist / piercing studio website.
 	if ( $has( [ 'tattoo studio website', 'tattoo artist website', 'tattoo parlour website', 'tattoo shop website', 'piercing studio website', 'body piercing website', 'tattoo removal website', 'laser tattoo removal website', 'traditional tattoo website', 'japanese tattoo website', 'watercolour tattoo website', 'blackwork tattoo website', 'realism tattoo website', 'semi-permanent makeup tattoo website', 'microblading tattoo website', 'fine line tattoo website' ] ) ) {
 		return $nl( [

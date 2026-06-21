@@ -425,6 +425,11 @@
           form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
         }
       }
+      // Ctrl+K — clear chat (power-user shortcut; mirrored in help panel).
+      if (e.ctrlKey && (e.key === 'k' || e.key === 'K')) {
+        e.preventDefault();
+        clearChat();
+      }
     });
     // "Enter ↵ to send" hint — reveals after 800ms typing pause, hides on blur or submit.
     var _sendHint = document.createElement('span');
@@ -439,9 +444,12 @@
       if (input.value.trim()) {
         _hintTimer = setTimeout(function() { _sendHint.classList.add('pb-brain__send-hint--vis'); }, 800);
       }
+      // Typing glow: gold border tint while there is content in the textarea.
+      input.classList.toggle('pb-brain__input--typing', input.value.length > 0);
     });
     input.addEventListener('blur', function() {
       clearTimeout(_hintTimer); _sendHint.classList.remove('pb-brain__send-hint--vis');
+      input.classList.remove('pb-brain__input--typing');
     });
     // Character count indicator — hidden below 100 chars; shows "N left" as user nears limit.
     var _charLimit = 500;
@@ -490,6 +498,8 @@
     }, 1700);
   }
 
+  var _origTitle = document.title;  // captured once at widget-init time
+  var _tabUnread = 0;               // new-message tab-title counter
   var _unreadCount = 0;
   function _updateOrbBadge() {
     if (!orb) return;
@@ -519,8 +529,14 @@
     }
     _unreadCount = 0;
     _updateOrbBadge();
+    if (_tabUnread > 0) { _tabUnread = 0; document.title = _origTitle; }
     if (input) input.focus();
   }
+
+  // Restore tab title when user returns from another tab.
+  document.addEventListener('visibilitychange', function() {
+    if (!document.hidden && _tabUnread > 0) { _tabUnread = 0; document.title = _origTitle; }
+  });
 
   function closeBrain() {
     if (!brain) return;
@@ -816,6 +832,11 @@
       if (cls === 'bot') {
         if (brain && brain.hidden) _unreadCount++;
         _updateOrbBadge();
+        // Tab-title notification: "(N) Photon Bounce" when user is on another tab.
+        if (document.hidden) {
+          _tabUnread++;
+          document.title = '(' + _tabUnread + ') Photon Bounce';
+        }
         if (!_nearBottom()) _newMsgChip.classList.add('pb-brain__newmsg--vis');
         // Push plaintext to SR live region so screen readers announce the reply.
         if (_srLive) { _srLive.textContent = ''; requestAnimationFrame(function() { _srLive.textContent = plain(text); }); }
@@ -1092,7 +1113,7 @@
         _progressDone();
         input.disabled = false;
         if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = 'Send'; }
-        document.title = _savedTitle;
+        if (!document.hidden) document.title = _savedTitle;
         input.focus();
       }
     });
@@ -1211,6 +1232,7 @@
           '<span><kbd>Enter</kbd> Send message</span>',
           '<span><kbd>Esc</kbd> Close / cancel search</span>',
           '<span><kbd>↑</kbd> / <kbd>↓</kbd> Browse sent messages</span>',
+          '<span><kbd>Ctrl</kbd>+<kbd>K</kbd> Clear chat</span>',
         ].join('');
         brainHead.appendChild(_helpPanel);
         helpBtn.addEventListener('click', function() {

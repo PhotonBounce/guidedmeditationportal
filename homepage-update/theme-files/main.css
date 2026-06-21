@@ -5085,3 +5085,9 @@ pre.pb-brain__code-block code{ font-size:inherit; background:none; border:none; 
   transition:opacity .15s;
 }
 .pb-brain__msg--bot:hover .pb-brain__resp-time{ opacity:1; }
+/* R49 — textarea typing glow: subtle gold border while user has content */
+.pb-brain__input--typing{
+  border-color:rgba(255,212,0,.3) !important;
+  box-shadow:0 0 0 2px rgba(255,212,0,.07);
+  transition:border-color .15s,box-shadow .15s;
+}
