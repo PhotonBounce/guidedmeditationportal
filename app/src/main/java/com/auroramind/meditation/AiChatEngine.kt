@@ -190,7 +190,8 @@ class AiChatEngine(private val context: Context) {
             "writing", "attention", "adhd", "distract",
             "brain fog", "foggy", "mental clarity", "sharp", "clear mind",
             "procrastinat", "multitasking", "information overload",
-            "doom scrolling", "doomscrolling", "doom-watching", "mindless scrolling", "phone addiction",
+            "doom scrolling", "doomscrolling", "doom-watching", "doom loop", "doom spiral",
+            "mindless scrolling", "phone addiction",
             "screen addiction", "endless scrolling", "too much screen", "screen time",
             "mental block", "writer's block", "writers block", "creative block",
             "brain freeze", "can't think straight", "cant think straight",
@@ -319,7 +320,8 @@ class AiChatEngine(private val context: Context) {
             "flashback", "having flashbacks", "intrusive memories",
             "body memories", "trauma response", "trauma trigger",
             "hypochondria", "hypochondriac", "health anxiety disorder",
-            "illness anxiety", "medical anxiety") ||
+            "illness anxiety", "medical anxiety",
+            "wind down", "wind-down", "winding down", "need to wind down") ||
         anyWord(lower, "rest", "tense", "rsd") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in",
@@ -379,6 +381,8 @@ class AiChatEngine(private val context: Context) {
             "self esteem", "self-esteem", "low confidence", "build confidence", "self-worth",
             "self worth", "confidence", "stretching", "morning routine", "bored", "boredom",
             "morning pages", "habit stacking", "habit tracker", "daily habit",
+            "habit formation", "habit building", "build a habit", "building habits",
+            "morning practice", "evening practice", "night routine",
             "cbt", "cognitive behavioral", "dbt", "dialectical behavior",
             "act therapy", "acceptance and commitment", "emdr",
             "body doubling", "pomodoro", "time blocking",
@@ -540,7 +544,9 @@ class AiChatEngine(private val context: Context) {
             "manic", "manic episode", "manic phase", "depressive episode",
             "hypomania", "hypomanic",
             "hate my life", "hate this life", "hate life", "i hate my life",
-            "hate everything") ||
+            "hate everything",
+            "layoff", "layoffs", "being laid off", "facing layoff",
+            "retrenchment", "downsizing", "made redundant") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
@@ -699,7 +705,11 @@ class AiChatEngine(private val context: Context) {
             "had a good day", "great day today", "mood is better", "mood has lifted",
             "lifted my mood", "feeling positive",
             "doing well", "having a good day", "all good today", "life is great",
-            "happy today", "having a great day", "actually doing okay") ->
+            "happy today", "having a great day", "actually doing okay",
+            "had a breakthrough", "just had a breakthrough", "big breakthrough",
+            "proud moment", "really proud", "so proud of myself",
+            "achieved my goal", "hit my goal", "reached my goal",
+            "finally did it", "i finally did it", "just did it") ->
             handlePositive().also { lastTopic = "" }
         any(lower, "timer", "sleep timer", "how long should", "how long to meditate",
             "how long for", "duration", "how many minutes") ->
