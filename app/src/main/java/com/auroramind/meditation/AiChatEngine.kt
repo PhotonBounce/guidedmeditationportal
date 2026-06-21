@@ -519,7 +519,7 @@ class AiChatEngine(private val context: Context) {
         return Pair(
             "🤍 Spirit's Suggestion — Personalised to You\n\n" +
             "Based on:\n" +
-            "Time: ${hour}:00 — ${if (hour >= 22 || hour < 6) "wind-down window" else "active hours"}\n" +
+            "Time: ${hour}:00 — ${if (hour >= 22 || hour < 5) "wind-down window" else "active hours"}\n" +
             "Your most-played: ${mostPlayed.emoji} ${mostPlayed.displayName} (${favMood.label})\n" +
             "What's tended to settle you before\n\n" +
             "Right now, try: ${suggestion.emoji} ${suggestion.displayName}\n\n" +
@@ -622,7 +622,7 @@ class AiChatEngine(private val context: Context) {
         val today = MicroTechniques.today()
         val goalMood = prefs.getGoal()
         val goalTech = if (goalMood != null) MicroTechniques.forGoal(goalMood).firstOrNull { it.title != today.title } else null
-        val extra = if (goalTech != null && goalTech.title != today.title)
+        val extra = if (goalTech != null)
             "\n\nMatched to your practice goal — ${goalTech.emoji} ${goalTech.title}: ${goalTech.teaser}"
         else ""
         val quote = Quotes.today()
