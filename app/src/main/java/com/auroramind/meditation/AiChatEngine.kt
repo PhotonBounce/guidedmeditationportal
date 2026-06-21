@@ -129,7 +129,7 @@ class AiChatEngine(private val context: Context) {
         any(lower, "sleep", "insomnia", "cant sleep", "can't sleep", "falling asleep",
             "bedtime", "tired", "fatigue", "exhausted", "wide awake", "cant switch off",
             "can't switch off", "racing mind", "racing thoughts", "nap", "night shift",
-            "shift work", "mind won't stop", "mind wont stop", "nightmares", "bad dreams",
+            "shift work", "mind won't stop", "mind wont stop", "nightmare", "nightmares", "bad dreams",
             "jet lag", "jet lagged", "jet-lagged", "restless", "restlessness",
             "woke up at", "keep waking", "3am", "4am", "middle of the night") ->
             handleSleep().also { lastTopic = "sleep" }
@@ -155,7 +155,7 @@ class AiChatEngine(private val context: Context) {
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
             handleTinnitus().also { lastTopic = "tinnitus" }
-        any(lower, "baby", "infant", "newborn", "toddler", "child", "kids", "crying") ->
+        any(lower, "baby", "infant", "newborn", "toddler", "child", "kids") ->
             handleBaby().also { lastTopic = "baby" }
         any(lower, "meditat", "mindful", "yoga", "zen", "chakra", "mantra",
             "vipassana", "tonglen", "soham", "thien", "sumara", "muraqaba",
@@ -177,14 +177,15 @@ class AiChatEngine(private val context: Context) {
             "empty inside", "feel empty", "feeling empty", "numb", "hopeless",
             "hollow", "disconnected", "meaningless", "no motivation", "nothing matters",
             "breakup", "broke up", "split up", "feeling blue", "feeling lost",
-            "lost and", "i feel lost", "blue today", "can't find", "lost myself",
+            "lost and", "i feel lost", "feel so lost", "blue today", "can't find", "lost myself",
             "bereaved", "bereavement", "loss of", "lost someone", "passed away",
             "died", "death of", "missing them", "miss them so",
             "relationship", "divorce", "divorc", "separation", "separated from",
             "feeling down", "feel down", "i feel down", "feeling low", "feel low",
             "i feel low", "feel so low", "feeling so low", "feeling very low",
             "life feels pointless", "feels pointless", "feel pointless",
-            "mood swings", "bad mood", "mental health", "i'm suffering") ->
+            "mood swings", "bad mood", "my mood", "mental health",
+            "i'm suffering", "need to vent", "need to talk", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
             "i feel ashamed", "embarrassed", "humiliated", "self-blame", "self blame",
@@ -212,8 +213,12 @@ class AiChatEngine(private val context: Context) {
         any(lower, "timer", "sleep timer", "how long", "duration", "how many minutes") ->
             handleTimer().also { lastTopic = "" }
         any(lower, "set alarm", "set an alarm", "morning alarm", "alarm for", "alarm at",
-            "alarm clock", "wake alarm", "daily alarm", "wake me up at", "schedule alarm") ->
+            "alarm clock", "wake alarm", "daily alarm", "wake me up", "schedule alarm") ->
             handleAlarm().also { lastTopic = "" }
+        // playRequest before ambient — "play my favourite track" must hit playRequest, not "track" in ambient
+        any(lower, "play it", "play that", "play my", "play my fav", "play favourite", "play favorite",
+            "start it", "queue it") ->
+            handlePlayRequest().also { lastTopic = "" }
         any(lower, "track", "tracks", "session", "sessions", "library", "guided",
             "which track", "what track", "play list", "playlist") ->
             handleAmbient().also { lastTopic = "" }
@@ -235,13 +240,12 @@ class AiChatEngine(private val context: Context) {
             "guided course", "structured", "7 day", "7-day", "5 day", "5-day", "challenge") ->
             handlePrograms().also { lastTopic = "" }
         any(lower, "my stats", "my progress", "how am i doing", "my history",
-            "how long have i", "sessions", "minutes meditated", "progress report") ->
+            "how long have i", "sessions", "minutes meditated", "progress report",
+            "my streak", "streak", "day streak") ->
             handleStats().also { lastTopic = "" }
         any(lower, "my favorites", "my favourites", "saved tracks", "what i saved",
             "what i've saved", "favorite tracks", "favourite tracks", "my saved") ->
             handleFavorites().also { lastTopic = "" }
-        any(lower, "play it", "play that", "start it", "queue it") ->
-            handlePlayRequest().also { lastTopic = "" }
         else -> handleGeneral(lower).also { lastTopic = "" }
     }
 
