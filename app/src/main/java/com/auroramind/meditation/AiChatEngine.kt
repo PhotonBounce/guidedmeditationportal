@@ -710,7 +710,11 @@ class AiChatEngine(private val context: Context) {
             "inflammation", "inflammatory", "repetitive strain", "carpal tunnel", "frozen shoulder",
             "tendonitis", "tendinitis", "endometriosis", "plantar fasciitis", "plantar",
             "neuropathy", "nerve damage", "nerve pain", "neuralgia",
+            "pinched nerve", "herniated disc", "bulging disc", "slipped disc",
             "muscle spasm", "muscle spasms", "back spasm", "back spasms",
+            "tight muscles", "muscle tightness", "muscle knots", "knotted muscles",
+            "hip flexor", "it band", "iliotibial",
+            "tennis elbow", "golfer's elbow", "rsi injury",
             "painful", "pains", "in pain") ||
         anyWord(lower, "pain") ->
             handlePain().also { lastTopic = "pain" }
@@ -721,7 +725,9 @@ class AiChatEngine(private val context: Context) {
             "three good things", "3 good things", "silver lining", "look for the good",
             "count the positives", "find the positive",
             "abundance", "abundance mindset", "manifestation", "manifesting",
-            "law of attraction", "positive affirmations", "affirmation practice") ->
+            "law of attraction", "positive affirmations", "affirmation practice",
+            "glass half full", "positive outlook", "optimistic", "optimism",
+            "reframe", "reframing", "cognitive reframe", "thought reframe") ->
             handleGratitude().also { lastTopic = "gratitude" }
         any(lower, "what can you do", "how do you work", "your features", "about spirit",
             "what are you", "what is spirit", "how can you help",

@@ -574,7 +574,11 @@ function route(lower, lastTopic) {
     "inflammation","inflammatory","repetitive strain","carpal tunnel","frozen shoulder",
     "tendonitis","tendinitis","endometriosis","plantar fasciitis","plantar",
     "neuropathy","nerve damage","nerve pain","neuralgia",
+    "pinched nerve","herniated disc","bulging disc","slipped disc",
     "muscle spasm","muscle spasms","back spasm","back spasms",
+    "tight muscles","muscle tightness","muscle knots","knotted muscles",
+    "hip flexor","it band","iliotibial",
+    "tennis elbow","golfer's elbow","rsi injury",
     "painful","pains","in pain"]) || anyWord(lower,["pain"])) return "pain";
   // 26. gratitude
   if(any(lower,["grateful","gratitude","journal","journaling","reflect","reflection",
@@ -584,7 +588,9 @@ function route(lower, lastTopic) {
     "three good things","3 good things","silver lining","look for the good",
     "count the positives","find the positive",
     "abundance","abundance mindset","manifestation","manifesting",
-    "law of attraction","positive affirmations","affirmation practice"])) return "gratitude";
+    "law of attraction","positive affirmations","affirmation practice",
+    "glass half full","positive outlook","optimistic","optimism",
+    "reframe","reframing","cognitive reframe","thought reframe"])) return "gratitude";
   // 27. help
   if(any(lower,["what can you do","how do you work","your features","about spirit",
     "what are you","what is spirit","how can you help",
@@ -807,6 +813,16 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R113: pain (pinched nerve/herniated disc/tight muscles/tennis elbow/IT band), gratitude (glass half full/reframe/optimism)
+  ["I have a pinched nerve in my neck", "", "pain", "pinched nerve → pain"],
+  ["my herniated disc is causing me constant pain", "", "pain", "herniated disc → pain"],
+  ["I have really tight muscles after the gym", "", "pain", "tight muscles → pain"],
+  ["I've developed tennis elbow from playing tennis", "", "pain", "tennis elbow → pain (avoid 'too much' → overwhelm preemption)"],
+  ["my IT band is really sore from running", "", "pain", "it band + sore → pain"],
+  ["I want to try to see the glass half full", "", "gratitude", "glass half full → gratitude"],
+  ["I'm working on having a positive outlook on life", "", "gratitude", "positive outlook → gratitude"],
+  ["I want to start reframing how I look at things", "", "gratitude", "reframing → gratitude (avoid 'challenges'→techniques and 'negative thoughts'→relax)"],
 
   // R112: shameGuilt (hate myself), sadness (hate my life), anger (lied/behind my back/took credit/manipulative/controlling)
   ["I hate myself for what I did", "", "shameGuilt", "hate myself → shameGuilt"],
