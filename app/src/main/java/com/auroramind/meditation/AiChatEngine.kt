@@ -147,7 +147,7 @@ class AiChatEngine(private val context: Context) {
             "morning boost", "morning energy", "sluggish", "lethargic") ->
             handleEnergy().also { lastTopic = "energy" }
         any(lower, "relax", "calm", "stress", "anxiety", "anxious", "breathe",
-            "unwind", "rest", "nervous", "tense", "panic", "overthink", "overthinking",
+            "unwind", "nervous", "panic", "overthink", "overthinking",
             "can't stop thinking", "cant stop thinking", "intrusive thoughts", "ruminating",
             "social anxiety", "public speaking", "presentation nerves", "exam nerves",
             "stage fright", "interview nerves", "interview anxiety", "nerves before",
@@ -158,7 +158,8 @@ class AiChatEngine(private val context: Context) {
             "fear", "scared", "frightened", "phobia", "afraid",
             "worry", "worried", "worrying", "i worry", "constant worry",
             "dissociation", "dissociating", "dissociated", "derealization", "depersonalization",
-            "feel unreal", "feeling unreal", "not feeling real", "feel detached") ->
+            "feel unreal", "feeling unreal", "not feeling real", "feel detached") ||
+        anyWord(lower, "rest", "tense") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
             handleTinnitus().also { lastTopic = "tinnitus" }
@@ -183,12 +184,12 @@ class AiChatEngine(private val context: Context) {
         any(lower, "sad", "grief", "grieving", "heartbreak", "heartbroken",
             "lonely", "alone", "loneliness", "depressed", "depression",
             "cry", "crying", "upset", "miserable", "unhappy", "low mood",
-            "empty inside", "feel empty", "feeling empty", "numb", "hopeless",
+            "empty inside", "feel empty", "feeling empty", "hopeless",
             "hollow", "disconnected", "meaningless", "no motivation", "nothing matters",
             "breakup", "broke up", "split up", "feeling blue", "feeling lost",
             "lost and", "i feel lost", "feel so lost", "blue today", "can't find", "lost myself",
             "bereaved", "bereavement", "loss of", "lost someone", "lost my",
-            "passed away", "died", "death of", "missing them", "miss them so",
+            "passed away", "death of", "missing them", "miss them so",
             "isolated", "feeling isolated", "so isolated",
             "got fired", "just fired", "lost my job", "lost their job", "laid off",
             "made redundant", "partner left me", "been left",
@@ -200,7 +201,8 @@ class AiChatEngine(private val context: Context) {
             "i'm suffering", "need to vent", "need to talk", "vent",
             "mourning", "in mourning", "heartache", "missing my ex", "miss my ex",
             "winter blues", "lack of sunlight", "low in winter",
-            "no purpose", "lack of purpose", "feel purposeless", "existential") ->
+            "no purpose", "lack of purpose", "feel purposeless", "existential") ||
+        anyWord(lower, "numb", "died") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
             "i feel ashamed", "embarrassed", "humiliated", "self-blame", "self blame",
@@ -214,8 +216,9 @@ class AiChatEngine(private val context: Context) {
             "work stress", "work anxiety", "work is killing me", "job stress",
             "feeling stuck", "feel stuck", "stuck in a rut", "stuck in life") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
-        any(lower, "angry", "anger", "furious", "mad", "frustrated", "frustration",
-            "rage", "irritated", "irritable", "annoyed", "wound up", "agitated") ->
+        any(lower, "angry", "anger", "furious", "frustrated", "frustration",
+            "rage", "irritated", "irritable", "annoyed", "wound up", "agitated") ||
+        anyWord(lower, "mad") ->
             handleAnger().also { lastTopic = "anger" }
 
         any(lower, "vip", "upgrade", "pro plan", "subscription", "pricing",
