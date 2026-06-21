@@ -170,7 +170,9 @@ class AiChatEngine(private val context: Context) {
             "worry", "worried", "worrying", "i worry", "constant worry",
             "dissociation", "dissociating", "dissociated", "derealization", "depersonalization",
             "feel unreal", "feeling unreal", "not feeling real", "feel detached",
-            "ocd", "obsessive", "compulsive thoughts") ||
+            "ocd", "obsessive", "compulsive thoughts",
+            "freaking out", "freak out", "losing my mind", "losing it",
+            "can't cope with", "cant cope with", "spiralling", "spiraling") ||
         anyWord(lower, "rest", "tense") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
@@ -243,7 +245,9 @@ class AiChatEngine(private val context: Context) {
             "work-life balance", "work life balance", "no time for myself", "no time for me",
             "people pleaser", "people-pleaser", "cant say no", "can't say no",
             "always putting others first", "never put myself first", "spread too thin",
-            "running on empty") ->
+            "running on empty", "meltdown", "having a meltdown", "on the edge",
+            "at my limit", "hit my limit", "can't handle it", "cant handle it",
+            "can't handle this", "cant handle this") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
         any(lower, "angry", "furious", "frustrated", "frustration",
             "rage", "irritated", "irritable", "annoyed", "wound up", "agitated") ||
