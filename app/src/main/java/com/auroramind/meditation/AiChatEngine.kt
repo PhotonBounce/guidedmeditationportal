@@ -109,7 +109,14 @@ class AiChatEngine(private val context: Context) {
             "don't want to be here anymore", "dont want to be here anymore",
             "don't want to exist", "dont want to exist",
             "unalive", "cutting myself", "overdose",
-            "cant go on like this", "can't go on like this") ->
+            "cant go on like this", "can't go on like this",
+            "feel like a burden", "such a burden", "being a burden", "am a burden", "i'm a burden", "i am a burden",
+            "better off without me", "world would be better without me",
+            "nothing to live for", "nothing left to live for",
+            "want to disappear", "wish i could disappear", "just want to disappear",
+            "wish i was dead", "wish i were dead",
+            "no point going on", "no point carrying on", "no point in carrying on",
+            "can't carry on", "cant carry on") ->
             handleCrisis()
 
         // Follow-up detection — must come first so "yes please" gets context-aware reply
@@ -254,6 +261,9 @@ class AiChatEngine(private val context: Context) {
             "mood swings", "bad mood", "my mood", "mental health",
             "i'm suffering", "need to vent", "need to talk", "venting",
             "mourning", "in mourning", "heartache", "missing my ex", "miss my ex",
+            "betrayed", "betrayal", "feel betrayed", "been betrayed",
+            "cheated on", "been cheated", "trust issues", "can't trust",
+            "feel like a burden", "i'm a burden", "am a burden",
             "winter blues", "lack of sunlight", "low in winter",
             "seasonal affective", "seasonal depression", "sad disorder",
             "no purpose", "lack of purpose", "feel purposeless", "existential",

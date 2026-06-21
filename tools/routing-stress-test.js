@@ -12,7 +12,14 @@ function route(lower, lastTopic) {
     "kill myself","self harm","self-harm","hurt myself","no reason to live","better off dead",
     "take my own life","take my life","life isnt worth living","not worth living",
     "dont want to be here anymore","dont want to exist",
-    "unalive","cutting myself","overdose","cant go on like this"])) return "crisis";
+    "unalive","cutting myself","overdose","cant go on like this",
+    "feel like a burden","such a burden","being a burden","am a burden","i'm a burden","i am a burden",
+    "better off without me","world would be better without me",
+    "nothing to live for","nothing left to live for",
+    "want to disappear","wish i could disappear","just want to disappear",
+    "wish i was dead","wish i were dead",
+    "no point going on","no point carrying on","no point in carrying on",
+    "can't carry on","cant carry on"])) return "crisis";
   // 2. followUp
   if(lastTopic.length > 0 && (any(lower,["please","okay","go on","continue","next",
     "tell me more","walk me through","guide me","show me","how do i","teach me",
@@ -134,6 +141,9 @@ function route(lower, lastTopic) {
     "mood swings","bad mood","my mood","mental health",
     "i'm suffering","need to vent","need to talk","venting",
     "longing","miss him","miss her",
+    "betrayed","betrayal","feel betrayed","been betrayed",
+    "cheated on","been cheated","trust issues","can't trust",
+    "feel like a burden","i'm a burden","am a burden",
     "miscarriage","stillbirth","pregnancy loss","child loss","infertility","lost my baby","lost our baby",
     "feel rejected","feel abandoned","abandoned","rejection","been rejected",
     "feel invisible","feel unseen","feel unloved","unlovable","not loved","no one cares",
@@ -414,6 +424,18 @@ var tests = [
   ["my life is not worth living", "", "crisis", "not worth living → crisis"],
   ["i dont want to exist anymore", "", "crisis", "dont want to exist → crisis"],
   ["i took an overdose", "", "crisis", "overdose → crisis"],
+  // R75: crisis safety additions (burden/disappear/better off without me/nothing to live for)
+  ["i feel like such a burden to my family", "", "crisis", "feel like a burden → crisis"],
+  ["everyone would be better off without me", "", "crisis", "better off without me → crisis"],
+  ["i have nothing to live for anymore", "", "crisis", "nothing to live for → crisis"],
+  ["i just want to disappear forever", "", "crisis", "want to disappear → crisis"],
+  ["i wish i was dead", "", "crisis", "wish i was dead → crisis"],
+  ["i just can't carry on anymore", "", "crisis", "cant carry on → crisis"],
+  // R75: sadness (betrayal/cheated/trust issues)
+  ["i was cheated on by my partner", "", "sadness", "cheated on → sadness"],
+  ["i feel so betrayed right now", "", "sadness", "betrayed → sadness"],
+  ["i have serious trust issues", "", "sadness", "trust issues → sadness"],
+
   ["i have the sunday scaries so bad", "", "relax", "sunday scaries → relax"],
   ["i dread going to work every day", "", "relax", "dread → relax"],
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
