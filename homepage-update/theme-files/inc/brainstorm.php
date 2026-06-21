@@ -667,6 +667,60 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre40-a) Beautician / beauty salon / nail salon / nail technician / lash tech website.
+	if ( $has( [ 'beautician website', 'beauty salon website', 'nail salon website', 'nail technician website', 'beauty therapist website', 'lash technician website', 'lash extensions website', 'eyebrow technician website', 'makeup artist website', 'brow artist website', 'spray tan website', 'skin clinic website', 'aesthetics clinic website', 'semi-permanent makeup website', 'microblading website', 'waxing salon website', 'beauty studio website' ] ) ) {
+		return $nl( [
+			"Beauty and nail salon websites convert on trust and a clear treatment menu &mdash; here&rsquo;s what drives bookings:",
+			'',
+			"&bull; <strong>Treatment menu</strong> &mdash; full list with treatment description, duration, and price; bundle packages (e.g. gel nails + eyebrow shape + spray tan); patch-test note where required (lash/brow tints, wax, skin peels); from <strong>$300</strong>",
+			"&bull; <strong>Online booking</strong> &mdash; Fresha (free to use), Timely, or Booksy; treatment + therapist preference; deposit at booking (reduces no-shows by approximately 60%); 24-hour SMS reminder; automated rebooking suggestion; from <strong>$350</strong>",
+			"&bull; <strong>Credentials and compliance</strong> &mdash; VTCT / CIBTAC / NVQ Level 3 qualification; public liability insurance amount; patch-test appointment (£10 credited against treatment); consent-form link for skin and lash treatments; trust signals that justify premium pricing",
+			"&bull; <strong>Before / after gallery</strong> &mdash; consent client photos; labelled by treatment (lash extensions / nail art / brow lamination / skin result); before and after paired images; from <strong>$250</strong>",
+			"&bull; <strong>Pricing page</strong> &mdash; transparent pricing builds trust in beauty specifically; hiding prices costs enquiries; include duration so clients can plan their visit; from <strong>$200</strong>",
+			"&bull; <strong>Aesthetics / skin clinic page</strong> &mdash; if you offer injectable aesthetics (Botox, fillers, skin peels, RF, LED), this needs its own page; UK law (April 2024) requires a prescribing clinician for injectable aesthetics &mdash; this must be stated on the site; from <strong>$300</strong>",
+			"&bull; <strong>Loyalty and gift cards</strong> &mdash; WooCommerce gift vouchers; digital loyalty stamp card (Floomby or Noqu); email delivery; birthday and Christmas push; from <strong>$200</strong>",
+			"&bull; <strong>From $500</strong> treatment menu + booking + gallery; <strong>$900+</strong> with credentials + loyalty scheme + aesthetics page",
+			'',
+			"Nails only, full beauty, or aesthetics too? Home-visit, salon, or mobile? Solo therapist or a team?",
+		] );
+	}
+
+	// 0d-pre40-b) Personal trainer / PT studio / online fitness coach / gym / fitness studio website.
+	if ( $has( [ 'personal trainer website', 'pt website', 'personal training website', 'fitness coach website', 'online fitness coach website', 'online personal trainer website', 'gym website', 'fitness studio website', 'bootcamp website', 'weight loss coach website', 'strength coach website', 'crossfit gym website', 'yoga studio website', 'pilates studio website', 'fitness instructor website', 'sports coach website' ] ) ) {
+		return $nl( [
+			"Personal trainer websites convert on transformation proof and a clear entry point &mdash; the lead magnet and the before/after gallery do the heavy lifting:",
+			'',
+			"&bull; <strong>Training offer page</strong> &mdash; 1:1 PT (face-to-face or online) / small group training / classes / 8-week transformation programme; clear price or &ldquo;from &pound;X&rdquo;; what&rsquo;s included (programme, check-ins, nutrition guidance); from <strong>$300</strong>",
+			"&bull; <strong>Transformation gallery</strong> &mdash; before and after with client name + stats (kg lost / deadlift PB / 5k time); client consent required; the highest-converting content on PT sites; video testimonials where available; from <strong>$250</strong>",
+			"&bull; <strong>Discovery call booking</strong> &mdash; Calendly 15-min free consultation; pre-call form (current fitness level / goals / training history / injuries); auto-reply with what to expect; from <strong>$200</strong>",
+			"&bull; <strong>Lead magnet</strong> &mdash; 4-week beginner programme PDF / &ldquo;What to eat around your workouts&rdquo; guide / 7-day challenge; Mailchimp or ConvertKit email sequence; builds list and warms leads; from <strong>$300</strong>",
+			"&bull; <strong>REPs / CIMSPA registration</strong> &mdash; Register of Exercise Professionals Level 3 minimum; CIMSPA membership; public liability and professional indemnity insurance (required for gym hire); DBS certificate for under-18 clients; trust signals that justify premium pricing",
+			"&bull; <strong>Nutrition and programming page</strong> &mdash; macro coaching / meal plan / MyFitnessPal integration; only if Level 4 qualified in nutrition (Level 3 PTs cannot give medical nutrition advice); from <strong>$200</strong>",
+			"&bull; <strong>Online coaching portal</strong> &mdash; True Coach or PT Distinction for programme delivery and check-ins; or custom members area; scales beyond 1:1 time; from <strong>$400</strong>",
+			"&bull; <strong>From $500</strong> offer page + transformation gallery + booking; <strong>$1,000+</strong> with lead magnet + online coaching portal + nutrition page",
+			'',
+			"Face-to-face, online, or both? 1:1 only or group classes too? Specific niche (weight loss, sports performance, post-natal, over-50s)?",
+		] );
+	}
+
+	// 0d-pre40-c) Driving school / driving instructor / intensive course / driving tuition website.
+	if ( $has( [ 'driving school website', 'driving instructor website', 'driving lessons website', 'driving tuition website', 'intensive driving course website', 'pass plus website', 'automatic driving lessons website', 'manual driving lessons website', 'dvsa approved website', 'driving academy website', 'driving school near me website', 'driving lesson website', 'crash course driving website' ] ) ) {
+		return $nl( [
+			"Driving school websites have three conversion levers: local SEO, pass rate, and a frictionless booking path:",
+			'',
+			"&bull; <strong>Lesson types and prices</strong> &mdash; manual vs automatic; hourly rate displayed (hiding it loses enquiries); block booking discount (e.g. 10 lessons = &pound;X); intensive / crash course (5-day or weekly intensive pass); from <strong>$250</strong>",
+			"&bull; <strong>Pass rate and reviews</strong> &mdash; DVSA first-attempt test pass rate if available; honest framing (&ldquo;above the national average of 45.7%&rdquo; is current UK average); Google / Trustpilot reviews widget; most persuasive conversion signal for learners choosing an instructor; from <strong>$200</strong>",
+			"&bull; <strong>Online booking</strong> &mdash; Appointy / Scheduling+ / Acuity; pick-up postcode + preferred test centre; lesson type; from <strong>$300</strong>",
+			"&bull; <strong>Intensive / crash course page</strong> &mdash; course dates + accommodation option near test centre; higher-margin product than hourly lessons; enquiry form with target pass date; from <strong>$150</strong>",
+			"&bull; <strong>Local SEO pages</strong> &mdash; &ldquo;[city] driving lessons&rdquo; + &ldquo;[postcode area] driving instructor&rdquo; + &ldquo;[town] driving school&rdquo;; NAP consistency; Local Business schema; first position for location query is the primary revenue driver for small driving schools; from <strong>$200</strong>",
+			"&bull; <strong>Theory test preparation</strong> &mdash; links to DVSA official mock tests; hazard perception tips; &ldquo;is my theory test still valid?&rdquo; note (2 years from pass date); from <strong>$150</strong>",
+			"&bull; <strong>Gift vouchers</strong> &mdash; WooCommerce gift cards; email delivery; Christmas and 17th-birthday push are the two peak gifting moments; from <strong>$150</strong>",
+			"&bull; <strong>From $500</strong> lesson types + pass rate + booking; <strong>$900+</strong> with intensive page + local SEO pages + gift vouchers",
+			'',
+			"Manual, automatic, or both? One instructor or a school with several? Which test centres do you cover?",
+		] );
+	}
+
 	// 0d-pre37-a) Music school / music lessons / instrument teacher / music tuition website.
 	if ( $has( [ 'music school website', 'music lessons website', 'guitar teacher website', 'piano teacher website', 'guitar lessons website', 'piano lessons website', 'drum lessons website', 'violin lessons website', 'singing lessons website', 'voice lessons website', 'music tuition website', 'music academy website', 'instrument lessons website', 'online music lessons website', 'music teacher website', 'music studio website' ] ) ) {
 		return $nl( [

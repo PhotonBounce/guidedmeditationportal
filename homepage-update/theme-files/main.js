@@ -714,7 +714,8 @@
         if (_wcWords > 0) {
           var _wcBadge = document.createElement('span');
           _wcBadge.className = 'pb-brain__wc';
-          _wcBadge.textContent = _wcWords + ' word' + (_wcWords !== 1 ? 's' : '');
+          var _wcRt = _wcWords >= 200 ? ' · ~' + Math.ceil(_wcWords / 200) + ' min' : '';
+          _wcBadge.textContent = _wcWords + ' word' + (_wcWords !== 1 ? 's' : '') + _wcRt;
           _wcBadge.setAttribute('aria-hidden', 'true');
           div.appendChild(_wcBadge);
         }
@@ -1150,8 +1151,26 @@
             helpBtn.setAttribute('aria-expanded', 'false');
           }
         });
-        if (closeBtn) { brainHead.removeChild(closeBtn); btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(printBtn); btnGroup.appendChild(collapseBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(helpBtn); btnGroup.appendChild(closeBtn); }
-        else { btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(printBtn); btnGroup.appendChild(collapseBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(helpBtn); }
+        // Starred filter — ★ button hides all non-starred bot replies until toggled off.
+        var _sfBtn = document.createElement('button');
+        _sfBtn.type = 'button';
+        _sfBtn.className = 'pb-brain__starfilter';
+        _sfBtn.title = 'Show starred replies only';
+        _sfBtn.setAttribute('aria-label', 'Show starred replies only');
+        _sfBtn.setAttribute('aria-pressed', 'false');
+        _sfBtn.innerHTML = '&#9733;';
+        var _sfOn = false;
+        _sfBtn.addEventListener('click', function() {
+          var _sc = log ? log.querySelectorAll('.pb-brain__msg--starred').length : 0;
+          if (!_sfOn && _sc === 0) { _showToast('Star a reply first ★'); return; }
+          _sfOn = !_sfOn;
+          log.classList.toggle('pb-brain__log--star-only', _sfOn);
+          _sfBtn.classList.toggle('pb-brain__starfilter--on', _sfOn);
+          _sfBtn.setAttribute('aria-pressed', String(_sfOn));
+          _showToast(_sfOn ? _sc + ' starred repl' + (_sc === 1 ? 'y' : 'ies') : 'All messages');
+        });
+        if (closeBtn) { brainHead.removeChild(closeBtn); btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(printBtn); btnGroup.appendChild(_sfBtn); btnGroup.appendChild(collapseBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(helpBtn); btnGroup.appendChild(closeBtn); }
+        else { btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(printBtn); btnGroup.appendChild(_sfBtn); btnGroup.appendChild(collapseBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(helpBtn); }
         brainHead.appendChild(btnGroup);
       } else {
         btnGroup.insertBefore(newChatBtn, btnGroup.firstChild);

@@ -5033,3 +5033,14 @@ html.pb-brain-open { overflow: hidden; }
   background:linear-gradient(90deg,rgba(255,212,0,.6),rgba(255,180,0,.35));
   transition:width .08s linear; border-radius:0 1px 1px 0;
 }
+/* R44 — Starred filter button + hide non-starred under filter */
+.pb-brain__starfilter{
+  font-size:14px; padding:2px 5px; border-radius:4px;
+  background:none; border:none; color:rgba(255,255,255,.28);
+  cursor:pointer; transition:color .15s, background .15s; line-height:1;
+}
+.pb-brain__starfilter:hover{ color:rgba(255,212,0,.65); }
+.pb-brain__starfilter--on{ color:rgba(255,212,0,.95); background:rgba(255,212,0,.1); }
+.pb-brain__starfilter:focus-visible{ outline:1px solid rgba(255,255,255,.3); border-radius:4px; }
+.pb-brain__log--star-only .pb-brain__msg:not(.pb-brain__msg--starred){ display:none; }
+.pb-brain__log--star-only .pb-brain__scrollprog{ display:none; }
