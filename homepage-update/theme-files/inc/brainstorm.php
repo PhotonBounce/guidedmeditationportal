@@ -667,6 +667,69 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre51-a) Veterinary practice / vet surgeon / animal hospital / pet clinic website.
+	if ( $has( [ 'vet website', 'veterinary website', 'veterinary practice website', 'animal hospital website', 'pet clinic website', 'vet surgery website', 'vet clinic website', 'animal clinic website', 'exotic vet website', 'equine vet website', 'farm vet website', 'large animal vet website', 'emergency vet website', 'vet nurse website', 'veterinary surgeon website', 'pet hospital website' ] ) ) {
+		return $nl( [
+			"Veterinary practice websites must simultaneously serve pet owners in emergencies (fast phone number, out-of-hours cover) and convert prospective clients choosing a vet for the first time &mdash; these two modes require completely different design priorities:",
+			'',
+			"&bull; <strong>Emergency / out-of-hours contact</strong>: the most important element on any vet website; red/prominent phone number; out-of-hours number if different; 24/7 emergency line partner (e.g. Vets Now) if used; visible above the fold on mobile where 90% of emergency searches happen. This is the #1 reason people visit a vet site in a panic; From \$100.",
+			"&bull; <strong>Services page</strong>: routine consultations; vaccinations; neutering/spaying; dental cleaning; emergency and trauma; diagnostic imaging (X-ray, ultrasound); in-house laboratory; physiotherapy/hydrotherapy if offered; pharmacy; specialist referrals; From \$150.",
+			"&bull; <strong>Online booking / appointment request</strong>: Vetstoria, PetsApp, or RxWorks online booking plugin; new patient registration form; existing patient appointment request; pet species + reason for visit; the single biggest operational efficiency win for a busy practice; From \$250.",
+			"&bull; <strong>Meet the team page</strong>: RCVS-registered vets with membership numbers (verifiable on the RCVS register); vet nurses; reception; photos and specialisms (&lsquo;Certificate in Small Animal Surgery&rsquo;, &lsquo;Advanced Practitioner in Dermatology&rsquo;); clients choose a vet as much as a practice; From \$150.",
+			"&bull; <strong>RCVS Practice Standards page</strong>: RCVS Practice Standards Scheme accreditation (General / Veterinary Hospital / Referral); RCVS logo; what it means for patient care; RVN qualifications; From \$100.",
+			"&bull; <strong>Pet health information / symptom guides</strong>: &ldquo;Is my dog in pain?&rdquo;, &ldquo;When to call an emergency vet&rdquo;, &ldquo;Cat vaccination schedule UK&rdquo; &mdash; high-traffic content that builds trust and captures new-patient traffic from Google; reduces non-urgent phone calls; From \$150.",
+			"&bull; <strong>Pet health plans / preventive care membership</strong>: monthly direct-debit health plan (vaccinations, flea/worming, annual health check) bundled as a subscription; increases client retention; specific plan levels for kittens, puppies, adult, senior; From \$200.",
+			"&bull; <strong>Species-specific pages</strong>: if the practice handles exotic species (rabbits, birds, reptiles, small mammals), guinea pigs etc. separate pages rank for &ldquo;rabbit vet near me&rdquo; which has very low competition; From \$100/page.",
+			"&bull; <strong>Pharmacy/online shop</strong>: prescription flea treatment, worming, joint supplements; Viovet or VetShop partnership; or own WooCommerce pharmacy with prescription verification workflow; From \$300.",
+			'',
+			"From \$500 for an emergency-first vet site &mdash; \$1,100+ with online booking, health plans, pet health library, and online pharmacy.",
+			'',
+			"Single site or multi-site group? Species focus (small animal, equine, farm, exotic)? 24/7 cover or partner out-of-hours?",
+		] );
+	}
+
+	// 0d-pre51-b) Dentist / dental practice / cosmetic dentist / orthodontist / implant centre.
+	if ( $has( [ 'dentist website', 'dental practice website', 'dental website', 'cosmetic dentist website', 'orthodontist website', 'dental implants website', 'dental surgery website', 'teeth whitening website', 'invisible braces website', 'invisalign website', 'dental clinic website', 'emergency dentist website', 'private dentist website', 'nhs dentist website', 'dental plan website', 'smile clinic website' ] ) ) {
+		return $nl( [
+			"Dental websites must build trust before the first appointment &mdash; dental anxiety is one of the most common phobias, so reducing fear through transparency, friendly photography, and clear process descriptions converts hesitant browsers into booked patients:",
+			'',
+			"&bull; <strong>New patient welcome page</strong>: &ldquo;Taking new patients?&rdquo; is the #1 question; clear NHS/private status; what to expect at a first appointment; registration process; what to bring; this page ranks for &ldquo;dentist taking new patients [area]&rdquo; which is searched by thousands of anxious patients every week; From \$200.",
+			"&bull; <strong>Online appointment booking</strong>: Dentally, Software of Excellence, or Exact with online booking module; emergency appointment slot prominent; new patient vs existing; From \$250.",
+			"&bull; <strong>Treatments page with before/afters</strong>: teeth whitening; composite bonding; veneers; Invisalign/Smilelign; implants; crowns; dentures; each page should include before/after photos (with patient consent); GDC-compliant treatment descriptions; From \$200.",
+			"&bull; <strong>Meet the dentists page</strong>: GDC registration number for each dentist (legally required on marketing material in the UK); photo; qualifications; special interests (&lsquo;interest in cosmetic dentistry&rsquo;, &lsquo;caring for nervous patients&rsquo;); GDC number must be displayed and verifiable; From \$150.",
+			"&bull; <strong>GDC registration and CQC/HTM 01-05 compliance</strong>: GDC registration numbers legally required; CQC registration number for England; HTM 01-05 infection control compliance statement; reassures patients about standards; From \$100.",
+			"&bull; <strong>Nervous patients page</strong>: dental anxiety is the #1 barrier to booking; dedicated page explaining sedation options (relative analgesia/happy air, IV sedation), gentle approach, what patients say; converts a very high-intent anxious searcher; From \$150.",
+			"&bull; <strong>Dental finance / payment plans page</strong>: Chrysalis Finance or Medenta 0% finance; monthly payment calculator; this is the biggest objection to cosmetic treatment (&ldquo;I can&rsquo;t afford veneers&rdquo;) and removing it with transparent finance options converts well; From \$150.",
+			"&bull; <strong>Dental plan (preventive membership) page</strong>: monthly direct-debit plan covering 2 check-ups, 2 hygienist visits, X-rays, emergency cover; Denplan or DPAS partnership; creates predictable recurring revenue and retains patients; From \$150.",
+			"&bull; <strong>Emergency dentist page</strong>: separate page targeting &ldquo;emergency dentist [area]&rdquo; &mdash; toothache, broken tooth, lost filling, abscess; emergency appointment phone number; out-of-hours guidance; this page ranks quickly and converts distressed patients immediately; From \$100.",
+			'',
+			"From \$600 for a trust-first practice site &mdash; \$1,300+ with online booking, treatment pages with before/afters, finance calculator, and nervous patient guide.",
+			'',
+			"NHS, private, or mixed? Any cosmetic/aesthetic specialism (veneers, Invisalign, implants)? Nervous patient focus?",
+		] );
+	}
+
+	// 0d-pre51-c) Physiotherapist / sports therapist / osteopath / chiropractor / manual therapist.
+	if ( $has( [ 'physiotherapist website', 'physio website', 'physiotherapy website', 'sports therapist website', 'osteopath website', 'osteopathy website', 'chiropractor website', 'chiropractic website', 'sports injury website', 'sports massage website', 'manual therapy website', 'rehabilitation website', 'acupuncture website', 'sports physio website', 'musculoskeletal physio website', 'private physio website' ] ) ) {
+		return $nl( [
+			"Physiotherapy and manual therapy websites convert on condition expertise and practitioner trust &mdash; the client is in pain and searching for someone who understands their specific problem:",
+			'',
+			"&bull; <strong>Condition / injury pages</strong>: one page per major condition or injury; back pain; knee pain; shoulder impingement; sciatica; sports injuries; ACL rehabilitation; plantar fasciitis; tennis elbow; neck pain; rotator cuff; each page ranks for &ldquo;[condition] physiotherapy [area]&rdquo; and converts directly from search intent; From \$150/page.",
+			"&bull; <strong>Online appointment booking</strong>: Power Diary, Cliniko, or Physitrack online booking; new vs returning patient; condition/service type; practitioner preference; slot availability in real-time; the single biggest operational improvement for any solo or group practice; From \$250.",
+			"&bull; <strong>Practitioner profiles</strong>: HCPC registration number (mandatory for physiotherapists in the UK); BSc/MSc Physiotherapy; specialist interests; years of experience; treatment approach (manual therapy, exercise therapy, sports rehabilitation, acupuncture); From \$150.",
+			"&bull; <strong>HCPC / CSP / GOsC / GCC registration</strong>: Health and Care Professions Council (HCPC) for physiotherapists; General Osteopathic Council (GOsC) for osteopaths; General Chiropractic Council (GCC) for chiropractors; registration number with verify link is a legal requirement and trust signal; From \$100.",
+			"&bull; <strong>Services and treatment techniques page</strong>: manual therapy (joint mobilisation, manipulation); soft tissue work; dry needling/acupuncture; exercise therapy; taping (Kinesio/RockTape); electrotherapy (ultrasound, TENS); biomechanical assessments; gait analysis; From \$150.",
+			"&bull; <strong>Online exercise programmes / patient portal</strong>: Physitrack or PhysiApp patient portal; prescribed home exercises with video; progress tracking; telehealth video appointments; increasingly expected by patients post-pandemic; From \$200.",
+			"&bull; <strong>Sports team / corporate partnership page</strong>: if the practice treats local sports teams or has corporate wellbeing partnerships; first aid cover; pitch-side physiotherapy; on-site corporate physio; B2B conversion completely different to B2C; From \$150.",
+			"&bull; <strong>Blog / injury guides</strong>: &ldquo;Should I ice or heat a muscle injury?&rdquo;; &ldquo;How long does a sprained ankle take to heal?&rdquo;; &ldquo;Exercises for lower back pain&rdquo;; high Google traffic; positions clinician as expert; From \$100/post.",
+			"&bull; <strong>Telehealth / video appointments page</strong>: remote consultation for advice, exercise programme review, and post-op monitoring; serves national market; patients who have moved away from your area; From \$150.",
+			'',
+			"From \$500 for a condition-led practice site &mdash; \$1,100+ with condition pages, online booking, exercise portal, and sports/corporate page.",
+			'',
+			"Solo practitioner or group practice? Any sports specialism? HCPC physiotherapist, osteopath (GOsC), or chiropractor (GCC)?",
+		] );
+	}
+
 	// 0d-pre50-a) Accountant / bookkeeper / chartered accountant / tax advisor website.
 	if ( $has( [ 'accountant website', 'chartered accountant website', 'bookkeeper website', 'accounting firm website', 'tax advisor website', 'tax accountant website', 'small business accountant website', 'self employed accountant website', 'cpa website', 'payroll website', 'management accountant website', 'accountancy practice website', 'financial accountant website', 'vat accountant website', 'company accounts website', 'annual accounts website' ] ) ) {
 		return $nl( [

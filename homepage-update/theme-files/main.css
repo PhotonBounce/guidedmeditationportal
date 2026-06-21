@@ -5211,3 +5211,39 @@ pre.pb-brain__code-block code{ font-size:inherit; background:none; border:none; 
 .pb-brain__stats-panel b{
   color:rgba(255,255,255,.9); font-weight:600;
 }
+
+/* R55 — empty-state suggestion tiles */
+.pb-brain__empty-hints{
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:8px; padding:8px 12px 12px;
+  opacity:0; transform:translateY(6px);
+  transition:opacity .3s ease, transform .3s ease;
+}
+.pb-brain__empty-hints.pb-brain__eh--vis{
+  opacity:1; transform:translateY(0);
+}
+.pb-brain__eh-tile{
+  display:flex; align-items:center; gap:8px;
+  padding:9px 12px; background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:10px; cursor:pointer; text-align:left;
+  transition:background .15s, border-color .15s;
+  min-height:44px; width:100%;
+}
+.pb-brain__eh-tile:hover,
+.pb-brain__eh-tile:focus-visible{
+  background:rgba(255,212,0,.08);
+  border-color:rgba(255,212,0,.3);
+  outline:none;
+}
+.pb-brain__eh-icon{
+  font-size:16px; flex-shrink:0; line-height:1;
+}
+.pb-brain__eh-label{
+  font-size:11.5px; color:rgba(255,255,255,.75);
+  line-height:1.3; flex:1;
+}
+.pb-brain__eh-tile:hover .pb-brain__eh-label,
+.pb-brain__eh-tile:focus-visible .pb-brain__eh-label{
+  color:rgba(255,212,0,.9);
+}

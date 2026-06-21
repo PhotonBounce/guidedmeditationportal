@@ -484,8 +484,30 @@
   function _greetUser() {
     if (!log) return;
     var _hr = new Date().getHours();
-    var _tod = _hr < 12 ? ‘Good morning’ : _hr < 17 ? ‘Good afternoon’ : ‘Good evening’;
-    addMsg(_tod + ‘! I’m Photon — what are you building today?’, ‘bot’);
+    var _tod = _hr < 12 ? 'Good morning' : _hr < 17 ? 'Good afternoon' : 'Good evening';
+    addMsg(_tod + "! I'm Photon — what are you building today?", 'bot');
+    // R55: Empty-state suggestion tiles—shown before the user sends anything.
+    var _eh = document.createElement('div');
+    _eh.className = 'pb-brain__empty-hints';
+    _eh.setAttribute('aria-label', 'Try asking about…');
+    var _ehItems = [
+      { emoji: '&#128736;', label: 'What can you build for me?' },
+      { emoji: '&#128176;', label: 'What do your services cost?' },
+      { emoji: '&#128247;', label: 'Show me your portfolio' },
+      { emoji: '&#128269;', label: 'Tell me about SEO' },
+    ];
+    _ehItems.forEach(function(item) {
+      var _ehBtn = document.createElement('button');
+      _ehBtn.type = 'button'; _ehBtn.className = 'pb-brain__eh-tile';
+      _ehBtn.innerHTML = '<span class="pb-brain__eh-icon">' + item.emoji + '</span><span class="pb-brain__eh-label">' + item.label + '</span>';
+      _ehBtn.addEventListener('click', function() {
+        _eh.remove();
+        if (input && form) { input.value = item.label; form.dispatchEvent(new Event('submit', { bubbles: true })); }
+      });
+      _eh.appendChild(_ehBtn);
+    });
+    log.appendChild(_eh);
+    requestAnimationFrame(function() { requestAnimationFrame(function() { _eh.classList.add('pb-brain__eh--vis'); }); });
   }
 
   function _showToast(msg) {
@@ -508,16 +530,16 @@
   var _unreadCount = 0;
   function _updateOrbBadge() {
     if (!orb) return;
-    var _badge = orb.querySelector(‘.pb-orb__badge’);
+    var _badge = orb.querySelector('.pb-orb__badge');
     if (!_badge) {
-      _badge = document.createElement(‘span’);
-      _badge.className = ‘pb-orb__badge’;
-      _badge.setAttribute(‘aria-label’, ‘0 unread messages’);
+      _badge = document.createElement('span');
+      _badge.className = 'pb-orb__badge';
+      _badge.setAttribute('aria-label', '0 unread messages');
       orb.appendChild(_badge);
     }
-    _badge.textContent = _unreadCount > 9 ? ‘9+’ : (_unreadCount > 0 ? String(_unreadCount) : ‘’);
-    _badge.setAttribute(‘aria-label’, _unreadCount + ‘ unread message’ + (_unreadCount !== 1 ? ‘s’ : ‘’));
-    _badge.classList.toggle(‘pb-orb__badge--vis’, _unreadCount > 0);
+    _badge.textContent = _unreadCount > 9 ? '9+' : (_unreadCount > 0 ? String(_unreadCount) : '');
+    _badge.setAttribute('aria-label', _unreadCount + ' unread message' + (_unreadCount !== 1 ? 's' : ''));
+    _badge.classList.toggle('pb-orb__badge--vis', _unreadCount > 0);
   }
 
   function openBrain() {
@@ -850,6 +872,8 @@
           div.appendChild(_expandBtn);
         }
       }
+      // R55: Remove empty-state hints on first user message
+      if (cls === 'user') { var _ehEl = log.querySelector('.pb-brain__empty-hints'); if (_ehEl) _ehEl.remove(); }
       log.appendChild(div);
       // After the 2nd bot message (first substantive reply), inject follow-up action chips.
       if (cls === 'bot') {
@@ -900,7 +924,7 @@
           { k: ['brand','logo','design','colour','font','identity'], c: ['Do you offer logo design?', 'How many design revisions are included?', 'What if I already have a logo?'] },
           { k: ['social','instagram','facebook','twitter','linkedin'], c: ['Do you manage social media too?', 'Can I embed an Instagram feed?', 'What about Open Graph previews?'] },
           { k: ['architect','planning','building','extension','loft'], c: ['What’s your planning approval rate?', 'Do you handle listed buildings?', 'What RIBA stages do you cover?'] },
-          { k: ['interior','decorator','stager','staging','e-design'], c: ['Do you offer virtual e-design?', 'Can I see your portfolio?', 'What’s the discovery call process?'] },
+          { k: ['interior','decorator','stager','staging','e-design'], c: ['Do you offer virtual e-design?', 'Can I see your portfolio?', 'What\'s the discovery call process?'] },
           { k: ['florist','flower','bouquet','arrangement'], c: ['Do you deliver same-day?', 'Can I see your floral portfolio?', 'Do you offer flower subscriptions?'] },
           { k: ['childminder','nursery','childcare','child','ofsted'], c: ['How do parents book online?', 'Can I show term-time availability?', 'How do you handle safeguarding info?'] },
           { k: ['music','teacher','tutor','lesson','instrument','singing','guitar','piano'], c: ['Can students book lessons online?', 'Do you offer trial lessons?', 'How do you show your teaching style?'] },
