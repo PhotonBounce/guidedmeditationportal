@@ -125,7 +125,8 @@ function route(lower, lastTopic) {
     "feel dull","feeling dull","flat energy","energy levels low",
     "thyroid","thyroid issues","underactive thyroid","hypothyroid","hypothyroidism",
     "cortisol","cortisol levels","high cortisol","cortisol spike",
-    "adrenal","adrenals are"])) return "energy";
+    "adrenal","adrenals are",
+    "cold plunge","cold-plunge","cold exposure"])) return "energy";
   // 9. relax
   if(any(lower,["relax","calm","stress","anxiety","anxious","breathe","unwind","nervous","panic",
     "overthink","overthinking","can't stop thinking","cant stop thinking",
@@ -252,6 +253,8 @@ function route(lower, lastTopic) {
     "mindset shift","shift my mindset","mindset work","growth mindset",
     "tapping","eft tapping","emotional freedom technique",
     "acupressure","acupuncture for",
+    "hypnosis","self-hypnosis","hypnotherapy",
+    "nlp","neuro-linguistic","neuro linguistic programming",
     "self-care","self care","self-care routine","self care routine",
     "self-care practice","taking care of myself","look after myself",
     "evening routine","wind down routine","wind-down routine"])) return "techniques";
@@ -355,6 +358,8 @@ function route(lower, lastTopic) {
     "codependency","codependent","codependent relationship",
     "avoidant attachment","attachment wound","attachment issues",
     "fearful avoidant","disorganized attachment",
+    "estranged","estrangement","family estrangement","estranged from",
+    "cut off from family","family cut me off","cut off by family",
     "divorce","divorcing","getting divorced","filed for divorce",
     "separation","separated","we're separated","going through a separation",
     "broke up","broken up","we broke up","just broke up",
@@ -538,7 +543,9 @@ function route(lower, lastTopic) {
     "appreciate","appreciation","count my blessings","count your blessings",
     "what am i grateful","things i'm grateful","blessings",
     "three good things","3 good things","silver lining","look for the good",
-    "count the positives","find the positive"])) return "gratitude";
+    "count the positives","find the positive",
+    "abundance","abundance mindset","manifestation","manifesting",
+    "law of attraction","positive affirmations","affirmation practice"])) return "gratitude";
   // 27. help
   if(any(lower,["what can you do","how do you work","your features","about spirit",
     "what are you","what is spirit","how can you help",
@@ -758,6 +765,16 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R108: energy (cold plunge/cold exposure), techniques (hypnosis/nlp), gratitude (manifestation/abundance), sadness (estranged)
+  ["I do cold plunge therapy every morning", "", "energy", "cold plunge → energy"],
+  ["cold exposure helps me feel more alert", "", "energy", "cold exposure → energy"],
+  ["I want to try hypnotherapy for my patterns", "", "techniques", "hypnotherapy → techniques"],
+  ["I've been practising self-hypnosis in the evenings", "", "techniques", "self-hypnosis → techniques (avoid 'sleep' preemption)"],
+  ["I'm working on an abundance mindset", "", "gratitude", "abundance mindset → gratitude"],
+  ["I believe in manifestation and the law of attraction", "", "gratitude", "manifestation → gratitude"],
+  ["I've been estranged from my family for two years", "", "sadness", "estranged → sadness"],
+  ["the estrangement from my sister still hurts", "", "sadness", "estrangement → sadness"],
 
   // R107: positive (feel good/better/great/happy), sleep (had a dream/dreamed about)
   ["I feel good about where I am now", "", "positive", "feel good → positive (avoid 'so' insertion between feel and good)"],

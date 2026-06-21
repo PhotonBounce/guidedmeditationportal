@@ -234,7 +234,8 @@ class AiChatEngine(private val context: Context) {
             "feel dull", "feeling dull", "flat energy", "energy levels low",
             "thyroid", "thyroid issues", "underactive thyroid", "hypothyroid", "hypothyroidism",
             "cortisol", "cortisol levels", "high cortisol", "cortisol spike",
-            "adrenal", "adrenals are") ->
+            "adrenal", "adrenals are",
+            "cold plunge", "cold-plunge", "cold exposure") ->
             handleEnergy().also { lastTopic = "energy" }
         any(lower, "relax", "calm", "stress", "anxiety", "anxious", "breathe",
             "unwind", "nervous", "panic", "overthink", "overthinking",
@@ -371,7 +372,9 @@ class AiChatEngine(private val context: Context) {
             "thought patterns", "unhelpful thoughts", "unhelpful thinking",
             "mindset shift", "shift my mindset", "mindset work", "growth mindset",
             "tapping", "eft tapping", "emotional freedom technique",
-            "acupressure", "acupuncture for") ->
+            "acupressure", "acupuncture for",
+            "hypnosis", "self-hypnosis", "hypnotherapy",
+            "nlp", "neuro-linguistic", "neuro linguistic programming") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
@@ -488,6 +491,8 @@ class AiChatEngine(private val context: Context) {
             "codependency", "codependent", "codependent relationship",
             "avoidant attachment", "attachment wound", "attachment issues",
             "fearful avoidant", "disorganized attachment",
+            "estranged", "estrangement", "family estrangement", "estranged from",
+            "cut off from family", "family cut me off", "cut off by family",
             "divorce", "divorcing", "getting divorced", "filed for divorce",
             "separation", "separated", "we're separated", "going through a separation",
             "broke up", "broken up", "we broke up", "just broke up",
@@ -675,7 +680,9 @@ class AiChatEngine(private val context: Context) {
             "appreciate", "appreciation", "count my blessings", "count your blessings",
             "what am i grateful", "things i'm grateful", "blessings",
             "three good things", "3 good things", "silver lining", "look for the good",
-            "count the positives", "find the positive") ->
+            "count the positives", "find the positive",
+            "abundance", "abundance mindset", "manifestation", "manifesting",
+            "law of attraction", "positive affirmations", "affirmation practice") ->
             handleGratitude().also { lastTopic = "gratitude" }
         any(lower, "what can you do", "how do you work", "your features", "about spirit",
             "what are you", "what is spirit", "how can you help",
