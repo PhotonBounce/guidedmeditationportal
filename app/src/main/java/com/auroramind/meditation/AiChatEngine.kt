@@ -235,17 +235,21 @@ class AiChatEngine(private val context: Context) {
         SoundType.THIEN
     )
 
-    private fun handleTechniques(): Pair<String, SoundType?> = Pair(
-        "🌿 A few paths into stillness:\n\n" +
-        "Mindfulness — rest attention on the breath, gently returning each time it wanders\n" +
-        "Body Scan — move awareness slowly from head to toe, releasing tension as you go\n" +
-        "Breathwork — slow, deliberate breathing patterns (try 4-7-8 or box breathing) to settle the nervous system\n" +
-        "Loving-Kindness (Metta) — silently offer warmth and goodwill to yourself, then others\n" +
-        "Visualization — picture a calm place or warm light filling the body\n" +
-        "Mantra — repeat a word or phrase to anchor a wandering mind\n\n" +
-        "Pair any of these with a track from the Sounds tab to set the mood. Want me to walk you through one?",
-        SoundType.THIEN
-    )
+    private fun handleTechniques(): Pair<String, SoundType?> {
+        val today = MicroTechniques.today()
+        return Pair(
+            "🌿 Today's Technique — ${today.emoji} ${today.title}\n\n" +
+            "${today.body}\n\n" +
+            "── Other paths into stillness ──\n\n" +
+            "Box Breathing 🫧 — breathe a slow square: in 4 · hold 4 · out 4 · hold 4\n" +
+            "Body Scan 🦶 — sweep attention from toes to head, softening as you go\n" +
+            "Loving-Kindness 🤍 — offer warmth to yourself, then gently outward\n" +
+            "Physiological Sigh 🌬️ — two short inhales, one long exhale; fastest real-time calm\n\n" +
+            "Pair any of these with a track from the Sounds tab.\n\n" +
+            "Want me to walk you through one step by step?",
+            SoundType.THIEN
+        )
+    }
 
     private fun handleVip(): Pair<String, SoundType?> = Pair(
         "🌟 Unlock Meditation Portal\n\n" +
@@ -261,9 +265,20 @@ class AiChatEngine(private val context: Context) {
 
     private fun handleRecommendation(): Pair<String, SoundType?> {
         val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        val favMood = mostPlayed.mood
         val (suggestion, reason) = when {
             hour >= 22 || hour < 5 ->
-                SoundType.EVENING_REVIEW to "a soft, unhurried close to the day — perfect for this hour"
+                SoundType.EVENING_REVIEW to "perfect for this hour — a soft Stoic close to the day"
+            favMood == Mood.FOCUS && hour in 7..17 ->
+                SoundType.WORK_FOCUS_CHILLOUT to "you tend toward focus practices — a warm anchor for the workday"
+            favMood == Mood.SLEEP ->
+                SoundType.SOHAM to "you often practice for rest — this eases the transition into calm"
+            favMood == Mood.STRESS ->
+                SoundType.AUTOGENIC_CALM to "you tend to practice for calm — this quiets the nervous system systematically"
+            favMood == Mood.COMPASSION ->
+                SoundType.TONGLEN to "you gravitate toward compassion practices — this opens the heart with warmth"
+            favMood == Mood.ENERGY ->
+                SoundType.CIRCUIT_THUNDERCLAP to "you tend toward energising practices — this sparks focus and drive"
             hour < 10 ->
                 SoundType.ZHAN_ZHUANG to "settles a busy mind before the day picks up speed"
             hour < 18 ->
@@ -272,10 +287,10 @@ class AiChatEngine(private val context: Context) {
                 SoundType.SOHAM to "eases the transition into a calm evening"
         }
         return Pair(
-            "🤍 Spirit's Gentle Suggestion\n\n" +
+            "🤍 Spirit's Suggestion — Personalised to You\n\n" +
             "Based on:\n" +
             "Time: ${hour}:00 — ${if (hour >= 22 || hour < 6) "wind-down window" else "active hours"}\n" +
-            "Your favourite: ${mostPlayed.emoji} ${mostPlayed.displayName}\n" +
+            "Your most-played: ${mostPlayed.emoji} ${mostPlayed.displayName} (${favMood.label})\n" +
             "What's tended to settle you before\n\n" +
             "Right now, try: ${suggestion.emoji} ${suggestion.displayName}\n\n" +
             "Why: $reason.\n\n" +

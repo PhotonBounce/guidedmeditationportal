@@ -124,6 +124,23 @@ class AiChatActivity : AppCompatActivity() {
             }
         }.also { binding.chipGroupQuick.addView(it) }
 
+        // Struggling chip — accent_rose to signal empathy, distinct from productivity chips
+        Chip(this).apply {
+            text = "😔 Struggling"
+            isCheckable = false
+            setTextColor(getColor(R.color.accent_rose))
+            chipBackgroundColor = ColorStateList.valueOf(getColor(R.color.card_bg))
+            chipStrokeColor = ColorStateList.valueOf(getColor(R.color.accent_rose))
+            chipStrokeWidth = 1.5f
+            textSize = 12f
+            setOnClickListener {
+                haptic.tick()
+                sfx.tap()
+                binding.etInput.setText("I'm feeling really low and struggling today")
+                sendMessage()
+            }
+        }.also { binding.chipGroupQuick.addView(it) }
+
         // Regular chat chips
         listOf(
             "😴 Sleep"  to "I need help sleeping",
