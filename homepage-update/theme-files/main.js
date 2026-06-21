@@ -587,6 +587,7 @@
     let listening = false;
     let currentAudio = null;
     var chatMsgs = []; // persisted to sessionStorage for cross-reload chat restore
+    var _mcEl = null;  // message-count badge element (set after brainHead is ready)
 
     // Strip HTML to plain text (for TTS + history).
     function plain(html) {
@@ -597,14 +598,30 @@
 
     // Bot replies may be HTML (local responder) or markdown (LLM). Normalize either
     // into safe HTML so nothing renders as run-on text or literal ** / \n.
+    // Code blocks and inline code are extracted before HTML-escaping so their
+    // content is preserved verbatim, then restored as styled <pre>/<code> elements.
     function format(text) {
       if (/<(a|strong|br|ul|ol|li|p|em)\b/i.test(text)) return text;
-      return text
+      var _codeBlocks = [], _inlineCodes = [];
+      text = text.replace(/```[\w]*\n?([\s\S]*?)```/g, function(_, code) {
+        var safe = code.trim().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        _codeBlocks.push('<pre class="pb-brain__code-block"><code>' + safe + '</code></pre>');
+        return '\x00CB' + (_codeBlocks.length - 1) + '\x00';
+      });
+      text = text.replace(/`([^`\n]+)`/g, function(_, code) {
+        var safe = code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        _inlineCodes.push('<code class="pb-brain__code-inline">' + safe + '</code>');
+        return '\x00IC' + (_inlineCodes.length - 1) + '\x00';
+      });
+      text = text
         .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
         .replace(/\[([^\]]+)\]\((https?:[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
         .replace(/(^|[\s(])((?:https?:\/\/|www\.)[^\s<)]+)/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>')
         .replace(/\n/g, '<br>');
+      _codeBlocks.forEach(function(h, i) { text = text.replace('\x00CB' + i + '\x00', h); });
+      _inlineCodes.forEach(function(h, i) { text = text.replace('\x00IC' + i + '\x00', h); });
+      return text;
     }
 
     function addMsg(text, cls) {
@@ -615,9 +632,15 @@
         var _fmtLines = format(text).split('<br>');
         var _textBody = document.createElement('div');
         _textBody.className = 'pb-brain__text';
-        _textBody.innerHTML = _fmtLines.map(function(ln, i) {
-          return '<span class="pb-brain__line" style="animation-delay:' + (i * 70) + 'ms">' + ln + '</span>';
-        }).join('<br>');
+        var _lh = '';
+        _fmtLines.forEach(function(ln, i) {
+          var isBlk = ln.trimStart().startsWith('<pre');
+          if (!isBlk && i > 0 && !_fmtLines[i-1].trimStart().startsWith('<pre')) _lh += '<br>';
+          _lh += isBlk
+            ? '<div class="pb-brain__line pb-brain__line--code">' + ln + '</div>'
+            : '<span class="pb-brain__line" style="animation-delay:' + (i * 70) + 'ms">' + ln + '</span>';
+        });
+        _textBody.innerHTML = _lh;
         div.appendChild(_textBody);
       } else {
         div.innerHTML = text.replace(/</g, '&lt;');
@@ -788,6 +811,7 @@
         if (_srLive) { _srLive.textContent = ''; requestAnimationFrame(function() { _srLive.textContent = plain(text); }); }
       }
       if (_nearBottom()) log.scrollTo({ top: log.scrollHeight, behavior: 'smooth' });
+      _updateMsgCount();
     }
 
     function saveChat() {
@@ -820,7 +844,16 @@
       var chips = brain.querySelector('.pb-brain__chips');
       if (chips) chips.style.display = '';
       _updateOrbBadge();
+      _updateMsgCount();
       _greetUser();
+    }
+
+    // Live message-count badge in header. Hoisted as a function declaration so addMsg()
+    // (defined earlier) can call it before _mcEl is assigned in the brainHead setup block.
+    function _updateMsgCount() {
+      if (!_mcEl) return;
+      var n = chatMsgs.length;
+      _mcEl.textContent = n > 0 ? n + (n === 1 ? ' message' : ' messages') : '';
     }
 
     function exportChat() {
@@ -1092,6 +1125,14 @@
     });
     var brainHead = document.querySelector('.pb-brain__head');
     if (brainHead) {
+      // Message-count badge — inserted after the h3 title; _mcEl declared at top of IIFE.
+      var _h3 = brainHead.querySelector('h3');
+      if (_h3) {
+        _mcEl = document.createElement('span');
+        _mcEl.className = 'pb-brain__msg-count';
+        _h3.parentNode.insertBefore(_mcEl, _h3.nextSibling);
+        _updateMsgCount();
+      }
       // "New conversation" reset button — clears log + sessionStorage
       var newChatBtn = document.createElement('button');
       newChatBtn.type = 'button';

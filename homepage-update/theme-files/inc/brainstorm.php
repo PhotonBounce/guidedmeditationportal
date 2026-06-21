@@ -667,6 +667,60 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre43-a) Vet clinic / veterinary practice / animal hospital / pet care website.
+	if ( $has( [ 'vet website', 'vet clinic website', 'veterinary practice website', 'veterinary clinic website', 'animal hospital website', 'pet care website', 'veterinary surgery website', 'small animal vet website', 'exotic vet website', 'emergency vet website', 'referral vet website', 'equine vet website', 'farm vet website', 'cat clinic website', 'dog clinic website', 'rabbit vet website' ] ) ) {
+		return $nl( [
+			"Veterinary practice websites convert on clinical trust and after-hours availability &mdash; RCVS registration and emergency cover are the two conversion anchors:",
+			'',
+			"&bull; <strong>Services pages</strong> &mdash; one per service (vaccinations / neutering / dental / surgery / diagnostics / physiotherapy / hydrotherapy / acupuncture / oncology / ophthalmology); species tabs where multi-species; what to expect description; from <strong>$200</strong> per page",
+			"&bull; <strong>Online booking</strong> &mdash; VetDesk / RxWorks / Provet Cloud appointment module; routine vs urgent vs emergency triage; species selector; from <strong>$300</strong>",
+			"&bull; <strong>RCVS compliance</strong> &mdash; RCVS-accredited practice logo (Practice Standards Scheme); named vet with RCVS registration number; out-of-hours cover statement (RCVS Code requires 24/7 emergency access &mdash; must state who provides OOH cover); from <strong>$150</strong>",
+			"&bull; <strong>Pet health library</strong> &mdash; condition guides (diabetes / arthritis / dental disease / obesity / flea/tick/worm prevention); seasonal reminders; builds organic search and client trust between appointments; from <strong>$250</strong>",
+			"&bull; <strong>Pet health plans / preventive care club</strong> &mdash; monthly direct debit covering vaccinations / flea/worm treatment / annual check-up; Vetsure / VetEnvoy / PetsApp; highest-retention product in veterinary; from <strong>$300</strong>",
+			"&bull; <strong>Emergency page</strong> &mdash; OOH number prominent; triage guide (&ldquo;is this an emergency?&rdquo;); nearest emergency hospital if not 24/7; pet first-aid guide (choking / bleeding / poisoning / RTA); from <strong>$150</strong>",
+			"&bull; <strong>Team profiles</strong> &mdash; vet and nurse headshots + RCVS number + specialism + favourite species; builds rapport before the appointment; from <strong>$150</strong> per profile",
+			"&bull; <strong>From $600</strong> services + booking + RCVS compliance; <strong>$1,200+</strong> with health library + health plan + emergency page",
+			'',
+			"Small animal only, or also exotics / equine / farm? Do you offer 24/7 on-site, or use an OOH provider? RCVS-accredited?",
+		] );
+	}
+
+	// 0d-pre43-b) Restaurant / café / pub / bar / hospitality website.
+	if ( $has( [ 'restaurant website', 'cafe website', 'café website', 'pub website', 'bar website', 'bistro website', 'brasserie website', 'fine dining website', 'pizza restaurant website', 'indian restaurant website', 'chinese restaurant website', 'italian restaurant website', 'takeaway website', 'food truck website', 'coffee shop website', 'tea room website', 'catering company website', 'wedding caterer website', 'hospitality website' ] ) ) {
+		return $nl( [
+			"Restaurant and hospitality websites convert on food photography and friction-free table booking &mdash; these two things move the needle more than anything else:",
+			'',
+			"&bull; <strong>Menu page</strong> &mdash; HTML menu (not a PDF &mdash; PDF menus are not crawlable or accessible); allergen filters (required under Natasha&rsquo;s Law for pre-packed foods; best practice for all); specials updated weekly; from <strong>$250</strong>",
+			"&bull; <strong>Online reservation</strong> &mdash; ResDiary / OpenTable / SevenRooms / Tock; table size + date + time + dietary notes; deposit option for large parties; from <strong>$300</strong>",
+			"&bull; <strong>Food and interior photography</strong> &mdash; professional food shoot 1&ndash;2 hours; hero image carousel; signature dishes; the single highest-ROI investment for restaurant marketing; from <strong>$300</strong> (coordinating shoot, not taking photos)",
+			"&bull; <strong>Private dining and events page</strong> &mdash; capacity / AV / room hire fee / catering packages; enquiry form with date + number of guests + occasion; bespoke menus; from <strong>$200</strong>",
+			"&bull; <strong>Takeaway / delivery integration</strong> &mdash; direct online ordering (Square, Slerp) vs marketplace (Deliveroo/Uber Eats/Just Eat); direct ordering has no 30% commission; from <strong>$300</strong>",
+			"&bull; <strong>Google Business integration</strong> &mdash; menu link synced to Google Business Profile; Reserve with Google button if using ResDiary/OpenTable; opening hours auto-synced; from <strong>$150</strong>",
+			"&bull; <strong>Gift vouchers</strong> &mdash; WooCommerce digital vouchers; Mother&rsquo;s Day / Christmas / birthday gifting; from <strong>$200</strong>",
+			"&bull; <strong>From $600</strong> menu + reservation + Google integration; <strong>$1,200+</strong> with food photography coordination + private dining + delivery ordering",
+			'',
+			"Dine-in, takeaway, or both? Do you take bookings or walk-ins only? Private dining / functions or purely restaurant covers?",
+		] );
+	}
+
+	// 0d-pre43-c) Landscaper / garden designer / groundsworker / garden maintenance website.
+	if ( $has( [ 'landscaper website', 'landscaping website', 'garden designer website', 'garden design website', 'groundsworker website', 'garden maintenance website', 'gardener website', 'lawn care website', 'tree surgeon website', 'arborist website', 'hedge trimming website', 'patio installation website', 'decking installation website', 'artificial grass website', 'turf laying website', 'fencing contractor website', 'driveway installer website', 'outdoor lighting website' ] ) ) {
+		return $nl( [
+			"Landscaping and garden design websites convert on before-and-after project photography and local trust signals &mdash; the portfolio is the product:",
+			'',
+			"&bull; <strong>Portfolio / project gallery</strong> &mdash; before and after paired images; garden type filters (formal / cottage / contemporary / low-maintenance / wildlife / roof terrace / commercial); location and approximate budget bracket; the highest-converting content for landscapers; from <strong>$300</strong>",
+			"&bull; <strong>Service pages</strong> &mdash; one per service (garden design / full build / planting scheme / lawn care / tree surgery / patio / decking / fencing / driveways / irrigation / lighting / ongoing maintenance); from <strong>$150</strong> per page",
+			"&bull; <strong>Design process page</strong> &mdash; consultation &rarr; concept plan &rarr; planting schedule &rarr; build &rarr; aftercare; sets expectations and justifies design fees; from <strong>$200</strong>",
+			"&bull; <strong>Free consultation CTA</strong> &mdash; Calendly 30-min site survey; pre-form (garden size / budget range / style preference / timeline); from <strong>$200</strong>",
+			"&bull; <strong>Compliance</strong> &mdash; BALI (British Association of Landscape Industries) membership badge; LANTRA-trained note; public liability insurance amount (minimum &pound;1m); waste carrier licence (Environment Agency) &mdash; required for removing soil or plant waste; from <strong>$150</strong>",
+			"&bull; <strong>Local SEO pages</strong> &mdash; &ldquo;[city] garden designer&rdquo; / &ldquo;[county] landscaper&rdquo;; Local Business schema; NAP consistency; Google Business photos linked to portfolio; from <strong>$150</strong> per location page",
+			"&bull; <strong>Seasonal content</strong> &mdash; spring planting guide / autumn prep / winter garden care; positions company as ongoing expert; email newsletter opt-in; from <strong>$150</strong>",
+			"&bull; <strong>From $550</strong> portfolio + service pages + consultation CTA; <strong>$1,100+</strong> with design process + BALI compliance + local SEO pages",
+			'',
+			"Design only, build only, or full design-and-build? Residential, commercial, or both? Hard landscaping (patios/drives) or soft (planting)?",
+		] );
+	}
+
 	// 0d-pre42-a) Dentist / dental practice / dental clinic / orthodontist website.
 	if ( $has( [ 'dentist website', 'dental practice website', 'dental clinic website', 'nhs dentist website', 'private dentist website', 'orthodontist website', 'cosmetic dentist website', 'dental implants website', 'dental hygienist website', 'teeth whitening website', 'invisalign website', 'braces website', 'emergency dentist website', 'childrens dentist website', 'smile clinic website', 'dental surgery website' ] ) ) {
 		return $nl( [

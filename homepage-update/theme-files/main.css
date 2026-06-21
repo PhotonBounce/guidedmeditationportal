@@ -5056,3 +5056,25 @@ html.pb-brain-open { overflow: hidden; }
   to{   box-shadow:0 0 0 8px rgba(255,212,0,0); }
 }
 .pb-brain__msg--new{ animation:pbMsgIn .14s ease-out, pbMsgPing .6s ease-out; }
+/* R47 — message count badge in header */
+.pb-brain__msg-count{
+  display:block; font-size:10px; color:rgba(255,255,255,.28);
+  letter-spacing:.4px; margin-top:1px; min-height:13px;
+  transition:opacity .3s;
+}
+/* R47 — inline code and fenced code block rendering */
+.pb-brain__code-inline{
+  font-family:ui-monospace,'Cascadia Code',Consolas,'Courier New',monospace;
+  font-size:.85em; padding:1px 5px; border-radius:3px;
+  background:rgba(255,212,0,.1); color:rgba(255,212,0,.92);
+  border:1px solid rgba(255,212,0,.2); white-space:pre;
+}
+pre.pb-brain__code-block{
+  font-family:ui-monospace,'Cascadia Code',Consolas,'Courier New',monospace;
+  font-size:.78em; line-height:1.55; margin:6px 0 4px; padding:10px 12px;
+  background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.08);
+  border-radius:6px; overflow-x:auto; white-space:pre;
+  color:rgba(255,255,255,.88);
+}
+pre.pb-brain__code-block code{ font-size:inherit; background:none; border:none; padding:0; }
+.pb-brain__line--code{ display:block; }
