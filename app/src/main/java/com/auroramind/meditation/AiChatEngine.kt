@@ -146,7 +146,8 @@ class AiChatEngine(private val context: Context) {
             "drift off", "drifting off", "can't drift",
             "counting sheep", "wired at night", "wired tonight", "can't wind down",
             "cant wind down", "light sleeper", "heavy sleeper", "sleep hygiene",
-            "body clock", "circadian", "night terrors") ||
+            "body clock", "circadian", "night terrors",
+            "night sweats", "hot flashes", "hot flush", "menopause", "perimenopause") ||
         anyWord(lower, "nap") ->
             handleSleep().also { lastTopic = "sleep" }
         any(lower, "focus", "study", "concentrate", "productivity",
@@ -263,8 +264,8 @@ class AiChatEngine(private val context: Context) {
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
             "i feel ashamed", "embarrassed", "humiliated", "self-blame", "self blame",
             "blame myself", "blaming myself", "i keep beating myself up", "beating myself up",
-            "hate my body", "body image", "feel ugly", "feel worthless",
-            "i'm worthless", "im worthless", "not good enough",
+            "hate my body", "body image", "feel ugly", "look ugly", "feel so ugly", "i look ugly",
+            "feel worthless", "worthless", "i'm worthless", "im worthless", "not good enough",
             "feel like a failure", "i'm a failure", "im a failure", "i am a failure",
             "feel inadequate", "i feel inadequate", "feel unworthy", "i feel unworthy",
             "forgive myself", "self-forgiveness", "self forgiveness",
@@ -330,6 +331,7 @@ class AiChatEngine(private val context: Context) {
             "chronic pain", "chronic illness", "fibromyalgia", "arthritis", "back pain",
             "lower back", "neck pain", "neck tension", "shoulder pain", "joint pain",
             "sciatica", "period pain", "menstrual cramps", "cramps",
+            "jaw pain", "jaw tension", "jaw clenching", "teeth grinding", "grind my teeth", "grinding my teeth", "bruxism",
             "painful", "pains", "in pain") ||
         anyWord(lower, "pain") ->
             handlePain().also { lastTopic = "pain" }

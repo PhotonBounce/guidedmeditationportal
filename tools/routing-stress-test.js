@@ -40,7 +40,8 @@ function route(lower, lastTopic) {
     "woke up at","keep waking","3am","4am","middle of the night",
     "drift off","drifting off","can't drift",
     "counting sheep","wired at night","wired tonight","can't wind down","cant wind down",
-    "light sleeper","heavy sleeper","sleep hygiene","body clock","circadian","night terrors"]) ||
+    "light sleeper","heavy sleeper","sleep hygiene","body clock","circadian","night terrors",
+    "night sweats","hot flashes","hot flush","menopause","perimenopause"]) ||
     anyWord(lower,["nap"])) return "sleep";
   // 7. focus
   if(any(lower,["focus","study","concentrate","productivity","procrastinat","writing","brain fog","adhd",
@@ -140,8 +141,11 @@ function route(lower, lastTopic) {
     "widowed","widow","ghosted"]) ||
     anyWord(lower,["numb","died","vent"])) return "sadness";
   // 15. shameGuilt
-  if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated","self-blame",
-    "blame myself","hate my body","feel worthless","not good enough",
+  if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated",
+    "self-blame","self blame","blame myself","blaming myself",
+    "i keep beating myself up","beating myself up",
+    "hate my body","body image","feel ugly","look ugly","feel so ugly","i look ugly",
+    "feel worthless","worthless","i'm worthless","im worthless","not good enough",
     "feel like a failure","i'm a failure","im a failure","i am a failure",
     "feel inadequate","i feel inadequate","feel unworthy","i feel unworthy",
     "forgive myself","self-forgiveness","self forgiveness",
@@ -196,6 +200,7 @@ function route(lower, lastTopic) {
     "muscle tension","stiff","tension","chronic pain","chronic illness","fibromyalgia","arthritis","back pain",
     "lower back","neck pain","neck tension","shoulder pain","joint pain",
     "sciatica","period pain","menstrual cramps","cramps",
+    "jaw pain","jaw tension","jaw clenching","teeth grinding","grind my teeth","grinding my teeth","bruxism",
     "painful","pains","in pain"]) || anyWord(lower,["pain"])) return "pain";
   // 26. gratitude
   if(any(lower,["grateful","gratitude","journal","journaling","reflect","reflection",
@@ -339,6 +344,16 @@ var tests = [
   ["i struggle with writing because i lose focus", "", "focus", "writing → focus"],
   ["i'm terrible at multitasking", "", "focus", "multitasking → focus"],
   ["i'm suffering from information overload", "", "focus", "information overload → focus"],
+
+  // R70: shameGuilt sim sync + night sweats/menopause → sleep + jaw/bruxism → pain
+  ["my body image is terrible", "", "shameGuilt", "body image (bare) → shameGuilt"],
+  ["i'm always beating myself up", "", "shameGuilt", "beating myself up → shameGuilt"],
+  ["i feel so ugly", "", "shameGuilt", "feel ugly → shameGuilt"],
+  ["i feel completely worthless", "", "shameGuilt", "i'm worthless → shameGuilt"],
+  ["i wake up drenched in night sweats", "", "sleep", "night sweats → sleep"],
+  ["menopause is disrupting my sleep", "", "sleep", "menopause → sleep"],
+  ["i grind my teeth at night", "", "pain", "teeth grinding → pain"],
+  ["i have constant jaw tension", "", "pain", "jaw tension → pain"],
 
   // R67: crisis (overdose/not worth living/take my life) + relax (dread/hypervig) + overwhelm
   ["i want to take my life", "", "crisis", "take my life → crisis"],
