@@ -589,8 +589,7 @@ function route(lower, lastTopic) {
     "count the positives","find the positive",
     "abundance","abundance mindset","manifestation","manifesting",
     "law of attraction","positive affirmations","affirmation practice",
-    "glass half full","positive outlook","optimistic","optimism",
-    "reframe","reframing","cognitive reframe","thought reframe"])) return "gratitude";
+    "glass half full","positive outlook","optimistic","optimism"])) return "gratitude";
   // 27. help
   if(any(lower,["what can you do","how do you work","your features","about spirit",
     "what are you","what is spirit","how can you help",
@@ -822,7 +821,7 @@ var tests = [
   ["my IT band is really sore from running", "", "pain", "it band + sore → pain"],
   ["I want to try to see the glass half full", "", "gratitude", "glass half full → gratitude"],
   ["I'm working on having a positive outlook on life", "", "gratitude", "positive outlook → gratitude"],
-  ["I want to start reframing how I look at things", "", "gratitude", "reframing → gratitude (avoid 'challenges'→techniques and 'negative thoughts'→relax)"],
+  ["I'm trying to have a more optimistic outlook on life", "", "gratitude", "optimistic → gratitude"],
 
   // R112: shameGuilt (hate myself), sadness (hate my life), anger (lied/behind my back/took credit/manipulative/controlling)
   ["I hate myself for what I did", "", "shameGuilt", "hate myself → shameGuilt"],

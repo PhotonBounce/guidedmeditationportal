@@ -726,8 +726,7 @@ class AiChatEngine(private val context: Context) {
             "count the positives", "find the positive",
             "abundance", "abundance mindset", "manifestation", "manifesting",
             "law of attraction", "positive affirmations", "affirmation practice",
-            "glass half full", "positive outlook", "optimistic", "optimism",
-            "reframe", "reframing", "cognitive reframe", "thought reframe") ->
+            "glass half full", "positive outlook", "optimistic", "optimism") ->
             handleGratitude().also { lastTopic = "gratitude" }
         any(lower, "what can you do", "how do you work", "your features", "about spirit",
             "what are you", "what is spirit", "how can you help",
