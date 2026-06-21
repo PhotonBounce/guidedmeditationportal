@@ -57,7 +57,10 @@ function route(lower, lastTopic) {
     "feeling off","bit off","not myself","off today","not okay","not ok today",
     "not doing ok","not doing well",
     "unwell","not well","not feeling well","feeling unwell",
-    "not fine","i'm not fine","im not fine"]) ||
+    "not fine","i'm not fine","im not fine",
+    "feeling low","feel low","so low","really low","been feeling low",
+    "feeling blue","feel blue","so blue",
+    "feeling down","feel down","been feeling down","really down","so down"]) ||
     anyWord(lower,["numb","died","vent"])) return "sadness";
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated","self-blame",
     "blame myself","hate my body","feel worthless","not good enough",
@@ -174,6 +177,14 @@ var tests = [
   ["i'm not doing well", "", "NOT:positive", "not doing well → sadness"],
   ["not myself lately", "", "NOT:positive", "not myself → sadness"],
   ["i'm feeling off today", "", "NOT:positive", "feeling off → sadness"],
+
+  // R58: emotional vocabulary gaps in sadness
+  ["i've been feeling low lately", "", "sadness", "feeling low → sadness"],
+  ["i feel so low today", "", "sadness", "so low → sadness"],
+  ["i've been feeling blue lately", "", "sadness", "feeling blue → sadness"],
+  ["i feel so down right now", "", "sadness", "so down → sadness"],
+  ["i've been feeling down all week", "", "sadness", "feeling down → sadness"],
+  ["i feel down", "", "sadness", "feel down → sadness"],
 
   // R57: isWell false positive fix + dwell rumination
   ["i'm not feeling well", "", "sadness", "not feeling well → sadness, not isWell in general"],

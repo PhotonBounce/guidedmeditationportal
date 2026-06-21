@@ -228,7 +228,10 @@ class AiChatEngine(private val context: Context) {
             "feeling off", "bit off", "not myself", "off today", "not okay",
             "not ok today", "not doing ok", "not doing well",
             "unwell", "not well", "not feeling well", "feeling unwell",
-            "not fine", "i'm not fine", "im not fine") ||
+            "not fine", "i'm not fine", "im not fine",
+            "feeling low", "feel low", "so low", "really low", "been feeling low",
+            "feeling blue", "feel blue", "so blue",
+            "feeling down", "feel down", "been feeling down", "really down", "so down") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
