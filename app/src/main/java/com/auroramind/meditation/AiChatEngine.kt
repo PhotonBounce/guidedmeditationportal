@@ -195,7 +195,9 @@ class AiChatEngine(private val context: Context) {
             "thought spiral", "thought spirals", "racing thoughts",
             "dread", "dreading", "sense of dread",
             "hypervigilant", "hypervigilance",
-            "sunday scaries", "anticipatory anxiety") ||
+            "sunday scaries", "anticipatory anxiety",
+            "drinking to cope", "drink to cope", "alcohol to cope", "drink to forget",
+            "drinking to forget", "using alcohol", "using drink") ||
         anyWord(lower, "rest", "tense") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
@@ -230,7 +232,9 @@ class AiChatEngine(private val context: Context) {
         any(lower, "sad", "grief", "grieving", "heartbreak", "heartbroken",
             "lonely", "alone", "loneliness", "depressed", "depression",
             "cry", "crying", "upset", "miserable", "unhappy", "low mood",
-            "empty inside", "feel empty", "feeling empty", "hopeless",
+            "empty inside", "feel empty", "feeling empty", "hopeless", "helpless",
+            "despair", "despairing", "in despair", "feel desperate", "feeling desperate",
+            "devastated", "feel devastated",
             "hollow", "disconnected", "meaningless", "no motivation", "nothing matters",
             "breakup", "broke up", "split up", "feeling blue", "feeling lost",
             "lost and", "i feel lost", "feel so lost", "blue today", "can't find", "lost myself",
@@ -300,7 +304,11 @@ class AiChatEngine(private val context: Context) {
             "rage", "irritated", "irritable", "annoyed", "wound up", "agitated",
             "pissed off", "livid", "seething", "seeing red",
             "lost my temper", "losing my temper", "lose my temper",
-            "about to explode", "about to snap", "lost it", "blow up") ||
+            "about to explode", "about to snap", "lost it", "blow up",
+            "want to scream", "could scream", "need to scream",
+            "snapped at", "keep snapping", "lashing out",
+            "resentment", "resentful", "resentment toward", "full of resentment",
+            "want to punch", "feel like punching", "slamming") ||
         anyWord(lower, "mad", "anger", "angered") ->
             handleAnger().also { lastTopic = "anger" }
 

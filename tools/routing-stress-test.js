@@ -83,7 +83,9 @@ function route(lower, lastTopic) {
     "thought spiral","thought spirals","racing thoughts",
     "dread","dreading","sense of dread",
     "hypervigilant","hypervigilance",
-    "sunday scaries","anticipatory anxiety"]) ||
+    "sunday scaries","anticipatory anxiety",
+    "drinking to cope","drink to cope","alcohol to cope","drink to forget",
+    "drinking to forget","using alcohol","using drink"]) ||
     anyWord(lower,["rest","tense"])) return "relax";
   // 10. tinnitus
   if(any(lower,["tinnitus","ringing in","ear ring","hearing loss","buzz in my ear"])) return "tinnitus";
@@ -112,7 +114,9 @@ function route(lower, lastTopic) {
   if(any(lower,["sad","grief","grieving","heartbreak","heartbroken","lonely","alone","loneliness",
     "depressed","depression","cry","crying","upset","miserable","unhappy","low mood",
     "empty inside","feel empty","feeling empty",
-    "hopeless","hollow","disconnected","meaningless","no motivation","nothing matters",
+    "hopeless","helpless","despair","despairing","in despair","feel desperate","feeling desperate",
+    "devastated","feel devastated",
+    "hollow","disconnected","meaningless","no motivation","nothing matters",
     "breakup","broke up","split up",
     "feeling lost","lost and","i feel lost","feel so lost","blue today","can't find","lost myself",
     "bereaved","bereavement","loss of","lost someone",
@@ -176,7 +180,11 @@ function route(lower, lastTopic) {
     "irritated","irritable","annoyed","wound up","agitated",
     "pissed off","livid","seething","seeing red",
     "lost my temper","losing my temper","lose my temper",
-    "about to explode","about to snap","lost it","blow up"]) ||
+    "about to explode","about to snap","lost it","blow up",
+    "want to scream","could scream","need to scream",
+    "snapped at","keep snapping","lashing out",
+    "resentment","resentful","resentment toward","full of resentment",
+    "want to punch","feel like punching","slamming"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   // 18. vip
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -364,6 +372,17 @@ var tests = [
   ["set a breathing timer for 5 minutes", "", "timer", "breathing timer → timer not techniques"],
   ["can you start a yoga timer", "", "timer", "yoga timer → timer not meditation"],
   ["set a timer for 10 minutes", "", "timer", "set a timer → timer"],
+
+  // R72: sadness gaps (helpless/despair/devastated) + anger gaps (lashing out/screaming/resentful) + relax (drink to cope)
+  ["i feel completely helpless", "", "sadness", "helpless → sadness"],
+  ["i'm in complete despair", "", "sadness", "despair → sadness"],
+  ["i'm absolutely devastated", "", "sadness", "devastated → sadness"],
+  ["i just want to scream", "", "anger", "want to scream → anger"],
+  ["i keep lashing out at everyone", "", "anger", "lashing out → anger"],
+  ["i snapped at my partner today", "", "anger", "snapped at → anger"],
+  ["i'm full of resentment toward my boss", "", "anger", "resentful → anger"],
+  ["i've been drinking to cope", "", "relax", "drinking to cope → relax"],
+  ["i drink to forget my problems", "", "relax", "drink to forget → relax"],
 
   // R67: crisis (overdose/not worth living/take my life) + relax (dread/hypervig) + overwhelm
   ["i want to take my life", "", "crisis", "take my life → crisis"],
