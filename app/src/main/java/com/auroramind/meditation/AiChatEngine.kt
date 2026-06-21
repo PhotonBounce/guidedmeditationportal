@@ -176,7 +176,9 @@ class AiChatEngine(private val context: Context) {
             "snoring", "snore",
             "narcolepsy", "narcoleptic",
             "sleepwalking", "somnambulism",
-            "hypersomnia", "excessive daytime sleepiness") ||
+            "hypersomnia", "excessive daytime sleepiness",
+            "melatonin", "taking melatonin", "melatonin supplement",
+            "magnesium for sleep", "sleep supplement") ||
         anyWord(lower, "nap", "rls") ->
             handleSleep().also { lastTopic = "sleep" }
         any(lower, "focus", "study", "concentrat", "productivity",
@@ -205,7 +207,11 @@ class AiChatEngine(private val context: Context) {
             "flow state", "get into flow", "enter flow", "in the zone",
             "deep work", "deep focus", "focus mode", "distraction-free",
             "context switching", "working from home", "wfh distractions",
-            "home office distractions") ||
+            "home office distractions",
+            "brain training", "cognitive training", "mental fitness", "mental agility",
+            "brain fitness", "mental sharpness", "sharpen my mind",
+            "memory improvement", "improve my memory", "improve memory",
+            "memory exercises", "memory training") ||
         anyWord(lower, "read", "code") ->
             handleFocus().also { lastTopic = "focus" }
         any(lower, "energy", "energise", "energize", "wake up", "waking up",
@@ -218,7 +224,8 @@ class AiChatEngine(private val context: Context) {
             "groggy", "grogginess", "brain dead", "zombie mode",
             "recharge", "recharging", "need to recharge", "fully recharged",
             "listless", "listlessness", "vitality", "low vitality", "no vitality",
-            "feel dull", "feeling dull", "flat energy", "energy levels low") ->
+            "feel dull", "feeling dull", "flat energy", "energy levels low",
+            "thyroid", "thyroid issues", "underactive thyroid", "hypothyroid", "hypothyroidism") ->
             handleEnergy().also { lastTopic = "energy" }
         any(lower, "relax", "calm", "stress", "anxiety", "anxious", "breathe",
             "unwind", "nervous", "panic", "overthink", "overthinking",
@@ -280,10 +287,14 @@ class AiChatEngine(private val context: Context) {
             "decompress", "decompressing", "need to decompress",
             "need a breather", "catch my breath", "need some space",
             "drinking to cope", "drink to cope", "alcohol to cope", "drink to forget",
-            "drinking to forget", "using alcohol", "using drink") ||
+            "drinking to forget", "using alcohol", "using drink",
+            "blood pressure", "high blood pressure", "hypertension",
+            "cardiac stress", "heart health stress") ||
         anyWord(lower, "rest", "tense", "rsd") ->
             handleRelax().also { lastTopic = "relax" }
-        any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
+        any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in",
+            "hyperacusis", "misophonia", "sound sensitivity", "ear noise",
+            "noise in my ears", "noise in my head") ->
             handleTinnitus().also { lastTopic = "tinnitus" }
         any(lower, "baby", "infant", "newborn", "toddler", "child", "kids",
             "new parent", "new mum", "new mom", "new dad", "new father",
@@ -471,6 +482,8 @@ class AiChatEngine(private val context: Context) {
             "struggle with my body", "hate how i look", "hate my appearance",
             "eating disorder", "disordered eating",
             "anorexia", "anorexic", "bulimia", "bulimic", "binge eating", "binge and purge",
+            "orthorexia", "orthorexic",
+            "body shaming", "body shame", "body shamed", "body-shaming",
             "comparing myself", "comparison trap", "always comparing",
             "compare myself", "social comparison",
             "self-sabotage", "self sabotage", "self-sabotaging",
@@ -518,7 +531,10 @@ class AiChatEngine(private val context: Context) {
             "financial crisis", "financial pressure", "financial strain",
             "money pressure", "debt problems", "serious debt", "drowning in debt",
             "parenting a teenager", "parenting teens", "raising a teenager",
-            "my teenager is", "teenagers are") ||
+            "my teenager is", "teenagers are",
+            "too many decisions", "decision overload", "choice overload",
+            "paralysed by choice", "paralyzed by choice",
+            "overwhelmed by options", "too many options") ||
         anyWord(lower, "toxic") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
         any(lower, "angry", "furious", "frustrated", "frustration",
@@ -548,6 +564,7 @@ class AiChatEngine(private val context: Context) {
             "racism", "racist", "racial abuse", "racial discrimination",
             "sexism", "sexist", "gender discrimination",
             "prejudice", "prejudiced", "bias against",
+            "revenge", "seeking revenge", "want revenge", "planning revenge",
             "bitter", "bitterness", "bitter toward", "bitter about",
             "contempt", "contemptuous",
             "jealous", "jealousy", "envy", "envious",
@@ -571,6 +588,8 @@ class AiChatEngine(private val context: Context) {
             "fantastic", "great job", "well done", "cheers",
             "celebrate", "celebrating", "proud of myself", "so proud", "proud of",
             "big achievement", "accomplished something", "nailed it",
+            "things are looking up", "something good happened", "good news today",
+            "life is good", "all is well", "feeling really good",
             "that helped", "that was helpful", "you helped", "exactly what i needed",
             "loved it", "that really helped", "that really worked", "really enjoyed that",
             "loved that session", "enjoyed that session") ->

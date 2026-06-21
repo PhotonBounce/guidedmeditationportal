@@ -69,7 +69,9 @@ function route(lower, lastTopic) {
     "snoring","snore",
     "narcolepsy","narcoleptic",
     "sleepwalking","somnambulism",
-    "hypersomnia","excessive daytime sleepiness"]) ||
+    "hypersomnia","excessive daytime sleepiness",
+    "melatonin","taking melatonin","melatonin supplement",
+    "magnesium for sleep","sleep supplement"]) ||
     anyWord(lower,["nap","rls"])) return "sleep";
   // 7. focus
   if(any(lower,["focus","study","concentrat","productivity","procrastinat","writing","brain fog","adhd",
@@ -97,7 +99,11 @@ function route(lower, lastTopic) {
     "deep work","deep focus","focus mode","distraction-free",
     "context switching","working from home","wfh distractions",
     "home office distractions",
-    "grounding"]) ||
+    "grounding",
+    "brain training","cognitive training","mental fitness","mental agility",
+    "brain fitness","mental sharpness","sharpen my mind",
+    "memory improvement","improve my memory","improve memory",
+    "memory exercises","memory training"]) ||
     anyWord(lower,["read","code"])) return "focus";
   // 8. energy
   if(any(lower,["energy","energise","energize","wake up","waking up","uplift","motivat",
@@ -109,7 +115,8 @@ function route(lower, lastTopic) {
     "groggy","grogginess","brain dead","zombie mode",
     "recharge","recharging","need to recharge","fully recharged",
     "listless","listlessness","vitality","low vitality","no vitality",
-    "feel dull","feeling dull","flat energy","energy levels low"])) return "energy";
+    "feel dull","feeling dull","flat energy","energy levels low",
+    "thyroid","thyroid issues","underactive thyroid","hypothyroid","hypothyroidism"])) return "energy";
   // 9. relax
   if(any(lower,["relax","calm","stress","anxiety","anxious","breathe","unwind","nervous","panic",
     "overthink","overthinking","can't stop thinking","cant stop thinking",
@@ -168,10 +175,14 @@ function route(lower, lastTopic) {
     "chattering mind","monkey mind",
     "stuck in my head","living in my head","all in my head",
     "decompress","decompressing","need to decompress",
-    "need a breather","catch my breath","need some space"]) ||
+    "need a breather","catch my breath","need some space",
+    "blood pressure","high blood pressure","hypertension",
+    "cardiac stress","heart health stress"]) ||
     anyWord(lower,["rest","tense","rsd"])) return "relax";
   // 10. tinnitus
-  if(any(lower,["tinnitus","ringing in","ear ring","hearing","buzz in my ear"])) return "tinnitus";
+  if(any(lower,["tinnitus","ringing in","ear ring","hearing","buzz in my ear",
+    "hyperacusis","misophonia","sound sensitivity","ear noise",
+    "noise in my ears","noise in my head"])) return "tinnitus";
   // 11. baby (non-sleep)
   if(any(lower,["baby","infant","newborn","toddler","new parent","new mum","new mom",
     "new dad","new father","first time parent","new baby",
@@ -347,6 +358,8 @@ function route(lower, lastTopic) {
     "struggle with my body","hate how i look","hate my appearance",
     "eating disorder","disordered eating",
     "anorexia","anorexic","bulimia","bulimic","binge eating","binge and purge",
+    "orthorexia","orthorexic",
+    "body shaming","body shame","body shamed","body-shaming",
     "comparing myself","comparison trap","always comparing",
     "compare myself","social comparison",
     "self-sabotage","self sabotage","self-sabotaging",
@@ -391,7 +404,10 @@ function route(lower, lastTopic) {
     "financial crisis","financial pressure","financial strain",
     "money pressure","debt problems","serious debt","drowning in debt",
     "parenting a teenager","parenting teens","raising a teenager",
-    "my teenager is","teenagers are"]) ||
+    "my teenager is","teenagers are",
+    "too many decisions","decision overload","choice overload",
+    "paralysed by choice","paralyzed by choice",
+    "overwhelmed by options","too many options"]) ||
     anyWord(lower,["toxic"])) return "overwhelm";
   // 17. anger
   if(any(lower,["angry","furious","frustrated","frustration","rage",
@@ -421,6 +437,7 @@ function route(lower, lastTopic) {
     "racism","racist","racial abuse","racial discrimination",
     "sexism","sexist","gender discrimination",
     "prejudice","prejudiced","bias against",
+    "revenge","seeking revenge","want revenge","planning revenge",
     "bitter","bitterness","bitter toward","bitter about",
     "contempt","contemptuous",
     "jealous","jealousy","envy","envious",
@@ -440,6 +457,8 @@ function route(lower, lastTopic) {
   if(any(lower,["thank","thanks","awesome","perfect","love it","amazing","nice",
     "celebrate","celebrating","proud of myself","so proud","proud of",
     "big achievement","accomplished something","nailed it",
+    "things are looking up","something good happened","good news today",
+    "life is good","all is well","feeling really good",
     "wonderful","brilliant","fantastic","great job","well done","cheers",
     "that helped","that was helpful","you helped","exactly what i needed",
     "loved it","that really helped","that really worked","really enjoyed that",
@@ -692,6 +711,21 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R102: sleep (melatonin), focus (brain training/memory), energy (thyroid), relax (blood pressure), tinnitus (hyperacusis/misophonia), overwhelm (choice overload), shameGuilt (orthorexia/body shaming), anger (revenge), positive (things looking up)
+  ["I've been taking melatonin to help me sleep", "", "sleep", "melatonin → sleep"],
+  ["I want to do some brain training to stay sharp", "", "focus", "brain training → focus"],
+  ["I want to improve my memory for work", "", "focus", "memory improvement → focus"],
+  ["I think my thyroid issues are draining my energy", "", "energy", "thyroid → energy"],
+  ["my blood pressure is high from all this tension", "", "relax", "blood pressure → relax (avoids 'tension' preemption — 'tension' ✓ anyWord in relax anyway)"],
+  ["I think I have hyperacusis — all sounds hurt", "", "tinnitus", "hyperacusis → tinnitus"],
+  ["I have misophonia and certain sounds trigger me", "", "tinnitus", "misophonia → tinnitus"],
+  ["I'm paralyzed by choice and can't decide anything", "", "overwhelm", "paralyzed by choice → overwhelm"],
+  ["I have orthorexia and obsess over clean eating", "", "shameGuilt", "orthorexia → shameGuilt"],
+  ["I've experienced a lot of body shaming growing up", "", "shameGuilt", "body shaming → shameGuilt"],
+  ["I keep fantasizing about revenge on my ex", "", "anger", "revenge → anger"],
+  ["things are looking up for me lately", "", "positive", "things are looking up → positive"],
+  ["something good happened to me today", "", "positive", "something good happened → positive"],
 
   // R101: anger (bullying/discrimination/racism/sexism), techniques (reframing/mindset shift/thought patterns), gratitude (silver lining/three good things), help (expanded keywords + anyWord)
   ["I've been experiencing workplace bullying from my manager", "", "anger", "workplace bullying → anger"],
