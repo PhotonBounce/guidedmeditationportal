@@ -126,6 +126,11 @@ class AiChatEngine(private val context: Context) {
             "howdy", "greetings", "what's up", "whats up") ||
         anyWord(lower, "hi", "hey", "yo", "sup") ->
             handleGreeting().also { lastTopic = "" }
+        // [Topic] timer phrases — fire before all topic routes so "sleep timer" reaches timer, not sleep
+        any(lower, "sleep timer", "nap timer", "meditation timer", "meditate timer",
+            "breathing timer", "breathwork timer", "relaxation timer", "yoga timer",
+            "anxiety timer", "focus timer", "energy timer") ->
+            handleTimer().also { lastTopic = "" }
         // Baby+sleep compounds must come before the bare "sleep" route to win
         any(lower, "baby sleep", "baby won't sleep", "baby can't sleep", "baby keeps waking",
             "infant sleep", "toddler sleep", "toddler won't sleep", "child won't sleep") ->
@@ -198,10 +203,10 @@ class AiChatEngine(private val context: Context) {
         any(lower, "baby", "infant", "newborn", "toddler", "child", "kids",
             "new parent", "new mum", "new mom", "first time parent", "new baby") ->
             handleBaby().also { lastTopic = "baby" }
-        // Duration/stats questions containing "meditat" must fire before the bare meditation route
+        // "How long" queries containing "meditat" must fire before the bare meditation route
         any(lower, "how long to meditate", "how long should i meditate",
             "how many minutes to meditate", "how long for meditation",
-            "how long should i practice", "meditation timer", "meditate timer") ->
+            "how long should i practice") ->
             handleTimer().also { lastTopic = "" }
         any(lower, "how long have i been meditating", "how long have i been practicing",
             "how many times have i meditated", "how many sessions have i done") ->

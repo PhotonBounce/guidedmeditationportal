@@ -23,6 +23,10 @@ function route(lower, lastTopic) {
   if(any(lower,["hello","good morning","good afternoon","good evening","good night",
     "howdy","greetings","what's up","whats up"]) ||
     anyWord(lower,["hi","hey","yo","sup"])) return "greeting";
+  // 3.5: [topic] timer phrases — before all topic routes
+  if(any(lower,["sleep timer","nap timer","meditation timer","meditate timer",
+    "breathing timer","breathwork timer","relaxation timer","yoga timer",
+    "anxiety timer","focus timer","energy timer"])) return "timer";
   // 4. baby+sleep compound (before bare sleep)
   if(any(lower,["baby sleep","baby won't sleep","baby can't sleep","baby keeps waking",
     "infant sleep","toddler sleep","toddler won't sleep","child won't sleep"])) return "baby";
@@ -86,10 +90,9 @@ function route(lower, lastTopic) {
   // 11. baby (non-sleep)
   if(any(lower,["baby","infant","newborn","toddler","new parent","new mum","new mom",
     "first time parent","new baby"])) return "baby";
-  // 11.5: duration/stats questions with "meditat" — fire before bare meditation route
+  // 11.5: "how long" meditat queries — must fire before bare meditation route
   if(any(lower,["how long to meditate","how long should i meditate",
-    "how many minutes to meditate","how long for meditation","how long should i practice",
-    "meditation timer","meditate timer"])) return "timer";
+    "how many minutes to meditate","how long for meditation","how long should i practice"])) return "timer";
   if(any(lower,["how long have i been meditating","how long have i been practicing",
     "how many times have i meditated","how many sessions have i done"])) return "stats";
   // 12. meditation (track names + traditions)
@@ -354,6 +357,13 @@ var tests = [
   ["menopause is disrupting my sleep", "", "sleep", "menopause → sleep"],
   ["i grind my teeth at night", "", "pain", "teeth grinding → pain"],
   ["i have constant jaw tension", "", "pain", "jaw tension → pain"],
+
+  // R71: timer preemption fixes — "sleep timer" used to route to sleep, "breathing timer" to techniques
+  ["can you set a sleep timer for 30 minutes", "", "timer", "sleep timer → timer not sleep"],
+  ["i need a nap timer", "", "timer", "nap timer → timer not sleep"],
+  ["set a breathing timer for 5 minutes", "", "timer", "breathing timer → timer not techniques"],
+  ["can you start a yoga timer", "", "timer", "yoga timer → timer not meditation"],
+  ["set a timer for 10 minutes", "", "timer", "set a timer → timer"],
 
   // R67: crisis (overdose/not worth living/take my life) + relax (dread/hypervig) + overwhelm
   ["i want to take my life", "", "crisis", "take my life → crisis"],
