@@ -14,7 +14,8 @@ function route(lower, lastTopic) {
   if(lastTopic.length > 0 && (any(lower,["please","okay","go on","continue","next",
     "tell me more","walk me through","guide me","show me","how do i","teach me",
     "what do i do","lets do it"]) || anyWord(lower,["yes","sure","ok"]))) return "followUp";
-  if(any(lower,["hello","good morning","good evening","good night"]) ||
+  if(any(lower,["hello","good morning","good afternoon","good evening","good night",
+    "howdy","greetings","what's up","whats up"]) ||
     anyWord(lower,["hi","hey","yo","sup"])) return "greeting";
   if(any(lower,["sleep","insomnia","nightmare","cant sleep","woke up at","keep waking","3am","4am",
     "middle of the night","drift off","drifting off","restless night","night terrors","sleepy",
@@ -131,6 +132,14 @@ var tests = [
   ["i'm about to snap", "", "NOT:sleep", "snap does not contain nap at word boundary"],
   ["i need a nap", "", "sleep", "nap (standalone) → sleep"],
   ["napping this afternoon", "", "sleep", "napping → sleep"],
+
+  // R52: greeting gaps + followUp agreement phrases
+  ["good afternoon spirit", "", "greeting", "good afternoon → greeting (was missing)"],
+  ["howdy", "", "greeting", "howdy → greeting"],
+  ["whats up", "", "greeting", "whats up → greeting"],
+  ["greetings", "", "greeting", "greetings → greeting"],
+  ["morning routine tips", "", "NOT:greeting", "morning routine must NOT trigger greeting"],
+  ["my morning energy is low", "", "NOT:greeting", "morning energy must NOT trigger greeting (goes to energy)"],
 
   // R51: timer route narrowing — "how long have I" must go to stats, not timer
   ["how long have i been meditating", "", "stats", "how long have I → stats, not timer"],

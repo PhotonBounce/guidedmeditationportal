@@ -113,11 +113,14 @@ class AiChatEngine(private val context: Context) {
         lastTopic.isNotEmpty() && (any(lower,
             "please", "okay", "go on", "continue", "next",
             "tell me more", "walk me through", "guide me", "show me",
-            "how do i", "teach me", "what do i do", "let's do it", "lets do it") ||
+            "how do i", "teach me", "what do i do", "let's do it", "lets do it",
+            "let's go", "lets go", "go ahead", "sounds good", "i'd like that",
+            "i would like that", "absolutely", "of course", "why not") ||
             anyWord(lower, "yes", "sure", "ok")) ->
             handleFollowUp()
 
-        any(lower, "hello", "good morning", "good evening", "good night") ||
+        any(lower, "hello", "good morning", "good afternoon", "good evening", "good night",
+            "howdy", "greetings", "what's up", "whats up") ||
         anyWord(lower, "hi", "hey", "yo", "sup") ->
             handleGreeting().also { lastTopic = "" }
         // Baby+sleep compounds must come before the bare "sleep" route to win
