@@ -107,10 +107,11 @@ class AiChatEngine(private val context: Context) {
             handleCrisis()
 
         // Follow-up detection — must come first so "yes please" gets context-aware reply
-        lastTopic.isNotEmpty() && any(lower,
-            "yes", "please", "sure", "ok", "okay", "go on", "continue", "next",
+        lastTopic.isNotEmpty() && (any(lower,
+            "please", "okay", "go on", "continue", "next",
             "tell me more", "walk me through", "guide me", "show me",
-            "how do i", "teach me", "what do i do", "let's do it", "lets do it") ->
+            "how do i", "teach me", "what do i do", "let's do it", "lets do it") ||
+            anyWord(lower, "yes", "sure", "ok")) ->
             handleFollowUp()
 
         any(lower, "hello", "good morning", "good evening", "good night") ||
@@ -136,11 +137,12 @@ class AiChatEngine(private val context: Context) {
             "drift off", "drifting off", "can't drift") ->
             handleSleep().also { lastTopic = "sleep" }
         any(lower, "focus", "study", "concentrate", "productivity",
-            "read", "code", "writing", "attention", "adhd",
+            "writing", "attention", "adhd",
             "brain fog", "foggy", "mental clarity", "sharp", "clear mind",
             "procrastinat",
             "doom scrolling", "doomscrolling", "mindless scrolling", "phone addiction",
-            "screen addiction", "endless scrolling", "too much screen") ->
+            "screen addiction", "endless scrolling", "too much screen") ||
+        anyWord(lower, "read", "code") ->
             handleFocus().also { lastTopic = "focus" }
         any(lower, "energy", "energise", "energize", "wake up", "waking up",
             "uplift", "motivation", "motivated", "active", "exercise", "workout",
