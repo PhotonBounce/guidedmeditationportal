@@ -30,7 +30,7 @@ object Quotes {
         "Wherever you are, be there totally." to "Eckhart Tolle",
         "Silence is not empty. It is full of answers." to "Unknown",
         "Let go of the thoughts that don't make you strong." to "Karen Salmansohn",
-        "Your calm mind is the ultimate weapon against your challenges." to "Bryant McGill",
+        "True silence is the rest of the mind, and is to the spirit what sleep is to the body." to "William Penn",
         "Rest is not idleness — it is the soil where clarity grows." to "Spirit",
         "Each breath is a fresh beginning." to "Spirit",
         "Peace comes from within. Do not seek it without." to "Buddha",
@@ -68,9 +68,9 @@ object Quotes {
         "Peace is not absence of noise. It is presence of stillness within the noise." to "Spirit",
         "We cannot direct the wind, but we can adjust the sails." to "Unknown",
         "The mind is like water. When it's turbulent, it's difficult to see. When it's calm, everything becomes clear." to "Prasad Mahes",
-        "It is not the mountain we conquer but ourselves." to "Edmund Hillary",
+        "Walk as if you are kissing the earth with your feet." to "Thich Nhat Hanh",
         "Awareness is the greatest agent for change." to "Eckhart Tolle",
-        "Don't wait for the storm to pass. Learn to dance in the rain." to "Vivian Greene",
+        "Nature does not hurry, yet everything is accomplished." to "Lao Tzu",
         "Act without expectation." to "Lao Tzu",
         "All that we are is the result of what we have thought." to "Buddha",
         "Muddy water, let stand, becomes clear." to "Lao Tzu",
@@ -78,7 +78,7 @@ object Quotes {
         "Out beyond ideas of wrongdoing and rightdoing, there is a field. I'll meet you there." to "Rumi",
         "The present moment always will have been." to "Spirit",
         "Not all those who wander are lost — and not all those who sit still are idle." to "Spirit",
-        "In the middle of difficulty lies opportunity." to "Albert Einstein",
+        "Before enlightenment, chop wood, carry water. After enlightenment, chop wood, carry water." to "Zen proverb",
     )
 
     /** Returns today's quote as (text, author). Stable per calendar day. */
