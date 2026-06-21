@@ -214,21 +214,33 @@ class AiChatEngine(private val context: Context) {
             "no purpose", "lack of purpose", "feel purposeless", "existential",
             "longing", "longing for", "miss him", "miss her",
             "miscarriage", "stillbirth", "pregnancy loss", "child loss", "infertility",
-            "lost my baby", "lost our baby") ||
+            "lost my baby", "lost our baby",
+            "feel rejected", "feel abandoned", "abandoned", "rejection", "been rejected",
+            "feel invisible", "feel unseen", "feel unloved", "feel unlovable",
+            "unlovable", "not loved", "no one cares") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
             "i feel ashamed", "embarrassed", "humiliated", "self-blame", "self blame",
             "blame myself", "blaming myself", "i keep beating myself up", "beating myself up",
             "hate my body", "body image", "feel ugly", "feel worthless",
-            "i'm worthless", "im worthless", "not good enough") ->
+            "i'm worthless", "im worthless", "not good enough",
+            "feel like a failure", "i'm a failure", "im a failure", "i am a failure",
+            "feel inadequate", "i feel inadequate", "feel unworthy", "i feel unworthy",
+            "forgive myself", "self-forgiveness", "self forgiveness",
+            "perfectionism", "perfectionist", "never good enough", "hard on myself",
+            "too hard on myself", "self-critical", "self critical") ->
             handleShameGuilt().also { lastTopic = "sadness" }
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out",
             "too much", "cant cope", "can't cope", "too busy", "overloaded",
             "swamped", "falling apart", "breaking point", "can't take",
             "work stress", "work anxiety", "work is killing me", "job stress",
             "feeling stuck", "feel stuck", "stuck in a rut", "stuck in life",
-            "deadline", "under pressure", "work pressure", "pressure at work") ->
+            "deadline", "under pressure", "work pressure", "pressure at work",
+            "work-life balance", "work life balance", "no time for myself", "no time for me",
+            "people pleaser", "people-pleaser", "cant say no", "can't say no",
+            "always putting others first", "never put myself first", "spread too thin",
+            "running on empty") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
         any(lower, "angry", "furious", "frustrated", "frustration",
             "rage", "irritated", "irritable", "annoyed", "wound up", "agitated") ||
