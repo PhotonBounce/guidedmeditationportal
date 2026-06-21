@@ -196,4 +196,11 @@ object MicroTechniques {
         val matches = all.filter { it.mood == goal }
         return if (matches.isEmpty()) all else matches
     }
+
+    /** Today's technique for a given goal — rotates daily within the goal-filtered pool. */
+    fun todayForGoal(goal: Mood?): Technique {
+        val pool = forGoal(goal)
+        val day = Calendar.getInstance().get(Calendar.DAY_OF_YEAR)
+        return pool[day % pool.size]
+    }
 }

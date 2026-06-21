@@ -32,7 +32,7 @@ class StreakWidgetProvider : AppWidgetProvider() {
 
         private fun renderWidget(context: Context, mgr: AppWidgetManager, id: Int) {
             val stats = StatsManager(context)
-            val tech = MicroTechniques.forGoal(PrefsManager(context).getGoal()).firstOrNull() ?: MicroTechniques.today()
+            val tech = MicroTechniques.todayForGoal(PrefsManager(context).getGoal())
 
             val views = RemoteViews(context.packageName, R.layout.widget_streak)
             views.setTextViewText(R.id.widgetStreak, "🔥 ${stats.currentStreak()}")
