@@ -1358,6 +1358,41 @@
       });
     }
 
+
+    // R62: Text-selection action — floating pill lets user send selected chat text as a new message.
+    if (log && input && form) {
+      var _selPill = document.createElement('button');
+      _selPill.type = 'button';
+      _selPill.className = 'pb-brain__selaction';
+      _selPill.textContent = 'Ask about this →';
+      _selPill.style.display = 'none';
+      document.body.appendChild(_selPill);
+      document.addEventListener('selectionchange', function() {
+        var sel = window.getSelection();
+        var txt = sel ? sel.toString().trim() : '';
+        if (!txt || txt.length < 3 || txt.length > 220) { _selPill.style.display = 'none'; return; }
+        var range = sel.rangeCount ? sel.getRangeAt(0) : null;
+        if (!range) { _selPill.style.display = 'none'; return; }
+        if (!log.contains(range.commonAncestorContainer)) { _selPill.style.display = 'none'; return; }
+        var rect = range.getBoundingClientRect();
+        _selPill.style.cssText = 'display:block;position:fixed;left:'
+          + Math.min(rect.right, window.innerWidth - 170) + 'px;top:' + (rect.bottom + 8) + 'px;';
+        _selPill.dataset.txt = txt;
+      });
+      _selPill.addEventListener('click', function() {
+        var txt = _selPill.dataset.txt || '';
+        _selPill.style.display = 'none';
+        window.getSelection().removeAllRanges();
+        if (!txt) return;
+        input.value = txt;
+        input.focus();
+        form.dispatchEvent(new Event('submit', { bubbles: true }));
+      });
+      document.addEventListener('mousedown', function(e) {
+        if (e.target !== _selPill) _selPill.style.display = 'none';
+      });
+    }
+
     form.addEventListener('submit', async e => {
       e.preventDefault();
       const text = input.value.trim();

@@ -670,6 +670,64 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 
 
 
+
+				// 0d-pre58-a) Dog trainer / dog behaviourist / puppy training / canine training / dog obedience / dog agility.
+				if ($has(['dog trainer website','dog training website','dog behaviourist website','puppy training website','canine trainer website','dog obedience website','dog agility website','k9 trainer website','gundog trainer website','dog socialisation website','reactive dog trainer website','dog behaviour consultant website','force free dog trainer website','positive reinforcement dog website','dog training classes website','dog walking training website'])) {
+				  $parts = [
+				    "<strong>Dog trainer / dog behaviourist website</strong> &mdash; expertise, method, and local trust",
+				    "&bull; <strong>Credentials / method page</strong>: IMDT (Institute of Modern Dog Trainers); APDT (Association of Pet Dog Trainers); CCAB (Certificated Clinical Animal Behaviourist, regulated by ASAB); ABTC registration (Animal Behaviour and Training Council &mdash; only statutory regulated body); force-free vs balanced approach statement; from \$150",
+				    "&bull; <strong>Services pages</strong>: puppy classes; 1-2-1 training; group classes; adolescent dogs; reactive dog programme; recall; agility foundation; gundog; trick training; residential stays; from \$200",
+				    "&bull; <strong>Behaviour consultation page</strong>: ABTC-registered behaviourist for aggression, anxiety, separation distress, fears and phobias; GP referral pathway; vet-referral only for clinical cases; from \$150",
+				    "&bull; <strong>Class booking / waitlist</strong>: Calendly; BookWhen; ClassBento; live class availability; from \$250",
+				    "&bull; <strong>Video testimonials / case study gallery</strong>: before/after video clips; &ldquo;Max went from lunging at every dog to calmly passing within 1m&rdquo;; most persuasive format for dog owners; from \$200",
+				    "&bull; <strong>Resources / blog</strong>: &ldquo;Why does my dog pull on lead?&rdquo;; &ldquo;Puppy biting: what&rsquo;s normal?&rdquo;; free downloads build email list; from \$100/post",
+				    "&bull; <strong>Puppy starter pack / free guide</strong>: email opt-in; Mailchimp / ConvertKit; builds list between enquiries; from \$150",
+				    "&bull; <strong>Location / area pages</strong>: &ldquo;Dog trainer [town]&rdquo;; training grounds / field address; from \$100/page",
+				    "&bull; <strong>FAQ</strong>: &ldquo;How many sessions will my dog need?&rdquo;; &ldquo;What age can puppies start?&rdquo;; &ldquo;Do you use e-collars?&rdquo; (state method clearly); from \$100",
+				    "From \$550 &mdash; \$1,200+ with booking, video gallery, and ABTC credentials."
+				  ];
+				  return $nl($parts);
+				}
+
+				// 0d-pre58-b) Jeweller / bespoke jewellery / engagement ring designer / wedding ring / watch specialist / goldsmith.
+				if ($has(['jeweller website','jewellery website','bespoke jewellery website','engagement ring website','wedding ring website','watch specialist website','goldsmith website','jewellery designer website','fine jewellery website','custom jewellery website','diamond ring website','antique jewellery website','estate jewellery website','jewellery repair website','watch repair website','silversmith website'])) {
+				  $parts = [
+				    "<strong>Jeweller / bespoke jewellery website</strong> &mdash; desire, trust, and the story of a piece",
+				    "&bull; <strong>Portfolio / collections gallery</strong>: large-format, styled product photography on white or atmospheric backgrounds; lifestyle shots of rings on hands; 360&deg; views; from \$350",
+				    "&bull; <strong>Bespoke design process</strong>: initial consultation; CAD design renders; wax model or 3D print; setting; hallmarking; typical timeline 6&ndash;12 weeks; full lifecycle makes the commission feel like a journey, not a transaction; from \$250",
+				    "&bull; <strong>Engagement ring collection</strong>: solitaire; halo; three-stone; fancy shape (oval, pear, cushion, emerald cut); metal choice (platinum, 18ct white/yellow/rose gold); setting style (claw, bezel, channel); education converts anxious first-time buyers; from \$300",
+				    "&bull; <strong>Diamond &amp; gemstone education</strong>: 4Cs explained (cut, colour, clarity, carat); lab-grown vs natural; GIA / IGI grading reports; ethical sourcing (Kimberley Process); from \$200",
+				    "&bull; <strong>Hallmarking assurance</strong>: UK Assay Office (London, Birmingham, Sheffield, Edinburgh); hallmark meanings; 950 platinum vs 750 18ct vs 375 9ct; builds trust for high-value purchases; from \$100",
+				    "&bull; <strong>Repair &amp; valuation services</strong>: re-sizing; re-polishing; re-tipping claws; antique restoration; insurance valuation (RICS-accredited valuer or Valuations Jewellers Association); from \$150",
+				    "&bull; <strong>Wishlist / save to gallery</strong>: customers share with partners before purchase; WooCommerce or Wishlist Plus; from \$200",
+				    "&bull; <strong>Secure checkout</strong>: PCI DSS; Stripe or SagePay; 30-day returns; certificate of authenticity; free insured delivery; from \$300",
+				    "&bull; <strong>Gift wrapping / occasion pages</strong>: anniversary; birthday; push present; milestone; converts impulse gift purchases; from \$100",
+				    "&bull; <strong>Instagram-feed integration</strong>: most jewellery discovery happens on Instagram; embedded feed drives follow and purchase; from \$100",
+				    "From \$700 &mdash; \$1,800+ with bespoke process, 360&deg; photography, and WooCommerce."
+				  ];
+				  return $nl($parts);
+				}
+
+				// 0d-pre58-c) Copywriter / content writer / freelance copywriter / ghostwriter / brand copywriter / SEO copywriter.
+				if ($has(['copywriter website','copywriting website','content writer website','freelance copywriter website','ghostwriter website','brand copywriter website','seo copywriter website','email copywriter website','direct response copywriter website','b2b copywriter website','saas copywriter website','healthcare copywriter website','finance copywriter website','advertising copywriter website','ux writer website','marketing copywriter website'])) {
+				  $parts = [
+				    "<strong>Copywriter / content writer website</strong> &mdash; demonstrate in the copy what you promise to deliver",
+				    "&bull; <strong>Homepage above-the-fold</strong>: benefit headline (not &ldquo;I&rsquo;m a copywriter&rdquo;); target audience named; single CTA; the copy itself is the portfolio; from \$200",
+				    "&bull; <strong>Specialism / niche page</strong>: SaaS; fintech; healthcare; legal; B2B; DTC; luxury; email sequences; landing pages; white papers; case studies; being specific doubles day rates and halves sales cycle; from \$200",
+				    "&bull; <strong>Portfolio / samples</strong>: before/after rewrites; PDF downloads (password-gated); links to live work (with client permission); Notion portfolio page embedded; from \$200",
+				    "&bull; <strong>Process page</strong>: brief; research; draft; amends; sign-off; approval rounds included; turnaround time; protects both parties; from \$150",
+				    "&bull; <strong>Services + pricing page</strong>: per project vs per word vs day rate vs retainer; transparent pricing eliminates timewasters and positions value; from \$150",
+				    "&bull; <strong>Testimonials with specifics</strong>: client name, company, and measurable outcome (&ldquo;email open rate went from 18% to 34%&rdquo;); vague praise converts poorly; from \$100",
+				    "&bull; <strong>Blog (with calls-to-action)</strong>: writing tips; brand voice examples; industry commentary; ranks for &ldquo;SaaS copywriter&rdquo; etc.; each post ends with &ldquo;Need help with your copy?&rdquo;; from \$100/post",
+				    "&bull; <strong>Email list / lead magnet</strong>: swipe file; brand voice guide; email subject line formulas; converts readers to warm leads; ConvertKit; from \$150",
+				    "&bull; <strong>Contact / brief form</strong>: project type; industry; deadline; budget range; word count; auto-response with next steps; from \$150",
+				    "&bull; <strong>About page</strong>: background that shows credibility (journalism; marketing; sector experience); not just a list of skills; personality closes the sale at equal price; from \$100",
+				    "From \$500 &mdash; \$1,100+ with portfolio, specialism pages, and email capture."
+				  ];
+				  return $nl($parts);
+				}
+
+
 				// 0d-pre57-a) Removal company / house removals / man and van / storage / office removals / international removals.
 				if ($has(['removal company website','removals website','house removals website','man and van website','moving company website','office removals website','commercial removals website','furniture removals website','piano removals website','international removals website','overseas removals website','european removals website','student removals website','storage company website','self storage website','shipping container storage website'])) {
 				  $parts = [
