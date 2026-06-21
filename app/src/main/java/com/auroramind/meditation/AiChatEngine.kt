@@ -103,7 +103,10 @@ class AiChatEngine(private val context: Context) {
         // Crisis detection — always first, no topic context should override this
         any(lower, "suicidal", "suicide", "want to die", "don't want to live", "dont want to live",
             "end it all", "end my life", "kill myself", "self harm", "self-harm",
-            "hurt myself", "no reason to live", "better off dead") ->
+            "hurt myself", "no reason to live", "better off dead",
+            "take my own life", "life isn't worth living", "life isnt worth living",
+            "don't want to be here anymore", "dont want to be here anymore",
+            "unalive", "cutting myself", "cant go on like this", "can't go on like this") ->
             handleCrisis()
 
         // Follow-up detection — must come first so "yes please" gets context-aware reply
