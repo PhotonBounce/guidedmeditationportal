@@ -69,7 +69,12 @@ function route(lower, lastTopic) {
     "mind blank","mind went blank","mind has gone blank",
     "analysis paralysis","decision paralysis","overthinking decisions",
     "hyperfocus","hyperfocusing","can't switch tasks",
-    "cant switch tasks","task switching"]) ||
+    "cant switch tasks","task switching",
+    "poor memory","memory problems","memory issues","bad memory",
+    "my memory","memory loss","memory lapses","terrible memory",
+    "keep forgetting","can't remember","cant remember",
+    "forget things","forget everything","forgetting everything",
+    "mind wanders","wandering mind"]) ||
     anyWord(lower,["read","code"])) return "focus";
   // 8. energy
   if(any(lower,["energy","energise","energize","wake up","waking up","uplift","motivat",
@@ -105,7 +110,9 @@ function route(lower, lastTopic) {
     "catastrophiz","catastrophising","what if thoughts",
     "fight or flight","fight-or-flight","adrenaline spike",
     "on edge","jittery","jitters","butterflies in",
-    "trembling","can't stop shaking","cant stop shaking"]) ||
+    "trembling","can't stop shaking","cant stop shaking",
+    "vagus nerve","vagal","somatic therapy","somatic healing","somatic exercises",
+    "nervous system regulation","regulate my nervous system"]) ||
     anyWord(lower,["rest","tense"])) return "relax";
   // 10. tinnitus
   if(any(lower,["tinnitus","ringing in","ear ring","hearing","buzz in my ear"])) return "tinnitus";
@@ -204,6 +211,7 @@ function route(lower, lastTopic) {
     "struggle with my body","hate how i look","hate my appearance",
     "eating disorder","disordered eating",
     "anorexia","anorexic","bulimia","bulimic","binge eating","binge and purge",
+    "inner child","inner child work","reparenting","re-parenting",
     "imposter syndrome","impostor syndrome",
     "feel like a fraud","feel like such a fraud",
     "feeling like a fraud","feeling like such a fraud",
@@ -236,7 +244,8 @@ function route(lower, lastTopic) {
     "resentment","resentful","resentment toward","full of resentment",
     "want to punch","feel like punching","slamming",
     "passive aggressive","passive-aggressive",
-    "short fuse","quick temper","bad temper",
+    "short fuse","quick temper","bad temper","short tempered","short-tempered",
+    "road rage",
     "bitter","bitterness","bitter toward","bitter about",
     "contempt","contemptuous",
     "jealous","jealousy","envy","envious"]) ||
@@ -488,6 +497,17 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R82: focus (memory/forgetting/mind wanders), relax (vagus/somatic), shameGuilt (inner child), anger (short tempered/road rage)
+  ["my memory has been terrible lately", "", "focus", "poor memory → focus"],
+  ["i keep forgetting things i should know", "", "focus", "keep forgetting → focus"],
+  ["my mind wanders when i try to work", "", "focus", "mind wanders → focus"],
+  ["i want to learn about vagus nerve breathing", "", "relax", "vagus nerve → relax"],
+  ["i've been doing somatic healing work", "", "relax", "somatic healing → relax"],
+  ["i'm doing inner child work with my therapist", "", "shameGuilt", "inner child → shameGuilt"],
+  ["i've been reparenting myself lately", "", "shameGuilt", "reparenting → shameGuilt"],
+  ["i'm very short tempered these days", "", "anger", "short tempered → anger"],
+  ["i keep getting road rage on my commute", "", "anger", "road rage → anger"],
 
   // R81: pain (tendonitis/endometriosis/neuropathy/muscle spasm), sadness (funk/dumps/need hope), stats (longest streak), techniques (morning pages)
   ["i have tendonitis in my elbow", "", "pain", "tendonitis → pain"],

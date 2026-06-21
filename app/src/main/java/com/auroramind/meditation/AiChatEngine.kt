@@ -177,7 +177,12 @@ class AiChatEngine(private val context: Context) {
             "mind blank", "mind went blank", "mind has gone blank",
             "analysis paralysis", "decision paralysis", "overthinking decisions",
             "hyperfocus", "hyperfocusing", "can't switch tasks",
-            "cant switch tasks", "task switching") ||
+            "cant switch tasks", "task switching",
+            "poor memory", "memory problems", "memory issues", "bad memory",
+            "my memory", "memory loss", "memory lapses", "terrible memory",
+            "keep forgetting", "can't remember", "cant remember",
+            "forget things", "forget everything", "forgetting everything",
+            "mind wanders", "wandering mind") ||
         anyWord(lower, "read", "code") ->
             handleFocus().also { lastTopic = "focus" }
         any(lower, "energy", "energise", "energize", "wake up", "waking up",
@@ -216,6 +221,8 @@ class AiChatEngine(private val context: Context) {
             "fight or flight", "fight-or-flight", "adrenaline spike",
             "on edge", "jittery", "jitters", "butterflies in",
             "trembling", "can't stop shaking", "cant stop shaking",
+            "vagus nerve", "vagal", "somatic therapy", "somatic healing", "somatic exercises",
+            "nervous system regulation", "regulate my nervous system",
             "drinking to cope", "drink to cope", "alcohol to cope", "drink to forget",
             "drinking to forget", "using alcohol", "using drink") ||
         anyWord(lower, "rest", "tense") ->
@@ -328,6 +335,7 @@ class AiChatEngine(private val context: Context) {
             "struggle with my body", "hate how i look", "hate my appearance",
             "eating disorder", "disordered eating",
             "anorexia", "anorexic", "bulimia", "bulimic", "binge eating", "binge and purge",
+            "inner child", "inner child work", "reparenting", "re-parenting",
             "imposter syndrome", "impostor syndrome",
             "feel like a fraud", "feel like such a fraud",
             "feeling like a fraud", "feeling like such a fraud",
@@ -362,7 +370,8 @@ class AiChatEngine(private val context: Context) {
             "resentment", "resentful", "resentment toward", "full of resentment",
             "want to punch", "feel like punching", "slamming",
             "passive aggressive", "passive-aggressive",
-            "short fuse", "quick temper", "bad temper",
+            "short fuse", "quick temper", "bad temper", "short tempered", "short-tempered",
+            "road rage",
             "bitter", "bitterness", "bitter toward", "bitter about",
             "contempt", "contemptuous",
             "jealous", "jealousy", "envy", "envious") ||
