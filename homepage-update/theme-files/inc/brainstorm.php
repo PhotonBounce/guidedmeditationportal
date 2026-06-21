@@ -561,6 +561,56 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre20-a) API documentation site / developer docs / technical docs.
+	if ( $has( [ 'api documentation', 'developer docs', 'technical docs', 'api docs', 'doc site', 'docs website', 'documentation site', 'swagger', 'openapi', 'docusaurus', 'nextra', 'readme.io', 'gitbook', 'developer portal', 'docs portal', 'api reference' ] ) ) {
+		return $nl( [
+			"Developer and API documentation sites are a common build &mdash; here&rsquo;s the landscape:",
+			'',
+			"&bull; <strong>Docusaurus</strong> (React + MDX) &mdash; fast, SEO-optimised, versioned docs, GitHub Pages deploy; best for open-source and dev teams; free to host",
+			"&bull; <strong>Nextra</strong> (Next.js + MDX) &mdash; full Next.js power + Markdown; custom themes; Vercel deploy; good for teams already in Next.js",
+			"&bull; <strong>GitBook</strong> &mdash; hosted, no deploy config, collaborative editing, GitHub sync; <strong>$6.70/user/mo</strong>",
+			"&bull; <strong>Readme.io</strong> &mdash; auto-generates reference docs from OpenAPI/Swagger spec; built-in API try-it console; paid",
+			"&bull; <strong>OpenAPI/Swagger integration</strong> &mdash; auto-generated reference pages from your .yaml spec; code samples in 10+ languages; included in custom builds",
+			"&bull; <strong>WordPress KB</strong> &mdash; KnowledgeBase plugin + custom theme; searchable, client-editable by non-devs; from <strong>$400</strong>",
+			'',
+			"Who maintains the docs &mdash; devs via Markdown/Git, or non-technical team via CMS? And do you need a live API try-it console?",
+		] );
+	}
+
+	// 0d-pre20-b) Browser extension / Chrome extension / Firefox add-on.
+	if ( $has( [ 'browser extension', 'chrome extension', 'firefox addon', 'browser plugin', 'chrome plugin', 'extension development', 'web extension', 'manifest v3', 'browser addon', 'chrome web store', 'firefox extension', 'edge extension', 'browser add-on' ] ) ) {
+		return $nl( [
+			"Browser extension development is in scope &mdash; here&rsquo;s the breakdown:",
+			'',
+			"&bull; <strong>Chrome Extension (MV3)</strong> &mdash; content scripts, service workers, popup UI, context menu, keyboard shortcuts; Chrome Web Store publish (~<strong>$5</strong> one-time developer fee)",
+			"&bull; <strong>Firefox Add-on</strong> &mdash; same WebExtensions API; publish to addons.mozilla.org; free",
+			"&bull; <strong>Cross-browser (Plasmo)</strong> &mdash; React + TypeScript + HMR; one codebase targets Chrome, Firefox, Edge, and Safari",
+			"&bull; <strong>Content scripts</strong> &mdash; inject JS/CSS into any page; DOM read/write; message passing to background service worker; tab communication",
+			"&bull; <strong>Storage</strong> &mdash; chrome.storage.sync for cross-device settings; chrome.storage.local for large or offline data",
+			"&bull; <strong>Common builds</strong> &mdash; page summariser, price tracker, screenshot/annotation tool, GPT sidebar, custom note-taker, URL logger; from <strong>$500</strong>",
+			"&bull; <strong>Review timeline</strong> &mdash; Chrome Web Store review 1&ndash;3 days; MV3 required (MV2 deprecated mid-2025)",
+			'',
+			"What does the extension do on the page, and does it need a backend or server-side sync?",
+		] );
+	}
+
+	// 0d-pre20-c) Desktop app / Electron / Tauri / native desktop.
+	if ( $has( [ 'desktop app', 'electron', 'tauri', 'desktop application', 'windows app', 'mac app', 'native desktop', 'desktop software', 'cross platform desktop', 'desktop gui', 'nwjs', 'windows desktop app', 'mac desktop app', 'desktop program' ] ) ) {
+		return $nl( [
+			"Desktop app work is in scope &mdash; here&rsquo;s the decision framework:",
+			'',
+			"&bull; <strong>Electron</strong> &mdash; Node.js + Chromium; largest ecosystem; VS Code, Slack, and Figma use it; ships on Windows, Mac, and Linux from one codebase; large bundle (~150 MB); from <strong>$2,500</strong>",
+			"&bull; <strong>Tauri</strong> &mdash; Rust + system WebView; tiny bundle (~3 MB); faster startup than Electron; same-codebase multi-platform; Rust adds build complexity; from <strong>$2,500</strong>",
+			"&bull; <strong>Native Mac (SwiftUI)</strong> &mdash; cleanest macOS integration; Mac App Store listing; best choice for Mac-only; from <strong>$3,500+</strong>",
+			"&bull; <strong>Native Windows (.NET / WinUI)</strong> &mdash; Microsoft Store listing; system tray, COM, Win32 APIs; from <strong>$3,500+</strong>",
+			"&bull; <strong>PWA (Edge / Chrome)</strong> &mdash; installable on Windows 11 and macOS; no App Store; offline support; included in web builds at no extra cost",
+			'',
+			"<strong>Electron vs Tauri</strong>: Electron = easier dev + large bundle; Tauri = small + fast + Rust learning curve.",
+			'',
+			"Windows, Mac, or both? And what&rsquo;s the key feature &mdash; file system access, system tray, native notifications, or hardware integration?",
+		] );
+	}
+
 	// 0d-pre19-a) Subscription box / recurring physical orders / subscription e-commerce.
 	if ( $has( [ 'subscription box', 'subscription service', 'recurring order', 'recurring product', 'monthly box', 'curated box', 'product subscription', 'recurring shipment', 'subscription e-commerce', 'subscription physical', 'monthly subscription', 'box subscription', 'subscribe and save' ] ) ) {
 		return $nl( [

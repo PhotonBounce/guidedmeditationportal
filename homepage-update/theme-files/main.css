@@ -2969,6 +2969,16 @@ border-radius: 50%; cursor: pointer; font-size: 16px;
   padding:1px 4px; line-height:1.4;
 }
 .pb-brain__hdr{ position:relative; }
+/* Bot message cascading line-reveal ("streaming" effect) */
+@keyframes pbLineIn{
+  from{ opacity:0; transform:translateY(5px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+.pb-brain__line{
+  display:inline;
+  opacity:0;
+  animation:pbLineIn .2s ease-out both;
+}
 .pb-brain__char-count{
   display:block; text-align:right; font-size:11px; color:rgba(244,246,251,.3);
   padding:2px 4px 0; transition:color .2s;

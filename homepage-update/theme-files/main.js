@@ -428,7 +428,14 @@
     function addMsg(text, cls) {
       const div = document.createElement('div');
       div.className = 'pb-brain__msg pb-brain__msg--' + cls;
-      div.innerHTML = cls === 'bot' ? format(text) : text.replace(/</g, '&lt;');
+      if (cls === 'bot') {
+        var _fmtLines = format(text).split('<br>');
+        div.innerHTML = _fmtLines.map(function(ln, i) {
+          return '<span class="pb-brain__line" style="animation-delay:' + (i * 70) + 'ms">' + ln + '</span>';
+        }).join('<br>');
+      } else {
+        div.innerHTML = text.replace(/</g, '&lt;');
+      }
       if (cls === 'bot' && navigator.clipboard) {
         var cpBtn = document.createElement('button');
         cpBtn.type = 'button';
