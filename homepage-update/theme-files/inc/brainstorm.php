@@ -667,6 +667,69 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre50-a) Accountant / bookkeeper / chartered accountant / tax advisor website.
+	if ( $has( [ 'accountant website', 'chartered accountant website', 'bookkeeper website', 'accounting firm website', 'tax advisor website', 'tax accountant website', 'small business accountant website', 'self employed accountant website', 'cpa website', 'payroll website', 'management accountant website', 'accountancy practice website', 'financial accountant website', 'vat accountant website', 'company accounts website', 'annual accounts website' ] ) ) {
+		return $nl( [
+			"Accountancy websites convert on trust, credentials, and clarity about who you serve &mdash; a prospective client needs to quickly determine &ldquo;do you work with businesses like mine?&rdquo; before they make contact:",
+			'',
+			"&bull; <strong>Specialism/niche homepage messaging</strong>: the fastest-converting accountancy sites are explicit about who they serve &mdash; e.g. &ldquo;We look after creative freelancers and small agencies&rdquo; or &ldquo;Specialist accountants for landlords and property investors&rdquo;. Generalist messaging converts poorly because every firm says the same thing; From \$200.",
+			"&bull; <strong>Services pages</strong>: one page per service; self-assessment/personal tax returns; limited company accounts; VAT returns; payroll; bookkeeping; management accounts; R&amp;D tax credits; CIS; MTD compliance; HMRC investigations. Each page should answer &ldquo;what&rsquo;s included?&rdquo;, &ldquo;who is this for?&rdquo;, and &ldquo;what does it cost?&rdquo;; From \$150/page.",
+			"&bull; <strong>Fixed-fee pricing page</strong>: the single biggest conversion lever in accountancy; &ldquo;what will my accountant cost?&rdquo; is the second-most-Googled accountancy question; publishing a tiered price guide (sole trader / limited company / SME) eliminates tyre-kickers and dramatically improves enquiry quality; From \$200.",
+			"&bull; <strong>ICAEW / ACCA / CIMA registration</strong>: professional body membership logo prominently displayed; regulated accountant vs unregulated bookkeeper distinction matters to clients; links to verify registration on official sites; From \$100.",
+			"&bull; <strong>Making Tax Digital (MTD) page</strong>: UK businesses are legally required to submit VAT under MTD; a page explaining what MTD means, what changes are coming (MTD for Income Tax), and how you help migrates anxious Google searches directly to your enquiry form; From \$150.",
+			"&bull; <strong>Onboarding process / &lsquo;how it works&rsquo; page</strong>: step-by-step from first contact to year-end accounts; software used (Xero/QuickBooks/Sage/FreeAgent partnership/certification logos); typical turnaround times; what documents the client provides; From \$200.",
+			"&bull; <strong>Software partner logos</strong>: Xero Silver/Gold/Platinum Partner, QuickBooks ProAdvisor, FreeAgent Partner logos are trust signals because they imply training and volume &mdash; they convert above pure text credentials; From \$100.",
+			"&bull; <strong>Tax deadline calendar / blog</strong>: &ldquo;SA100 deadline&rdquo;, &ldquo;corporation tax payment window&rdquo;, &ldquo;VAT return due&rdquo; &mdash; high-traffic, evergreen content that attracts business owners in a panic; each post funnels to your contact form; From \$100/post.",
+			"&bull; <strong>Client testimonials with business context</strong>: &ldquo;Jane, freelance graphic designer, saved 3 hours a month&rdquo; is more powerful than &ldquo;great service&rdquo;; context matches the reader to the testimonial; From \$100.",
+			'',
+			"From \$500 for a credentials-led practice site &mdash; \$1,000+ with niche messaging, fixed-fee pricing page, MTD guide, and onboarding process.",
+			'',
+			"Do you specialise by client type (sole traders, SMEs, landlords, creatives) or service type (tax, payroll, R&amp;D)? UK-only or international clients?",
+		] );
+	}
+
+	// 0d-pre50-b) Solicitor / law firm / conveyancer / family lawyer / legal services website.
+	if ( $has( [ 'solicitor website', 'law firm website', 'legal website', 'conveyancer website', 'conveyancing website', 'family lawyer website', 'family law website', 'employment lawyer website', 'immigration lawyer website', 'personal injury lawyer website', 'commercial lawyer website', 'property lawyer website', 'will writer website', 'legal services website', 'barrister website', 'criminal lawyer website' ] ) ) {
+		return $nl( [
+			"Legal websites face a dual challenge: they must communicate authority and expertise to command premium fees, while also feeling accessible to clients who may be frightened, grieving, or in dispute &mdash; the tone must be both confident and human:",
+			'',
+			"&bull; <strong>Practice area pages</strong>: one comprehensive page per area; family law; conveyancing; wills and probate; employment law; personal injury; commercial; immigration; criminal defence; each page should be genuinely informative (not just a service list) &mdash; a 1,000-word page explaining what divorce proceedings involve converts far better than a 100-word list of what you offer; From \$200/page.",
+			"&bull; <strong>SRA / Law Society registration</strong>: Solicitors Regulation Authority number and regulated-firm badge must appear on every page (footer or header); it&rsquo;s a regulatory requirement and a conversion signal; verification link to the SRA register reassures clients checking credentials; From \$100.",
+			"&bull; <strong>Initial consultation booking</strong>: most firms offer a free or fixed-fee initial 30-minute consultation; a simple form (matter type + brief description + preferred contact method) converts significantly better than just a phone number; Calendly for lawyers with own availability calendar; From \$200.",
+			"&bull; <strong>Fixed-fee transparency page</strong>: the SRA mandates publication of prices for six specific areas (conveyancing, probate, employment tribunal, motoring offences, immigration, debt recovery); non-compliance risks SRA referral; compliance-first approach and clear fee guides also convert better than &ldquo;call for a quote&rdquo;; From \$250.",
+			"&bull; <strong>Team / lawyer profiles</strong>: named lawyers with photo, year of qualification, specialisms, languages spoken, professional body memberships (Law Society, Resolution, ACTAPS); clients choose a lawyer as much as a firm; profiles drive direct enquiries to specific fee earners; From \$150.",
+			"&bull; <strong>Testimonials and case studies</strong>: legal testimonials must be carefully worded (&ldquo;excellent advice and support&rdquo; is fine; promising outcomes is not allowed); anonymous case studies showing the type of matter handled and general outcome build confidence without outcome guarantees; From \$150.",
+			"&bull; <strong>Client guides / FAQs</strong>: &ldquo;How long does conveyancing take?&rdquo;, &ldquo;What is the divorce process in the UK?&rdquo;, &ldquo;What happens at an employment tribunal?&rdquo; &mdash; informational guides that rank for high-intent searches and position the firm as a trusted adviser before the first call; From \$150.",
+			"&bull; <strong>Legal jargon glossary</strong>: accessible plain-English explanations of common legal terms; clients appreciate not feeling talked down to; ranks well for long-tail search; From \$100.",
+			"&bull; <strong>Complaints procedure page</strong>: legally required; professional handling of this page actually increases confidence (transparent firms feel safer to instruct); From \$50.",
+			'',
+			"From \$600 for a regulated firm site with SRA compliance &mdash; \$1,400+ with practice area pages, fixed-fee transparency, lawyer profiles, and client guides.",
+			'',
+			"Which practice areas? Any regulatory compliance requirements beyond SRA? Primarily consumer or commercial clients?",
+		] );
+	}
+
+	// 0d-pre50-c) Estate agent / letting agent / property management company website.
+	if ( $has( [ 'estate agent website', 'letting agent website', 'property agent website', 'estate agency website', 'letting agency website', 'property management website', 'property company website', 'real estate agent website', 'landlord service website', 'property management company website', 'buy to let website', 'holiday let website', 'short term rental website', 'property investment website', 'sales and lettings website', 'residential property website' ] ) ) {
+		return $nl( [
+			"Estate agent and lettings websites must do two things simultaneously: convince vendors/landlords to instruct you, and convince buyers/tenants to search with you &mdash; these are different audiences with conflicting motivations, and most agency sites fail to serve either well:",
+			'',
+			"&bull; <strong>Property search / listings page</strong>: a functioning property search with filtering (bedrooms, price, area, type); even a small independent agent should have this; it creates a reason to return to the site; MLS/Rightmove/Zoopla feed integration via the agent&rsquo;s existing CRM; or a custom property database; From \$400.",
+			"&bull; <strong>Valuation landing page</strong>: the single highest-value page for an agent; &ldquo;What is my home worth?&rdquo; is one of the most searched phrases in UK property; instant online valuation (API from HM Land Registry price data) or &ldquo;Book a free valuation&rdquo; form; the primary lead-generation tool for seller/vendor acquisition; From \$250.",
+			"&bull; <strong>Landlord services page</strong>: separate page for landlords not owner-sellers; full management vs rent-only; tenant-find only; guaranteed rent; HMO management; fee schedules (percentage of rent vs fixed fee); legal compliance services (EPC, gas safe, EICR, Right to Rent); From \$200.",
+			"&bull; <strong>Why choose us / differentiators</strong>: independent vs corporate; local expertise; average days to sell/let (number); percentage of asking price achieved; Google review rating; Rightmove/Zoopla partner logos; ARLA Propertymark / NAEA Propertymark membership logos; From \$150.",
+			"&bull; <strong>ARLA / NAEA / The Property Ombudsman membership</strong>: client money protection scheme logo; ARLA Propertymark member badge; The Property Ombudsman or Property Redress Scheme logo (legally required for lettings agents in England); these reduce risk perception for cautious landlords and vendors; From \$100.",
+			"&bull; <strong>Area guides</strong>: one page per area covered; local amenities; average house prices; transport links; schools; these pages rank well for &ldquo;houses for sale in [area]&rdquo; and &ldquo;flats to rent in [area]&rdquo; and are underused by most independent agents; From \$200/area.",
+			"&bull; <strong>Staff profiles / team page</strong>: vendors and landlords instruct the person, not the company; named negotiators and managers with photos and years of local experience convert significantly better than anonymous &ldquo;our team&rdquo; copy; From \$150.",
+			"&bull; <strong>Testimonials / Google reviews feed</strong>: Google review rating and count embedded; vendors need social proof before inviting you to value their home; From \$150.",
+			"&bull; <strong>Blog / market updates</strong>: &ldquo;[Area] property market report Q1 2025&rdquo;; &ldquo;Average rental yield in [town]&rdquo;; positions the firm as local market authority; strong SEO value for area + property type searches; From \$150/post.",
+			'',
+			"From \$600 for a listings + valuation site &mdash; \$1,400+ with full property search, landlord page, area guides, and market reports.",
+			'',
+			"Sales, lettings, or both? Any specialist focus (HMO, holiday lets, commercial)? Independent or franchise?",
+		] );
+	}
+
 	// 0d-pre49-a) Childminder / nursery / childcare / after-school club / day nursery website.
 	if ( $has( [ 'childminder website', 'nursery website', 'childcare website', 'day nursery website', 'after-school club website', 'childcare provider website', 'childminder site', 'pre-school website', 'preschool website', 'creche website', 'childcare setting website', 'childminding website', 'wrap around care website', 'out of school club website', 'holiday club website', 'daycare website' ] ) ) {
 		return $nl( [

@@ -610,6 +610,10 @@
     var chatMsgs = []; // persisted to sessionStorage for cross-reload chat restore
     var _mcEl = null;  // message-count badge element (set after brainHead is ready)
     var _lastSendTime = 0; // timestamp of last user send; cleared after bot responds
+    // R54: Session statistics accumulators
+    var _statsSessionStart = Date.now();
+    var _statsRespTimes = [];
+    var _statsBotWords = 0;
 
     // Strip HTML to plain text (for TTS + history).
     function plain(html) {
@@ -803,15 +807,18 @@
       div.appendChild(_tsEl);
       // Response-time badge on live bot replies (not session-restore; guard: < 30s elapsed).
       if (cls === 'bot' && _lastSendTime > 0 && (Date.now() - _lastSendTime) < 30000) {
+        var _rtMs = Date.now() - _lastSendTime;
+        _statsRespTimes.push(_rtMs);
         var _rtEl = document.createElement('small');
         _rtEl.className = 'pb-brain__resp-time';
-        _rtEl.textContent = '⚡ ' + ((Date.now() - _lastSendTime) / 1000).toFixed(1) + 's';
+        _rtEl.textContent = '⚡ ' + (_rtMs / 1000).toFixed(1) + 's';
         div.appendChild(_rtEl);
         _lastSendTime = 0;
       }
       // Word count badge on bot replies — gives a sense of response length at a glance.
       if (cls === 'bot') {
         var _wcWords = plain(text).trim().split(/\s+/).filter(Boolean).length;
+        _statsBotWords += _wcWords;
         if (_wcWords > 0) {
           var _wcBadge = document.createElement('span');
           _wcBadge.className = 'pb-brain__wc';
@@ -1378,8 +1385,47 @@
           _sfBtn.setAttribute('aria-pressed', String(_sfOn));
           _showToast(_sfOn ? _sc + ' starred repl' + (_sc === 1 ? 'y' : 'ies') : 'All messages');
         });
-        if (closeBtn) { brainHead.removeChild(closeBtn); btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(printBtn); btnGroup.appendChild(_sfBtn); btnGroup.appendChild(collapseBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(helpBtn); btnGroup.appendChild(closeBtn); }
-        else { btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(printBtn); btnGroup.appendChild(_sfBtn); btnGroup.appendChild(collapseBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(helpBtn); }
+        // R54: Session stats button + panel
+        var _statsBtn = document.createElement('button');
+        _statsBtn.type = 'button'; _statsBtn.className = 'pb-brain__stats-btn';
+        _statsBtn.title = 'Session stats'; _statsBtn.setAttribute('aria-label', 'Session stats');
+        _statsBtn.setAttribute('aria-expanded', 'false'); _statsBtn.innerHTML = '&#128202;';
+        var _statsPanel = document.createElement('div');
+        _statsPanel.className = 'pb-brain__stats-panel';
+        _statsPanel.setAttribute('role', 'status');
+        var _statsOpen = false;
+        var _renderStats = function() {
+          var _elapsed = Math.floor((Date.now() - _statsSessionStart) / 1000);
+          var _mins = Math.floor(_elapsed / 60), _secs = _elapsed % 60;
+          var _sessionTime = _mins > 0 ? _mins + 'm ' + _secs + 's' : _secs + 's';
+          var _uCount = chatMsgs.filter(function(m) { return m.cls === 'user'; }).length;
+          var _avgResp = _statsRespTimes.length > 0
+            ? (_statsRespTimes.reduce(function(a, b) { return a + b; }, 0) / _statsRespTimes.length / 1000).toFixed(1) + 's'
+            : '—';
+          _statsPanel.innerHTML = [
+            '<strong>&#128202; Session stats</strong>',
+            '<span>Your messages <b>' + _uCount + '</b></span>',
+            '<span>Bot words&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>' + _statsBotWords.toLocaleString() + '</b></span>',
+            '<span>Avg response&nbsp;<b>' + _avgResp + '</b></span>',
+            '<span>Session time&nbsp;<b>' + _sessionTime + '</b></span>',
+          ].join('');
+        };
+        _statsBtn.addEventListener('click', function() {
+          _statsOpen = !_statsOpen;
+          if (_statsOpen) _renderStats();
+          _statsPanel.classList.toggle('pb-brain__stats-panel--open', _statsOpen);
+          _statsBtn.setAttribute('aria-expanded', String(_statsOpen));
+        });
+        document.addEventListener('click', function(e) {
+          if (_statsOpen && !_statsPanel.contains(e.target) && e.target !== _statsBtn) {
+            _statsOpen = false;
+            _statsPanel.classList.remove('pb-brain__stats-panel--open');
+            _statsBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+        brainHead.appendChild(_statsPanel);
+        if (closeBtn) { brainHead.removeChild(closeBtn); btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(printBtn); btnGroup.appendChild(_sfBtn); btnGroup.appendChild(_statsBtn); btnGroup.appendChild(collapseBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(helpBtn); btnGroup.appendChild(closeBtn); }
+        else { btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(printBtn); btnGroup.appendChild(_sfBtn); btnGroup.appendChild(_statsBtn); btnGroup.appendChild(collapseBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(helpBtn); }
         brainHead.appendChild(btnGroup);
       } else {
         btnGroup.insertBefore(newChatBtn, btnGroup.firstChild);
