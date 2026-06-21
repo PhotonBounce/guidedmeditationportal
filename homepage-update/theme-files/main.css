@@ -2801,6 +2801,17 @@ color: #000;
   pointer-events:none;
 }
 .pb-orb__badge--vis{ opacity:1; transform:scale(1); }
+/* API fetch progress bar — thin gold line sweeps to 82% while waiting, snaps to 100% on done */
+.pb-brain__progress{
+  position:absolute; top:0; left:0; height:2px;
+  background:linear-gradient(90deg, rgba(255,212,0,.95), rgba(255,212,0,.3));
+  width:0%; opacity:0; pointer-events:none; z-index:1;
+  transition:opacity .3s ease;
+}
+.pb-brain__progress--run{
+  transition:width 2.2s cubic-bezier(.1,0,.4,1), opacity .25s ease;
+  width:82%;
+}
 
 .pb-brain{
 position: fixed;

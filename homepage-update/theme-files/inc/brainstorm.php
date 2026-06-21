@@ -561,6 +561,60 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre34-a) Hotel / boutique hotel / guesthouse / B&B / self-catering / apart-hotel website.
+	if ( $has( [ 'hotel website', 'boutique hotel website', 'guesthouse website', 'bed and breakfast website', 'b&b website', 'self-catering website', 'holiday cottage website', 'holiday let website', 'apart-hotel website', 'serviced apartment website', 'lodge website', 'inn website', 'hotel booking website', 'accommodation website', 'hostel website', 'hotel direct booking' ] ) ) {
+		return $nl( [
+			"Hotel and accommodation websites have one overriding goal: capture direct bookings and reduce dependence on Booking.com and Airbnb commission (typically 15&ndash;25%). Here&rsquo;s how:",
+			'',
+			"&bull; <strong>Direct booking engine</strong> &mdash; Checkfront, Beds24, Lodgify, or WP Hotel Booking plugin; real-time availability calendar; rate per room type; discount for direct (&ldquo;best rate guaranteed&rdquo; badge); from <strong>$500</strong>",
+			"&bull; <strong>Room pages</strong> &mdash; one per room type; full-screen photo gallery; bed configuration, capacity, view, floor; en-suite vs shared facilities; pet-friendly or accessible room flags; from <strong>$350</strong>",
+			"&bull; <strong>Packages and offers</strong> &mdash; seasonal packages (romantic break, family half-term, Christmas); WooCommerce or booking plugin add-ons (breakfast, spa treatment, flowers, champagne); from <strong>$300</strong>",
+			"&bull; <strong>Local area guide</strong> &mdash; attractions, restaurants, walks, public transport within 10 miles; strengthens &ldquo;[town] hotel&rdquo; SEO; positions the property as a local expert not just a bed",
+			"&bull; <strong>Events and weddings</strong> &mdash; if the property hosts private events: enquiry form with preferred dates, guest count, catering needs; links through to the full wedding page if applicable",
+			"&bull; <strong>Review integration</strong> &mdash; TripAdvisor badge; Google rating pull; Booking.com score if positive; Trustpilot; social proof above the fold",
+			"&bull; <strong>Channel manager note</strong> &mdash; syncing availability across Booking.com, Airbnb, Expedia with zero double-booking requires a channel manager (Lodgify, Cloudbeds, SiteMinder); I integrate with your chosen platform",
+			"&bull; <strong>From $600</strong> with booking engine and room pages; <strong>$1,300+</strong> with packages, area guide, events, and channel manager integration",
+			'',
+			"How many rooms or properties, and do you want to move guests from OTA platforms to direct bookings?",
+		] );
+	}
+
+	// 0d-pre34-b) Day spa / luxury spa / wellness retreat / thermal baths / spa hotel page.
+	if ( $has( [ 'day spa website', 'luxury spa website', 'spa website', 'wellness retreat website', 'spa retreat website', 'spa hotel website', 'thermal spa website', 'spa resort website', 'wellness centre website', 'holistic wellness website', 'spa day website', 'spa break website', 'spa treatments website', 'massage therapy website', 'hydrotherapy website', 'flotation therapy website', 'cryotherapy website' ] ) ) {
+		return $nl( [
+			"Day spa and wellness retreat websites need to evoke the experience before the visitor even books &mdash; here&rsquo;s the standard build:",
+			'',
+			"&bull; <strong>Treatment menu</strong> &mdash; one page per treatment category (massages, facials, body wraps, hydrotherapy, thermal circuit, holistic); duration, price, contraindications; booking CTA on each; from <strong>$400</strong>",
+			"&bull; <strong>Online booking</strong> &mdash; treatment type, therapist preference (gender option if relevant), date and time slot, add-ons (upgrade to 90 min, aromatherapy oil selection, herbal tea on arrival); Stripe deposit; confirmation email with pre-treatment advice; from <strong>$400</strong>",
+			"&bull; <strong>Spa day and break packages</strong> &mdash; half-day, full-day, overnight; &ldquo;Build your own spa day&rdquo; selector (treatment selection + lunch option + access level); from <strong>$350</strong>",
+			"&bull; <strong>Gift vouchers</strong> &mdash; monetary value or treatment-specific; email delivery; WooCommerce or dedicated gift voucher plugin; popular for Christmas, Mother&rsquo;s Day, birthdays; from <strong>$250</strong>",
+			"&bull; <strong>Membership</strong> &mdash; monthly wellness membership (spa access + treatment allowance + member rate); WooCommerce Subscriptions; cancel anytime; from <strong>$350</strong>",
+			"&bull; <strong>Photography and video</strong> &mdash; serene imagery of treatment rooms, thermal pools, relaxation lounges; 30&ndash;60 second ambient video hero; professional photography budget = highest-ROI spend for a spa",
+			"&bull; <strong>Wellness blog</strong> &mdash; skincare tips, seasonal treatments, therapist interviews; email capture with &ldquo;seasonal wellness guide&rdquo; lead magnet",
+			"&bull; <strong>From $600</strong> treatment menu and booking; <strong>$1,200+</strong> with packages, gift vouchers, membership, and wellness blog",
+			'',
+			"Day spa, destination retreat, or a spa hotel adding a dedicated spa page?",
+		] );
+	}
+
+	// 0d-pre34-c) Personal trainer / PT / fitness coach / nutritionist / online coaching website.
+	if ( $has( [ 'personal trainer website', 'personal training website', 'fitness coach website', 'pt website', 'fitness coaching website', 'online coaching website', 'strength coach website', 'conditioning coach website', 'sports coach website', 'nutritionist website', 'nutrition coach website', 'dietitian website', 'weight loss coach website', 'body transformation website', 'online personal trainer website', 'health coach website' ] ) ) {
+		return $nl( [
+			"Personal trainer and fitness coach websites are lead-generation tools first and foremost &mdash; here&rsquo;s what converts:",
+			'',
+			"&bull; <strong>Transformation gallery</strong> &mdash; before-and-after client results with consent; weight, body composition, or strength benchmarks; most powerful trust signal for fitness audiences; includes client quote and timeline",
+			"&bull; <strong>Coaching packages</strong> &mdash; tiered offers (12-week transformation, 6-week starter, monthly rolling); what&rsquo;s included (sessions per week, nutrition plan, WhatsApp check-ins, app access); Stripe payment; from <strong>$300</strong>",
+			"&bull; <strong>Online booking</strong> &mdash; free 20-min discovery call (Calendly); 1-to-1 session booking with session credit system; from <strong>$250</strong>",
+			"&bull; <strong>Client app integration</strong> &mdash; Trainerize, My PT Hub, or TrueCoach embed or link; workout and nutrition programme delivery via app; reduces manual WhatsApp admin; from <strong>$150</strong> integration page",
+			"&bull; <strong>Specialist niche pages</strong> &mdash; one per audience (pre/postnatal, over-50s strength, sport-specific conditioning, weight loss, powerlifting, marathon prep); each targets its own keyword cluster; from <strong>$200</strong> per page",
+			"&bull; <strong>Credentials and regulation</strong> &mdash; REPs (UK) or NASM/ACE (US) registration; Level 3 or 4 PT qualification; first aid certificate; insurance provider (e.g. Insure4Sport); regulated nutrition advice disclaimer if nutritionist",
+			"&bull; <strong>Freebie lead magnet</strong> &mdash; PDF workout plan, meal prep guide, or 7-day challenge; Mailchimp or ConvertKit email sequence after download",
+			"&bull; <strong>From $400</strong> PT site with packages and booking; <strong>$800+</strong> with niche pages, client app integration, and lead magnet sequence",
+			'',
+			"In-person, online, or hybrid coaching? Any specialist niche (pre/postnatal, sport-specific, over-50s)?",
+		] );
+	}
+
 	// 0d-pre33-a) Art gallery / commercial gallery / museum / cultural venue / exhibition space.
 	if ( $has( [ 'art gallery website', 'commercial gallery website', 'museum website', 'gallery website', 'contemporary art website', 'fine art gallery website', 'art dealer website', 'art consultant website', 'exhibition website', 'cultural venue website', 'sculpture gallery website', 'print gallery website', 'art fair website', 'public gallery website', 'photography gallery website' ] ) ) {
 		return $nl( [

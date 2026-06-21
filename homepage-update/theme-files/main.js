@@ -886,6 +886,23 @@
       }, 400);
     }
 
+    // API fetch progress bar — thin gold line at panel top during waiting.
+    var _progressBar = document.createElement('div');
+    _progressBar.className = 'pb-brain__progress';
+    _progressBar.setAttribute('aria-hidden', 'true');
+    if (brain) brain.prepend(_progressBar);
+    function _progressStart() {
+      _progressBar.style.width = '0%';
+      _progressBar.style.opacity = '1';
+      _progressBar.classList.add('pb-brain__progress--run');
+    }
+    function _progressDone() {
+      _progressBar.classList.remove('pb-brain__progress--run');
+      _progressBar.style.width = '100%';
+      setTimeout(function() { _progressBar.style.opacity = '0'; }, 200);
+      setTimeout(function() { _progressBar.style.width = '0%'; }, 600);
+    }
+
     form.addEventListener('submit', async e => {
       e.preventDefault();
       const text = input.value.trim();
@@ -900,6 +917,7 @@
       var _savedTitle = document.title;
       document.title = 'Photon is thinking…';
       if (sendBtn) { sendBtn.disabled = true; sendBtn.textContent = '…'; }
+      _progressStart();
       try {
         const r = await fetch(endpoint, {
           method: 'POST',
@@ -922,6 +940,7 @@
         typing.remove();
         addMsg('Connection hiccup — try again, or email us directly.', 'err');
       } finally {
+        _progressDone();
         input.disabled = false;
         if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = 'Send'; }
         document.title = _savedTitle;
