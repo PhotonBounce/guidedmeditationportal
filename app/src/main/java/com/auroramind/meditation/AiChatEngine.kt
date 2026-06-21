@@ -208,14 +208,14 @@ class AiChatEngine(private val context: Context) {
             "i feel low", "feel so low", "feeling so low", "feeling very low",
             "life feels pointless", "feels pointless", "feel pointless",
             "mood swings", "bad mood", "my mood", "mental health",
-            "i'm suffering", "need to vent", "need to talk", "vent",
+            "i'm suffering", "need to vent", "need to talk", "venting",
             "mourning", "in mourning", "heartache", "missing my ex", "miss my ex",
             "winter blues", "lack of sunlight", "low in winter",
             "no purpose", "lack of purpose", "feel purposeless", "existential",
             "longing", "longing for", "miss him", "miss her",
             "miscarriage", "stillbirth", "pregnancy loss", "child loss", "infertility",
             "lost my baby", "lost our baby") ||
-        anyWord(lower, "numb", "died") ->
+        anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
             "i feel ashamed", "embarrassed", "humiliated", "self-blame", "self blame",
@@ -256,9 +256,11 @@ class AiChatEngine(private val context: Context) {
         any(lower, "track", "tracks", "library", "guided",
             "which track", "what track", "play list", "playlist") ->
             handleAmbient().also { lastTopic = "" }
-        any(lower, "headache", "migraine", "pain", "ache", "sore", "tension headache",
+        any(lower, "headache", "migraine", "ache", "sore", "tension headache",
             "physical", "body tension", "muscle tension", "stiff",
-            "chronic pain", "chronic illness", "fibromyalgia", "arthritis", "back pain") ->
+            "chronic pain", "chronic illness", "fibromyalgia", "arthritis", "back pain",
+            "painful", "pains", "in pain") ||
+        anyWord(lower, "pain") ->
             handlePain().also { lastTopic = "pain" }
         any(lower, "grateful", "gratitude", "journal", "journaling", "reflect",
             "reflection", "intention", "intentions", "thankful", "thankfulness") ->
