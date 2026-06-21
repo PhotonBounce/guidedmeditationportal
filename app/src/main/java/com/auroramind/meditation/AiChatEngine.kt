@@ -148,7 +148,10 @@ class AiChatEngine(private val context: Context) {
             "brain fog", "foggy", "mental clarity", "sharp", "clear mind",
             "procrastinat",
             "doom scrolling", "doomscrolling", "mindless scrolling", "phone addiction",
-            "screen addiction", "endless scrolling", "too much screen") ||
+            "screen addiction", "endless scrolling", "too much screen",
+            "mental block", "writer's block", "writers block", "creative block",
+            "brain freeze", "can't think straight", "cant think straight",
+            "mind blank", "mind went blank", "mind has gone blank") ||
         anyWord(lower, "read", "code") ->
             handleFocus().also { lastTopic = "focus" }
         any(lower, "energy", "energise", "energize", "wake up", "waking up",

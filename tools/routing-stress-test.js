@@ -24,7 +24,12 @@ function route(lower, lastTopic) {
     "tired","exhausted","racing mind at night","cant switch off","napping"]) ||
     anyWord(lower,["nap"])) return "sleep";
   if(any(lower,["focus","study","concentrate","productivity","procrastinat","brain fog","adhd",
-    "attention","distract","doom scrolling","doomscrolling","mindless scrolling"]) ||
+    "foggy","mental clarity","sharp","clear mind","attention","distract",
+    "doom scrolling","doomscrolling","mindless scrolling","phone addiction",
+    "screen addiction","endless scrolling","too much screen",
+    "mental block","writer's block","writers block","creative block",
+    "brain freeze","can't think straight","cant think straight",
+    "mind blank","mind went blank","mind has gone blank"]) ||
     anyWord(lower,["read","code"])) return "focus";
   if(any(lower,["energy","energise","energize","wake up","waking up","uplift","motivation",
     "motivated","active","exercise","workout","morning boost","morning energy","sluggish",
@@ -77,12 +82,17 @@ function route(lower, lastTopic) {
     "body image issues","body image problem","negative body image",
     "struggle with my body","hate how i look","hate my appearance",
     "eating disorder","disordered eating"])) return "shameGuilt";
-  if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","too much","cant cope",
-    "too busy","work stress","work anxiety","feeling stuck","feel stuck",
+  if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","too much",
+    "cant cope","can't cope","too busy","overloaded","swamped","falling apart",
+    "breaking point","can't take","work stress","work anxiety","work is killing me",
+    "job stress","feeling stuck","feel stuck","stuck in a rut","stuck in life",
     "deadline","under pressure","work pressure","pressure at work",
-    "work-life balance","people pleaser","cant say no","can't say no","running on empty",
-    "meltdown","having a meltdown","on the edge","at my limit","hit my limit",
-    "can't handle it","cant handle it","can't handle this","cant handle this"])) return "overwhelm";
+    "work-life balance","work life balance","no time for myself","no time for me",
+    "people pleaser","people-pleaser","cant say no","can't say no",
+    "always putting others first","never put myself first","spread too thin",
+    "running on empty","meltdown","having a meltdown","on the edge","at my limit",
+    "hit my limit","can't handle it","cant handle it","can't handle this",
+    "cant handle this"])) return "overwhelm";
   if(any(lower,["angry","furious","frustrated","frustration","rage","irritated","annoyed"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -187,6 +197,15 @@ var tests = [
   ["i'm not doing well", "", "NOT:positive", "not doing well → sadness"],
   ["not myself lately", "", "NOT:positive", "not myself → sadness"],
   ["i'm feeling off today", "", "NOT:positive", "feeling off → sadness"],
+
+  // R61: focus expansion + overwhelm sim sync
+  ["i have a mental block", "", "focus", "mental block → focus"],
+  ["i have writer's block today", "", "focus", "writer's block → focus"],
+  ["my mind has gone blank", "", "focus", "mind has gone blank → focus"],
+  ["i'm swamped at work", "", "overwhelm", "swamped → overwhelm"],
+  ["i'm falling apart", "", "overwhelm", "falling apart → overwhelm"],
+  ["work is killing me", "", "overwhelm", "work is killing me → overwhelm"],
+  ["i'm always putting others first", "", "overwhelm", "always putting others first → overwhelm"],
 
   // R60: "worth" substring preemption fix — worthless must reach shameGuilt not techniques
   ["i feel worthless", "", "shameGuilt", "worthless → shameGuilt (not techniques via worth substring)"],
