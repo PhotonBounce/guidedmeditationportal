@@ -799,12 +799,14 @@
       const sendBtn = form.querySelector('[type="submit"]');
       const typing = addTyping();
       input.disabled = true;
+      var _savedTitle = document.title;
+      document.title = 'Photon is thinking…';
       if (sendBtn) { sendBtn.disabled = true; sendBtn.textContent = '…'; }
       try {
         const r = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: text, history: history, path: location.pathname, title: document.title })
+          body: JSON.stringify({ message: text, history: history, path: location.pathname, title: _savedTitle })
         });
         typing.remove();
         const data = await r.json();
@@ -824,6 +826,7 @@
       } finally {
         input.disabled = false;
         if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = 'Send'; }
+        document.title = _savedTitle;
         input.focus();
       }
     });

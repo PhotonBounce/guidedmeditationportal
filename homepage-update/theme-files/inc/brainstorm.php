@@ -561,6 +561,58 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre26-a) Car dealership / automotive / vehicle sales site.
+	if ( $has( [ 'car dealership website', 'automotive website', 'vehicle dealership', 'car sales website', 'used car dealership', 'new car dealership', 'car lot website', 'auto dealership', 'vehicle sales site', 'car showroom website', 'used cars website', 'motorbike dealership', 'truck dealership' ] ) ) {
+		return $nl( [
+			"Automotive and car dealership sites are specialised builds &mdash; here&rsquo;s what&rsquo;s typically included:",
+			'',
+			"&bull; <strong>Vehicle inventory</strong> &mdash; custom post type: VIN, make, model, year, mileage, price, condition (new/used/certified), colour, photos; advanced filter search; staff-editable via WP admin; from <strong>$500</strong>",
+			"&bull; <strong>Finance calculator</strong> &mdash; interactive JS widget; deposit, term, APR inputs; estimated monthly payment output; links to your finance partner enquiry form",
+			"&bull; <strong>Trade-in enquiry</strong> &mdash; multi-step form: registration/VIN &rarr; mileage &rarr; condition &rarr; contact; email alert to sales team on submission",
+			"&bull; <strong>Test drive booking</strong> &mdash; specific vehicle pre-selected; date/time picker; Stripe <strong>&pound;0</strong> pre-auth to reduce no-shows; SMS confirmation; from <strong>$300</strong>",
+			"&bull; <strong>Video walkarounds</strong> &mdash; per-vehicle YouTube/Vimeo embed or self-hosted; auto-plays muted on listing page",
+			"&bull; <strong>Local SEO</strong> &mdash; &ldquo;[make] dealership [city]&rdquo; keyword clusters; Google Business profile; Vehicle schema markup for rich results in search",
+			"&bull; <strong>OEM / franchise note</strong> &mdash; franchise dealers (Ford, VW, BMW approved networks) often need to use an OEM-mandated platform; I build for <em>independent</em> dealers &mdash; no OEM restrictions apply",
+			"&bull; <strong>From $700</strong> for an independent used-car lot; <strong>$1,500+</strong> with full finance calculator, trade-in, test-drive booking, and video walkarounds",
+			'',
+			"How many vehicles in stock, and is this new, used, or specialist inventory?",
+		] );
+	}
+
+	// 0d-pre26-b) Accountant / bookkeeper / tax professional / CPA / financial advisor.
+	if ( $has( [ 'accountant website', 'bookkeeper website', 'accountancy website', 'tax professional', 'cpa website', 'chartered accountant', 'bookkeeping website', 'tax advisor website', 'payroll service website', 'accounting firm website', 'tax return website', 'financial accountant' ] ) ) {
+		return $nl( [
+			"Accountancy and bookkeeping sites are straightforward builds with a few specific requirements &mdash; here&rsquo;s what&rsquo;s standard:",
+			'',
+			"&bull; <strong>Service pages</strong> &mdash; dedicated pages for tax, bookkeeping, payroll, accounts filing, VAT returns, management accounts, R&amp;D tax credits; each page targets its own keyword cluster",
+			"&bull; <strong>Client portal link</strong> &mdash; login button linking to Xero, QuickBooks, FreeAgent, TaxDome, or Iris; authentication handled by the platform &mdash; not built in-house",
+			"&bull; <strong>Secure document exchange</strong> &mdash; restricted WP media library (client role login) or Dropbox Business folder per client; encrypted upload form; from <strong>$200</strong>",
+			"&bull; <strong>Discovery call booking</strong> &mdash; Calendly embed for a free 15-min consultation; highest-converting CTA for accounting practices",
+			"&bull; <strong>GDPR / data handling</strong> &mdash; privacy policy, cookie consent, data processing agreement; all forms encrypt in transit; no sensitive financial data stored in WP database",
+			"&bull; <strong>Professional body badges</strong> &mdash; ICAEW, ACCA, CIMA, AAT (UK); AICPA, CPA (US); structured in footer + About page; builds instant trust",
+			"&bull; <strong>From $450</strong> for a 5-page sole-practitioner site; <strong>$900+</strong> for a firm with multiple service lines and a client portal link",
+			'',
+			"How many partners or team members, and which accounting software do your clients use?",
+		] );
+	}
+
+	// 0d-pre26-c) Pet business / grooming studio / veterinary clinic / pet shop.
+	if ( $has( [ 'pet business website', 'pet grooming website', 'dog grooming website', 'veterinary website', 'vet website', 'pet shop website', 'pet supplies website', 'pet care website', 'animal shelter website', 'dog training website', 'cattery website', 'kennels website', 'dog walker website', 'pet photography' ] ) ) {
+		return $nl( [
+			"Pet business websites cover a wide range &mdash; groomers, vets, pet shops, and shelters each have slightly different needs:",
+			'',
+			"&bull; <strong>Online booking</strong> &mdash; pet type + service + groomer/vet + date/time + Stripe deposit; automated SMS and email reminders; cancel/reschedule self-service; from <strong>$350</strong>",
+			"&bull; <strong>Team + service menu</strong> &mdash; groomer/vet bios, certifications, specialisms, direct-book button; service menu with duration, price, and breed-size surcharges",
+			"&bull; <strong>Before/after gallery</strong> &mdash; grooming transformations filterable by breed; WebP lazy-loaded; doubles as social proof and SEO content",
+			"&bull; <strong>Pet records portal (vet only)</strong> &mdash; login-gated page per client linking to your practice management software (ezyVet, VetsPetPortal, Vet24); authentication handled by the platform, not in-house",
+			"&bull; <strong>E-commerce (pet shop)</strong> &mdash; WooCommerce; product categories; weight-based or variable shipping; Stripe + PayPal; subscription auto-ship for food/treats; from <strong>$500</strong>",
+			"&bull; <strong>Google Reviews + schema</strong> &mdash; live review widget; Local Business JSON-LD; trust signals are especially critical for pet care where owners are emotionally invested",
+			"&bull; <strong>From $400</strong> for a solo grooming studio; <strong>$600</strong> for a vet practice; <strong>$900+</strong> for a pet shop with full e-commerce",
+			'',
+			"Is this a grooming studio, vet practice, pet shop, or a combination?",
+		] );
+	}
+
 	// 0d-pre25-a) Beauty salon / spa / hair / nail / aesthetics studio site.
 	if ( $has( [ 'beauty salon', 'hair salon', 'nail salon', 'spa website', 'beauty website', 'aesthetics website', 'barbershop website', 'salon website', 'lash studio', 'brow studio', 'beauty studio', 'makeup artist website', 'tattoo studio website', 'massage therapist website' ] ) ) {
 		return $nl( [
