@@ -131,9 +131,15 @@ class AiChatEngine(private val context: Context) {
         any(lower, "track", "tracks", "session", "sessions", "library", "guided",
             "which track", "what track", "play list", "playlist") ->
             handleAmbient().also { lastTopic = "" }
+        any(lower, "headache", "migraine", "pain", "ache", "sore", "tension headache",
+            "physical", "body tension", "muscle tension", "stiff") ->
+            handlePain().also { lastTopic = "pain" }
+        any(lower, "grateful", "gratitude", "journal", "journaling", "reflect",
+            "reflection", "intention", "intentions", "thankful", "thankfulness") ->
+            handleGratitude().also { lastTopic = "gratitude" }
         any(lower, "play it", "play that", "start it", "queue it") ->
             handlePlayRequest().also { lastTopic = "" }
-        else -> handleGeneral().also { lastTopic = "" }
+        else -> handleGeneral(lower).also { lastTopic = "" }
     }
 
     private fun any(input: String, vararg kws: String) = kws.any { input.contains(it) }
@@ -421,19 +427,88 @@ class AiChatEngine(private val context: Context) {
             "Vipassana ⚡ is ideal here — it trains you to observe sensation without being consumed by it. 🌿",
             SoundType.VIPASSANA
         )
+        "pain" -> Pair(
+            "💪 Progressive Muscle Release — Step by Step\n\n" +
+            "Find a comfortable position — lying down is best.\n\n" +
+            "1. Three slow breaths to settle.\n" +
+            "2. Tense your feet and toes tightly for 5 seconds... then release completely.\n" +
+            "3. Move up slowly: calves → thighs → abdomen → chest → hands → arms → shoulders → face.\n" +
+            "4. After tensing each group, exhale slowly and notice the contrast — the release is where the relief is.\n\n" +
+            "A full pass takes 10–15 minutes. Most people feel noticeably lighter by the end.\n\n" +
+            "Progressive Muscle Release 💪 is queued — let the narration guide you. 🤍",
+            SoundType.PROGRESSIVE_MUSCLE_RELEASE
+        )
+        "gratitude" -> Pair(
+            "🙏 Loving-Kindness Opening — For Reflection\n\n" +
+            "Before you write or reflect, try this 3-minute centering:\n\n" +
+            "1. Sit comfortably. Close your eyes. Three slow breaths.\n" +
+            "2. Think of one small thing from today that wasn't terrible — a warm drink, a kind word, a moment of quiet.\n" +
+            "3. Let that image rest in your chest. Breathe into it.\n" +
+            "4. Silently: 'I am grateful for this. I am glad it existed.'\n" +
+            "5. Open your eyes and write from that place.\n\n" +
+            "Evening Review 🏛️ structures this beautifully — a Stoic close that makes gratitude natural rather than forced. 🤍",
+            SoundType.EVENING_REVIEW
+        )
         else -> handleGeneral()
     }
 
-    private fun handleGeneral(): Pair<String, SoundType?> {
-        val fallbacks = listOf(
-            "I'm listening. Tell me more — are you working with restlessness, stress, or scattered focus? Spirit can help with all three. 🤍",
-            "Spirit here 🌙 — I can help with rest, focus, relaxation, and tinnitus support, or talk through a meditation technique. Mention any of those for a tailored suggestion!",
-            "I hear you. 🌙 Based on what you've enjoyed before, ${mostPlayed.emoji} ${mostPlayed.displayName} might suit this moment well. Want to know why?",
-            "Lovely chatting. Ask about a 'technique' to learn a new way to meditate, or say 'recommend' for a soundscape suggestion tailored to right now. 🎵"
-        )
-        return Pair(
-            fallbacks[turnsCount % fallbacks.size],
-            if (turnsCount % 4 == 2) mostPlayed else null
-        )
+    private fun handlePain(): Pair<String, SoundType?> = Pair(
+        "💜 Physical tension and pain hold so much. The body often carries what the mind hasn't yet processed.\n\n" +
+        "A few practices that can ease physical discomfort:\n\n" +
+        "Progressive Muscle Release 💪 — deliberately tense and release each muscle group; " +
+        "very effective for tension headaches and held stress\n" +
+        "Body Scan — move awareness slowly through the body, breathing into areas of tightness " +
+        "rather than bracing against them\n" +
+        "Autogenic Calm ❄️ — quiet autosuggestions that guide the body toward warmth and heaviness; " +
+        "can noticeably reduce tension in 10 minutes\n\n" +
+        "Lower the lights if you can, and give yourself permission to stop trying to fix it — " +
+        "just observe the sensation with curiosity rather than resistance.\n\n" +
+        "Would you like me to walk you through PMR or a body scan?",
+        SoundType.PROGRESSIVE_MUSCLE_RELEASE
+    )
+
+    private fun handleGratitude(): Pair<String, SoundType?> = Pair(
+        "🙏 Reflection and gratitude are some of the most consistently supported wellbeing practices.\n\n" +
+        "A few ways in:\n\n" +
+        "Evening Review 🏛️ — a Stoic nightly reflection that naturally integrates gratitude " +
+        "into an honest close-of-day review\n" +
+        "Loving-Kindness (Metta) — extend warmth first to yourself, then to people in your life; " +
+        "a gratitude practice that moves outward\n" +
+        "Journaling anchor: two minutes with any grounding track before you write — " +
+        "it settles the mind so the words come more easily\n\n" +
+        "Want Spirit to walk you through a brief loving-kindness practice to open the reflection? 🤍",
+        SoundType.EVENING_REVIEW
+    )
+
+    private fun handleGeneral(input: String = ""): Pair<String, SoundType?> {
+        val isStrugg = any(input, "bad", "hard", "difficult", "struggling", "not great",
+            "terrible", "awful", "horrible", "rough", "tough", "lost", "broken")
+        val isWell = any(input, "good", "great", "well", "happy", "fine", "wonderful")
+        return when {
+            isStrugg -> Pair(
+                "I hear that things feel hard right now. 🤍\n\n" +
+                "Spirit can sit with you in that — whether you need a breathing practice to ease " +
+                "the weight, a grounding track to steady the moment, or just something quiet to listen to.\n\n" +
+                "Tell me a little more — is it more stress, exhaustion, sadness, or something else? " +
+                "Even one word helps me find the right practice for you.",
+                mostPlayed
+            )
+            isWell -> Pair(
+                "That's lovely to hear. ☀️\n\n" +
+                "A good moment is a great time to deepen your practice — what are you here for today? " +
+                "Focus, relaxation, or exploring a new technique?\n\n" +
+                "I can also suggest a track matched to this energy if you'd like.",
+                null
+            )
+            else -> {
+                val fallbacks = listOf(
+                    "I'm listening. 🤍 Tell me more — are you working with restlessness, stress, or scattered focus? Spirit can help with all three.",
+                    "Spirit here 🌙 — I can guide you through rest, focus, relaxation, or talk you through a meditation technique. What's most needed right now?",
+                    "I hear you. 🌙 Your most-played — ${mostPlayed.emoji} ${mostPlayed.displayName} — might suit this moment. Want to know why?",
+                    "Lovely chatting. Say 'technique' to explore a new way to meditate, or 'recommend' for a soundscape suggestion tailored to right now. 🎵"
+                )
+                Pair(fallbacks[turnsCount % fallbacks.size], if (turnsCount % 4 == 2) mostPlayed else null)
+            }
+        }
     }
 }
