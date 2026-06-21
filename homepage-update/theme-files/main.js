@@ -347,6 +347,26 @@
   // (Auto-open removed — the chat opens only when the visitor clicks the orb,
   //  so it never starts talking on its own on page load.)
 
+  function _greetUser() {
+    if (!log) return;
+    var _hr = new Date().getHours();
+    var _tod = _hr < 12 ? ‘Good morning’ : _hr < 17 ? ‘Good afternoon’ : ‘Good evening’;
+    addMsg(_tod + ‘! I’m Photon — what are you building today?’, ‘bot’);
+  }
+
+  function _updateOrbBadge() {
+    if (!orb) return;
+    var _badge = orb.querySelector(‘.pb-orb__badge’);
+    if (!_badge) {
+      _badge = document.createElement(‘span’);
+      _badge.className = ‘pb-orb__badge’;
+      orb.appendChild(_badge);
+    }
+    var _cnt = chatMsgs.filter(function(m) { return m.cls === ‘bot’; }).length;
+    _badge.textContent = _cnt > 9 ? ‘9+’ : (_cnt > 0 ? String(_cnt) : ‘’);
+    _badge.classList.toggle(‘pb-orb__badge--vis’, _cnt > 0 && (brain ? brain.hidden !== false : true));
+  }
+
   function openBrain() {
     if (!brain) return;
     brain.hidden = false;
@@ -356,6 +376,9 @@
     if (chips && log && log.querySelectorAll('.pb-brain__msg').length <= 1) {
       chips.style.display = '';
     }
+    if (chatMsgs.length === 0 && log && log.querySelectorAll('.pb-brain__msg').length === 0) {
+      _greetUser();
+    }
     if (input) input.focus();
   }
 
@@ -363,9 +386,10 @@
     if (!brain) return;
     brain.hidden = true;
     document.documentElement.classList.remove('pb-brain-open');
+    _updateOrbBadge();
   }
 
-  openBtns.forEach(btn => btn.addEventListener('click', openBrain));
+  openBtns.forEach(btn => btn.addEventListener('click', function() { openBrain(); _updateOrbBadge(); }));
   closeBtns.forEach(btn => btn.addEventListener('click', closeBrain));
 
   // Ctrl+/ (or Cmd+/) toggles the chatbot
@@ -538,6 +562,7 @@
         }
       }
       if (cls !== 'err') { chatMsgs.push({ text: text, cls: cls }); saveChat(); }
+      if (cls === 'bot') _updateOrbBadge();
       if (_nearBottom()) log.scrollTop = log.scrollHeight;
     }
 
@@ -551,6 +576,8 @@
       while (log.children.length > 1) log.removeChild(log.lastChild);
       var chips = brain.querySelector('.pb-brain__chips');
       if (chips) chips.style.display = '';
+      _updateOrbBadge();
+      _greetUser();
     }
 
     function exportChat() {

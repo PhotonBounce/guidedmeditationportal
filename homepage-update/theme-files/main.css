@@ -4855,6 +4855,17 @@ html.pb-brain-open { overflow: hidden; }
 .pb-orb__logo svg{ width:16px; height:16px; }
 .pb-orb__lab{ color:#fff !important; text-shadow:none; letter-spacing:.02em; white-space:nowrap; font-weight:600; }
 @media(max-width:520px){ .pb-orb__lab{ display:none; } .pb-orb{ padding:12px; } }
+/* Orb message-count badge (appears when drawer is closed + there are bot replies) */
+.pb-orb__badge{
+  position:absolute; top:-5px; right:-5px;
+  background:#ff4c4c; color:#fff; border-radius:50%;
+  font-size:9px; font-weight:700; line-height:1;
+  min-width:17px; height:17px; box-sizing:border-box;
+  display:flex; align-items:center; justify-content:center; padding:0 3px;
+  opacity:0; transform:scale(.5); transition:opacity .18s,transform .18s;
+  pointer-events:none; border:2px solid rgba(10,16,30,.9);
+}
+.pb-orb__badge--vis{ opacity:1; transform:scale(1); }
 
 /* ===== FAQ accordion (pb-faq) ===== */
 .pb-faq{ padding:60px 0 80px; }

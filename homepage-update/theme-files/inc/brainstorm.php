@@ -561,6 +561,54 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre21-a) Podcast / audio production / show notes site.
+	if ( $has( [ 'podcast production', 'audio editing', 'show notes', 'podcast website', 'podcast site', 'podcast player', 'podcast hosting', 'audio recording', 'podcast episode', 'podcast rss', 'distribute podcast', 'apple podcasts', 'spotify podcast' ] ) ) {
+		return $nl( [
+			"Podcast production support and podcast websites are both in scope &mdash; here&rsquo;s the breakdown:",
+			'',
+			"&bull; <strong>Podcast website</strong> &mdash; episode archive, custom HTML5 player (WaveSurfer.js waveform), show notes, transcript, guest bio, RSS feed valid for Apple Podcasts + Spotify; from <strong>$500</strong>",
+			"&bull; <strong>Distribution</strong> &mdash; submit once to Apple Podcasts, Spotify, Amazon Music, iHeartRadio via Buzzsprout or Transistor; not managed in-house but I&rsquo;ll set it up",
+			"&bull; <strong>Transcript integration</strong> &mdash; paste Whisper AI or Rev transcript; auto-formats as collapsible show notes; boosts SEO with long-form keyword content per episode",
+			"&bull; <strong>Audio production referral</strong> &mdash; sound design, mixing, and mastering is out of my scope but I can connect you with freelance engineers from my network",
+			"&bull; <strong>Audiogram generator</strong> &mdash; static waveform clip export for social media (optional; custom build from <strong>$200</strong>)",
+			'',
+			"Is this a podcast site, a podcast player embedded in an existing site, or both?",
+		] );
+	}
+
+	// 0d-pre21-b) SaaS onboarding flow / activation / product-led growth.
+	if ( $has( [ 'saas onboarding', 'user onboarding', 'onboarding flow', 'onboarding wizard', 'onboarding checklist', 'activation flow', 'product-led growth', 'plg', 'user activation', 'welcome flow', 'new user flow', 'onboarding tour', 'first run experience', 'in-app onboarding' ] ) ) {
+		return $nl( [
+			"SaaS onboarding and activation flows are a speciality &mdash; here&rsquo;s how it typically scopes:",
+			'',
+			"&bull; <strong>Welcome wizard</strong> &mdash; multi-step setup (2&ndash;5 steps) collecting user preferences; skippable; progress bar; persisted to user profile; from <strong>$350</strong>",
+			"&bull; <strong>Checklist</strong> &mdash; Intercom-style contextual checklist; items checked off as user completes actions; completion triggers upgrade prompt or confetti; from <strong>$250</strong>",
+			"&bull; <strong>Guided tour</strong> &mdash; Shepherd.js or custom tooltip overlay highlighting key UI elements sequentially; skippable; once-per-user; from <strong>$200</strong>",
+			"&bull; <strong>Empty-state CTAs</strong> &mdash; friendly empty states with a clear first action instead of a blank screen; copy + illustration; included in SaaS build",
+			"&bull; <strong>Activation metric</strong> &mdash; define the &lsquo;aha moment&rsquo; (e.g. first project created, first export, first invite); instrument it in GA4 or Mixpanel; from <strong>$150</strong>",
+			"&bull; <strong>Email drip on sign-up</strong> &mdash; 3&ndash;5 email welcome sequence triggered by registration; hooks into Mailchimp, Klaviyo, or Postmark; from <strong>$200</strong>",
+			'',
+			"What&rsquo;s the &lsquo;aha moment&rsquo; for your product &mdash; the first action that makes users understand its value?",
+		] );
+	}
+
+	// 0d-pre21-c) Multilingual / i18n / translated website.
+	if ( $has( [ 'multilingual', 'multi-language', 'translate website', 'website translation', 'i18n', 'internationalization', 'localisation', 'localization', 'french version', 'spanish version', 'german version', 'wpml', 'polylang', 'translatepress', 'rtl support', 'arabic website', 'chinese website' ] ) ) {
+		return $nl( [
+			"Multilingual websites are fully in scope &mdash; here&rsquo;s the plugin decision matrix:",
+			'',
+			"&bull; <strong>WPML</strong> &mdash; industry standard; per-language pages; WooCommerce multilingual add-on; from <strong>$99/yr</strong>; recommended for 3+ languages or e-commerce",
+			"&bull; <strong>Polylang</strong> &mdash; lighter; free tier covers 2 languages; good for blogs and informational sites",
+			"&bull; <strong>TranslatePress</strong> &mdash; visual front-end editor; translate directly on the page; AI auto-translate add-on; from <strong>$89/yr</strong>",
+			"&bull; <strong>Translation workflow</strong> &mdash; machine translation (DeepL API) for first draft, then human review; or hand over to a translator with a PO file export",
+			"&bull; <strong>RTL support</strong> &mdash; Arabic, Hebrew, Urdu, Farsi; CSS direction:rtl; RTL-compatible theme; tested in Chrome + Firefox",
+			"&bull; <strong>SEO</strong> &mdash; hreflang tags for each language; separate slug structure (yourdomain.com/fr/, /de/); Yoast SEO Premium handles this automatically",
+			"&bull; <strong>Included cost</strong> &mdash; the plugin + setup + one translated page as proof of concept; content translation is usually billed separately per word",
+			'',
+			"How many languages, which ones, and is the content already translated or does it need translation services too?",
+		] );
+	}
+
 	// 0d-pre20-a) API documentation site / developer docs / technical docs.
 	if ( $has( [ 'api documentation', 'developer docs', 'technical docs', 'api docs', 'doc site', 'docs website', 'documentation site', 'swagger', 'openapi', 'docusaurus', 'nextra', 'readme.io', 'gitbook', 'developer portal', 'docs portal', 'api reference' ] ) ) {
 		return $nl( [
