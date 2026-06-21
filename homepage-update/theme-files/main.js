@@ -372,6 +372,15 @@
         }
       }
     });
+    // Enter sends; Shift+Enter inserts a newline (textarea default blocked).
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
+        e.preventDefault();
+        if (input.value.trim() && form) {
+          form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+        }
+      }
+    });
   }
 
   // (Auto-open removed — the chat opens only when the visitor clicks the orb,

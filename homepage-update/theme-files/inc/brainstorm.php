@@ -561,6 +561,60 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre27-a) Childcare / nursery / daycare / preschool / after-school site.
+	if ( $has( [ 'childcare website', 'nursery website', 'daycare website', 'preschool website', 'after-school website', 'childminder website', 'kindergarten website', 'primary school website', 'school website', 'early years website', 'montessori website', 'childcare centre', 'kids club website', 'creche website' ] ) ) {
+		return $nl( [
+			"Childcare and nursery websites are trust-critical builds &mdash; here&rsquo;s what&rsquo;s typically included:",
+			'',
+			"&bull; <strong>Ofsted / regulatory badge</strong> &mdash; inspection rating prominently displayed; current certificate PDF linked; automatically builds trust with prospective parents",
+			"&bull; <strong>Enrolment enquiry form</strong> &mdash; child&rsquo;s name and date of birth, required start date, days required, dietary or medical notes; routed to the setting manager by email; from <strong>$250</strong>",
+			"&bull; <strong>Waiting list management</strong> &mdash; WPForms waiting list with auto-confirm email and admin dashboard; from <strong>$200</strong>",
+			"&bull; <strong>Virtual tour</strong> &mdash; 360&deg; photo gallery or embedded video walkthrough; parents who cannot visit in person often make decisions based on this alone",
+			"&bull; <strong>Parent portal link</strong> &mdash; login button linking to your management system (Famly, Kinderly, Tapestry, Brightwheel); authentication handled by the platform",
+			"&bull; <strong>Safeguarding page</strong> &mdash; named DSL, safeguarding policy PDF download, GDPR notice; required by Ofsted and EYFS framework",
+			"&bull; <strong>Term dates / calendar</strong> &mdash; annual term-date table; holiday club and inset day listing; auto-updated via The Events Calendar plugin",
+			"&bull; <strong>From $400</strong> for a solo childminder; <strong>$800+</strong> for a multi-room nursery with waiting list and parent portal link",
+			'',
+			"How many children do you have capacity for, and are you Ofsted-registered (UK) or state-licensed (US)?",
+		] );
+	}
+
+	// 0d-pre27-b) Cleaning / home services / trades / maintenance company site.
+	if ( $has( [ 'cleaning website', 'cleaning company website', 'home services website', 'tradesman website', 'plumber website', 'electrician website', 'handyman website', 'painter decorator website', 'landscaping website', 'gardening website', 'window cleaning website', 'pest control website', 'maintenance website', 'cleaning business website' ] ) ) {
+		return $nl( [
+			"Cleaning and home-services sites are conversion-focused builds &mdash; the goal is to turn visitors into booked jobs:",
+			'',
+			"&bull; <strong>Instant quote form</strong> &mdash; property type, size, service frequency, postcode; calculates a real-time estimate and captures lead email; highest-converting element for cleaning companies; from <strong>$350</strong>",
+			"&bull; <strong>Online booking</strong> &mdash; service type + frequency (one-off, weekly, fortnightly) + date/time slot; Stripe upfront payment or card-on-file for recurring; automated SMS + email reminders; from <strong>$400</strong>",
+			"&bull; <strong>Before / after gallery</strong> &mdash; filterable by job type; WebP lazy-loaded; social proof that converts fence-sitters",
+			"&bull; <strong>Service area pages</strong> &mdash; one optimised page per town or postcode zone; &ldquo;cleaning company [area]&rdquo; keyword targeting; Local Business JSON-LD; Google map embed",
+			"&bull; <strong>Google Reviews widget</strong> &mdash; live pull of your Google Business reviews; star rating badge in header; most leads cite reviews as the deciding factor",
+			"&bull; <strong>Team / vetting page</strong> &mdash; DBS-checked / police-vetted badges; named operatives with photo; reduces cancellations from trust concerns",
+			"&bull; <strong>Franchise / multi-location</strong> &mdash; if you have branches, one subdomain or subfolder per location; all feeding the same booking engine; from <strong>$250</strong> per location page add-on",
+			"&bull; <strong>From $450</strong> for a solo trader; <strong>$900+</strong> for a team with online booking, instant quote, and multi-area SEO pages",
+			'',
+			"Is this domestic cleaning, commercial cleaning, or a trade service? And do you want instant online booking or lead-capture only?",
+		] );
+	}
+
+	// 0d-pre27-c) Funeral home / memorial / celebrant / bereavement services site.
+	if ( $has( [ 'funeral home website', 'funeral director website', 'memorial website', 'celebrant website', 'bereavement website', 'funeral services website', 'cremation website', 'burial services website', 'funeral parlour website', 'death doula website', 'obituary website', 'grief counselling website' ] ) ) {
+		return $nl( [
+			"Funeral and memorial service sites require a particularly sensitive and calm design approach &mdash; here&rsquo;s what&rsquo;s standard:",
+			'',
+			"&bull; <strong>Design language</strong> &mdash; muted palette, generous white space, serif typography, no aggressive CTAs; the site must feel calming and dignified; from <strong>$600</strong>",
+			"&bull; <strong>Service pages</strong> &mdash; burial, cremation, direct cremation, celebration of life, repatriation; each with clear pricing and what is included &mdash; price transparency is now required in England and Wales (FCA regulation 2021)",
+			"&bull; <strong>Pre-need / pre-planning</strong> &mdash; funeral plan enquiry form; downloadable pre-arrangement guide; links to Funeral Planning Authority or NAFD-registered plan providers",
+			"&bull; <strong>Online obituary / tribute page</strong> &mdash; password-protected per family; photo gallery, memory wall (comments), candle lighting; families can share with friends; from <strong>$300</strong>",
+			"&bull; <strong>Out-of-hours contact</strong> &mdash; 24/7 phone number prominently displayed; click-to-call; never hidden behind a contact form alone",
+			"&bull; <strong>Bereavement resources</strong> &mdash; grief support links (Cruse, Sue Ryder); practical checklist (what to do when someone dies); builds authority and helps bereaved families",
+			"&bull; <strong>Accessibility</strong> &mdash; WCAG 2.1 AA mandatory; large body text (18px+); high-contrast mode; print stylesheet for families who print service programmes",
+			"&bull; <strong>From $600</strong> for a single-location funeral home; <strong>$1,200+</strong> with tribute pages, pre-need planning, and multi-location",
+			'',
+			"Is this a funeral home, a celebrant, a memorial artist, or a bereavement counsellor?",
+		] );
+	}
+
 	// 0d-pre26-a) Car dealership / automotive / vehicle sales site.
 	if ( $has( [ 'car dealership website', 'automotive website', 'vehicle dealership', 'car sales website', 'used car dealership', 'new car dealership', 'car lot website', 'auto dealership', 'vehicle sales site', 'car showroom website', 'used cars website', 'motorbike dealership', 'truck dealership' ] ) ) {
 		return $nl( [
