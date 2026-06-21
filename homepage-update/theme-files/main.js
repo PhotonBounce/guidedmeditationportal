@@ -389,6 +389,23 @@
         }
       }
     });
+    // "Enter ↵ to send" hint — reveals after 800ms typing pause, hides on blur or submit.
+    var _sendHint = document.createElement('span');
+    _sendHint.className = 'pb-brain__send-hint';
+    _sendHint.setAttribute('aria-hidden', 'true');
+    _sendHint.innerHTML = 'Enter &#8629; to send &nbsp;&middot;&nbsp; Shift+Enter for new line';
+    if (form) form.appendChild(_sendHint);
+    var _hintTimer = null;
+    input.addEventListener('input', function() {
+      clearTimeout(_hintTimer);
+      _sendHint.classList.remove('pb-brain__send-hint--vis');
+      if (input.value.trim()) {
+        _hintTimer = setTimeout(function() { _sendHint.classList.add('pb-brain__send-hint--vis'); }, 800);
+      }
+    });
+    input.addEventListener('blur', function() {
+      clearTimeout(_hintTimer); _sendHint.classList.remove('pb-brain__send-hint--vis');
+    });
   }
 
   // (Auto-open removed — the chat opens only when the visitor clicks the orb,
@@ -836,6 +853,7 @@
       addMsg(text, 'user');
       input.value = '';
       input.style.height = 'auto';
+      clearTimeout(_hintTimer); _sendHint.classList.remove('pb-brain__send-hint--vis');
       const sendBtn = form.querySelector('[type="submit"]');
       const typing = addTyping();
       input.disabled = true;

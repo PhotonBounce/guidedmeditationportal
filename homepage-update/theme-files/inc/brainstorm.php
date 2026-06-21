@@ -561,6 +561,58 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre30-a) Optician / optometrist / eyewear / contact lens / ophthalmology practice.
+	if ( $has( [ 'optician website', 'optometrist website', 'eyewear website', 'glasses website', 'spectacles website', 'contact lens website', 'optometry website', 'optician practice website', 'eye test booking', 'ophthalmologist website', 'eye care website', 'vision centre website', 'eye clinic website', 'optical practice website' ] ) ) {
+		return $nl( [
+			"Optician and eyewear websites need to balance clinical trust with a retail shopping experience &mdash; here&rsquo;s what works:",
+			'',
+			"&bull; <strong>Online eye test booking</strong> &mdash; Calendly or custom WP booking; test type (full eye exam, contact lens check, children&rsquo;s, dry eye, OCT scan); optometrist selection; online pre-appointment questionnaire; email + SMS reminders; from <strong>$300</strong>",
+			"&bull; <strong>Frame try-on gallery</strong> &mdash; filterable product grid (shape, colour, brand, gender, price); photo-accurate product images; virtual try-on integration via Ditto or GlassesOn iframe; from <strong>$400</strong>",
+			"&bull; <strong>Online shop</strong> &mdash; WooCommerce; lens type upsell at checkout (single vision / varifocal / reading / blue light); prescription upload PDF or JPEG; frame + lens bundle pricing; Stripe + PayPal; from <strong>$600</strong>",
+			"&bull; <strong>Prescription recall</strong> &mdash; automated email when a patient&rsquo;s prescription is due for renewal (typically 2 years); Mailchimp or FluentCRM; from <strong>$250</strong>",
+			"&bull; <strong>NHS information</strong> &mdash; sight test eligibility checker (under 16, over 60, benefits, diabetes, glaucoma risk); GOS voucher info; accepted private schemes",
+			"&bull; <strong>Trust signals</strong> &mdash; GOC registration number in footer; College of Optometrists / ABDO / FODO membership; reviews widget; awards",
+			"&bull; <strong>From $450</strong> booking-only site; <strong>$1,100+</strong> with online shop, virtual try-on, and recall emails",
+			'',
+			"Is the primary goal appointment bookings, online frame and lens sales, or both?",
+		] );
+	}
+
+	// 0d-pre30-b) Property management / letting agent / HMO management / block management.
+	if ( $has( [ 'property management website', 'property manager website', 'hmo management website', 'landlord services website', 'rental management website', 'block management website', 'property management company website', 'residential management website', 'property maintenance website', 'property concierge website', 'estate management website', 'facility management website' ] ) ) {
+		return $nl( [
+			"Property management websites need to serve two distinct audiences &mdash; landlords looking for a managing agent, and tenants needing maintenance access:",
+			'',
+			"&bull; <strong>Landlord lead-gen pages</strong> &mdash; one page per service type (HMO management, AST lettings management, block management, holiday let management); percentage fee calculator; enquiry form; from <strong>$400</strong>",
+			"&bull; <strong>Tenant portal</strong> &mdash; login-gated (WP user roles); maintenance report with photo upload; rent payment history; key documents (tenancy agreement, EPC, gas safety); from <strong>$500</strong>",
+			"&bull; <strong>Maintenance request form</strong> &mdash; issue category (plumbing / electrical / pest / structural / appliance); urgency level; photo upload; auto-routes to assigned contractor or inbox; from <strong>$300</strong>",
+			"&bull; <strong>Compliance hub</strong> &mdash; EPC / EICR / gas safety / legionella risk; expiry-date reminder emails; required for HMO licence conditions",
+			"&bull; <strong>CMP badge</strong> &mdash; Client Money Protection membership displayed prominently; required under The Tenant Fees Act 2019; immediate trust signal for landlords",
+			"&bull; <strong>Portfolio showcase</strong> &mdash; number of properties managed, client testimonials, contractor network page; reassures landlords that maintenance is handled professionally",
+			"&bull; <strong>From $500</strong> brochure and maintenance form; <strong>$1,100+</strong> with full tenant portal and compliance hub",
+			'',
+			"Do you manage AST residential lettings, HMOs, blocks of flats, or commercial property?",
+		] );
+	}
+
+	// 0d-pre30-c) Language school / tutoring centre / English language teaching / adult education.
+	if ( $has( [ 'language school website', 'english language school', 'english teaching website', 'tutoring centre website', 'tutoring website', 'online tutoring website', 'language course website', 'esl website', 'tefl website', 'language academy website', 'adult education website', 'language learning website', 'private tutor website', 'exam tuition website', 'gcse tuition website', 'a level tuition website' ] ) ) {
+		return $nl( [
+			"Language school and tutoring websites need to convert anxious parents and adult learners fast &mdash; here&rsquo;s the standard build:",
+			'',
+			"&bull; <strong>Course pages</strong> &mdash; one per level or exam (GCSE English, A-Level Maths, IELTS, Cambridge First, Business English, Conversational Spanish); includes teacher bio, class size, timetable, price, outcomes; from <strong>$350</strong>",
+			"&bull; <strong>Online booking and enrolment</strong> &mdash; course type, start date, student level, trial lesson option; Stripe payment at booking; from <strong>$350</strong>",
+			"&bull; <strong>Level placement test</strong> &mdash; Typeform or Gravity Forms; 10&ndash;15 questions; auto-calculates A1&ndash;C2 level; triggers email with recommended course; from <strong>$300</strong>",
+			"&bull; <strong>Student learning portal</strong> &mdash; login-gated; homework files, lesson recordings, vocabulary lists, progress tracker; from <strong>$500</strong>",
+			"&bull; <strong>Teacher profiles</strong> &mdash; photo, qualifications (PGCE, CELTA, native or near-native), specialist subjects, availability; key trust signal for parents booking 1-to-1",
+			"&bull; <strong>Accreditation badges</strong> &mdash; British Council inspected, English UK member, Ofsted, Cambridge Exam Centre; display in header or footer",
+			"&bull; <strong>Visa information page</strong> &mdash; UKVI-recognised sponsor status, CAS number guidance; important for IELTS and academic English bookings from international students",
+			"&bull; <strong>From $450</strong> brochure and enrolment form; <strong>$1,000+</strong> with portal, placement test, and multilingual site via WPML",
+			'',
+			"Is this a bricks-and-mortar language school, a 1-to-1 tutoring practice, or primarily online teaching?",
+		] );
+	}
+
 	// 0d-pre29-a) Commercial / studio photography (headshots, product, corporate — not portfolio sites).
 	if ( $has( [ 'product photography website', 'commercial photographer', 'headshot photographer', 'corporate photographer', 'studio photography website', 'food photographer', 'fashion photographer website', 'property photographer website', 'real estate photographer', 'drone photography website', 'event photographer website', 'newborn photographer website', 'boudoir photographer', 'photo studio website' ] ) ) {
 		return $nl( [
