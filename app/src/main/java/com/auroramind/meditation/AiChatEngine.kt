@@ -219,7 +219,7 @@ class AiChatEngine(private val context: Context) {
         any(lower, "play it", "play that", "play my", "play my fav", "play favourite", "play favorite",
             "start it", "queue it") ->
             handlePlayRequest().also { lastTopic = "" }
-        any(lower, "track", "tracks", "session", "sessions", "library", "guided",
+        any(lower, "track", "tracks", "library", "guided",
             "which track", "what track", "play list", "playlist") ->
             handleAmbient().also { lastTopic = "" }
         any(lower, "headache", "migraine", "pain", "ache", "sore", "tension headache",
@@ -694,7 +694,8 @@ class AiChatEngine(private val context: Context) {
         "${SoundType.AUTOGENIC_CALM.emoji} ${SoundType.AUTOGENIC_CALM.displayName} — quietly guides your body out of fight-or-flight, system by system\n" +
         "Box breathing — 4 counts in · 4 hold · 4 out · 4 hold — used by paramedics to restore calm fast\n\n" +
         "You don't need to solve everything right now. Just this breath, then the next.\n\n" +
-        "Want me to walk you through box breathing?",
+        "Want me to walk you through box breathing?" +
+        progLine("anxiety5"),
         SoundType.BURNOUT_RECOVERY
     )
 
