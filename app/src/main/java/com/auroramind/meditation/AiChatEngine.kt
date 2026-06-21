@@ -153,6 +153,9 @@ class AiChatEngine(private val context: Context) {
         any(lower, "grateful", "gratitude", "journal", "journaling", "reflect",
             "reflection", "intention", "intentions", "thankful", "thankfulness") ->
             handleGratitude().also { lastTopic = "gratitude" }
+        any(lower, "journey", "journeys", "program", "programs", "course",
+            "guided course", "structured", "7 day", "7-day", "5 day", "5-day", "challenge") ->
+            handlePrograms().also { lastTopic = "" }
         any(lower, "my stats", "my progress", "how am i doing", "my history",
             "how long have i", "sessions", "minutes meditated", "progress report") ->
             handleStats().also { lastTopic = "" }
@@ -248,33 +251,33 @@ class AiChatEngine(private val context: Context) {
     private fun handleTinnitus(): Pair<String, SoundType?> = Pair(
         "👂 Gentle Tinnitus Support\n\n" +
         "Spirit's suggestions for easing the focus on ringing:\n\n" +
-        "Sumara 🌊 — Javanese surrender, a natural backdrop that gently draws attention outward\n" +
-        "Vipassana ⚡ — systematic body-scanning to redirect attention away from the ringing\n" +
-        "Sufi-toned breathing practices — redirect awareness to the breath instead\n\n" +
-        "Start around 50% volume — lower than you'd think. Comfort matters more than coverage.\n\n" +
-        "A body-scan practice can also help shift attention away from the ringing — want to try one?",
+        "${SoundType.SUMARA.emoji} ${SoundType.SUMARA.displayName} — unhurried Javanese surrender; a natural backdrop that gently draws attention outward\n" +
+        "${SoundType.VIPASSANA.emoji} ${SoundType.VIPASSANA.displayName} — systematic body-scanning to redirect attention away from the ringing\n" +
+        "${SoundType.SOHAM.emoji} ${SoundType.SOHAM.displayName} — breath-mantra rhythm absorbs awareness and lifts it away from the sound\n\n" +
+        "Start around 50% volume — lower than you'd think. Comfort over coverage.\n\n" +
+        "A body-scan practice can also help shift attention from the ringing — want to try one?",
         SoundType.SUMARA
     )
 
     private fun handleBaby(): Pair<String, SoundType?> = Pair(
         "👶 Soothing Little Ones\n\n" +
         "A few gentle, narrated tracks that work well in a quiet nursery:\n\n" +
-        "Soham 🧘 — slow, steady, easy to drift off to\n" +
-        "Progressive Muscle Release 💪 — a soft, grounding physical relaxation rhythm\n" +
-        "Sumara 🌊 — open and unhurried, a gentle constant presence\n\n" +
-        "Keep the volume low and steady — soft enough for a quiet room.\n\n" +
-        "Spirit's tip: loop a track at low volume after feeding to build a calming bedtime cue.",
+        "${SoundType.SOHAM.emoji} ${SoundType.SOHAM.displayName} — slow, steady, easy to drift off to\n" +
+        "${SoundType.SUMARA.emoji} ${SoundType.SUMARA.displayName} — open and unhurried; a gentle constant presence\n" +
+        "${SoundType.PROGRESSIVE_MUSCLE_RELEASE.emoji} ${SoundType.PROGRESSIVE_MUSCLE_RELEASE.displayName} — a soft, grounding rhythm that releases physical tension\n\n" +
+        "Keep volume low and steady — soft enough that the room feels calm rather than full.\n\n" +
+        "Spirit's tip: loop a track after feeding to build a calming sleep cue over time.",
         SoundType.SOHAM
     )
 
     private fun handleMeditation(): Pair<String, SoundType?> = Pair(
         "🧘 Meditation Soundscape\n\n" +
         "A gentle stack to support your sitting practice:\n\n" +
-        "Thien 🎋 — Zen breathing and smiling in the middle of daily life\n" +
-        "Tonglen 🏔️ — Tibetan practice of sending and taking to settle the mind\n" +
-        "Muraqaba 👁️ — Sufi discipline of watchfulness and quiet observation\n\n" +
-        "New to sitting: try 5 minutes with 'Muraqaba.'\n" +
-        "Deepening your practice: try 'Thien' or 'Tonglen' for an extended, spacious sit.\n\n" +
+        "${SoundType.THIEN.emoji} ${SoundType.THIEN.displayName} — Zen breathing and smiling in the middle of daily life\n" +
+        "${SoundType.TONGLEN.emoji} ${SoundType.TONGLEN.displayName} — Tibetan practice of sending and receiving to settle the mind\n" +
+        "${SoundType.MURAQABA.emoji} ${SoundType.MURAQABA.displayName} — Sufi discipline of watchfulness and quiet observation\n\n" +
+        "New to sitting: 5 minutes with ${SoundType.MURAQABA.displayName} is a soft, accessible start.\n" +
+        "Deepening your practice: ${SoundType.THIEN.displayName} or ${SoundType.TONGLEN.displayName} reward longer sits.\n\n" +
         "Curious about a specific technique — mindfulness, breathwork, body scan, loving-kindness? Just ask.",
         SoundType.THIEN
     )
@@ -385,6 +388,25 @@ class AiChatEngine(private val context: Context) {
         "you need permission to simply rest.",
         SoundType.SOHAM
     )
+
+    private fun handlePrograms(): Pair<String, SoundType?> {
+        val lines = Programs.all.joinToString("\n\n") { prog ->
+            val done = prefs.getProgramProgress(prog.id)
+            val status = when {
+                done >= prog.days.size -> "✓ Complete"
+                done == 0              -> "Not started"
+                else                   -> "Day $done of ${prog.days.size}"
+            }
+            "${prog.emoji} ${prog.title} — ${prog.days.size} days\n${prog.blurb}\n$status"
+        }
+        return Pair(
+            "🗓️ Guided Journeys\n\n" +
+            "$lines\n\n" +
+            "Find all Journeys via the Journeys button on the main screen. Each day is a short guided session — " +
+            "tap 'Begin today's session' to continue where you left off.",
+            null
+        )
+    }
 
     private fun handleStats(): Pair<String, SoundType?> {
         val streak = stats.currentStreak()
@@ -563,6 +585,16 @@ class AiChatEngine(private val context: Context) {
             "A full pass takes 10–15 minutes. Most people feel noticeably lighter by the end.\n\n" +
             "Progressive Muscle Release 💪 is queued — let the narration guide you. 🤍",
             SoundType.PROGRESSIVE_MUSCLE_RELEASE
+        )
+        "focus" -> Pair(
+            "🧠 Pre-Focus Reset — 2 Minutes\n\n" +
+            "Before you open the work, do this:\n\n" +
+            "1. Write one sentence: what does success look like in the next 90 minutes?\n" +
+            "2. Close everything unrelated. Phone face-down.\n" +
+            "3. Take 4 slow breaths: in 4 · hold 4 · out 4 · hold 4.\n\n" +
+            "The first 5 minutes of a session set the tone for the rest. Resist the urge to check one more thing.\n\n" +
+            "${SoundType.WORK_FOCUS_CHILLOUT.emoji} ${SoundType.WORK_FOCUS_CHILLOUT.displayName} is queued — let it carry you in. 🎵",
+            SoundType.WORK_FOCUS_CHILLOUT
         )
         "gratitude" -> Pair(
             "🙏 Loving-Kindness Opening — For Reflection\n\n" +
