@@ -174,7 +174,10 @@ class AiChatEngine(private val context: Context) {
             "screen addiction", "endless scrolling", "too much screen",
             "mental block", "writer's block", "writers block", "creative block",
             "brain freeze", "can't think straight", "cant think straight",
-            "mind blank", "mind went blank", "mind has gone blank") ||
+            "mind blank", "mind went blank", "mind has gone blank",
+            "analysis paralysis", "decision paralysis", "overthinking decisions",
+            "hyperfocus", "hyperfocusing", "can't switch tasks",
+            "cant switch tasks", "task switching") ||
         anyWord(lower, "read", "code") ->
             handleFocus().also { lastTopic = "focus" }
         any(lower, "energy", "energise", "energize", "wake up", "waking up",
@@ -247,7 +250,9 @@ class AiChatEngine(private val context: Context) {
         // Emotional intent handlers — sadness, overwhelm, anger
         any(lower, "sad", "grief", "grieving", "heartbreak", "heartbroken",
             "lonely", "alone", "loneliness", "depressed", "depression",
-            "cry", "crying", "upset", "miserable", "unhappy", "low mood",
+            "cry", "crying", "sobbing", "weeping", "in tears", "tearing up",
+            "burst into tears", "bawling",
+            "upset", "miserable", "unhappy", "low mood",
             "empty inside", "feel empty", "feeling empty", "hopeless", "helpless",
             "despair", "despairing", "in despair", "feel desperate", "feeling desperate",
             "devastated", "feel devastated",
@@ -289,7 +294,9 @@ class AiChatEngine(private val context: Context) {
             "feeling low", "feel low", "so low", "really low", "been feeling low",
             "feeling blue", "feel blue", "so blue",
             "feeling down", "feel down", "been feeling down", "really down", "so down",
-            "widowed", "widow", "ghosted") ||
+            "widowed", "widow", "ghosted",
+            "feel like giving up", "want to give up", "ready to give up",
+            "thinking of giving up", "about to give up") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",

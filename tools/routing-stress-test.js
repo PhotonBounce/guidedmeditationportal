@@ -66,7 +66,10 @@ function route(lower, lastTopic) {
     "screen addiction","endless scrolling","too much screen",
     "mental block","writer's block","writers block","creative block",
     "brain freeze","can't think straight","cant think straight",
-    "mind blank","mind went blank","mind has gone blank"]) ||
+    "mind blank","mind went blank","mind has gone blank",
+    "analysis paralysis","decision paralysis","overthinking decisions",
+    "hyperfocus","hyperfocusing","can't switch tasks",
+    "cant switch tasks","task switching"]) ||
     anyWord(lower,["read","code"])) return "focus";
   // 8. energy
   if(any(lower,["energy","energise","energize","wake up","waking up","uplift","motivat",
@@ -128,7 +131,8 @@ function route(lower, lastTopic) {
     "self worth","confidence","stretching","morning routine","bored","boredom"])) return "techniques";
   // 14. sadness
   if(any(lower,["sad","grief","grieving","heartbreak","heartbroken","lonely","alone","loneliness",
-    "depressed","depression","cry","crying","upset","miserable","unhappy","low mood",
+    "depressed","depression","cry","crying","sobbing","weeping","in tears","tearing up",
+    "burst into tears","bawling","upset","miserable","unhappy","low mood",
     "empty inside","feel empty","feeling empty",
     "hopeless","helpless","despair","despairing","in despair","feel desperate","feeling desperate",
     "devastated","feel devastated",
@@ -167,7 +171,9 @@ function route(lower, lastTopic) {
     "winter blues","lack of sunlight","low in winter",
     "seasonal affective","seasonal depression","sad disorder",
     "widowed","widow","ghosted",
-    "empty nest","empty nester","kids moved out","children left home"]) ||
+    "empty nest","empty nester","kids moved out","children left home",
+    "feel like giving up","want to give up","ready to give up",
+    "thinking of giving up","about to give up"]) ||
     anyWord(lower,["numb","died","vent"])) return "sadness";
   // 15. shameGuilt
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated",
@@ -465,6 +471,16 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R79: sadness (sobbing/weeping/giving up), focus (analysis paralysis/hyperfocus)
+  ["i've been sobbing all afternoon", "", "sadness", "sobbing → sadness"],
+  ["i'm completely in tears right now", "", "sadness", "in tears → sadness"],
+  ["i keep tearing up for no reason", "", "sadness", "tearing up → sadness"],
+  ["i feel like giving up on everything", "", "sadness", "feel like giving up → sadness"],
+  ["i'm ready to give up i don't know what to do", "", "sadness", "ready to give up → sadness"],
+  ["i keep getting analysis paralysis with decisions", "", "focus", "analysis paralysis → focus"],
+  ["i tend to hyperfocus and forget to take breaks", "", "focus", "hyperfocus → focus"],
+  ["i struggle with task switching when working", "", "focus", "task switching → focus"],
 
   // R78: relax (catastrophizing, fight-or-flight, on edge, jittery, butterflies), anger (passive-aggressive, bitter, jealousy), shameGuilt (imposter)
   ["i keep catastrophizing everything", "", "relax", "catastrophizing → relax"],
