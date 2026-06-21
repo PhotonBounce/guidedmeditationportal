@@ -984,6 +984,11 @@
         }
         if (window._pbInputHistory) { window._pbInputHistory.push(plain(text)); window._pbHistPtr = -1; }
       }
+      // R65: Bot message entrance — slides new bot replies in from below.
+      if (cls === 'bot') {
+        div.classList.add('pb-brain__msg--entering');
+        setTimeout(function() { div.classList.remove('pb-brain__msg--entering'); }, 400);
+      }
 
       log.appendChild(div);
       // After the 2nd bot message (first substantive reply), inject follow-up action chips.

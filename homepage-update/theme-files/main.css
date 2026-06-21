@@ -5387,3 +5387,11 @@ a.pb-brain__autolink::after{
   background:rgba(255,212,0,.12);
   color:rgba(255,212,0,1);
 }
+/* R65 — bot message entrance slide-in animation */
+@keyframes pb-msg-in{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.pb-brain__msg--entering{
+  animation:pb-msg-in .35s cubic-bezier(.25,.46,.45,.94) forwards;
+}

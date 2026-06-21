@@ -673,6 +673,59 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 
 
 
+
+			// 0d-pre61-a) Music teacher / guitar teacher / piano teacher / singing teacher / music school
+			if ($has(['music teacher website','guitar teacher website','piano teacher website','singing teacher website','music school website','drum teacher website','violin teacher website','music tutor website','music lessons website','online music lessons website','music academy website','singing lessons website','music studio website','music education website','rockschool teacher website','abrsm teacher website'])) {
+				$parts = [
+					"<strong>Music teacher / music school website</strong> &mdash; showcase your teaching style and make booking a first lesson effortless.",
+					"&bull; <strong>Online lesson booking</strong>: Calendly; LessonSpace (built for music tuition); Acuity; trial lesson as first CTA; from &pound;200",
+					"&bull; <strong>Instrument/subject pages</strong>: guitar; piano; drums; vocals; violin; bass; ukulele; music theory; each targets &ldquo;[instrument] lessons [city]&rdquo;; from &pound;150/page",
+					"&bull; <strong>ABRSM &amp; Rockschool grade prep</strong>: exam board credentials; pass rate stats; highest-converting trust signal for parents; from &pound;100",
+					"&bull; <strong>Age-group pages</strong>: children (fun; games; patience); teenagers; adults (returning or beginner); genre preference (classical vs contemporary vs pop vs rock); from &pound;100/page",
+					"&bull; <strong>Online vs in-person</strong>: separate pages; Zoom/Google Meet; hardware recommendations; from &pound;100",
+					"&bull; <strong>Teacher profiles</strong>: performance background; qualifications; DBS check; teaching style; video intro; from &pound;100/teacher",
+					"&bull; <strong>Pupil performances / recital page</strong>: social proof; build community; from &pound;100",
+					"&bull; <strong>Free resource</strong>: first chord sheet; practice routine PDF; email opt-in; from &pound;100",
+					"&bull; <strong>FAQ</strong>: how often to practise; own instrument needed; starting age; from &pound;100",
+					"From &pound;500 &mdash; &pound;1,200+",
+				];
+				return $nl($parts);
+			}
+
+			// 0d-pre61-b) Interior designer / interior decorator / home stylist / BIID
+			if ($has(['interior designer website','interior design website','interior decorator website','interior design studio website','home stylist website','interior styling website','commercial interior design website','residential interior design website','interior architect website','space planner website','kitchen designer website','bathroom designer website','furniture designer website','show home designer website','property developer interior website','staging website'])) {
+				$parts = [
+					"<strong>Interior designer website</strong> &mdash; the portfolio is the sales pitch; every image must earn its place.",
+					"&bull; <strong>Portfolio / case studies</strong>: before &amp; after; room-type filter (kitchen; bathroom; living; bedroom; office; commercial); full-bleed photography; project story (brief &rarr; concept &rarr; delivery); from &pound;300",
+					"&bull; <strong>Service pages</strong>: full design (concept to completion); interior styling; online e-design; show home/property staging; commercial fit-out; from &pound;150/page",
+					"&bull; <strong>Design process</strong>: discovery &rarr; mood board &rarr; space planning &rarr; procurement &rarr; installation; reduces scope creep; from &pound;150",
+					"&bull; <strong>Online interior design</strong>: Zoom consultations; e-design packages; flat fee vs hourly; growing revenue stream; from &pound;200",
+					"&bull; <strong>BIID / RIBA membership</strong>: British Institute of Interior Design; professional indemnity insurance; distinguishes qualified designers from decorators; from &pound;100",
+					"&bull; <strong>Style / aesthetic pages</strong>: Scandi; biophilic; maximalist; coastal; mid-century; helps SEO and pre-qualifies clients; from &pound;100/page",
+					"&bull; <strong>Press / features</strong>: Homes &amp; Gardens; House Beautiful; Livingetc; Grand Designs; authority building; from &pound;100",
+					"&bull; <strong>Discovery call booking</strong>: Calendly; free 30-min; first filter step for high-ticket projects; from &pound;150",
+					"From &pound;650 &mdash; &pound;1,600+",
+				];
+				return $nl($parts);
+			}
+
+			// 0d-pre61-c) Landscape gardener / garden designer / BALI / APL / Landscape Institute
+			if ($has(['landscape gardener website','landscaping website','garden designer website','landscape design website','garden landscaping website','landscaping company website','garden maintenance website','lawn care website','garden care website','patio design website','decking website','artificial grass website','landscape architect website','outdoor living website','garden renovation website','grounds maintenance website'])) {
+				$parts = [
+					"<strong>Landscape gardener / garden designer website</strong> &mdash; photography-first, local SEO-second.",
+					"&bull; <strong>Portfolio gallery</strong>: before &amp; after; garden type filter (formal; cottage; contemporary; wildlife; low-maintenance; courtyard); from &pound;250",
+					"&bull; <strong>Service pages</strong>: full garden design; maintenance contracts; lawn care; patio &amp; decking; artificial grass; planting schemes; irrigation; lighting; outdoor kitchens; from &pound;150/page",
+					"&bull; <strong>Online quote form</strong>: garden size; type of work; photos; postcode; timeline; filters leads; from &pound;200",
+					"&bull; <strong>Maintenance contract page</strong>: fortnightly/monthly/seasonal; recurring revenue; from &pound;150",
+					"&bull; <strong>Design process</strong>: site survey &rarr; concept plan &rarr; planting scheme &rarr; installation &rarr; aftercare; from &pound;150",
+					"&bull; <strong>BALI / APL / Landscape Institute</strong>: BALI = British Association of Landscape Industries approved contractor; APL = Association of Professional Landscapers; Landscape Institute = chartered landscape architect; from &pound;100",
+					"&bull; <strong>Coverage area pages</strong>: &ldquo;landscape gardener [town]&rdquo;; especially high-converting for maintenance contracts; from &pound;100/page",
+					"&bull; <strong>Seasonal blog</strong>: &ldquo;Best plants for a north-facing garden&rdquo;; long-tail SEO; email opt-in; from &pound;100/post",
+					"From &pound;600 &mdash; &pound;1,400+",
+				];
+				return $nl($parts);
+			}
+
 			// 0d-pre60-a) Tattoo studio / tattoo artist / piercing studio / fine line / neo-trad
 			if ($has(['tattoo website','tattoo studio website','tattoo artist website','piercing website','piercing studio website','fine line tattoo website','neo traditional tattoo website','blackwork tattoo website','watercolour tattoo website','realism tattoo website','japanese tattoo website','sleeve tattoo website','custom tattoo website','cover up tattoo website','tattoo removal website','tattoo flash website'])) {
 				$parts = [
