@@ -5267,3 +5267,30 @@ a.pb-brain__autolink::after{
   vertical-align:super;
   opacity:.55;
 }
+
+/* R57 — per-message thumbs rating */
+.pb-brain__rating{
+  display:flex; justify-content:flex-end; gap:4px;
+  padding:4px 8px 2px;
+  opacity:0; transition:opacity .4s ease;
+}
+.pb-brain__rating.pb-brain__rating--vis{ opacity:1; }
+.pb-brain__rate-btn{
+  background:none; border:1px solid rgba(255,255,255,.12);
+  border-radius:6px; cursor:pointer; font-size:14px;
+  line-height:1; padding:3px 7px;
+  transition:background .15s, border-color .15s, transform .1s;
+  color:inherit;
+}
+.pb-brain__rate-btn:hover{
+  background:rgba(255,255,255,.07);
+  border-color:rgba(255,255,255,.28);
+  transform:scale(1.15);
+}
+.pb-brain__rate-btn--on{
+  background:rgba(255,212,0,.12);
+  border-color:rgba(255,212,0,.5);
+}
+.pb-brain__rate-btn--on:hover{
+  background:rgba(255,212,0,.18);
+}

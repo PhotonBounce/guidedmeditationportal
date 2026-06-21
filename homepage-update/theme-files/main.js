@@ -964,7 +964,24 @@
         log.appendChild(_scDiv);
         requestAnimationFrame(function() { requestAnimationFrame(function() { _scDiv.classList.remove('pb-chips-entering'); }); });
       }
-      if (cls !== 'err') { chatMsgs.push({ text: text, cls: cls }); saveChat(); }
+     
+      // R57: Thumbs rating on every bot reply — records feedback in data-attr, toggles on re-click.
+      if (cls === 'bot') {
+        var _rb = document.createElement('div');
+        _rb.className = 'pb-brain__rating';
+        _rb.innerHTML = '<button type=\"button\" class=\"pb-brain__rate-btn\" data-v=\"up\" aria-label=\"Helpful\">&#128077;</button><button type=\"button\" class=\"pb-brain__rate-btn\" data-v=\"down\" aria-label=\"Not helpful\">&#128078;</button>';
+        _rb.querySelectorAll('.pb-brain__rate-btn').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            var _v = btn.dataset.v;
+            div.dataset.ratingVal = (div.dataset.ratingVal === _v) ? '' : _v;
+            _rb.querySelectorAll('.pb-brain__rate-btn').forEach(function(b) {
+              b.classList.toggle('pb-brain__rate-btn--on', b.dataset.v === div.dataset.ratingVal);
+            });
+          });
+        });
+        div.appendChild(_rb);
+        setTimeout(function() { _rb.classList.add('pb-brain__rating--vis'); }, 800);
+      } if (cls !== 'err') { chatMsgs.push({ text: text, cls: cls }); saveChat(); }
       if (cls === 'bot') {
         if (brain && brain.hidden) _unreadCount++;
         _updateOrbBadge();
