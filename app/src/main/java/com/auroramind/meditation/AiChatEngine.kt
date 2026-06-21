@@ -124,6 +124,7 @@ class AiChatEngine(private val context: Context) {
         any(lower, "sleep paralysis", "paralyzed in sleep", "paralyzed while sleeping",
             "paralyzed when waking", "awake but can't move", "awake but cant move",
             "woke up couldn't move", "woke up cant move", "frozen while sleeping",
+            "frozen when waking", "frozen on waking", "frozen waking up",
             "cant move when waking", "can't move when waking") ->
             handleSleepParalysis().also { lastTopic = "relax" }
         any(lower, "sleep", "insomnia", "cant sleep", "can't sleep", "falling asleep",
@@ -131,7 +132,8 @@ class AiChatEngine(private val context: Context) {
             "can't switch off", "racing mind", "racing thoughts", "nap", "night shift",
             "shift work", "mind won't stop", "mind wont stop", "nightmare", "nightmares", "bad dreams",
             "jet lag", "jet lagged", "jet-lagged", "restless", "restlessness",
-            "woke up at", "keep waking", "3am", "4am", "middle of the night") ->
+            "woke up at", "keep waking", "3am", "4am", "middle of the night",
+            "drift off", "drifting off", "can't drift") ->
             handleSleep().also { lastTopic = "sleep" }
         any(lower, "focus", "study", "concentrate", "productivity",
             "read", "code", "writing", "attention", "adhd",
@@ -140,7 +142,7 @@ class AiChatEngine(private val context: Context) {
             handleFocus().also { lastTopic = "focus" }
         any(lower, "energy", "energise", "energize", "wake up", "waking up",
             "uplift", "motivation", "motivated", "active", "exercise", "workout",
-            "morning boost", "morning energy") ->
+            "morning boost", "morning energy", "sluggish", "lethargic") ->
             handleEnergy().also { lastTopic = "energy" }
         any(lower, "relax", "calm", "stress", "anxiety", "anxious", "breathe",
             "unwind", "rest", "nervous", "tense", "panic", "overthink", "overthinking",
@@ -157,10 +159,11 @@ class AiChatEngine(private val context: Context) {
             handleTinnitus().also { lastTopic = "tinnitus" }
         any(lower, "baby", "infant", "newborn", "toddler", "child", "kids") ->
             handleBaby().also { lastTopic = "baby" }
-        any(lower, "meditat", "mindful", "yoga", "zen", "chakra", "mantra",
+        any(lower, "meditat", "mindful", "yoga", "chakra", "mantra",
             "vipassana", "tonglen", "soham", "thien", "sumara", "muraqaba",
             "hesychasm", "dhikr", "hitbodedut", "zhan zhuang", "buddho",
-            "sufi", "tibetan", "qigong", "stoic", "stoicism", "spiritual") ->
+            "sufi", "tibetan", "qigong", "stoic", "stoicism", "spiritual") ||
+        anyWord(lower, "zen") ->
             handleMeditation().also { lastTopic = "meditation" }
         any(lower, "technique", "breathwork", "breathing", "body scan", "loving-kindness",
             "loving kindness", "visualization", "visualisation", "how do i meditate",
@@ -189,7 +192,7 @@ class AiChatEngine(private val context: Context) {
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
             "i feel ashamed", "embarrassed", "humiliated", "self-blame", "self blame",
-            "blame myself", "i keep beating myself up", "beating myself up") ->
+            "blame myself", "blaming myself", "i keep beating myself up", "beating myself up") ->
             handleShameGuilt().also { lastTopic = "sadness" }
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out",
             "too much", "cant cope", "can't cope", "too busy", "overloaded",
