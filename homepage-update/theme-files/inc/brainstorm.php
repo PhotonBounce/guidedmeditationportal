@@ -668,6 +668,62 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 	}
 
 
+
+				// 0d-pre56-a) Chartered surveyor / building surveyor / RICS surveyor / homebuyer survey / structural survey / valuation surveyor.
+				if ($has(['surveyor website','chartered surveyor website','building surveyor website','rics surveyor website','homebuyer survey website','structural survey website','home survey website','valuation surveyor website','party wall surveyor website','dilapidations surveyor website','quantity surveyor website','rics website','surveying firm website','building consultancy website','property surveyor website','snagging surveyor website'])) {
+				  $parts = [
+				    "<strong>Chartered surveyor / RICS website</strong> &mdash; authority, credentials, and local expertise",
+				    "&bull; <strong>RICS regulated firm badge</strong>: RICS Regulation protects clients; mandatory display of RICS logo and firm reference; RICS Dispute Resolution Service; from \$100",
+				    "&bull; <strong>Survey types pages</strong>: RICS Home Survey Level 1 (condition report); Level 2 (homebuyer report, most popular); Level 3 (full structural survey, older/unusual properties); each page explains who needs it and what it covers; from \$200",
+				    "&bull; <strong>Building defects library</strong>: damp; subsidence; roof structure; timber decay; Japanese knotweed; lintel failure; this is highest organic-traffic content for surveyors; from \$200",
+				    "&bull; <strong>Online quote / instruction form</strong>: postcode; property type; bedrooms; approximate value; mortgage lender; turnaround; Acuity or Calendly; from \$250",
+				    "&bull; <strong>Party wall surveyor page</strong>: Party Wall Act 1996; Section 3 notice; agreed surveyor vs appointed surveyors; high-value niche with repeat solicitor referrals; from \$150",
+				    "&bull; <strong>Valuation services</strong>: RICS Red Book valuation; Help to Buy; shared ownership; probate; matrimonial; insurance reinstatement; from \$150",
+				    "&bull; <strong>Commercial and dilapidations</strong>: schedule of dilapidations; terminal dilapidations; lease-end negotiation; high-value B2B instruction; from \$150",
+				    "&bull; <strong>Team page</strong>: MRICS / FRICS designations; ARB (if architect-qualified); PG Certificate; local market knowledge; from \$100",
+				    "&bull; <strong>Coverage area pages</strong>: &ldquo;Building surveyor [town]&rdquo;; sold price data from HM Land Registry; from \$100/page",
+				    "From \$650 &mdash; \$1,500+ with full defects library and quote system."
+				  ];
+				  return $nl($parts);
+				}
+
+				// 0d-pre56-b) Social media agency / social media manager / content creator / influencer marketing / TikTok agency / Instagram agency.
+				if ($has(['social media agency website','social media manager website','social media marketing website','content creator website','influencer marketing website','tiktok agency website','instagram agency website','content marketing agency website','digital content website','social media consultant website','community manager website','ugc creator website','content strategy website','brand content website','video content agency website','social media management website'])) {
+				  $parts = [
+				    "<strong>Social media agency / content creator website</strong> &mdash; results-first, not just &ldquo;pretty posts&rdquo;",
+				    "&bull; <strong>Case studies with metrics</strong>: reach; engagement rate; follower growth; CPE; ROAS; conversion from social; specific brand names (with permission); from \$300",
+				    "&bull; <strong>Services pages</strong>: organic social management; paid social (Meta, TikTok, LinkedIn); content production; influencer seeding; community management; UGC creation; social listening; from \$200",
+				    "&bull; <strong>Platform specialisms</strong>: Instagram Reels; TikTok; LinkedIn B2B; Pinterest e-commerce; YouTube Shorts; X / Twitter; Threads; each with specific KPIs; from \$150",
+				    "&bull; <strong>Process / how it works</strong>: discovery call; audit; strategy; content calendar; approval workflow (Planable, Loomly, Later); reporting cadence; from \$150",
+				    "&bull; <strong>Content portfolio / reel</strong>: video grid; before/after account audits; creative examples; auto-play silent; from \$200",
+				    "&bull; <strong>Influencer roster or methodology</strong>: nano vs micro vs macro; vetting process; exclusivity; seeding vs paid; brand safety; from \$150",
+				    "&bull; <strong>Pricing transparency</strong>: starter retainer; growth; enterprise; or &ldquo;contact for bespoke&rdquo;; either way showing something converts undecided visitors; from \$100",
+				    "&bull; <strong>Social proof strip</strong>: follower counts managed; posts created; brands worked with; Trustpilot; from \$100",
+				    "&bull; <strong>Careers / creator submissions</strong>: attract talent; UGC creators applying; from \$100",
+				    "From \$600 &mdash; \$1,400+ with portfolio, case studies, and platform-specific pages."
+				  ];
+				  return $nl($parts);
+				}
+
+				// 0d-pre56-c) Translation agency / interpreter / localisation / transcreation / certified translation / language services.
+				if ($has(['translation agency website','translation company website','translation services website','interpreter website','interpretation services website','localisation website','localization website','transcreation website','certified translation website','sworn translation website','legal translation website','medical translation website','technical translation website','language services website','document translation website','subtitling website'])) {
+				  $parts = [
+				    "<strong>Translation agency / language services website</strong> &mdash; precision, certification, and turnaround speed",
+				    "&bull; <strong>Language pairs pages</strong>: each major pair (English &harr; French; English &harr; Spanish; English &harr; Arabic etc.) as own page; ranks for &ldquo;[language] translator UK&rdquo;; ATA (US) / ITI (UK) / CIOL member credentials per page; from \$150/page",
+				    "&bull; <strong>Specialism pages</strong>: legal (certified; sworn; court-accepted); medical (clinical trials; patient information; SmPC); technical (engineering; aerospace; software); financial (fund prospectus; annual reports); marketing / transcreation; subtitling &amp; captioning; from \$150/page",
+				    "&bull; <strong>Certified / sworn translation page</strong>: UK courts; UKVI / Home Office; FCDO apostille; company house; birth/marriage/death certificates; most searched-for by individuals; from \$200",
+				    "&bull; <strong>Quote request / file upload form</strong>: source language; target language; word count or file upload; subject; deadline; urgency surcharge; from \$250",
+				    "&bull; <strong>CAT tools and quality page</strong>: SDL Trados; memoQ; translation memory; term base; ISO 17100 (translation standard) or ISO 18587 (machine translation post-editing); builds enterprise confidence; from \$150",
+				    "&bull; <strong>Machine translation + post-editing page</strong>: DeepL / Google MT + human review; MTPE pricing vs full HT; speed advantage; suitable content vs not; from \$150",
+				    "&bull; <strong>Interpreting services</strong>: consecutive; simultaneous; telephone (OPI); video remote (VRI); BSL; court; medical; from \$150",
+				    "&bull; <strong>Client portal / project tracking</strong>: file delivery; version history; invoice; feedback; builds long-term client retention; from \$300",
+				    "&bull; <strong>ATA / ITI / CIOL / CIoL membership</strong>: professional body logos; directory backlinks; trust for sensitive documents; from \$100",
+				    "From \$600 &mdash; \$1,400+ with language pair pages, specialisms, and upload form."
+				  ];
+				  return $nl($parts);
+				}
+
+
 				// 0d-pre55-a) Graphic design studio / brand agency / creative agency / freelance graphic designer / visual identity.
 				if ($has(['graphic design website','graphic designer website','brand agency website','brand design website','creative agency website','creative studio website','branding agency website','design studio website','visual identity website','logo designer website','identity design website','brand strategist website','packaging design website','freelance designer website','illustration website','motion graphics website','infographic design website','print design website','design portfolio website','art direction website'])) {
 				  $parts = [

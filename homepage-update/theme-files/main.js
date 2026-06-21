@@ -922,6 +922,41 @@
       }
       // R55: Remove empty-state hints on first user message
       if (cls === 'user') { var _ehEl = log.querySelector('.pb-brain__empty-hints'); if (_ehEl) _ehEl.remove(); var _ctaEl = log.querySelector('.pb-brain__cta-card'); if (_ctaEl) _ctaEl.remove(); }
+
+      // R60: Input history — ↑/↓ arrows cycle through previously sent messages; indicator fades in.
+      if (cls === 'user') {
+        if (typeof window._pbHistInited === 'undefined' && input) {
+          window._pbHistInited = true;
+          window._pbInputHistory = [];
+          window._pbHistPtr = -1;
+          window._pbHistDraft = '';
+          var _histInd = document.createElement('div');
+          _histInd.className = 'pb-brain__hist-indicator';
+          _histInd.textContent = '↑ history';
+          if (input.parentNode) input.parentNode.appendChild(_histInd);
+          input.addEventListener('keydown', function(e) {
+            var _hist = window._pbInputHistory;
+            if (!_hist || !_hist.length) return;
+            if (e.key === 'ArrowUp' && !e.shiftKey) {
+              if (window._pbHistPtr === -1) window._pbHistDraft = input.value;
+              window._pbHistPtr = Math.min(window._pbHistPtr + 1, _hist.length - 1);
+              input.value = _hist[_hist.length - 1 - window._pbHistPtr];
+              _histInd.classList.add('pb-brain__hist-indicator--vis');
+              e.preventDefault();
+            } else if (e.key === 'ArrowDown' && !e.shiftKey && window._pbHistPtr > -1) {
+              window._pbHistPtr--;
+              input.value = (window._pbHistPtr === -1) ? window._pbHistDraft : _hist[_hist.length - 1 - window._pbHistPtr];
+              if (window._pbHistPtr === -1) _histInd.classList.remove('pb-brain__hist-indicator--vis');
+              e.preventDefault();
+            } else if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') {
+              window._pbHistPtr = -1;
+              _histInd.classList.remove('pb-brain__hist-indicator--vis');
+            }
+          });
+        }
+        if (window._pbInputHistory) { window._pbInputHistory.push(plain(text)); window._pbHistPtr = -1; }
+      }
+
       log.appendChild(div);
       // After the 2nd bot message (first substantive reply), inject follow-up action chips.
       if (cls === 'bot') {
