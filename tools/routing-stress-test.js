@@ -13,7 +13,9 @@ function route(lower, lastTopic) {
     "unalive","cutting myself","cant go on like this"])) return "crisis";
   if(lastTopic.length > 0 && (any(lower,["please","okay","go on","continue","next",
     "tell me more","walk me through","guide me","show me","how do i","teach me",
-    "what do i do","lets do it"]) || anyWord(lower,["yes","sure","ok"]))) return "followUp";
+    "what do i do","let's do it","lets do it","let's go","lets go","go ahead",
+    "sounds good","i'd like that","i would like that","absolutely","of course",
+    "why not"]) || anyWord(lower,["yes","sure","ok"]))) return "followUp";
   if(any(lower,["hello","good morning","good afternoon","good evening","good night",
     "howdy","greetings","what's up","whats up"]) ||
     anyWord(lower,["hi","hey","yo","sup"])) return "greeting";
@@ -28,13 +30,19 @@ function route(lower, lastTopic) {
     "motivated","active","exercise","workout","morning boost","morning energy","sluggish",
     "lethargic","cold shower","cold water","ice bath","wim hof"])) return "energy";
   if(any(lower,["relax","calm","stress","anxiety","anxious","breathe","unwind","nervous","panic",
-    "overthink","overthinking","intrusive thoughts","ruminating","social anxiety","public speaking",
+    "overthink","overthinking","can't stop thinking","cant stop thinking",
+    "intrusive thoughts","ruminating","social anxiety","public speaking",
     "presentation nerves","exam nerves","stage fright","interview nerves","interview anxiety",
-    "nerves before","performance anxiety","performance pressure","pounding heart","heart racing",
-    "fear","scared","frightened","phobia","afraid","worry","worried","worrying","dissociation",
-    "feel unreal","feel detached","ocd","obsessive","compulsive thoughts",
-    "freaking out","freak out","losing my mind","losing it","can't cope with","cant cope with",
-    "spiralling","spiraling"]) ||
+    "nerves before","performance anxiety","performance pressure",
+    "pounding heart","heart racing","mind keeps wandering","can't stop my mind",
+    "cant stop my mind","racing heart","trauma","traumatic","ptsd","post-traumatic",
+    "triggered","hyperventilat","chest tight","tight chest","can't breathe","cant breathe",
+    "fear","scared","frightened","phobia","afraid",
+    "worry","worried","worrying","i worry","constant worry",
+    "dissociation","dissociating","dissociated","derealization","depersonalization",
+    "feel unreal","feeling unreal","not feeling real","feel detached","ocd","obsessive",
+    "compulsive thoughts","freaking out","freak out","losing my mind","losing it",
+    "can't cope with","cant cope with","spiralling","spiraling"]) ||
     anyWord(lower,["rest","tense"])) return "relax";
   if(any(lower,["sad","grief","grieving","heartbreak","heartbroken","lonely","alone","loneliness",
     "depressed","depression","cry","crying","upset","miserable","unhappy","low mood","empty inside",
@@ -163,6 +171,19 @@ var tests = [
   ["i'm not doing well", "", "NOT:positive", "not doing well → sadness"],
   ["not myself lately", "", "NOT:positive", "not myself → sadness"],
   ["i'm feeling off today", "", "NOT:positive", "feeling off → sadness"],
+
+  // R56: followUp sim sync + relax sim sync
+  ["go ahead", "sleep", "followUp", "go ahead with lastTopic → followUp"],
+  ["sounds good", "relax", "followUp", "sounds good with lastTopic → followUp"],
+  ["absolutely", "overwhelm", "followUp", "absolutely with lastTopic → followUp"],
+  ["of course", "anger", "followUp", "of course with lastTopic → followUp"],
+  ["i'd like that", "sadness", "followUp", "i'd like that with lastTopic → followUp"],
+  ["why not", "focus", "followUp", "why not with lastTopic → followUp"],
+  ["i have ptsd", "", "relax", "ptsd → relax"],
+  ["i'm dealing with trauma", "", "relax", "trauma → relax"],
+  ["i'm feeling triggered right now", "", "relax", "triggered → relax"],
+  ["i can't breathe", "", "relax", "can't breathe → relax"],
+  ["i can't stop thinking", "", "relax", "can't stop thinking → relax"],
 
   // R53: relax + overwhelm gaps
   ["i'm freaking out", "", "relax", "freaking out → relax"],
