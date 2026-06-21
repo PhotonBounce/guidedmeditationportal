@@ -207,7 +207,11 @@ function route(lower, lastTopic) {
   // 10. tinnitus
   if(any(lower,["tinnitus","ringing in","ear ring","hearing","buzz in my ear",
     "hyperacusis","misophonia","sound sensitivity","ear noise",
-    "noise in my ears","noise in my head"])) return "tinnitus";
+    "noise in my ears","noise in my head",
+    "humming in my ear","whistling in my ear","clicking in my ear",
+    "whooshing in my ear","throbbing in my ear","blocked ear",
+    "ears feel blocked","ear fullness","ear pressure",
+    "auditory processing"])) return "tinnitus";
   // 11. baby (non-sleep)
   if(any(lower,["baby","infant","newborn","toddler","new parent","new mum","new mom",
     "new dad","new father","first time parent","new baby",
@@ -546,7 +550,9 @@ function route(lower, lastTopic) {
     "feel better","feeling better","feel much better","feeling much better",
     "feel happy","feeling happy","in a good mood","good mood today",
     "had a good day","great day today","mood is better","mood has lifted",
-    "lifted my mood","feeling positive"])) return "positive";
+    "lifted my mood","feeling positive",
+    "doing well","having a good day","all good today","life is great",
+    "happy today","having a great day","actually doing okay"])) return "positive";
   // 21. timer
   if(any(lower,["timer","sleep timer","how long should","how long to meditate","how long for","duration","how many minutes"])) return "timer";
   // 22. alarm
@@ -607,7 +613,9 @@ function route(lower, lastTopic) {
     "encourage me","daily tip","today's practice","what should i practice",
     "technique of the day","something to try",
     "daily inspiration","inspiring message","positive message",
-    "boost my mood"])) return "inspire";
+    "boost my mood","inspiring","something inspiring",
+    "words of wisdom","wise words","words of hope",
+    "something meaningful","meaningful message"])) return "inspire";
   // 29. programs
   if(any(lower,["journey","journeys","program","programs","course","guided course",
     "structured","7 day","7-day","5 day","5-day","challenge",
@@ -812,6 +820,15 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R114: tinnitus (ear sounds/blocked ear), positive (doing well/happy today), inspire (inspiring/words of wisdom)
+  ["I have a humming in my ear that won't go away", "", "tinnitus", "humming in my ear → tinnitus"],
+  ["I keep getting a blocked ear sensation", "", "tinnitus", "blocked ear → tinnitus"],
+  ["there's a whooshing in my ear when I lie down", "", "tinnitus", "whooshing in my ear → tinnitus"],
+  ["I'm actually doing well today for once", "", "positive", "doing well → positive"],
+  ["I'm having a good day today actually", "", "positive", "having a good day → positive"],
+  ["can you send me something inspiring", "", "inspire", "something inspiring → inspire"],
+  ["I'd love some words of wisdom today", "", "inspire", "words of wisdom → inspire"],
 
   // R113: pain (pinched nerve/herniated disc/tight muscles/tennis elbow/IT band), gratitude (glass half full/reframe/optimism)
   ["I have a pinched nerve in my neck", "", "pain", "pinched nerve → pain"],

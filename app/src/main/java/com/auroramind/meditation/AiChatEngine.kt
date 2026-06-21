@@ -319,7 +319,11 @@ class AiChatEngine(private val context: Context) {
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in",
             "hyperacusis", "misophonia", "sound sensitivity", "ear noise",
-            "noise in my ears", "noise in my head") ->
+            "noise in my ears", "noise in my head",
+            "humming in my ear", "whistling in my ear", "clicking in my ear",
+            "whooshing in my ear", "throbbing in my ear", "blocked ear",
+            "ears feel blocked", "ear fullness", "ear pressure",
+            "auditory processing") ->
             handleTinnitus().also { lastTopic = "tinnitus" }
         any(lower, "baby", "infant", "newborn", "toddler", "child", "kids",
             "new parent", "new mum", "new mom", "new dad", "new father",
@@ -677,7 +681,9 @@ class AiChatEngine(private val context: Context) {
             "feel better", "feeling better", "feel much better", "feeling much better",
             "feel happy", "feeling happy", "in a good mood", "good mood today",
             "had a good day", "great day today", "mood is better", "mood has lifted",
-            "lifted my mood", "feeling positive") ->
+            "lifted my mood", "feeling positive",
+            "doing well", "having a good day", "all good today", "life is great",
+            "happy today", "having a great day", "actually doing okay") ->
             handlePositive().also { lastTopic = "" }
         any(lower, "timer", "sleep timer", "how long should", "how long to meditate",
             "how long for", "duration", "how many minutes") ->
@@ -745,7 +751,9 @@ class AiChatEngine(private val context: Context) {
             "pep talk", "cheer me up", "lift my spirits", "give me a boost",
             "need encouragement",
             "daily inspiration", "inspiring message", "positive message",
-            "boost my mood") ->
+            "boost my mood", "inspiring", "something inspiring",
+            "words of wisdom", "wise words", "words of hope",
+            "something meaningful", "meaningful message") ->
             handleInspiration().also { lastTopic = "inspiration" }
         any(lower, "journey", "journeys", "program", "programs", "course",
             "guided course", "structured", "7 day", "7-day", "5 day", "5-day", "challenge",
