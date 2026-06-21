@@ -194,8 +194,8 @@ class AiChatEngine(private val context: Context) {
             "how to meditate", "types of meditation", "autogenic", "box breath",
             "4-7-8", "4 7 8", "physiological sigh", "progressive muscle", "metta",
             "self-compassion", "self compassion", "compassion practice", "kind to myself",
-            "self esteem", "self-esteem", "low confidence", "build confidence", "worth",
-            "confidence", "stretching", "morning routine", "bored", "boredom") ->
+            "self esteem", "self-esteem", "low confidence", "build confidence", "self-worth",
+            "self worth", "confidence", "stretching", "morning routine", "bored", "boredom") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger

@@ -67,8 +67,13 @@ function route(lower, lastTopic) {
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated","self-blame",
     "blame myself","hate my body","feel worthless","not good enough",
     "low confidence","build confidence",
+    "feel like a failure","i'm a failure","im a failure","i am a failure",
+    "feel inadequate","i feel inadequate","feel unworthy","i feel unworthy",
+    "forgive myself","self-forgiveness","self forgiveness",
+    "perfectionism","perfectionist","never good enough","hard on myself",
     "i'm not perfect","im not perfect","i am not perfect",
     "nobody's perfect","nobody is perfect","nothing is perfect",
+    "too hard on myself","self-critical","self critical",
     "body image issues","body image problem","negative body image",
     "struggle with my body","hate how i look","hate my appearance",
     "eating disorder","disordered eating"])) return "shameGuilt";
@@ -86,8 +91,8 @@ function route(lower, lastTopic) {
   if(any(lower,["timer","sleep timer","how long should","how long to meditate","how long for","duration","how many minutes"])) return "timer";
   if(any(lower,["my stats","my streak","my progress","sessions","total time","day streak","how long have i","my history","minutes meditated"])) return "stats";
   if(any(lower,["technique","breathwork","body scan","box breathing","physiological sigh",
-    "self-compassion","self esteem","low confidence","build confidence","worth",
-    "confidence","stretching","morning routine","bored","boredom"])) return "techniques";
+    "self-compassion","self esteem","low confidence","build confidence","self-worth",
+    "self worth","confidence","stretching","morning routine","bored","boredom"])) return "techniques";
   if(any(lower,["play it","play that","play my","play my fav","play favourite","play favorite",
     "start it","queue it","play something","play now","can you play",
     "put on a","put on some","start playing"])) return "play";
@@ -182,6 +187,12 @@ var tests = [
   ["i'm not doing well", "", "NOT:positive", "not doing well → sadness"],
   ["not myself lately", "", "NOT:positive", "not myself → sadness"],
   ["i'm feeling off today", "", "NOT:positive", "feeling off → sadness"],
+
+  // R60: "worth" substring preemption fix — worthless must reach shameGuilt not techniques
+  ["i feel worthless", "", "shameGuilt", "worthless → shameGuilt (not techniques via worth substring)"],
+  ["i feel unworthy", "", "shameGuilt", "unworthy → shameGuilt"],
+  ["my self-worth is low", "", "techniques", "self-worth → techniques (positive case preserved)"],
+  ["i want to build self worth", "", "techniques", "self worth → techniques"],
 
   // R59: body image → shameGuilt, negative thoughts → relax
   ["i have body image issues", "", "shameGuilt", "body image issues → shameGuilt"],
