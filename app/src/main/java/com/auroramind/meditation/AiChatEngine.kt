@@ -366,7 +366,7 @@ class AiChatEngine(private val context: Context) {
         "Spirit, your meditation companion\n" +
         "Meditation alarm with gentle wake tones\n" +
         "Zero ads, forever\n\n" +
-        "Just \$1.99, one time. No subscriptions, no surprises.\n\n" +
+        "Try free for 14 days — then just \$1.99, one time. No subscriptions, no surprises.\n\n" +
         "Tap Unlock on the main screen anytime you're ready! 🚀",
         null
     )

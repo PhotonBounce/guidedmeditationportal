@@ -145,6 +145,34 @@ object MicroTechniques {
             "Self-kindness is a skill that grows with practice.",
             Mood.COMPASSION,
         ),
+        Technique(
+            "Power Breath", "⚡",
+            "20 quick belly pumps followed by a 5-count hold — a natural energy shot.",
+            "Sit upright. Take a deep inhale. Now do 20 quick, sharp exhales through your nose, " +
+            "letting your belly pump in and out. The inhales happen passively. This is Kapalabhati. " +
+            "After 20 pumps, take one deep inhale and hold for 5 counts. Exhale fully. " +
+            "Repeat 3 rounds. You'll feel warm, alert, and clear-headed.",
+            Mood.ENERGY,
+        ),
+        Technique(
+            "Wake-Up Body Tap", "👐",
+            "Pat your legs, torso, and arms with open palms to wake the body's surface energy.",
+            "Stand or sit upright. Use open palms to firmly but gently pat your thighs down to " +
+            "your feet. Move up to your hips, belly, and lower back. Pat your chest and shoulders. " +
+            "Finish by massaging your scalp and face with your fingertips. " +
+            "This physical stimulation activates circulation and tells the nervous system: awake now.",
+            Mood.ENERGY,
+        ),
+        Technique(
+            "Sun Breath", "🌅",
+            "Reach overhead on the inhale, pull down on the exhale — shakes off sluggishness in 5 reps.",
+            "Stand with feet hip-width apart. Inhale deeply through your nose while raising both arms " +
+            "overhead — feel your chest expand. At the top, hold for a count. Exhale forcefully through " +
+            "your mouth while sweeping your arms back down and bending your knees slightly — let the " +
+            "exhale be a sound if you like. Repeat 5 times. End with a slow inhale and a smile. " +
+            "The big movement breaks the stillness of sitting and sends fresh oxygen to the brain.",
+            Mood.ENERGY,
+        ),
     )
 
     /** Today's technique — stable per calendar day, rotates at midnight. */
