@@ -2969,6 +2969,14 @@ border-radius: 50%; cursor: pointer; font-size: 16px;
   border-bottom-color:rgba(255,212,0,.45);
 }
 .pb-brain__search::-webkit-search-cancel-button{ cursor:pointer; }
+/* Search match count — shown below the search input when query is active */
+.pb-brain__search-count{
+  font-size:10px; color:rgba(255,255,255,.38);
+  padding:2px 12px 4px; text-align:right;
+  background:rgba(0,0,0,.18);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  user-select:none;
+}
 /* Keyboard shortcuts help button + panel */
 .pb-brain__help{
   background:none; border:1px solid rgba(255,255,255,.15);

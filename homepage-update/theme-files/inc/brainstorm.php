@@ -561,6 +561,61 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre33-a) Art gallery / commercial gallery / museum / cultural venue / exhibition space.
+	if ( $has( [ 'art gallery website', 'commercial gallery website', 'museum website', 'gallery website', 'contemporary art website', 'fine art gallery website', 'art dealer website', 'art consultant website', 'exhibition website', 'cultural venue website', 'sculpture gallery website', 'print gallery website', 'art fair website', 'public gallery website', 'photography gallery website' ] ) ) {
+		return $nl( [
+			"Art gallery and museum websites need to present work with the same care the gallery brings to its physical space &mdash; here&rsquo;s the standard build:",
+			'',
+			"&bull; <strong>Artist and collection pages</strong> &mdash; one CPT for artists (bio, CV, selected shows); one CPT for works (medium, dimensions, year, edition, price on enquiry vs listed); filterable by medium, year, artist; from <strong>$500</strong>",
+			"&bull; <strong>Exhibition archive</strong> &mdash; past, current, and upcoming shows; opening date and private view time; press release PDF; install shots gallery; from <strong>$300</strong>",
+			"&bull; <strong>Enquiry and purchase flow</strong> &mdash; &ldquo;Enquire about this work&rdquo; form per artwork; price on request vs listed price toggle; collector enquiry routes to gallery director; from <strong>$250</strong>",
+			"&bull; <strong>Online viewing room</strong> &mdash; private OVR for art fair week or collector previews; password-protected page with full artwork grid, zoom, enquiry; from <strong>$350</strong>",
+			"&bull; <strong>Art fair presence</strong> &mdash; dedicated landing page per fair (Frieze, Art Basel, TEFAF, The Armory); booth number, participating artists, install preview; activates SEO around fair week",
+			"&bull; <strong>Press and publications</strong> &mdash; reviews, catalogue PDFs, editorial coverage; signals institutional credibility to collectors and curators",
+			"&bull; <strong>Newsletter / collector list</strong> &mdash; Mailchimp or FluentCRM; segmented by interest (photography, painting, sculpture); private view invitations; from <strong>$200</strong> set-up",
+			"&bull; <strong>From $600</strong> gallery site with artist and exhibition CPTs; <strong>$1,200+</strong> with OVR, art fair pages, and collector segmentation",
+			'',
+			"Is this a commercial gallery representing artists, a public or non-profit museum, or an artist&rsquo;s own studio website?",
+		] );
+	}
+
+	// 0d-pre33-b) Brewery / craft beer / distillery / cidery / winery website.
+	if ( $has( [ 'brewery website', 'craft brewery website', 'microbrewery website', 'craft beer website', 'distillery website', 'craft distillery website', 'gin distillery website', 'whisky distillery website', 'rum distillery website', 'vodka distillery website', 'winery website', 'vineyard website', 'cidery website', 'meadery website', 'taproom website', 'tasting room website' ] ) ) {
+		return $nl( [
+			"Brewery, distillery, and winery websites serve three audiences at once: trade buyers, direct consumers, and visitors to the taproom or cellar door &mdash; here&rsquo;s how that scopes:",
+			'',
+			"&bull; <strong>Product range</strong> &mdash; WooCommerce; one product per SKU (style, ABV, volume, tasting notes, food pairing, allergen info); filterable by type; case discounts; from <strong>$500</strong>",
+			"&bull; <strong>Age gate</strong> &mdash; full-screen overlay on first visit; date-of-birth entry or 18+ / 21+ confirmation click; stores consent in a session cookie; from <strong>$150</strong>",
+			"&bull; <strong>Taproom and tours</strong> &mdash; brewery tour or tasting session booking; Calendly or custom WP; session capacity; Stripe deposit; from <strong>$300</strong>",
+			"&bull; <strong>Trade enquiry</strong> &mdash; separate form for on-trade (pubs, restaurants, bars) and off-trade (retailers, wholesalers); minimum order, delivery area, price list PDF download; from <strong>$200</strong>",
+			"&bull; <strong>Story and process</strong> &mdash; founders page; equipment photography; grain-to-glass or field-to-bottle narrative; key differentiator vs large producers; essential for premium positioning",
+			"&bull; <strong>Stockist locator</strong> &mdash; embedded Google Map + searchable list of stockists; updated by the client; from <strong>$250</strong>",
+			"&bull; <strong>Subscription / mixed case club</strong> &mdash; WooCommerce Subscriptions; monthly or quarterly; member early access to new releases; from <strong>$350</strong>",
+			"&bull; <strong>Compliance</strong> &mdash; Drinkaware / Drink Aware NI logo (UK); Drinkwise (Australia); standard disclaimer &ldquo;please drink responsibly&rdquo;; no targeting under-18s",
+			"&bull; <strong>From $550</strong> product range with age gate; <strong>$1,200+</strong> with taproom booking, trade enquiry, and subscription club",
+			'',
+			"Is the primary revenue online direct-to-consumer, trade wholesale, or cellar-door visitors?",
+		] );
+	}
+
+	// 0d-pre33-c) Driving school / driver training / DVSA / advanced driving / fleet training.
+	if ( $has( [ 'driving school website', 'driving instructor website', 'driver training website', 'driving lessons website', 'driving tuition website', 'intensive driving course website', 'pass plus website', 'advanced driving website', 'fleet driver training website', 'fleet training website', 'automatic driving lessons website', 'motorway lessons website', 'dvsa website', 'driving test website', 'young driver website' ] ) ) {
+		return $nl( [
+			"Driving school websites are conversion machines &mdash; the visitor already knows what they want, so the site just needs to close the booking quickly:",
+			'',
+			"&bull; <strong>Online lesson booking</strong> &mdash; lesson type (manual / automatic / intensive / Pass Plus / motorway); duration (1h, 1.5h, 2h); pick-up area (postcode); preferred instructor if multi-instructor; Stripe upfront payment or card-on-file; from <strong>$350</strong>",
+			"&bull; <strong>Instructor profiles</strong> &mdash; photo, DVSA ADI badge number, experience years, areas covered, availability indicator; confidence signal for anxious learners and parents",
+			"&bull; <strong>Intensive course packages</strong> &mdash; page per package (20h / 30h / 40h crash course); includes estimated pass timeline, what&rsquo;s included, test booking guidance; Stripe single payment; from <strong>$250</strong>",
+			"&bull; <strong>Theory test prep</strong> &mdash; links to official DVSA resources; embedded DVSA hazard perception practice or third-party widget; blog posts by topic (rules of the road, road signs quiz)",
+			"&bull; <strong>Pass rates and reviews</strong> &mdash; first-time pass rate prominently displayed (stat + source); Google Reviews widget; Trustpilot badge if applicable; highest-converting trust signal",
+			"&bull; <strong>Gift vouchers</strong> &mdash; WooCommerce gift card plugin; popular for birthdays and Christmas; email delivery; from <strong>$200</strong>",
+			"&bull; <strong>Area SEO pages</strong> &mdash; one per town or postcode: &ldquo;driving lessons [town]&rdquo;, &ldquo;driving instructor [postcode area]&rdquo;; Local Business schema; from <strong>$80</strong> per page",
+			"&bull; <strong>From $450</strong> single instructor with booking and area pages; <strong>$900+</strong> multi-instructor with intensive packages, gift vouchers, and area SEO",
+			'',
+			"Single instructor or a school with multiple instructors? Is intensive / crash-course booking a priority?",
+		] );
+	}
+
 	// 0d-pre32-a) Interior design studio / decorator / staging / soft furnishings website.
 	if ( $has( [ 'interior design studio website', 'interior design website', 'interior designer website', 'interior decorator website', 'home staging website', 'soft furnishings website', 'interior stylist website', 'interior consultancy website', 'home decor website', 'interior renovation website', 'space planning website', 'kitchen designer website', 'bathroom designer website' ] ) ) {
 		return $nl( [

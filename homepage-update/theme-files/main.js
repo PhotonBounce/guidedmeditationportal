@@ -280,12 +280,23 @@
   _srchInput.setAttribute('aria-label', 'Search chat messages');
   _srchInput.setAttribute('autocomplete', 'off');
   if (log && log.parentNode) log.parentNode.insertBefore(_srchInput, log);
+  var _srchCount = document.createElement('span');
+  _srchCount.className = 'pb-brain__search-count';
+  _srchCount.setAttribute('aria-live', 'polite');
+  _srchCount.setAttribute('aria-atomic', 'true');
+  _srchCount.style.display = 'none';
+  if (log && log.parentNode) log.parentNode.insertBefore(_srchCount, log);
   function _srchFilter() {
     var q = _srchInput.value.toLowerCase().trim();
     var msgs = log ? log.querySelectorAll('.pb-brain__msg') : [];
+    var _n = 0;
     [].forEach.call(msgs, function(m) {
-      m.style.opacity = (!q || m.textContent.toLowerCase().indexOf(q) !== -1) ? '' : '0.15';
+      var _hit = !q || m.textContent.toLowerCase().indexOf(q) !== -1;
+      m.style.opacity = _hit ? '' : '0.15';
+      if (q && _hit) _n++;
     });
+    _srchCount.textContent = q ? (_n === 0 ? 'No results' : _n + ' match' + (_n !== 1 ? 'es' : '')) : '';
+    _srchCount.style.display = q ? '' : 'none';
   }
   function _srchClose() {
     _srchInput.value = ''; _srchFilter();
