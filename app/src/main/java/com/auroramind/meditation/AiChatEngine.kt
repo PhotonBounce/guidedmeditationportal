@@ -237,6 +237,8 @@ class AiChatEngine(private val context: Context) {
             "feel inadequate", "i feel inadequate", "feel unworthy", "i feel unworthy",
             "forgive myself", "self-forgiveness", "self forgiveness",
             "perfectionism", "perfectionist", "never good enough", "hard on myself",
+            "i'm not perfect", "im not perfect", "i am not perfect",
+            "nobody's perfect", "nobody is perfect", "nothing is perfect",
             "too hard on myself", "self-critical", "self critical") ->
             handleShameGuilt().also { lastTopic = "sadness" }
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out",
@@ -274,7 +276,8 @@ class AiChatEngine(private val context: Context) {
             handleAlarm().also { lastTopic = "" }
         // playRequest before ambient — "play my favourite track" must hit playRequest, not "track" in ambient
         any(lower, "play it", "play that", "play my", "play my fav", "play favourite", "play favorite",
-            "start it", "queue it") ->
+            "start it", "queue it", "play something", "play now", "can you play",
+            "put on a", "put on some", "start playing") ->
             handlePlayRequest().also { lastTopic = "" }
         any(lower, "track", "tracks", "library", "guided",
             "which track", "what track", "play list", "playlist") ->

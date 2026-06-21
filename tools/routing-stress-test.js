@@ -50,7 +50,9 @@ function route(lower, lastTopic) {
     anyWord(lower,["numb","died","vent"])) return "sadness";
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated","self-blame",
     "blame myself","hate my body","feel worthless","not good enough",
-    "low confidence","build confidence"])) return "shameGuilt";
+    "low confidence","build confidence",
+    "i'm not perfect","im not perfect","i am not perfect",
+    "nobody's perfect","nobody is perfect","nothing is perfect"])) return "shameGuilt";
   if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","too much","cant cope",
     "too busy","work stress","work anxiety","feeling stuck","feel stuck",
     "deadline","under pressure","work pressure","pressure at work",
@@ -67,6 +69,9 @@ function route(lower, lastTopic) {
   if(any(lower,["technique","breathwork","body scan","box breathing","physiological sigh",
     "self-compassion","self esteem","low confidence","build confidence","worth",
     "confidence","stretching","morning routine","bored","boredom"])) return "techniques";
+  if(any(lower,["play it","play that","play my","play my fav","play favourite","play favorite",
+    "start it","queue it","play something","play now","can you play",
+    "put on a","put on some","start playing"])) return "play";
   if(any(lower,["headache","migraine","ache","sore","tension headache","physical","body tension",
     "muscle tension","stiff","chronic pain","chronic illness","fibromyalgia","arthritis","back pain",
     "painful","pains","in pain"]) || anyWord(lower,["pain"])) return "pain";
@@ -143,6 +148,13 @@ var tests = [
   ["i'm about to snap", "", "NOT:sleep", "snap does not contain nap at word boundary"],
   ["i need a nap", "", "sleep", "nap (standalone) → sleep"],
   ["napping this afternoon", "", "sleep", "napping → sleep"],
+
+  // R55: "not perfect" false positive + play route gaps
+  ["i'm not perfect", "", "NOT:positive", "not perfect must not trigger positive"],
+  ["nobody's perfect", "", "NOT:positive", "nobody's perfect must not trigger positive"],
+  ["can you play something for me", "", "play", "can you play → playRequest"],
+  ["put on some meditation", "", "play", "put on some → playRequest"],
+  ["start playing something", "", "play", "start playing → playRequest"],
 
   // R54: "not great" / "not okay" — must NOT hit positive route
   ["i'm not feeling so great today", "", "NOT:positive", "not great must not trigger positive"],
