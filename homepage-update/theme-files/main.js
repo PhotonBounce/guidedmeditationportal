@@ -595,9 +595,12 @@
       div.className = 'pb-brain__msg pb-brain__msg--' + cls;
       if (cls === 'bot') {
         var _fmtLines = format(text).split('<br>');
-        div.innerHTML = _fmtLines.map(function(ln, i) {
+        var _textBody = document.createElement('div');
+        _textBody.className = 'pb-brain__text';
+        _textBody.innerHTML = _fmtLines.map(function(ln, i) {
           return '<span class="pb-brain__line" style="animation-delay:' + (i * 70) + 'ms">' + ln + '</span>';
         }).join('<br>');
+        div.appendChild(_textBody);
       } else {
         div.innerHTML = text.replace(/</g, '&lt;');
       }
@@ -697,6 +700,28 @@
           _wcBadge.textContent = _wcWords + ' word' + (_wcWords !== 1 ? 's' : '');
           _wcBadge.setAttribute('aria-hidden', 'true');
           div.appendChild(_wcBadge);
+        }
+        // Collapse long replies (6+ line-spans) behind a "Show more ↓" toggle.
+        // _textBody is the div.pb-brain__text wrapper created at addMsg() top;
+        // the toggle is appended to div (outside the wrapper) so overflow:hidden never clips it.
+        var _tbody = div.querySelector('.pb-brain__text');
+        var _tbLines = _tbody ? _tbody.querySelectorAll('.pb-brain__line') : [];
+        if (_tbody && _tbLines.length > 5) {
+          _tbody.classList.add('pb-brain__text--collapsed');
+          var _expandBtn = document.createElement('button');
+          _expandBtn.type = 'button';
+          _expandBtn.className = 'pb-brain__toggle';
+          _expandBtn.textContent = 'Show more ↓';
+          _expandBtn.setAttribute('aria-expanded', 'false');
+          var _colOpen = false;
+          _expandBtn.addEventListener('click', function() {
+            _colOpen = !_colOpen;
+            _tbody.classList.toggle('pb-brain__text--collapsed', !_colOpen);
+            _expandBtn.textContent = _colOpen ? 'Show less ↑' : 'Show more ↓';
+            _expandBtn.setAttribute('aria-expanded', String(_colOpen));
+            if (_colOpen) { requestAnimationFrame(function() { log.scrollTop = log.scrollHeight; }); }
+          });
+          div.appendChild(_expandBtn);
         }
       }
       log.appendChild(div);

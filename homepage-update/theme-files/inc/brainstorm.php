@@ -561,6 +561,59 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre38-a) Dog groomer / pet groomer / mobile dog groomer / pet salon website.
+	if ( $has( [ 'dog groomer website', 'dog grooming website', 'pet groomer website', 'pet grooming website', 'mobile dog groomer website', 'mobile grooming website', 'pet salon website', 'dog salon website', 'cat groomer website', 'grooming salon website', 'pet stylist website', 'dog wash website', 'dog grooming parlour website', 'animal grooming website' ] ) ) {
+		return $nl( [
+			"Dog grooming websites need to convert anxious pet owners into repeat customers &mdash; trust and convenience are the two conversion levers:",
+			'',
+			"&bull; <strong>Service menu with breed-size pricing</strong> &mdash; full groom / bath &amp; brush / hand strip / scissor finish / nail trim / wash &amp; dry; priced by size (small / medium / large / giant); coat type surcharges (matted / double coat); from <strong>$300</strong>",
+			"&bull; <strong>Online booking</strong> &mdash; WP Amelia or SimplyBook.me; breed + service + coat condition; 24h reminder SMS; automated rebooking suggestion at 6&ndash;8 weeks; from <strong>$350</strong>",
+			"&bull; <strong>Breed speciality pages</strong> &mdash; one per breed you&rsquo;re known for (Doodles / Cocker Spaniels / Schnauzers / Bichons / Poodles); coat-specific grooming style notes; targets &ldquo;[breed] groomer [town]&rdquo; keyword; from <strong>$150</strong> per page",
+			"&bull; <strong>Before and after gallery</strong> &mdash; client photos with consent; filterable by breed; most-viewed and most-converting content on pet grooming sites; shows quality and coat transformation",
+			"&bull; <strong>Mobile grooming page</strong> &mdash; service radius map; &ldquo;no salon noise or strange dogs &mdash; less stressful for anxious pets&rdquo; framing; van setup photo; premium over salon pricing justified here; from <strong>$200</strong>",
+			"&bull; <strong>Trust signals</strong> &mdash; City &amp; Guilds or iPET Network Level 3 dog grooming qualification; PetPlan Business or Dognanny insurance; pet first aid certificate; British Dog Groomers&rsquo; Association membership",
+			"&bull; <strong>Gift vouchers</strong> &mdash; WooCommerce gift cards; email delivery; birthdays and Christmas; from <strong>$150</strong>",
+			"&bull; <strong>From $450</strong> service menu + booking; <strong>$900+</strong> with breed pages + before/after gallery + mobile grooming page",
+			'',
+			"Salon, mobile, or both? How many groomers? Do you specialise in a particular breed or style?",
+		] );
+	}
+
+	// 0d-pre38-b) Life coach / executive coach / business coach / NLP practitioner website.
+	if ( $has( [ 'life coach website', 'life coaching website', 'executive coach website', 'business coach website', 'executive coaching website', 'leadership coach website', 'career coach website', 'nlp practitioner website', 'nlp coach website', 'mindset coach website', 'performance coach website', 'online life coach website', 'confidence coach website', 'wellbeing coach website' ] ) ) {
+		return $nl( [
+			"Coaching websites are different from therapy sites in one important way: coaching is unregulated, so your credibility comes from results, not credentials &mdash; case studies and testimonials do more work than certificates:",
+			'',
+			"&bull; <strong>ICF or EMCC membership</strong> &mdash; ICF (International Coaching Federation) and EMCC (European Mentoring &amp; Coaching Council) are the nearest equivalent to regulated credentials in an unregulated industry; display prominently; ICF credential levels (ACC / PCC / MCC) signal training hours",
+			"&bull; <strong>Core offer page</strong> &mdash; signature programme (12-week / 6-month / 3 x 1:1 sessions); target client avatar at specific-enough detail (&ldquo;ambitious female professional, 35&ndash;50, navigating a career transition&rdquo; beats &ldquo;anyone who wants to grow&rdquo;); before/after transformation arc; clear price or &ldquo;from &pound;X&rdquo;; from <strong>$350</strong>",
+			"&bull; <strong>Discovery call booking</strong> &mdash; Calendly; 30&ndash;60 min free call; pre-call questionnaire (what are you working toward? what have you already tried?); auto-reply with the form; from <strong>$250</strong>",
+			"&bull; <strong>Case studies and testimonials</strong> &mdash; coaches can share full client names and companies with consent (unlike therapists); video testimonials; LinkedIn recommendation screenshot; specific transformation result (&ldquo;promoted within 4 months&rdquo; beats &ldquo;very helpful coach&rdquo;); from <strong>$200</strong> per story",
+			"&bull; <strong>Lead magnet</strong> &mdash; &ldquo;5 steps to [outcome]&rdquo; PDF or 5-day email challenge; Mailchimp or ConvertKit sequence (5&ndash;7 emails); from <strong>$300</strong>",
+			"&bull; <strong>Group programme or cohort</strong> &mdash; WooCommerce or Kajabi; waitlist page for next intake; often higher-margin than 1:1; from <strong>$400</strong>",
+			"&bull; <strong>Podcast / content hub</strong> &mdash; episode archive or YouTube embed; positions you as thought leader; organic traffic from long-tail queries",
+			"&bull; <strong>From $500</strong> offer page + booking + lead magnet; <strong>$1,000+</strong> with case studies + group programme + content hub",
+			'',
+			"1:1 / group / online / in-person / corporate? What&rsquo;s your niche &mdash; career / leadership / confidence / life direction?",
+		] );
+	}
+
+	// 0d-pre38-c) Event planner / wedding planner / party planner / corporate event manager website.
+	if ( $has( [ 'event planner website', 'wedding planner website', 'party planner website', 'corporate events website', 'event management website', 'event coordinator website', 'event organiser website', 'wedding coordinator website', 'wedding stylist website', 'event styling website', 'luxury events website', 'corporate event planner website', 'event production website', 'birthday party planner website' ] ) ) {
+		return $nl( [
+			"Event planner websites are often confused with venue or photographer sites &mdash; the planner&rsquo;s value is the co-ordination and relationships, not the location or images:",
+			'',
+			"&bull; <strong>Service tiers page</strong> &mdash; Full planning (venue search through on-the-day management) / Partial planning (you&rsquo;ve booked the main suppliers, I co-ordinate the rest) / Day-of co-ordination (your plan, my execution) / Styling &amp; d&eacute;cor only; clear scope and price range per tier; sets expectations pre-enquiry; from <strong>$400</strong>",
+			"&bull; <strong>Portfolio</strong> &mdash; event categories (weddings / corporate launch / birthday / charity gala / private dinner / team away day); role callout per project (full planning vs styling vs day-of); narrative + detail shots rather than a photographer-style gallery; from <strong>$400</strong>",
+			"&bull; <strong>Real event case studies</strong> &mdash; brief + challenge + planner&rsquo;s specific contribution + result; the planner&rsquo;s role IS the story; from <strong>$200</strong> per case study",
+			"&bull; <strong>Enquiry form</strong> &mdash; event type + date + guest count + location + budget range + current stage of planning; auto-routes to CRM (Airtable or HoneyBook); from <strong>$250</strong>",
+			"&bull; <strong>Supplier network page</strong> &mdash; preferred vendors (venues / caterers / florists / photographers / bands / AV / marquees); reciprocal links; signals to clients that you have established industry relationships",
+			"&bull; <strong>Corporate events page</strong> &mdash; B2B tone; product launch / conference / gala dinner / team away day / brand activation; invoice and BACS payment; form with company name + objectives + budget",
+			"&bull; <strong>From $550</strong> service tiers + portfolio + enquiry form; <strong>$1,100+</strong> with case studies + corporate page + supplier network",
+			'',
+			"Weddings only, corporate only, or both? Full planning, day-of, or styling?",
+		] );
+	}
+
 	// 0d-pre37-a) Music school / music lessons / instrument teacher / music tuition website.
 	if ( $has( [ 'music school website', 'music lessons website', 'guitar teacher website', 'piano teacher website', 'guitar lessons website', 'piano lessons website', 'drum lessons website', 'violin lessons website', 'singing lessons website', 'voice lessons website', 'music tuition website', 'music academy website', 'instrument lessons website', 'online music lessons website', 'music teacher website', 'music studio website' ] ) ) {
 		return $nl( [
