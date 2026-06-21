@@ -86,6 +86,10 @@ function route(lower, lastTopic) {
     "working memory","cognitive load","mental load",
     "need clarity","lack of clarity","need to think clearly",
     "time blindness","neurodivergent",
+    "flow state","get into flow","enter flow","in the zone",
+    "deep work","deep focus","focus mode","distraction-free",
+    "context switching","working from home","wfh distractions",
+    "home office distractions",
     "grounding"]) ||
     anyWord(lower,["read","code"])) return "focus";
   // 8. energy
@@ -165,7 +169,10 @@ function route(lower, lastTopic) {
     "vipassana","tonglen","soham","thien","sumara","muraqaba",
     "hesychasm","dhikr","hitbodedut","zhan zhuang","buddho",
     "sufi","tibetan","qigong","stoic","stoicism","spiritual",
-    "tai chi","tai-chi","taichi","nidra","nsdr","non-sleep deep rest"]) ||
+    "tai chi","tai-chi","taichi","nidra","nsdr","non-sleep deep rest",
+    "open monitoring","open awareness","choiceless awareness",
+    "witnessing meditation","pure awareness","awareness practice",
+    "non-dual","nondual"]) ||
     anyWord(lower,["zen"])) return "meditation";
   // 13. techniques
   if(any(lower,["technique","breathwork","breathing","body scan","loving-kindness","loving kindness",
@@ -177,7 +184,10 @@ function route(lower, lastTopic) {
     "morning pages","habit stacking","habit tracker","daily habit",
     "cbt","cognitive behavioral","dbt","dialectical behavior",
     "act therapy","acceptance and commitment","emdr",
-    "body doubling","pomodoro","time blocking"])) return "techniques";
+    "body doubling","pomodoro","time blocking",
+    "self-care","self care","self-care routine","self care routine",
+    "self-care practice","taking care of myself","look after myself",
+    "evening routine","wind down routine","wind-down routine"])) return "techniques";
   // 14. sadness
   if(any(lower,["sad","grief","grieving","heartbreak","heartbroken","lonely","alone","loneliness",
     "depressed","depression","cry","crying","sobbing","weeping","in tears","tearing up",
@@ -601,6 +611,16 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R95: focus (flow state/deep work/in the zone/context switching), meditation (open awareness/non-dual), techniques (self-care/evening routine)
+  ["I want to get into a flow state for work", "", "focus", "flow state → focus"],
+  ["I need to find my zone and get deep work done", "", "focus", "in the zone + deep work → focus"],
+  ["constant context switching is killing my concentration", "", "focus", "context switching → focus"],
+  ["working from home with all these distractions", "", "focus", "working from home → focus"],
+  ["I want to learn about open awareness meditation", "", "meditation", "open awareness → meditation"],
+  ["what is non-dual meditation", "", "meditation", "non-dual → meditation"],
+  ["I want to build a self-care routine", "", "techniques", "self-care routine → techniques"],
+  ["I need an evening routine to wind down", "", "techniques", "evening routine + wind down → techniques"],
 
   // R94: overwhelm (financial crisis/quiet quitting/sandwich gen/teen parenting), sadness (dark night/narcissistic abuse/codependency/avoidant), sleep (lucid dreams/long covid)
   ["I'm drowning in debt and don't know what to do", "", "overwhelm", "drowning in debt → overwhelm"],

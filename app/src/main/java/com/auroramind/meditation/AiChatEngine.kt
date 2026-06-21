@@ -194,7 +194,11 @@ class AiChatEngine(private val context: Context) {
             "working memory", "cognitive load", "mental load",
             "need clarity", "lack of clarity", "need to think clearly",
             "time blindness", "neurodivergent",
-            "grounding") ||
+            "grounding",
+            "flow state", "get into flow", "enter flow", "in the zone",
+            "deep work", "deep focus", "focus mode", "distraction-free",
+            "context switching", "working from home", "wfh distractions",
+            "home office distractions") ||
         anyWord(lower, "read", "code") ->
             handleFocus().also { lastTopic = "focus" }
         any(lower, "energy", "energise", "energize", "wake up", "waking up",
@@ -281,7 +285,10 @@ class AiChatEngine(private val context: Context) {
             "vipassana", "tonglen", "soham", "thien", "sumara", "muraqaba",
             "hesychasm", "dhikr", "hitbodedut", "zhan zhuang", "buddho",
             "sufi", "tibetan", "qigong", "stoic", "stoicism", "spiritual",
-            "tai chi", "tai-chi", "taichi", "nidra", "nsdr", "non-sleep deep rest") ||
+            "tai chi", "tai-chi", "taichi", "nidra", "nsdr", "non-sleep deep rest",
+            "open monitoring", "open awareness", "choiceless awareness",
+            "witnessing meditation", "pure awareness", "awareness practice",
+            "non-dual", "nondual") ||
         anyWord(lower, "zen") ->
             handleMeditation().also { lastTopic = "meditation" }
         any(lower, "technique", "breathwork", "breathing", "body scan", "loving-kindness",
@@ -294,7 +301,10 @@ class AiChatEngine(private val context: Context) {
             "morning pages", "habit stacking", "habit tracker", "daily habit",
             "cbt", "cognitive behavioral", "dbt", "dialectical behavior",
             "act therapy", "acceptance and commitment", "emdr",
-            "body doubling", "pomodoro", "time blocking") ->
+            "body doubling", "pomodoro", "time blocking",
+            "self-care", "self care", "self-care routine", "self care routine",
+            "self-care practice", "taking care of myself", "look after myself",
+            "evening routine", "wind down routine", "wind-down routine") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
