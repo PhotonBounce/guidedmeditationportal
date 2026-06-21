@@ -170,8 +170,14 @@ class AiChatEngine(private val context: Context) {
             "wake up tired", "wake up unrested",
             "lucid dreaming", "lucid dream", "have lucid dreams",
             "long covid", "post covid", "post-covid", "post-viral fatigue",
-            "chronic fatigue syndrome", "me/cfs") ||
-        anyWord(lower, "nap") ->
+            "chronic fatigue syndrome", "me/cfs",
+            "sleep apnea", "sleep apnoea", "apnea", "apnoea",
+            "restless legs", "restless leg syndrome",
+            "snoring", "snore",
+            "narcolepsy", "narcoleptic",
+            "sleepwalking", "somnambulism",
+            "hypersomnia", "excessive daytime sleepiness") ||
+        anyWord(lower, "nap", "rls") ->
             handleSleep().also { lastTopic = "sleep" }
         any(lower, "focus", "study", "concentrat", "productivity",
             "writing", "attention", "adhd", "distract",
@@ -329,7 +335,10 @@ class AiChatEngine(private val context: Context) {
             "pranayama", "alternate nostril", "pranic breathing",
             "personal growth", "personal development", "self-development",
             "introspection", "self-discovery", "know myself better",
-            "work on myself", "self-awareness") ->
+            "work on myself", "self-awareness",
+            "mirror work", "mirror meditation",
+            "parts work", "internal family systems", "ifs therapy",
+            "inner parts", "self parts", "exile", "exiles") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
@@ -366,6 +375,8 @@ class AiChatEngine(private val context: Context) {
             "seasonal affective", "seasonal depression", "sad disorder",
             "no purpose", "lack of purpose", "feel purposeless", "existential",
             "longing", "longing for", "miss him", "miss her",
+            "yearning", "yearning for", "yearning to", "deep yearning",
+            "homesick", "homesickness", "missing home", "miss home",
             "empty nest", "empty nester", "kids moved out", "children left home",
             "miscarriage", "stillbirth", "pregnancy loss", "child loss", "infertility",
             "lost my baby", "lost our baby",
@@ -527,6 +538,8 @@ class AiChatEngine(private val context: Context) {
             "unfair treatment", "double standards",
             "short fuse", "quick temper", "bad temper", "short tempered", "short-tempered",
             "road rage",
+            "cyberbullying", "trolled", "being trolled", "online troll",
+            "online harassment", "social media harassment", "hate comments",
             "bitter", "bitterness", "bitter toward", "bitter about",
             "contempt", "contemptuous",
             "jealous", "jealousy", "envy", "envious",

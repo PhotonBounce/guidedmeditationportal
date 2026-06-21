@@ -63,8 +63,14 @@ function route(lower, lastTopic) {
     "wake up tired","wake up unrested",
     "lucid dreaming","lucid dream","have lucid dreams",
     "long covid","post covid","post-covid","post-viral fatigue",
-    "chronic fatigue syndrome","me/cfs"]) ||
-    anyWord(lower,["nap"])) return "sleep";
+    "chronic fatigue syndrome","me/cfs",
+    "sleep apnea","sleep apnoea","apnea","apnoea",
+    "restless legs","restless leg syndrome",
+    "snoring","snore",
+    "narcolepsy","narcoleptic",
+    "sleepwalking","somnambulism",
+    "hypersomnia","excessive daytime sleepiness"]) ||
+    anyWord(lower,["nap","rls"])) return "sleep";
   // 7. focus
   if(any(lower,["focus","study","concentrat","productivity","procrastinat","writing","brain fog","adhd",
     "foggy","mental clarity","sharp","clear mind","attention","distract",
@@ -210,6 +216,9 @@ function route(lower, lastTopic) {
     "personal growth","personal development","self-development",
     "introspection","self-discovery","know myself better",
     "work on myself","self-awareness",
+    "mirror work","mirror meditation",
+    "parts work","internal family systems","ifs therapy",
+    "inner parts","self parts","exile","exiles",
     "self-care","self care","self-care routine","self care routine",
     "self-care practice","taking care of myself","look after myself",
     "evening routine","wind down routine","wind-down routine"])) return "techniques";
@@ -237,6 +246,8 @@ function route(lower, lastTopic) {
     "mood swings","bad mood","my mood","mental health",
     "i'm suffering","need to vent","need to talk","venting",
     "longing","miss him","miss her",
+    "yearning","yearning for","yearning to","deep yearning",
+    "homesick","homesickness","missing home","miss home",
     "betrayed","betrayal","feel betrayed","been betrayed",
     "cheated on","been cheated","trust issues","can't trust",
     "feel like a burden","i'm a burden","am a burden",
@@ -400,6 +411,8 @@ function route(lower, lastTopic) {
     "my voice isn't heard","not being heard at work",
     "short fuse","quick temper","bad temper","short tempered","short-tempered",
     "road rage",
+    "cyberbullying","trolled","being trolled","online troll",
+    "online harassment","social media harassment","hate comments",
     "bitter","bitterness","bitter toward","bitter about",
     "contempt","contemptuous",
     "jealous","jealousy","envy","envious",
@@ -664,6 +677,22 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R100: sleep (apnea/restless legs/snoring/narcolepsy/sleepwalking), anger (cyberbullying/trolled), techniques (mirror work/parts work/IFS), sadness (yearning/homesick)
+  ["I was diagnosed with sleep apnea last year", "", "sleep", "sleep apnea → sleep"],
+  ["I have restless leg syndrome and it keeps me up", "", "sleep", "restless leg syndrome → sleep"],
+  ["my partner says my snoring wakes them up", "", "sleep", "snoring → sleep"],
+  ["I think I might have narcolepsy", "", "sleep", "narcolepsy → sleep"],
+  ["I've been sleepwalking recently", "", "sleep", "sleepwalking → sleep"],
+  ["I've been getting hypersomnia episodes", "", "sleep", "hypersomnia → sleep"],
+  ["I've been cyberbullied and I'm really angry", "", "anger", "cyberbullied → anger"],
+  ["I got trolled online and it really hurt", "", "anger", "trolled → anger"],
+  ["I'm experiencing online harassment at work", "", "anger", "online harassment → anger (avoids 'hurt' in sadness preemption since 'hurt' ✓ in sadness before anger)"],
+  ["I want to try mirror work for self-esteem", "", "techniques", "mirror work → techniques"],
+  ["I've been doing parts work in therapy", "", "techniques", "parts work → techniques"],
+  ["I'm learning about internal family systems", "", "techniques", "internal family systems → techniques"],
+  ["I'm feeling really yearning for connection", "", "sadness", "yearning → sadness"],
+  ["I'm so homesick since moving abroad", "", "sadness", "homesick → sadness"],
 
   // R99: focus (autism/asd), relax (new job nerves/sensory processing), sadness (bpd/conflicted/feel nothing), overwhelm (moving house/major life change), positive (celebrate/proud), meditation (namaste/contemplative)
   ["I'm autistic and struggle with transitions", "", "focus", "autism → focus"],
