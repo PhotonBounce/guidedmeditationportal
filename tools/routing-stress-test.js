@@ -50,7 +50,8 @@ function route(lower, lastTopic) {
     anyWord(lower,["mad","anger","angered"])) return "anger";
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
   if(any(lower,["recommend","suggest","what should i play","pick something"])) return "recommend";
-  if(any(lower,["my stats","my streak","my progress","sessions","total time","day streak"])) return "stats";
+  if(any(lower,["timer","sleep timer","how long should","how long to meditate","how long for","duration","how many minutes"])) return "timer";
+  if(any(lower,["my stats","my streak","my progress","sessions","total time","day streak","how long have i","my history","minutes meditated"])) return "stats";
   if(any(lower,["technique","breathwork","body scan","box breathing","physiological sigh",
     "self-compassion","self esteem","low confidence","build confidence","worth",
     "confidence","stretching","morning routine","bored","boredom"])) return "techniques";
@@ -130,6 +131,12 @@ var tests = [
   ["i'm about to snap", "", "NOT:sleep", "snap does not contain nap at word boundary"],
   ["i need a nap", "", "sleep", "nap (standalone) → sleep"],
   ["napping this afternoon", "", "sleep", "napping → sleep"],
+
+  // R51: timer route narrowing — "how long have I" must go to stats, not timer
+  ["how long have i been meditating", "", "stats", "how long have I → stats, not timer"],
+  ["how long should i meditate", "", "timer", "how long should → timer"],
+  ["how many minutes should i do", "", "timer", "how many minutes → timer"],
+  ["how long have i been practicing", "", "stats", "how long have I practicing → stats"],
 
   // Core routing
   ["cant sleep tonight", "", "sleep", "core sleep"],

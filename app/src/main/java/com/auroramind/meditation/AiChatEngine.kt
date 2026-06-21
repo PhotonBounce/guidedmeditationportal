@@ -256,7 +256,8 @@ class AiChatEngine(private val context: Context) {
         any(lower, "thank", "thanks", "awesome", "great", "perfect",
             "love it", "amazing", "nice") ->
             handlePositive().also { lastTopic = "" }
-        any(lower, "timer", "sleep timer", "how long", "duration", "how many minutes") ->
+        any(lower, "timer", "sleep timer", "how long should", "how long to meditate",
+            "how long for", "duration", "how many minutes") ->
             handleTimer().also { lastTopic = "" }
         any(lower, "set alarm", "set an alarm", "morning alarm", "alarm for", "alarm at",
             "alarm clock", "wake alarm", "daily alarm", "wake me up", "schedule alarm") ->
