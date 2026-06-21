@@ -321,6 +321,14 @@
     if (_nearBottom()) _newMsgChip.classList.remove('pb-brain__newmsg--vis');
   });
 
+  // SR-only live region — screen readers announce new bot replies automatically.
+  var _srLive = document.createElement('div');
+  _srLive.className = 'pb-brain__sr-live';
+  _srLive.setAttribute('aria-live', 'polite');
+  _srLive.setAttribute('aria-atomic', 'true');
+  _srLive.setAttribute('aria-relevant', 'additions text');
+  if (brain) brain.appendChild(_srLive);
+
   // Textarea auto-resize — grows up to 120px, resets to 1 row on submit.
   // Character counter shows "n / 2000" and turns amber near the limit.
   if (input) {
@@ -655,7 +663,12 @@
         }
       }
       if (cls !== 'err') { chatMsgs.push({ text: text, cls: cls }); saveChat(); }
-      if (cls === 'bot') { _updateOrbBadge(); if (!_nearBottom()) _newMsgChip.classList.add('pb-brain__newmsg--vis'); }
+      if (cls === 'bot') {
+        _updateOrbBadge();
+        if (!_nearBottom()) _newMsgChip.classList.add('pb-brain__newmsg--vis');
+        // Push plaintext to SR live region so screen readers announce the reply.
+        if (_srLive) { _srLive.textContent = ''; requestAnimationFrame(function() { _srLive.textContent = plain(text); }); }
+      }
       if (_nearBottom()) log.scrollTop = log.scrollHeight;
     }
 

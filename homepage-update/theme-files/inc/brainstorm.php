@@ -561,6 +561,57 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre29-a) Commercial / studio photography (headshots, product, corporate — not portfolio sites).
+	if ( $has( [ 'product photography website', 'commercial photographer', 'headshot photographer', 'corporate photographer', 'studio photography website', 'food photographer', 'fashion photographer website', 'property photographer website', 'real estate photographer', 'drone photography website', 'event photographer website', 'newborn photographer website', 'boudoir photographer', 'photo studio website' ] ) ) {
+		return $nl( [
+			"Commercial and studio photography sites are lead-generation builds focused on enquiry and booking &mdash; here&rsquo;s what&rsquo;s standard:",
+			'',
+			"&bull; <strong>Service speciality pages</strong> &mdash; one page per niche (headshots, product shots, food, drone, events&hellip;); each targeting its own keyword cluster; 3&ndash;5 portfolio examples per page as social proof; from <strong>$350</strong>",
+			"&bull; <strong>Online session booking</strong> &mdash; Calendly Pro embed or custom WP booking; session type + duration + studio or location option + Stripe deposit; from <strong>$300</strong>",
+			"&bull; <strong>Client gallery delivery</strong> &mdash; password-protected gallery per client using Pic-Time, Pixieset, or ShootProof embed; download with expiry date; favourite selection; from <strong>$150</strong> integration setup",
+			"&bull; <strong>E-commerce prints</strong> &mdash; WooCommerce product pages for fine art prints; Printful or local lab fulfilment; from <strong>$400</strong>",
+			"&bull; <strong>Commercial licensing page</strong> &mdash; stock-style usage tiers (editorial, commercial, exclusive); enquiry form for multi-image packages; important for product and fashion photographers",
+			"&bull; <strong>Before/after retouching slider</strong> &mdash; demonstrates post-production quality; high conversion impact for headshot and portrait photographers",
+			"&bull; <strong>From $500</strong> for a speciality photography service site; <strong>$1,000+</strong> with online booking, client delivery portal, and print shop",
+			'',
+			"What is your primary specialism, and do you need client gallery delivery, online booking, or print sales?",
+		] );
+	}
+
+	// 0d-pre29-b) Florist / flower shop / wedding flowers / corporate floristry site.
+	if ( $has( [ 'florist website', 'flower shop website', 'floristry website', 'wedding florist website', 'flower delivery website', 'florist online shop', 'florist booking', 'corporate floristry', 'event flowers website', 'bouquet website', 'flower subscription website', 'flower arrangement website' ] ) ) {
+		return $nl( [
+			"Florist websites are conversion-critical &mdash; most orders happen within 48 hours of a calendar event, so speed and clarity matter:",
+			'',
+			"&bull; <strong>Online shop</strong> &mdash; WooCommerce; product categories (bouquets, seasonal arrangements, condolence, corporate); photo-first grid; delivery date selector at checkout; Stripe + PayPal; from <strong>$500</strong>",
+			"&bull; <strong>Delivery zones</strong> &mdash; postcode-based delivery fee calculator at cart; local same-day vs next-day vs collection options; flat rate or tiered by distance; from <strong>$250</strong>",
+			"&bull; <strong>Subscription / flower club</strong> &mdash; WooCommerce Subscriptions; weekly or monthly bouquet; pause/cancel self-service; gifting option (send to a different address); from <strong>$300</strong>",
+			"&bull; <strong>Wedding / event consultation</strong> &mdash; multi-step enquiry form: date &rarr; venue &rarr; style inspiration &rarr; approximate budget; Pinterest board or image upload for mood; feeds email or Dubsado",
+			"&bull; <strong>Seasonal availability notice</strong> &mdash; banner or modal announcing peak-period cutoffs (Valentine&rsquo;s Day, Mother&rsquo;s Day, Christmas Eve); urgency drives conversions",
+			"&bull; <strong>Google Business + local SEO</strong> &mdash; &ldquo;florist near me&rdquo; and &ldquo;flower delivery [town]&rdquo; keyword clusters; Local Business schema; Google Shopping feed for product listings",
+			"&bull; <strong>From $550</strong> for an online shop with delivery zones; <strong>$1,000+</strong> with subscription flower club, wedding enquiry, and Google Shopping",
+			'',
+			"Is the primary business walk-in retail, online delivery, weddings and events, or a combination?",
+		] );
+	}
+
+	// 0d-pre29-c) Pharmacy / chemist / health products / online dispensary site.
+	if ( $has( [ 'pharmacy website', 'chemist website', 'dispensary website', 'online pharmacy', 'health products website', 'compounding pharmacy', 'pharmacy online shop', 'independent pharmacy website', 'prescription service website', 'health supplement website', 'wellbeing shop website' ] ) ) {
+		return $nl( [
+			"Pharmacy and health-product sites have strict regulatory requirements &mdash; here&rsquo;s what&rsquo;s achievable and what&rsquo;s not:",
+			'',
+			"&bull; <strong>What I can build</strong> &mdash; OTC (over-the-counter) product e-commerce with WooCommerce; appointment booking for health checks, flu jabs, travel clinics; service pages; NHS contractor info; prescription collection notification system",
+			"&bull; <strong>Online prescription sales</strong> &mdash; <em>POM (prescription-only medicines) cannot be sold directly via an e-commerce site</em> without a registered online pharmacy (GPhC registration in UK; DEA in US); I integrate with your existing licensed dispensing workflow, I do not build the dispensing system itself",
+			"&bull; <strong>OTC / health product shop</strong> &mdash; WooCommerce with age-verification popup for restricted products; stock sync via CSV or WooCommerce REST API import; from <strong>$500</strong>",
+			"&bull; <strong>Appointment booking</strong> &mdash; flu jab, travel vaccines, blood pressure check, weight management, ear wax removal, minor ailments; Calendly or custom WP booking; from <strong>$300</strong>",
+			"&bull; <strong>Compliance</strong> &mdash; GPhC logo and registration number in footer; privacy policy; GDPR cookie consent; no medical claims in product descriptions beyond permitted health claims; disclaimer on health content pages",
+			"&bull; <strong>Click-and-collect</strong> &mdash; WooCommerce &ldquo;local pickup&rdquo; option at checkout; order ready SMS/email notification; from <strong>$200</strong>",
+			"&bull; <strong>From $500</strong> for an independent pharmacy site with services and click-and-collect; <strong>$1,100+</strong> with full OTC e-commerce and appointment booking",
+			'',
+			"Are you a UK-registered independent pharmacy, a health supplement retailer, or a travel health clinic?",
+		] );
+	}
+
 	// 0d-pre28-a) Architecture / interior design / landscape design / design studio site.
 	if ( $has( [ 'architecture website', 'architect website', 'interior design website', 'interior designer website', 'landscape design website', 'design studio website', 'architectural firm', 'interior architecture', 'space design website', 'architecture portfolio', 'architectural visualization', 'interior decorator website', 'design agency portfolio' ] ) ) {
 		return $nl( [
