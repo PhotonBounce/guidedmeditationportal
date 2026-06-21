@@ -146,6 +146,10 @@ function route(lower, lastTopic) {
     "feel jumpy","jumpy","overstimulated",
     "stomach in knots","knot in my stomach","stomach tied in knots",
     "stomach churning","knot in stomach",
+    "freeze response","fawn response","fawn mode",
+    "hyperarousal","hypoarousal",
+    "polyvagal","job interview","going for a job interview",
+    "nervous system dysregulation",
     "unsettled","uncertainty","uncertain","uneasy",
     "mind chatter","mental chatter","busy mind",
     "chattering mind","monkey mind",
@@ -190,6 +194,8 @@ function route(lower, lastTopic) {
     "body doubling","pomodoro","time blocking",
     "setting boundaries","healthy boundaries","set boundaries",
     "establish boundaries","learn to say no",
+    "window of tolerance","nervous system reset",
+    "polyvagal theory","co-regulation","coregulation",
     "personal growth","personal development","self-development",
     "introspection","self-discovery","know myself better",
     "work on myself","self-awareness",
@@ -270,6 +276,11 @@ function route(lower, lastTopic) {
     "quarterlife crisis","quarter-life crisis","quarter life crisis",
     "heavy heart","heart feels heavy","heart is heavy",
     "fomo","fear of missing out",
+    "anhedonia","going through the motions","on autopilot",
+    "feel like a robot","feeling like a robot","like a zombie",
+    "nothing brings me joy","joy has gone","lost my spark",
+    "lost my zest","no zest for life",
+    "finding my calling","what am i here for","why am i here",
     "cyclothymia","dysthymia","persistent depressive",
     "love bombing","situationship","situationships",
     "dark night of the soul","spiritual dryness",
@@ -360,6 +371,10 @@ function route(lower, lastTopic) {
     "resentment","resentful","resentment toward","full of resentment",
     "want to punch","feel like punching","slamming",
     "passive aggressive","passive-aggressive",
+    "microaggression","microaggressions",
+    "talked over","constantly interrupted","being interrupted",
+    "not taken seriously","nobody takes me seriously",
+    "my voice isn't heard","not being heard at work",
     "short fuse","quick temper","bad temper","short tempered","short-tempered",
     "road rage",
     "bitter","bitterness","bitter toward","bitter about",
@@ -418,6 +433,7 @@ function route(lower, lastTopic) {
     "what are you","what is spirit","how can you help"])) return "help";
   // 28. inspire
   if(any(lower,["inspire me","inspiration","quote","affirmation","motivate me",
+    "pep talk","cheer me up","lift my spirits","give me a boost","need encouragement",
     "encourage me","daily tip","today's practice","what should i practice",
     "technique of the day","something to try"])) return "inspire";
   // 29. programs
@@ -623,6 +639,21 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R97: relax (freeze/fawn/hyperarousal/job interview), sadness (anhedonia/going through motions/lost my spark), anger (microaggressions/talked over), techniques (window of tolerance), inspiration (pep talk)
+  ["I'm going into a freeze response", "", "relax", "freeze response → relax"],
+  ["I think I fawn when confronted — it's a trauma response", "", "relax", "fawn response → relax"],
+  ["I'm in a state of hyperarousal and can't calm down", "", "relax", "hyperarousal → relax"],
+  ["I want to understand polyvagal theory better", "", "relax", "polyvagal → relax"],
+  ["I have a job interview tomorrow and I'm terrified", "", "relax", "job interview → relax"],
+  ["I have anhedonia and nothing feels good anymore", "", "sadness", "anhedonia → sadness"],
+  ["I feel like I'm just going through the motions", "", "sadness", "going through the motions → sadness"],
+  ["I've lost my spark and feel like a zombie", "", "sadness", "lost my spark → sadness"],
+  ["I constantly face microaggressions at work", "", "anger", "microaggressions → anger"],
+  ["I keep getting talked over in meetings", "", "anger", "talked over → anger"],
+  ["I need a pep talk tonight", "", "inspire", "pep talk → inspire"],
+  ["can you cheer me up please", "", "inspire", "cheer me up → inspire"],
+  ["I want to learn about the window of tolerance", "", "techniques", "window of tolerance → techniques"],
 
   // R96: relax (stomach in knots), sadness (heavy heart/FOMO/cyclothymia/love bombing/situationship), meditation (inner peace), techniques (boundaries/personal growth)
   ["I have a knot in my stomach before this presentation", "", "relax", "knot in my stomach → relax"],

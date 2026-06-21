@@ -256,6 +256,10 @@ class AiChatEngine(private val context: Context) {
             "feel jumpy", "jumpy", "overstimulated",
             "stomach in knots", "knot in my stomach", "stomach tied in knots",
             "stomach churning", "knot in stomach",
+            "freeze response", "fawn response", "fawn mode",
+            "hyperarousal", "hypoarousal",
+            "polyvagal", "job interview", "going for a job interview",
+            "nervous system dysregulation",
             "unsettled", "uncertainty", "uncertain", "uneasy",
             "mind chatter", "mental chatter", "busy mind",
             "chattering mind", "monkey mind",
@@ -310,6 +314,8 @@ class AiChatEngine(private val context: Context) {
             "evening routine", "wind down routine", "wind-down routine",
             "setting boundaries", "healthy boundaries", "set boundaries",
             "establish boundaries", "learn to say no",
+            "window of tolerance", "nervous system reset",
+            "polyvagal theory", "co-regulation", "coregulation",
             "personal growth", "personal development", "self-development",
             "introspection", "self-discovery", "know myself better",
             "work on myself", "self-awareness") ->
@@ -402,6 +408,11 @@ class AiChatEngine(private val context: Context) {
             "quarterlife crisis", "quarter-life crisis", "quarter life crisis",
             "heavy heart", "heart feels heavy", "heart is heavy",
             "fomo", "fear of missing out",
+            "anhedonia", "going through the motions", "on autopilot",
+            "feel like a robot", "feeling like a robot", "like a zombie",
+            "nothing brings me joy", "joy has gone", "lost my spark",
+            "lost my zest", "no zest for life",
+            "finding my calling", "what am i here for", "why am i here",
             "cyclothymia", "dysthymia", "persistent depressive",
             "love bombing", "situationship", "situationships",
             "dark night of the soul", "spiritual dryness",
@@ -487,6 +498,10 @@ class AiChatEngine(private val context: Context) {
             "resentment", "resentful", "resentment toward", "full of resentment",
             "want to punch", "feel like punching", "slamming",
             "passive aggressive", "passive-aggressive",
+            "microaggression", "microaggressions",
+            "talked over", "constantly interrupted", "being interrupted",
+            "not taken seriously", "nobody takes me seriously",
+            "my voice isn't heard", "not being heard at work",
             "short fuse", "quick temper", "bad temper", "short tempered", "short-tempered",
             "road rage",
             "bitter", "bitterness", "bitter toward", "bitter about",
@@ -555,7 +570,9 @@ class AiChatEngine(private val context: Context) {
             handleHelp().also { lastTopic = "" }
         any(lower, "inspire me", "inspiration", "quote", "affirmation", "motivate me",
             "encourage me", "daily tip", "today's practice", "what should i practice",
-            "technique of the day", "something to try") ->
+            "technique of the day", "something to try",
+            "pep talk", "cheer me up", "lift my spirits", "give me a boost",
+            "need encouragement") ->
             handleInspiration().also { lastTopic = "inspiration" }
         any(lower, "journey", "journeys", "program", "programs", "course",
             "guided course", "structured", "7 day", "7-day", "5 day", "5-day", "challenge") ->
