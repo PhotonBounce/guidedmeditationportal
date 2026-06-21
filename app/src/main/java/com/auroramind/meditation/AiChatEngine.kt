@@ -155,7 +155,7 @@ class AiChatEngine(private val context: Context) {
             "night sweats", "hot flashes", "hot flush", "menopause", "perimenopause") ||
         anyWord(lower, "nap") ->
             handleSleep().also { lastTopic = "sleep" }
-        any(lower, "focus", "study", "concentrate", "productivity",
+        any(lower, "focus", "study", "concentrat", "productivity",
             "writing", "attention", "adhd", "distract",
             "brain fog", "foggy", "mental clarity", "sharp", "clear mind",
             "procrastinat", "multitasking", "information overload",
@@ -167,11 +167,12 @@ class AiChatEngine(private val context: Context) {
         anyWord(lower, "read", "code") ->
             handleFocus().also { lastTopic = "focus" }
         any(lower, "energy", "energise", "energize", "wake up", "waking up",
-            "uplift", "motivation", "motivated", "active", "exercise", "workout",
+            "uplift", "motivat", "active", "exercise", "workout",
             "morning boost", "morning energy", "sluggish", "lethargic",
             "cold shower", "cold water", "ice bath", "wim hof",
             "afternoon slump", "afternoon crash", "2pm slump", "post-lunch dip",
-            "pick me up", "need a boost", "feeling flat", "flat today") ->
+            "pick me up", "need a boost", "feeling flat", "flat today",
+            "drained", "wiped out", "run down", "worn out", "no drive") ->
             handleEnergy().also { lastTopic = "energy" }
         any(lower, "relax", "calm", "stress", "anxiety", "anxious", "breathe",
             "unwind", "nervous", "panic", "overthink", "overthinking",
@@ -286,7 +287,7 @@ class AiChatEngine(private val context: Context) {
             "struggle with my body", "hate how i look", "hate my appearance",
             "eating disorder", "disordered eating") ->
             handleShameGuilt().also { lastTopic = "sadness" }
-        any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out",
+        any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out", "burning out",
             "too much", "cant cope", "can't cope", "too busy", "overloaded",
             "swamped", "falling apart", "breaking point", "can't take",
             "work stress", "work anxiety", "work is killing me", "job stress",

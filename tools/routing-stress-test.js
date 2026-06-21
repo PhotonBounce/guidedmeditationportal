@@ -48,7 +48,7 @@ function route(lower, lastTopic) {
     "night sweats","hot flashes","hot flush","menopause","perimenopause"]) ||
     anyWord(lower,["nap"])) return "sleep";
   // 7. focus
-  if(any(lower,["focus","study","concentrate","productivity","procrastinat","writing","brain fog","adhd",
+  if(any(lower,["focus","study","concentrat","productivity","procrastinat","writing","brain fog","adhd",
     "foggy","mental clarity","sharp","clear mind","attention","distract",
     "multitasking","information overload",
     "doom scrolling","doomscrolling","mindless scrolling","phone addiction",
@@ -58,11 +58,12 @@ function route(lower, lastTopic) {
     "mind blank","mind went blank","mind has gone blank"]) ||
     anyWord(lower,["read","code"])) return "focus";
   // 8. energy
-  if(any(lower,["energy","energise","energize","wake up","waking up","uplift","motivation",
-    "motivated","active","exercise","workout","morning boost","morning energy","sluggish",
+  if(any(lower,["energy","energise","energize","wake up","waking up","uplift","motivat",
+    "active","exercise","workout","morning boost","morning energy","sluggish",
     "lethargic","cold shower","cold water","ice bath","wim hof",
     "afternoon slump","afternoon crash","2pm slump","post-lunch dip",
-    "pick me up","need a boost","feeling flat","flat today"])) return "energy";
+    "pick me up","need a boost","feeling flat","flat today",
+    "drained","wiped out","run down","worn out","no drive"])) return "energy";
   // 9. relax
   if(any(lower,["relax","calm","stress","anxiety","anxious","breathe","unwind","nervous","panic",
     "overthink","overthinking","can't stop thinking","cant stop thinking",
@@ -164,7 +165,7 @@ function route(lower, lastTopic) {
     "struggle with my body","hate how i look","hate my appearance",
     "eating disorder","disordered eating"])) return "shameGuilt";
   // 16. overwhelm
-  if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","too much",
+  if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","burning out","too much",
     "cant cope","can't cope","too busy","overloaded","swamped","falling apart",
     "breaking point","can't take","work stress","work anxiety","work is killing me",
     "job stress","feeling stuck","feel stuck","stuck in a rut","stuck in life",
@@ -383,6 +384,15 @@ var tests = [
   ["i'm full of resentment toward my boss", "", "anger", "resentful → anger"],
   ["i've been drinking to cope", "", "relax", "drinking to cope → relax"],
   ["i drink to forget my problems", "", "relax", "drink to forget → relax"],
+
+  // R73: stem fixes (concentrat/motivat) + energy (drained/wiped out) + overwhelm (burning out)
+  ["i'm having trouble concentrating", "", "focus", "concentrating → focus via concentrat stem"],
+  ["i have real trouble with concentration", "", "focus", "concentration → focus via concentrat stem"],
+  ["i can't motivate myself at all", "", "energy", "motivate → energy via motivat stem"],
+  ["i've been feeling so drained lately", "", "energy", "drained → energy"],
+  ["i'm completely wiped out", "", "energy", "wiped out → energy"],
+  ["i'm totally run down", "", "energy", "run down → energy"],
+  ["i think i'm burning out at work", "", "overwhelm", "burning out → overwhelm"],
 
   // R67: crisis (overdose/not worth living/take my life) + relax (dread/hypervig) + overwhelm
   ["i want to take my life", "", "crisis", "take my life → crisis"],
