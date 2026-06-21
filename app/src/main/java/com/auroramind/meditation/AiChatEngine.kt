@@ -165,7 +165,8 @@ class AiChatEngine(private val context: Context) {
             "fear", "scared", "frightened", "phobia", "afraid",
             "worry", "worried", "worrying", "i worry", "constant worry",
             "dissociation", "dissociating", "dissociated", "derealization", "depersonalization",
-            "feel unreal", "feeling unreal", "not feeling real", "feel detached") ||
+            "feel unreal", "feeling unreal", "not feeling real", "feel detached",
+            "ocd", "obsessive", "compulsive thoughts") ||
         anyWord(lower, "rest", "tense") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
@@ -185,7 +186,7 @@ class AiChatEngine(private val context: Context) {
             "4-7-8", "4 7 8", "physiological sigh", "progressive muscle", "metta",
             "self-compassion", "self compassion", "compassion practice", "kind to myself",
             "self esteem", "self-esteem", "low confidence", "build confidence", "worth",
-            "confidence", "stretching", "morning routine") ->
+            "confidence", "stretching", "morning routine", "bored", "boredom") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
@@ -209,7 +210,10 @@ class AiChatEngine(private val context: Context) {
             "i'm suffering", "need to vent", "need to talk", "vent",
             "mourning", "in mourning", "heartache", "missing my ex", "miss my ex",
             "winter blues", "lack of sunlight", "low in winter",
-            "no purpose", "lack of purpose", "feel purposeless", "existential") ||
+            "no purpose", "lack of purpose", "feel purposeless", "existential",
+            "longing", "longing for", "miss him", "miss her",
+            "miscarriage", "stillbirth", "pregnancy loss", "child loss", "infertility",
+            "lost my baby", "lost our baby") ||
         anyWord(lower, "numb", "died") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
@@ -222,7 +226,8 @@ class AiChatEngine(private val context: Context) {
             "too much", "cant cope", "can't cope", "too busy", "overloaded",
             "swamped", "falling apart", "breaking point", "can't take",
             "work stress", "work anxiety", "work is killing me", "job stress",
-            "feeling stuck", "feel stuck", "stuck in a rut", "stuck in life") ->
+            "feeling stuck", "feel stuck", "stuck in a rut", "stuck in life",
+            "deadline", "under pressure", "work pressure", "pressure at work") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
         any(lower, "angry", "anger", "furious", "frustrated", "frustration",
             "rage", "irritated", "irritable", "annoyed", "wound up", "agitated") ||
