@@ -243,6 +243,10 @@ function route(lower, lastTopic) {
     "been through a lot","gone through a lot",
     "a lot to process","so much to process",
     "carrying a lot","carrying so much",
+    "coping with loss","cope with loss","dealing with loss",
+    "living with grief","coping with grief","cope with grief",
+    "identity crisis","midlife crisis","mid-life crisis",
+    "quarterlife crisis","quarter-life crisis","quarter life crisis",
     "in a funk","bit of a funk","in a bit of a funk",
     "in my feelings","in the dumps","down in the dumps",
     "need hope","need some hope","lost all hope",
@@ -266,6 +270,7 @@ function route(lower, lastTopic) {
     "nobody's perfect","nobody is perfect","nothing is perfect",
     "too hard on myself","self-critical","self critical",
     "body image issues","body image problem","negative body image",
+    "body dysmorphia","dysmorphia","body dysmorphic",
     "struggle with my body","hate how i look","hate my appearance",
     "eating disorder","disordered eating",
     "anorexia","anorexic","bulimia","bulimic","binge eating","binge and purge",
@@ -308,7 +313,8 @@ function route(lower, lastTopic) {
   // 17. anger
   if(any(lower,["angry","furious","frustrated","frustration","rage",
     "irritated","irritable","annoyed","wound up","agitated",
-    "pissed off","livid","seething","seeing red",
+    "pissed off","livid","seething","seeing red","fuming",
+    "holding a grudge","grudge","can't let it go","cant let it go",
     "lost my temper","losing my temper","lose my temper",
     "about to explode","about to snap","lost it","blow up",
     "want to scream","could scream","need to scream",
@@ -579,6 +585,16 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R93: anger (fuming/grudge), sadness (coping with loss/identity crisis/midlife crisis), shameGuilt (body dysmorphia)
+  ["I'm absolutely fuming right now", "", "anger", "fuming → anger"],
+  ["I'm holding a grudge and it's eating me up", "", "anger", "grudge → anger"],
+  ["I can't let it go no matter how hard I try", "", "anger", "can't let it go → anger"],
+  ["I'm struggling to cope with loss after my nan died", "", "sadness", "cope with loss → sadness"],
+  ["I'm coping with grief after losing my dad", "", "sadness", "coping with grief → sadness"],
+  ["I think I'm having an identity crisis", "", "sadness", "identity crisis → sadness"],
+  ["going through a midlife crisis right now", "", "sadness", "midlife crisis → sadness"],
+  ["I have body dysmorphia and hate looking in the mirror", "", "shameGuilt", "body dysmorphia → shameGuilt"],
 
   // R92: relax (mind racing/jumpy/overstimulated), meditation (tai chi/nidra/nsdr), positive (loved it), sadness (carrying a lot/been through a lot)
   ["my mind is racing tonight", "", "relax", "mind is racing → relax"],

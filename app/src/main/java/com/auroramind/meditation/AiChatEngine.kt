@@ -374,7 +374,11 @@ class AiChatEngine(private val context: Context) {
             "trying to heal", "on a healing journey",
             "been through a lot", "gone through a lot",
             "a lot to process", "so much to process",
-            "carrying a lot", "carrying so much") ||
+            "carrying a lot", "carrying so much",
+            "coping with loss", "cope with loss", "dealing with loss",
+            "living with grief", "coping with grief", "cope with grief",
+            "identity crisis", "midlife crisis", "mid-life crisis",
+            "quarterlife crisis", "quarter-life crisis", "quarter life crisis") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
@@ -390,6 +394,7 @@ class AiChatEngine(private val context: Context) {
             "nobody's perfect", "nobody is perfect", "nothing is perfect",
             "too hard on myself", "self-critical", "self critical",
             "body image issues", "body image problem", "negative body image",
+            "body dysmorphia", "dysmorphia", "body dysmorphic",
             "struggle with my body", "hate how i look", "hate my appearance",
             "eating disorder", "disordered eating",
             "anorexia", "anorexic", "bulimia", "bulimic", "binge eating", "binge and purge",
@@ -435,7 +440,8 @@ class AiChatEngine(private val context: Context) {
             handleOverwhelm().also { lastTopic = "overwhelm" }
         any(lower, "angry", "furious", "frustrated", "frustration",
             "rage", "irritated", "irritable", "annoyed", "wound up", "agitated",
-            "pissed off", "livid", "seething", "seeing red",
+            "pissed off", "livid", "seething", "seeing red", "fuming",
+            "holding a grudge", "grudge", "can't let it go", "cant let it go",
             "lost my temper", "losing my temper", "lose my temper",
             "about to explode", "about to snap", "lost it", "blow up",
             "want to scream", "could scream", "need to scream",
