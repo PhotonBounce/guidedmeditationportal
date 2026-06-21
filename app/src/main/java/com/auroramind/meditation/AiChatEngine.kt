@@ -100,6 +100,12 @@ class AiChatEngine(private val context: Context) {
     // ── Router ────────────────────────────────────────────────────────────────
 
     private fun route(lower: String): Pair<String, SoundType?> = when {
+        // Crisis detection — always first, no topic context should override this
+        any(lower, "suicidal", "suicide", "want to die", "don't want to live", "dont want to live",
+            "end it all", "end my life", "kill myself", "self harm", "self-harm",
+            "hurt myself", "no reason to live", "better off dead") ->
+            handleCrisis()
+
         // Follow-up detection — must come first so "yes please" gets context-aware reply
         lastTopic.isNotEmpty() && any(lower,
             "yes", "please", "sure", "ok", "okay", "go on", "continue", "next",
@@ -114,11 +120,13 @@ class AiChatEngine(private val context: Context) {
             "can't switch off", "racing mind", "racing thoughts", "nap", "night shift",
             "shift work", "mind won't stop", "mind wont stop", "nightmares", "bad dreams",
             "jet lag", "jet lagged", "jet-lagged", "restless", "restlessness",
-            "woke up at", "keep waking", "3am", "4am", "middle of the night") ->
+            "woke up at", "keep waking", "3am", "4am", "middle of the night",
+            "sleep paralysis") ->
             handleSleep().also { lastTopic = "sleep" }
         any(lower, "focus", "work", "study", "concentrate", "productivity",
             "read", "code", "writing", "attention", "adhd",
-            "brain fog", "foggy", "mental clarity", "sharp", "clear mind") ->
+            "brain fog", "foggy", "mental clarity", "sharp", "clear mind",
+            "procrastinat") ->
             handleFocus().also { lastTopic = "focus" }
         any(lower, "energy", "energise", "energize", "wake up", "waking up",
             "uplift", "motivation", "motivated", "active", "exercise", "workout",
@@ -130,7 +138,8 @@ class AiChatEngine(private val context: Context) {
             "social anxiety", "public speaking", "presentation nerves", "exam nerves",
             "pounding heart", "heart racing", "mind keeps wandering", "can't stop my mind",
             "cant stop my mind", "racing heart", "trauma", "traumatic", "ptsd",
-            "post-traumatic", "triggered") ->
+            "post-traumatic", "triggered", "hyperventilat", "chest tight",
+            "tight chest", "can't breathe", "cant breathe") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
             handleTinnitus().also { lastTopic = "tinnitus" }
@@ -155,11 +164,14 @@ class AiChatEngine(private val context: Context) {
             "empty inside", "feel empty", "feeling empty", "numb", "hopeless",
             "hollow", "disconnected", "meaningless", "no motivation", "nothing matters",
             "breakup", "broke up", "split up", "feeling blue", "feeling lost",
-            "lost and", "i feel lost", "blue today", "can't find", "lost myself") ->
+            "lost and", "i feel lost", "blue today", "can't find", "lost myself",
+            "bereaved", "bereavement", "loss of", "lost someone", "passed away",
+            "died", "death of", "missing them", "miss them so") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out",
             "too much", "cant cope", "can't cope", "too busy", "overloaded",
-            "swamped", "falling apart", "breaking point", "can't take") ->
+            "swamped", "falling apart", "breaking point", "can't take",
+            "work stress", "work anxiety", "work is killing me", "job stress") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
         any(lower, "angry", "anger", "furious", "mad", "frustrated", "frustration",
             "rage", "irritated", "irritable", "annoyed", "wound up", "agitated") ->
@@ -304,7 +316,7 @@ class AiChatEngine(private val context: Context) {
             "${SoundType.CIRCUIT_THUNDERCLAP_1.emoji} ${SoundType.CIRCUIT_THUNDERCLAP_1.displayName} — ${SoundType.CIRCUIT_THUNDERCLAP_1.description}\n\n" +
             "Before you start: two deep breaths, then set a single clear intention for the next 25 minutes. " +
             "Energy without direction is just noise — give it somewhere to go.\n\n" +
-            "Want a 30-second activation to go with this? 🎵",
+            "Want a 30-second activation? Or say 'technique' for an energy micro-practice. 🎵",
             primary
         )
     }
@@ -832,6 +844,19 @@ class AiChatEngine(private val context: Context) {
         "it settles the mind so the words come more easily\n\n" +
         "Want Spirit to walk you through a brief loving-kindness practice to open the reflection? 🤍",
         SoundType.EVENING_REVIEW
+    )
+
+    private fun handleCrisis(): Pair<String, SoundType?> = Pair(
+        "You matter. 🤍\n\n" +
+        "If you're having thoughts of ending your life or harming yourself, " +
+        "please reach out to someone trained to help right now:\n\n" +
+        "🇬🇧 Samaritans: 116 123 (free, 24/7)\n" +
+        "🇺🇸 988 Suicide & Crisis Lifeline: call or text 988\n" +
+        "🌍 Crisis Text Line: text HOME to 741741\n\n" +
+        "I'm here with you — but a real person on those lines can offer something I can't.\n\n" +
+        "You don't have to carry this alone. If you'd like, I can also play something " +
+        "gentle while you gather the courage to reach out. 🌙",
+        SoundType.HESYCHASM
     )
 
     private fun handleAlarm(): Pair<String, SoundType?> = Pair(
