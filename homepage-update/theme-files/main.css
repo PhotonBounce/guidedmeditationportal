@@ -2913,6 +2913,14 @@ border-radius: 50%; cursor: pointer; font-size: 16px;
 .pb-brain__msg--me .pb-brain__ts{ text-align:right; }
 .pb-brain__msg--bot .pb-brain__ts{ text-align:left; }
 .pb-brain__msg:hover .pb-brain__ts{ opacity:1; }
+/* Word count badge on bot replies — shown on hover alongside timestamp */
+.pb-brain__wc{
+  display:block; font-size:9px; color:rgba(255,255,255,.2);
+  text-align:right; margin-top:2px;
+  opacity:0; transition:opacity .2s;
+  pointer-events:none; user-select:none;
+}
+.pb-brain__msg:hover .pb-brain__wc{ opacity:1; }
 /* "Was this helpful?" thumbs feedback on bot messages */
 .pb-brain__fb{
   display:flex; gap:4px; margin-top:6px;

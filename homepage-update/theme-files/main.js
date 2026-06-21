@@ -659,6 +659,17 @@
       _tsEl.textContent = _tn.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       _tsEl.setAttribute('datetime', _tn.toISOString());
       div.appendChild(_tsEl);
+      // Word count badge on bot replies — gives a sense of response length at a glance.
+      if (cls === 'bot') {
+        var _wcWords = plain(text).trim().split(/\s+/).filter(Boolean).length;
+        if (_wcWords > 0) {
+          var _wcBadge = document.createElement('span');
+          _wcBadge.className = 'pb-brain__wc';
+          _wcBadge.textContent = _wcWords + ' word' + (_wcWords !== 1 ? 's' : '');
+          _wcBadge.setAttribute('aria-hidden', 'true');
+          div.appendChild(_wcBadge);
+        }
+      }
       log.appendChild(div);
       // After the 2nd bot message (first substantive reply), inject follow-up action chips.
       if (cls === 'bot') {

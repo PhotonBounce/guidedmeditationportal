@@ -561,6 +561,59 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre35-a) Subscription box / DTC subscription brand / product subscription / mystery box website.
+	if ( $has( [ 'subscription box website', 'subscription website', 'subscription box', 'monthly box website', 'dtc subscription website', 'direct to consumer website', 'product subscription website', 'mystery box website', 'gift box subscription website', 'beauty box website', 'snack box website', 'book subscription website', 'hobby box website', 'kids subscription box', 'pet subscription box website' ] ) ) {
+		return $nl( [
+			"Subscription box websites live or die by conversion rate, churn, and average order value &mdash; here&rsquo;s how to build one that performs:",
+			'',
+			"&bull; <strong>WooCommerce Subscriptions</strong> &mdash; monthly, quarterly, annual billing; pause and skip options (pause > cancel for churn reduction); gift subscription option; trial or first-box discount; Stripe + PayPal; from <strong>$600</strong>",
+			"&bull; <strong>Box contents page / what&rsquo;s inside</strong> &mdash; current month&rsquo;s box reveal with product photography; spoiler count (e.g. &ldquo;6&ndash;8 full-size products&rdquo;); retail value callout (&ldquo;&pound;80 value for &pound;29.99&rdquo;); past box archive as proof of quality",
+			"&bull; <strong>Quiz or personalisation flow</strong> &mdash; 3&ndash;5 question style quiz (skin type, dietary preference, interests) before checkout; feeds curation logic or WooCommerce product variations; reduces perceived risk; from <strong>$350</strong>",
+			"&bull; <strong>Referral programme</strong> &mdash; ReferralHero or WooCommerce Coupons; subscriber gets a unique link; reward per paid referral (free box, discount, bonus product); from <strong>$300</strong>",
+			"&bull; <strong>Subscriber portal</strong> &mdash; WooCommerce Subscriptions self-service; skip a month, update address, swap plan, view past boxes; self-service eliminates support tickets and reduces churn; from <strong>$300</strong>",
+			"&bull; <strong>Waitlist and scarcity</strong> &mdash; sold-out months create FOMO; email capture with launch notification; countdown timer for next box cutoff; from <strong>$150</strong>",
+			"&bull; <strong>Trust and social proof</strong> &mdash; Trustpilot widget; UGC gallery (Instagram unboxing photos via Taggbox or Curator); influencer mention logos; key subscriber-count milestone badge",
+			"&bull; <strong>From $700</strong> subscriptions, box reveal, and subscriber portal; <strong>$1,300+</strong> with quiz personalisation, referral programme, and influencer UGC gallery",
+			'',
+			"What&rsquo;s the niche, what&rsquo;s the price point, and how many active subscribers are you targeting in year one?",
+		] );
+	}
+
+	// 0d-pre35-b) Mortgage broker / IFA / financial planner / regulated financial advice website.
+	if ( $has( [ 'mortgage broker website', 'mortgage adviser website', 'mortgage advisor website', 'ifa website', 'independent financial adviser website', 'financial planner website', 'financial planning website', 'wealth management website', 'financial advice website', 'remortgage website', 'buy to let mortgage website', 'first time buyer website', 'equity release website', 'protection adviser website', 'pension adviser website', 'regulated financial advice website' ] ) ) {
+		return $nl( [
+			"Mortgage broker and IFA websites operate under strict FCA regulation and must balance lead generation with compliance &mdash; here&rsquo;s the standard build:",
+			'',
+			"&bull; <strong>FCA compliance essentials</strong> &mdash; FCA number and &ldquo;authorised and regulated by the Financial Conduct Authority&rdquo; in footer; risk warnings on relevant pages (e.g. &ldquo;your home may be repossessed if you do not keep up repayments on your mortgage&rdquo;); FSCS membership logo; cookie and privacy policy; not optional",
+			"&bull; <strong>Service pages</strong> &mdash; one per specialism (residential mortgage, remortgage, buy-to-let, first-time buyer, equity release, protection, pension); each with explainer content, FAQ schema, and &ldquo;book a free consultation&rdquo; CTA; from <strong>$350</strong> per page or <strong>$700</strong> for first four",
+			"&bull; <strong>Mortgage calculator</strong> &mdash; repayment vs interest-only calculator; LTV and rate inputs; indicative monthly payment output; strong lead magnet; note: must carry &ldquo;for illustrative purposes only&rdquo; disclaimer; from <strong>$350</strong>",
+			"&bull; <strong>Free consultation booking</strong> &mdash; Calendly or custom WP booking; phone, video, or in-office option; pre-qualifying questions (purchase / remortgage / BTL, approximate value, deposit); from <strong>$250</strong>",
+			"&bull; <strong>Client portal or secure form</strong> &mdash; document upload (payslips, bank statements, ID); Gravity Forms or Formstack with GDPR consent; replaces unencrypted email; from <strong>$300</strong>",
+			"&bull; <strong>Case studies</strong> &mdash; anonymised client scenarios (adverse credit, self-employed, large loan, BTL portfolio); builds confidence for clients with complex situations",
+			"&bull; <strong>From $650</strong> compliance-compliant site with service pages and booking; <strong>$1,200+</strong> with calculator, portal, case studies, and full service range",
+			'',
+			"Are you a mortgage broker, an IFA, or both? Whole-of-market or restricted panel?",
+		] );
+	}
+
+	// 0d-pre35-c) Therapist / counsellor / psychologist / mental health practice / psychiatry website.
+	if ( $has( [ 'therapist website', 'counsellor website', 'counselor website', 'psychologist website', 'psychotherapist website', 'mental health website', 'cbt website', 'cognitive behavioural therapy website', 'anxiety therapist website', 'depression therapist website', 'trauma therapist website', 'bereavement counsellor website', 'relationship therapist website', 'couples therapy website', 'eating disorder therapist website', 'adhd therapist website', 'private psychiatry website', 'psychiatric clinic website' ] ) ) {
+		return $nl( [
+			"Therapy and counselling websites must convey warmth, safety, and professional credibility simultaneously &mdash; here&rsquo;s how to build one that converts enquiries:",
+			'',
+			"&bull; <strong>Design language</strong> &mdash; calm palette (soft neutrals, muted greens, warm blues); photography of the therapist in their actual consulting room (not stock); no clinical or medical imagery; no aggressive CTAs; generous whitespace; accessibility is non-negotiable (18px+ body text, high contrast, keyboard navigation)",
+			"&bull; <strong>Speciality pages</strong> &mdash; one per presenting issue (anxiety, depression, trauma / PTSD, OCD, eating disorders, bereavement, relationship difficulties, self-esteem, addiction); each targets its own keyword cluster; from <strong>$300</strong> per page",
+			"&bull; <strong>Therapist profile</strong> &mdash; BACP / UKCP / BPS accreditation; modality (CBT, EMDR, psychodynamic, person-centred, integrative, ACT); years of experience; supervised hours; professional indemnity insurance; membership number; building trust is everything",
+			"&bull; <strong>Online session booking</strong> &mdash; Calendly or Jane App; session type (video / phone / in-person); 50-minute or 80-minute slot; weekly or fortnightly; first session fee is often lower; Stripe payment; from <strong>$250</strong>",
+			"&bull; <strong>Therapy process page</strong> &mdash; &ldquo;what happens in the first session&rdquo; walkthrough; reduces fear of the unknown; most under-used conversion tool in therapy sites",
+			"&bull; <strong>Fees and insurance</strong> &mdash; transparent pricing (typical private therapy &pound;60&ndash;&pound;150 per session); BUPA / AXA / Cigna / WPA insurance panel membership if applicable; EAP work",
+			"&bull; <strong>Crisis resources</strong> &mdash; Samaritans, Crisis Text Line, MIND; required both ethically and practically; position these clearly without alarming general enquirers",
+			"&bull; <strong>From $500</strong> profile and booking; <strong>$1,000+</strong> with speciality pages, fee schedule, therapy process guide, and insurance information",
+			'',
+			"One therapist or a group practice? Face-to-face, online, or both? Any specialist modality or presenting issue focus?",
+		] );
+	}
+
 	// 0d-pre34-a) Hotel / boutique hotel / guesthouse / B&B / self-catering / apart-hotel website.
 	if ( $has( [ 'hotel website', 'boutique hotel website', 'guesthouse website', 'bed and breakfast website', 'b&b website', 'self-catering website', 'holiday cottage website', 'holiday let website', 'apart-hotel website', 'serviced apartment website', 'lodge website', 'inn website', 'hotel booking website', 'accommodation website', 'hostel website', 'hotel direct booking' ] ) ) {
 		return $nl( [
