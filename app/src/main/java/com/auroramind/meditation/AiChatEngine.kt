@@ -167,7 +167,10 @@ class AiChatEngine(private val context: Context) {
             "can't turn off", "cant turn off", "turn my brain off",
             "brain won't stop", "brain wont stop",
             "never feel rested", "never fully rested", "wake up exhausted",
-            "wake up tired", "wake up unrested") ||
+            "wake up tired", "wake up unrested",
+            "lucid dreaming", "lucid dream", "have lucid dreams",
+            "long covid", "post covid", "post-covid", "post-viral fatigue",
+            "chronic fatigue syndrome", "me/cfs") ||
         anyWord(lower, "nap") ->
             handleSleep().also { lastTopic = "sleep" }
         any(lower, "focus", "study", "concentrat", "productivity",
@@ -378,7 +381,13 @@ class AiChatEngine(private val context: Context) {
             "coping with loss", "cope with loss", "dealing with loss",
             "living with grief", "coping with grief", "cope with grief",
             "identity crisis", "midlife crisis", "mid-life crisis",
-            "quarterlife crisis", "quarter-life crisis", "quarter life crisis") ||
+            "quarterlife crisis", "quarter-life crisis", "quarter life crisis",
+            "dark night of the soul", "spiritual dryness",
+            "narcissistic abuse", "narcissist partner", "narcissistic partner",
+            "coercive control", "emotional manipulation",
+            "codependency", "codependent", "codependent relationship",
+            "avoidant attachment", "attachment wound", "attachment issues",
+            "fearful avoidant", "disorganized attachment") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
@@ -435,7 +444,14 @@ class AiChatEngine(private val context: Context) {
             "drowning in", "drowning at work", "drowning in work",
             "hate my job", "hate this job", "hate going to work", "hate my work",
             "can't catch a break", "cant catch a break",
-            "just need a break", "need a break") ||
+            "just need a break", "need a break",
+            "sandwich generation", "caring for aging parents", "caring for elderly parents",
+            "caring for elderly", "elder care", "eldercare",
+            "quiet quitting", "quiet quit",
+            "financial crisis", "financial pressure", "financial strain",
+            "money pressure", "debt problems", "serious debt", "drowning in debt",
+            "parenting a teenager", "parenting teens", "raising a teenager",
+            "my teenager is", "teenagers are") ||
         anyWord(lower, "toxic") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
         any(lower, "angry", "furious", "frustrated", "frustration",

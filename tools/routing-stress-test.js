@@ -60,7 +60,10 @@ function route(lower, lastTopic) {
     "can't turn off","cant turn off","turn my brain off",
     "brain won't stop","brain wont stop",
     "never feel rested","never fully rested","wake up exhausted",
-    "wake up tired","wake up unrested"]) ||
+    "wake up tired","wake up unrested",
+    "lucid dreaming","lucid dream","have lucid dreams",
+    "long covid","post covid","post-covid","post-viral fatigue",
+    "chronic fatigue syndrome","me/cfs"]) ||
     anyWord(lower,["nap"])) return "sleep";
   // 7. focus
   if(any(lower,["focus","study","concentrat","productivity","procrastinat","writing","brain fog","adhd",
@@ -247,6 +250,12 @@ function route(lower, lastTopic) {
     "living with grief","coping with grief","cope with grief",
     "identity crisis","midlife crisis","mid-life crisis",
     "quarterlife crisis","quarter-life crisis","quarter life crisis",
+    "dark night of the soul","spiritual dryness",
+    "narcissistic abuse","narcissist partner","narcissistic partner",
+    "coercive control","emotional manipulation",
+    "codependency","codependent","codependent relationship",
+    "avoidant attachment","attachment wound","attachment issues",
+    "fearful avoidant","disorganized attachment",
     "in a funk","bit of a funk","in a bit of a funk",
     "in my feelings","in the dumps","down in the dumps",
     "need hope","need some hope","lost all hope",
@@ -308,7 +317,14 @@ function route(lower, lastTopic) {
     "drowning in","drowning at work","drowning in work",
     "hate my job","hate this job","hate going to work","hate my work",
     "can't catch a break","cant catch a break",
-    "just need a break","need a break"]) ||
+    "just need a break","need a break",
+    "sandwich generation","caring for aging parents","caring for elderly parents",
+    "caring for elderly","elder care","eldercare",
+    "quiet quitting","quiet quit",
+    "financial crisis","financial pressure","financial strain",
+    "money pressure","debt problems","serious debt","drowning in debt",
+    "parenting a teenager","parenting teens","raising a teenager",
+    "my teenager is","teenagers are"]) ||
     anyWord(lower,["toxic"])) return "overwhelm";
   // 17. anger
   if(any(lower,["angry","furious","frustrated","frustration","rage",
@@ -585,6 +601,19 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R94: overwhelm (financial crisis/quiet quitting/sandwich gen/teen parenting), sadness (dark night/narcissistic abuse/codependency/avoidant), sleep (lucid dreams/long covid)
+  ["I'm drowning in debt and don't know what to do", "", "overwhelm", "drowning in debt → overwhelm"],
+  ["quiet quitting is the only way I can cope at work", "", "overwhelm", "quiet quitting → overwhelm"],
+  ["I'm part of the sandwich generation caring for everyone", "", "overwhelm", "sandwich generation → overwhelm"],
+  ["parenting a teenager is exhausting me", "", "overwhelm", "parenting a teenager → overwhelm"],
+  ["I'm under serious financial pressure right now", "", "overwhelm", "financial pressure → overwhelm"],
+  ["I think I'm going through a dark night of the soul", "", "sadness", "dark night of the soul → sadness"],
+  ["I survived narcissistic abuse and still healing", "", "sadness", "narcissistic abuse → sadness"],
+  ["I've been in a codependent relationship for years", "", "sadness", "codependent → sadness (via relationship)"],
+  ["I have an avoidant attachment style", "", "sadness", "avoidant attachment → sadness"],
+  ["I'm interested in lucid dreaming", "", "sleep", "lucid dreaming → sleep"],
+  ["long covid has completely wrecked my sleep", "", "sleep", "long covid → sleep"],
 
   // R93: anger (fuming/grudge), sadness (coping with loss/identity crisis/midlife crisis), shameGuilt (body dysmorphia)
   ["I'm absolutely fuming right now", "", "anger", "fuming → anger"],
