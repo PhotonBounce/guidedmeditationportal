@@ -637,7 +637,8 @@ class AiChatEngine(private val context: Context) {
         "Loving-Kindness (Metta) — offering yourself the same warmth you'd give a close friend\n" +
         "${SoundType.HESYCHASM.emoji} ${SoundType.HESYCHASM.displayName} — a gentle, wordless prayer of the heart; no effort required\n\n" +
         "You don't have to feel better right away. Spirit is here.\n\n" +
-        "Would you like me to walk you through a loving-kindness practice? 🤍",
+        "Would you like me to walk you through a loving-kindness practice? 🤍" +
+        progLine("compassion5"),
         SoundType.TONGLEN
     )
 
@@ -871,7 +872,8 @@ class AiChatEngine(private val context: Context) {
         "warmth you would give a friend who came to you with this exact feeling.\n\n" +
         "Try this: place a hand on your heart. Say quietly — " +
         "'I am struggling. I am still worthy of care.'\n\n" +
-        "Want me to walk you through a self-compassion practice? 🤍",
+        "Want me to walk you through a self-compassion practice? 🤍" +
+        progLine("compassion5"),
         SoundType.HESYCHASM
     )
 
