@@ -73,7 +73,10 @@ function route(lower, lastTopic) {
     "melatonin","taking melatonin","melatonin supplement",
     "magnesium for sleep","sleep supplement",
     "vivid dreams","vivid dream","recurring dreams","recurring dream",
-    "strange dream","weird dream","unsettling dream","dreams every night"]) ||
+    "strange dream","weird dream","unsettling dream","dreams every night",
+    "had a dream","keep having dreams","dream last night",
+    "dreamed about","dreamt about","keep dreaming","remember my dreams",
+    "disturbing dreams","disturbing dream"]) ||
     anyWord(lower,["nap","rls"])) return "sleep";
   // 7. focus
   if(any(lower,["focus","study","concentrat","productivity","procrastinat","writing","brain fog","adhd",
@@ -498,7 +501,12 @@ function route(lower, lastTopic) {
     "wonderful","brilliant","fantastic","great job","well done","cheers",
     "that helped","that was helpful","you helped","exactly what i needed",
     "loved it","that really helped","that really worked","really enjoyed that",
-    "loved that session","enjoyed that session"])) return "positive";
+    "loved that session","enjoyed that session",
+    "feel good","feeling good","feel great","feeling great",
+    "feel better","feeling better","feel much better","feeling much better",
+    "feel happy","feeling happy","in a good mood","good mood today",
+    "had a good day","great day today","mood is better","mood has lifted",
+    "lifted my mood","feeling positive"])) return "positive";
   // 21. timer
   if(any(lower,["timer","sleep timer","how long should","how long to meditate","how long for","duration","how many minutes"])) return "timer";
   // 22. alarm
@@ -641,7 +649,7 @@ var tests = [
 
   // R54: "not great" / "not okay" — must NOT hit positive route
   ["i'm not feeling so great today", "", "NOT:positive", "not great must not trigger positive"],
-  ["i'm feeling great today", "", "general", "feeling great → general (isWell branch says 'lovely to hear')"],
+  ["i'm feeling great today", "", "positive", "feeling great → positive (R107: added 'feeling great' keyword)"],
   ["not feeling ok", "", "NOT:positive", "not ok → sadness, not positive"],
   ["i'm not doing well", "", "NOT:positive", "not doing well → sadness"],
   ["not myself lately", "", "NOT:positive", "not myself → sadness"],
@@ -750,6 +758,16 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R107: positive (feel good/better/great/happy), sleep (had a dream/dreamed about)
+  ["I feel good about where I am now", "", "positive", "feel good → positive (avoid 'so' insertion between feel and good)"],
+  ["I'm feeling much better now", "", "positive", "feeling better → positive"],
+  ["I feel great right now actually", "", "positive", "feel great → positive (avoid 'rest' → relax preemption)"],
+  ["I feel happy for the first time in ages", "", "positive", "feel happy → positive"],
+  ["I'm in such a good mood today", "", "positive", "good mood today → positive"],
+  ["I had a strange dream last night", "", "sleep", "had a dream → sleep"],
+  ["I keep dreaming about falling", "", "sleep", "keep dreaming → sleep"],
+  ["I dreamed about my late father", "", "sleep", "dreamed about → sleep"],
 
   // R106: sleep (vivid/recurring dreams), focus (revision/pomodoro), energy (cortisol/adrenal), techniques (tapping/eft), sadness (divorce/broke up)
   ["I keep having vivid dreams every night", "", "sleep", "vivid dreams → sleep"],

@@ -180,7 +180,10 @@ class AiChatEngine(private val context: Context) {
             "melatonin", "taking melatonin", "melatonin supplement",
             "magnesium for sleep", "sleep supplement",
             "vivid dreams", "vivid dream", "recurring dreams", "recurring dream",
-            "strange dream", "weird dream", "unsettling dream", "dreams every night") ||
+            "strange dream", "weird dream", "unsettling dream", "dreams every night",
+            "had a dream", "keep having dreams", "dream last night",
+            "dreamed about", "dreamt about", "keep dreaming", "remember my dreams",
+            "disturbing dreams", "disturbing dream") ||
         anyWord(lower, "nap", "rls") ->
             handleSleep().also { lastTopic = "sleep" }
         any(lower, "focus", "study", "concentrat", "productivity",
@@ -629,7 +632,12 @@ class AiChatEngine(private val context: Context) {
             "life is good", "all is well", "feeling really good",
             "that helped", "that was helpful", "you helped", "exactly what i needed",
             "loved it", "that really helped", "that really worked", "really enjoyed that",
-            "loved that session", "enjoyed that session") ->
+            "loved that session", "enjoyed that session",
+            "feel good", "feeling good", "feel great", "feeling great",
+            "feel better", "feeling better", "feel much better", "feeling much better",
+            "feel happy", "feeling happy", "in a good mood", "good mood today",
+            "had a good day", "great day today", "mood is better", "mood has lifted",
+            "lifted my mood", "feeling positive") ->
             handlePositive().also { lastTopic = "" }
         any(lower, "timer", "sleep timer", "how long should", "how long to meditate",
             "how long for", "duration", "how many minutes") ->
