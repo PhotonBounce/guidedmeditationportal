@@ -139,7 +139,9 @@ class AiChatEngine(private val context: Context) {
             "pounding heart", "heart racing", "mind keeps wandering", "can't stop my mind",
             "cant stop my mind", "racing heart", "trauma", "traumatic", "ptsd",
             "post-traumatic", "triggered", "hyperventilat", "chest tight",
-            "tight chest", "can't breathe", "cant breathe") ->
+            "tight chest", "can't breathe", "cant breathe",
+            "fear", "scared", "frightened", "phobia", "afraid",
+            "worry", "worried", "worrying", "i worry", "constant worry") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
             handleTinnitus().also { lastTopic = "tinnitus" }
@@ -154,7 +156,8 @@ class AiChatEngine(private val context: Context) {
             "loving kindness", "visualization", "visualisation", "how do i meditate",
             "how to meditate", "types of meditation", "autogenic", "box breath",
             "4-7-8", "4 7 8", "physiological sigh", "progressive muscle", "metta",
-            "self-compassion", "self compassion", "compassion practice", "kind to myself") ->
+            "self-compassion", "self compassion", "compassion practice", "kind to myself",
+            "self esteem", "self-esteem", "low confidence", "build confidence", "worth") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
@@ -166,7 +169,9 @@ class AiChatEngine(private val context: Context) {
             "breakup", "broke up", "split up", "feeling blue", "feeling lost",
             "lost and", "i feel lost", "blue today", "can't find", "lost myself",
             "bereaved", "bereavement", "loss of", "lost someone", "passed away",
-            "died", "death of", "missing them", "miss them so") ->
+            "died", "death of", "missing them", "miss them so",
+            "shame", "ashamed", "guilt", "guilty", "i feel guilty",
+            "relationship", "divorce", "divorc", "separation", "separated from") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out",
             "too much", "cant cope", "can't cope", "too busy", "overloaded",
@@ -195,7 +200,8 @@ class AiChatEngine(private val context: Context) {
             "which track", "what track", "play list", "playlist") ->
             handleAmbient().also { lastTopic = "" }
         any(lower, "headache", "migraine", "pain", "ache", "sore", "tension headache",
-            "physical", "body tension", "muscle tension", "stiff") ->
+            "physical", "body tension", "muscle tension", "stiff",
+            "chronic pain", "chronic illness", "fibromyalgia", "arthritis", "back pain") ->
             handlePain().also { lastTopic = "pain" }
         any(lower, "grateful", "gratitude", "journal", "journaling", "reflect",
             "reflection", "intention", "intentions", "thankful", "thankfulness") ->
