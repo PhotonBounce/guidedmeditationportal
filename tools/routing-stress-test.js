@@ -81,7 +81,9 @@ function route(lower, lastTopic) {
     "mind wanders","wandering mind",
     "executive function","executive dysfunction",
     "working memory","cognitive load","mental load",
-    "need clarity","lack of clarity","need to think clearly"]) ||
+    "need clarity","lack of clarity","need to think clearly",
+    "time blindness","neurodivergent",
+    "grounding"]) ||
     anyWord(lower,["read","code"])) return "focus";
   // 8. energy
   if(any(lower,["energy","energise","energize","wake up","waking up","uplift","motivat",
@@ -129,13 +131,16 @@ function route(lower, lastTopic) {
     "neck tension","shoulder tension",
     "pms","pmdd","premenstrual","period symptoms",
     "hormonal anxiety","hormonal mood",
+    "sensory overload","sensory overwhelm","sensory sensitivity",
+    "rejection sensitive","rejection sensitivity",
+    "rejection sensitive dysphoria",
     "unsettled","uncertainty","uncertain","uneasy",
     "mind chatter","mental chatter","busy mind",
     "chattering mind","monkey mind",
     "stuck in my head","living in my head","all in my head",
     "decompress","decompressing","need to decompress",
     "need a breather","catch my breath","need some space"]) ||
-    anyWord(lower,["rest","tense"])) return "relax";
+    anyWord(lower,["rest","tense","rsd"])) return "relax";
   // 10. tinnitus
   if(any(lower,["tinnitus","ringing in","ear ring","hearing","buzz in my ear"])) return "tinnitus";
   // 11. baby (non-sleep)
@@ -228,6 +233,9 @@ function route(lower, lastTopic) {
     "rough patch","going through a rough time","going through a hard time",
     "in a dark place","dark place","bad place right now",
     "hard time right now","difficult place",
+    "really struggling","been struggling","struggle is real",
+    "emotional healing","healing journey","still healing",
+    "trying to heal","on a healing journey",
     "in a funk","bit of a funk","in a bit of a funk",
     "in my feelings","in the dumps","down in the dumps",
     "need hope","need some hope","lost all hope",
@@ -562,6 +570,16 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R91: focus (grounding/neurodivergent), relax (sensory overload/RSD), sadness (healing journey/really struggling)
+  ["grounding exercises help with anxiety", "", "focus", "grounding → focus (before energy/exercise preempts)"],
+  ["I'm neurodivergent and need help focusing", "", "focus", "neurodivergent → focus"],
+  ["I think I have time blindness with my ADHD", "", "focus", "time blindness → focus"],
+  ["I'm experiencing sensory overload right now", "", "relax", "sensory overload → relax"],
+  ["I have rejection sensitive dysphoria", "", "relax", "rejection sensitive dysphoria → relax"],
+  ["I suffer from RSD so rejection really hits hard", "", "relax", "RSD → relax (anyWord)"],
+  ["I'm really struggling at the moment", "", "sadness", "really struggling → sadness"],
+  ["I'm on a healing journey after my divorce", "", "sadness", "healing journey → sadness"],
 
   // R90: relax (decompress/breather), energy (recharge), sadness (rough patch/dark place), shameGuilt (not measuring up), overwhelm (need a break)
   ["I need to decompress after a long day", "", "relax", "decompress → relax"],

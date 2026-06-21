@@ -189,7 +189,9 @@ class AiChatEngine(private val context: Context) {
             "mind wanders", "wandering mind",
             "executive function", "executive dysfunction",
             "working memory", "cognitive load", "mental load",
-            "need clarity", "lack of clarity", "need to think clearly") ||
+            "need clarity", "lack of clarity", "need to think clearly",
+            "time blindness", "neurodivergent",
+            "grounding") ||
         anyWord(lower, "read", "code") ->
             handleFocus().also { lastTopic = "focus" }
         any(lower, "energy", "energise", "energize", "wake up", "waking up",
@@ -235,19 +237,22 @@ class AiChatEngine(private val context: Context) {
             "nervous system regulation", "regulate my nervous system",
             "emotional regulation", "regulate my emotions", "emotional dysregulation",
             "can't regulate", "cant regulate",
-            "drinking to cope", "drink to cope", "alcohol to cope", "drink to forget",
-            "drinking to forget", "using alcohol", "using drink",
             "muscle tension", "body tension", "physical tension",
             "neck tension", "shoulder tension",
             "pms", "pmdd", "premenstrual", "period symptoms",
             "hormonal anxiety", "hormonal mood",
+            "sensory overload", "sensory overwhelm", "sensory sensitivity",
+            "rejection sensitive", "rejection sensitivity",
+            "rejection sensitive dysphoria",
             "unsettled", "uncertainty", "uncertain", "uneasy",
             "mind chatter", "mental chatter", "busy mind",
             "chattering mind", "monkey mind",
             "stuck in my head", "living in my head", "all in my head",
             "decompress", "decompressing", "need to decompress",
-            "need a breather", "catch my breath", "need some space") ||
-        anyWord(lower, "rest", "tense") ->
+            "need a breather", "catch my breath", "need some space",
+            "drinking to cope", "drink to cope", "alcohol to cope", "drink to forget",
+            "drinking to forget", "using alcohol", "using drink") ||
+        anyWord(lower, "rest", "tense", "rsd") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
             handleTinnitus().also { lastTopic = "tinnitus" }
@@ -359,7 +364,10 @@ class AiChatEngine(private val context: Context) {
             "find meaning", "sense of meaning",
             "rough patch", "going through a rough time", "going through a hard time",
             "in a dark place", "dark place", "bad place right now",
-            "hard time right now", "difficult place") ||
+            "hard time right now", "difficult place",
+            "really struggling", "been struggling", "struggle is real",
+            "emotional healing", "healing journey", "still healing",
+            "trying to heal", "on a healing journey") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
