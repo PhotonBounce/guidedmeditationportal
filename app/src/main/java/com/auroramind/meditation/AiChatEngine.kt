@@ -106,6 +106,10 @@ class AiChatEngine(private val context: Context) {
         any(lower, "focus", "work", "study", "concentrate", "productivity",
             "read", "code", "writing", "attention", "adhd") ->
             handleFocus().also { lastTopic = "focus" }
+        any(lower, "energy", "energise", "energize", "wake up", "waking up",
+            "uplift", "motivation", "motivated", "active", "exercise", "workout",
+            "morning boost", "morning energy") ->
+            handleEnergy().also { lastTopic = "energy" }
         any(lower, "relax", "calm", "stress", "anxiety", "anxious", "breathe",
             "unwind", "rest", "nervous", "tense", "panic") ->
             handleRelax().also { lastTopic = "relax" }
@@ -248,6 +252,25 @@ class AiChatEngine(private val context: Context) {
         SoundType.SOHAM
     )
 
+    private fun handleEnergy(): Pair<String, SoundType?> {
+        val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        val (primary, secondary) = if (hour < 10)
+            SoundType.ZHAN_ZHUANG to SoundType.CIRCUIT_THUNDERCLAP
+        else
+            SoundType.CIRCUIT_THUNDERCLAP to SoundType.NINE_TO_FIVE
+        return Pair(
+            "⚡ Energy & Activation\n\n" +
+            "A stack to spark focus and presence:\n\n" +
+            "${primary.emoji} ${primary.displayName} — ${primary.description}\n" +
+            "${secondary.emoji} ${secondary.displayName} — ${secondary.description}\n" +
+            "${SoundType.CIRCUIT_THUNDERCLAP_1.emoji} ${SoundType.CIRCUIT_THUNDERCLAP_1.displayName} — ${SoundType.CIRCUIT_THUNDERCLAP_1.description}\n\n" +
+            "Before you start: two deep breaths, then set a single clear intention for the next 25 minutes. " +
+            "Energy without direction is just noise — give it somewhere to go.\n\n" +
+            "Want a 30-second activation to go with this? 🎵",
+            primary
+        )
+    }
+
     private fun handleTinnitus(): Pair<String, SoundType?> = Pair(
         "👂 Gentle Tinnitus Support\n\n" +
         "Spirit's suggestions for easing the focus on ringing:\n\n" +
@@ -376,16 +399,19 @@ class AiChatEngine(private val context: Context) {
     )
 
     private fun handleAmbient(): Pair<String, SoundType?> = Pair(
-        "🌌 Guided Meditations — Narrated Practices\n\n" +
-        "Portal features a full library of guided meditation sessions — gentle, " +
-        "narrated practices for releasing tension, grounding the body, and resting " +
-        "the mind:\n\n" +
-        "Breathing & release: Autogenic Calm, Progressive Muscle Release\n" +
-        "Grounding & body-scan: Zhan Zhuang, Vipassana\n" +
-        "Spacious awareness: Thien, Tonglen, Sumara, Muraqaba\n\n" +
-        "Each session is a calm, narrated guide — easy to follow, easy to sink into.\n\n" +
-        "Try 'Soham' for winding down, or 'Tonglen' any time " +
-        "you need permission to simply rest.",
+        "🌌 Guided Meditation Library\n\n" +
+        "Portal features a full library of narrated practices:\n\n" +
+        "Breathing & release: ${SoundType.AUTOGENIC_CALM.emoji} ${SoundType.AUTOGENIC_CALM.displayName}, " +
+        "${SoundType.PROGRESSIVE_MUSCLE_RELEASE.emoji} ${SoundType.PROGRESSIVE_MUSCLE_RELEASE.displayName}\n" +
+        "Grounding & body-scan: ${SoundType.ZHAN_ZHUANG.emoji} ${SoundType.ZHAN_ZHUANG.displayName}, " +
+        "${SoundType.VIPASSANA.emoji} ${SoundType.VIPASSANA.displayName}\n" +
+        "Spacious awareness: ${SoundType.THIEN.emoji} ${SoundType.THIEN.displayName}, " +
+        "${SoundType.TONGLEN.emoji} ${SoundType.TONGLEN.displayName}, " +
+        "${SoundType.SUMARA.emoji} ${SoundType.SUMARA.displayName}\n" +
+        "Devotional quiet: ${SoundType.MURAQABA.emoji} ${SoundType.MURAQABA.displayName}, " +
+        "${SoundType.HESYCHASM.emoji} ${SoundType.HESYCHASM.displayName}\n\n" +
+        "Try ${SoundType.SOHAM.emoji} ${SoundType.SOHAM.displayName} for winding down, or " +
+        "${SoundType.TONGLEN.emoji} ${SoundType.TONGLEN.displayName} any time you need permission to simply rest.",
         SoundType.SOHAM
     )
 
@@ -586,6 +612,16 @@ class AiChatEngine(private val context: Context) {
             "Progressive Muscle Release 💪 is queued — let the narration guide you. 🤍",
             SoundType.PROGRESSIVE_MUSCLE_RELEASE
         )
+        "energy" -> Pair(
+            "⚡ 30-Second Activation — Anywhere\n\n" +
+            "1. Stand up. Feet shoulder-width, spine tall.\n" +
+            "2. Take 3 big breaths: inhale fully, hold 2 seconds, release fast.\n" +
+            "3. Roll your shoulders back twice.\n" +
+            "4. Set one micro-goal for the next 25 minutes — just one.\n\n" +
+            "Direction + breath = energy. That's the whole equation.\n\n" +
+            "${SoundType.CIRCUIT_THUNDERCLAP.emoji} ${SoundType.CIRCUIT_THUNDERCLAP.displayName} is queued — let it carry you forward. 🎵",
+            SoundType.CIRCUIT_THUNDERCLAP
+        )
         "focus" -> Pair(
             "🧠 Pre-Focus Reset — 2 Minutes\n\n" +
             "Before you open the work, do this:\n\n" +
@@ -613,11 +649,11 @@ class AiChatEngine(private val context: Context) {
     private fun handlePain(): Pair<String, SoundType?> = Pair(
         "💜 Physical tension and pain hold so much. The body often carries what the mind hasn't yet processed.\n\n" +
         "A few practices that can ease physical discomfort:\n\n" +
-        "Progressive Muscle Release 💪 — deliberately tense and release each muscle group; " +
+        "${SoundType.PROGRESSIVE_MUSCLE_RELEASE.emoji} ${SoundType.PROGRESSIVE_MUSCLE_RELEASE.displayName} — deliberately tense and release each muscle group; " +
         "very effective for tension headaches and held stress\n" +
         "Body Scan — move awareness slowly through the body, breathing into areas of tightness " +
         "rather than bracing against them\n" +
-        "Autogenic Calm ❄️ — quiet autosuggestions that guide the body toward warmth and heaviness; " +
+        "${SoundType.AUTOGENIC_CALM.emoji} ${SoundType.AUTOGENIC_CALM.displayName} — quiet autosuggestions that guide the body toward warmth and heaviness; " +
         "can noticeably reduce tension in 10 minutes\n\n" +
         "Lower the lights if you can, and give yourself permission to stop trying to fix it — " +
         "just observe the sensation with curiosity rather than resistance.\n\n" +
@@ -628,7 +664,7 @@ class AiChatEngine(private val context: Context) {
     private fun handleGratitude(): Pair<String, SoundType?> = Pair(
         "🙏 Reflection and gratitude are some of the most consistently supported wellbeing practices.\n\n" +
         "A few ways in:\n\n" +
-        "Evening Review 🏛️ — a Stoic nightly reflection that naturally integrates gratitude " +
+        "${SoundType.EVENING_REVIEW.emoji} ${SoundType.EVENING_REVIEW.displayName} — a Stoic nightly reflection that naturally integrates gratitude " +
         "into an honest close-of-day review\n" +
         "Loving-Kindness (Metta) — extend warmth first to yourself, then to people in your life; " +
         "a gratitude practice that moves outward\n" +

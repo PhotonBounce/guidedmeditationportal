@@ -143,12 +143,13 @@ class AiChatActivity : AppCompatActivity() {
 
         // Regular chat chips
         listOf(
-            "😴 Sleep"      to "I need help sleeping",
-            "🧠 Focus"      to "Help me focus and concentrate",
-            "🌿 Relax"      to "I need to relax and de-stress",
+            "😴 Sleep"       to "I need help sleeping",
+            "🧠 Focus"       to "Help me focus and concentrate",
+            "⚡ Energy"      to "I need energy and motivation",
+            "🌿 Relax"       to "I need to relax and de-stress",
             "📊 My progress" to "my stats",
             "⭐ Favorites"   to "my favorites",
-            "🌟 VIP"        to "Tell me about VIP features"
+            "🌟 VIP"         to "Tell me about VIP features"
         ).forEach { (label, prompt) ->
             val chip = Chip(this).apply {
                 text = label
