@@ -148,6 +148,7 @@ class AiChatEngine(private val context: Context) {
             "unwind", "rest", "nervous", "tense", "panic", "overthink", "overthinking",
             "can't stop thinking", "cant stop thinking", "intrusive thoughts", "ruminating",
             "social anxiety", "public speaking", "presentation nerves", "exam nerves",
+            "stage fright", "interview nerves", "interview anxiety", "nerves before",
             "pounding heart", "heart racing", "mind keeps wandering", "can't stop my mind",
             "cant stop my mind", "racing heart", "trauma", "traumatic", "ptsd",
             "post-traumatic", "triggered", "hyperventilat", "chest tight",
@@ -181,8 +182,11 @@ class AiChatEngine(private val context: Context) {
             "hollow", "disconnected", "meaningless", "no motivation", "nothing matters",
             "breakup", "broke up", "split up", "feeling blue", "feeling lost",
             "lost and", "i feel lost", "feel so lost", "blue today", "can't find", "lost myself",
-            "bereaved", "bereavement", "loss of", "lost someone", "passed away",
-            "died", "death of", "missing them", "miss them so",
+            "bereaved", "bereavement", "loss of", "lost someone", "lost my",
+            "passed away", "died", "death of", "missing them", "miss them so",
+            "isolated", "feeling isolated", "so isolated",
+            "got fired", "just fired", "lost my job", "lost their job", "laid off",
+            "made redundant", "partner left me", "been left",
             "relationship", "divorce", "divorc", "separation", "separated from",
             "feeling down", "feel down", "i feel down", "feeling low", "feel low",
             "i feel low", "feel so low", "feeling so low", "feeling very low",
@@ -192,7 +196,9 @@ class AiChatEngine(private val context: Context) {
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
             "i feel ashamed", "embarrassed", "humiliated", "self-blame", "self blame",
-            "blame myself", "blaming myself", "i keep beating myself up", "beating myself up") ->
+            "blame myself", "blaming myself", "i keep beating myself up", "beating myself up",
+            "hate my body", "body image", "feel ugly", "feel worthless",
+            "i'm worthless", "im worthless", "not good enough") ->
             handleShameGuilt().also { lastTopic = "sadness" }
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out",
             "too much", "cant cope", "can't cope", "too busy", "overloaded",
