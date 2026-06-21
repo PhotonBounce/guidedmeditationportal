@@ -758,6 +758,23 @@ class AiChatEngine(private val context: Context) {
             "Evening Review 🏛️ structures this beautifully — a Stoic close that makes gratitude natural rather than forced. 🤍",
             SoundType.EVENING_REVIEW
         )
+        "recommendation" -> Pair(
+            "Tap the track card above to begin — the sound will start right away. 🎵\n\n" +
+            "Give it 2–3 minutes before judging whether it's right. The nervous system needs a moment to settle.\n\n" +
+            "Want a different suggestion? Just say 'recommend again' or describe your mood.",
+            null
+        )
+        "meditation" -> Pair(
+            "🧘 Let's Begin — A Simple Sitting\n\n" +
+            "Find a comfortable seat. No special posture needed — just upright enough to stay awake.\n\n" +
+            "1. Close your eyes or soften your gaze.\n" +
+            "2. Take three slow breaths. Let the last exhale be a little longer.\n" +
+            "3. Choose one anchor: the feeling of air at your nostrils, or the rise and fall of your chest.\n" +
+            "4. Rest there. When thoughts pull you away — and they will — simply notice and return.\n\n" +
+            "That's all. The return is the practice.\n\n" +
+            "${SoundType.THIEN.emoji} ${SoundType.THIEN.displayName} is a perfect companion for this — gentle enough to support silence.",
+            SoundType.THIEN
+        )
         "tinnitus" -> Pair(
             "👂 Attention Redirect — Body Scan for Tinnitus\n\n" +
             "The ringing competes for focus. We're going to give your attention somewhere else to land:\n\n" +
