@@ -40,11 +40,11 @@ class AiChatEngine(private val context: Context) {
 
     private fun buildWelcome(): String {
         val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
-        val timeCtx = when {
-            hour in 22..23 || hour < 5 -> "late night 🌙"
-            hour < 12                  -> "morning 🌅"
-            hour < 18                  -> "afternoon ☀️"
-            else                       -> "evening 🌙"
+        val greeting = when {
+            hour in 22..23 || hour < 5 -> "Hey — late night 🌙"
+            hour < 12                  -> "Good morning 🌅"
+            hour < 18                  -> "Good afternoon ☀️"
+            else                       -> "Good evening 🌙"
         }
         val hasHistory = prefs.getPlayHistory().isNotEmpty()
         val streak = stats.currentStreak()
@@ -72,14 +72,14 @@ class AiChatEngine(private val context: Context) {
         } else ""
 
         return if (hasHistory) {
-            "Good $timeCtx! I'm Spirit — your meditation companion. 🤍\n\n" +
+            "$greeting! I'm Spirit — your meditation companion. 🤍\n\n" +
             streakLine +
             programNudge +
-            "Welcome back. Last time, ${mostPlayed.emoji} ${mostPlayed.displayName} seemed to settle you nicely.\n\n" +
+            "Welcome back. Your go-to is ${mostPlayed.emoji} ${mostPlayed.displayName} — great choice for whenever you're ready.\n\n" +
             depthLine +
             "What are you here for right now — rest, focus, relaxation, or something else?"
         } else {
-            "Good $timeCtx! I'm Spirit — your meditation companion. 🤍\n\n" +
+            "$greeting! I'm Spirit — your meditation companion. 🤍\n\n" +
             "I can suggest a track for how you're feeling, walk you through a technique like breathwork " +
             "or body scanning, or just keep you company for a few quiet minutes.\n\n" +
             "What are you here for right now? Rest, focus, relaxation, or something else?"
