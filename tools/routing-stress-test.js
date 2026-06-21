@@ -19,7 +19,11 @@ function route(lower, lastTopic) {
     "want to disappear","wish i could disappear","just want to disappear",
     "wish i was dead","wish i were dead",
     "no point going on","no point carrying on","no point in carrying on",
-    "can't carry on","cant carry on"])) return "crisis";
+    "can't carry on","cant carry on",
+    "ending it all","ending my life",
+    "harming myself","harm myself",
+    "thoughts of suicide","thoughts of ending my life",
+    "suicidal thoughts","suicidal ideation"])) return "crisis";
   // 2. followUp
   if(lastTopic.length > 0 && (any(lower,["please","okay","go on","continue","next",
     "tell me more","walk me through","guide me","show me","how do i","teach me",
@@ -114,7 +118,9 @@ function route(lower, lastTopic) {
     "shortness of breath","breathlessness","out of breath",
     "palpitations","heart palpitations","heart flutters",
     "vagus nerve","vagal","somatic therapy","somatic healing","somatic exercises",
-    "nervous system regulation","regulate my nervous system"]) ||
+    "nervous system regulation","regulate my nervous system",
+    "emotional regulation","regulate my emotions","emotional dysregulation",
+    "can't regulate","cant regulate"]) ||
     anyWord(lower,["rest","tense"])) return "relax";
   // 10. tinnitus
   if(any(lower,["tinnitus","ringing in","ear ring","hearing","buzz in my ear"])) return "tinnitus";
@@ -142,7 +148,10 @@ function route(lower, lastTopic) {
     "self-compassion","self compassion","compassion practice","kind to myself",
     "self esteem","self-esteem","low confidence","build confidence","self-worth",
     "self worth","confidence","stretching","morning routine","bored","boredom",
-    "morning pages","habit stacking","habit tracker","daily habit"])) return "techniques";
+    "morning pages","habit stacking","habit tracker","daily habit",
+    "cbt","cognitive behavioral","dbt","dialectical behavior",
+    "act therapy","acceptance and commitment","emdr",
+    "body doubling","pomodoro","time blocking"])) return "techniques";
   // 14. sadness
   if(any(lower,["sad","grief","grieving","heartbreak","heartbroken","lonely","alone","loneliness",
     "depressed","depression","cry","crying","sobbing","weeping","in tears","tearing up",
@@ -510,6 +519,16 @@ var tests = [
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
 
+  // R85: crisis (ending it all / harming myself / suicidal thoughts), relax (emotional regulation), techniques (CBT/DBT/EMDR)
+  ["i keep having thoughts of ending it all", "", "crisis", "ending it all → crisis"],
+  ["i've been having suicidal thoughts", "", "crisis", "suicidal thoughts → crisis"],
+  ["i'm scared i'll start harming myself", "", "crisis", "harming myself → crisis"],
+  ["i really struggle with emotional regulation", "", "relax", "emotional regulation → relax"],
+  ["my therapist uses CBT and I want to understand it better", "", "techniques", "CBT → techniques"],
+  ["my therapist recommended EMDR", "", "techniques", "EMDR → techniques"],
+  ["what is DBT and can it help me", "", "techniques", "DBT → techniques"],
+  ["i need help with time blocking", "", "techniques", "time blocking → techniques"],
+
   // R84: relax (shortness of breath/palpitations), sadness (losing my), overwhelm (hate job), shameGuilt (comparing myself)
   ["i keep getting shortness of breath when anxious", "", "relax", "shortness of breath → relax"],
   ["i'm having heart palpitations", "", "relax", "heart palpitations → relax"],
@@ -736,7 +755,7 @@ var tests = [
 
 var pass = 0, fail = 0;
 tests.forEach(function(t) {
-  var input = t[0], lastT = t[1], expected = t[2], desc = t[3];
+  var input = t[0].toLowerCase().trim(), lastT = t[1], expected = t[2], desc = t[3];
   var actual = route(input, lastT);
   var ok = expected.startsWith("NOT:") ? (actual !== expected.slice(4)) : (actual === expected);
   if(!ok) { console.log("FAIL: \"" + input + "\" -> " + actual + " (expected " + expected + ") | " + desc); fail++; }

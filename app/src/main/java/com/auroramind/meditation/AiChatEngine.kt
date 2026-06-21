@@ -116,7 +116,11 @@ class AiChatEngine(private val context: Context) {
             "want to disappear", "wish i could disappear", "just want to disappear",
             "wish i was dead", "wish i were dead",
             "no point going on", "no point carrying on", "no point in carrying on",
-            "can't carry on", "cant carry on") ->
+            "can't carry on", "cant carry on",
+            "ending it all", "ending my life",
+            "harming myself", "harm myself",
+            "thoughts of suicide", "thoughts of ending my life",
+            "suicidal thoughts", "suicidal ideation") ->
             handleCrisis()
 
         // Follow-up detection — must come first so "yes please" gets context-aware reply
@@ -225,6 +229,8 @@ class AiChatEngine(private val context: Context) {
             "palpitations", "heart palpitations", "heart flutters",
             "vagus nerve", "vagal", "somatic therapy", "somatic healing", "somatic exercises",
             "nervous system regulation", "regulate my nervous system",
+            "emotional regulation", "regulate my emotions", "emotional dysregulation",
+            "can't regulate", "cant regulate",
             "drinking to cope", "drink to cope", "alcohol to cope", "drink to forget",
             "drinking to forget", "using alcohol", "using drink") ||
         anyWord(lower, "rest", "tense") ->
@@ -259,7 +265,10 @@ class AiChatEngine(private val context: Context) {
             "self-compassion", "self compassion", "compassion practice", "kind to myself",
             "self esteem", "self-esteem", "low confidence", "build confidence", "self-worth",
             "self worth", "confidence", "stretching", "morning routine", "bored", "boredom",
-            "morning pages", "habit stacking", "habit tracker", "daily habit") ->
+            "morning pages", "habit stacking", "habit tracker", "daily habit",
+            "cbt", "cognitive behavioral", "dbt", "dialectical behavior",
+            "act therapy", "acceptance and commitment", "emdr",
+            "body doubling", "pomodoro", "time blocking") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
