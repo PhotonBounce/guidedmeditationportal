@@ -667,6 +667,60 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre44-a) Tattoo studio / tattoo artist / piercing studio website.
+	if ( $has( [ 'tattoo studio website', 'tattoo artist website', 'tattoo parlour website', 'tattoo shop website', 'piercing studio website', 'body piercing website', 'tattoo removal website', 'laser tattoo removal website', 'traditional tattoo website', 'japanese tattoo website', 'watercolour tattoo website', 'blackwork tattoo website', 'realism tattoo website', 'semi-permanent makeup tattoo website', 'microblading tattoo website', 'fine line tattoo website' ] ) ) {
+		return $nl( [
+			"Tattoo studio websites convert on portfolio quality and consultation bookings &mdash; the artist&rsquo;s style is the product, not the studio name:",
+			'',
+			"&bull; <strong>Artist portfolio pages</strong> &mdash; one page per artist; high-resolution healed tattoo photos (NOT fresh tattoos &mdash; fresh tattoos look more dramatic but mislead clients on the healed result); style categories (traditional / Japanese / blackwork / fine line / watercolour / realism / neo-traditional / lettering / geometric); from <strong>$250</strong> per artist",
+			"&bull; <strong>Consultation booking</strong> &mdash; online consultation form capturing reference images, placement, size, budget, skin tone, and timeline; Calendly or custom form; deposit at consultation stage (&pound;50&ndash;&pound;100 credited against the tattoo); from <strong>$300</strong>",
+			"&bull; <strong>Style guide pages</strong> &mdash; &ldquo;What is blackwork?&rdquo; / &ldquo;How long does a sleeve take?&rdquo; / &ldquo;What to expect at your appointment&rdquo;; educates first-time clients; reduces admin emails; from <strong>$150</strong>",
+			"&bull; <strong>Aftercare page</strong> &mdash; written and video aftercare instructions; reduces infections and callbacks; &ldquo;is my tattoo healing correctly?&rdquo; FAQ; from <strong>$150</strong>",
+			"&bull; <strong>Compliance</strong> &mdash; UK regulation: tattooing is regulated under the Skin Piercing and Tattooing Act; local authority licence number for each tattooist; single-use needle and sterile equipment statement; age restriction statement (18+ required by law); from <strong>$150</strong>",
+			"&bull; <strong>Flash sale / available designs</strong> &mdash; artist flash sheets available to book immediately (no custom design wait); lower price point; converts walk-in traffic; WooCommerce or simple form; from <strong>$200</strong>",
+			"&bull; <strong>Gift vouchers</strong> &mdash; WooCommerce; birthday and Christmas gifting; &ldquo;gift a consultation&rdquo; option; from <strong>$150</strong>",
+			"&bull; <strong>From $550</strong> portfolio + consultation booking + compliance; <strong>$1,100+</strong> with style guides + aftercare + flash sale page",
+			'',
+			"Solo artist or a studio with multiple artists? Walk-in flash, appointment-only, or both? Do you offer removal or just application?",
+		] );
+	}
+
+	// 0d-pre44-b) Childminder / nursery / preschool / day nursery / after-school club website.
+	if ( $has( [ 'childminder website', 'nursery website', 'day nursery website', 'preschool website', 'pre-school website', 'after school club website', 'breakfast club website', 'holiday club website', 'childcare website', 'nanny agency website', 'au pair agency website', 'creche website', 'early years website', 'toddler group website', 'mother and toddler website', 'out of school care website', 'wrap around care website' ] ) ) {
+		return $nl( [
+			"Childcare and nursery websites convert on safety trust and immediate availability &mdash; Ofsted rating and photo proof of the environment are the two conversion anchors:",
+			'',
+			"&bull; <strong>About the setting page</strong> &mdash; Ofsted registration number and most recent inspection outcome (must display Outstanding / Good / Requires Improvement / Inadequate prominently); photos of the setting (rooms, outdoor space, meals, activities); opening hours; age range accepted; from <strong>$250</strong>",
+			"&bull; <strong>Online enquiry and waiting list</strong> &mdash; child name + date of birth + start date + session type + funding eligibility; WooCommerce / Gravity Forms; deposit to secure a place; from <strong>$300</strong>",
+			"&bull; <strong>Government-funded places page</strong> &mdash; 15-hour universal entitlement (all 3&ndash;4-year-olds); 30-hour extended entitlement (working parents); 15 hours from 9 months (April 2024 expansion); Tax-Free Childcare scheme; most-asked parent question and it must be answered clearly; from <strong>$200</strong>",
+			"&bull; <strong>Team profiles</strong> &mdash; key person system explanation; staff headshots + Level 3 qualification + DBS-checked statement; paediatric first-aid certification date; builds parental trust; from <strong>$150</strong> per profile",
+			"&bull; <strong>Curriculum and activities page</strong> &mdash; EYFS (Early Years Foundation Stage) framework; phonics / maths / creative play / outdoor learning; forest school where applicable; from <strong>$200</strong>",
+			"&bull; <strong>Parent testimonials</strong> &mdash; Google Reviews widget; specific quotes about settling-in and communication; most persuasive content for anxious parents of young children",
+			"&bull; <strong>Safeguarding and policies page</strong> &mdash; safeguarding policy link; SENCO contact; complaints procedure; GDPR notice for child photos; from <strong>$150</strong>",
+			"&bull; <strong>From $600</strong> setting page + enquiry form + funding page + Ofsted badge; <strong>$1,200+</strong> with team profiles + curriculum + testimonials",
+			'',
+			"Childminder, nursery, pre-school, or after-school? Are you Ofsted registered? Which age ranges do you take? Do you accept funded hours?",
+		] );
+	}
+
+	// 0d-pre44-c) Building contractor / builder / construction company / property developer website.
+	if ( $has( [ 'builder website', 'building contractor website', 'construction company website', 'general contractor website', 'property developer website', 'house builder website', 'extension builder website', 'loft conversion website', 'renovation contractor website', 'refurbishment contractor website', 'groundworks contractor website', 'commercial contractor website', 'fit-out contractor website', 'main contractor website', 'building company website', 'construction firm website' ] ) ) {
+		return $nl( [
+			"Building contractor websites convert on project proof and accreditation trust &mdash; a polished before-and-after gallery with credentials visible on the homepage moves the needle most:",
+			'',
+			"&bull; <strong>Project portfolio</strong> &mdash; before and after photos; project type (extension / loft / new build / refurb / commercial fit-out); location and approximate value; client quote where consented; from <strong>$300</strong>",
+			"&bull; <strong>Services pages</strong> &mdash; one per service type (extensions / loft conversions / new builds / renovations / groundworks / commercial / fit-out / structural repairs); scope description + planning note + typical timeline + indicative price range; from <strong>$150</strong> per page",
+			"&bull; <strong>Planning and process page</strong> &mdash; how you handle planning permission / permitted development / building control sign-off; project stages (feasibility &rarr; design &rarr; contract &rarr; build &rarr; snagging &rarr; sign-off); sets expectations and reduces pre-sales phone calls; from <strong>$200</strong>",
+			"&bull; <strong>Accreditation badges</strong> &mdash; FMB (Federation of Master Builders) membership; NHBC / Premier Guarantee / Build Zone warranty provider (for new builds); CHAS or Constructionline (for commercial tenders); Gas Safe / NICEIC subcontractor list; from <strong>$150</strong>",
+			"&bull; <strong>Free quote form</strong> &mdash; project type + location + size (m&sup2;) + planning status + budget range + timeline; acknowledge 48-hour response; from <strong>$200</strong>",
+			"&bull; <strong>Testimonials and case studies</strong> &mdash; one case study per project type; homeowner photo with project photo; Google Reviews widget; builds confidence for high-value projects where trust is the main barrier; from <strong>$200</strong> per case study",
+			"&bull; <strong>Compliance</strong> &mdash; VAT registration number (for B2B clients); public liability (&pound;5m minimum for most commercial); employers&rsquo; liability (legally required for employed labour); waste carrier licence from <strong>$150</strong>",
+			"&bull; <strong>From $600</strong> portfolio + services + quote form + accreditation; <strong>$1,200+</strong> with case studies + planning page + compliance",
+			'',
+			"Residential or commercial? New build, extensions, or general refurb? Main contractor or specialist sub-contractor? Are you FMB or NHBC registered?",
+		] );
+	}
+
 	// 0d-pre43-a) Vet clinic / veterinary practice / animal hospital / pet care website.
 	if ( $has( [ 'vet website', 'vet clinic website', 'veterinary practice website', 'veterinary clinic website', 'animal hospital website', 'pet care website', 'veterinary surgery website', 'small animal vet website', 'exotic vet website', 'emergency vet website', 'referral vet website', 'equine vet website', 'farm vet website', 'cat clinic website', 'dog clinic website', 'rabbit vet website' ] ) ) {
 		return $nl( [

@@ -588,6 +588,7 @@
     let currentAudio = null;
     var chatMsgs = []; // persisted to sessionStorage for cross-reload chat restore
     var _mcEl = null;  // message-count badge element (set after brainHead is ready)
+    var _lastSendTime = 0; // timestamp of last user send; cleared after bot responds
 
     // Strip HTML to plain text (for TTS + history).
     function plain(html) {
@@ -616,6 +617,7 @@
       text = text
         .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/(?<!\w)_([^_\n]+)_(?!\w)/g, '<em>$1</em>')
         .replace(/\[([^\]]+)\]\((https?:[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
         .replace(/(^|[\s(])((?:https?:\/\/|www\.)[^\s<)]+)/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>')
         .replace(/\n/g, '<br>');
@@ -733,6 +735,14 @@
       _tsEl.title = _tn.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ' · ' + _tn.toLocaleDateString();
       _tsEl.setAttribute('datetime', _tn.toISOString());
       div.appendChild(_tsEl);
+      // Response-time badge on live bot replies (not session-restore; guard: < 30s elapsed).
+      if (cls === 'bot' && _lastSendTime > 0 && (Date.now() - _lastSendTime) < 30000) {
+        var _rtEl = document.createElement('small');
+        _rtEl.className = 'pb-brain__resp-time';
+        _rtEl.textContent = '⚡ ' + ((Date.now() - _lastSendTime) / 1000).toFixed(1) + 's';
+        div.appendChild(_rtEl);
+        _lastSendTime = 0;
+      }
       // Word count badge on bot replies — gives a sense of response length at a glance.
       if (cls === 'bot') {
         var _wcWords = plain(text).trim().split(/\s+/).filter(Boolean).length;
@@ -1044,6 +1054,7 @@
       e.preventDefault();
       const text = input.value.trim();
       if (!text) return;
+      _lastSendTime = Date.now();
       addMsg(text, 'user');
       input.value = '';
       _histIdx = -1;

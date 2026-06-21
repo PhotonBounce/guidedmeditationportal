@@ -5078,3 +5078,10 @@ pre.pb-brain__code-block{
 }
 pre.pb-brain__code-block code{ font-size:inherit; background:none; border:none; padding:0; }
 .pb-brain__line--code{ display:block; }
+/* R48 — response-time badge: ⚡ Xs revealed on bot-message hover */
+.pb-brain__resp-time{
+  display:block; font-size:9px; color:rgba(255,212,0,.35);
+  text-align:right; margin-top:2px; opacity:0;
+  transition:opacity .15s;
+}
+.pb-brain__msg--bot:hover .pb-brain__resp-time{ opacity:1; }
