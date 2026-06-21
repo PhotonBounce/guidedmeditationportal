@@ -132,7 +132,8 @@ function route(lower, lastTopic) {
     "box breath","4-7-8","physiological sigh","progressive muscle","metta",
     "self-compassion","self compassion","compassion practice","kind to myself",
     "self esteem","self-esteem","low confidence","build confidence","self-worth",
-    "self worth","confidence","stretching","morning routine","bored","boredom"])) return "techniques";
+    "self worth","confidence","stretching","morning routine","bored","boredom",
+    "morning pages","habit stacking","habit tracker","daily habit"])) return "techniques";
   // 14. sadness
   if(any(lower,["sad","grief","grieving","heartbreak","heartbroken","lonely","alone","loneliness",
     "depressed","depression","cry","crying","sobbing","weeping","in tears","tearing up",
@@ -181,7 +182,10 @@ function route(lower, lastTopic) {
     "widowed","widow","ghosted",
     "empty nest","empty nester","kids moved out","children left home",
     "feel like giving up","want to give up","ready to give up",
-    "thinking of giving up","about to give up"]) ||
+    "thinking of giving up","about to give up",
+    "in a funk","bit of a funk","in a bit of a funk",
+    "in my feelings","in the dumps","down in the dumps",
+    "need hope","need some hope","lost all hope"]) ||
     anyWord(lower,["numb","died","vent"])) return "sadness";
   // 15. shameGuilt
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated",
@@ -265,6 +269,9 @@ function route(lower, lastTopic) {
     "sciatica","period pain","menstrual cramps","cramps",
     "jaw pain","jaw tension","jaw clenching","teeth grinding","grind my teeth","grinding my teeth","bruxism",
     "inflammation","inflammatory","repetitive strain","carpal tunnel","frozen shoulder",
+    "tendonitis","tendinitis","endometriosis","plantar fasciitis","plantar",
+    "neuropathy","nerve damage","nerve pain","neuralgia",
+    "muscle spasm","muscle spasms","back spasm","back spasms",
     "painful","pains","in pain"]) || anyWord(lower,["pain"])) return "pain";
   // 26. gratitude
   if(any(lower,["grateful","gratitude","journal","journaling","reflect","reflection",
@@ -283,7 +290,8 @@ function route(lower, lastTopic) {
     "structured","7 day","7-day","5 day","5-day","challenge"])) return "programs";
   // 30. stats
   if(any(lower,["my stats","my streak","my progress","sessions","total time","day streak",
-    "how long have i","my history","minutes meditated"])) return "stats";
+    "how long have i","my history","minutes meditated",
+    "longest streak","total minutes","how many sessions"])) return "stats";
   // 31. favorites
   if(any(lower,["my favorites","my favourites","saved tracks","what i saved","what i've saved",
     "favorite tracks","favourite tracks","my saved"])) return "favorites";
@@ -480,6 +488,17 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R81: pain (tendonitis/endometriosis/neuropathy/muscle spasm), sadness (funk/dumps/need hope), stats (longest streak), techniques (morning pages)
+  ["i have tendonitis in my elbow", "", "pain", "tendonitis → pain"],
+  ["i struggle with endometriosis pain every month", "", "pain", "endometriosis → pain"],
+  ["i'm dealing with peripheral neuropathy", "", "pain", "neuropathy → pain"],
+  ["my back spasms are really bad today", "", "pain", "back spasms → pain"],
+  ["i'm in a bit of a funk this week", "", "sadness", "in a funk → sadness"],
+  ["i've been in my feelings all day", "", "sadness", "in my feelings → sadness"],
+  ["i need some hope right now", "", "sadness", "need some hope → sadness"],
+  ["what's my longest streak?", "", "stats", "longest streak → stats"],
+  ["i want to do my morning pages today", "", "techniques", "morning pages → techniques"],
 
   // R80: baby (postpartum/postnatal/breastfeeding/colic), sadness (feels off/not like myself), energy (groggy), overwhelm (drowning)
   ["i think i have postpartum depression", "", "baby", "postpartum → baby (fires before sadness)"],

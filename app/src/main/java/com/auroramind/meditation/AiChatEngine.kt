@@ -249,7 +249,8 @@ class AiChatEngine(private val context: Context) {
             "4-7-8", "4 7 8", "physiological sigh", "progressive muscle", "metta",
             "self-compassion", "self compassion", "compassion practice", "kind to myself",
             "self esteem", "self-esteem", "low confidence", "build confidence", "self-worth",
-            "self worth", "confidence", "stretching", "morning routine", "bored", "boredom") ->
+            "self worth", "confidence", "stretching", "morning routine", "bored", "boredom",
+            "morning pages", "habit stacking", "habit tracker", "daily habit") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
@@ -300,6 +301,9 @@ class AiChatEngine(private val context: Context) {
             "not like myself", "not quite myself", "not feeling like myself",
             "don't feel like myself", "dont feel like myself",
             "don't seem like myself", "dont seem like myself",
+            "in a funk", "bit of a funk", "in a bit of a funk",
+            "in my feelings", "in the dumps", "down in the dumps",
+            "need hope", "need some hope", "lost all hope",
             "feeling low", "feel low", "so low", "really low", "been feeling low",
             "feeling blue", "feel blue", "so blue",
             "feeling down", "feel down", "been feeling down", "really down", "so down",
@@ -399,6 +403,9 @@ class AiChatEngine(private val context: Context) {
             "sciatica", "period pain", "menstrual cramps", "cramps",
             "jaw pain", "jaw tension", "jaw clenching", "teeth grinding", "grind my teeth", "grinding my teeth", "bruxism",
             "inflammation", "inflammatory", "repetitive strain", "carpal tunnel", "frozen shoulder",
+            "tendonitis", "tendinitis", "endometriosis", "plantar fasciitis", "plantar",
+            "neuropathy", "nerve damage", "nerve pain", "neuralgia",
+            "muscle spasm", "muscle spasms", "back spasm", "back spasms",
             "painful", "pains", "in pain") ||
         anyWord(lower, "pain") ->
             handlePain().also { lastTopic = "pain" }
@@ -419,7 +426,8 @@ class AiChatEngine(private val context: Context) {
             handlePrograms().also { lastTopic = "" }
         any(lower, "my stats", "my progress", "how am i doing", "my history",
             "how long have i", "sessions", "minutes meditated", "progress report",
-            "my streak", "streak", "day streak") ->
+            "my streak", "streak", "day streak",
+            "longest streak", "total time", "total minutes", "how many sessions") ->
             handleStats().also { lastTopic = "" }
         any(lower, "my favorites", "my favourites", "saved tracks", "what i saved",
             "what i've saved", "favorite tracks", "favourite tracks", "my saved") ->
