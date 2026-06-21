@@ -240,7 +240,10 @@ class AiChatEngine(private val context: Context) {
             "adrenal", "adrenals are",
             "cold plunge", "cold-plunge", "cold exposure",
             "afternoon energy dip", "mid-afternoon dip", "mid-afternoon crash",
-            "morning slump", "mid-morning slump") ->
+            "morning slump", "mid-morning slump",
+            "no enthusiasm", "lacking enthusiasm", "no passion",
+            "caffeine crash", "coffee crash", "sugar crash",
+            "need coffee", "running low", "low battery") ->
             handleEnergy().also { lastTopic = "energy" }
         any(lower, "relax", "calm", "stress", "anxiety", "anxious", "breathe",
             "unwind", "nervous", "panic", "overthink", "overthinking",
@@ -333,7 +336,12 @@ class AiChatEngine(private val context: Context) {
             "colic", "baby blues", "maternity leave", "paternity leave",
             "pregnant", "expecting a baby", "expecting baby",
             "trying to conceive", "ivf", "fertility treatment",
-            "first trimester", "second trimester", "third trimester") ->
+            "first trimester", "second trimester", "third trimester",
+            "teething", "cluster feeding", "tongue tie", "tongue-tie",
+            "mastitis", "weaning", "feeding schedule", "growth spurt",
+            "overdue", "c-section", "caesarean", "surrogacy", "surrogate",
+            "adoption", "adopted", "foster parent", "fostering",
+            "premature baby", "prem baby", "neonatal", "nicu") ->
             handleBaby().also { lastTopic = "baby" }
         // "How long" queries containing "meditat" must fire before the bare meditation route
         any(lower, "how long to meditate", "how long should i meditate",

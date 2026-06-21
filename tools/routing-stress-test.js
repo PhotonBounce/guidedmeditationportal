@@ -131,7 +131,10 @@ function route(lower, lastTopic) {
     "adrenal","adrenals are",
     "cold plunge","cold-plunge","cold exposure",
     "afternoon energy dip","mid-afternoon dip","mid-afternoon crash",
-    "morning slump","mid-morning slump"])) return "energy";
+    "morning slump","mid-morning slump",
+    "no enthusiasm","lacking enthusiasm","no passion",
+    "caffeine crash","coffee crash","sugar crash",
+    "need coffee","running low","low battery"])) return "energy";
   // 9. relax
   if(any(lower,["relax","calm","stress","anxiety","anxious","breathe","unwind","nervous","panic",
     "overthink","overthinking","can't stop thinking","cant stop thinking",
@@ -220,7 +223,12 @@ function route(lower, lastTopic) {
     "colic","baby blues","maternity leave","paternity leave",
     "pregnant","expecting a baby","expecting baby",
     "trying to conceive","ivf","fertility treatment",
-    "first trimester","second trimester","third trimester"])) return "baby";
+    "first trimester","second trimester","third trimester",
+    "teething","cluster feeding","tongue tie","tongue-tie",
+    "mastitis","weaning","feeding schedule","growth spurt",
+    "overdue","c-section","caesarean","surrogacy","surrogate",
+    "adoption","adopted","foster parent","fostering",
+    "premature baby","prem baby","neonatal","nicu"])) return "baby";
   // 11.5: "how long" meditat queries — must fire before bare meditation route
   if(any(lower,["how long to meditate","how long should i meditate",
     "how many minutes to meditate","how long for meditation","how long should i practice"])) return "timer";
@@ -820,6 +828,14 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R115: baby (teething/weaning/c-section/nicu/adoption), energy (caffeine crash/no enthusiasm)
+  ["my baby is teething and it's exhausting", "", "baby", "teething → baby"],
+  ["I just had a c-section and I'm still recovering", "", "baby", "c-section → baby"],
+  ["we're going through the adoption process", "", "baby", "adoption → baby"],
+  ["our baby was in nicu for two weeks", "", "baby", "nicu → baby"],
+  ["I'm having a major caffeine crash right now", "", "energy", "caffeine crash → energy"],
+  ["I have no enthusiasm for anything today", "", "energy", "no enthusiasm → energy"],
 
   // R114: tinnitus (ear sounds/blocked ear), positive (doing well/happy today), inspire (inspiring/words of wisdom)
   ["I have a humming in my ear that won't go away", "", "tinnitus", "humming in my ear → tinnitus"],
