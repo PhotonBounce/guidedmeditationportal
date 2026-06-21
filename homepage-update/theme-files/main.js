@@ -540,6 +540,26 @@
         _dnBtn.addEventListener('click', function() { _pbFbLock(_dnBtn); });
         _fbDiv.appendChild(_upBtn); _fbDiv.appendChild(_dnBtn);
         div.appendChild(_fbDiv);
+        // Bookmark / star button — toggled via aria-pressed; starred state persists to sessionStorage.
+        var _starBtn = document.createElement('button');
+        _starBtn.type = 'button'; _starBtn.className = 'pb-brain__star';
+        _starBtn.title = 'Bookmark this reply';
+        _starBtn.setAttribute('aria-label', 'Bookmark reply');
+        _starBtn.setAttribute('aria-pressed', 'false');
+        _starBtn.innerHTML = '&#9733;';
+        _starBtn.addEventListener('click', function() {
+          var _on = div.classList.toggle('pb-brain__msg--starred');
+          _starBtn.setAttribute('aria-pressed', String(_on));
+          _starBtn.classList.toggle('pb-brain__star--on', _on);
+          try {
+            var _stars = JSON.parse(sessionStorage.getItem('pb_stars_v1') || '[]');
+            var _key = plain(text).slice(0, 80);
+            if (_on) { if (_stars.indexOf(_key) < 0) _stars.push(_key); }
+            else { _stars = _stars.filter(function(s) { return s !== _key; }); }
+            sessionStorage.setItem('pb_stars_v1', JSON.stringify(_stars));
+          } catch(e) {}
+        });
+        div.appendChild(_starBtn);
       }
       // Retry button on API error messages
       if (cls === 'err') {

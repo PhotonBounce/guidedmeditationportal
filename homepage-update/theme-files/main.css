@@ -2913,6 +2913,16 @@ border-radius: 50%; cursor: pointer; font-size: 16px;
 .pb-brain__msg--bot:hover .pb-brain__copy{ opacity:1; }
 .pb-brain__copy:hover{ color:rgba(255,212,0,.9); }
 .pb-brain__copy:focus-visible{ opacity:1; outline:1px solid rgba(255,212,0,.5); border-radius:3px; }
+/* Bookmark / star button — revealed on msg hover; gold when active */
+.pb-brain__star{
+  background:none; border:none; cursor:pointer; font-size:13px;
+  color:rgba(255,255,255,.22); padding:2px 4px; line-height:1;
+  opacity:0; transition:opacity .15s,color .2s; vertical-align:middle;
+}
+.pb-brain__msg:hover .pb-brain__star{ opacity:1; }
+.pb-brain__star:hover{ color:rgba(255,212,0,.75); }
+.pb-brain__star--on{ color:#ffd400 !important; opacity:1 !important; }
+.pb-brain__msg--starred{ border-left:2px solid rgba(255,212,0,.6); }
 /* Error messages (transient — not saved to sessionStorage) */
 .pb-brain__msg--err{
   align-self:stretch; max-width:100%;

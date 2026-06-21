@@ -561,6 +561,59 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre25-a) Beauty salon / spa / hair / nail / aesthetics studio site.
+	if ( $has( [ 'beauty salon', 'hair salon', 'nail salon', 'spa website', 'beauty website', 'aesthetics website', 'barbershop website', 'salon website', 'lash studio', 'brow studio', 'beauty studio', 'makeup artist website', 'tattoo studio website', 'massage therapist website' ] ) ) {
+		return $nl( [
+			"Beauty and salon sites are high-converting when built around online booking &mdash; here&rsquo;s what&rsquo;s standard:",
+			'',
+			"&bull; <strong>Online booking</strong> &mdash; service menu + provider selection + date/time picker + Stripe deposit or full payment; Fresha or Vagaro embed (<strong>$0/mo</strong> on their free plan) or custom-built from <strong>$350</strong>; automated SMS + email reminders reduce no-shows by ~30%",
+			"&bull; <strong>Service menu</strong> &mdash; grouped by category (hair, nails, skincare&hellip;), duration + price; staff-editable via WP admin; from <strong>$300</strong>",
+			"&bull; <strong>Team / stylist pages</strong> &mdash; photo, bio, specialities, Instagram embed, direct-book button; each stylist can have their own landing page for SEO",
+			"&bull; <strong>Gallery</strong> &mdash; before/after slider; filterable by treatment; lazy-loaded WebP; linked to Instagram feed via Smash Balloon",
+			"&bull; <strong>Gift vouchers</strong> &mdash; WooCommerce gift cards; purchasable online, redeemable at checkout; from <strong>$200</strong>",
+			"&bull; <strong>Local SEO</strong> &mdash; &ldquo;[treatment] near me&rdquo; and &ldquo;[treatment] [town]&rdquo; keyword clusters; Google Business Reviews widget; Local Business schema",
+			"&bull; <strong>From $450</strong> for a solo stylist site; <strong>$900+</strong> for a multi-stylist salon with online booking and gift vouchers",
+			'',
+			"How many team members, and do you already use a booking system like Fresha or Vagaro?",
+		] );
+	}
+
+	// 0d-pre25-b) Music / band / artist / DJ / musician website.
+	if ( $has( [ 'music website', 'band website', 'musician website', 'dj website', 'artist website music', 'album website', 'tour dates', 'gig listings', 'music streaming', 'soundcloud', 'spotify artist', 'music portfolio', 'record label website', 'singer website' ] ) ) {
+		return $nl( [
+			"Music and artist sites need to look as good as they sound &mdash; here&rsquo;s a typical build:",
+			'',
+			"&bull; <strong>Hero + embedded player</strong> &mdash; full-screen video or parallax photo; Spotify/Apple Music/SoundCloud embed; WaveSurfer.js custom waveform player; from <strong>$350</strong>",
+			"&bull; <strong>Tour dates / gig listings</strong> &mdash; Bandsintown or Songkick widget for auto-updating tour dates; or custom CPT with Eventbrite ticket link; from <strong>$200</strong>",
+			"&bull; <strong>Music / release archive</strong> &mdash; album discography with artwork, track listings, streaming links (Spotify, Apple Music, YouTube Music, Deezer); auto-updated via MusicBrainz or manual entry",
+			"&bull; <strong>Video</strong> &mdash; YouTube / Vimeo channel embed; music video archive with lazy-load",
+			"&bull; <strong>Merch store</strong> &mdash; WooCommerce + Printful for apparel, vinyl, posters; no upfront stock cost; from <strong>$400</strong>",
+			"&bull; <strong>Press kit (EPK)</strong> &mdash; password-protected page with bio, hi-res photos, logo, rider, past press; shareable URL for promoters",
+			"&bull; <strong>Mailing list</strong> &mdash; Mailchimp or Klaviyo signup with lead-magnet (free download); best channel for direct fan communication",
+			"&bull; <strong>From $500</strong> for an artist bio/EPK site; <strong>$1,000+</strong> for full discography, merch store, and mailing list",
+			'',
+			"Solo artist, band, or label? And is the priority booking gigs, selling music, or growing fans?",
+		] );
+	}
+
+	// 0d-pre25-c) Travel / tourism / tour operator / activity booking site.
+	if ( $has( [ 'travel website', 'tourism website', 'tour operator', 'activity booking', 'travel agency', 'holiday website', 'tour booking', 'travel blog', 'excursion website', 'adventure tourism', 'eco tourism', 'safari website', 'boat charter', 'travel booking site' ] ) ) {
+		return $nl( [
+			"Travel and tour operator sites are built around booking and trust &mdash; here&rsquo;s what&rsquo;s typical:",
+			'',
+			"&bull; <strong>Tour / activity listings</strong> &mdash; custom CPT: overview, itinerary accordion, included/excluded list, difficulty rating, photo gallery, pricing tiers; staff-editable; from <strong>$450</strong>",
+			"&bull; <strong>Online booking + payment</strong> &mdash; date picker, group size selector, Stripe or PayPal; deposit or full payment at time of booking; from <strong>$400</strong>",
+			"&bull; <strong>FareHarbor / Bokun / Rezdy integration</strong> &mdash; if you already use a channel manager for OTA distribution (Viator, GetYourGuide), I embed their widget; keeps availability in sync automatically",
+			"&bull; <strong>Destination pages</strong> &mdash; one page per destination; local tips, map, weather widget, testimonials; targets &ldquo;[activity] in [destination]&rdquo; keywords; strong SEO play for tour operators",
+			"&bull; <strong>TripAdvisor / Google Reviews widget</strong> &mdash; live review pull; trust signals are critical for travel; from <strong>$150</strong>",
+			"&bull; <strong>Travel blog / itinerary content</strong> &mdash; long-form SEO content strategy; targets informational keywords to drive organic top-of-funnel traffic",
+			"&bull; <strong>Multi-currency + multi-language</strong> &mdash; WooCommerce currency switcher + WPML for international operators; from <strong>$350</strong>",
+			"&bull; <strong>From $650</strong> for a 5-tour operator site; <strong>$1,500+</strong> for a full booking engine with channel-manager integration",
+			'',
+			"How many tours or activities, and do you already use a booking platform like FareHarbor or Bokun?",
+		] );
+	}
+
 	// 0d-pre24-a) Gym / fitness studio / personal trainer / yoga site.
 	if ( $has( [ 'gym website', 'fitness website', 'personal trainer', 'yoga studio', 'crossfit', 'pilates site', 'bootcamp', 'personal training', 'fitness class', 'gym membership', 'fitness studio', 'spin class', 'martial arts website' ] ) ) {
 		return $nl( [
