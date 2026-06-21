@@ -115,6 +115,10 @@ class AiChatEngine(private val context: Context) {
 
         any(lower, "hello", "hi", "hey", "good morning", "good evening", "good night", "yo", "sup") ->
             handleGreeting().also { lastTopic = "greeting" }
+        // Baby+sleep compounds must come before the bare "sleep" route to win
+        any(lower, "baby sleep", "baby won't sleep", "baby can't sleep", "baby keeps waking",
+            "infant sleep", "toddler sleep", "toddler won't sleep", "child won't sleep") ->
+            handleBaby().also { lastTopic = "baby" }
         any(lower, "sleep", "insomnia", "cant sleep", "can't sleep", "falling asleep",
             "bedtime", "tired", "fatigue", "exhausted", "wide awake", "cant switch off",
             "can't switch off", "racing mind", "racing thoughts", "nap", "night shift",
@@ -123,7 +127,7 @@ class AiChatEngine(private val context: Context) {
             "woke up at", "keep waking", "3am", "4am", "middle of the night",
             "sleep paralysis") ->
             handleSleep().also { lastTopic = "sleep" }
-        any(lower, "focus", "work", "study", "concentrate", "productivity",
+        any(lower, "focus", "study", "concentrate", "productivity",
             "read", "code", "writing", "attention", "adhd",
             "brain fog", "foggy", "mental clarity", "sharp", "clear mind",
             "procrastinat") ->
