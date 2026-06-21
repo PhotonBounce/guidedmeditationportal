@@ -153,6 +153,12 @@ class AiChatEngine(private val context: Context) {
         any(lower, "grateful", "gratitude", "journal", "journaling", "reflect",
             "reflection", "intention", "intentions", "thankful", "thankfulness") ->
             handleGratitude().also { lastTopic = "gratitude" }
+        any(lower, "my stats", "my progress", "how am i doing", "my history",
+            "how long have i", "sessions", "minutes meditated", "progress report") ->
+            handleStats().also { lastTopic = "" }
+        any(lower, "my favorites", "my favourites", "saved tracks", "what i saved",
+            "what i've saved", "favorite tracks", "favourite tracks", "my saved") ->
+            handleFavorites().also { lastTopic = "" }
         any(lower, "play it", "play that", "start it", "queue it") ->
             handlePlayRequest().also { lastTopic = "" }
         else -> handleGeneral(lower).also { lastTopic = "" }
@@ -380,12 +386,71 @@ class AiChatEngine(private val context: Context) {
         SoundType.SOHAM
     )
 
-    private fun handlePlayRequest(): Pair<String, SoundType?> = Pair(
-        "Queuing up ${mostPlayed.emoji} ${mostPlayed.displayName} — your most-played soundscape!\n\n" +
-        "Tap Play below, or find it in the grid on the main screen. 🎵\n\n" +
-        "Settle in and breathe... 🌙",
-        mostPlayed
-    )
+    private fun handleStats(): Pair<String, SoundType?> {
+        val streak = stats.currentStreak()
+        val longest = stats.longestStreak()
+        val sessions = stats.totalSessions()
+        val minutes = stats.totalMinutes()
+        val favorites = prefs.getFavorites()
+        val streakLine = when {
+            streak >= 7 -> "🔥 ${streak}-day streak — exceptional."
+            streak >= 2 -> "🌱 ${streak} days in a row."
+            streak == 1 -> "✨ 1 day — a solid start."
+            else        -> "Streak: 0 days. Today is a great time to begin."
+        }
+        val longestNote = if (longest > streak && longest > 1) " (Best: ${longest} days)" else ""
+        val minuteLine = when {
+            minutes >= 60 -> "${minutes} min meditated across ${sessions} sessions."
+            minutes > 0   -> "${minutes} min across ${sessions} sessions."
+            else          -> "No sessions logged yet."
+        }
+        val favLine = if (favorites.isEmpty()) {
+            "No favorites saved yet — heart a track on the main screen."
+        } else {
+            "Saved: ${favorites.take(3).joinToString("  ") { "${it.emoji} ${it.displayName}" }}"
+        }
+        return Pair(
+            "🤍 Your Practice\n\n" +
+            "$streakLine$longestNote\n" +
+            "$minuteLine\n" +
+            "Most-played: ${mostPlayed.emoji} ${mostPlayed.displayName}\n\n" +
+            "$favLine\n\n" +
+            "Every session counts — you're building something real.",
+            null
+        )
+    }
+
+    private fun handleFavorites(): Pair<String, SoundType?> {
+        val favorites = prefs.getFavorites()
+        if (favorites.isEmpty()) {
+            return Pair(
+                "You haven't saved any favorites yet. 🤍\n\n" +
+                "Tap the heart icon on any track card to save it here.\n\n" +
+                "Spirit's suggestion for your first: ${mostPlayed.emoji} ${mostPlayed.displayName} — your most-played.",
+                mostPlayed
+            )
+        }
+        val list = favorites.joinToString("\n") { "• ${it.emoji} ${it.displayName}" }
+        val topFav = favorites.first()
+        return Pair(
+            "⭐ Your Saved Tracks\n\n" +
+            "$list\n\n" +
+            "Tap the card above to play ${topFav.emoji} ${topFav.displayName} now.",
+            topFav
+        )
+    }
+
+    private fun handlePlayRequest(): Pair<String, SoundType?> {
+        val favorites = prefs.getFavorites()
+        val toPlay = favorites.firstOrNull() ?: mostPlayed
+        val source = if (favorites.isNotEmpty()) "your top saved favorite" else "your most-played"
+        return Pair(
+            "Queuing up ${toPlay.emoji} ${toPlay.displayName} — ${source}!\n\n" +
+            "Tap Play below, or find it in the grid on the main screen. 🎵\n\n" +
+            "Settle in and breathe... 🌙",
+            toPlay
+        )
+    }
 
     private fun handleSadness(): Pair<String, SoundType?> = Pair(
         "💜 I hear you. Sadness deserves space — not fixing.\n\n" +
