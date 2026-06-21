@@ -62,11 +62,23 @@ function route(lower, lastTopic) {
     "thought spiral","thought spirals","racing thoughts"]) ||
     anyWord(lower,["rest","tense"])) return "relax";
   if(any(lower,["sad","grief","grieving","heartbreak","heartbroken","lonely","alone","loneliness",
-    "depressed","depression","cry","crying","upset","miserable","unhappy","low mood","empty inside",
+    "depressed","depression","cry","crying","upset","miserable","unhappy","low mood",
+    "empty inside","feel empty","feeling empty",
     "hopeless","hollow","disconnected","meaningless","no motivation","nothing matters",
-    "bereaved","bereavement","loss of","lost someone","longing","miss him","miss her",
+    "breakup","broke up","split up",
+    "feeling lost","lost and","i feel lost","feel so lost","blue today","can't find","lost myself",
+    "bereaved","bereavement","loss of","lost someone",
+    "passed away","death of","missing them","miss them so",
+    "isolated","feeling isolated","so isolated",
+    "got fired","just fired","lost my job","lost their job","laid off",
+    "made redundant","partner left me","been left",
+    "relationship","divorce","divorc","separation","separated from",
+    "i feel low","feel so low","feeling so low","feeling very low",
+    "life feels pointless","feels pointless","feel pointless",
+    "mood swings","bad mood","my mood","mental health",
+    "i'm suffering","need to vent","need to talk","venting",
+    "longing","miss him","miss her",
     "miscarriage","stillbirth","pregnancy loss","child loss","infertility","lost my baby","lost our baby",
-    "need to vent","venting",
     "feel rejected","feel abandoned","abandoned","rejection","been rejected",
     "feel invisible","feel unseen","feel unloved","unlovable","not loved","no one cares",
     "not great","not so great","not feeling great","not doing great",
@@ -80,7 +92,8 @@ function route(lower, lastTopic) {
     "mourning","in mourning","heartache","missing my ex","miss my ex",
     "no purpose","lack of purpose","feel purposeless","existential",
     "winter blues","lack of sunlight","low in winter",
-    "seasonal affective","seasonal depression","sad disorder"]) ||
+    "seasonal affective","seasonal depression","sad disorder",
+    "widowed","widow","ghosted"]) ||
     anyWord(lower,["numb","died","vent"])) return "sadness";
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated","self-blame",
     "blame myself","hate my body","feel worthless","not good enough",
@@ -224,6 +237,19 @@ var tests = [
   ["my shoulder pain won't go away", "", "pain", "shoulder pain → pain"],
   ["i have sciatica", "", "pain", "sciatica → pain"],
   ["period cramps are so bad today", "", "pain", "cramps → pain"],
+
+  // R66: sadness sim sync — pre-R62 keywords were missing; + widowed/ghosted
+  ["we just broke up", "", "sadness", "broke up → sadness"],
+  ["i've been feeling so isolated", "", "sadness", "isolated → sadness"],
+  ["my dad passed away last week", "", "sadness", "passed away → sadness"],
+  ["i got laid off yesterday", "", "sadness", "laid off → sadness"],
+  ["we're going through a divorce", "", "sadness", "divorce → sadness"],
+  ["my partner left me", "", "sadness", "partner left me → sadness"],
+  ["my mood is all over the place", "", "sadness", "mood swings → sadness"],
+  ["i feel so empty inside", "", "sadness", "feel empty → sadness"],
+  ["my life feels pointless lately", "", "sadness", "life feels pointless → sadness"],
+  ["i was recently widowed", "", "sadness", "widowed → sadness"],
+  ["i got ghosted and it hurt", "", "sadness", "ghosted → sadness"],
 
   // R64: sleep simulation sync + new sleep keywords + night terrors
   ["i have terrible night terrors", "", "sleep", "night terrors → sleep"],

@@ -242,7 +242,8 @@ class AiChatEngine(private val context: Context) {
             "not fine", "i'm not fine", "im not fine",
             "feeling low", "feel low", "so low", "really low", "been feeling low",
             "feeling blue", "feel blue", "so blue",
-            "feeling down", "feel down", "been feeling down", "really down", "so down") ||
+            "feeling down", "feel down", "been feeling down", "really down", "so down",
+            "widowed", "widow", "ghosted") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
