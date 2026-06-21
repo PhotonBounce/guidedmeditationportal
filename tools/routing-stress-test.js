@@ -78,7 +78,10 @@ function route(lower, lastTopic) {
     "my memory","memory loss","memory lapses","terrible memory",
     "keep forgetting","can't remember","cant remember",
     "forget things","forget everything","forgetting everything",
-    "mind wanders","wandering mind"]) ||
+    "mind wanders","wandering mind",
+    "executive function","executive dysfunction",
+    "working memory","cognitive load","mental load",
+    "need clarity","lack of clarity","need to think clearly"]) ||
     anyWord(lower,["read","code"])) return "focus";
   // 8. energy
   if(any(lower,["energy","energise","energize","wake up","waking up","uplift","motivat",
@@ -216,6 +219,9 @@ function route(lower, lastTopic) {
     "feel misunderstood","always misunderstood",
     "people always leave","everyone leaves","people keep leaving",
     "doom and gloom",
+    "find my purpose","finding my purpose","life purpose",
+    "searching for meaning","search for meaning",
+    "find meaning","sense of meaning",
     "in a funk","bit of a funk","in a bit of a funk",
     "in my feelings","in the dumps","down in the dumps",
     "need hope","need some hope","lost all hope",
@@ -292,7 +298,10 @@ function route(lower, lastTopic) {
     "jealous","jealousy","envy","envious",
     "arguing","we argue","keep arguing","constant arguments",
     "bickering","we bicker",
-    "silent treatment"]) ||
+    "silent treatment",
+    "feel disrespected","disrespected","feel dismissed",
+    "feel unheard","not being heard","nobody listens",
+    "taken advantage of","being taken advantage"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   // 18. vip
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -543,6 +552,16 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R89: focus (executive dysfunction/working memory), sadness (life purpose/meaning), anger (disrespected/dismissed)
+  ["I struggle with executive dysfunction every day", "", "focus", "executive dysfunction → focus"],
+  ["my working memory is really poor", "", "focus", "working memory → focus"],
+  ["I need clarity on what to do next", "", "focus", "need clarity → focus"],
+  ["I'm still searching for meaning in my life", "", "sadness", "searching for meaning → sadness"],
+  ["I want to find my life purpose", "", "sadness", "life purpose → sadness"],
+  ["my boss always makes me feel disrespected", "", "anger", "disrespected → anger"],
+  ["I feel dismissed every time I speak up", "", "anger", "feel dismissed → anger"],
+  ["I'm constantly being taken advantage of", "", "anger", "taken advantage of → anger"],
 
   // R88: relax (uncertainty/mind chatter/monkey mind), sadness (everyone leaves/doom and gloom)
   ["I'm living with so much uncertainty right now", "", "relax", "uncertainty → relax"],

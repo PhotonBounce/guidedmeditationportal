@@ -186,7 +186,10 @@ class AiChatEngine(private val context: Context) {
             "my memory", "memory loss", "memory lapses", "terrible memory",
             "keep forgetting", "can't remember", "cant remember",
             "forget things", "forget everything", "forgetting everything",
-            "mind wanders", "wandering mind") ||
+            "mind wanders", "wandering mind",
+            "executive function", "executive dysfunction",
+            "working memory", "cognitive load", "mental load",
+            "need clarity", "lack of clarity", "need to think clearly") ||
         anyWord(lower, "read", "code") ->
             handleFocus().also { lastTopic = "focus" }
         any(lower, "energy", "energise", "energize", "wake up", "waking up",
@@ -347,7 +350,10 @@ class AiChatEngine(private val context: Context) {
             "no one understands", "nobody understands",
             "feel misunderstood", "always misunderstood",
             "people always leave", "everyone leaves", "people keep leaving",
-            "doom and gloom") ||
+            "doom and gloom",
+            "find my purpose", "finding my purpose", "life purpose",
+            "searching for meaning", "search for meaning",
+            "find meaning", "sense of meaning") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
@@ -419,7 +425,10 @@ class AiChatEngine(private val context: Context) {
             "jealous", "jealousy", "envy", "envious",
             "arguing", "we argue", "keep arguing", "constant arguments",
             "bickering", "we bicker",
-            "silent treatment") ||
+            "silent treatment",
+            "feel disrespected", "disrespected", "feel dismissed",
+            "feel unheard", "not being heard", "nobody listens",
+            "taken advantage of", "being taken advantage") ||
         anyWord(lower, "mad", "anger", "angered") ->
             handleAnger().also { lastTopic = "anger" }
 
