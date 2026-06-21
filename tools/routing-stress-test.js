@@ -110,7 +110,10 @@ function route(lower, lastTopic) {
     "memory improvement","improve my memory","improve memory",
     "memory exercises","memory training",
     "revision","revising","revise","exam revision",
-    "pomodoro","pomodoro technique"]) ||
+    "pomodoro","pomodoro technique",
+    "scattered thoughts","scattered brain","scattered thinking",
+    "can't organise my thoughts","can't organize my thoughts",
+    "disorganised thinking","disorganized thinking"]) ||
     anyWord(lower,["read","code"])) return "focus";
   // 8. energy
   if(any(lower,["energy","energise","energize","wake up","waking up","uplift","motivat",
@@ -192,7 +195,10 @@ function route(lower, lastTopic) {
     "blood pressure","high blood pressure","hypertension",
     "cardiac stress","heart health stress",
     "social pressure","peer pressure","exam pressure",
-    "performance pressure","pressure to perform"]) ||
+    "performance pressure","pressure to perform",
+    "heart is racing","heart races","heart started racing",
+    "heart is pounding","heart has been pounding",
+    "noise sensitivity"]) ||
     anyWord(lower,["rest","tense","rsd"])) return "relax";
   // 10. tinnitus
   if(any(lower,["tinnitus","ringing in","ear ring","hearing","buzz in my ear",
@@ -361,6 +367,10 @@ function route(lower, lastTopic) {
     "codependency","codependent","codependent relationship",
     "avoidant attachment","attachment wound","attachment issues",
     "fearful avoidant","disorganized attachment",
+    "rock bottom","hit rock bottom","at rock bottom",
+    "fall to pieces","falling to pieces","going to pieces",
+    "feel unwanted","feeling unwanted","feel unloved by",
+    "identity loss","loss of identity",
     "estranged","estrangement","family estrangement","estranged from",
     "cut off from family","family cut me off","cut off by family",
     "divorce","divorcing","getting divorced","filed for divorce",
@@ -563,7 +573,10 @@ function route(lower, lastTopic) {
     "what do you do","how do i use this","how do i use you",
     "tell me about yourself","how does this work","i need help",
     "what can i ask you","what can i ask","i don't know where to start",
-    "i dont know where to start","not sure where to start"]) ||
+    "i dont know where to start","not sure where to start",
+    "how do i get started","how do i start","where do i start",
+    "getting started","just downloaded","new to this","first time using",
+    "just started using"]) ||
     anyWord(lower,["help"])) return "help";
   // 28. inspire
   if(any(lower,["inspire me","inspiration","quote","affirmation","motivate me",
@@ -776,6 +789,18 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R110: sadness (rock bottom/fall to pieces/feel unwanted/identity loss), relax (heart is racing/noise sensitivity), focus (scattered thoughts), help (getting started)
+  ["I feel like I've hit rock bottom", "", "sadness", "rock bottom → sadness"],
+  ["I'm completely falling to pieces right now", "", "sadness", "falling to pieces → sadness"],
+  ["I feel unwanted by everyone around me", "", "sadness", "feel unwanted → sadness"],
+  ["I'm going through a loss of identity", "", "sadness", "loss of identity → sadness"],
+  ["my heart is racing all the time", "", "relax", "heart is racing → relax"],
+  ["my heart has been pounding all day", "", "relax", "heart is pounding → relax"],
+  ["I have noise sensitivity and it's getting worse", "", "relax", "noise sensitivity → relax"],
+  ["I have scattered thoughts and can't land on anything", "", "focus", "scattered thoughts → focus"],
+  ["I just downloaded this app and don't know where to start", "", "help", "just downloaded + getting started → help"],
+  ["I'm new to this and want to know what to do", "", "help", "new to this → help"],
 
   // R109: anger (narcissist/micromanagement/stonewalling/condescending/undermined), overwhelm (stretched too thin/can't manage), techniques (mental wellness/self-improvement)
   ["my boss is a narcissist and it's affecting me", "", "anger", "narcissist → anger (standalone, sadness has compound phrases)"],

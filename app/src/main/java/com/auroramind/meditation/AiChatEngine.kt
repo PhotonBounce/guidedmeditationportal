@@ -218,7 +218,10 @@ class AiChatEngine(private val context: Context) {
             "memory improvement", "improve my memory", "improve memory",
             "memory exercises", "memory training",
             "revision", "revising", "revise", "exam revision",
-            "pomodoro", "pomodoro technique") ||
+            "pomodoro", "pomodoro technique",
+            "scattered thoughts", "scattered brain", "scattered thinking",
+            "can't organise my thoughts", "can't organize my thoughts",
+            "disorganised thinking", "disorganized thinking") ||
         anyWord(lower, "read", "code") ->
             handleFocus().also { lastTopic = "focus" }
         any(lower, "energy", "energise", "energize", "wake up", "waking up",
@@ -304,7 +307,10 @@ class AiChatEngine(private val context: Context) {
             "blood pressure", "high blood pressure", "hypertension",
             "cardiac stress", "heart health stress",
             "social pressure", "peer pressure", "exam pressure",
-            "performance pressure", "pressure to perform") ||
+            "performance pressure", "pressure to perform",
+            "heart is racing", "heart races", "heart started racing",
+            "heart is pounding", "heart has been pounding",
+            "noise sensitivity") ||
         anyWord(lower, "rest", "tense", "rsd") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in",
@@ -496,6 +502,10 @@ class AiChatEngine(private val context: Context) {
             "fearful avoidant", "disorganized attachment",
             "estranged", "estrangement", "family estrangement", "estranged from",
             "cut off from family", "family cut me off", "cut off by family",
+            "rock bottom", "hit rock bottom", "at rock bottom",
+            "fall to pieces", "falling to pieces", "going to pieces",
+            "feel unwanted", "feeling unwanted", "feel unloved by",
+            "identity loss", "loss of identity",
             "divorce", "divorcing", "getting divorced", "filed for divorce",
             "separation", "separated", "we're separated", "going through a separation",
             "broke up", "broken up", "we broke up", "just broke up",
@@ -700,7 +710,10 @@ class AiChatEngine(private val context: Context) {
             "what do you do", "how do i use this", "how do i use you",
             "tell me about yourself", "how does this work", "i need help",
             "what can i ask you", "what can i ask", "i don't know where to start",
-            "i dont know where to start", "not sure where to start") ||
+            "i dont know where to start", "not sure where to start",
+            "how do i get started", "how do i start", "where do i start",
+            "getting started", "just downloaded", "new to this", "first time using",
+            "just started using") ||
         anyWord(lower, "help") ->
             handleHelp().also { lastTopic = "" }
         any(lower, "inspire me", "inspiration", "quote", "affirmation", "motivate me",
