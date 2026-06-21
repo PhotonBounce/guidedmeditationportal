@@ -376,19 +376,28 @@
         input.placeholder = phList[phIdx];
       }
     }, 3500);
-    // Ctrl+↑ on empty input — restore last sent message (edit-last pattern).
+    // ↑/↓ history nav — terminal-style cycling through sent messages on empty input.
+    // ↑ enters history mode (going oldest first); ↓ exits back toward present.
+    // Multiline input (Shift+Enter newlines) is left alone so caret can move between lines.
+    var _histIdx = -1;
     input.addEventListener('keydown', function(e) {
-      if (e.ctrlKey && e.key === 'ArrowUp' && !input.value.trim()) {
-        var _last = null;
-        for (var _li = chatMsgs.length - 1; _li >= 0; _li--) {
-          if (chatMsgs[_li].cls === 'user') { _last = chatMsgs[_li]; break; }
-        }
-        if (_last) {
-          e.preventDefault();
-          input.value = _last.text;
-          input.dispatchEvent(new Event('input'));
-          input.selectionStart = input.selectionEnd = input.value.length;
-        }
+      if (e.key === 'ArrowUp') {
+        if (input.value.indexOf('\n') !== -1) return;        // multiline: let textarea handle
+        if (input.value.trim() !== '' && _histIdx === -1) return; // typed content: don't clobber
+        var _hm = chatMsgs.filter(function(m) { return m.cls === 'user'; });
+        if (!_hm.length) return;
+        e.preventDefault();
+        if (_histIdx === -1) _histIdx = _hm.length;          // start past newest
+        _histIdx = Math.max(0, _histIdx - 1);
+        input.value = _hm[_histIdx].text;
+        input.dispatchEvent(new Event('input'));
+        input.selectionStart = input.selectionEnd = input.value.length;
+      } else if (e.key === 'ArrowDown' && _histIdx !== -1) {
+        var _hm = chatMsgs.filter(function(m) { return m.cls === 'user'; });
+        e.preventDefault();
+        _histIdx++;
+        if (_histIdx >= _hm.length) { _histIdx = -1; input.value = ''; input.dispatchEvent(new Event('input')); }
+        else { input.value = _hm[_histIdx].text; input.dispatchEvent(new Event('input')); input.selectionStart = input.selectionEnd = input.value.length; }
       }
     });
     // Enter sends; Shift+Enter inserts a newline (textarea default blocked).
@@ -920,6 +929,7 @@
       if (!text) return;
       addMsg(text, 'user');
       input.value = '';
+      _histIdx = -1;
       input.style.height = 'auto';
       clearTimeout(_hintTimer); _sendHint.classList.remove('pb-brain__send-hint--vis');
       const sendBtn = form.querySelector('[type="submit"]');

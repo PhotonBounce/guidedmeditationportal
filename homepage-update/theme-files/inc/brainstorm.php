@@ -561,6 +561,60 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre36-a) Estate agent / lettings agent / property management company website.
+	if ( $has( [ 'estate agent website', 'lettings agent website', 'property management website', 'estate agency website', 'letting agent website', 'property agent website', 'property developer website', 'new homes website', 'residential sales website', 'commercial property website', 'property sales website', 'landlord website', 'property management company website', 'block management website', 'hmo management website' ] ) ) {
+		return $nl( [
+			"Estate agent and letting agent websites must convert vendors and landlords, not just browsers &mdash; here&rsquo;s the standard build:",
+			'',
+			"&bull; <strong>Property search and listings</strong> &mdash; WP-Property, Easy Property Listings, or custom CPT; search by price / beds / type / area; saved searches with email alerts; floor plan + virtual tour embed; Rightmove/Zoopla feed integration (CRM-dependent); from <strong>$600</strong>",
+			"&bull; <strong>Valuation lead capture</strong> &mdash; &ldquo;Get a free valuation&rdquo; is your highest-value conversion; instant online estimate (Property Data API or Hometrack) + scheduled in-person valuation booking (Calendly); Gravity Forms with postcode lookup; from <strong>$350</strong>",
+			"&bull; <strong>Landlord and vendor pages</strong> &mdash; separate landing pages per audience; landlord page covers yield, compliance (EICR / EPC / gas safety / HMO licence), and tenant-find vs full management tiers; vendor page covers sales process timeline and fees; from <strong>$300</strong>",
+			"&bull; <strong>Tenant portal / repair request</strong> &mdash; maintenance ticket form; tenancy document access (AST / deposit certificate / inventory); integrates with Arthur or Fixflo; from <strong>$300</strong>",
+			"&bull; <strong>Branch pages</strong> &mdash; one per office; Local Business schema; area guide content (&ldquo;best streets in [town]&rdquo; long-form); school catchment links; commute times; strong for local SEO",
+			"&bull; <strong>CRM integration</strong> &mdash; Reapit / Jupix / Dezrez / Alto (Zoopla) / Property Hive (WP plugin); discuss with your CRM provider before build to confirm data export format",
+			"&bull; <strong>From $700</strong> listings + valuation + branch page; <strong>$1,400+</strong> with tenant portal + landlord/vendor pages + CRM feed + area guides",
+			'',
+			"Residential sales, lettings, or both? How many branches? Which CRM are you on?",
+		] );
+	}
+
+	// 0d-pre36-b) Dance studio / dance school / ballet school / performing arts academy website.
+	if ( $has( [ 'dance studio website', 'dance school website', 'ballet school website', 'performing arts website', 'dance academy website', 'dance lessons website', 'ballet website', 'ballroom dancing website', 'contemporary dance website', 'tap dance website', 'street dance website', 'salsa dance website', 'dance class website', 'latin dance website', 'swing dance website', 'irish dance website', 'cheerleading website' ] ) ) {
+		return $nl( [
+			"Dance studio websites need to convert parents for children&rsquo;s classes and adults for recreational and competitive training:",
+			'',
+			"&bull; <strong>Class timetable</strong> &mdash; WP Amelia or The Booking Factory; filter by age group / style / level / day; capacity per slot; add-to-Google-Calendar link; from <strong>$400</strong>",
+			"&bull; <strong>Online enrolment + direct debit</strong> &mdash; WooCommerce Subscriptions for monthly class packages; GoCardless for DD (UK); or Stripe recurring; trial class booking with Stripe deposit; from <strong>$400</strong>",
+			"&bull; <strong>Style pages</strong> &mdash; one per discipline (ballet / tap / jazz / contemporary / hip-hop / ballroom / Latin / Irish / acro / street); level ladder from beginner to performance; FAQ; from <strong>$200</strong> per page",
+			"&bull; <strong>Show and performance archive</strong> &mdash; annual show gallery; video reel; student testimonials; inspires prospective students and reassures parents about performance opportunities",
+			"&bull; <strong>Exam and festival results</strong> &mdash; ISTD / RAD / IDTA exam grades; festival trophy results; competitive credentials are a major purchase signal for competitive families",
+			"&bull; <strong>Teacher profiles</strong> &mdash; headshots + training background + performance history + syllabus qualifications; reduces anonymous-studio anxiety, especially for children&rsquo;s classes",
+			"&bull; <strong>Uniform and merchandise shop</strong> &mdash; WooCommerce; branded kit + show costume sales; from <strong>$300</strong>",
+			"&bull; <strong>Safeguarding and DBS notice</strong> &mdash; enhanced DBS note; safeguarding policy PDF; GDPR media consent statement; required for any studio with under-18 students",
+			"&bull; <strong>From $600</strong> timetable + enrolment + style pages; <strong>$1,100+</strong> with show archive + shop + exam results + teacher profiles",
+			'',
+			"Children&rsquo;s classes, adult recreational, competitive, or all three? How many disciplines?",
+		] );
+	}
+
+	// 0d-pre36-c) Wedding photographer / event photographer / portrait photographer / commercial photographer website.
+	if ( $has( [ 'wedding photographer website', 'wedding photography website', 'event photographer website', 'portrait photographer website', 'commercial photographer website', 'photographer portfolio website', 'photography portfolio website', 'headshot photographer website', 'family photographer website', 'newborn photographer website', 'boudoir photographer website', 'product photographer website', 'architectural photographer website', 'food photographer website', 'brand photographer website', 'lifestyle photographer website' ] ) ) {
+		return $nl( [
+			"Photographer websites are portfolio-first but must convert enquiries &mdash; the two goals can conflict if gallery weight hurts load speed or buries the CTA:",
+			'',
+			"&bull; <strong>Portfolio / gallery</strong> &mdash; Justified Image Grid or Modula; WebP with lazy load; full-screen lightbox; curated (30&ndash;50 images, not your archive); load time is conversion time; from <strong>$400</strong>",
+			"&bull; <strong>Enquiry and booking flow</strong> &mdash; Gravity Forms or HoneyBook / Studio Ninja integration; wedding form: date + venue + guest count + how they found you; portrait: session type + preferred date; auto-reply with pricing guide PDF; from <strong>$300</strong>",
+			"&bull; <strong>Real wedding / real shoot pages</strong> &mdash; one page per featured commission (venue + suppliers + short narrative + 15&ndash;20 select images); each targets &ldquo;[venue name] wedding photographer&rdquo; keyword; from <strong>$150</strong> per page",
+			"&bull; <strong>Packages and pricing page</strong> &mdash; transparent or enquiry-only (both approaches work; transparent reduces volume but increases close rate); wedding: coverage hours + album + second shooter; portrait: duration + digital files + prints",
+			"&bull; <strong>Testimonials and reviews</strong> &mdash; Google Reviews widget; one pull quote per gallery section; video testimonials where available; emotional buying decision &mdash; social proof closes it",
+			"&bull; <strong>Style and approach page</strong> &mdash; documentary vs posed; natural light vs studio; editing style (film emulation / moody / bright + airy); helps couples self-select and reduces mismatched enquiries",
+			"&bull; <strong>Location SEO</strong> &mdash; &ldquo;[city] wedding photographer&rdquo; landing pages; &ldquo;[venue] wedding photography&rdquo; from real-shoot pages; from <strong>$100</strong> per page",
+			"&bull; <strong>From $500</strong> portfolio + enquiry form + packages; <strong>$1,000+</strong> with real-shoot pages + location SEO + CRM integration + testimonial architecture",
+			'',
+			"Wedding / portrait / commercial / events? Primary region? Do you use Studio Ninja, HoneyBook, or Sprout Studio?",
+		] );
+	}
+
 	// 0d-pre35-a) Subscription box / DTC subscription brand / product subscription / mystery box website.
 	if ( $has( [ 'subscription box website', 'subscription website', 'subscription box', 'monthly box website', 'dtc subscription website', 'direct to consumer website', 'product subscription website', 'mystery box website', 'gift box subscription website', 'beauty box website', 'snack box website', 'book subscription website', 'hobby box website', 'kids subscription box', 'pet subscription box website' ] ) ) {
 		return $nl( [
