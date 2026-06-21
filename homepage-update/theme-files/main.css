@@ -5044,3 +5044,9 @@ html.pb-brain-open { overflow: hidden; }
 .pb-brain__starfilter:focus-visible{ outline:1px solid rgba(255,255,255,.3); border-radius:4px; }
 .pb-brain__log--star-only .pb-brain__msg:not(.pb-brain__msg--starred){ display:none; }
 .pb-brain__log--star-only .pb-brain__scrollprog{ display:none; }
+/* R45 — message entry slide-up (transform-only; no opacity conflict with pb-brain__line reveal) */
+@keyframes pbMsgIn{
+  from{ transform:translateY(6px); }
+  to{ transform:none; }
+}
+.pb-brain__msg{ animation:pbMsgIn .14s ease-out; }

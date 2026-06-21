@@ -737,7 +737,7 @@
             _tbody.classList.toggle('pb-brain__text--collapsed', !_colOpen);
             _expandBtn.textContent = _colOpen ? 'Show less ↑' : 'Show more ↓';
             _expandBtn.setAttribute('aria-expanded', String(_colOpen));
-            if (_colOpen) { requestAnimationFrame(function() { log.scrollTop = log.scrollHeight; }); }
+            if (_colOpen) { requestAnimationFrame(function() { log.scrollTo({ top: log.scrollHeight, behavior: 'smooth' }); }); }
           });
           div.appendChild(_expandBtn);
         }
@@ -785,7 +785,7 @@
         // Push plaintext to SR live region so screen readers announce the reply.
         if (_srLive) { _srLive.textContent = ''; requestAnimationFrame(function() { _srLive.textContent = plain(text); }); }
       }
-      if (_nearBottom()) log.scrollTop = log.scrollHeight;
+      if (_nearBottom()) log.scrollTo({ top: log.scrollHeight, behavior: 'smooth' });
     }
 
     function saveChat() {
@@ -803,16 +803,16 @@
     }
 
     function exportChat() {
-      if (!chatMsgs.length) return;
+      if (!chatMsgs.length) { _showToast('Nothing to export yet'); return; }
       var lines = chatMsgs.map(function(m) {
-        return (m.cls === 'bot' ? 'Photon: ' : 'You:    ') + plain(m.text);
+        return (m.cls === 'bot' ? '**Photon:** ' : '**You:** ') + plain(m.text);
       });
-      var content = 'Photon Bounce — Chat Transcript\n' + new Date().toLocaleString() + '\n' + '────────────────────────────────────────' + '\n\n' + lines.join('\n\n');
-      var blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      var content = '# Photon Bounce — Chat\n\n_Exported ' + new Date().toLocaleString() + '_\n\n---\n\n' + lines.join('\n\n');
+      var blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
       var url = URL.createObjectURL(blob);
       var a = document.createElement('a');
       a.href = url;
-      a.download = 'pb-chat-' + new Date().toISOString().slice(0, 10) + '.txt';
+      a.download = 'pb-chat-' + new Date().toISOString().slice(0, 10) + '.md';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -850,7 +850,7 @@
       div.className = 'pb-brain__msg pb-brain__msg--bot pb-brain__typing';
       div.innerHTML = '<span></span><span></span><span></span>';
       log.appendChild(div);
-      if (_nearBottom()) log.scrollTop = log.scrollHeight;
+      if (_nearBottom()) log.scrollTo({ top: log.scrollHeight, behavior: 'smooth' });
       return div;
     }
 
@@ -927,7 +927,7 @@
       banner.setAttribute('aria-live', 'assertive');
       banner.innerHTML = '<span class="pb-brain__listen-dot"></span>Listening…';
       log.appendChild(banner);
-      if (_nearBottom()) log.scrollTop = log.scrollHeight;
+      if (_nearBottom()) log.scrollTo({ top: log.scrollHeight, behavior: 'smooth' });
     }
     function hideListeningBanner() {
       if (!log) return;
@@ -1094,8 +1094,8 @@
         var exportBtn = document.createElement('button');
         exportBtn.type = 'button';
         exportBtn.className = 'pb-brain__export';
-        exportBtn.title = 'Download chat transcript';
-        exportBtn.setAttribute('aria-label', 'Download chat transcript');
+        exportBtn.title = 'Download chat as Markdown';
+        exportBtn.setAttribute('aria-label', 'Download chat as Markdown');
         exportBtn.innerHTML = '&#8659;';
         exportBtn.addEventListener('click', exportChat);
         var printBtn = document.createElement('button');

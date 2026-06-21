@@ -667,6 +667,60 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre41-a) Solicitor / law firm / barrister / legal services website.
+	if ( $has( [ 'solicitor website', 'law firm website', 'barrister website', 'lawyer website', 'legal services website', 'conveyancing solicitor website', 'family law website', 'employment law website', 'criminal defence website', 'personal injury website', 'immigration solicitor website', 'probate solicitor website', 'will writing website', 'commercial law website', 'litigation website', 'legal firm website', 'law practice website' ] ) ) {
+		return $nl( [
+			"Law firm websites must balance SRA regulatory compliance with genuine conversion — here&rsquo;s what drives new client enquiries:",
+			'',
+			"&bull; <strong>Practice area pages</strong> &mdash; one per specialism (conveyancing / family / employment / criminal defence / personal injury / immigration / probate and estate administration / commercial / wills and LPAs / dispute resolution); fees by practice area where required; from <strong>$200</strong> per page",
+			"&bull; <strong>SRA compliance</strong> &mdash; SRA badge (required by SRA Code of Conduct &mdash; must display Solicitors Regulation Authority name and registration number); regulated disclaimer; client money protection statement; Lexcel or ISO 9001 quality mark if held",
+			"&bull; <strong>Fixed fee and price transparency</strong> &mdash; SRA requires published price information for family (divorce), immigration, conveyancing, motoring offences, employment, and wills; transparent pricing or a Gravity Forms quote-request flow; from <strong>$250</strong>",
+			"&bull; <strong>Client portal</strong> &mdash; Osprey Approach / Clio / LEAP / Action Step; secure document upload; matter progress updates; reduces admin calls; from <strong>$400</strong>",
+			"&bull; <strong>Case studies / testimonials</strong> &mdash; client consent essential; anonymise employment and family cases; full name and outcome acceptable for personal injury and commercial transactions; from <strong>$150</strong> per case study",
+			"&bull; <strong>Accreditations</strong> &mdash; Lexcel / CQS conveyancing quality scheme / Resolution (family) / APIL membership (personal injury) / Law Society Diversity & Inclusion Charter; trust badges build immediate credibility on first visit",
+			"&bull; <strong>Legal resource hub</strong> &mdash; &ldquo;What is a Section 21 notice?&rdquo; / &ldquo;Employment tribunal process explained&rdquo; long-form guides; organic search traffic and client education; from <strong>$300</strong>",
+			"&bull; <strong>From $600</strong> practice pages + SRA compliance + price transparency; <strong>$1,200+</strong> with client portal + resource hub + case studies",
+			'',
+			"Which practice areas? High street general or specialist firm? Legal aid, privately funded, or fixed fee?",
+		] );
+	}
+
+	// 0d-pre41-b) Accountant / bookkeeper / chartered accountant / tax advisor website.
+	if ( $has( [ 'accountant website', 'accounting firm website', 'bookkeeper website', 'chartered accountant website', 'tax advisor website', 'management accountant website', 'small business accountant website', 'self assessment website', 'vat specialist website', 'payroll services website', 'xero accountant website', 'quickbooks accountant website', 'cloud accountant website', 'cpa website', 'financial controller website', 'accounting practice website', 'tax return website' ] ) ) {
+		return $nl( [
+			"Accounting firm sites convert two types of client &mdash; compliance clients (annual accounts, tax returns) and advisory clients (management accounts, growth planning) &mdash; speak to both:",
+			'',
+			"&bull; <strong>Services pages</strong> &mdash; one per service (annual accounts / self-assessment / corporation tax / VAT returns / payroll / bookkeeping / management accounts / R&amp;D tax credits / business advisory / cloud accounting setup); frame compliance as &ldquo;we keep you legal&rdquo; and advisory as &ldquo;we grow your business&rdquo;; from <strong>$200</strong> per page",
+			"&bull; <strong>Software partner badges</strong> &mdash; Xero Platinum / Gold / Silver partner badge (the most influential trust signal for small business accounting clients choosing a cloud-first firm); QuickBooks ProAdvisor; FreeAgent certified; from <strong>$150</strong>",
+			"&bull; <strong>Free consultation booking</strong> &mdash; Calendly 30-min; pre-call form (business type / estimated turnover band / current accounting software / main pain point); auto-confirm with what to bring; from <strong>$200</strong>",
+			"&bull; <strong>Pricing page</strong> &mdash; packages (e.g. Start / Grow / Scale or Sole Trader / Limited Company / Group); monthly retainer price or &ldquo;from &pound;X per month&rdquo;; accounting software subscription bundled or not; reduces price-enquiry calls; from <strong>$250</strong>",
+			"&bull; <strong>ICAEW / ACCA / CIMA / ICAS membership</strong> &mdash; professional body badge (required for regulated services); professional indemnity insurance amount; AML supervision statement (accountants are supervised for anti-money laundering under the Money Laundering Regulations &mdash; this must be disclosed); from <strong>$150</strong>",
+			"&bull; <strong>Tax and deadline calendar page</strong> &mdash; Companies House confirmation statement / HMRC self-assessment / corporation tax / VAT deadlines; helps clients understand the timing pressure and appreciate the value of a proactive accountant; builds retention",
+			"&bull; <strong>Client portal</strong> &mdash; Xero Practice Manager / Karbon / SENTA / TaxCalc Cloud; secure document upload and e-signature; from <strong>$350</strong>",
+			"&bull; <strong>From $550</strong> services + software badges + consultation booking; <strong>$1,100+</strong> with pricing page + client portal + tax calendar",
+			'',
+			"Sole traders, limited companies, or both? Which software do you use? Cloud-first or traditional practice?",
+		] );
+	}
+
+	// 0d-pre41-c) Mortgage broker / IFA / financial adviser / protection broker website.
+	if ( $has( [ 'mortgage broker website', 'mortgage advisor website', 'independent financial adviser website', 'ifa website', 'financial advisor website', 'remortgage website', 'first time buyer mortgage website', 'buy to let mortgage website', 'protection broker website', 'life insurance broker website', 'critical illness cover website', 'income protection website', 'whole of market broker website', 'equity release website', 'mortgage adviser website', 'financial planning website' ] ) ) {
+		return $nl( [
+			"Mortgage broker and IFA websites must earn trust through FCA credentials before a visitor will share their financial situation &mdash; here&rsquo;s the conversion funnel:",
+			'',
+			"&bull; <strong>Mortgage types page</strong> &mdash; first-time buyer / remortgage / buy-to-let / Help to Buy / shared ownership / self-employed / adverse credit / equity release; brief description and typical timeline per type; from <strong>$250</strong>",
+			"&bull; <strong>FCA authorisation disclosure</strong> &mdash; required by FCA rules; must state that the firm is authorised and regulated by the Financial Conduct Authority, include the FCA firm reference number (FRN), and link to the FCA register; professional indemnity insurance note; from <strong>$150</strong>",
+			"&bull; <strong>Affordability calculator</strong> &mdash; indicative borrowing amount (salary multiplier up to 4.5&times; + LTV/deposit slider); captures lead intent data; &ldquo;our broker will be in touch to find you the best deal&rdquo; CTA; from <strong>$350</strong>",
+			"&bull; <strong>Fee transparency</strong> &mdash; FCA rules require clear statement of broker fees; state the broker fee (typical &pound;300&ndash;&pound;695) OR &ldquo;fee-free, we are paid by the lender by way of procuration fee / commission&rdquo;; hiding fees triggers FCA compliance risk; from <strong>$150</strong>",
+			"&bull; <strong>Case studies</strong> &mdash; first-time buyer with gifted deposit / self-employed sole trader with one year of accounts / adverse credit with settled defaults / buy-to-let portfolio remortgage; real scenario without identifying details; from <strong>$200</strong> per case study",
+			"&bull; <strong>Protection page</strong> &mdash; life insurance / critical illness / income protection / buildings and contents; many clients don&rsquo;t know brokers handle protection as well as mortgages; from <strong>$200</strong>",
+			"&bull; <strong>Initial consultation booking</strong> &mdash; Calendly; fact-find form (purchase or remortgage + property value + deposit amount + employment type + any adverse credit history); from <strong>$250</strong>",
+			"&bull; <strong>From $550</strong> mortgage types + FCA disclosure + affordability calculator; <strong>$1,100+</strong> with fee transparency page + case studies + protection page",
+			'',
+			"Whole of market or tied? Residential, buy-to-let, or both? Do you handle protection products too?",
+		] );
+	}
+
 	// 0d-pre40-a) Beautician / beauty salon / nail salon / nail technician / lash tech website.
 	if ( $has( [ 'beautician website', 'beauty salon website', 'nail salon website', 'nail technician website', 'beauty therapist website', 'lash technician website', 'lash extensions website', 'eyebrow technician website', 'makeup artist website', 'brow artist website', 'spray tan website', 'skin clinic website', 'aesthetics clinic website', 'semi-permanent makeup website', 'microblading website', 'waxing salon website', 'beauty studio website' ] ) ) {
 		return $nl( [
