@@ -152,7 +152,9 @@ class AiChatEngine(private val context: Context) {
             "counting sheep", "wired at night", "wired tonight", "can't wind down",
             "cant wind down", "light sleeper", "heavy sleeper", "sleep hygiene",
             "body clock", "circadian", "night terrors",
-            "night sweats", "hot flashes", "hot flush", "menopause", "perimenopause") ||
+            "night sweats", "hot flashes", "hot flush", "menopause", "perimenopause",
+            "can't turn off", "cant turn off", "turn my brain off",
+            "brain won't stop", "brain wont stop") ||
         anyWord(lower, "nap") ->
             handleSleep().also { lastTopic = "sleep" }
         any(lower, "focus", "study", "concentrat", "productivity",
@@ -237,6 +239,7 @@ class AiChatEngine(private val context: Context) {
             "despair", "despairing", "in despair", "feel desperate", "feeling desperate",
             "devastated", "feel devastated",
             "hollow", "disconnected", "meaningless", "no motivation", "nothing matters",
+            "gaslighting", "gaslit", "being gaslit", "emotional abuse",
             "breakup", "broke up", "split up", "feeling blue", "feeling lost",
             "lost and", "i feel lost", "feel so lost", "blue today", "can't find", "lost myself",
             "bereaved", "bereavement", "loss of", "lost someone", "lost my",
@@ -299,7 +302,8 @@ class AiChatEngine(private val context: Context) {
             "running on empty", "meltdown", "having a meltdown", "on the edge",
             "at my limit", "hit my limit", "can't handle it", "cant handle it",
             "can't handle this", "cant handle this",
-            "can't keep up", "cant keep up") ->
+            "can't keep up", "cant keep up", "hostile work") ||
+        anyWord(lower, "toxic") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
         any(lower, "angry", "furious", "frustrated", "frustration",
             "rage", "irritated", "irritable", "annoyed", "wound up", "agitated",
@@ -346,6 +350,7 @@ class AiChatEngine(private val context: Context) {
             "lower back", "neck pain", "neck tension", "shoulder pain", "joint pain",
             "sciatica", "period pain", "menstrual cramps", "cramps",
             "jaw pain", "jaw tension", "jaw clenching", "teeth grinding", "grind my teeth", "grinding my teeth", "bruxism",
+            "inflammation", "inflammatory", "repetitive strain", "carpal tunnel", "frozen shoulder",
             "painful", "pains", "in pain") ||
         anyWord(lower, "pain") ->
             handlePain().also { lastTopic = "pain" }

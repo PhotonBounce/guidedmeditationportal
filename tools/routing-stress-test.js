@@ -45,7 +45,9 @@ function route(lower, lastTopic) {
     "drift off","drifting off","can't drift",
     "counting sheep","wired at night","wired tonight","can't wind down","cant wind down",
     "light sleeper","heavy sleeper","sleep hygiene","body clock","circadian","night terrors",
-    "night sweats","hot flashes","hot flush","menopause","perimenopause"]) ||
+    "night sweats","hot flashes","hot flush","menopause","perimenopause",
+    "can't turn off","cant turn off","turn my brain off",
+    "brain won't stop","brain wont stop"]) ||
     anyWord(lower,["nap"])) return "sleep";
   // 7. focus
   if(any(lower,["focus","study","concentrat","productivity","procrastinat","writing","brain fog","adhd",
@@ -89,7 +91,7 @@ function route(lower, lastTopic) {
     "drinking to forget","using alcohol","using drink"]) ||
     anyWord(lower,["rest","tense"])) return "relax";
   // 10. tinnitus
-  if(any(lower,["tinnitus","ringing in","ear ring","hearing loss","buzz in my ear"])) return "tinnitus";
+  if(any(lower,["tinnitus","ringing in","ear ring","hearing","buzz in my ear"])) return "tinnitus";
   // 11. baby (non-sleep)
   if(any(lower,["baby","infant","newborn","toddler","new parent","new mum","new mom",
     "first time parent","new baby"])) return "baby";
@@ -118,6 +120,7 @@ function route(lower, lastTopic) {
     "hopeless","helpless","despair","despairing","in despair","feel desperate","feeling desperate",
     "devastated","feel devastated",
     "hollow","disconnected","meaningless","no motivation","nothing matters",
+    "gaslighting","gaslit","being gaslit","emotional abuse",
     "breakup","broke up","split up",
     "feeling lost","lost and","i feel lost","feel so lost","blue today","can't find","lost myself",
     "bereaved","bereavement","loss of","lost someone",
@@ -175,7 +178,8 @@ function route(lower, lastTopic) {
     "always putting others first","never put myself first","spread too thin",
     "running on empty","meltdown","having a meltdown","on the edge","at my limit",
     "hit my limit","can't handle it","cant handle it","can't handle this",
-    "cant handle this","can't keep up","cant keep up"])) return "overwhelm";
+    "cant handle this","can't keep up","cant keep up","hostile work"]) ||
+    anyWord(lower,["toxic"])) return "overwhelm";
   // 17. anger
   if(any(lower,["angry","furious","frustrated","frustration","rage",
     "irritated","irritable","annoyed","wound up","agitated",
@@ -213,6 +217,7 @@ function route(lower, lastTopic) {
     "lower back","neck pain","neck tension","shoulder pain","joint pain",
     "sciatica","period pain","menstrual cramps","cramps",
     "jaw pain","jaw tension","jaw clenching","teeth grinding","grind my teeth","grinding my teeth","bruxism",
+    "inflammation","inflammatory","repetitive strain","carpal tunnel","frozen shoulder",
     "painful","pains","in pain"]) || anyWord(lower,["pain"])) return "pain";
   // 26. gratitude
   if(any(lower,["grateful","gratitude","journal","journaling","reflect","reflection",
@@ -393,6 +398,16 @@ var tests = [
   ["i'm completely wiped out", "", "energy", "wiped out → energy"],
   ["i'm totally run down", "", "energy", "run down → energy"],
   ["i think i'm burning out at work", "", "overwhelm", "burning out → overwhelm"],
+
+  // R74: sleep (can't turn off), pain (inflammation/carpal tunnel), sadness (gaslit), overwhelm (toxic)
+  ["i just can't turn off my brain at night", "", "sleep", "can't turn off → sleep"],
+  ["my thoughts won't stop when i try to sleep", "", "sleep", "thoughts won't stop → sleep"],
+  ["i have chronic inflammation", "", "pain", "inflammation → pain"],
+  ["i think i have carpal tunnel syndrome", "", "pain", "carpal tunnel → pain"],
+  ["my frozen shoulder is really painful", "", "pain", "frozen shoulder → pain"],
+  ["i think i'm being gaslit by my partner", "", "sadness", "gaslit → sadness"],
+  ["the gaslighting at work is destroying me", "", "sadness", "gaslighting → sadness"],
+  ["my workplace is completely toxic", "", "overwhelm", "toxic workplace → overwhelm"],
 
   // R67: crisis (overdose/not worth living/take my life) + relax (dread/hypervig) + overwhelm
   ["i want to take my life", "", "crisis", "take my life → crisis"],
