@@ -254,6 +254,8 @@ class AiChatEngine(private val context: Context) {
             "mind is racing", "head is spinning", "head is full",
             "can't quiet my mind", "cant quiet my mind", "quiet my mind",
             "feel jumpy", "jumpy", "overstimulated",
+            "stomach in knots", "knot in my stomach", "stomach tied in knots",
+            "stomach churning", "knot in stomach",
             "unsettled", "uncertainty", "uncertain", "uneasy",
             "mind chatter", "mental chatter", "busy mind",
             "chattering mind", "monkey mind",
@@ -288,7 +290,8 @@ class AiChatEngine(private val context: Context) {
             "tai chi", "tai-chi", "taichi", "nidra", "nsdr", "non-sleep deep rest",
             "open monitoring", "open awareness", "choiceless awareness",
             "witnessing meditation", "pure awareness", "awareness practice",
-            "non-dual", "nondual") ||
+            "non-dual", "nondual",
+            "inner peace", "peace of mind", "peaceful mind", "inner calm") ||
         anyWord(lower, "zen") ->
             handleMeditation().also { lastTopic = "meditation" }
         any(lower, "technique", "breathwork", "breathing", "body scan", "loving-kindness",
@@ -304,7 +307,12 @@ class AiChatEngine(private val context: Context) {
             "body doubling", "pomodoro", "time blocking",
             "self-care", "self care", "self-care routine", "self care routine",
             "self-care practice", "taking care of myself", "look after myself",
-            "evening routine", "wind down routine", "wind-down routine") ->
+            "evening routine", "wind down routine", "wind-down routine",
+            "setting boundaries", "healthy boundaries", "set boundaries",
+            "establish boundaries", "learn to say no",
+            "personal growth", "personal development", "self-development",
+            "introspection", "self-discovery", "know myself better",
+            "work on myself", "self-awareness") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
@@ -392,6 +400,10 @@ class AiChatEngine(private val context: Context) {
             "living with grief", "coping with grief", "cope with grief",
             "identity crisis", "midlife crisis", "mid-life crisis",
             "quarterlife crisis", "quarter-life crisis", "quarter life crisis",
+            "heavy heart", "heart feels heavy", "heart is heavy",
+            "fomo", "fear of missing out",
+            "cyclothymia", "dysthymia", "persistent depressive",
+            "love bombing", "situationship", "situationships",
             "dark night of the soul", "spiritual dryness",
             "narcissistic abuse", "narcissist partner", "narcissistic partner",
             "coercive control", "emotional manipulation",

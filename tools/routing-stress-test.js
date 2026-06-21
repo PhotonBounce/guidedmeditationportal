@@ -144,6 +144,8 @@ function route(lower, lastTopic) {
     "mind is racing","head is spinning","head is full",
     "can't quiet my mind","cant quiet my mind","quiet my mind",
     "feel jumpy","jumpy","overstimulated",
+    "stomach in knots","knot in my stomach","stomach tied in knots",
+    "stomach churning","knot in stomach",
     "unsettled","uncertainty","uncertain","uneasy",
     "mind chatter","mental chatter","busy mind",
     "chattering mind","monkey mind",
@@ -172,7 +174,8 @@ function route(lower, lastTopic) {
     "tai chi","tai-chi","taichi","nidra","nsdr","non-sleep deep rest",
     "open monitoring","open awareness","choiceless awareness",
     "witnessing meditation","pure awareness","awareness practice",
-    "non-dual","nondual"]) ||
+    "non-dual","nondual",
+    "inner peace","peace of mind","peaceful mind","inner calm"]) ||
     anyWord(lower,["zen"])) return "meditation";
   // 13. techniques
   if(any(lower,["technique","breathwork","breathing","body scan","loving-kindness","loving kindness",
@@ -185,6 +188,11 @@ function route(lower, lastTopic) {
     "cbt","cognitive behavioral","dbt","dialectical behavior",
     "act therapy","acceptance and commitment","emdr",
     "body doubling","pomodoro","time blocking",
+    "setting boundaries","healthy boundaries","set boundaries",
+    "establish boundaries","learn to say no",
+    "personal growth","personal development","self-development",
+    "introspection","self-discovery","know myself better",
+    "work on myself","self-awareness",
     "self-care","self care","self-care routine","self care routine",
     "self-care practice","taking care of myself","look after myself",
     "evening routine","wind down routine","wind-down routine"])) return "techniques";
@@ -260,6 +268,10 @@ function route(lower, lastTopic) {
     "living with grief","coping with grief","cope with grief",
     "identity crisis","midlife crisis","mid-life crisis",
     "quarterlife crisis","quarter-life crisis","quarter life crisis",
+    "heavy heart","heart feels heavy","heart is heavy",
+    "fomo","fear of missing out",
+    "cyclothymia","dysthymia","persistent depressive",
+    "love bombing","situationship","situationships",
     "dark night of the soul","spiritual dryness",
     "narcissistic abuse","narcissist partner","narcissistic partner",
     "coercive control","emotional manipulation",
@@ -611,6 +623,19 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R96: relax (stomach in knots), sadness (heavy heart/FOMO/cyclothymia/love bombing/situationship), meditation (inner peace), techniques (boundaries/personal growth)
+  ["I have a knot in my stomach before this presentation", "", "relax", "knot in my stomach → relax"],
+  ["I've got a heavy heart today", "", "sadness", "heavy heart → sadness"],
+  ["I have serious FOMO right now", "", "sadness", "FOMO → sadness"],
+  ["I think I have cyclothymia or dysthymia", "", "sadness", "cyclothymia → sadness"],
+  ["I think I was love bombed in my last relationship", "", "sadness", "love bombing → sadness"],
+  ["I'm in a situationship and it's confusing me", "", "sadness", "situationship → sadness"],
+  ["I just want inner peace", "", "meditation", "inner peace → meditation"],
+  ["I need peace of mind tonight", "", "meditation", "peace of mind → meditation"],
+  ["I need to get better at setting boundaries", "", "techniques", "setting boundaries → techniques"],
+  ["I want to work on my personal growth this year", "", "techniques", "personal growth → techniques (not focus via 'focus' word)"],
+  ["I want to do some introspection tonight", "", "techniques", "introspection → techniques"],
 
   // R95: focus (flow state/deep work/in the zone/context switching), meditation (open awareness/non-dual), techniques (self-care/evening routine)
   ["I want to get into a flow state for work", "", "focus", "flow state → focus"],
