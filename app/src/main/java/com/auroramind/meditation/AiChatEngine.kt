@@ -340,7 +340,11 @@ class AiChatEngine(private val context: Context) {
             "feel like a fraud", "feel like such a fraud",
             "feeling like a fraud", "feeling like such a fraud",
             "feel like an imposter", "feel like such an imposter",
-            "feeling like an imposter") ->
+            "feeling like an imposter",
+            "addiction", "in recovery", "sobriety", "substance abuse",
+            "drug addiction", "drug problem", "drinking problem", "alcohol problem",
+            "quitting drinking", "staying sober", "getting sober") ||
+        anyWord(lower, "sober") ->
             handleShameGuilt().also { lastTopic = "sadness" }
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out", "burning out",
             "too much", "cant cope", "can't cope", "too busy", "overloaded",
@@ -385,7 +389,9 @@ class AiChatEngine(private val context: Context) {
             "best sound", "what sound", "pick a sound", "help me choose") ->
             handleRecommendation().also { lastTopic = "recommendation" }
         any(lower, "thank", "thanks", "awesome", "perfect",
-            "love it", "amazing", "nice") ->
+            "love it", "amazing", "nice", "wonderful", "brilliant",
+            "fantastic", "great job", "well done", "cheers",
+            "that helped", "that was helpful", "you helped", "exactly what i needed") ->
             handlePositive().also { lastTopic = "" }
         any(lower, "timer", "sleep timer", "how long should", "how long to meditate",
             "how long for", "duration", "how many minutes") ->

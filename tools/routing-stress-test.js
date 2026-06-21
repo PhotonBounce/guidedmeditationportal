@@ -216,7 +216,11 @@ function route(lower, lastTopic) {
     "feel like a fraud","feel like such a fraud",
     "feeling like a fraud","feeling like such a fraud",
     "feel like an imposter","feel like such an imposter",
-    "feeling like an imposter"])) return "shameGuilt";
+    "feeling like an imposter",
+    "addiction","in recovery","sobriety","substance abuse",
+    "drug addiction","drug problem","drinking problem","alcohol problem",
+    "quitting drinking","staying sober","getting sober"]) ||
+    anyWord(lower,["sober"])) return "shameGuilt";
   // 16. overwhelm
   if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","burning out","too much",
     "cant cope","can't cope","too busy","overloaded","swamped","falling apart",
@@ -256,7 +260,9 @@ function route(lower, lastTopic) {
   if(any(lower,["recommend","suggest","what should","which sound","best sound",
     "what sound","pick a sound","help me choose"])) return "recommend";
   // 20. positive
-  if(any(lower,["thank","thanks","awesome","perfect","love it","amazing","nice"])) return "positive";
+  if(any(lower,["thank","thanks","awesome","perfect","love it","amazing","nice",
+    "wonderful","brilliant","fantastic","great job","well done","cheers",
+    "that helped","that was helpful","you helped","exactly what i needed"])) return "positive";
   // 21. timer
   if(any(lower,["timer","sleep timer","how long should","how long to meditate","how long for","duration","how many minutes"])) return "timer";
   // 22. alarm
@@ -497,6 +503,15 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R83: shameGuilt (addiction/sobriety/recovery), positive route expansion
+  ["i'm dealing with an addiction to alcohol", "", "shameGuilt", "addiction → shameGuilt"],
+  ["i've been in recovery for six months", "", "shameGuilt", "in recovery → shameGuilt"],
+  ["i'm trying to stay sober", "", "shameGuilt", "sober (anyWord) → shameGuilt"],
+  ["my sobriety is really important to me", "", "shameGuilt", "sobriety → shameGuilt"],
+  ["that was wonderful thank you", "", "positive", "wonderful → positive"],
+  ["well done spirit that really helped", "", "positive", "well done → positive"],
+  ["that's exactly what i needed", "", "positive", "exactly what i needed → positive"],
 
   // R82: focus (memory/forgetting/mind wanders), relax (vagus/somatic), shameGuilt (inner child), anger (short tempered/road rage)
   ["my memory has been terrible lately", "", "focus", "poor memory → focus"],
