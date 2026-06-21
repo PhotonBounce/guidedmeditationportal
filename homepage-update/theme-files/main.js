@@ -306,6 +306,21 @@
     if (brain.offsetParent === null) _srchClose();
   }).observe(brain, { attributes: true, attributeFilter: ['style', 'class'] });
 
+  // "New message" chip — appears when bot replies while user is scrolled up
+  var _newMsgChip = document.createElement('button');
+  _newMsgChip.type = 'button';
+  _newMsgChip.className = 'pb-brain__newmsg';
+  _newMsgChip.setAttribute('aria-label', 'Jump to latest message');
+  _newMsgChip.innerHTML = '&#8595;&#xFE0E; New message';
+  if (brain) brain.appendChild(_newMsgChip);
+  _newMsgChip.addEventListener('click', function() {
+    if (log) log.scrollTop = log.scrollHeight;
+    _newMsgChip.classList.remove('pb-brain__newmsg--vis');
+  });
+  if (log) log.addEventListener('scroll', function() {
+    if (_nearBottom()) _newMsgChip.classList.remove('pb-brain__newmsg--vis');
+  });
+
   // Textarea auto-resize — grows up to 120px, resets to 1 row on submit.
   // Character counter shows "n / 2000" and turns amber near the limit.
   if (input) {
@@ -562,7 +577,7 @@
         }
       }
       if (cls !== 'err') { chatMsgs.push({ text: text, cls: cls }); saveChat(); }
-      if (cls === 'bot') _updateOrbBadge();
+      if (cls === 'bot') { _updateOrbBadge(); if (!_nearBottom()) _newMsgChip.classList.add('pb-brain__newmsg--vis'); }
       if (_nearBottom()) log.scrollTop = log.scrollHeight;
     }
 

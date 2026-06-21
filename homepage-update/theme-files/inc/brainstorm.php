@@ -561,6 +561,55 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre22-a) Photography portfolio / creative portfolio / visual artist site.
+	if ( $has( [ 'photography portfolio', 'photographer website', 'photography site', 'photo portfolio', 'portfolio website', 'artist portfolio', 'creative portfolio', 'visual portfolio', 'portfolio gallery', 'photographer site', 'art portfolio', 'creative website', 'freelance portfolio' ] ) ) {
+		return $nl( [
+			"Photography and creative portfolio sites are a regular build &mdash; here&rsquo;s how it scopes:",
+			'',
+			"&bull; <strong>Gallery system</strong> &mdash; filterable by category (weddings, portraits, landscapes); lazy-loaded images with WebP conversion; full-screen lightbox with keyboard navigation; from <strong>$350</strong>",
+			"&bull; <strong>Performance</strong> &mdash; images are the main content so performance is critical: Imagify/ShortPixel compression, responsive srcset, critical CSS; Core Web Vitals pass",
+			"&bull; <strong>Client proofing</strong> &mdash; private password-protected gallery per client; download link with expiry; client selects favourite images; via Envira Gallery or custom build",
+			"&bull; <strong>Print shop</strong> &mdash; sell prints via WooCommerce + Printful integration; photographer sets their own markup over Printful base cost",
+			"&bull; <strong>Booking system</strong> &mdash; session type selection (wedding/portrait/commercial), date picker, deposit payment via Stripe; contract signing via HelloSign API; from <strong>$400</strong>",
+			"&bull; <strong>SEO for photographers</strong> &mdash; location + speciality keywords; image alt text schema; local business JSON-LD; Google Images optimisation",
+			'',
+			"What&rsquo;s the main goal &mdash; showcase work, book clients, sell prints, or deliver to existing clients?",
+		] );
+	}
+
+	// 0d-pre22-b) Restaurant / café / food business website.
+	if ( $has( [ 'restaurant website', 'cafe website', 'food business site', 'restaurant menu', 'online menu', 'restaurant booking', 'table reservation', 'opentable', 'resy', 'restaurant site', 'food truck', 'bakery website', 'bar website', 'bistro website', 'hospitality website', 'takeaway website' ] ) ) {
+		return $nl( [
+			"Restaurant and hospitality websites are a core build &mdash; here&rsquo;s what&rsquo;s typically included:",
+			'',
+			"&bull; <strong>Menu</strong> &mdash; filterable by dietary requirement (vegan, gluten-free, nut-free); PDF version for download; seasonal content easily updated by staff via WordPress admin; from <strong>$300</strong>",
+			"&bull; <strong>Table reservations</strong> &mdash; OpenTable or Resy embed (they handle capacity and confirmation); or a custom Gravity Forms booking form with email confirmation + SMS reminder",
+			"&bull; <strong>Online ordering</strong> &mdash; WooCommerce or Square Online for click-and-collect / delivery; integrates with Deliverect for multi-channel order management",
+			"&bull; <strong>Event / private dining</strong> &mdash; enquiry form for groups, menus, and weddings; deposit collection via Stripe",
+			"&bull; <strong>Google Business Profile</strong> &mdash; site structured to pass address, hours, and phone to Google; Local Business JSON-LD; triggers the knowledge panel and map pack",
+			"&bull; <strong>Instagram feed</strong> &mdash; live feed embedded in the footer (Smash Balloon plugin); no API token management required",
+			'',
+			"Is this dine-in, takeaway, delivery, or a mix? And do you need table reservations or just an enquiry form?",
+		] );
+	}
+
+	// 0d-pre22-c) Law firm / solicitor / professional services firm.
+	if ( $has( [ 'law firm website', 'lawyer website', 'solicitor website', 'attorney website', 'legal website', 'law firm site', 'legal services site', 'accountant website', 'professional services site', 'consultant website', 'financial advisor website', 'advisory firm' ] ) ) {
+		return $nl( [
+			"Professional services firm websites (law, accountancy, consultancy) are a well-understood build &mdash; a few things to note:",
+			'',
+			"&bull; <strong>What&rsquo;s included</strong> &mdash; practice area pages with SEO-optimised copy, attorney/partner bios, contact + enquiry form, embedded map, client testimonials (anonymised if needed), ADA-compliant design",
+			"&bull; <strong>Intake form</strong> &mdash; multi-step form collecting matter type, jurisdiction, timeline; routed to the right team member via conditional email notifications; from <strong>$250</strong>",
+			"&bull; <strong>Client portal link</strong> &mdash; link to Clio, MyCase, or PracticePanther from the nav; authentication handled by those platforms (not built in-house)",
+			"&bull; <strong>Legal disclaimer</strong> &mdash; standard &ldquo;Not legal advice&rdquo; footer disclaimer added to all pages; no substantive legal content written &mdash; I provide the layout and you supply the copy",
+			"&bull; <strong>Compliance</strong> &mdash; GDPR/CCPA cookie consent; no personal data stored server-side beyond form submissions",
+			"&bull; <strong>Authority signals</strong> &mdash; bar association membership logos, publication links, awards, case result summaries (redacted) in a structured schema markup",
+			"&bull; <strong>From $700</strong> for a professional 6&ndash;8 page firm site",
+			'',
+			"How many attorneys or partners, which practice areas, and do you have existing copy or do you need copywriting guidance?",
+		] );
+	}
+
 	// 0d-pre21-a) Podcast / audio production / show notes site.
 	if ( $has( [ 'podcast production', 'audio editing', 'show notes', 'podcast website', 'podcast site', 'podcast player', 'podcast hosting', 'audio recording', 'podcast episode', 'podcast rss', 'distribute podcast', 'apple podcasts', 'spotify podcast' ] ) ) {
 		return $nl( [

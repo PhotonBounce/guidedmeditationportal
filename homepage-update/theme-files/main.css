@@ -3019,6 +3019,21 @@ border-radius: 50%; cursor: pointer; font-size: 16px;
 .pb-brain.is-collapsed .pb-brain__listening,
 .pb-brain.is-collapsed .pb-brain__scroll-down{ display:none !important; }
 .pb-brain.is-collapsed{ min-height:0; height:auto; }
+/* "New message" chip — floats above form when bot replies while user is scrolled up */
+.pb-brain__newmsg{
+  position:absolute; bottom:64px; left:50%;
+  transform:translateX(-50%) translateY(6px);
+  background:rgba(22,30,52,.96); border:1px solid rgba(255,212,0,.45);
+  border-radius:20px; color:rgba(255,212,0,.92);
+  cursor:pointer; font-size:12px; padding:5px 14px;
+  opacity:0; pointer-events:none;
+  transition:opacity .2s,transform .2s;
+  white-space:nowrap; z-index:10;
+}
+.pb-brain__newmsg--vis{
+  opacity:1; pointer-events:auto;
+  transform:translateX(-50%) translateY(0);
+}
 /* Submit guard — visual disabled state during API fetch */
 .pb-brain__input:disabled{ opacity:.45; cursor:not-allowed; resize:none; }
 .pb-brain__form button[type="submit"]:disabled{ opacity:.45; cursor:not-allowed; pointer-events:none; }
