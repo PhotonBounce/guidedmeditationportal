@@ -306,8 +306,10 @@ class AiChatEngine(private val context: Context) {
             "which track", "what track", "play list", "playlist") ->
             handleAmbient().also { lastTopic = "" }
         any(lower, "headache", "migraine", "ache", "sore", "tension headache",
-            "physical", "body tension", "muscle tension", "stiff",
+            "physical", "body tension", "muscle tension", "stiff", "tension",
             "chronic pain", "chronic illness", "fibromyalgia", "arthritis", "back pain",
+            "lower back", "neck pain", "neck tension", "shoulder pain", "joint pain",
+            "sciatica", "period pain", "menstrual cramps", "cramps",
             "painful", "pains", "in pain") ||
         anyWord(lower, "pain") ->
             handlePain().also { lastTopic = "pain" }

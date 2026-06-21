@@ -124,7 +124,9 @@ function route(lower, lastTopic) {
     "start it","queue it","play something","play now","can you play",
     "put on a","put on some","start playing"])) return "play";
   if(any(lower,["headache","migraine","ache","sore","tension headache","physical","body tension",
-    "muscle tension","stiff","chronic pain","chronic illness","fibromyalgia","arthritis","back pain",
+    "muscle tension","stiff","tension","chronic pain","chronic illness","fibromyalgia","arthritis","back pain",
+    "lower back","neck pain","neck tension","shoulder pain","joint pain",
+    "sciatica","period pain","menstrual cramps","cramps",
     "painful","pains","in pain"]) || anyWord(lower,["pain"])) return "pain";
   return "general";
 }
@@ -214,6 +216,14 @@ var tests = [
   ["i'm not doing well", "", "NOT:positive", "not doing well → sadness"],
   ["not myself lately", "", "NOT:positive", "not myself → sadness"],
   ["i'm feeling off today", "", "NOT:positive", "feeling off → sadness"],
+
+  // R65: pain route expansion — tension/neck/sciatica/cramps
+  ["i have so much tension in my body", "", "pain", "tension → pain (PMR)"],
+  ["my lower back is killing me", "", "pain", "lower back → pain"],
+  ["i have terrible neck pain", "", "pain", "neck pain → pain"],
+  ["my shoulder pain won't go away", "", "pain", "shoulder pain → pain"],
+  ["i have sciatica", "", "pain", "sciatica → pain"],
+  ["period cramps are so bad today", "", "pain", "cramps → pain"],
 
   // R64: sleep simulation sync + new sleep keywords + night terrors
   ["i have terrible night terrors", "", "sleep", "night terrors → sleep"],
