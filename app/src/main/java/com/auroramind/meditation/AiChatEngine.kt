@@ -170,9 +170,12 @@ class AiChatEngine(private val context: Context) {
             "lost and", "i feel lost", "blue today", "can't find", "lost myself",
             "bereaved", "bereavement", "loss of", "lost someone", "passed away",
             "died", "death of", "missing them", "miss them so",
-            "shame", "ashamed", "guilt", "guilty", "i feel guilty",
             "relationship", "divorce", "divorc", "separation", "separated from") ->
             handleSadness().also { lastTopic = "sadness" }
+        any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
+            "i feel ashamed", "embarrassed", "humiliated", "self-blame", "self blame",
+            "blame myself", "i keep beating myself up", "beating myself up") ->
+            handleShameGuilt().also { lastTopic = "sadness" }
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out",
             "too much", "cant cope", "can't cope", "too busy", "overloaded",
             "swamped", "falling apart", "breaking point", "can't take",
@@ -853,6 +856,23 @@ class AiChatEngine(private val context: Context) {
         "it settles the mind so the words come more easily\n\n" +
         "Want Spirit to walk you through a brief loving-kindness practice to open the reflection? 🤍",
         SoundType.EVENING_REVIEW
+    )
+
+    private fun handleShameGuilt(): Pair<String, SoundType?> = Pair(
+        "🤍 You're carrying something heavy.\n\n" +
+        "Guilt says: I did something wrong. Shame says: I am wrong. Both are painful — " +
+        "and both tighten their grip when we try to turn away from them.\n\n" +
+        "Meditation doesn't erase guilt or shame. But it creates enough stillness to see them " +
+        "without being entirely defined by them.\n\n" +
+        "${SoundType.HESYCHASM.emoji} ${SoundType.HESYCHASM.displayName} — a wordless, forgiving quiet; no performance needed\n" +
+        "${SoundType.TONGLEN.emoji} ${SoundType.TONGLEN.displayName} — breathe the feeling in fully, breathe out spaciousness; " +
+        "transforms by not avoiding\n\n" +
+        "Loving-Kindness (Metta) is the most direct path: deliberately offering yourself the same " +
+        "warmth you would give a friend who came to you with this exact feeling.\n\n" +
+        "Try this: place a hand on your heart. Say quietly — " +
+        "'I am struggling. I am still worthy of care.'\n\n" +
+        "Want me to walk you through a self-compassion practice? 🤍",
+        SoundType.HESYCHASM
     )
 
     private fun handleCrisis(): Pair<String, SoundType?> = Pair(
