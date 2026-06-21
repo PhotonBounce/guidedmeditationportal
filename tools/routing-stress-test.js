@@ -97,7 +97,11 @@ function route(lower, lastTopic) {
     "hypervigilant","hypervigilance",
     "sunday scaries","anticipatory anxiety",
     "drinking to cope","drink to cope","alcohol to cope","drink to forget",
-    "drinking to forget","using alcohol","using drink"]) ||
+    "drinking to forget","using alcohol","using drink",
+    "catastrophiz","catastrophising","what if thoughts",
+    "fight or flight","fight-or-flight","adrenaline spike",
+    "on edge","jittery","jitters","butterflies in",
+    "trembling","can't stop shaking","cant stop shaking"]) ||
     anyWord(lower,["rest","tense"])) return "relax";
   // 10. tinnitus
   if(any(lower,["tinnitus","ringing in","ear ring","hearing","buzz in my ear"])) return "tinnitus";
@@ -181,7 +185,12 @@ function route(lower, lastTopic) {
     "body image issues","body image problem","negative body image",
     "struggle with my body","hate how i look","hate my appearance",
     "eating disorder","disordered eating",
-    "anorexia","anorexic","bulimia","bulimic","binge eating","binge and purge"])) return "shameGuilt";
+    "anorexia","anorexic","bulimia","bulimic","binge eating","binge and purge",
+    "imposter syndrome","impostor syndrome",
+    "feel like a fraud","feel like such a fraud",
+    "feeling like a fraud","feeling like such a fraud",
+    "feel like an imposter","feel like such an imposter",
+    "feeling like an imposter"])) return "shameGuilt";
   // 16. overwhelm
   if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","burning out","too much",
     "cant cope","can't cope","too busy","overloaded","swamped","falling apart",
@@ -206,7 +215,12 @@ function route(lower, lastTopic) {
     "want to scream","could scream","need to scream",
     "snapped at","keep snapping","lashing out",
     "resentment","resentful","resentment toward","full of resentment",
-    "want to punch","feel like punching","slamming"]) ||
+    "want to punch","feel like punching","slamming",
+    "passive aggressive","passive-aggressive",
+    "short fuse","quick temper","bad temper",
+    "bitter","bitterness","bitter toward","bitter about",
+    "contempt","contemptuous",
+    "jealous","jealousy","envy","envious"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   // 18. vip
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -451,6 +465,21 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R78: relax (catastrophizing, fight-or-flight, on edge, jittery, butterflies), anger (passive-aggressive, bitter, jealousy), shameGuilt (imposter)
+  ["i keep catastrophizing everything", "", "relax", "catastrophizing → relax"],
+  ["my body went into fight or flight mode", "", "relax", "fight or flight → relax"],
+  ["i feel so on edge today", "", "relax", "on edge → relax"],
+  ["i've been jittery all morning", "", "relax", "jittery → relax"],
+  ["i have butterflies in my stomach before this", "", "relax", "butterflies in → relax"],
+  ["i'm trembling i'm so anxious", "", "relax", "trembling → relax"],
+  ["i keep being passive aggressive and i hate it", "", "anger", "passive aggressive → anger"],
+  ["i have such a short fuse lately", "", "anger", "short fuse → anger"],
+  ["i feel so bitter about how things turned out", "", "anger", "bitter → anger"],
+  ["i have a lot of contempt for what they did", "", "anger", "contempt → anger"],
+  ["i feel jealous of my friends and it bothers me", "", "anger", "jealous → anger"],
+  ["i feel like such a fraud at work", "", "shameGuilt", "feel like a fraud → shameGuilt"],
+  ["i think i have imposter syndrome", "", "shameGuilt", "imposter syndrome → shameGuilt"],
 
   // R77: sim recommend fix, exhaustion, empty nest, single parent
   ["what sound should i listen to", "", "recommend", "what sound → recommend (sim was missing)"],

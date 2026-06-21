@@ -208,6 +208,10 @@ class AiChatEngine(private val context: Context) {
             "dread", "dreading", "sense of dread",
             "hypervigilant", "hypervigilance",
             "sunday scaries", "anticipatory anxiety",
+            "catastrophiz", "catastrophising", "what if thoughts",
+            "fight or flight", "fight-or-flight", "adrenaline spike",
+            "on edge", "jittery", "jitters", "butterflies in",
+            "trembling", "can't stop shaking", "cant stop shaking",
             "drinking to cope", "drink to cope", "alcohol to cope", "drink to forget",
             "drinking to forget", "using alcohol", "using drink") ||
         anyWord(lower, "rest", "tense") ->
@@ -303,7 +307,12 @@ class AiChatEngine(private val context: Context) {
             "body image issues", "body image problem", "negative body image",
             "struggle with my body", "hate how i look", "hate my appearance",
             "eating disorder", "disordered eating",
-            "anorexia", "anorexic", "bulimia", "bulimic", "binge eating", "binge and purge") ->
+            "anorexia", "anorexic", "bulimia", "bulimic", "binge eating", "binge and purge",
+            "imposter syndrome", "impostor syndrome",
+            "feel like a fraud", "feel like such a fraud",
+            "feeling like a fraud", "feeling like such a fraud",
+            "feel like an imposter", "feel like such an imposter",
+            "feeling like an imposter") ->
             handleShameGuilt().also { lastTopic = "sadness" }
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out", "burning out",
             "too much", "cant cope", "can't cope", "too busy", "overloaded",
@@ -330,7 +339,12 @@ class AiChatEngine(private val context: Context) {
             "want to scream", "could scream", "need to scream",
             "snapped at", "keep snapping", "lashing out",
             "resentment", "resentful", "resentment toward", "full of resentment",
-            "want to punch", "feel like punching", "slamming") ||
+            "want to punch", "feel like punching", "slamming",
+            "passive aggressive", "passive-aggressive",
+            "short fuse", "quick temper", "bad temper",
+            "bitter", "bitterness", "bitter toward", "bitter about",
+            "contempt", "contemptuous",
+            "jealous", "jealousy", "envy", "envious") ||
         anyWord(lower, "mad", "anger", "angered") ->
             handleAnger().also { lastTopic = "anger" }
 
