@@ -433,17 +433,19 @@
     }, 1700);
   }
 
+  var _unreadCount = 0;
   function _updateOrbBadge() {
     if (!orb) return;
     var _badge = orb.querySelector(‘.pb-orb__badge’);
     if (!_badge) {
       _badge = document.createElement(‘span’);
       _badge.className = ‘pb-orb__badge’;
+      _badge.setAttribute(‘aria-label’, ‘0 unread messages’);
       orb.appendChild(_badge);
     }
-    var _cnt = chatMsgs.filter(function(m) { return m.cls === ‘bot’; }).length;
-    _badge.textContent = _cnt > 9 ? ‘9+’ : (_cnt > 0 ? String(_cnt) : ‘’);
-    _badge.classList.toggle(‘pb-orb__badge--vis’, _cnt > 0 && (brain ? brain.hidden !== false : true));
+    _badge.textContent = _unreadCount > 9 ? ‘9+’ : (_unreadCount > 0 ? String(_unreadCount) : ‘’);
+    _badge.setAttribute(‘aria-label’, _unreadCount + ‘ unread message’ + (_unreadCount !== 1 ? ‘s’ : ‘’));
+    _badge.classList.toggle(‘pb-orb__badge--vis’, _unreadCount > 0);
   }
 
   function openBrain() {
@@ -458,6 +460,8 @@
     if (chatMsgs.length === 0 && log && log.querySelectorAll('.pb-brain__msg').length === 0) {
       _greetUser();
     }
+    _unreadCount = 0;
+    _updateOrbBadge();
     if (input) input.focus();
   }
 
@@ -681,6 +685,7 @@
       }
       if (cls !== 'err') { chatMsgs.push({ text: text, cls: cls }); saveChat(); }
       if (cls === 'bot') {
+        if (brain && brain.hidden) _unreadCount++;
         _updateOrbBadge();
         if (!_nearBottom()) _newMsgChip.classList.add('pb-brain__newmsg--vis');
         // Push plaintext to SR live region so screen readers announce the reply.

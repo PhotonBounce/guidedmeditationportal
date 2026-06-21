@@ -561,6 +561,60 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre31-a) Tattoo studio / tattoo artist / piercing / body art website.
+	if ( $has( [ 'tattoo studio website', 'tattoo artist website', 'tattoo shop website', 'tattoo parlour website', 'tattoo booking website', 'tattoo portfolio website', 'custom tattoo website', 'tattoo flash website', 'piercing website', 'body art website', 'tattoo artist portfolio', 'ink studio website' ] ) ) {
+		return $nl( [
+			"Tattoo studio websites are all about portfolio, trust, and capturing the booking &mdash; here&rsquo;s the standard build:",
+			'',
+			"&bull; <strong>Artist portfolios</strong> &mdash; one profile page per artist; galleries filterable by style (traditional / blackwork / realism / watercolour / fine-line / Japanese / neo-trad / geometric); high-res WebP photos with Lightbox; artist bio and speciality styles; from <strong>$300</strong> per artist or <strong>$500</strong> for multi-artist studio",
+			"&bull; <strong>Online booking</strong> &mdash; consultation request form: style reference upload, body placement, rough size, existing tattoo info, preferred artist; Stripe 10&ndash;20% deposit to hold the slot; auto-confirmation email with aftercare PDF attached; from <strong>$350</strong>",
+			"&bull; <strong>Flash sale / available designs</strong> &mdash; filterable grid of ready-to-book flash designs with price and size; &ldquo;Claim this design&rdquo; booking form; drives quick bookings in quieter periods",
+			"&bull; <strong>Walk-in availability indicator</strong> &mdash; editable banner (&ldquo;Walk-ins welcome today until 5pm&rdquo;) or WP Notification Bar plugin; low effort, high footfall impact",
+			"&bull; <strong>Aftercare &amp; FAQ page</strong> &mdash; written + illustrated; reduces aftercare support queries; reinforces professionalism",
+			"&bull; <strong>Minimum price policy</strong> &mdash; clearly stated (e.g. &pound;80 minimum); sets expectations and filters tyre-kickers",
+			"&bull; <strong>Age verification notice</strong> &mdash; 18+ required; under-18 with parental consent policy if applicable; brief statement in footer and booking form",
+			"&bull; <strong>From $500</strong> solo artist; <strong>$1,000+</strong> multi-artist studio with flash shop and deposit booking",
+			'',
+			"How many artists are in the studio, and is online deposit booking a priority?",
+		] );
+	}
+
+	// 0d-pre31-b) Veterinary practice / pet clinic / animal hospital website.
+	if ( $has( [ 'vet website', 'veterinary website', 'vets website', 'animal hospital website', 'pet clinic website', 'veterinary practice website', 'veterinary surgery website', 'vet clinic website', 'exotic vet website', 'veterinary specialist website', 'animal clinic website', 'pet hospital website', 'vet practice website', 'veterinary nurse website' ] ) ) {
+		return $nl( [
+			"Veterinary practice websites need to earn client trust immediately and make appointment booking frictionless:",
+			'',
+			"&bull; <strong>Online appointment booking</strong> &mdash; appointment type (new patient, existing patient, vaccination, emergency triage, dental, nurse consult); species selector (dogs, cats, rabbits, exotics); preferred vet; Calendly or custom WP booking with VetConnect / Animana / ezyVet integration; from <strong>$350</strong>",
+			"&bull; <strong>Species and service pages</strong> &mdash; one page per species or service type (canine, feline, rabbit and small animal, equine if applicable, preventive care, dentistry, surgery, diagnostics); each with targeted keywords (&ldquo;rabbit vet [town]&rdquo;); from <strong>$400</strong>",
+			"&bull; <strong>Team profiles</strong> &mdash; vet and nurse bios with RCVS credentials, certificates of higher training (CHTs), clinical interests; owners bond with individual vets; essential for retention",
+			"&bull; <strong>Repeat prescription request</strong> &mdash; form: patient name, owner details, medication name, quantity; routes to practice management system or email; reduces phone call volume; from <strong>$200</strong>",
+			"&bull; <strong>Pet health articles / blog</strong> &mdash; seasonal content (tick season, summer heat, fireworks anxiety, dental month); builds organic search traffic; signals clinical expertise",
+			"&bull; <strong>Emergency out-of-hours information</strong> &mdash; 24/7 phone number or named OOH provider prominently displayed above the fold; critical for new clients in distress",
+			"&bull; <strong>RCVS Practice Standards</strong> &mdash; accreditation logo and scheme tier (Core / Advanced / Tier 3) displayed; immediate trust signal",
+			"&bull; <strong>From $500</strong> small practice; <strong>$1,100+</strong> multi-branch with online booking, prescription request, and full species SEO",
+			'',
+			"Single or multi-branch practice? Do you see exotics or mainly dogs and cats?",
+		] );
+	}
+
+	// 0d-pre31-c) Coworking space / serviced offices / hot desking / flexible workspace website.
+	if ( $has( [ 'coworking space website', 'coworking website', 'serviced office website', 'hot desking website', 'flexible workspace website', 'shared office website', 'coworking membership website', 'virtual office website', 'business hub website', 'innovation hub website', 'startup hub website', 'managed office website', 'office rental website', 'desk rental website' ] ) ) {
+		return $nl( [
+			"Coworking and serviced office websites need to showcase community, show real pricing, and close the trial visit or membership sign-up:",
+			'',
+			"&bull; <strong>Membership tier pages</strong> &mdash; Hot desk / Dedicated desk / Private office / Enterprise suite; per-day, monthly, and annual pricing table; amenities checklist (printing, meeting rooms, phone booths, kitchen, events, parking); from <strong>$400</strong>",
+			"&bull; <strong>Space tour / booking</strong> &mdash; Calendly for in-person tours; or virtual tour embed (Matterport 360&deg; walkthrough); showing up is the highest-converting action; from <strong>$250</strong>",
+			"&bull; <strong>Meeting room booking</strong> &mdash; hourly room hire (non-members); WP Amelia or Checkfront; capacity and A/V specs; Stripe payment at booking; from <strong>$400</strong>",
+			"&bull; <strong>Member portal</strong> &mdash; login; book desks and rooms; view invoices; access community Slack or Discourse link; door code delivery; from <strong>$600</strong>",
+			"&bull; <strong>Community page</strong> &mdash; member spotlight grid (photo + company + sector); upcoming events calendar; member blog; humanises the space and drives referrals",
+			"&bull; <strong>Virtual office packages</strong> &mdash; registered address, mail handling, call forwarding, meeting room credits; useful for remote companies needing a UK business address; from <strong>$200</strong> add-on page",
+			"&bull; <strong>Location SEO</strong> &mdash; &ldquo;coworking space [city]&rdquo; and &ldquo;serviced office [city]&rdquo; keyword clusters; Google Business + Google Maps embed; Local Business + Event schema for member events",
+			"&bull; <strong>From $500</strong> brochure with tour booking; <strong>$1,200+</strong> with member portal, room booking, and community features",
+			'',
+			"Are you a single-location space or a multi-site network, and do members pay per visit or on monthly plans?",
+		] );
+	}
+
 	// 0d-pre30-a) Optician / optometrist / eyewear / contact lens / ophthalmology practice.
 	if ( $has( [ 'optician website', 'optometrist website', 'eyewear website', 'glasses website', 'spectacles website', 'contact lens website', 'optometry website', 'optician practice website', 'eye test booking', 'ophthalmologist website', 'eye care website', 'vision centre website', 'eye clinic website', 'optical practice website' ] ) ) {
 		return $nl( [

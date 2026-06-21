@@ -2788,6 +2788,19 @@ color: #000;
 @keyframes pb-orb-ring{ 0%{ transform: scale(.85); opacity:.6; } 100%{ transform: scale(1.4); opacity:0; } }
 @keyframes pb-orb-nudge{ 0%,100%{ box-shadow:0 0 0 0 rgba(255,212,0,.6); } 40%{ box-shadow:0 0 0 16px rgba(255,212,0,0); } 60%{ box-shadow:0 0 0 0 rgba(255,212,0,0); } 80%{ box-shadow:0 0 0 10px rgba(255,212,0,0); } }
 .pb-orb--nudge{ animation: pb-orb-nudge 1s ease-out 2; }
+/* Unread-message count badge on the orb */
+.pb-orb__badge{
+  position:absolute; top:-4px; right:-4px;
+  min-width:18px; height:18px; padding:0 4px;
+  background:#e53935; color:#fff;
+  font-size:10px; font-weight:700; line-height:18px; text-align:center;
+  border-radius:9px; white-space:nowrap;
+  box-shadow:0 1px 4px rgba(0,0,0,.4);
+  opacity:0; transform:scale(.6);
+  transition:opacity .18s ease, transform .18s ease;
+  pointer-events:none;
+}
+.pb-orb__badge--vis{ opacity:1; transform:scale(1); }
 
 .pb-brain{
 position: fixed;
