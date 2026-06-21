@@ -219,6 +219,9 @@ function route(lower, lastTopic) {
     "mirror work","mirror meditation",
     "parts work","internal family systems","ifs therapy",
     "inner parts","self parts","exile","exiles",
+    "reframing","cognitive reframing","reframe my thoughts",
+    "thought patterns","unhelpful thoughts","unhelpful thinking",
+    "mindset shift","shift my mindset","mindset work","growth mindset",
     "self-care","self care","self-care routine","self care routine",
     "self-care practice","taking care of myself","look after myself",
     "evening routine","wind down routine","wind-down routine"])) return "techniques";
@@ -413,6 +416,11 @@ function route(lower, lastTopic) {
     "road rage",
     "cyberbullying","trolled","being trolled","online troll",
     "online harassment","social media harassment","hate comments",
+    "bullying","workplace bullying","being bullied","bullied at work",
+    "discrimination","discriminated against","discriminated",
+    "racism","racist","racial abuse","racial discrimination",
+    "sexism","sexist","gender discrimination",
+    "prejudice","prejudiced","bias against",
     "bitter","bitterness","bitter toward","bitter about",
     "contempt","contemptuous",
     "jealous","jealousy","envy","envious",
@@ -465,10 +473,17 @@ function route(lower, lastTopic) {
   if(any(lower,["grateful","gratitude","journal","journaling","reflect","reflection",
     "intention","intentions","thankful","thankfulness",
     "appreciate","appreciation","count my blessings","count your blessings",
-    "what am i grateful","things i'm grateful","blessings"])) return "gratitude";
+    "what am i grateful","things i'm grateful","blessings",
+    "three good things","3 good things","silver lining","look for the good",
+    "count the positives","find the positive"])) return "gratitude";
   // 27. help
   if(any(lower,["what can you do","how do you work","your features","about spirit",
-    "what are you","what is spirit","how can you help"])) return "help";
+    "what are you","what is spirit","how can you help",
+    "what do you do","how do i use this","how do i use you",
+    "tell me about yourself","how does this work","i need help",
+    "what can i ask you","what can i ask","i don't know where to start",
+    "i dont know where to start","not sure where to start"]) ||
+    anyWord(lower,["help"])) return "help";
   // 28. inspire
   if(any(lower,["inspire me","inspiration","quote","affirmation","motivate me",
     "pep talk","cheer me up","lift my spirits","give me a boost","need encouragement",
@@ -677,6 +692,21 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R101: anger (bullying/discrimination/racism/sexism), techniques (reframing/mindset shift/thought patterns), gratitude (silver lining/three good things), help (expanded keywords + anyWord)
+  ["I've been experiencing workplace bullying from my manager", "", "anger", "workplace bullying → anger"],
+  ["I feel like I'm being discriminated against at work", "", "anger", "discrimination → anger"],
+  ["I've experienced racism at my workplace", "", "anger", "racism → anger"],
+  ["I deal with everyday sexism and it wears me down", "", "anger", "sexism → anger"],
+  ["I want to work on reframing how I think about failure", "", "techniques", "reframing → techniques"],
+  ["I want to shift my mindset about failure", "", "techniques", "mindset shift → techniques"],
+  ["I've been stuck in unhelpful thought patterns", "", "techniques", "thought patterns → techniques"],
+  ["I want to develop a growth mindset", "", "techniques", "growth mindset → techniques"],
+  ["I want to note three good things today", "", "gratitude", "three good things → gratitude"],
+  ["I'm trying to find the silver lining in this situation", "", "gratitude", "silver lining → gratitude"],
+  ["I don't know where to start", "", "help", "not sure where to start → help"],
+  ["can you tell me about yourself", "", "help", "tell me about yourself → help"],
+  ["how do i use this app", "", "help", "how do i use this → help"],
 
   // R100: sleep (apnea/restless legs/snoring/narcolepsy/sleepwalking), anger (cyberbullying/trolled), techniques (mirror work/parts work/IFS), sadness (yearning/homesick)
   ["I was diagnosed with sleep apnea last year", "", "sleep", "sleep apnea → sleep"],

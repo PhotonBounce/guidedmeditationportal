@@ -338,7 +338,10 @@ class AiChatEngine(private val context: Context) {
             "work on myself", "self-awareness",
             "mirror work", "mirror meditation",
             "parts work", "internal family systems", "ifs therapy",
-            "inner parts", "self parts", "exile", "exiles") ->
+            "inner parts", "self parts", "exile", "exiles",
+            "reframing", "cognitive reframing", "reframe my thoughts",
+            "thought patterns", "unhelpful thoughts", "unhelpful thinking",
+            "mindset shift", "shift my mindset", "mindset work", "growth mindset") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
@@ -540,6 +543,11 @@ class AiChatEngine(private val context: Context) {
             "road rage",
             "cyberbullying", "trolled", "being trolled", "online troll",
             "online harassment", "social media harassment", "hate comments",
+            "bullying", "workplace bullying", "being bullied", "bullied at work",
+            "discrimination", "discriminated against", "discriminated",
+            "racism", "racist", "racial abuse", "racial discrimination",
+            "sexism", "sexist", "gender discrimination",
+            "prejudice", "prejudiced", "bias against",
             "bitter", "bitterness", "bitter toward", "bitter about",
             "contempt", "contemptuous",
             "jealous", "jealousy", "envy", "envious",
@@ -601,10 +609,17 @@ class AiChatEngine(private val context: Context) {
         any(lower, "grateful", "gratitude", "journal", "journaling", "reflect",
             "reflection", "intention", "intentions", "thankful", "thankfulness",
             "appreciate", "appreciation", "count my blessings", "count your blessings",
-            "what am i grateful", "things i'm grateful", "blessings") ->
+            "what am i grateful", "things i'm grateful", "blessings",
+            "three good things", "3 good things", "silver lining", "look for the good",
+            "count the positives", "find the positive") ->
             handleGratitude().also { lastTopic = "gratitude" }
         any(lower, "what can you do", "how do you work", "your features", "about spirit",
-            "what are you", "what is spirit", "how can you help") ->
+            "what are you", "what is spirit", "how can you help",
+            "what do you do", "how do i use this", "how do i use you",
+            "tell me about yourself", "how does this work", "i need help",
+            "what can i ask you", "what can i ask", "i don't know where to start",
+            "i dont know where to start", "not sure where to start") ||
+        anyWord(lower, "help") ->
             handleHelp().also { lastTopic = "" }
         any(lower, "inspire me", "inspiration", "quote", "affirmation", "motivate me",
             "encourage me", "daily tip", "today's practice", "what should i practice",
