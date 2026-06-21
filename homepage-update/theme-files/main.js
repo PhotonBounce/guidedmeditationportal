@@ -725,6 +725,30 @@
       URL.revokeObjectURL(url);
     }
 
+    function printChat() {
+      if (!chatMsgs.length) { _showToast('Nothing to print yet'); return; }
+      var rows = chatMsgs.map(function(m) {
+        var who = m.cls === 'bot' ? 'Photon' : 'You';
+        var bg  = m.cls === 'bot' ? '#f0f4f8' : '#e8f0fe';
+        return '<div style="margin:0 0 12px;padding:10px 14px;background:' + bg + ';border-radius:8px;">' +
+               '<strong style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;">' + who + '</strong>' +
+               '<div style="margin:4px 0 0;font-size:13.5px;line-height:1.55;">' +
+               m.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div></div>';
+      });
+      var html = '<!DOCTYPE html><html><head><meta charset="utf-8">' +
+        '<title>Photon Bounce — Chat Transcript</title>' +
+        '<style>body{font-family:system-ui,sans-serif;margin:32px;color:#1a1a1a;max-width:700px}' +
+        'h1{font-size:18px;margin:0 0 4px;color:#0d1b2a}' +
+        'p.meta{font-size:12px;color:#666;margin:0 0 24px;border-bottom:1px solid #dde;padding-bottom:12px}' +
+        '@media print{body{margin:16px}}</style></head><body>' +
+        '<h1>Photon Bounce — Chat Transcript</h1>' +
+        '<p class="meta">Exported ' + new Date().toLocaleString() + ' &nbsp;&middot;&nbsp; ' + chatMsgs.length + ' messages</p>' +
+        rows.join('') + '</body></html>';
+      var w = window.open('', '_blank', 'width=800,height=600');
+      if (w) { w.document.write(html); w.document.close(); w.focus(); w.print(); }
+      else { _showToast('Allow pop-ups to print'); }
+    }
+
     function _nearBottom() { return !log || (log.scrollHeight - log.scrollTop - log.clientHeight) < 90; }
 
     function addTyping() {
@@ -960,6 +984,13 @@
         exportBtn.setAttribute('aria-label', 'Download chat transcript');
         exportBtn.innerHTML = '&#8659;';
         exportBtn.addEventListener('click', exportChat);
+        var printBtn = document.createElement('button');
+        printBtn.type = 'button';
+        printBtn.className = 'pb-brain__print';
+        printBtn.title = 'Print or save as PDF';
+        printBtn.setAttribute('aria-label', 'Print or save as PDF');
+        printBtn.innerHTML = '&#128438;';
+        printBtn.addEventListener('click', printChat);
         var collapseBtn = document.createElement('button');
         collapseBtn.type = 'button';
         collapseBtn.className = 'pb-brain__collapse';
@@ -1006,8 +1037,8 @@
             helpBtn.setAttribute('aria-expanded', 'false');
           }
         });
-        if (closeBtn) { brainHead.removeChild(closeBtn); btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(collapseBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(helpBtn); btnGroup.appendChild(closeBtn); }
-        else { btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(collapseBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(helpBtn); }
+        if (closeBtn) { brainHead.removeChild(closeBtn); btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(printBtn); btnGroup.appendChild(collapseBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(helpBtn); btnGroup.appendChild(closeBtn); }
+        else { btnGroup.appendChild(newChatBtn); btnGroup.appendChild(exportBtn); btnGroup.appendChild(printBtn); btnGroup.appendChild(collapseBtn); btnGroup.appendChild(muteBtn); btnGroup.appendChild(helpBtn); }
         brainHead.appendChild(btnGroup);
       } else {
         btnGroup.insertBefore(newChatBtn, btnGroup.firstChild);

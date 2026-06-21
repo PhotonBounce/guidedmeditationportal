@@ -3027,6 +3027,15 @@ border-radius: 50%; cursor: pointer; font-size: 16px;
 }
 .pb-brain__export:hover{ border-color:rgba(100,200,255,.6); color:rgba(100,200,255,.9); }
 .pb-brain__export:focus-visible{ outline:1px solid rgba(100,200,255,.5); border-radius:50%; }
+/* Print / Save as PDF button */
+.pb-brain__print{
+  background:none; border:1px solid rgba(255,255,255,.15);
+  color:rgba(255,255,255,.5); width:28px; height:28px; border-radius:50%;
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; transition:.15s; font-size:13px; padding:0;
+}
+.pb-brain__print:hover{ border-color:rgba(180,160,255,.6); color:rgba(200,180,255,.9); }
+.pb-brain__print:focus-visible{ outline:1px solid rgba(180,160,255,.5); border-radius:50%; }
 /* Minimize / collapse toggle button */
 .pb-brain__collapse{
   background:none; border:1px solid rgba(255,255,255,.15);

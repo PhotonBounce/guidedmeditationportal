@@ -561,6 +561,59 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre32-a) Interior design studio / decorator / staging / soft furnishings website.
+	if ( $has( [ 'interior design studio website', 'interior design website', 'interior designer website', 'interior decorator website', 'home staging website', 'soft furnishings website', 'interior stylist website', 'interior consultancy website', 'home decor website', 'interior renovation website', 'space planning website', 'kitchen designer website', 'bathroom designer website' ] ) ) {
+		return $nl( [
+			"Interior design studio websites are a portfolio-first sales tool &mdash; here&rsquo;s how to build one that converts enquiries:",
+			'',
+			"&bull; <strong>Project portfolio</strong> &mdash; CPT with categories (residential / commercial / hospitality / staging); hero photo full-bleed per project; before-and-after sliders; room type tags (kitchen, living, bedroom, bathroom); client location; from <strong>$500</strong>",
+			"&bull; <strong>Virtual mood board / style quiz</strong> &mdash; Typeform or Gravity Forms quiz (style preference: Scandi / mid-century / maximalist / industrial / coastal / Japandi); outputs a &ldquo;your style profile&rdquo; summary + recommended services; lead capture before result; from <strong>$350</strong>",
+			"&bull; <strong>Consultation booking</strong> &mdash; in-home vs virtual option; duration (30-min discovery call, 2-hour room consultation, full-day staging); Stripe deposit; from <strong>$300</strong>",
+			"&bull; <strong>Press &amp; features</strong> &mdash; logos of editorial coverage (House Beautiful, Elle D&eacute;cor, Homes &amp; Gardens, Livingetc); strong social proof for premium clients",
+			"&bull; <strong>Trade account notice</strong> &mdash; access to trade pricing at Romo, GP &amp; J Baker, Sanderson, Colefax; signals sourcing expertise to discerning clients",
+			"&bull; <strong>Services page</strong> &mdash; full interior design (concept to install), consultancy (room by room), e-design (digital only), home staging; clear scope and process timeline for each; manages expectations before enquiry",
+			"&bull; <strong>From $600</strong> portfolio and consultation site; <strong>$1,100+</strong> with style quiz, press page, and e-design packages",
+			'',
+			"Residential, commercial, or a mix? Do you offer e-design for remote clients?",
+		] );
+	}
+
+	// 0d-pre32-b) Accountancy firm / chartered accountant / tax adviser / bookkeeper website.
+	// Note: fires after 0d-pre26-b (general accountant site) for more specific sub-specialities.
+	if ( $has( [ 'tax adviser website', 'tax advisor website', 'tax consultant website', 'tax planning website', 'corporation tax website', 'vat specialist website', 'r&d tax credits website', 'r&d tax relief website', 'capital gains website', 'inheritance tax website', 'tax investigation website', 'wealth management website', 'personal tax website', 'self assessment website', 'bookkeeping website', 'bookkeeper website', 'management accounts website', 'payroll website', 'payroll bureau website' ] ) ) {
+		return $nl( [
+			"Tax advisory and specialist accountancy websites need to establish authority quickly and drive enquiry &mdash; here&rsquo;s the standard build:",
+			'',
+			"&bull; <strong>Speciality service pages</strong> &mdash; one per service (R&amp;D Tax Credits, Capital Gains Tax planning, Inheritance Tax, VAT specialist, Tax Investigation Defence, Corporation Tax); each targets its own high-intent keyword; schema FAQ on each page; from <strong>$350</strong> per page or <strong>$600</strong> for first three",
+			"&bull; <strong>Tax calculator tools</strong> &mdash; CGT calculator (property gain vs shares), dividend vs salary optimiser, R&amp;D credits estimator; interactive tools are strong lead magnets and linkable assets; from <strong>$400</strong> per tool",
+			"&bull; <strong>Regulated credentials</strong> &mdash; ICAEW / ACCA / CIOT / ATT practising certificate; FCA-authorised statement if investment advice is given; trust signals in footer and About page",
+			"&bull; <strong>Case study format</strong> &mdash; sector + challenge + outcome (e.g. &ldquo;Tech startup recovered &pound;120k R&amp;D relief in year one&rdquo;); no client names needed &mdash; sector and result suffice; from <strong>$200</strong> per case study",
+			"&bull; <strong>Budget/Autumn Statement commentary</strong> &mdash; fast-turnaround blog posts after each Budget; signals active expertise; generates backlinks from local media",
+			"&bull; <strong>Secure document exchange</strong> &mdash; FuseBase or SmartVault integration; client uploads tax docs; avoids unencrypted email attachments; from <strong>$250</strong> add-on",
+			"&bull; <strong>From $550</strong> with three speciality pages and case studies; <strong>$1,100+</strong> with calculators, secure portal, and full service range",
+			'',
+			"Which tax speciality brings most of your clients &mdash; R&amp;D relief, CGT, IHT, or VAT? And are you targeting businesses or private individuals?",
+		] );
+	}
+
+	// 0d-pre32-c) Wedding venue / banqueting hall / events venue / manor house website.
+	if ( $has( [ 'wedding venue website', 'wedding venue', 'banqueting hall website', 'events venue website', 'manor house website', 'barn venue website', 'marquee venue website', 'wedding barn website', 'exclusive use venue website', 'country house venue website', 'wedding hall website', 'wedding hotel website', 'function suite website', 'reception venue website' ] ) ) {
+		return $nl( [
+			"Wedding and events venue websites are a high-stakes purchase &mdash; couples spend months researching and the visual experience is everything:",
+			'',
+			"&bull; <strong>Hero gallery</strong> &mdash; full-screen autoplay (WebP, mobile-optimised); ceremony and reception rooms; grounds and gardens; real wedding photography (not stock); non-negotiable first impression",
+			"&bull; <strong>Venue hire packages</strong> &mdash; tiered pricing table (Weekday / Friday / Saturday / Sunday / exclusive use); minimum spend vs hire fee distinction; catering options (in-house, approved suppliers, BYO corkage); seasonal pricing note",
+			"&bull; <strong>Virtual tour</strong> &mdash; Matterport 360&deg; embed of ceremony room, main reception room, bridal suite; couples who can&rsquo;t travel to view still book; from <strong>$200</strong> add-on (requires Matterport scan supplied by client)",
+			"&bull; <strong>Date availability checker</strong> &mdash; public-facing calendar (manually updated or iCal sync) showing booked and available dates; reduces &ldquo;is [date] free?&rdquo; enquiries; from <strong>$300</strong>",
+			"&bull; <strong>Enquiry form</strong> &mdash; preferred date, estimated guest count, ceremony and reception or reception only, daytime or evening; captures key qualifying info; auto-CRM routing to venue co-ordinator",
+			"&bull; <strong>Supplier directory</strong> &mdash; approved or preferred suppliers (photographers, florists, bands, DJs, hair and make-up, cake makers, stationery); reciprocal links drive organic traffic",
+			"&bull; <strong>Real weddings gallery</strong> &mdash; one page per featured wedding; photo story; couple testimonial; links to photographer and suppliers; SEO goldmine for long-tail searches",
+			"&bull; <strong>From $700</strong> gallery, packages, enquiry form; <strong>$1,400+</strong> with virtual tour, date availability, real weddings, and supplier directory",
+			'',
+			"Is this a standalone wedding venue, a hotel with a function suite, or a marquee-hire business?",
+		] );
+	}
+
 	// 0d-pre31-a) Tattoo studio / tattoo artist / piercing / body art website.
 	if ( $has( [ 'tattoo studio website', 'tattoo artist website', 'tattoo shop website', 'tattoo parlour website', 'tattoo booking website', 'tattoo portfolio website', 'custom tattoo website', 'tattoo flash website', 'piercing website', 'body art website', 'tattoo artist portfolio', 'ink studio website' ] ) ) {
 		return $nl( [
