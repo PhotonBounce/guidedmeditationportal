@@ -374,7 +374,10 @@ class AiChatEngine(private val context: Context) {
             "tapping", "eft tapping", "emotional freedom technique",
             "acupressure", "acupuncture for",
             "hypnosis", "self-hypnosis", "hypnotherapy",
-            "nlp", "neuro-linguistic", "neuro linguistic programming") ->
+            "nlp", "neuro-linguistic", "neuro linguistic programming",
+            "mental wellness", "emotional wellness", "wellness journey",
+            "personal development", "personal growth journey", "self-improvement",
+            "self-development") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
@@ -579,7 +582,10 @@ class AiChatEngine(private val context: Context) {
             "my teenager is", "teenagers are",
             "too many decisions", "decision overload", "choice overload",
             "paralysed by choice", "paralyzed by choice",
-            "overwhelmed by options", "too many options") ||
+            "overwhelmed by options", "too many options",
+            "stretched too thin", "stretched so thin",
+            "can't manage anymore", "can't manage it all", "can't manage everything",
+            "cant manage anymore", "cant manage it all") ||
         anyWord(lower, "toxic") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
         any(lower, "angry", "furious", "frustrated", "frustration",
@@ -618,7 +624,12 @@ class AiChatEngine(private val context: Context) {
             "silent treatment",
             "feel disrespected", "disrespected", "feel dismissed",
             "feel unheard", "not being heard", "nobody listens",
-            "taken advantage of", "being taken advantage") ||
+            "taken advantage of", "being taken advantage",
+            "narcissist", "narcissistic",
+            "micromanaged", "being micromanaged", "micromanagement", "micromanaging",
+            "stonewalling", "being stonewalled",
+            "condescending", "condescension",
+            "undermined", "being undermined", "feel undermined") ||
         anyWord(lower, "mad", "anger", "angered") ->
             handleAnger().also { lastTopic = "anger" }
 

@@ -255,6 +255,9 @@ function route(lower, lastTopic) {
     "acupressure","acupuncture for",
     "hypnosis","self-hypnosis","hypnotherapy",
     "nlp","neuro-linguistic","neuro linguistic programming",
+    "mental wellness","emotional wellness","wellness journey",
+    "personal development","personal growth journey","self-improvement",
+    "self-development",
     "self-care","self care","self-care routine","self care routine",
     "self-care practice","taking care of myself","look after myself",
     "evening routine","wind down routine","wind-down routine"])) return "techniques";
@@ -451,7 +454,10 @@ function route(lower, lastTopic) {
     "my teenager is","teenagers are",
     "too many decisions","decision overload","choice overload",
     "paralysed by choice","paralyzed by choice",
-    "overwhelmed by options","too many options"]) ||
+    "overwhelmed by options","too many options",
+    "stretched too thin","stretched so thin",
+    "can't manage anymore","can't manage it all","can't manage everything",
+    "cant manage anymore","cant manage it all"]) ||
     anyWord(lower,["toxic"])) return "overwhelm";
   // 17. anger
   if(any(lower,["angry","furious","frustrated","frustration","rage",
@@ -490,7 +496,12 @@ function route(lower, lastTopic) {
     "silent treatment",
     "feel disrespected","disrespected","feel dismissed",
     "feel unheard","not being heard","nobody listens",
-    "taken advantage of","being taken advantage"]) ||
+    "taken advantage of","being taken advantage",
+    "narcissist","narcissistic",
+    "micromanaged","being micromanaged","micromanagement","micromanaging",
+    "stonewalling","being stonewalled",
+    "condescending","condescension",
+    "undermined","being undermined","feel undermined"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   // 18. vip
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -765,6 +776,17 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R109: anger (narcissist/micromanagement/stonewalling/condescending/undermined), overwhelm (stretched too thin/can't manage), techniques (mental wellness/self-improvement)
+  ["my boss is a narcissist and it's affecting me", "", "anger", "narcissist → anger (standalone, sadness has compound phrases)"],
+  ["I'm being micromanaged and it's driving me insane", "", "anger", "micromanaged → anger"],
+  ["he keeps using stonewalling and I feel shut out", "", "anger", "stonewalling → anger"],
+  ["my colleague is so condescending to me", "", "anger", "condescending → anger"],
+  ["I feel constantly undermined at work", "", "anger", "undermined → anger"],
+  ["I'm stretched too thin between work and family", "", "overwhelm", "stretched too thin → overwhelm"],
+  ["I just can't manage everything anymore", "", "overwhelm", "can't manage anymore → overwhelm"],
+  ["I'm on a personal development journey", "", "techniques", "personal development → techniques"],
+  ["I'm prioritising my mental wellness this year", "", "techniques", "mental wellness → techniques (avoid 'focused' → focus preemption)"],
 
   // R108: energy (cold plunge/cold exposure), techniques (hypnosis/nlp), gratitude (manifestation/abundance), sadness (estranged)
   ["I do cold plunge therapy every morning", "", "energy", "cold plunge → energy"],
