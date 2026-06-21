@@ -485,7 +485,7 @@ class AiChatEngine(private val context: Context) {
     private fun handleInspiration(): Pair<String, SoundType?> {
         val today = MicroTechniques.today()
         val goalMood = prefs.getGoal()
-        val goalTech = if (goalMood != null) MicroTechniques.forGoal(goalMood).randomOrNull() else null
+        val goalTech = if (goalMood != null) MicroTechniques.forGoal(goalMood).firstOrNull { it.title != today.title } else null
         val extra = if (goalTech != null && goalTech.title != today.title)
             "\n\nMatched to your practice goal — ${goalTech.emoji} ${goalTech.title}: ${goalTech.teaser}"
         else ""
@@ -741,6 +741,31 @@ class AiChatEngine(private val context: Context) {
             "5. Open your eyes and write from that place.\n\n" +
             "Evening Review 🏛️ structures this beautifully — a Stoic close that makes gratitude natural rather than forced. 🤍",
             SoundType.EVENING_REVIEW
+        )
+        "tinnitus" -> Pair(
+            "👂 Attention Redirect — Body Scan for Tinnitus\n\n" +
+            "The ringing competes for focus. We're going to give your attention somewhere else to land:\n\n" +
+            "1. Sit or lie comfortably. Close your eyes.\n" +
+            "2. Bring your attention to the soles of your feet — feel the weight, warmth, or texture there.\n" +
+            "3. Very slowly, let awareness travel upward: calves, knees, thighs, hips...\n" +
+            "4. At each area, breathe in and deliberately soften. Don't fight the ringing — just don't follow it.\n" +
+            "5. Continue up through belly, chest, shoulders, jaw, forehead.\n\n" +
+            "The scan doesn't silence tinnitus — it trains attention to move away from it. " +
+            "With practice, the ringing becomes background noise rather than foreground.\n\n" +
+            "${SoundType.VIPASSANA.emoji} ${SoundType.VIPASSANA.displayName} is a natural pairing — its systematic structure mirrors the scan perfectly. 🎵",
+            SoundType.VIPASSANA
+        )
+        "baby" -> Pair(
+            "👶 Building a Sleep Cue — The Gentle Ritual\n\n" +
+            "Babies learn faster from repetition than instruction. Here's a 3-step cue sequence:\n\n" +
+            "1. Dim the lights 30 minutes before you want them to settle — melatonin cues begin with darkness.\n" +
+            "2. Play the same track every night at low volume (around 40%). Consistency builds association.\n" +
+            "3. During feeding or rocking, breathe slowly yourself — babies co-regulate with caregivers. " +
+            "Your calm is contagious.\n\n" +
+            "If they're fighting sleep: try ${SoundType.SOHAM.emoji} ${SoundType.SOHAM.displayName} — " +
+            "the slow, steady rhythm is close to an adult resting heart rate and naturally signals safety.\n\n" +
+            "You're doing brilliantly. This season passes. 🤍",
+            SoundType.SOHAM
         )
         else -> handleGeneral()
     }

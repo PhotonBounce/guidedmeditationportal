@@ -153,12 +153,10 @@ object MicroTechniques {
         return all[day % all.size]
     }
 
-    /** A technique suited to the user's chosen goal, else today's. */
-    fun forGoal(goal: Mood?): Technique {
-        if (goal == null) return today()
+    /** Techniques suited to the user's chosen goal, else all techniques. */
+    fun forGoal(goal: Mood?): List<Technique> {
+        if (goal == null) return all
         val matches = all.filter { it.mood == goal }
-        if (matches.isEmpty()) return today()
-        val day = Calendar.getInstance().get(Calendar.DAY_OF_YEAR)
-        return matches[day % matches.size]
+        return if (matches.isEmpty()) all else matches
     }
 }
