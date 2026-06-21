@@ -308,7 +308,12 @@ class AiChatEngine(private val context: Context) {
             "empty nest", "empty nester", "kids moved out", "children left home",
             "miscarriage", "stillbirth", "pregnancy loss", "child loss", "infertility",
             "lost my baby", "lost our baby",
-            "feel rejected", "feel abandoned", "abandoned", "rejection", "been rejected",
+            "feel rejected", "feel abandoned", "abandoned", "abandonment", "abandonment issues",
+            "rejection", "been rejected",
+            "apathy", "apathetic", "feel apathetic", "feeling apathetic",
+            "numbness", "feeling numb", "feel numb", "went numb", "gone numb",
+            "couples therapy", "marriage counselling", "marriage counseling",
+            "relationship counselling", "relationship counseling",
             "feel invisible", "feel unseen", "feel unloved", "feel unlovable",
             "unlovable", "not loved", "no one cares",
             "not great", "not so great", "not feeling great", "not doing great",
@@ -393,7 +398,10 @@ class AiChatEngine(private val context: Context) {
             "road rage",
             "bitter", "bitterness", "bitter toward", "bitter about",
             "contempt", "contemptuous",
-            "jealous", "jealousy", "envy", "envious") ||
+            "jealous", "jealousy", "envy", "envious",
+            "arguing", "we argue", "keep arguing", "constant arguments",
+            "bickering", "we bicker",
+            "silent treatment") ||
         anyWord(lower, "mad", "anger", "angered") ->
             handleAnger().also { lastTopic = "anger" }
 

@@ -204,7 +204,12 @@ function route(lower, lastTopic) {
     "thinking of giving up","about to give up",
     "in a funk","bit of a funk","in a bit of a funk",
     "in my feelings","in the dumps","down in the dumps",
-    "need hope","need some hope","lost all hope"]) ||
+    "need hope","need some hope","lost all hope",
+    "abandonment","abandonment issues",
+    "apathy","apathetic","feel apathetic","feeling apathetic",
+    "numbness","feeling numb","feel numb","went numb","gone numb",
+    "couples therapy","marriage counselling","marriage counseling",
+    "relationship counselling","relationship counseling"]) ||
     anyWord(lower,["numb","died","vent"])) return "sadness";
   // 15. shameGuilt
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated",
@@ -267,7 +272,10 @@ function route(lower, lastTopic) {
     "road rage",
     "bitter","bitterness","bitter toward","bitter about",
     "contempt","contemptuous",
-    "jealous","jealousy","envy","envious"]) ||
+    "jealous","jealousy","envy","envious",
+    "arguing","we argue","keep arguing","constant arguments",
+    "bickering","we bicker",
+    "silent treatment"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   // 18. vip
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -518,6 +526,15 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R86: sadness (abandonment/apathy/numbness/couples therapy), anger (arguing/bickering/silent treatment)
+  ["I struggle with abandonment issues from childhood", "", "sadness", "abandonment → sadness"],
+  ["I've been feeling completely apathetic about everything", "", "sadness", "apathetic → sadness"],
+  ["there's just a numbness to everything I do", "", "sadness", "numbness → sadness (anyWord numb misses this)"],
+  ["we started couples therapy last month", "", "sadness", "couples therapy → sadness"],
+  ["we keep arguing about the same things", "", "anger", "arguing → anger"],
+  ["the constant bickering is exhausting", "", "anger", "bickering → anger"],
+  ["she keeps giving me the silent treatment", "", "anger", "silent treatment → anger"],
 
   // R85: crisis (ending it all / harming myself / suicidal thoughts), relax (emotional regulation), techniques (CBT/DBT/EMDR)
   ["i keep having thoughts of ending it all", "", "crisis", "ending it all → crisis"],
