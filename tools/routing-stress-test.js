@@ -129,7 +129,9 @@ function route(lower, lastTopic) {
     "thyroid","thyroid issues","underactive thyroid","hypothyroid","hypothyroidism",
     "cortisol","cortisol levels","high cortisol","cortisol spike",
     "adrenal","adrenals are",
-    "cold plunge","cold-plunge","cold exposure"])) return "energy";
+    "cold plunge","cold-plunge","cold exposure",
+    "afternoon energy dip","mid-afternoon dip","mid-afternoon crash",
+    "morning slump","mid-morning slump"])) return "energy";
   // 9. relax
   if(any(lower,["relax","calm","stress","anxiety","anxious","breathe","unwind","nervous","panic",
     "overthink","overthinking","can't stop thinking","cant stop thinking",
@@ -198,7 +200,9 @@ function route(lower, lastTopic) {
     "performance pressure","pressure to perform",
     "heart is racing","heart races","heart started racing",
     "heart is pounding","heart has been pounding",
-    "noise sensitivity"]) ||
+    "noise sensitivity",
+    "flashback","having flashbacks","intrusive memories",
+    "body memories","trauma response","trauma trigger"]) ||
     anyWord(lower,["rest","tense","rsd"])) return "relax";
   // 10. tinnitus
   if(any(lower,["tinnitus","ringing in","ear ring","hearing","buzz in my ear",
@@ -546,7 +550,11 @@ function route(lower, lastTopic) {
   if(any(lower,["my favorites","my favourites","saved tracks","what i saved","what i've saved",
     "favorite tracks","favourite tracks","my saved"])) return "favorites";
   // 24. ambient (track/library)
-  if(any(lower,["track","tracks","library","guided","which track","what track","play list","playlist"])) return "ambient";
+  if(any(lower,["track","tracks","library","guided","which track","what track","play list","playlist",
+    "white noise","pink noise","brown noise",
+    "binaural","binaural beats","solfeggio","solfeggio frequencies",
+    "nature sounds","rain sounds","ocean sounds","soundscape",
+    "sound therapy","sound bath","sound healing"])) return "ambient";
   // 25. pain
   if(any(lower,["headache","migraine","ache","sore","tension headache","physical","body tension",
     "muscle tension","stiff","tension","chronic pain","chronic illness","fibromyalgia","arthritis","back pain",
@@ -789,6 +797,15 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R111: ambient (white noise/binaural beats/sound bath), relax (flashback/intrusive memories), energy (afternoon dip/morning slump)
+  ["I enjoy listening to white noise while I work", "", "ambient", "white noise → ambient (avoid 'concentrate' → focus preemption)"],
+  ["do you have binaural beats in this app", "", "ambient", "binaural beats → ambient (avoid 'deep focus' → focus preemption)"],
+  ["I want to try a sound bath session", "", "ambient", "sound bath → ambient"],
+  ["I keep having flashbacks to a difficult time", "", "relax", "flashback → relax"],
+  ["I'm having intrusive memories about a past event", "", "relax", "intrusive memories → relax"],
+  ["I always get an afternoon energy dip around 3pm", "", "energy", "afternoon energy dip → energy"],
+  ["I hit a morning slump every day around 10am", "", "energy", "morning slump → energy"],
 
   // R110: sadness (rock bottom/fall to pieces/feel unwanted/identity loss), relax (heart is racing/noise sensitivity), focus (scattered thoughts), help (getting started)
   ["I feel like I've hit rock bottom", "", "sadness", "rock bottom → sadness"],

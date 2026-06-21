@@ -238,7 +238,9 @@ class AiChatEngine(private val context: Context) {
             "thyroid", "thyroid issues", "underactive thyroid", "hypothyroid", "hypothyroidism",
             "cortisol", "cortisol levels", "high cortisol", "cortisol spike",
             "adrenal", "adrenals are",
-            "cold plunge", "cold-plunge", "cold exposure") ->
+            "cold plunge", "cold-plunge", "cold exposure",
+            "afternoon energy dip", "mid-afternoon dip", "mid-afternoon crash",
+            "morning slump", "mid-morning slump") ->
             handleEnergy().also { lastTopic = "energy" }
         any(lower, "relax", "calm", "stress", "anxiety", "anxious", "breathe",
             "unwind", "nervous", "panic", "overthink", "overthinking",
@@ -310,7 +312,9 @@ class AiChatEngine(private val context: Context) {
             "performance pressure", "pressure to perform",
             "heart is racing", "heart races", "heart started racing",
             "heart is pounding", "heart has been pounding",
-            "noise sensitivity") ||
+            "noise sensitivity",
+            "flashback", "having flashbacks", "intrusive memories",
+            "body memories", "trauma response", "trauma trigger") ||
         anyWord(lower, "rest", "tense", "rsd") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in",
@@ -681,7 +685,11 @@ class AiChatEngine(private val context: Context) {
             "what i've saved", "favorite tracks", "favourite tracks", "my saved") ->
             handleFavorites().also { lastTopic = "" }
         any(lower, "track", "tracks", "library", "guided",
-            "which track", "what track", "play list", "playlist") ->
+            "which track", "what track", "play list", "playlist",
+            "white noise", "pink noise", "brown noise",
+            "binaural", "binaural beats", "solfeggio", "solfeggio frequencies",
+            "nature sounds", "rain sounds", "ocean sounds", "soundscape",
+            "sound therapy", "sound bath", "sound healing") ->
             handleAmbient().also { lastTopic = "" }
         any(lower, "headache", "migraine", "ache", "sore", "tension headache",
             "physical", "body tension", "muscle tension", "stiff", "tension",
