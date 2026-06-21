@@ -124,7 +124,11 @@ function route(lower, lastTopic) {
     "muscle tension","body tension","physical tension",
     "neck tension","shoulder tension",
     "pms","pmdd","premenstrual","period symptoms",
-    "hormonal anxiety","hormonal mood"]) ||
+    "hormonal anxiety","hormonal mood",
+    "unsettled","uncertainty","uncertain","uneasy",
+    "mind chatter","mental chatter","busy mind",
+    "chattering mind","monkey mind",
+    "stuck in my head","living in my head","all in my head"]) ||
     anyWord(lower,["rest","tense"])) return "relax";
   // 10. tinnitus
   if(any(lower,["tinnitus","ringing in","ear ring","hearing","buzz in my ear"])) return "tinnitus";
@@ -210,6 +214,8 @@ function route(lower, lastTopic) {
     "no sense of belonging","don't belong","dont belong",
     "no one understands","nobody understands",
     "feel misunderstood","always misunderstood",
+    "people always leave","everyone leaves","people keep leaving",
+    "doom and gloom",
     "in a funk","bit of a funk","in a bit of a funk",
     "in my feelings","in the dumps","down in the dumps",
     "need hope","need some hope","lost all hope",
@@ -537,6 +543,16 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R88: relax (uncertainty/mind chatter/monkey mind), sadness (everyone leaves/doom and gloom)
+  ["I'm living with so much uncertainty right now", "", "relax", "uncertainty → relax"],
+  ["my mind chatter just won't stop", "", "relax", "mind chatter → relax"],
+  ["I have such a busy monkey mind", "", "relax", "monkey mind → relax"],
+  ["I keep getting stuck in my head", "", "relax", "stuck in my head → relax"],
+  ["it feels like everyone leaves eventually", "", "sadness", "everyone leaves → sadness"],
+  ["I'm feeling really doom and gloom today", "", "sadness", "doom and gloom → sadness"],
+  // Regression guards: writer's block and creative block already in focus (not added again)
+  ["I have writer's block and can't produce anything", "", "focus", "writer's block → focus"],
 
   // R87: relax (muscle tension/PMS), sadness (what's the point/belonging), shameGuilt (self-sabotage/inner critic)
   ["I carry so much muscle tension in my shoulders", "", "relax", "muscle tension → relax"],

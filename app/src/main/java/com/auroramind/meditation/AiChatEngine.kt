@@ -236,7 +236,11 @@ class AiChatEngine(private val context: Context) {
             "muscle tension", "body tension", "physical tension",
             "neck tension", "shoulder tension",
             "pms", "pmdd", "premenstrual", "period symptoms",
-            "hormonal anxiety", "hormonal mood") ||
+            "hormonal anxiety", "hormonal mood",
+            "unsettled", "uncertainty", "uncertain", "uneasy",
+            "mind chatter", "mental chatter", "busy mind",
+            "chattering mind", "monkey mind",
+            "stuck in my head", "living in my head", "all in my head") ||
         anyWord(lower, "rest", "tense") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
@@ -341,7 +345,9 @@ class AiChatEngine(private val context: Context) {
             "what's the point", "whats the point", "what is the point",
             "no sense of belonging", "don't belong", "dont belong",
             "no one understands", "nobody understands",
-            "feel misunderstood", "always misunderstood") ||
+            "feel misunderstood", "always misunderstood",
+            "people always leave", "everyone leaves", "people keep leaving",
+            "doom and gloom") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
