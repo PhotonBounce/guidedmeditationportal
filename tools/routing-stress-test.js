@@ -30,14 +30,14 @@ function route(lower, lastTopic) {
     "counting sheep","wired at night","wired tonight","can't wind down","cant wind down",
     "light sleeper","heavy sleeper","sleep hygiene","body clock","circadian","night terrors"]) ||
     anyWord(lower,["nap"])) return "sleep";
-  if(any(lower,["focus","study","concentrate","productivity","procrastinat","brain fog","adhd",
+  if(any(lower,["focus","study","concentrate","productivity","procrastinat","writing","brain fog","adhd",
     "foggy","mental clarity","sharp","clear mind","attention","distract",
+    "multitasking","information overload",
     "doom scrolling","doomscrolling","mindless scrolling","phone addiction",
     "screen addiction","endless scrolling","too much screen",
     "mental block","writer's block","writers block","creative block",
     "brain freeze","can't think straight","cant think straight",
-    "mind blank","mind went blank","mind has gone blank",
-    "distract"]) ||
+    "mind blank","mind went blank","mind has gone blank"]) ||
     anyWord(lower,["read","code"])) return "focus";
   if(any(lower,["energy","energise","energize","wake up","waking up","uplift","motivation",
     "motivated","active","exercise","workout","morning boost","morning energy","sluggish",
@@ -241,6 +241,11 @@ var tests = [
   ["my shoulder pain won't go away", "", "pain", "shoulder pain → pain"],
   ["i have sciatica", "", "pain", "sciatica → pain"],
   ["period cramps are so bad today", "", "pain", "cramps → pain"],
+
+  // R68: focus sim sync (writing added, duplicate distract removed) + multitasking/info overload
+  ["i struggle with writing because i lose focus", "", "focus", "writing → focus"],
+  ["i'm terrible at multitasking", "", "focus", "multitasking → focus"],
+  ["i'm suffering from information overload", "", "focus", "information overload → focus"],
 
   // R67: crisis (overdose/not worth living/take my life) + relax (dread/hypervig) + overwhelm
   ["i want to take my life", "", "crisis", "take my life → crisis"],

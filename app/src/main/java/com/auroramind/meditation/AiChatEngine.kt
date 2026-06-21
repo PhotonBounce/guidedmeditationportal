@@ -152,7 +152,7 @@ class AiChatEngine(private val context: Context) {
         any(lower, "focus", "study", "concentrate", "productivity",
             "writing", "attention", "adhd", "distract",
             "brain fog", "foggy", "mental clarity", "sharp", "clear mind",
-            "procrastinat",
+            "procrastinat", "multitasking", "information overload",
             "doom scrolling", "doomscrolling", "mindless scrolling", "phone addiction",
             "screen addiction", "endless scrolling", "too much screen",
             "mental block", "writer's block", "writers block", "creative block",
