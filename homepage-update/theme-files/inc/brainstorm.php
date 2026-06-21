@@ -561,6 +561,57 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre24-a) Gym / fitness studio / personal trainer / yoga site.
+	if ( $has( [ 'gym website', 'fitness website', 'personal trainer', 'yoga studio', 'crossfit', 'pilates site', 'bootcamp', 'personal training', 'fitness class', 'gym membership', 'fitness studio', 'spin class', 'martial arts website' ] ) ) {
+		return $nl( [
+			"Fitness and gym websites are a very common build &mdash; here&rsquo;s what&rsquo;s typically included:",
+			'',
+			"&bull; <strong>Class schedule</strong> &mdash; weekly timetable; filter by instructor or class type; live availability; MindBody or Glofox embed available as a <strong>$200</strong> add-on; or built custom; from <strong>$350</strong>",
+			"&bull; <strong>Online booking</strong> &mdash; class or PT session booking with Stripe deposit; cancel/reschedule self-service; automated SMS and email reminders via Twilio or Mailchimp",
+			"&bull; <strong>Membership tiers</strong> &mdash; monthly and annual subscriptions via WooCommerce Subscriptions or MemberPress; member portal login; free-trial logic; from <strong>$400</strong>",
+			"&bull; <strong>Trainer profiles</strong> &mdash; photo, bio, specialisms, video intro, and a direct-book button on each profile",
+			"&bull; <strong>Video on demand (VOD)</strong> &mdash; locked-behind-membership workout library; Bunny.net or Vimeo hosting; watch progress tracking; from <strong>$600</strong>",
+			"&bull; <strong>Local SEO</strong> &mdash; Local Business JSON-LD; Google Business integration; map pack visibility; class schema markup for rich results",
+			"&bull; <strong>From $500</strong> for a studio site with booking; <strong>$1,200+</strong> for a full member portal with VOD library",
+			'',
+			"Is the primary offer group classes, one-to-one PT, online coaching, or a combination?",
+		] );
+	}
+
+	// 0d-pre24-b) Real estate / estate agent / property listing site.
+	if ( $has( [ 'real estate website', 'property listing', 'estate agent website', 'realtor website', 'homes for sale', 'property website', 'letting agent', 'idx integration', 'mls integration', 'real estate site', 'property for sale', 'estate agency', 'letting website', 'property search' ] ) ) {
+		return $nl( [
+			"Real estate and estate agent websites have a specific stack &mdash; here&rsquo;s how it typically comes together:",
+			'',
+			"&bull; <strong>Property listings</strong> &mdash; custom post type with photo gallery, floor plan, map pin, price, beds/baths/sq ft; fully staff-editable via WP admin; from <strong>$450</strong>",
+			"&bull; <strong>MLS / IDX integration</strong> &mdash; US realtors can embed a live MLS feed via IDX Broker or Showcase IDX (<strong>$60&ndash;$80/mo</strong> third-party licence); pulls live active listings automatically without manual data entry",
+			"&bull; <strong>Advanced property search</strong> &mdash; filter by location, price range, bedrooms, bathrooms, property type, new-build flag; saved-search + email alert on new match; from <strong>$300</strong>",
+			"&bull; <strong>Mortgage calculator</strong> &mdash; interactive JS widget; monthly payment, total cost, deposit breakdown; no third-party fees",
+			"&bull; <strong>Valuation / appraisal lead form</strong> &mdash; multi-step form feeding your CRM or email; typically the highest-converting page on any agent site",
+			"&bull; <strong>Local area pages</strong> &mdash; one optimised page per suburb or neighbourhood; Local Business schema; Google Maps embed; targets &ldquo;[area] estate agent&rdquo; keyword cluster",
+			"&bull; <strong>From $600</strong> for a 10-listing agency site; <strong>$1,500+</strong> for IDX feed integration with saved-search email alerts",
+			'',
+			"Are you a solo agent, a team, or an agency? And are you in the US (MLS/IDX) or UK/EU?",
+		] );
+	}
+
+	// 0d-pre24-c) Wedding / event planning / venue / coordinator site.
+	if ( $has( [ 'wedding website', 'wedding planner', 'event planning website', 'venue website', 'event coordinator', 'bridal website', 'wedding photography', 'wedding videographer', 'wedding site', 'event venue', 'event management website', 'party planner', 'corporate events website' ] ) ) {
+		return $nl( [
+			"Wedding and event sites have strong visual expectations &mdash; here&rsquo;s what&rsquo;s standard:",
+			'',
+			"&bull; <strong>Hero + gallery</strong> &mdash; full-screen video hero (Bunny.net hosted for speed); filterable photo gallery by wedding style or season; before/after slider; from <strong>$400</strong>",
+			"&bull; <strong>Package pages</strong> &mdash; clearly priced tiers with inclusions checklist; FAQ accordion; testimonials with photo; structured data for rich results in Google Search",
+			"&bull; <strong>Enquiry / availability form</strong> &mdash; multi-step: date &rarr; event type &rarr; guest count &rarr; budget &rarr; contact; Gravity Forms with conditional logic; feeds CRM, Dubsado, or HoneyBook",
+			"&bull; <strong>Online contract + deposit</strong> &mdash; HelloSign e-signature for booking contract; Stripe 30% deposit; triggers automated welcome email sequence",
+			"&bull; <strong>Client portal</strong> &mdash; login-gated page with planning checklist, mood board upload, and event timeline; WP user roles; from <strong>$400</strong>",
+			"&bull; <strong>Real wedding showcase</strong> &mdash; blog-style posts with rich imagery; Pinterest-optimised Open Graph; strong long-tail SEO (&ldquo;outdoor barn wedding Essex&rdquo; type keywords)",
+			"&bull; <strong>From $550</strong> for a 6-page planner or photographer site; <strong>$1,400+</strong> for a venue with online booking, e-sign contract, deposit, and client portal",
+			'',
+			"Are you a planner, photographer, videographer, or a venue? Do you need online contracts and deposits?",
+		] );
+	}
+
 	// 0d-pre23-a) Nonprofit / charity / NGO / donation site.
 	if ( $has( [ 'nonprofit', 'non-profit', 'charity website', 'ngo', 'donation', 'fundraising', 'charity site', 'nonprofit site', 'volunteer', 'donation website', 'crowdfunding', '501c3', 'charitable', 'foundation website', 'giving campaign' ] ) ) {
 		return $nl( [

@@ -357,6 +357,21 @@
         input.placeholder = phList[phIdx];
       }
     }, 3500);
+    // Ctrl+↑ on empty input — restore last sent message (edit-last pattern).
+    input.addEventListener('keydown', function(e) {
+      if (e.ctrlKey && e.key === 'ArrowUp' && !input.value.trim()) {
+        var _last = null;
+        for (var _li = chatMsgs.length - 1; _li >= 0; _li--) {
+          if (chatMsgs[_li].cls === 'user') { _last = chatMsgs[_li]; break; }
+        }
+        if (_last) {
+          e.preventDefault();
+          input.value = _last.text;
+          input.dispatchEvent(new Event('input'));
+          input.selectionStart = input.selectionEnd = input.value.length;
+        }
+      }
+    });
   }
 
   // (Auto-open removed — the chat opens only when the visitor clicks the orb,
@@ -891,6 +906,7 @@
           '<span><kbd>Shift</kbd>+<kbd>Enter</kbd> New line</span>',
           '<span><kbd>Enter</kbd> Send message</span>',
           '<span><kbd>Esc</kbd> Close / cancel search</span>',
+          '<span><kbd>Ctrl</kbd>+<kbd>↑</kbd> Edit last message</span>',
         ].join('');
         brainHead.appendChild(_helpPanel);
         helpBtn.addEventListener('click', function() {
