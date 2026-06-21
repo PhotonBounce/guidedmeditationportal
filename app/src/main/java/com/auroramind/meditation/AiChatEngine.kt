@@ -244,6 +244,9 @@ class AiChatEngine(private val context: Context) {
             "sensory overload", "sensory overwhelm", "sensory sensitivity",
             "rejection sensitive", "rejection sensitivity",
             "rejection sensitive dysphoria",
+            "mind is racing", "head is spinning", "head is full",
+            "can't quiet my mind", "cant quiet my mind", "quiet my mind",
+            "feel jumpy", "jumpy", "overstimulated",
             "unsettled", "uncertainty", "uncertain", "uneasy",
             "mind chatter", "mental chatter", "busy mind",
             "chattering mind", "monkey mind",
@@ -274,7 +277,8 @@ class AiChatEngine(private val context: Context) {
         any(lower, "meditat", "mindful", "yoga", "chakra", "mantra",
             "vipassana", "tonglen", "soham", "thien", "sumara", "muraqaba",
             "hesychasm", "dhikr", "hitbodedut", "zhan zhuang", "buddho",
-            "sufi", "tibetan", "qigong", "stoic", "stoicism", "spiritual") ||
+            "sufi", "tibetan", "qigong", "stoic", "stoicism", "spiritual",
+            "tai chi", "tai-chi", "taichi", "nidra", "nsdr", "non-sleep deep rest") ||
         anyWord(lower, "zen") ->
             handleMeditation().also { lastTopic = "meditation" }
         any(lower, "technique", "breathwork", "breathing", "body scan", "loving-kindness",
@@ -367,7 +371,10 @@ class AiChatEngine(private val context: Context) {
             "hard time right now", "difficult place",
             "really struggling", "been struggling", "struggle is real",
             "emotional healing", "healing journey", "still healing",
-            "trying to heal", "on a healing journey") ||
+            "trying to heal", "on a healing journey",
+            "been through a lot", "gone through a lot",
+            "a lot to process", "so much to process",
+            "carrying a lot", "carrying so much") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
@@ -459,7 +466,9 @@ class AiChatEngine(private val context: Context) {
         any(lower, "thank", "thanks", "awesome", "perfect",
             "love it", "amazing", "nice", "wonderful", "brilliant",
             "fantastic", "great job", "well done", "cheers",
-            "that helped", "that was helpful", "you helped", "exactly what i needed") ->
+            "that helped", "that was helpful", "you helped", "exactly what i needed",
+            "loved it", "that really helped", "that really worked", "really enjoyed that",
+            "loved that session", "enjoyed that session") ->
             handlePositive().also { lastTopic = "" }
         any(lower, "timer", "sleep timer", "how long should", "how long to meditate",
             "how long for", "duration", "how many minutes") ->

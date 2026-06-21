@@ -134,6 +134,9 @@ function route(lower, lastTopic) {
     "sensory overload","sensory overwhelm","sensory sensitivity",
     "rejection sensitive","rejection sensitivity",
     "rejection sensitive dysphoria",
+    "mind is racing","head is spinning","head is full",
+    "can't quiet my mind","cant quiet my mind","quiet my mind",
+    "feel jumpy","jumpy","overstimulated",
     "unsettled","uncertainty","uncertain","uneasy",
     "mind chatter","mental chatter","busy mind",
     "chattering mind","monkey mind",
@@ -158,7 +161,8 @@ function route(lower, lastTopic) {
   if(any(lower,["meditat","mindful","yoga","chakra","mantra",
     "vipassana","tonglen","soham","thien","sumara","muraqaba",
     "hesychasm","dhikr","hitbodedut","zhan zhuang","buddho",
-    "sufi","tibetan","qigong","stoic","stoicism","spiritual"]) ||
+    "sufi","tibetan","qigong","stoic","stoicism","spiritual",
+    "tai chi","tai-chi","taichi","nidra","nsdr","non-sleep deep rest"]) ||
     anyWord(lower,["zen"])) return "meditation";
   // 13. techniques
   if(any(lower,["technique","breathwork","breathing","body scan","loving-kindness","loving kindness",
@@ -236,6 +240,9 @@ function route(lower, lastTopic) {
     "really struggling","been struggling","struggle is real",
     "emotional healing","healing journey","still healing",
     "trying to heal","on a healing journey",
+    "been through a lot","gone through a lot",
+    "a lot to process","so much to process",
+    "carrying a lot","carrying so much",
     "in a funk","bit of a funk","in a bit of a funk",
     "in my feelings","in the dumps","down in the dumps",
     "need hope","need some hope","lost all hope",
@@ -329,7 +336,9 @@ function route(lower, lastTopic) {
   // 20. positive
   if(any(lower,["thank","thanks","awesome","perfect","love it","amazing","nice",
     "wonderful","brilliant","fantastic","great job","well done","cheers",
-    "that helped","that was helpful","you helped","exactly what i needed"])) return "positive";
+    "that helped","that was helpful","you helped","exactly what i needed",
+    "loved it","that really helped","that really worked","really enjoyed that",
+    "loved that session","enjoyed that session"])) return "positive";
   // 21. timer
   if(any(lower,["timer","sleep timer","how long should","how long to meditate","how long for","duration","how many minutes"])) return "timer";
   // 22. alarm
@@ -570,6 +579,20 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R92: relax (mind racing/jumpy/overstimulated), meditation (tai chi/nidra/nsdr), positive (loved it), sadness (carrying a lot/been through a lot)
+  ["my mind is racing tonight", "", "relax", "mind is racing → relax"],
+  ["my head is spinning from everything", "", "relax", "head is spinning → relax"],
+  ["I feel overstimulated and need to calm down", "", "relax", "overstimulated → relax"],
+  ["I feel really jumpy and on edge", "", "relax", "jumpy → relax (anyWord needed? no — relax fires first via on edge)"],
+  ["I want to learn tai chi", "", "meditation", "tai chi → meditation"],
+  ["yoga nidra sounds interesting", "", "meditation", "nidra → meditation"],
+  ["I've been doing NSDR every morning", "", "meditation", "nsdr → meditation"],
+  ["I loved that session so much", "", "positive", "loved it → positive"],
+  ["that really helped me tonight", "", "positive", "that really helped → positive"],
+  ["I've been through a lot this year", "", "sadness", "been through a lot → sadness"],
+  ["I feel like I'm carrying so much right now", "", "sadness", "carrying so much → sadness"],
+  ["there's a lot to process after today", "", "sadness", "a lot to process → sadness"],
 
   // R91: focus (grounding/neurodivergent), relax (sensory overload/RSD), sadness (healing journey/really struggling)
   ["grounding exercises help with anxiety", "", "focus", "grounding → focus (before energy/exercise preempts)"],
