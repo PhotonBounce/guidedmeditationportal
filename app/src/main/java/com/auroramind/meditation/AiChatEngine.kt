@@ -281,7 +281,7 @@ class AiChatEngine(private val context: Context) {
         "${SoundType.SOHAM.emoji} ${SoundType.SOHAM.displayName} — listen to the natural mantra of the breath\n" +
         "${SoundType.AUTOGENIC_CALM.emoji} ${SoundType.AUTOGENIC_CALM.displayName} — somatic relaxation through quiet autosuggestions\n" +
         "${SoundType.THIEN.emoji} ${SoundType.THIEN.displayName} — breathe and smile in the middle of daily life\n\n" +
-        "Try a slow 4-count inhale, 6-count exhale alongside any of these.\n\n" +
+        "Try a slow 4-count inhale, 6-count exhale alongside any of these (or tap the Breathe chip above for a visual pacer).\n\n" +
         "Spirit can walk you through breathwork or a body scan — just ask." +
         progLine("anxiety5"),
         SoundType.SOHAM
@@ -346,7 +346,7 @@ class AiChatEngine(private val context: Context) {
             "🌿 Today's Technique — ${today.emoji} ${today.title}\n\n" +
             "${today.body}\n\n" +
             "── Other paths into stillness ──\n\n" +
-            "Box Breathing 🫧 — in 4 · hold 4 · out 4 · hold 4 (or tap Breathe on the main screen for a visual pacer)\n" +
+            "Box Breathing 🫧 — in 4 · hold 4 · out 4 · hold 4 (or tap the Breathe chip above for a visual pacer)\n" +
             "Body Scan 🦶 — sweep attention from toes to head, softening as you go\n" +
             "Loving-Kindness 🤍 — offer warmth to yourself, then gently outward\n" +
             "Physiological Sigh 🌬️ — two short inhales, one long exhale; fastest real-time calm\n\n" +
@@ -363,7 +363,7 @@ class AiChatEngine(private val context: Context) {
         "Spirit, your meditation companion\n" +
         "Meditation alarm with gentle wake tones\n" +
         "Zero ads, forever\n\n" +
-        "Just \$2.00, one time. No subscriptions, no surprises.\n\n" +
+        "Just \$1.99, one time. No subscriptions, no surprises.\n\n" +
         "Tap Unlock on the main screen anytime you're ready! 🚀",
         null
     )
@@ -618,8 +618,8 @@ class AiChatEngine(private val context: Context) {
         "🌊 Overwhelm is a signal — your system is carrying more than it was designed to hold alone.\n\n" +
         "First: one slow exhale right now. Longer out than in. That alone begins to ease the physical grip.\n\n" +
         "Then, when you're ready:\n\n" +
-        "Burnout Recovery 🔋 — a comforting ambient wave that releases mental overload; free to play now\n" +
-        "Autogenic Calm ❄️ — quietly guides your body out of fight-or-flight, system by system\n" +
+        "${SoundType.BURNOUT_RECOVERY.emoji} ${SoundType.BURNOUT_RECOVERY.displayName} — a comforting ambient wave that releases mental overload\n" +
+        "${SoundType.AUTOGENIC_CALM.emoji} ${SoundType.AUTOGENIC_CALM.displayName} — quietly guides your body out of fight-or-flight, system by system\n" +
         "Box breathing — 4 counts in · 4 hold · 4 out · 4 hold — used by paramedics to restore calm fast\n\n" +
         "You don't need to solve everything right now. Just this breath, then the next.\n\n" +
         "Want me to walk you through box breathing?",
@@ -630,8 +630,8 @@ class AiChatEngine(private val context: Context) {
         "🔥 Anger is real — and it's often pointing at something that matters.\n\n" +
         "Don't suppress it. That drives it underground. Let it move through the body first:\n\n" +
         "A long, forceful exhale — longer out than in — activates the parasympathetic brake\n" +
-        "Progressive Muscle Release 💪 — deliberately channels the energy out through the body\n" +
-        "Vipassana ⚡ — teaches you to observe the sensation of anger without being swept away by it\n\n" +
+        "${SoundType.PROGRESSIVE_MUSCLE_RELEASE.emoji} ${SoundType.PROGRESSIVE_MUSCLE_RELEASE.displayName} — deliberately channels the energy out through the body\n" +
+        "${SoundType.VIPASSANA.emoji} ${SoundType.VIPASSANA.displayName} — teaches you to observe the sensation of anger without being swept away by it\n\n" +
         "After the heat passes, there's usually something underneath worth listening to — hurt, fear, or an unmet need.\n\n" +
         "Want to try a body-based practice for anger right now?",
         SoundType.VIPASSANA
