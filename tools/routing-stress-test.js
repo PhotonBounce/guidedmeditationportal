@@ -77,7 +77,8 @@ function route(lower, lastTopic) {
     "lethargic","cold shower","cold water","ice bath","wim hof",
     "afternoon slump","afternoon crash","2pm slump","post-lunch dip",
     "pick me up","need a boost","feeling flat","flat today",
-    "drained","wiped out","run down","worn out","no drive"])) return "energy";
+    "drained","wiped out","run down","worn out","no drive",
+    "groggy","grogginess","brain dead","zombie mode"])) return "energy";
   // 9. relax
   if(any(lower,["relax","calm","stress","anxiety","anxious","breathe","unwind","nervous","panic",
     "overthink","overthinking","can't stop thinking","cant stop thinking",
@@ -110,7 +111,10 @@ function route(lower, lastTopic) {
   if(any(lower,["tinnitus","ringing in","ear ring","hearing","buzz in my ear"])) return "tinnitus";
   // 11. baby (non-sleep)
   if(any(lower,["baby","infant","newborn","toddler","new parent","new mum","new mom",
-    "first time parent","new baby"])) return "baby";
+    "new dad","new father","first time parent","new baby",
+    "postpartum","postnatal","post natal","post-natal",
+    "breastfeeding","breast feeding","nursing baby",
+    "colic","baby blues","maternity leave","paternity leave"])) return "baby";
   // 11.5: "how long" meditat queries — must fire before bare meditation route
   if(any(lower,["how long to meditate","how long should i meditate",
     "how many minutes to meditate","how long for meditation","how long should i practice"])) return "timer";
@@ -163,6 +167,10 @@ function route(lower, lastTopic) {
     "not doing ok","not doing well",
     "unwell","not well","not feeling well","feeling unwell",
     "not fine","i'm not fine","im not fine",
+    "feels off","feel off","something feels off","something's off",
+    "not like myself","not quite myself","not feeling like myself",
+    "don't feel like myself","dont feel like myself",
+    "don't seem like myself","dont seem like myself",
     "feeling low","feel low","so low","really low","been feeling low",
     "feeling blue","feel blue","so blue",
     "feeling down","feel down","been feeling down","really down","so down",
@@ -210,7 +218,8 @@ function route(lower, lastTopic) {
     "hit my limit","can't handle it","cant handle it","can't handle this",
     "cant handle this","can't keep up","cant keep up","hostile work",
     "single parent","single mum","single mom","single dad",
-    "sole parent","solo parenting","solo parent"]) ||
+    "sole parent","solo parenting","solo parent",
+    "drowning in","drowning at work","drowning in work"]) ||
     anyWord(lower,["toxic"])) return "overwhelm";
   // 17. anger
   if(any(lower,["angry","furious","frustrated","frustration","rage",
@@ -471,6 +480,16 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R80: baby (postpartum/postnatal/breastfeeding/colic), sadness (feels off/not like myself), energy (groggy), overwhelm (drowning)
+  ["i think i have postpartum depression", "", "baby", "postpartum → baby (fires before sadness)"],
+  ["i've been breastfeeding every two hours and i need some support", "", "baby", "breastfeeding → baby"],
+  ["my baby has colic and i can barely cope", "", "baby", "colic → baby"],
+  ["i have the baby blues really badly", "", "baby", "baby blues → baby"],
+  ["something just feels off today i'm not sure why", "", "sadness", "feels off → sadness"],
+  ["i just don't feel like myself lately", "", "sadness", "not like myself → sadness"],
+  ["i'm so groggy this morning i can barely function", "", "energy", "groggy → energy"],
+  ["i'm drowning in work and i can't see a way out", "", "overwhelm", "drowning in work → overwhelm"],
 
   // R79: sadness (sobbing/weeping/giving up), focus (analysis paralysis/hyperfocus)
   ["i've been sobbing all afternoon", "", "sadness", "sobbing → sadness"],

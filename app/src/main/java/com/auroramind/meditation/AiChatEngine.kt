@@ -186,7 +186,8 @@ class AiChatEngine(private val context: Context) {
             "cold shower", "cold water", "ice bath", "wim hof",
             "afternoon slump", "afternoon crash", "2pm slump", "post-lunch dip",
             "pick me up", "need a boost", "feeling flat", "flat today",
-            "drained", "wiped out", "run down", "worn out", "no drive") ->
+            "drained", "wiped out", "run down", "worn out", "no drive",
+            "groggy", "grogginess", "brain dead", "zombie mode") ->
             handleEnergy().also { lastTopic = "energy" }
         any(lower, "relax", "calm", "stress", "anxiety", "anxious", "breathe",
             "unwind", "nervous", "panic", "overthink", "overthinking",
@@ -222,7 +223,11 @@ class AiChatEngine(private val context: Context) {
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
             handleTinnitus().also { lastTopic = "tinnitus" }
         any(lower, "baby", "infant", "newborn", "toddler", "child", "kids",
-            "new parent", "new mum", "new mom", "first time parent", "new baby") ->
+            "new parent", "new mum", "new mom", "new dad", "new father",
+            "first time parent", "new baby",
+            "postpartum", "postnatal", "post natal", "post-natal",
+            "breastfeeding", "breast feeding", "nursing baby",
+            "colic", "baby blues", "maternity leave", "paternity leave") ->
             handleBaby().also { lastTopic = "baby" }
         // "How long" queries containing "meditat" must fire before the bare meditation route
         any(lower, "how long to meditate", "how long should i meditate",
@@ -291,6 +296,10 @@ class AiChatEngine(private val context: Context) {
             "not ok today", "not doing ok", "not doing well",
             "unwell", "not well", "not feeling well", "feeling unwell",
             "not fine", "i'm not fine", "im not fine",
+            "feels off", "feel off", "something feels off", "something's off",
+            "not like myself", "not quite myself", "not feeling like myself",
+            "don't feel like myself", "dont feel like myself",
+            "don't seem like myself", "dont seem like myself",
             "feeling low", "feel low", "so low", "really low", "been feeling low",
             "feeling blue", "feel blue", "so blue",
             "feeling down", "feel down", "been feeling down", "really down", "so down",
@@ -335,7 +344,8 @@ class AiChatEngine(private val context: Context) {
             "running on empty", "meltdown", "having a meltdown", "on the edge",
             "at my limit", "hit my limit", "can't handle it", "cant handle it",
             "can't handle this", "cant handle this",
-            "can't keep up", "cant keep up", "hostile work") ||
+            "can't keep up", "cant keep up", "hostile work",
+            "drowning in", "drowning at work", "drowning in work") ||
         anyWord(lower, "toxic") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
         any(lower, "angry", "furious", "frustrated", "frustration",
