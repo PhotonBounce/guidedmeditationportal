@@ -133,11 +133,12 @@ class AiChatEngine(private val context: Context) {
             handleSleepParalysis().also { lastTopic = "relax" }
         any(lower, "sleep", "insomnia", "cant sleep", "can't sleep", "falling asleep",
             "bedtime", "tired", "fatigue", "exhausted", "wide awake", "cant switch off",
-            "can't switch off", "racing mind", "racing thoughts", "nap", "night shift",
+            "can't switch off", "racing mind", "racing thoughts", "napping", "night shift",
             "shift work", "mind won't stop", "mind wont stop", "nightmare", "nightmares", "bad dreams",
             "jet lag", "jet lagged", "jet-lagged", "restless", "restlessness",
             "woke up at", "keep waking", "3am", "4am", "middle of the night",
-            "drift off", "drifting off", "can't drift") ->
+            "drift off", "drifting off", "can't drift") ||
+        anyWord(lower, "nap") ->
             handleSleep().also { lastTopic = "sleep" }
         any(lower, "focus", "study", "concentrate", "productivity",
             "writing", "attention", "adhd",

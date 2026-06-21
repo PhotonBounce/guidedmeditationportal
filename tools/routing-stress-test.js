@@ -18,7 +18,8 @@ function route(lower, lastTopic) {
     anyWord(lower,["hi","hey","yo","sup"])) return "greeting";
   if(any(lower,["sleep","insomnia","nightmare","cant sleep","woke up at","keep waking","3am","4am",
     "middle of the night","drift off","drifting off","restless night","night terrors","sleepy",
-    "tired","exhausted","racing mind at night","cant switch off"])) return "sleep";
+    "tired","exhausted","racing mind at night","cant switch off","napping"]) ||
+    anyWord(lower,["nap"])) return "sleep";
   if(any(lower,["focus","study","concentrate","productivity","procrastinat","brain fog","adhd",
     "attention","distract","doom scrolling","doomscrolling","mindless scrolling"]) ||
     anyWord(lower,["read","code"])) return "focus";
@@ -30,17 +31,20 @@ function route(lower, lastTopic) {
     "presentation nerves","exam nerves","stage fright","interview nerves","interview anxiety",
     "nerves before","performance anxiety","performance pressure","pounding heart","heart racing",
     "fear","scared","frightened","phobia","afraid","worry","worried","worrying","dissociation",
-    "feel unreal","feel detached"]) || anyWord(lower,["rest","tense"])) return "relax";
+    "feel unreal","feel detached","ocd","obsessive","compulsive thoughts"]) ||
+    anyWord(lower,["rest","tense"])) return "relax";
   if(any(lower,["sad","grief","grieving","heartbreak","heartbroken","lonely","alone","loneliness",
     "depressed","depression","cry","crying","upset","miserable","unhappy","low mood","empty inside",
     "hopeless","hollow","disconnected","meaningless","no motivation","nothing matters",
-    "bereaved","bereavement","loss of","lost someone"]) ||
+    "bereaved","bereavement","loss of","lost someone","longing","miss him","miss her",
+    "miscarriage","stillbirth","pregnancy loss","child loss","infertility","lost my baby","lost our baby"]) ||
     anyWord(lower,["numb","died"])) return "sadness";
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated","self-blame",
     "blame myself","hate my body","feel worthless","not good enough",
     "low confidence","build confidence"])) return "shameGuilt";
   if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","too much","cant cope",
-    "too busy","work stress","work anxiety","feeling stuck","feel stuck"])) return "overwhelm";
+    "too busy","work stress","work anxiety","feeling stuck","feel stuck",
+    "deadline","under pressure","work pressure","pressure at work"])) return "overwhelm";
   if(any(lower,["angry","anger","furious","frustrated","frustration","rage","irritated","annoyed"]) ||
     anyWord(lower,["mad"])) return "anger";
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -48,7 +52,7 @@ function route(lower, lastTopic) {
   if(any(lower,["my stats","my streak","my progress","sessions","total time","day streak"])) return "stats";
   if(any(lower,["technique","breathwork","body scan","box breathing","physiological sigh",
     "self-compassion","self esteem","low confidence","build confidence","worth",
-    "confidence","stretching","morning routine"])) return "techniques";
+    "confidence","stretching","morning routine","bored","boredom"])) return "techniques";
   return "general";
 }
 
@@ -90,6 +94,23 @@ var tests = [
   ["i need more confidence", "", "techniques", "confidence → techniques"],
   ["morning routine ideas", "", "techniques", "morning routine → techniques"],
   ["stretching practice", "", "techniques", "stretching → techniques"],
+
+  // R43 additions
+  ["ocd is ruining my life", "", "relax", "ocd → relax (intrusive thoughts cluster)"],
+  ["obsessive thoughts wont stop", "", "relax", "obsessive → relax"],
+  ["i have a deadline tomorrow", "", "overwhelm", "deadline → overwhelm"],
+  ["so much work pressure", "", "overwhelm", "work pressure → overwhelm"],
+  ["im so bored", "", "techniques", "bored → techniques"],
+  ["boredom is killing me", "", "techniques", "boredom → techniques"],
+  ["i miss him so much", "", "sadness", "miss him → sadness"],
+  ["i had a miscarriage", "", "sadness", "miscarriage → sadness"],
+  ["struggling with infertility", "", "sadness", "infertility → sadness"],
+  ["pregnancy loss is devastating", "", "sadness", "pregnancy loss → sadness"],
+
+  // R44: nap word-boundary fix — snap should NOT route to sleep
+  ["i'm about to snap", "", "NOT:sleep", "snap does not contain nap at word boundary"],
+  ["i need a nap", "", "sleep", "nap (standalone) → sleep"],
+  ["napping this afternoon", "", "sleep", "napping → sleep"],
 
   // Core routing
   ["cant sleep tonight", "", "sleep", "core sleep"],
