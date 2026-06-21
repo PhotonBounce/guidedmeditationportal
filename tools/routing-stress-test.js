@@ -13,7 +13,7 @@ function route(lower, lastTopic) {
     "take my own life","take my life","life isnt worth living","not worth living",
     "dont want to be here anymore","dont want to exist",
     "unalive","cutting myself","overdose","cant go on like this",
-    "feel like a burden","such a burden","being a burden","am a burden","i'm a burden","i am a burden",
+    "feel like a burden","like such a burden","being a burden","am a burden","i'm a burden","i am a burden",
     "better off without me","world would be better without me",
     "nothing to live for","nothing left to live for",
     "want to disappear","wish i could disappear","just want to disappear",
@@ -54,7 +54,9 @@ function route(lower, lastTopic) {
     "light sleeper","heavy sleeper","sleep hygiene","body clock","circadian","night terrors",
     "night sweats","hot flashes","hot flush","menopause","perimenopause",
     "can't turn off","cant turn off","turn my brain off",
-    "brain won't stop","brain wont stop"]) ||
+    "brain won't stop","brain wont stop",
+    "never feel rested","never fully rested","wake up exhausted",
+    "wake up tired","wake up unrested"]) ||
     anyWord(lower,["nap"])) return "sleep";
   // 7. focus
   if(any(lower,["focus","study","concentrat","productivity","procrastinat","writing","brain fog","adhd",
@@ -128,6 +130,7 @@ function route(lower, lastTopic) {
     "devastated","feel devastated",
     "hollow","disconnected","meaningless","no motivation","nothing matters",
     "gaslighting","gaslit","being gaslit","emotional abuse",
+    "bipolar","manic","mania","manic episode","hypomania",
     "breakup","broke up","split up",
     "feeling lost","lost and","i feel lost","feel so lost","blue today","can't find","lost myself",
     "bereaved","bereavement","loss of","lost someone",
@@ -176,7 +179,8 @@ function route(lower, lastTopic) {
     "too hard on myself","self-critical","self critical",
     "body image issues","body image problem","negative body image",
     "struggle with my body","hate how i look","hate my appearance",
-    "eating disorder","disordered eating"])) return "shameGuilt";
+    "eating disorder","disordered eating",
+    "anorexia","anorexic","bulimia","bulimic","binge eating","binge and purge"])) return "shameGuilt";
   // 16. overwhelm
   if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","burning out","too much",
     "cant cope","can't cope","too busy","overloaded","swamped","falling apart",
@@ -231,7 +235,9 @@ function route(lower, lastTopic) {
     "painful","pains","in pain"]) || anyWord(lower,["pain"])) return "pain";
   // 26. gratitude
   if(any(lower,["grateful","gratitude","journal","journaling","reflect","reflection",
-    "intention","intentions","thankful","thankfulness"])) return "gratitude";
+    "intention","intentions","thankful","thankfulness",
+    "appreciate","appreciation","count my blessings","count your blessings",
+    "what am i grateful","things i'm grateful","blessings"])) return "gratitude";
   // 27. help
   if(any(lower,["what can you do","how do you work","your features","about spirit",
     "what are you","what is spirit","how can you help"])) return "help";
@@ -441,6 +447,17 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R76: burden fix (like such a burden), eating disorders, bipolar, sleep (wake up tired), gratitude expansions
+  ["i feel like such a burden to my family", "", "crisis", "like such a burden → crisis"],
+  ["i struggle with bulimia", "", "shameGuilt", "bulimia → shameGuilt"],
+  ["i think i might be anorexic", "", "shameGuilt", "anorexic → shameGuilt"],
+  ["i have a binge eating problem", "", "shameGuilt", "binge eating → shameGuilt"],
+  ["i've been diagnosed with bipolar disorder", "", "sadness", "bipolar → sadness"],
+  ["i wake up tired no matter how much i sleep", "", "sleep", "wake up tired → sleep"],
+  ["i never feel rested anymore", "", "sleep", "never feel rested → sleep"],
+  ["i want to appreciate what i have more", "", "gratitude", "appreciate → gratitude"],
+  ["i want to count my blessings today", "", "gratitude", "count my blessings → gratitude"],
 
   // R66: sadness sim sync — pre-R62 keywords were missing; + widowed/ghosted
   ["we just broke up", "", "sadness", "broke up → sadness"],

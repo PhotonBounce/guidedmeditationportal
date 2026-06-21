@@ -110,7 +110,7 @@ class AiChatEngine(private val context: Context) {
             "don't want to exist", "dont want to exist",
             "unalive", "cutting myself", "overdose",
             "cant go on like this", "can't go on like this",
-            "feel like a burden", "such a burden", "being a burden", "am a burden", "i'm a burden", "i am a burden",
+            "feel like a burden", "like such a burden", "being a burden", "am a burden", "i'm a burden", "i am a burden",
             "better off without me", "world would be better without me",
             "nothing to live for", "nothing left to live for",
             "want to disappear", "wish i could disappear", "just want to disappear",
@@ -161,7 +161,9 @@ class AiChatEngine(private val context: Context) {
             "body clock", "circadian", "night terrors",
             "night sweats", "hot flashes", "hot flush", "menopause", "perimenopause",
             "can't turn off", "cant turn off", "turn my brain off",
-            "brain won't stop", "brain wont stop") ||
+            "brain won't stop", "brain wont stop",
+            "never feel rested", "never fully rested", "wake up exhausted",
+            "wake up tired", "wake up unrested") ||
         anyWord(lower, "nap") ->
             handleSleep().also { lastTopic = "sleep" }
         any(lower, "focus", "study", "concentrat", "productivity",
@@ -247,6 +249,7 @@ class AiChatEngine(private val context: Context) {
             "devastated", "feel devastated",
             "hollow", "disconnected", "meaningless", "no motivation", "nothing matters",
             "gaslighting", "gaslit", "being gaslit", "emotional abuse",
+            "bipolar", "manic", "mania", "manic episode", "hypomania",
             "breakup", "broke up", "split up", "feeling blue", "feeling lost",
             "lost and", "i feel lost", "feel so lost", "blue today", "can't find", "lost myself",
             "bereaved", "bereavement", "loss of", "lost someone", "lost my",
@@ -298,7 +301,8 @@ class AiChatEngine(private val context: Context) {
             "too hard on myself", "self-critical", "self critical",
             "body image issues", "body image problem", "negative body image",
             "struggle with my body", "hate how i look", "hate my appearance",
-            "eating disorder", "disordered eating") ->
+            "eating disorder", "disordered eating",
+            "anorexia", "anorexic", "bulimia", "bulimic", "binge eating", "binge and purge") ->
             handleShameGuilt().also { lastTopic = "sadness" }
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out", "burning out",
             "too much", "cant cope", "can't cope", "too busy", "overloaded",
@@ -365,7 +369,9 @@ class AiChatEngine(private val context: Context) {
         anyWord(lower, "pain") ->
             handlePain().also { lastTopic = "pain" }
         any(lower, "grateful", "gratitude", "journal", "journaling", "reflect",
-            "reflection", "intention", "intentions", "thankful", "thankfulness") ->
+            "reflection", "intention", "intentions", "thankful", "thankfulness",
+            "appreciate", "appreciation", "count my blessings", "count your blessings",
+            "what am i grateful", "things i'm grateful", "blessings") ->
             handleGratitude().also { lastTopic = "gratitude" }
         any(lower, "what can you do", "how do you work", "your features", "about spirit",
             "what are you", "what is spirit", "how can you help") ->
