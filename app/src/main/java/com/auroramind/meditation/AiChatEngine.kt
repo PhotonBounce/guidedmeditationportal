@@ -21,6 +21,7 @@ data class ChatMessage(
 class AiChatEngine(private val context: Context) {
 
     private val prefs = PrefsManager(context)
+    private val stats = StatsManager(context)
     private val history = mutableListOf<ChatMessage>()
     private var turnsCount = 0
     // Tracks the last topic so follow-up phrases ("yes", "walk me through it") get contextual responses.
@@ -46,16 +47,31 @@ class AiChatEngine(private val context: Context) {
             else                       -> "evening 🌙"
         }
         val hasHistory = prefs.getPlayHistory().isNotEmpty()
+        val streak = stats.currentStreak()
+        val minutes = stats.totalMinutes()
+        val sessions = stats.totalSessions()
+
+        val streakLine = when {
+            streak >= 30 -> "${streak}-day streak — a genuine, sustained practice. 🔥\n\n"
+            streak >= 7  -> "${streak} days in a row. That kind of consistency builds something real. ✨\n\n"
+            streak >= 3  -> "${streak} days running — momentum is forming. Keep showing up. 🌱\n\n"
+            else         -> ""
+        }
+        val depthLine = when {
+            minutes >= 60 && sessions >= 10 ->
+                "${minutes} minutes across ${sessions} sessions — a meaningful investment in yourself.\n\n"
+            else -> ""
+        }
+
         return if (hasHistory) {
             "Good $timeCtx! I'm Spirit — your meditation companion. 🤍\n\n" +
-            "Welcome back. Last time, ${mostPlayed.emoji} ${mostPlayed.displayName} " +
-            "seemed to settle you nicely.\n\n" +
-            "I'm here to help you find the right practice for this moment, or simply " +
-            "to talk — about rest, focus, relaxation, or any meditation technique you'd like to explore."
+            streakLine +
+            "Welcome back. Last time, ${mostPlayed.emoji} ${mostPlayed.displayName} seemed to settle you nicely.\n\n" +
+            depthLine +
+            "What are you here for right now — rest, focus, relaxation, or something else?"
         } else {
             "Good $timeCtx! I'm Spirit — your meditation companion. 🤍\n\n" +
-            "Think of me as an encouraging voice on your practice: I can suggest a " +
-            "track for how you're feeling, walk you through a technique like breathwork " +
+            "I can suggest a track for how you're feeling, walk you through a technique like breathwork " +
             "or body scanning, or just keep you company for a few quiet minutes.\n\n" +
             "What are you here for right now? Rest, focus, relaxation, or something else?"
         }
@@ -265,7 +281,8 @@ class AiChatEngine(private val context: Context) {
 
     private fun handleRecommendation(): Pair<String, SoundType?> {
         val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
-        val favMood = mostPlayed.mood
+        // Explicit onboarding goal takes priority over inferred mood from playback history.
+        val favMood = prefs.getGoal() ?: mostPlayed.mood
         val (suggestion, reason) = when {
             hour >= 22 || hour < 5 ->
                 SoundType.EVENING_REVIEW to "perfect for this hour — a soft Stoic close to the day"
@@ -300,10 +317,17 @@ class AiChatEngine(private val context: Context) {
     }
 
     private fun handlePositive(): Pair<String, SoundType?> {
+        val streak = stats.currentStreak()
+        val minutes = stats.totalMinutes()
+        val milestoneNote = when {
+            streak >= 7  -> " Your ${streak}-day streak is building something genuinely lasting."
+            minutes >= 60 -> " Over ${minutes} minutes in practice — that consistency shows."
+            else          -> ""
+        }
         val msgs = listOf(
-            "You're so welcome. Rest easy and be gentle with yourself 🤍 Spirit's always here when you need a moment of stillness.",
+            "You're so welcome.$milestoneNote Rest easy and be gentle with yourself. 🤍",
             "That makes me glad! 🌙 Showing up for your practice matters — even a few quiet minutes a day adds up.",
-            "Lovely! Consistency is what makes a practice — you're doing beautifully. 💪🌙"
+            "Lovely!$milestoneNote Consistency is what makes a practice — you're doing beautifully. 💪"
         )
         return Pair(msgs[turnsCount % msgs.size], null)
     }
