@@ -667,6 +667,64 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+
+				// 0d-pre55-a) Graphic design studio / brand agency / creative agency / freelance graphic designer / visual identity.
+				if ($has(['graphic design website','graphic designer website','brand agency website','brand design website','creative agency website','creative studio website','branding agency website','design studio website','visual identity website','logo designer website','identity design website','brand strategist website','packaging design website','freelance designer website','illustration website','motion graphics website','infographic design website','print design website','design portfolio website','art direction website'])) {
+				  $parts = [
+				"<strong>Graphic design / brand agency website</strong> &mdash; your portfolio IS the product",
+				"&bull; <strong>Portfolio / case studies</strong>: grid or masonry; client + brief + challenge + outcome per project; discipline filter (branding, packaging, digital, motion); from \$300",
+				"&bull; <strong>Visual identity / branding page</strong>: logo; typeface; colour system; guidelines PDF; brand audit offer; this is your highest-value service page; from \$200",
+				"&bull; <strong>Services breakdown</strong>: brand strategy; logo &amp; identity; print; packaging; digital; motion graphics; illustration; from \$200",
+				"&bull; <strong>About / studio story</strong>: founder, team, process, tools (Adobe CC, Figma, Procreate); personality sells in creative work; from \$150",
+				"&bull; <strong>Process page</strong>: discovery &rarr; concept &rarr; refinement &rarr; delivery; sets expectation, reduces scope creep; from \$150",
+				"&bull; <strong>Client logos / testimonials</strong>: recognisable brands lend authority; Google Reviews schema; from \$100",
+				"&bull; <strong>Pricing transparency</strong>: brand starter \$X; full identity \$Y; day rate; not publishing loses undecided buyers to studios that do; from \$100",
+				"&bull; <strong>Blog / insight articles</strong>: colour psychology; rebranding triggers; brand consistency; ranks for &ldquo;branding tips [city]&rdquo;; from \$100/post",
+				"&bull; <strong>Inquiry / brief form</strong>: project type; budget; timeline; Notion / Trello; scopes enquiries before call; from \$150",
+				"From \$550 &mdash; \$1,200+ for full brand identity site with case studies."
+				  ];
+				  return $nl($parts);
+				}
+
+				// 0d-pre55-b) Car garage / MOT centre / auto mechanic / vehicle repair / bodyshop / tyre fitter / servicing centre.
+				if ($has(['car garage website','garage website','mot centre website','mot garage website','auto mechanic website','vehicle repair website','bodyshop website','body shop website','tyre fitter website','tyre shop website','auto repair website','mechanic website','car servicing website','service centre website','oil change website','brake repair website','exhaust repair website','transmission repair website','auto electrician website','car diagnostic website'])) {
+				  $parts = [
+				"<strong>Car garage / MOT centre website</strong> &mdash; local trust + online booking beat the fast-fit chains",
+				"&bull; <strong>Online MOT / service booking</strong>: Garage Hive, GarageWire, Autoflow, or Calendly; customers book 11pm on Sunday; from \$300",
+				"&bull; <strong>MOT reminder email / SMS</strong>: DVSA API integration; automated renewal prompts; highest-ROI retention tool a garage can run; from \$250",
+				"&bull; <strong>Services pages</strong>: MOT (Class IV / Class VII); annual service; interim; major; brakes; tyres; exhausts; air conditioning regas; diagnostics; EV/hybrid; each as own page for local SEO; from \$200",
+				"&bull; <strong>Tyre price checker</strong>: MyTyres / Blackcircles API; fit price + tyre price; closes comparison shoppers instantly; from \$350",
+				"&bull; <strong>DVSA MOT history check widget</strong>: reg-plate lookup; educational for customer; from \$200",
+				"&bull; <strong>Trust signals</strong>: Bosch Car Service; RAC / AA approved; Motoreasy / WMS warranty; IMI accreditation; Trading Standards Buy With Confidence; from \$100",
+				"&bull; <strong>Google Reviews integration</strong>: schema markup; review widget; &ldquo;[city] garage reviews&rdquo; SEO; from \$100",
+				"&bull; <strong>Fleet / business vehicles</strong>: invoicing; account customer discounts; priority booking; from \$150",
+				"&bull; <strong>Vehicle collection &amp; delivery</strong>: courtesy car; loan car availability; removes barrier for time-pressed customers; from \$100",
+				"&bull; <strong>Electric vehicle page</strong>: OZEV-certified; EV health check; DC fast charge nearby; future-proofs enquiries; from \$150",
+				"From \$600 &mdash; \$1,400+ with booking system and tyre price checker."
+				  ];
+				  return $nl($parts);
+				}
+
+				// 0d-pre55-c) Catering company / private chef / mobile catering / food truck / wedding caterer / events catering.
+				if ($has(['catering website','catering company website','private chef website','mobile catering website','food truck website','wedding caterer website','events catering website','corporate catering website','buffet catering website','hog roast website','bbq catering website','street food website','catering van website','outside catering website','finger food catering website','canape catering website','school catering website','university catering website','film catering website','festival catering website'])) {
+				  $parts = [
+				"<strong>Catering company / private chef website</strong> &mdash; appetite appeal + availability confidence",
+				"&bull; <strong>Gallery</strong>: high-resolution food photography is non-negotiable; professional stylist if possible; carousel of event types (weddings, corporate, festivals, private); from \$250",
+				"&bull; <strong>Menu pages</strong>: canapés; bowl food; buffet; fork buffet; plated dinner; BBQ / hog roast; vegan; gluten-free; allergen matrix (Natasha&rsquo;s Law 2021 &mdash; mandatory allergen info); from \$200",
+				"&bull; <strong>Natasha&rsquo;s Law compliance</strong>: Food Information (Amendment) (England) Regulations 2021; mandatory allergen information on pre-packed for direct sale (PPDS) food; clearly displayed on menus and website; from \$150",
+				"&bull; <strong>Event types</strong>: weddings; corporate away-days; product launches; birthday / milestone events; film &amp; TV; festivals &amp; outdoor events; school leavers; each as own page; from \$150/page",
+				"&bull; <strong>Enquiry and quote form</strong>: event date; guest count; venue postcode; budget; dietary requirements; filters unqualified leads; automated email acknowledgment; from \$200",
+				"&bull; <strong>Availability calendar</strong>: Calendly or custom; real-time; reduces phone tag; from \$200",
+				"&bull; <strong>Testimonials + real event blog</strong>: &ldquo;Sophie&rsquo;s 200-person wedding at [Venue]&rdquo;; ranks for &ldquo;caterer [venue name]&rdquo;; from \$150/post",
+				"&bull; <strong>Food hygiene rating</strong>: 5-star Food Standards Agency badge; mandatory display under some local authority schemes; trust signal regardless; from \$80",
+				"&bull; <strong>Corporate accounts / repeat booking</strong>: board lunches; training days; multi-date retainer; invoice terms; from \$150",
+				"&bull; <strong>Staff / chef profiles</strong>: City &amp; Guilds; NVQ Level 3; WSET wine; personal story; trust for private home dinners; from \$100",
+				"From \$600 &mdash; \$1,400+ with allergen compliance, gallery, and quote workflow."
+				  ];
+				  return $nl($parts);
+				}
+
+
 				// 0d-pre54-a) Estate agent / lettings agent / property developer / property management.
 	if ( $has( [ 'estate agent website', 'letting agent website', 'property developer website', 'property management website', 'property website', 'estate agency website', 'real estate website', 'property listing website', 'house sales website', 'property portal website', 'hmo management website', 'buy to let management website', 'property investment website', 'new homes developer website', 'property finder website', 'block management website' ] ) ) {
 		return $nl( [

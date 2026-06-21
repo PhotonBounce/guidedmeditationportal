@@ -746,6 +746,47 @@
       } else {
         div.innerHTML = text.replace(/</g, '&lt;');
       }
+
+      // R59: Niche topic tag — labels each bot reply with its detected service category.
+      if (cls === 'bot') {
+        var _nicheMap = [
+          {k:['solicitor','law firm','barrister','conveyancing','gdpr','legal practice'], label:'Legal'},
+          {k:['mortgage broker','ifa ','financial adviser','equity release','pension'], label:'Finance'},
+          {k:['architect','riba plan','arb-registered','planning application'], label:'Architecture'},
+          {k:['dentist','dental practice','gdp ','orthodont','invisalign'], label:'Dental'},
+          {k:['veterinary','vet ','animal hospital','rcvs'], label:'Veterinary'},
+          {k:['physiotherapist','physio ','osteopath','chiropractor','hcpc'], label:'Health & Therapy'},
+          {k:['funeral director','cremation','bereavement','nafd','saif'], label:'Funeral Services'},
+          {k:['optician','optometrist','eye test','goc register'], label:'Optical'},
+          {k:['nutritionist','dietitian','registered dietitian'], label:'Nutrition'},
+          {k:['estate agent','letting agent','rightmove','valpal'], label:'Property'},
+          {k:['hotel website','boutique hotel','holiday cottage','direct booking'], label:'Hospitality'},
+          {k:['wedding photographer','event photographer','pixieset','portfolio gallery'], label:'Photography'},
+          {k:['graphic design','brand agency','creative studio','freelance designer'], label:'Design'},
+          {k:['car garage','mot centre','auto mechanic','bodyshop'], label:'Automotive'},
+          {k:['catering company','private chef','mobile catering','food truck'], label:'Catering'},
+          {k:['restaurant','cafe','pub ','bar ','hospitality website'], label:'Food & Drink'},
+          {k:['ecommerce','woocommerce','shopify','online shop'], label:'eCommerce'},
+          {k:['saas','software','app ','api '], label:'Software'},
+          {k:['personal trainer','fitness','pilates','gym website'], label:'Fitness'},
+          {k:['hairdresser','barber','hair salon'], label:'Hair & Beauty'},
+          {k:['childminder','nursery','daycare'], label:'Childcare'},
+        ];
+        var _ltp = plain(text).toLowerCase().slice(0, 400);
+        var _matchedNiche = null;
+        for (var _ni = 0; _ni < _nicheMap.length && !_matchedNiche; _ni++) {
+          for (var _nki = 0; _nki < _nicheMap[_ni].k.length; _nki++) {
+            if (_ltp.indexOf(_nicheMap[_ni].k[_nki]) > -1) { _matchedNiche = _nicheMap[_ni]; break; }
+          }
+        }
+        if (_matchedNiche) {
+          var _ntag = document.createElement('span');
+          _ntag.className = 'pb-brain__topic-tag';
+          _ntag.textContent = _matchedNiche.label;
+          div.insertBefore(_ntag, div.firstChild);
+        }
+      }
+
       if (cls === 'bot' && navigator.clipboard) {
         var cpBtn = document.createElement('button');
         cpBtn.type = 'button';
