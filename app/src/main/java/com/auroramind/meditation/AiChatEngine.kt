@@ -149,13 +149,15 @@ class AiChatEngine(private val context: Context) {
             handleFocus().also { lastTopic = "focus" }
         any(lower, "energy", "energise", "energize", "wake up", "waking up",
             "uplift", "motivation", "motivated", "active", "exercise", "workout",
-            "morning boost", "morning energy", "sluggish", "lethargic") ->
+            "morning boost", "morning energy", "sluggish", "lethargic",
+            "cold shower", "cold water", "ice bath", "wim hof") ->
             handleEnergy().also { lastTopic = "energy" }
         any(lower, "relax", "calm", "stress", "anxiety", "anxious", "breathe",
             "unwind", "nervous", "panic", "overthink", "overthinking",
             "can't stop thinking", "cant stop thinking", "intrusive thoughts", "ruminating",
             "social anxiety", "public speaking", "presentation nerves", "exam nerves",
             "stage fright", "interview nerves", "interview anxiety", "nerves before",
+            "performance anxiety", "performance pressure",
             "pounding heart", "heart racing", "mind keeps wandering", "can't stop my mind",
             "cant stop my mind", "racing heart", "trauma", "traumatic", "ptsd",
             "post-traumatic", "triggered", "hyperventilat", "chest tight",
@@ -182,7 +184,8 @@ class AiChatEngine(private val context: Context) {
             "how to meditate", "types of meditation", "autogenic", "box breath",
             "4-7-8", "4 7 8", "physiological sigh", "progressive muscle", "metta",
             "self-compassion", "self compassion", "compassion practice", "kind to myself",
-            "self esteem", "self-esteem", "low confidence", "build confidence", "worth") ->
+            "self esteem", "self-esteem", "low confidence", "build confidence", "worth",
+            "confidence", "stretching", "morning routine") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
