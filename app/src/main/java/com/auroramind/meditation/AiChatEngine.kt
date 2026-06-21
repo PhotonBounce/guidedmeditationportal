@@ -113,7 +113,8 @@ class AiChatEngine(private val context: Context) {
             "how do i", "teach me", "what do i do", "let's do it", "lets do it") ->
             handleFollowUp()
 
-        any(lower, "hello", "hi", "hey", "good morning", "good evening", "good night", "yo", "sup") ->
+        any(lower, "hello", "good morning", "good evening", "good night") ||
+        anyWord(lower, "hi", "hey", "yo", "sup") ->
             handleGreeting().also { lastTopic = "greeting" }
         // Baby+sleep compounds must come before the bare "sleep" route to win
         any(lower, "baby sleep", "baby won't sleep", "baby can't sleep", "baby keeps waking",
@@ -179,7 +180,11 @@ class AiChatEngine(private val context: Context) {
             "lost and", "i feel lost", "blue today", "can't find", "lost myself",
             "bereaved", "bereavement", "loss of", "lost someone", "passed away",
             "died", "death of", "missing them", "miss them so",
-            "relationship", "divorce", "divorc", "separation", "separated from") ->
+            "relationship", "divorce", "divorc", "separation", "separated from",
+            "feeling down", "feel down", "i feel down", "feeling low", "feel low",
+            "i feel low", "feel so low", "feeling so low", "feeling very low",
+            "life feels pointless", "feels pointless", "feel pointless",
+            "mood swings", "bad mood", "mental health", "i'm suffering") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
             "i feel ashamed", "embarrassed", "humiliated", "self-blame", "self blame",
@@ -188,7 +193,8 @@ class AiChatEngine(private val context: Context) {
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out",
             "too much", "cant cope", "can't cope", "too busy", "overloaded",
             "swamped", "falling apart", "breaking point", "can't take",
-            "work stress", "work anxiety", "work is killing me", "job stress") ->
+            "work stress", "work anxiety", "work is killing me", "job stress",
+            "feeling stuck", "feel stuck", "stuck in a rut", "stuck in life") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
         any(lower, "angry", "anger", "furious", "mad", "frustrated", "frustration",
             "rage", "irritated", "irritable", "annoyed", "wound up", "agitated") ->
@@ -240,6 +246,10 @@ class AiChatEngine(private val context: Context) {
     }
 
     private fun any(input: String, vararg kws: String) = kws.any { input.contains(it) }
+    // Word-boundary variant — use for short single-syllable keywords that are substrings of common words
+    // e.g. "hi" inside "this", "hey" inside "they", "yo" inside "you", "sup" inside "support"
+    private fun anyWord(input: String, vararg kws: String) =
+        kws.any { Regex("\\b${Regex.escape(it)}\\b").containsMatchIn(input) }
 
     private fun progLine(programId: String): String {
         val prog = Programs.all.find { it.id == programId } ?: return ""
