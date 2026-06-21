@@ -82,8 +82,8 @@ function route(lower, lastTopic) {
   if(any(lower,["focus","study","concentrat","productivity","procrastinat","writing","brain fog","adhd",
     "foggy","mental clarity","sharp","clear mind","attention","distract",
     "multitasking","information overload",
-    "doom scrolling","doomscrolling","mindless scrolling","phone addiction",
-    "screen addiction","endless scrolling","too much screen",
+    "doom scrolling","doomscrolling","doom-watching","mindless scrolling","phone addiction",
+    "screen addiction","endless scrolling","too much screen","screen time",
     "mental block","writer's block","writers block","creative block",
     "brain freeze","can't think straight","cant think straight",
     "mind blank","mind went blank","mind has gone blank",
@@ -129,7 +129,7 @@ function route(lower, lastTopic) {
     "thyroid","thyroid issues","underactive thyroid","hypothyroid","hypothyroidism",
     "cortisol","cortisol levels","high cortisol","cortisol spike",
     "adrenal","adrenals are",
-    "cold plunge","cold-plunge","cold exposure",
+    "cold plunge","cold-plunge","cold exposure","cold therapy","cold water therapy",
     "afternoon energy dip","mid-afternoon dip","mid-afternoon crash",
     "morning slump","mid-morning slump",
     "no enthusiasm","lacking enthusiasm","no passion",
@@ -205,7 +205,9 @@ function route(lower, lastTopic) {
     "heart is pounding","heart has been pounding",
     "noise sensitivity",
     "flashback","having flashbacks","intrusive memories",
-    "body memories","trauma response","trauma trigger"]) ||
+    "body memories","trauma response","trauma trigger",
+    "hypochondria","hypochondriac","health anxiety disorder",
+    "illness anxiety","medical anxiety"]) ||
     anyWord(lower,["rest","tense","rsd"])) return "relax";
   // 10. tinnitus
   if(any(lower,["tinnitus","ringing in","ear ring","hearing","buzz in my ear",
@@ -246,7 +248,11 @@ function route(lower, lastTopic) {
     "open monitoring","open awareness","choiceless awareness",
     "witnessing meditation","pure awareness","awareness practice",
     "non-dual","nondual",
-    "inner peace","peace of mind","peaceful mind","inner calm"]) ||
+    "inner peace","peace of mind","peaceful mind","inner calm",
+    "present moment","be present","stay present","living in the moment",
+    "higher self","soul work","true self","authentic self",
+    "stillness","still the mind","still my mind","being still",
+    "sit with myself","sitting with","inner silence"]) ||
     anyWord(lower,["zen"])) return "meditation";
   // 13. techniques
   if(any(lower,["technique","breathwork","breathing","body scan","loving-kindness","loving kindness",
@@ -282,7 +288,8 @@ function route(lower, lastTopic) {
     "self-development",
     "self-care","self care","self-care routine","self care routine",
     "self-care practice","taking care of myself","look after myself",
-    "evening routine","wind down routine","wind-down routine"])) return "techniques";
+    "evening routine","wind down routine","wind-down routine",
+    "breath of fire","kapalbhati","ujjayi","pranayama"])) return "techniques";
   // 14. sadness
   if(any(lower,["sad","grief","grieving","heartbreak","heartbroken","lonely","alone","loneliness",
     "depressed","depression","cry","crying","sobbing","weeping","in tears","tearing up",
@@ -828,6 +835,16 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R116: meditation (present moment/higher self/stillness), techniques (pranayama/ujjayi), relax (hypochondria), focus (doom-watching), energy (cold therapy)
+  ["I want to learn to be present in the moment", "", "meditation", "present moment → meditation"],
+  ["I'm interested in connecting with my higher self", "", "meditation", "higher self → meditation"],
+  ["I've been working on inner stillness lately", "", "meditation", "stillness → meditation"],
+  ["I want to try pranayama breathing", "", "techniques", "pranayama → techniques"],
+  ["do you have any ujjayi breathing guidance", "", "techniques", "ujjayi → techniques"],
+  ["I think I have hypochondria", "", "relax", "hypochondria → relax"],
+  ["I've been doom-watching the news all day", "", "focus", "doom-watching → focus"],
+  ["I do cold therapy every morning to wake up", "", "energy", "cold therapy → energy"],
 
   // R115: baby (teething/weaning/c-section/nicu/adoption), energy (caffeine crash/no enthusiasm)
   ["my baby is teething and it's exhausting", "", "baby", "teething → baby"],

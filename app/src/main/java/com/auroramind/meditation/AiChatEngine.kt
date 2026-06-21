@@ -190,8 +190,8 @@ class AiChatEngine(private val context: Context) {
             "writing", "attention", "adhd", "distract",
             "brain fog", "foggy", "mental clarity", "sharp", "clear mind",
             "procrastinat", "multitasking", "information overload",
-            "doom scrolling", "doomscrolling", "mindless scrolling", "phone addiction",
-            "screen addiction", "endless scrolling", "too much screen",
+            "doom scrolling", "doomscrolling", "doom-watching", "mindless scrolling", "phone addiction",
+            "screen addiction", "endless scrolling", "too much screen", "screen time",
             "mental block", "writer's block", "writers block", "creative block",
             "brain freeze", "can't think straight", "cant think straight",
             "mind blank", "mind went blank", "mind has gone blank",
@@ -238,7 +238,7 @@ class AiChatEngine(private val context: Context) {
             "thyroid", "thyroid issues", "underactive thyroid", "hypothyroid", "hypothyroidism",
             "cortisol", "cortisol levels", "high cortisol", "cortisol spike",
             "adrenal", "adrenals are",
-            "cold plunge", "cold-plunge", "cold exposure",
+            "cold plunge", "cold-plunge", "cold exposure", "cold therapy", "cold water therapy",
             "afternoon energy dip", "mid-afternoon dip", "mid-afternoon crash",
             "morning slump", "mid-morning slump",
             "no enthusiasm", "lacking enthusiasm", "no passion",
@@ -317,7 +317,9 @@ class AiChatEngine(private val context: Context) {
             "heart is pounding", "heart has been pounding",
             "noise sensitivity",
             "flashback", "having flashbacks", "intrusive memories",
-            "body memories", "trauma response", "trauma trigger") ||
+            "body memories", "trauma response", "trauma trigger",
+            "hypochondria", "hypochondriac", "health anxiety disorder",
+            "illness anxiety", "medical anxiety") ||
         anyWord(lower, "rest", "tense", "rsd") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in",
@@ -362,7 +364,11 @@ class AiChatEngine(private val context: Context) {
             "open monitoring", "open awareness", "choiceless awareness",
             "witnessing meditation", "pure awareness", "awareness practice",
             "non-dual", "nondual",
-            "inner peace", "peace of mind", "peaceful mind", "inner calm") ||
+            "inner peace", "peace of mind", "peaceful mind", "inner calm",
+            "present moment", "be present", "stay present", "living in the moment",
+            "higher self", "soul work", "true self", "authentic self",
+            "stillness", "still the mind", "still my mind", "being still",
+            "sit with myself", "sitting with", "inner silence") ||
         anyWord(lower, "zen") ->
             handleMeditation().also { lastTopic = "meditation" }
         any(lower, "technique", "breathwork", "breathing", "body scan", "loving-kindness",
@@ -399,7 +405,9 @@ class AiChatEngine(private val context: Context) {
             "nlp", "neuro-linguistic", "neuro linguistic programming",
             "mental wellness", "emotional wellness", "wellness journey",
             "personal development", "personal growth journey", "self-improvement",
-            "self-development") ->
+            "self-development",
+            "self-care", "self care", "self care routine", "self-care routine",
+            "breath of fire", "kapalbhati", "ujjayi", "pranayama") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
