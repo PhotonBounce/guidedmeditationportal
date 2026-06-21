@@ -3034,6 +3034,20 @@ border-radius: 50%; cursor: pointer; font-size: 16px;
   opacity:1; pointer-events:auto;
   transform:translateX(-50%) translateY(0);
 }
+/* Copy-to-clipboard confirmation toast */
+.pb-brain__toast{
+  position:absolute; top:48px; left:50%;
+  transform:translateX(-50%) translateY(-6px);
+  background:rgba(22,30,52,.97); border:1px solid rgba(255,255,255,.15);
+  border-radius:6px; color:rgba(255,255,255,.9);
+  font-size:12px; padding:5px 14px;
+  opacity:0; pointer-events:none;
+  transition:opacity .18s,transform .18s;
+  white-space:nowrap; z-index:11;
+}
+.pb-brain__toast--vis{
+  opacity:1; transform:translateX(-50%) translateY(0);
+}
 /* Submit guard — visual disabled state during API fetch */
 .pb-brain__input:disabled{ opacity:.45; cursor:not-allowed; resize:none; }
 .pb-brain__form button[type="submit"]:disabled{ opacity:.45; cursor:not-allowed; pointer-events:none; }

@@ -561,6 +561,56 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre23-a) Nonprofit / charity / NGO / donation site.
+	if ( $has( [ 'nonprofit', 'non-profit', 'charity website', 'ngo', 'donation', 'fundraising', 'charity site', 'nonprofit site', 'volunteer', 'donation website', 'crowdfunding', '501c3', 'charitable', 'foundation website', 'giving campaign' ] ) ) {
+		return $nl( [
+			"Nonprofit and charity websites share the same WordPress stack with a few key additions &mdash; here&rsquo;s what&rsquo;s typical:",
+			'',
+			"&bull; <strong>Donation system</strong> &mdash; GiveWP plugin (most popular open-source donation plugin); single and recurring donations; Stripe + PayPal gateway; PDF receipt emailed automatically; from <strong>$350</strong> with donation integration",
+			"&bull; <strong>Campaign pages</strong> &mdash; fundraising thermometer / progress bar toward a goal; donor wall (optionally anonymised); time-limited campaign countdown",
+			"&bull; <strong>Volunteer management</strong> &mdash; signup form with shift selection; volunteer coordinator dashboard; email confirmation + reminder automation",
+			"&bull; <strong>Google Ad Grants</strong> &mdash; nonprofits qualify for <strong>$10,000/month</strong> in free Google Ads; I can set up the account, campaigns, and landing pages to unlock this",
+			"&bull; <strong>Annual report / impact page</strong> &mdash; data visualisation of impact metrics, financial summary, board of directors; grant-document friendly layout",
+			"&bull; <strong>Discounts</strong> &mdash; TechSoup for discounted software; Cloudflare nonprofits; Mailchimp Nonprofit 15% discount",
+			'',
+			"Is the primary goal donations, volunteer recruitment, event attendance, or all three?",
+		] );
+	}
+
+	// 0d-pre23-b) Education / eLearning / online course / LMS.
+	if ( $has( [ 'online course', 'elearning', ' lms ', 'learning management system', 'course website', 'teach online', 'sell courses', 'membership learning', 'education platform', 'tutoring site', 'student portal', 'school website', 'learning portal', 'course platform', 'learndash', 'tutor lms', 'thinkific', 'teachable alternative', 'online education' ] ) ) {
+		return $nl( [
+			"eLearning and online course sites are a common build &mdash; here&rsquo;s the plugin decision matrix:",
+			'',
+			"&bull; <strong>LearnDash</strong> &mdash; most powerful WP LMS; course builder, quizzes, certificates, progress tracking, group management, SCORM 1.2; from <strong>$199/yr</strong> + setup; best for multi-course or corporate training",
+			"&bull; <strong>Tutor LMS</strong> &mdash; free core; clean UI; good for creators launching their first course; from <strong>$350</strong> total",
+			"&bull; <strong>BuddyBoss</strong> &mdash; LMS + community; social profiles, messaging, groups, and courses in one; great for coaching programmes or cohort-based learning; from <strong>$700</strong>",
+			"&bull; <strong>Video hosting</strong> &mdash; Bunny.net (fast, cheap) or Vimeo for course videos; <em>never YouTube</em> (adverts + distracting autoplay on student pages)",
+			"&bull; <strong>Checkout</strong> &mdash; WooCommerce for one-time purchase, subscription, or bundle; Stripe + PayPal supported",
+			"&bull; <strong>Certificates</strong> &mdash; LearnDash generates PDF certificates on course completion; custom design included",
+			"&bull; <strong>From $450</strong> for a single-course site; <strong>$1,200+</strong> for a full multi-course LMS with memberships and community",
+			'',
+			"How many courses, and is access one-time purchase, subscription, or membership-based?",
+		] );
+	}
+
+	// 0d-pre23-c) Healthcare / medical practice / telemedicine / therapist website.
+	if ( $has( [ 'healthcare website', 'medical website', 'doctor website', 'clinic website', 'telemedicine', 'telehealth', 'patient portal', 'hipaa', 'medical practice', 'dentist website', 'therapist website', 'mental health site', 'healthcare site', 'gp website', 'psychologist website', 'appointment booking healthcare' ] ) ) {
+		return $nl( [
+			"Medical and healthcare websites use the same WordPress stack but have specific requirements &mdash; important notes up front:",
+			'',
+			"&bull; <strong>Appointment booking</strong> &mdash; Calendly embed (HIPAA-compliant plan available) or SimplePractice for therapists; custom WP booking form from <strong>$350</strong>; no PHI (Protected Health Information) stored server-side",
+			"&bull; <strong>Telemedicine</strong> &mdash; Doxy.me embed (HIPAA-compliant video); Zoom Healthcare (requires a signed BAA with Zoom); <em>not built in-house</em> &mdash; I connect the platform to your site",
+			"&bull; <strong>HIPAA compliance</strong> &mdash; contact forms must not log or store PHI; SSL required; no GA4 on patient-facing pages without consent; I handle the technical layer but your team must verify compliance with a qualified officer",
+			"&bull; <strong>Patient portal</strong> &mdash; login page linking to your EHR (Epic, Athenahealth, SimplePractice); authentication handled by those platforms, not built here",
+			"&bull; <strong>Medical copy</strong> &mdash; I provide layout and structure; your clinical team writes and approves all medical content; no medical claims written by me",
+			"&bull; <strong>ADA / WCAG 2.1 AA</strong> &mdash; essential for healthcare; audited and remediated as standard",
+			"&bull; <strong>From $600</strong> for a practice website; <strong>$250 add-on</strong> for a HIPAA form configuration audit",
+			'',
+			"What type of practice, and do you need online booking, telemedicine video, or a patient-portal link?",
+		] );
+	}
+
 	// 0d-pre22-a) Photography portfolio / creative portfolio / visual artist site.
 	if ( $has( [ 'photography portfolio', 'photographer website', 'photography site', 'photo portfolio', 'portfolio website', 'artist portfolio', 'creative portfolio', 'visual portfolio', 'portfolio gallery', 'photographer site', 'art portfolio', 'creative website', 'freelance portfolio' ] ) ) {
 		return $nl( [

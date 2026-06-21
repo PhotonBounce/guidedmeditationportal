@@ -369,6 +369,21 @@
     addMsg(_tod + ‘! I’m Photon — what are you building today?’, ‘bot’);
   }
 
+  function _showToast(msg) {
+    if (!brain) return;
+    var _t = document.createElement('div');
+    _t.className = 'pb-brain__toast';
+    _t.setAttribute('role', 'status');
+    _t.setAttribute('aria-live', 'polite');
+    _t.textContent = msg;
+    brain.appendChild(_t);
+    requestAnimationFrame(function() { requestAnimationFrame(function() { _t.classList.add('pb-brain__toast--vis'); }); });
+    setTimeout(function() {
+      _t.classList.remove('pb-brain__toast--vis');
+      setTimeout(function() { if (_t.parentNode) _t.parentNode.removeChild(_t); }, 280);
+    }, 1700);
+  }
+
   function _updateOrbBadge() {
     if (!orb) return;
     var _badge = orb.querySelector(‘.pb-orb__badge’);
@@ -485,6 +500,7 @@
         cpBtn.addEventListener('click', function() {
           navigator.clipboard.writeText(plain(text)).then(function() {
             cpBtn.innerHTML = '&#10003;';
+            _showToast('Copied to clipboard');
             setTimeout(function() { cpBtn.innerHTML = '&#128203;'; }, 1500);
           });
         });
