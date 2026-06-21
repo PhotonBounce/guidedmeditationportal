@@ -32,7 +32,9 @@ function route(lower, lastTopic) {
     "presentation nerves","exam nerves","stage fright","interview nerves","interview anxiety",
     "nerves before","performance anxiety","performance pressure","pounding heart","heart racing",
     "fear","scared","frightened","phobia","afraid","worry","worried","worrying","dissociation",
-    "feel unreal","feel detached","ocd","obsessive","compulsive thoughts"]) ||
+    "feel unreal","feel detached","ocd","obsessive","compulsive thoughts",
+    "freaking out","freak out","losing my mind","losing it","can't cope with","cant cope with",
+    "spiralling","spiraling"]) ||
     anyWord(lower,["rest","tense"])) return "relax";
   if(any(lower,["sad","grief","grieving","heartbreak","heartbroken","lonely","alone","loneliness",
     "depressed","depression","cry","crying","upset","miserable","unhappy","low mood","empty inside",
@@ -46,7 +48,10 @@ function route(lower, lastTopic) {
     "low confidence","build confidence"])) return "shameGuilt";
   if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","too much","cant cope",
     "too busy","work stress","work anxiety","feeling stuck","feel stuck",
-    "deadline","under pressure","work pressure","pressure at work"])) return "overwhelm";
+    "deadline","under pressure","work pressure","pressure at work",
+    "work-life balance","people pleaser","cant say no","can't say no","running on empty",
+    "meltdown","having a meltdown","on the edge","at my limit","hit my limit",
+    "can't handle it","cant handle it","can't handle this","cant handle this"])) return "overwhelm";
   if(any(lower,["angry","furious","frustrated","frustration","rage","irritated","annoyed"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -132,6 +137,14 @@ var tests = [
   ["i'm about to snap", "", "NOT:sleep", "snap does not contain nap at word boundary"],
   ["i need a nap", "", "sleep", "nap (standalone) → sleep"],
   ["napping this afternoon", "", "sleep", "napping → sleep"],
+
+  // R53: relax + overwhelm gaps
+  ["i'm freaking out", "", "relax", "freaking out → relax"],
+  ["i'm losing my mind", "", "relax", "losing my mind → relax"],
+  ["i'm spiralling", "", "relax", "spiralling → relax"],
+  ["i'm having a meltdown", "", "overwhelm", "meltdown → overwhelm"],
+  ["i've hit my limit", "", "overwhelm", "hit my limit → overwhelm"],
+  ["i can't handle this anymore", "", "overwhelm", "cant handle this → overwhelm"],
 
   // R52: greeting gaps + followUp agreement phrases
   ["good afternoon spirit", "", "greeting", "good afternoon → greeting (was missing)"],
