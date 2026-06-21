@@ -715,12 +715,19 @@
       return text;
     }
 
+    // R56: Auto-link bare https?:// URLs in bot response HTML without double-linking.
+    function _autoLink(html) {
+      return html.replace(/(<a\b[^>]*>[\s\S]*?<\/a>|<[^>]+>)|(https?:\/\/[\w\-\.\/\?\#\=\&\%\+\:\~@,;!\*]+[\w\/\?])/gi, function(m, tag, url) {
+        return tag ? tag : '<a class="pb-brain__autolink" href="' + url + '" target="_blank" rel="noopener noreferrer">' + url + '</a>';
+      });
+    }
+
     function addMsg(text, cls) {
       const div = document.createElement('div');
       div.className = 'pb-brain__msg pb-brain__msg--' + (cls === 'bot' ? 'bot' : cls === 'err' ? 'err' : 'me');
       if (cls !== 'err') div.classList.add('pb-brain__msg--new');
       if (cls === 'bot') {
-        var _fmtLines = format(text).split('<br>');
+        var _fmtLines = _autoLink(format(text)).split('<br>');  // R56: auto-link URLs
         var _textBody = document.createElement('div');
         _textBody.className = 'pb-brain__text';
         var _lh = '';

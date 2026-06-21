@@ -5247,3 +5247,23 @@ pre.pb-brain__code-block code{ font-size:inherit; background:none; border:none; 
 .pb-brain__eh-tile:focus-visible .pb-brain__eh-label{
   color:rgba(255,212,0,.9);
 }
+
+/* R56 — auto-linked URLs in bot responses */
+a.pb-brain__autolink{
+  color:rgba(255,212,0,.82);
+  text-decoration:underline;
+  text-decoration-color:rgba(255,212,0,.28);
+  text-underline-offset:2px;
+  word-break:break-all;
+  transition:color .15s, text-decoration-color .15s;
+}
+a.pb-brain__autolink:hover{
+  color:#ffd400;
+  text-decoration-color:rgba(255,212,0,.65);
+}
+a.pb-brain__autolink::after{
+  content:' ↗';
+  font-size:.7em;
+  vertical-align:super;
+  opacity:.55;
+}

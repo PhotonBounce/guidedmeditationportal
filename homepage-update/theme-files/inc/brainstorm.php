@@ -667,7 +667,71 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
-	// 0d-pre51-a) Veterinary practice / vet surgeon / animal hospital / pet clinic website.
+		// 0d-pre52-a) Funeral director / funeral home / funeral parlour / crematorium.
+	if ( $has( [ 'funeral director website', 'funeral home website', 'funeral parlour website', 'funeral service website', 'crematorium website', 'funeral plans website', 'funeral chapel website', 'memorial website', 'bereavement website', 'funeral arranger website', 'funeral celebrant website', 'graveside service website', 'funeral cost website', 'direct cremation website', 'natural burial website', 'green funeral website' ] ) ) {
+		return $nl( [
+			"Funeral director websites serve two completely different audiences simultaneously: a family in acute grief searching at 2am for immediate help, and someone pre-planning calmly weeks in advance &mdash; the design must never confuse the two:",
+			'',
+			"&bull; <strong>Immediate contact / 24-hour line</strong>: the most critical element on any funeral website; prominently displayed phone number with a 24/7 availability statement; families need instant reassurance you can help right now; From \$100.",
+			"&bull; <strong>What to do when someone dies</strong>: a calm step-by-step guide; when to call a funeral director; registering the death; obtaining the death certificate; this page ranks for the highest-intent searches on the site; From \$200.",
+			"&bull; <strong>Services pages</strong>: traditional funeral with burial; cremation; direct cremation (unattended); natural/green/woodland burial; humanist/civil/religious ceremonies; repatriation; each as a separate page with a clear price guide; CMA regulations require price transparency for funeral directors in England &amp; Wales (since September 2021); From \$200.",
+			"&bull; <strong>CMA price transparency compliance</strong>: the Competition and Markets Authority legally requires all funeral directors in England and Wales to publish standardised price lists online; non-compliance risks investigation and fines; a fully compliant price page is not optional; From \$150.",
+			"&bull; <strong>Pre-paid funeral plans page</strong>: FCA-regulated since 2022; providers include Safe Hands, Golden Charter, Dignity Plans, Co-op Funeralcare; locks in today&rsquo;s price; national market for pre-planning enquiries; From \$200.",
+			"&bull; <strong>Memorial and tribute pages</strong>: online obituary submission form; live-stream link for remote family members; memorial garden / Book of Remembrance; condolence messages; charitable donations in lieu of flowers; increasingly expected by families; From \$250.",
+			"&bull; <strong>Meet the team</strong>: professional yet warm photography; NAFD / SAIF / BIFD membership logos; local roots; families choose a funeral director almost entirely on trust; From \$150.",
+			"&bull; <strong>NAFD / SAIF membership</strong>: National Association of Funeral Directors (NAFD) or Society of Allied and Independent Funeral Directors (SAIF); code of practice; independent vs chain distinction; From \$100.",
+			"&bull; <strong>Bereavement support resources</strong>: links to Cruse Bereavement Care, WAY Widowed and Young; local support groups; positions the funeral director as a long-term community partner; From \$150.",
+			"&bull; <strong>Area coverage / local landmark</strong>: clear map and service area; local cemetery and crematorium names; ranks for &ldquo;funeral director [area]&rdquo; which is a very high-value local search; From \$100.",
+			'',
+			"From \$600 for a compassionate, CMA-compliant funeral director site &mdash; \$1,400+ with pre-paid plans, live-stream, online tribute, and full pricing.",
+			'',
+			"Sole practitioner or group? Any specialism (direct cremation, natural burial, repatriation)? England/Wales (CMA required) or Scotland/NI?",
+		] );
+	}
+
+	// 0d-pre52-b) Optician / optometrist / contact lens clinic / eyewear boutique.
+	if ( $has( [ 'optician website', 'optometrist website', 'eye test website', 'eyewear website', 'glasses website', 'contact lens website', 'optical practice website', 'eye care website', 'spectacles website', 'sunglasses website', 'laser eye surgery website', 'dry eye clinic website', 'myopia management website', 'children optician website', 'optical boutique website', 'independent optician website' ] ) ) {
+		return $nl( [
+			"Independent optician websites must convert both the routine NHS eye test customer and the fashion-conscious customer choosing designer frames &mdash; two completely different value propositions needing two different pages:",
+			'',
+			"&bull; <strong>Online appointment booking</strong>: the single most important page; NHS vs private; contact lens check; OCT scan; children&rsquo;s eye tests; Acuity Scheduling, Optinet, or similar real-time slot picker; patients decide based on booking convenience; From \$250.",
+			"&bull; <strong>Frames and eyewear gallery / online shop</strong>: brand showcases (Lindberg, Silhouette, Tom Ford, Ray-Ban); price ranges; virtual try-on API (Ditto or similar); or WooCommerce for prescription glasses online; frames drive footfall as much as eye tests; From \$400.",
+			"&bull; <strong>Eye tests and services pages</strong>: standard NHS eye test (GOS voucher information); private eye test; children&rsquo;s sight test (free under 16); OCT scan; visual fields; driving standard checks; each as its own page; From \$200.",
+			"&bull; <strong>GOC registration</strong>: General Optical Council registration number for each optometrist and dispensing optician is a legal requirement to practice; registration number should appear on the team page with a GOC register verify link; From \$100.",
+			"&bull; <strong>NHS GOS voucher information</strong>: NHS sight test entitlement (children, over-60, diabetes, glaucoma risk, income-based); GOS voucher values for spectacles and contact lenses; clear explanation converts NHS patients who don&rsquo;t know they&rsquo;re entitled; From \$150.",
+			"&bull; <strong>Contact lens subscription / home delivery</strong>: Acuvue, CooperVision, Alcon brands; monthly or annual supply; online lens ordering for existing patients; subscription repeat-delivery; recurring revenue and strong patient retention; From \$300.",
+			"&bull; <strong>Specialist clinics pages</strong>: dry eye clinic (TearLab, LipiFlow); myopia management (Orthokeratology, MiSight); low vision; keratoconus; children&rsquo;s vision therapy; these high-value pages have very low search competition; From \$150/page.",
+			"&bull; <strong>Laser eye surgery referral page</strong>: if offering pre-assessment or referral to a LASIK/LASEK/SMILE clinic; co-management pathway; patient journey; From \$150.",
+			"&bull; <strong>Lens technology page</strong>: single vision, varifocal, occupational; anti-reflection, photochromic (Transitions), blue light filter; lens comparisons convert upgrade decisions; From \$150.",
+			'',
+			"From \$600 for a bookings-led NHS optician site &mdash; \$1,400+ with online frame shop, contact lens subscription, OCT and dry eye clinic pages.",
+			'',
+			"Independent practice or small group? NHS GOS or predominantly private? Any specialist area (myopia management, dry eye, low vision)?",
+		] );
+	}
+
+	// 0d-pre52-c) Nutritionist / dietitian / health coach / weight management clinic.
+	if ( $has( [ 'nutritionist website', 'dietitian website', 'nutrition coach website', 'health coach website', 'weight management website', 'wellness coach website', 'nutrition consultant website', 'sports nutritionist website', 'clinical nutritionist website', 'registered dietitian website', 'functional medicine website', 'gut health website', 'eating disorder website', 'diabetes dietitian website', 'nutrition therapy website', 'wellness practitioner website' ] ) ) {
+		return $nl( [
+			"Nutrition and dietitian websites must immediately establish the critical professional distinction: a <strong>Registered Dietitian</strong> (HCPC-protected title, NHS-recognised) vs a <strong>nutritionist</strong> (unprotected title in the UK, hugely variable qualifications) &mdash; failure to do so leads to mistrust:",
+			'',
+			"&bull; <strong>HCPC / UKVRN / BDA / BANT registration</strong>: HCPC registration number for Registered Dietitians (legally protected title); UK Voluntary Register of Nutritionists (UKVRN) RNutr or ANutr for qualified nutritionists; BDA (British Dietetic Association) membership; BANT (British Association for Applied Nutrition and Nutritional Therapy) membership; credentials above the fold on every page; From \$100.",
+			"&bull; <strong>Areas of specialism pages</strong>: gut health (IBS, IBD, SIBO, microbiome); weight management; sports and performance nutrition; eating disorders (ARFID, BED &mdash; only for qualified specialists); type 2 diabetes; PCOS; pregnancy and fertility; paediatric nutrition; oncology; each condition as its own page ranking for &ldquo;[condition] dietitian&rdquo; searches; From \$150/page.",
+			"&bull; <strong>Services and packages page</strong>: initial consultation (60-90 mins); follow-up sessions; programme packages (6-week gut reset, 12-week weight management); corporate nutrition; online via Zoom; clear per-session and package pricing; From \$200.",
+			"&bull; <strong>Booking integration</strong>: Calendly or Practice Better (specialist nutrition software); intake form including current medication (essential for RD scope-of-practice); From \$250.",
+			"&bull; <strong>Recipe hub / free resources</strong>: free recipe downloads (IBS-friendly meal plan, 7-day gut health reset) gated behind an email opt-in; builds the mailing list; From \$200.",
+			"&bull; <strong>Blog / evidence-based nutrition content</strong>: &ldquo;Does the gut microbiome affect mental health?&rdquo;; &ldquo;Is intermittent fasting safe for women?&rdquo;; high Google traffic from health-anxious searches; From \$100/post.",
+			"&bull; <strong>Corporate wellness page</strong>: staff webinars; canteen menu consultation; executive health programmes; B2B income stream with very different conversion process; From \$150.",
+			"&bull; <strong>Media and press page</strong>: TV/radio/podcast appearances; national press quotes; establishes authority that separates a Registered Dietitian from unregulated influencer nutritionists; From \$100.",
+			"&bull; <strong>NHS and GP referral pathway</strong>: for Registered Dietitians taking NHS referrals alongside private work; EMIS/SystmOne integration; Choosing Wisely guidance; From \$150.",
+			'',
+			"From \$550 for a credentials-first nutrition practice site &mdash; \$1,200+ with condition pages, recipe hub, booking integration, and corporate wellness section.",
+			'',
+			"Registered Dietitian (HCPC) or nutritionist (UKVRN/BANT)? Any specialism (gut health, eating disorders, sports)? NHS contract or private only?",
+		] );
+	}
+
+// 0d-pre51-a) Veterinary practice / vet surgeon / animal hospital / pet clinic website.
 	if ( $has( [ 'vet website', 'veterinary website', 'veterinary practice website', 'animal hospital website', 'pet clinic website', 'vet surgery website', 'vet clinic website', 'animal clinic website', 'exotic vet website', 'equine vet website', 'farm vet website', 'large animal vet website', 'emergency vet website', 'vet nurse website', 'veterinary surgeon website', 'pet hospital website' ] ) ) {
 		return $nl( [
 			"Veterinary practice websites must simultaneously serve pet owners in emergencies (fast phone number, out-of-hours cover) and convert prospective clients choosing a vet for the first time &mdash; these two modes require completely different design priorities:",
