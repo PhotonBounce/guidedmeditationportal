@@ -121,11 +121,15 @@ class AiChatEngine(private val context: Context) {
             handleTinnitus().also { lastTopic = "tinnitus" }
         any(lower, "baby", "infant", "newborn", "toddler", "child", "kids", "crying") ->
             handleBaby().also { lastTopic = "baby" }
-        any(lower, "meditat", "mindful", "yoga", "zen", "chakra", "mantra") ->
+        any(lower, "meditat", "mindful", "yoga", "zen", "chakra", "mantra",
+            "vipassana", "tonglen", "soham", "thien", "sumara", "muraqaba",
+            "hesychasm", "dhikr", "hitbodedut", "zhan zhuang", "buddho",
+            "sufi", "tibetan", "qigong", "stoic", "stoicism") ->
             handleMeditation().also { lastTopic = "meditation" }
         any(lower, "technique", "breathwork", "breathing", "body scan", "loving-kindness",
             "loving kindness", "visualization", "visualisation", "how do i meditate",
-            "how to meditate", "types of meditation") ->
+            "how to meditate", "types of meditation", "autogenic", "box breath",
+            "4-7-8", "4 7 8", "physiological sigh", "progressive muscle", "metta") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
@@ -163,10 +167,13 @@ class AiChatEngine(private val context: Context) {
         any(lower, "grateful", "gratitude", "journal", "journaling", "reflect",
             "reflection", "intention", "intentions", "thankful", "thankfulness") ->
             handleGratitude().also { lastTopic = "gratitude" }
+        any(lower, "what can you do", "how do you work", "your features", "about spirit",
+            "what are you", "what is spirit", "how can you help") ->
+            handleHelp().also { lastTopic = "" }
         any(lower, "inspire me", "inspiration", "quote", "affirmation", "motivate me",
             "encourage me", "daily tip", "today's practice", "what should i practice",
             "technique of the day", "something to try") ->
-            handleInspiration().also { lastTopic = "" }
+            handleInspiration().also { lastTopic = "inspiration" }
         any(lower, "journey", "journeys", "program", "programs", "course",
             "guided course", "structured", "7 day", "7-day", "5 day", "5-day", "challenge") ->
             handlePrograms().also { lastTopic = "" }
@@ -440,6 +447,22 @@ class AiChatEngine(private val context: Context) {
         SoundType.SOHAM
     )
 
+    private fun handleHelp(): Pair<String, SoundType?> = Pair(
+        "🤍 What Spirit Can Do\n\n" +
+        "I'm your meditation companion — here's how we can work together:\n\n" +
+        "🎵 Sound recommendations — 'recommend' or 'what should I play'\n" +
+        "😴 Sleep / 🧠 Focus / ⚡ Energy / 🌿 Relax — mood-specific track stacks\n" +
+        "💜 Emotional support — 'sad', 'overwhelmed', 'angry', 'struggling'\n" +
+        "🌿 Technique walkthroughs — breathwork, body scan, loving-kindness, box breathing\n" +
+        "✨ Daily inspiration — 'inspire me' for today's rotating practice\n" +
+        "📊 Progress & favorites — 'my stats' or 'my favorites'\n" +
+        "🗓️ Structured journeys — 'journeys' to see your guided programs\n" +
+        "⏱️ Timer help — 'how long should I meditate'\n" +
+        "👶 Tinnitus & baby tracks — just say what you need\n\n" +
+        "What would you like to explore first?",
+        null
+    )
+
     private fun handleInspiration(): Pair<String, SoundType?> {
         val today = MicroTechniques.today()
         val goalMood = prefs.getGoal()
@@ -654,6 +677,19 @@ class AiChatEngine(private val context: Context) {
             "Progressive Muscle Release 💪 is queued — let the narration guide you. 🤍",
             SoundType.PROGRESSIVE_MUSCLE_RELEASE
         )
+        "inspiration" -> {
+            val goalMood = prefs.getGoal()
+            val pool = if (goalMood != null) MicroTechniques.forGoal(goalMood) else MicroTechniques.all
+            val next = pool.filterNot { it.title == MicroTechniques.today().title }.randomOrNull()
+                ?: MicroTechniques.today()
+            Pair(
+                "✨ Another Practice — ${next.emoji} ${next.title}\n\n" +
+                "${next.body}\n\n" +
+                "Try it right now — even 60 seconds changes the tone of the moment. " +
+                "Pair with ${mostPlayed.emoji} ${mostPlayed.displayName} if you'd like a backdrop. 🌙",
+                mostPlayed
+            )
+        }
         "energy" -> Pair(
             "⚡ 30-Second Activation — Anywhere\n\n" +
             "1. Stand up. Feet shoulder-width, spine tall.\n" +
