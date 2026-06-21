@@ -464,6 +464,24 @@
     });
   }
 
+  // Focus trap — Tab/Shift+Tab cycles within the open drawer (WCAG 2.1 SC 2.1.2).
+  if (brain) {
+    brain.addEventListener('keydown', function(e) {
+      if (e.key !== 'Tab' || brain.hidden) return;
+      var _foc = Array.prototype.slice.call(
+        brain.querySelectorAll('button:not([disabled]), input:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')
+      ).filter(function(el) { return el.offsetParent !== null; });
+      if (!_foc.length) return;
+      var _first = _foc[0];
+      var _last = _foc[_foc.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === _first) { e.preventDefault(); _last.focus(); }
+      } else {
+        if (document.activeElement === _last) { e.preventDefault(); _first.focus(); }
+      }
+    });
+  }
+
   // Orb z-index fix
   if (orb) {
     orb.style.zIndex = '99999';

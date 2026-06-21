@@ -561,6 +561,57 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre28-a) Architecture / interior design / landscape design / design studio site.
+	if ( $has( [ 'architecture website', 'architect website', 'interior design website', 'interior designer website', 'landscape design website', 'design studio website', 'architectural firm', 'interior architecture', 'space design website', 'architecture portfolio', 'architectural visualization', 'interior decorator website', 'design agency portfolio' ] ) ) {
+		return $nl( [
+			"Architecture and interior design sites are portfolio-led builds where the visual presentation is everything &mdash; here&rsquo;s what&rsquo;s standard:",
+			'',
+			"&bull; <strong>Project portfolio</strong> &mdash; custom post type: full-screen photos, category tags (residential/commercial/hospitality), location, year, area sqm; Masonry or editorial grid layout; filterable; from <strong>$500</strong>",
+			"&bull; <strong>Full-screen photography</strong> &mdash; hero with parallax scroll; WebP optimisation; lazy-load with blurhash placeholder; Lightbox with keyboard nav; EXIF and credit line support",
+			"&bull; <strong>3D / CGI integration</strong> &mdash; Sketchfab embed for interactive 3D models; Matterport virtual tour embed for completed spaces; before/after slider for renovation projects",
+			"&bull; <strong>Services page</strong> &mdash; phased breakdown (concept, design development, planning, construction documentation, project management); fee structure (% of build cost vs fixed fee vs hourly) explained clearly",
+			"&bull; <strong>Awards and press</strong> &mdash; dedicated page; RIBA, AIA, Dezeen features, Architizer A+ etc.; schema markup for awards",
+			"&bull; <strong>Enquiry form</strong> &mdash; project type, location, area, approximate budget, timeline; routed to the lead designer; from <strong>$200</strong>",
+			"&bull; <strong>From $600</strong> for a solo architect or interior designer; <strong>$1,400+</strong> for a studio with 3D integration, Matterport tours, and award pages",
+			'',
+			"Is this a solo practitioner, a small studio, or a larger firm? And what scale of projects are you showcasing?",
+		] );
+	}
+
+	// 0d-pre28-b) Sports club / team / association / leisure centre website.
+	if ( $has( [ 'sports club website', 'football club website', 'tennis club website', 'cricket club website', 'rugby club website', 'swimming club website', 'athletics club', 'sports team website', 'leisure centre website', 'golf club website', 'cycling club website', 'sports association website', 'martial arts club website', 'gym club website', 'sports coaching website' ] ) ) {
+		return $nl( [
+			"Sports club and team websites are community-first builds &mdash; here&rsquo;s what&rsquo;s typically included:",
+			'',
+			"&bull; <strong>Membership signup and renewal</strong> &mdash; WooCommerce Subscriptions; annual fee, family rate, junior rate, concessions; PayPal + Stripe; automated renewal reminders; from <strong>$400</strong>",
+			"&bull; <strong>Fixtures and results</strong> &mdash; upcoming matches calendar; live score or post-match result entry; league table auto-calculated; export to iCal; The Events Calendar plugin or custom CPT; from <strong>$300</strong>",
+			"&bull; <strong>Player / member profiles</strong> &mdash; login-gated; stats dashboard; season history; squad management; from <strong>$400</strong>",
+			"&bull; <strong>Volunteer and team management</strong> &mdash; role sign-up forms; availability poll; WhatsApp / email group links; team-sheet PDF download",
+			"&bull; <strong>News / match reports</strong> &mdash; standard WP posts; category by team or division; auto-posted to Facebook + Twitter via Zapier; shareable match graphics",
+			"&bull; <strong>Sponsorship page</strong> &mdash; tiered packages (kit sponsor, pitch-side board, match sponsor); logo wall; enquiry form; important revenue stream for amateur clubs",
+			"&bull; <strong>From $450</strong> for a small club with fixtures + membership; <strong>$1,100+</strong> for a multi-team association with player profiles and league tables",
+			'',
+			"What sport, how many teams / age groups, and is membership renewal the main priority?",
+		] );
+	}
+
+	// 0d-pre28-c) Recruitment agency / headhunter / staffing / job board site.
+	if ( $has( [ 'recruitment website', 'recruitment agency website', 'staffing website', 'headhunter website', 'job board website', 'jobs website', 'employment agency website', 'talent acquisition website', 'executive search website', 'temp agency website', 'it recruitment website', 'hr recruitment website' ] ) ) {
+		return $nl( [
+			"Recruitment and staffing agency sites serve two distinct audiences &mdash; candidates and employers &mdash; and need to serve both well:",
+			'',
+			"&bull; <strong>Job listings board</strong> &mdash; custom post type: role title, location, salary range, job type (perm/contract/temp), sector, skills; filterable search; Apply button (CV upload form); from <strong>$450</strong>",
+			"&bull; <strong>CV / resume upload</strong> &mdash; speculative register-your-CV form; file upload (PDF, DOCX); auto-tagged by sector; emails to relevant consultant; Gravity Forms + GDPR consent tick",
+			"&bull; <strong>Candidate portal</strong> &mdash; login-gated account; saved jobs; application status; WP user roles; from <strong>$350</strong>",
+			"&bull; <strong>Employer / client page</strong> &mdash; post-a-vacancy enquiry form; sector specialisms; client logos; case studies (&ldquo;we placed 47 engineers at [Company]&rdquo;)",
+			"&bull; <strong>Indeed / LinkedIn job sync</strong> &mdash; WP Job Manager plugin can export feed to Indeed; LinkedIn via Direct Jobs API (requires LinkedIn partner approval); from <strong>$250</strong> add-on",
+			"&bull; <strong>Sector pages</strong> &mdash; one per specialism (Technology, Finance, Healthcare&hellip;); keyword-rich content; targets &ldquo;[sector] recruitment [city]&rdquo;; strong SEO play",
+			"&bull; <strong>From $550</strong> for a boutique agency with job board; <strong>$1,200+</strong> for a multi-sector agency with candidate portal, employer area, and Indeed sync",
+			'',
+			"What sectors do you recruit in, and do you need a live job board or just a lead-capture site?",
+		] );
+	}
+
 	// 0d-pre27-a) Childcare / nursery / daycare / preschool / after-school site.
 	if ( $has( [ 'childcare website', 'nursery website', 'daycare website', 'preschool website', 'after-school website', 'childminder website', 'kindergarten website', 'primary school website', 'school website', 'early years website', 'montessori website', 'childcare centre', 'kids club website', 'creche website' ] ) ) {
 		return $nl( [
