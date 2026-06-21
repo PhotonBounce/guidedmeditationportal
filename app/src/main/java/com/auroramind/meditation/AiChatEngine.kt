@@ -138,7 +138,9 @@ class AiChatEngine(private val context: Context) {
         any(lower, "focus", "study", "concentrate", "productivity",
             "read", "code", "writing", "attention", "adhd",
             "brain fog", "foggy", "mental clarity", "sharp", "clear mind",
-            "procrastinat") ->
+            "procrastinat",
+            "doom scrolling", "doomscrolling", "mindless scrolling", "phone addiction",
+            "screen addiction", "endless scrolling", "too much screen") ->
             handleFocus().also { lastTopic = "focus" }
         any(lower, "energy", "energise", "energize", "wake up", "waking up",
             "uplift", "motivation", "motivated", "active", "exercise", "workout",
@@ -154,11 +156,14 @@ class AiChatEngine(private val context: Context) {
             "post-traumatic", "triggered", "hyperventilat", "chest tight",
             "tight chest", "can't breathe", "cant breathe",
             "fear", "scared", "frightened", "phobia", "afraid",
-            "worry", "worried", "worrying", "i worry", "constant worry") ->
+            "worry", "worried", "worrying", "i worry", "constant worry",
+            "dissociation", "dissociating", "dissociated", "derealization", "depersonalization",
+            "feel unreal", "feeling unreal", "not feeling real", "feel detached") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
             handleTinnitus().also { lastTopic = "tinnitus" }
-        any(lower, "baby", "infant", "newborn", "toddler", "child", "kids") ->
+        any(lower, "baby", "infant", "newborn", "toddler", "child", "kids",
+            "new parent", "new mum", "new mom", "first time parent", "new baby") ->
             handleBaby().also { lastTopic = "baby" }
         any(lower, "meditat", "mindful", "yoga", "chakra", "mantra",
             "vipassana", "tonglen", "soham", "thien", "sumara", "muraqaba",
@@ -192,7 +197,10 @@ class AiChatEngine(private val context: Context) {
             "i feel low", "feel so low", "feeling so low", "feeling very low",
             "life feels pointless", "feels pointless", "feel pointless",
             "mood swings", "bad mood", "my mood", "mental health",
-            "i'm suffering", "need to vent", "need to talk", "vent") ->
+            "i'm suffering", "need to vent", "need to talk", "vent",
+            "mourning", "in mourning", "heartache", "missing my ex", "miss my ex",
+            "winter blues", "lack of sunlight", "low in winter",
+            "no purpose", "lack of purpose", "feel purposeless", "existential") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
             "i feel ashamed", "embarrassed", "humiliated", "self-blame", "self blame",
