@@ -62,10 +62,19 @@ class AiChatEngine(private val context: Context) {
                 "${minutes} minutes across ${sessions} sessions — a meaningful investment in yourself.\n\n"
             else -> ""
         }
+        val activeProgram = Programs.all.firstOrNull { prog ->
+            val done = prefs.getProgramProgress(prog.id)
+            done > 0 && done < prog.days.size
+        }
+        val programNudge = if (activeProgram != null) {
+            val done = prefs.getProgramProgress(activeProgram.id)
+            "${activeProgram.emoji} You're on Day $done of ${activeProgram.title} — ready to continue?\n\n"
+        } else ""
 
         return if (hasHistory) {
             "Good $timeCtx! I'm Spirit — your meditation companion. 🤍\n\n" +
             streakLine +
+            programNudge +
             "Welcome back. Last time, ${mostPlayed.emoji} ${mostPlayed.displayName} seemed to settle you nicely.\n\n" +
             depthLine +
             "What are you here for right now — rest, focus, relaxation, or something else?"
@@ -479,6 +488,7 @@ class AiChatEngine(private val context: Context) {
         "😴 Sleep / 🧠 Focus / ⚡ Energy / 🌿 Relax — mood-specific track stacks\n" +
         "💜 Emotional support — 'sad', 'overwhelmed', 'angry', 'struggling'\n" +
         "🌿 Technique walkthroughs — breathwork, body scan, loving-kindness, box breathing\n" +
+        "🌬️ Breathe — tap the Breathe chip above for a visual guided box-breathing pacer\n" +
         "✨ Daily inspiration — 'inspire me' for today's rotating practice\n" +
         "📊 Progress & favorites — 'my stats' or 'my favorites'\n" +
         "🗓️ Structured journeys — 'journeys' to see your guided programs\n" +
@@ -596,9 +606,9 @@ class AiChatEngine(private val context: Context) {
         "💜 I hear you. Sadness deserves space — not fixing.\n\n" +
         "When we're low, the mind wants to understand *why*, but sometimes the most healing thing is simply to sit with the feeling rather than push it away.\n\n" +
         "A few practices that can help:\n\n" +
-        "Tonglen 🏔️ — a Tibetan practice of breathing *with* pain rather than away from it; a quiet companion for grief\n" +
-        "Loving-Kindness — offering yourself the same warmth you'd give a close friend\n" +
-        "Hesychasm ⛪ — a gentle, wordless prayer of the heart; no effort required\n\n" +
+        "${SoundType.TONGLEN.emoji} ${SoundType.TONGLEN.displayName} — breathing *with* pain rather than away from it; a quiet companion for grief\n" +
+        "Loving-Kindness (Metta) — offering yourself the same warmth you'd give a close friend\n" +
+        "${SoundType.HESYCHASM.emoji} ${SoundType.HESYCHASM.displayName} — a gentle, wordless prayer of the heart; no effort required\n\n" +
         "You don't have to feel better right away. Spirit is here.\n\n" +
         "Would you like me to walk you through a loving-kindness practice? 🤍",
         SoundType.TONGLEN
