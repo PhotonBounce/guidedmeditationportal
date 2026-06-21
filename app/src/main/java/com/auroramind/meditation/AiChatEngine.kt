@@ -518,7 +518,9 @@ class AiChatEngine(private val context: Context) {
             "feel empty", "feeling empty", "emotional emptiness", "inner emptiness",
             "bipolar", "bipolar disorder",
             "manic", "manic episode", "manic phase", "depressive episode",
-            "hypomania", "hypomanic") ||
+            "hypomania", "hypomanic",
+            "hate my life", "hate this life", "hate life", "i hate my life",
+            "hate everything") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
@@ -561,7 +563,9 @@ class AiChatEngine(private val context: Context) {
             "self-punishment", "punishing myself", "self-punishing",
             "emotional eating", "comfort eating", "eating my feelings",
             "feel judged", "feeling judged", "being judged",
-            "fear of judgment", "fear of being judged", "feel watched") ||
+            "fear of judgment", "fear of being judged", "feel watched",
+            "hate myself", "i hate myself", "hate who i am", "i hate who i am",
+            "hate myself so much", "hate myself for") ||
         anyWord(lower, "sober") ->
             handleShameGuilt().also { lastTopic = "sadness" }
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out", "burning out",
@@ -643,7 +647,13 @@ class AiChatEngine(private val context: Context) {
             "micromanaged", "being micromanaged", "micromanagement", "micromanaging",
             "stonewalling", "being stonewalled",
             "condescending", "condescension",
-            "undermined", "being undermined", "feel undermined") ||
+            "undermined", "being undermined", "feel undermined",
+            "lied to me", "she lied", "he lied", "they lied", "been lied to",
+            "went behind my back", "behind my back", "going behind my back",
+            "took credit for my work", "taking credit for my work", "stole my idea", "takes credit",
+            "blame me for everything", "blames me for everything", "always my fault",
+            "manipulative", "manipulator", "being manipulated",
+            "controlling partner", "controlling behavior", "controlling behaviour") ||
         anyWord(lower, "mad", "anger", "angered") ->
             handleAnger().also { lastTopic = "anger" }
 

@@ -393,7 +393,9 @@ function route(lower, lastTopic) {
     "feel empty","feeling empty","emotional emptiness","inner emptiness",
     "bipolar","bipolar disorder",
     "manic","manic episode","manic phase","depressive episode",
-    "hypomania","hypomanic"]) ||
+    "hypomania","hypomanic",
+    "hate my life","hate this life","hate life","i hate my life",
+    "hate everything"]) ||
     anyWord(lower,["numb","died","vent"])) return "sadness";
   // 15. shameGuilt
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated",
@@ -435,7 +437,9 @@ function route(lower, lastTopic) {
     "self-punishment","punishing myself","self-punishing",
     "emotional eating","comfort eating","eating my feelings",
     "feel judged","feeling judged","being judged",
-    "fear of judgment","fear of being judged","feel watched"]) ||
+    "fear of judgment","fear of being judged","feel watched",
+    "hate myself","i hate myself","hate who i am","i hate who i am",
+    "hate myself so much","hate myself for"]) ||
     anyWord(lower,["sober"])) return "shameGuilt";
   // 16. overwhelm
   if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","burning out","too much",
@@ -515,7 +519,13 @@ function route(lower, lastTopic) {
     "micromanaged","being micromanaged","micromanagement","micromanaging",
     "stonewalling","being stonewalled",
     "condescending","condescension",
-    "undermined","being undermined","feel undermined"]) ||
+    "undermined","being undermined","feel undermined",
+    "lied to me","she lied","he lied","they lied","been lied to",
+    "went behind my back","behind my back","going behind my back",
+    "took credit for my work","taking credit for my work","stole my idea","takes credit",
+    "blame me for everything","blames me for everything","always my fault",
+    "manipulative","manipulator","being manipulated",
+    "controlling partner","controlling behavior","controlling behaviour"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   // 18. vip
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -797,6 +807,16 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R112: shameGuilt (hate myself), sadness (hate my life), anger (lied/behind my back/took credit/manipulative/controlling)
+  ["I hate myself for what I did", "", "shameGuilt", "hate myself → shameGuilt"],
+  ["I hate who I am right now", "", "shameGuilt", "hate who i am → shameGuilt"],
+  ["I hate my life at the moment", "", "sadness", "hate my life → sadness"],
+  ["she lied to me and I can't forgive her for it", "", "anger", "she lied → anger (avoid 'betrayed' → sadness preemption)"],
+  ["they went behind my back and told my boss", "", "anger", "behind my back → anger"],
+  ["my colleague took credit for my work again", "", "anger", "took credit for my work → anger"],
+  ["my partner is being so manipulative lately", "", "anger", "manipulative → anger"],
+  ["my partner has controlling behavior and it's exhausting", "", "anger", "controlling behavior → anger (not controlling relationship — 'relationship' → sadness preempts)"],
 
   // R111: ambient (white noise/binaural beats/sound bath), relax (flashback/intrusive memories), energy (afternoon dip/morning slump)
   ["I enjoy listening to white noise while I work", "", "ambient", "white noise → ambient (avoid 'concentrate' → focus preemption)"],
