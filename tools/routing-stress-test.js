@@ -29,11 +29,14 @@ function route(lower, lastTopic) {
     "screen addiction","endless scrolling","too much screen",
     "mental block","writer's block","writers block","creative block",
     "brain freeze","can't think straight","cant think straight",
-    "mind blank","mind went blank","mind has gone blank"]) ||
+    "mind blank","mind went blank","mind has gone blank",
+    "distract"]) ||
     anyWord(lower,["read","code"])) return "focus";
   if(any(lower,["energy","energise","energize","wake up","waking up","uplift","motivation",
     "motivated","active","exercise","workout","morning boost","morning energy","sluggish",
-    "lethargic","cold shower","cold water","ice bath","wim hof"])) return "energy";
+    "lethargic","cold shower","cold water","ice bath","wim hof",
+    "afternoon slump","afternoon crash","2pm slump","post-lunch dip",
+    "pick me up","need a boost","feeling flat","flat today"])) return "energy";
   if(any(lower,["relax","calm","stress","anxiety","anxious","breathe","unwind","nervous","panic",
     "overthink","overthinking","can't stop thinking","cant stop thinking",
     "intrusive thoughts","ruminating","social anxiety","public speaking",
@@ -67,7 +70,11 @@ function route(lower, lastTopic) {
     "not fine","i'm not fine","im not fine",
     "feeling low","feel low","so low","really low","been feeling low",
     "feeling blue","feel blue","so blue",
-    "feeling down","feel down","been feeling down","really down","so down"]) ||
+    "feeling down","feel down","been feeling down","really down","so down",
+    "mourning","in mourning","heartache","missing my ex","miss my ex",
+    "no purpose","lack of purpose","feel purposeless","existential",
+    "winter blues","lack of sunlight","low in winter",
+    "seasonal affective","seasonal depression","sad disorder"]) ||
     anyWord(lower,["numb","died","vent"])) return "sadness";
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated","self-blame",
     "blame myself","hate my body","feel worthless","not good enough",
@@ -197,6 +204,15 @@ var tests = [
   ["i'm not doing well", "", "NOT:positive", "not doing well → sadness"],
   ["not myself lately", "", "NOT:positive", "not myself → sadness"],
   ["i'm feeling off today", "", "NOT:positive", "feeling off → sadness"],
+
+  // R62: distract→focus, seasonal affective→sadness, afternoon slump→energy
+  ["i'm so distracted today", "", "focus", "distracted → focus (was in sim not Kotlin — now fixed)"],
+  ["i have seasonal affective disorder", "", "sadness", "seasonal affective → sadness"],
+  ["seasonal depression is hitting hard", "", "sadness", "seasonal depression → sadness"],
+  ["i always get low in winter", "", "sadness", "low in winter → sadness"],
+  ["afternoon slump is real today", "", "energy", "afternoon slump → energy"],
+  ["need a pick me up", "", "energy", "pick me up → energy"],
+  ["feeling completely flat today", "", "energy", "feeling flat → energy"],
 
   // R61: focus expansion + overwhelm sim sync
   ["i have a mental block", "", "focus", "mental block → focus"],

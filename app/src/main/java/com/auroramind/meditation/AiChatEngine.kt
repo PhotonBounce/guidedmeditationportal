@@ -144,7 +144,7 @@ class AiChatEngine(private val context: Context) {
         anyWord(lower, "nap") ->
             handleSleep().also { lastTopic = "sleep" }
         any(lower, "focus", "study", "concentrate", "productivity",
-            "writing", "attention", "adhd",
+            "writing", "attention", "adhd", "distract",
             "brain fog", "foggy", "mental clarity", "sharp", "clear mind",
             "procrastinat",
             "doom scrolling", "doomscrolling", "mindless scrolling", "phone addiction",
@@ -157,7 +157,9 @@ class AiChatEngine(private val context: Context) {
         any(lower, "energy", "energise", "energize", "wake up", "waking up",
             "uplift", "motivation", "motivated", "active", "exercise", "workout",
             "morning boost", "morning energy", "sluggish", "lethargic",
-            "cold shower", "cold water", "ice bath", "wim hof") ->
+            "cold shower", "cold water", "ice bath", "wim hof",
+            "afternoon slump", "afternoon crash", "2pm slump", "post-lunch dip",
+            "pick me up", "need a boost", "feeling flat", "flat today") ->
             handleEnergy().also { lastTopic = "energy" }
         any(lower, "relax", "calm", "stress", "anxiety", "anxious", "breathe",
             "unwind", "nervous", "panic", "overthink", "overthinking",
@@ -222,6 +224,7 @@ class AiChatEngine(private val context: Context) {
             "i'm suffering", "need to vent", "need to talk", "venting",
             "mourning", "in mourning", "heartache", "missing my ex", "miss my ex",
             "winter blues", "lack of sunlight", "low in winter",
+            "seasonal affective", "seasonal depression", "sad disorder",
             "no purpose", "lack of purpose", "feel purposeless", "existential",
             "longing", "longing for", "miss him", "miss her",
             "miscarriage", "stillbirth", "pregnancy loss", "child loss", "infertility",
