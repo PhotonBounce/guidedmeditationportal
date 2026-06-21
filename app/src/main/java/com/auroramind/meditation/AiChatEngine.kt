@@ -119,13 +119,18 @@ class AiChatEngine(private val context: Context) {
         any(lower, "baby sleep", "baby won't sleep", "baby can't sleep", "baby keeps waking",
             "infant sleep", "toddler sleep", "toddler won't sleep", "child won't sleep") ->
             handleBaby().also { lastTopic = "baby" }
+        // Sleep paralysis — frightening, needs grounding/safety response, not wind-down advice
+        any(lower, "sleep paralysis", "paralyzed in sleep", "paralyzed while sleeping",
+            "paralyzed when waking", "awake but can't move", "awake but cant move",
+            "woke up couldn't move", "woke up cant move", "frozen while sleeping",
+            "cant move when waking", "can't move when waking") ->
+            handleSleepParalysis().also { lastTopic = "relax" }
         any(lower, "sleep", "insomnia", "cant sleep", "can't sleep", "falling asleep",
             "bedtime", "tired", "fatigue", "exhausted", "wide awake", "cant switch off",
             "can't switch off", "racing mind", "racing thoughts", "nap", "night shift",
             "shift work", "mind won't stop", "mind wont stop", "nightmares", "bad dreams",
             "jet lag", "jet lagged", "jet-lagged", "restless", "restlessness",
-            "woke up at", "keep waking", "3am", "4am", "middle of the night",
-            "sleep paralysis") ->
+            "woke up at", "keep waking", "3am", "4am", "middle of the night") ->
             handleSleep().also { lastTopic = "sleep" }
         any(lower, "focus", "study", "concentrate", "productivity",
             "read", "code", "writing", "attention", "adhd",
@@ -274,6 +279,25 @@ class AiChatEngine(private val context: Context) {
             )
         }
     }
+
+    private fun handleSleepParalysis(): Pair<String, SoundType?> = Pair(
+        "🌙 Sleep Paralysis — You're Safe\n\n" +
+        "Sleep paralysis happens when your brain wakes up before your body does — the muscle-suspension " +
+        "of REM sleep lingers a few seconds or minutes. It's deeply frightening, but never harmful.\n\n" +
+        "During an episode:\n" +
+        "• Focus on one tiny movement — a finger, your tongue, or just your breath. Small twitches break it faster than trying to sit up\n" +
+        "• One slow, deliberate exhale. Panic prolongs it; breath signals 'I am awake'\n" +
+        "• If you sense something frightening: 'This is hypnagogic imagery — my brain, not reality'\n\n" +
+        "After — ground yourself back into your body:\n" +
+        "${SoundType.VIPASSANA.emoji} ${SoundType.VIPASSANA.displayName} — body-scan attention; the most direct way to feel 'in' your body again\n" +
+        "${SoundType.HESYCHASM.emoji} ${SoundType.HESYCHASM.displayName} — wordless, still quiet; no performance needed to feel safe\n\n" +
+        "To reduce frequency:\n" +
+        "• Keep consistent sleep/wake times — even weekends\n" +
+        "• Avoid sleeping on your back (episodes peak face-up)\n" +
+        "• Stress and sleep deprivation are the biggest triggers — managing them cuts episodes significantly\n\n" +
+        "Want me to walk you through a calming breathwork practice to settle your nervous system now?",
+        SoundType.VIPASSANA
+    )
 
     private fun handleSleep(): Pair<String, SoundType?> {
         val rec = SoundType.EVENING_REVIEW
