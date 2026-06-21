@@ -630,6 +630,27 @@
         _inlineCodes.push('<code class="pb-brain__code-inline">' + safe + '</code>');
         return '\x00IC' + (_inlineCodes.length - 1) + '\x00';
       });
+      var _listBlocks = [];
+      var _fmtItem = function(s) {
+        return s
+          .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+          .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+          .replace(/(?<!\w)_([^_\n]+)_(?!\w)/g,'<em>$1</em>')
+          .replace(/~~([^~\n]+)~~/g,'<del>$1</del>')
+          .replace(/\[([^\]]+)\]\((https?:[^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+      };
+      text = text.replace(/((?:^|\n)\d+\. [^\n]+)+/g, function(block) {
+        var html = '<ol class="pb-brain__ol">' + block.trim().split('\n').map(function(l) {
+          return '<li class="pb-brain__li">' + _fmtItem(l.replace(/^\d+\. /, '')) + '</li>';
+        }).join('') + '</ol>';
+        _listBlocks.push(html); return '\x00LB' + (_listBlocks.length - 1) + '\x00';
+      });
+      text = text.replace(/((?:^|\n)[*-] [^\n]+)+/g, function(block) {
+        var html = '<ul class="pb-brain__ul">' + block.trim().split('\n').map(function(l) {
+          return '<li class="pb-brain__li">' + _fmtItem(l.replace(/^[*-] /, '')) + '</li>';
+        }).join('') + '</ul>';
+        _listBlocks.push(html); return '\x00LB' + (_listBlocks.length - 1) + '\x00';
+      });
       text = text
         .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
@@ -641,6 +662,7 @@
         .replace(/\n/g, '<br>');
       _codeBlocks.forEach(function(h, i) { text = text.replace('\x00CB' + i + '\x00', h); });
       _inlineCodes.forEach(function(h, i) { text = text.replace('\x00IC' + i + '\x00', h); });
+      _listBlocks.forEach(function(h, i) { text = text.replace('\x00LB' + i + '\x00', h); });
       return text;
     }
 
@@ -1072,6 +1094,20 @@
       setTimeout(function() { _progressBar.style.opacity = '0'; }, 200);
       setTimeout(function() { _progressBar.style.width = '0%'; }, 600);
     }
+    function _confetti() {
+      var cols = ['#ffd400','rgba(255,212,0,.8)','#fff','rgba(255,255,255,.7)','rgba(255,180,0,.9)'];
+      for (var i = 0; i < 18; i++) {
+        var p = document.createElement('div');
+        p.className = 'pb-brain__confetti';
+        p.style.left = (Math.random() * 100) + '%';
+        p.style.animationDelay = (Math.random() * 0.55) + 's';
+        p.style.background = cols[i % cols.length];
+        var sz = (4 + Math.random() * 5) + 'px';
+        p.style.width = sz; p.style.height = sz;
+        document.body.appendChild(p);
+        setTimeout(function(el) { if (el.parentNode) el.parentNode.removeChild(el); }, 2200, p);
+      }
+    }
 
     form.addEventListener('submit', async e => {
       e.preventDefault();
@@ -1079,6 +1115,7 @@
       if (!text) return;
       _lastSendTime = Date.now();
       addMsg(text, 'user');
+      if (chatMsgs.filter(function(m) { return m.cls === 'user'; }).length === 1) { _confetti(); }
       input.value = '';
       _histIdx = -1;
       input.style.height = 'auto';

@@ -667,6 +667,67 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre47-a) Dog groomer / pet groomer / mobile dog groomer / dog salon website.
+	if ( $has( [ 'dog groomer website', 'dog grooming website', 'pet groomer website', 'pet grooming website', 'mobile dog groomer website', 'mobile grooming website', 'dog salon website', 'dog parlour website', 'pet salon website', 'puppy groomer website', 'cat groomer website', 'dog wash website', 'hand strip groomer website', 'show dog groomer website', 'dog grooming van website', 'dog spa website' ] ) ) {
+		return $nl( [
+			"Dog grooming websites convert on trust signals and zero-friction booking &mdash; pet owners hand over something precious, so every page needs to build confidence:",
+			'',
+			"&bull; <strong>Meet the groomer page</strong>: qualifications (City &amp; Guilds Level 3 / iPET Network / BII); years of experience; breeds specialised in; City &amp; Guilds pet first-aid certification; face photo with a dog &mdash; the human connection closes bookings. From $200.",
+			"&bull; <strong>Online booking</strong>: breed + size + coat type + services required + date; deposit to secure slot; Shortcuts, Petlinx, or Calendly. Reduces phone tag entirely. From $300.",
+			"&bull; <strong>Services and pricing</strong>: full groom, bath &amp; dry, hand strip, puppy introduction, nail clip, teeth brushing, de-shedding treatment; price banded by size (small/medium/large/giant); coat surcharges for matted coats. From $250.",
+			"&bull; <strong>Before/after gallery</strong>: breed-specific transformations; healed coat photos; breed-standard clips (Bichon, Poodle, Schnauzer, Cocker, Westie) &mdash; this is the primary conversion asset for new clients deciding on style. From $200.",
+			"&bull; <strong>FAQ / first visit page</strong>: &ldquo;What if my dog is anxious?&rdquo; &ldquo;Do you do puppies under 6 months?&rdquo; &ldquo;What if my dog is matted?&rdquo; &ldquo;Are you insured?&rdquo; &mdash; reduces pre-appointment anxiety calls and positions you as an expert. From $150.",
+			"&bull; <strong>Breed-specific pages</strong>: &ldquo;Cockapoo grooming&rdquo;, &ldquo;Golden Retriever grooming&rdquo;, &ldquo;Doodle grooming&rdquo; &mdash; each ranks for breed-specific searches which have high buyer intent. From $100/page.",
+			"&bull; <strong>Mobile grooming map</strong>: service area postcode list; &ldquo;no trailing leads or waiting rooms&rdquo; USP (stress-reduction for anxious dogs); Google Maps embed. From $150.",
+			"&bull; <strong>Insurance and licensing</strong>: public liability (PetPlan Sanctuary / Cliverton); local authority registration (required in many LAs since Animal Welfare (Licensing) Act 2018). From $100.",
+			'',
+			"From \$400 for a clean booking-focused groomer site &mdash; \$800+ with breed gallery, breed pages, and mobile service map.",
+			'',
+			"Any niche to call out &mdash; hand stripping, show preparation, anxious or elderly dogs?",
+		] );
+	}
+
+	// 0d-pre47-b) Spa / wellness centre / massage therapist / holistic therapist / retreat website.
+	if ( $has( [ 'spa website', 'day spa website', 'wellness centre website', 'wellness center website', 'massage therapist website', 'massage therapy website', 'holistic therapist website', 'holistic therapy website', 'beauty spa website', 'med spa website', 'medical spa website', 'skin clinic website', 'facialist website', 'reflexology website', 'aromatherapy website', 'reiki website', 'sound healing website', 'retreat website', 'wellbeing website', 'relaxation centre website', 'spa salon website', 'wellness studio website' ] ) ) {
+		return $nl( [
+			"Spa and wellness websites convert on sensory atmosphere and frictionless booking &mdash; the digital experience must match the in-person promise:",
+			'',
+			"&bull; <strong>Online booking</strong>: therapist + treatment + duration + date; Fresha (zero commission), Phorest, Mindbody, or Zenoti; deposit option. The booking button must be visible above the fold on mobile. From $350.",
+			"&bull; <strong>Treatments menu</strong>: grouped by category (massage / facials / body / holistic / medical aesthetic); duration + price; contraindications where relevant; photo per treatment. From $250.",
+			"&bull; <strong>Gift vouchers</strong>: WooCommerce or Treatwell vouchers; custom amounts or fixed packages; &ldquo;gift an experience&rdquo; copywriting; seasonal (Christmas, Mother&rsquo;s Day, Valentine&rsquo;s, birthdays); single highest-ROI page for spa websites. From $200.",
+			"&bull; <strong>Meet the therapists</strong>: ITEC / VTCT / CIBTAC / CIDESCO qualifications; specialist expertise per therapist; face photos in uniform &mdash; reduces first-visit anxiety for new clients. From $150/profile.",
+			"&bull; <strong>Memberships / packages</strong>: monthly subscription (Stripe recurring billing); pre-paid treatment bundles (e.g. 6 massages for the price of 5); improves retention and forward revenue visibility. From $250.",
+			"&bull; <strong>Medical aesthetics page</strong> (if applicable): CQC registration required for injectables (Botox, fillers); prescriber details; GPhC-regulated pharmacy; consultation-first policy &mdash; must be stated clearly. From $200.",
+			"&bull; <strong>Wellbeing blog / resources</strong>: &ldquo;5 signs you need a deep tissue massage&rdquo;; &ldquo;difference between Swedish and hot stone&rdquo; &mdash; ranks for informational searches that funnel to bookings. From $150/post.",
+			"&bull; <strong>GDPR consent &amp; health forms</strong>: consultation forms (medical history, contraindications); digital e-signature via Jotform or Typeform; complies with ICO requirements and CNHC codes of practice. From $150.",
+			'',
+			"From \$550 for a focused booking-led wellness site &mdash; \$1,100+ with gift vouchers, memberships, and medical aesthetics compliance page.",
+			'',
+			"Is this a multi-therapist centre or solo practitioner? Any CQC-regulated treatments (injectables, laser)?",
+		] );
+	}
+
+	// 0d-pre47-c) Event venue / wedding venue / conference venue / function room website.
+	if ( $has( [ 'event venue website', 'wedding venue website', 'conference venue website', 'function room website', 'party venue website', 'event space website', 'banqueting suite website', 'corporate event venue website', 'private hire venue website', 'barn wedding venue website', 'manor house wedding website', 'hotel wedding venue website', 'micro wedding venue website', 'wedding barn website', 'meeting room website', 'events hall website', 'reception venue website', 'event hall website' ] ) ) {
+		return $nl( [
+			"Event venue websites convert on emotional imagery, capacity/layout trust signals, and a smooth enquiry-to-quote flow:",
+			'',
+			"&bull; <strong>Virtual tour / gallery</strong>: professional photography is the #1 investment for a venue site; 360&deg; tour (Matterport from ~&pound;300/session); ceremony + reception + outdoor + catering kitchen &mdash; buyers make shortlist decisions on imagery alone. From $300.",
+			"&bull; <strong>Capacity and layout page</strong>: theatre / cabaret / boardroom / banquet / ceremony configurations; capacity per layout; floor plan PDF download; outdoor capacity; parking spaces. From $200.",
+			"&bull; <strong>Packages and pricing</strong>: wedding packages (ceremony + reception + catering); corporate day delegate rates (DDR); evening-only hire; minimum spend; exclusivity policy. Venues that hide pricing generate fewer qualified enquiries. From $250.",
+			"&bull; <strong>Enquiry &amp; availability form</strong>: event type + date + estimated guest count + catering requirements + budget range + hear-about; CRM integration (HubSpot, Zoho, or Salesforce); auto-reply with PDF brochure attach. From $300.",
+			"&bull; <strong>Preferred suppliers page</strong>: caterers, florists, photographers, bands, AV companies, accommodation nearby &mdash; generates referral traffic and positions venue as full-service. From $150.",
+			"&bull; <strong>Wedding gallery / real weddings blog</strong>: one post per real wedding (with couple consent); each post ranks for &ldquo;[venue name] wedding&rdquo;; long-tail SEO goldmine. From $100/post.",
+			"&bull; <strong>Corporate / private hire page</strong>: HDMI / AV / PA / stage / breakout rooms / catering / Wi-Fi speeds; corporate invoice process; day hire vs half-day. From $200.",
+			"&bull; <strong>Accessibility statement</strong>: step-free access; hearing loop; accessible parking; baby-changing; dietary options &mdash; legally required under Equality Act 2010 and increasingly a buyer filter. From $100.",
+			"&bull; <strong>Local authority licences</strong>: premises licence for civil ceremonies (must be registered with local registrar); Temporary Events Notice limit (499 people without full premises licence); alcohol licence displayed if applicable. From $100.",
+			'',
+			"From \$700 for a gallery-led venue site &mdash; \$1,400+ with virtual tour embed, real-weddings blog, enquiry CRM integration, and preferred supplier directory.",
+			'',
+			"Is this primarily weddings, corporate, or mixed? Licensed for civil ceremonies? Do you have in-house catering?",
+		] );
+	}
+
 	// 0d-pre46-a) Hairdresser / barber / hair salon / barbershop / colourist website.
 	if ( $has( [ 'hairdresser website', 'hair salon website', 'barber website', 'barbershop website', 'hair stylist website', 'hair colourist website', 'hair colourist website', 'hair extensions website', 'blow dry bar website', 'keratin treatment website', 'afro hair salon website', 'men\'s hair salon website', 'ladies hairdresser website', 'mobile hairdresser website', 'wedding hair website', 'bridal hair website' ] ) ) {
 		return $nl( [
