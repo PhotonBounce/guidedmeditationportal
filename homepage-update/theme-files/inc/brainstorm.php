@@ -561,6 +561,61 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre37-a) Music school / music lessons / instrument teacher / music tuition website.
+	if ( $has( [ 'music school website', 'music lessons website', 'guitar teacher website', 'piano teacher website', 'guitar lessons website', 'piano lessons website', 'drum lessons website', 'violin lessons website', 'singing lessons website', 'voice lessons website', 'music tuition website', 'music academy website', 'instrument lessons website', 'online music lessons website', 'music teacher website', 'music studio website' ] ) ) {
+		return $nl( [
+			"Music school and private teacher websites need to convert both parents (children&rsquo;s lessons) and adult learners:",
+			'',
+			"&bull; <strong>Instrument / lesson-type pages</strong> &mdash; one per instrument (guitar / piano / drums / violin / singing / bass / ukulele / saxophone / keyboard / cello); includes grade ladder (beginner through Grade 8 / diploma); in-person and online lesson options; from <strong>$200</strong> per page",
+			"&bull; <strong>Trial lesson booking</strong> &mdash; WP Amelia or Calendly; reduced-rate first slot (&pound;15 for 30 min is the industry standard trial offer); highest lead-to-student converter on music sites; auto-confirm with pre-lesson notes; from <strong>$250</strong>",
+			"&bull; <strong>Timetable and lesson booking</strong> &mdash; recurring slot (weekly / fortnightly); 30 / 45 / 60-minute duration; teacher preference (multi-teacher); Stripe card-on-file or direct debit; from <strong>$400</strong>",
+			"&bull; <strong>Teacher profiles</strong> &mdash; headshots + qualifications (LRAM / LLCM / BMus / Dip ABRSM / PGCE music); performance background (orchestral / touring / recording); exam board experience (ABRSM / RSL / Trinity); DBS certificate for under-18s",
+			"&bull; <strong>Grade exam results</strong> &mdash; Distinction and Merit tally by grade; recent ABRSM / RSL / Trinity pass rate; major purchase signal for parents choosing a teacher for their child",
+			"&bull; <strong>Online lessons page</strong> &mdash; Zoom / Teams-compatible setup; equipment advice (instrument, mic, stand); latency note (fine for one-to-one, not for ensemble); global reach; from <strong>$150</strong>",
+			"&bull; <strong>From $600</strong> instrument pages + trial booking + teacher profiles; <strong>$1,100+</strong> with timetable system + online lesson page + exam results showcase",
+			'',
+			"One teacher or a school with several? Which instruments? ABRSM / RSL / Trinity, or ungraded?",
+		] );
+	}
+
+	// 0d-pre37-b) Escape room / immersive experience / adventure gaming / laser tag / axe throwing website.
+	if ( $has( [ 'escape room website', 'escape room booking website', 'immersive experience website', 'adventure gaming website', 'laser tag website', 'axe throwing website', 'virtual reality experience website', 'vr experience website', 'puzzle room website', 'mystery room website', 'immersive gaming website', 'team building venue website', 'family entertainment website', 'indoor adventure website' ] ) ) {
+		return $nl( [
+			"Escape room and adventure experience websites have one job: fill slots and push group bookings:",
+			'',
+			"&bull; <strong>Room / experience pages</strong> &mdash; one per theme (mystery / horror / adventure / sci-fi / heist / family); difficulty rating (novice &ndash; expert); min/max players; suitability tags (corporate / birthday / date night / stag/hen / family); record times; from <strong>$250</strong> per room",
+			"&bull; <strong>Live slot booking</strong> &mdash; FareHarbor / Xola / Peek Pro / Checkfront; real-time availability; group size selector; Stripe payment at booking; automated reminder emails 24h before; from <strong>$450</strong>",
+			"&bull; <strong>Gift vouchers</strong> &mdash; WooCommerce gift cards; email delivery; monetary or experience-specific; Christmas + birthday push; from <strong>$200</strong>",
+			"&bull; <strong>Corporate and team-building page</strong> &mdash; private hire (whole venue / single room); invoice BACS payment for businesses; post-game debrief option; bespoke challenge design; enquiry form with date + group size + catering; from <strong>$250</strong>",
+			"&bull; <strong>Birthday / hen / stag packages</strong> &mdash; tiered packages (room-only / + prosecco / + pizza + prosecco); promotional codes; group discount logic (10+ players = 15% off); from <strong>$200</strong>",
+			"&bull; <strong>Record board</strong> &mdash; fastest completion times per room; encourages rebooking; drives social media sharing; cheap to build, high engagement",
+			"&bull; <strong>Multi-location</strong> &mdash; location selector on homepage; one sub-page per venue with own booking calendar; from <strong>$400</strong>",
+			"&bull; <strong>From $600</strong> rooms + booking + vouchers; <strong>$1,200+</strong> corporate page + packages + record board + multi-location",
+			'',
+			"How many rooms? Solo venue or multiple locations? Is corporate bookings a priority?",
+		] );
+	}
+
+	// 0d-pre37-c) Franchise / franchisor / franchise opportunity / become a franchisee website.
+	if ( $has( [ 'franchise website', 'franchisor website', 'franchise opportunity website', 'franchise for sale website', 'franchise recruitment website', 'franchise business website', 'buy a franchise website', 'start a franchise website', 'become a franchisee website', 'franchise network website', 'franchise opportunity uk', 'franchise model website', 'franchisee website' ] ) ) {
+		return $nl( [
+			"Franchise websites serve two very different audiences: recruiting new franchisees and supporting existing ones. Which side you&rsquo;re on changes everything:",
+			'',
+			"<strong>Franchisor (recruiting prospects)</strong>",
+			"&bull; <strong>Franchise opportunity page</strong> &mdash; investment range (licence fee + working capital); territory map; earnings potential (realistic, not inflated); what&rsquo;s included (training / support / exclusive territory / brand / tech stack); from <strong>$500</strong>",
+			"&bull; <strong>Discovery day / enquiry flow</strong> &mdash; multi-step qualification form (current occupation, liquid capital, location, motivation); discovery day booking with Calendly; pre-NDA information pack triggered on email; from <strong>$350</strong>",
+			"&bull; <strong>Franchisee testimonials and case studies</strong> &mdash; real franchisee stories (not corporate PR); revenue ranges if willing to share; day-in-the-life videos; most persuasive asset in franchise recruitment",
+			"&bull; <strong>Franchise awards and credentials</strong> &mdash; bfa membership (British Franchise Association); Franchise Direct ratings; British Franchise Awards nominations; trust signals for prospects doing due diligence",
+			"&bull; <strong>Franchisee portal</strong> &mdash; training materials, marketing assets, operations manuals, brand guidelines behind a login; from <strong>$400</strong>",
+			"&bull; <strong>From $800</strong> opportunity page + discovery day + testimonials; <strong>$1,500+</strong> with territory map + portal + full recruitment funnel",
+			'',
+			"<strong>Franchisee (individual territory site)</strong>",
+			"&bull; Local franchisee site under main brand&rsquo;s domain architecture (/location or subdomain); local NAP consistency; local testimonials and photos; service area schema; CTA routes to national booking system or local number; from <strong>$300</strong>",
+			'',
+			"Are you the franchisor recruiting new franchisees, or an individual franchisee needing a local site?",
+		] );
+	}
+
 	// 0d-pre36-a) Estate agent / lettings agent / property management company website.
 	if ( $has( [ 'estate agent website', 'lettings agent website', 'property management website', 'estate agency website', 'letting agent website', 'property agent website', 'property developer website', 'new homes website', 'residential sales website', 'commercial property website', 'property sales website', 'landlord website', 'property management company website', 'block management website', 'hmo management website' ] ) ) {
 		return $nl( [

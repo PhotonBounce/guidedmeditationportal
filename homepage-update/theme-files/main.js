@@ -426,6 +426,26 @@
     input.addEventListener('blur', function() {
       clearTimeout(_hintTimer); _sendHint.classList.remove('pb-brain__send-hint--vis');
     });
+    // Character count indicator — hidden below 100 chars; shows "N left" as user nears limit.
+    var _charLimit = 500;
+    var _charCount = document.createElement('span');
+    _charCount.className = 'pb-brain__charcount';
+    _charCount.setAttribute('aria-live', 'polite');
+    _charCount.setAttribute('aria-atomic', 'true');
+    _charCount.style.display = 'none';
+    if (form) form.appendChild(_charCount);
+    function _updateCharCount() {
+      var n = input.value.length;
+      var rem = _charLimit - n;
+      if (n < 100) { _charCount.style.display = 'none'; return; }
+      _charCount.style.display = '';
+      _charCount.textContent = rem >= 0 ? rem + ' left' : Math.abs(rem) + ' over limit';
+      _charCount.classList.toggle('pb-brain__charcount--warn', rem < 100 && rem >= 0);
+      _charCount.classList.toggle('pb-brain__charcount--over', rem < 0);
+      var _sb = form ? form.querySelector('[type="submit"]') : null;
+      if (_sb) _sb.disabled = rem < 0;
+    }
+    input.addEventListener('input', _updateCharCount);
   }
 
   // (Auto-open removed — the chat opens only when the visitor clicks the orb,
