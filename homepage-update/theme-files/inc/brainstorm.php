@@ -672,6 +672,62 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 
 
 
+
+			// 0d-pre60-a) Tattoo studio / tattoo artist / piercing studio / fine line / neo-trad
+			if ($has(['tattoo website','tattoo studio website','tattoo artist website','piercing website','piercing studio website','fine line tattoo website','neo traditional tattoo website','blackwork tattoo website','watercolour tattoo website','realism tattoo website','japanese tattoo website','sleeve tattoo website','custom tattoo website','cover up tattoo website','tattoo removal website','tattoo flash website'])) {
+				$parts = [
+					"<strong>Tattoo studio / artist website</strong> &mdash; the portfolio IS the business.",
+					"&bull; <strong>Portfolio gallery</strong>: style-filtered (fine line; blackwork; neo-trad; Japanese; realism; watercolour; geometric; cover-up); healed photo examples; video flip; from &pound;250",
+					"&bull; <strong>Style-specific pages</strong>: each targets &ldquo;[style] tattoo [city]&rdquo;; explain technique and aftercare; from &pound;150/page",
+					"&bull; <strong>Artist profiles</strong>: each artist has own gallery, specialism, booking link; from &pound;100/artist",
+					"&bull; <strong>Booking &amp; consultation form</strong>: reference images upload; body placement; size estimate; budget; Calendly or Acuity; deposit-required flow; from &pound;250",
+					"&bull; <strong>Custom quote form</strong>: stops time-wasting DMs; narrows leads to serious clients; from &pound;150",
+					"&bull; <strong>Aftercare page</strong>: wrap; wash; moisturise; sun avoidance; healed photo submission CTA (social proof); from &pound;100",
+					"&bull; <strong>FAQ</strong>: pain; healing; price-per-hour vs flat; touch-up policy; from &pound;100",
+					"&bull; <strong>Flash sale / available designs</strong>: WooCommerce or simple booking for ready-to-book flash; from &pound;200",
+					"&bull; <strong>Guest artist page</strong>: one-off visit announcements; from &pound;100",
+					"&bull; <strong>Instagram feed embed</strong>: tattoo studios live on Instagram; freshest work auto-synced; from &pound;100",
+					"From &pound;550 &mdash; &pound;1,300+",
+				];
+				return $nl($parts);
+			}
+
+			// 0d-pre60-b) Beauty therapist / beauty salon / lash tech / nail tech / aesthetics clinic
+			if ($has(['beauty therapist website','beauty salon website','beauty clinic website','lash technician website','lash extension website','nail technician website','nail salon website','aesthetics clinic website','aesthetics website','semi permanent makeup website','microblading website','dermaplaning website','skin clinic website','facial website','brow specialist website','waxing website','spray tan website','teeth whitening website'])) {
+				$parts = [
+					"<strong>Beauty therapist / salon website</strong> &mdash; book-online beats Instagram DM every time.",
+					"&bull; <strong>Online booking system</strong>: Fresha (most popular UK beauty booking); Treatwell; Square Appointments; clients book at midnight; deposits take no-shows from 30% to under 5%; from &pound;300",
+					"&bull; <strong>Treatment menu pages</strong>: lashes (classic; hybrid; volume; mega-volume); nails (gel; acrylic; BIAB; nail art); brows (microblading; SPMU; lamination; tinting; threading); skin (chemical peel; microneedling; dermaplaning; HydraFacial; LED); aesthetics (lip filler; anti-wrinkle; PRP; profhilo); from &pound;150/page",
+					"&bull; <strong>Before &amp; after gallery</strong>: must show realistic results; JCCP &amp; ASA rules on aesthetic before/afters; from &pound;200",
+					"&bull; <strong>Aesthetics compliance page</strong>: CQC registration (if prescribing); registered nurse/doctor practitioner credentials; Botox requires POM prescriber on-site since July 2022 (England); JCCP/BACN membership; from &pound;150",
+					"&bull; <strong>Price list page</strong>: transparency reduces consultation abandonment; link to booking per treatment; from &pound;100",
+					"&bull; <strong>Loyalty scheme / gift vouchers</strong>: Fresha vouchers; highest AOV uplift; from &pound;150",
+					"&bull; <strong>Blog / aftercare guides</strong>: &ldquo;How long do lash extensions last?&rdquo;; captures pre-treatment searches; from &pound;100/post",
+					"&bull; <strong>Google Reviews widget</strong>: Fresha auto-requests post-appointment; from &pound;100",
+					"&bull; <strong>Patch test policy</strong>: lashes; tints; henna; essential for insurance compliance; from &pound;100",
+					"From &pound;550 &mdash; &pound;1,300+",
+				];
+				return $nl($parts);
+			}
+
+			// 0d-pre60-c) Life coach / executive coach / mindset coach / business coach / NLP
+			if ($has(['life coach website','life coaching website','executive coach website','executive coaching website','business coach website','business coaching website','mindset coach website','nlp coach website','nlp practitioner website','career coach website','confidence coach website','leadership coach website','performance coach website','transformational coach website','wellbeing coach website','accountability coach website'])) {
+				$parts = [
+					"<strong>Life / executive / business coach website</strong> &mdash; authority, empathy, and an undeniable first step.",
+					"&bull; <strong>Niche-specific homepage headline</strong>: &ldquo;C-suite leaders who want to [outcome]&rdquo; converts 3&times; better than &ldquo;I&rsquo;m a life coach&rdquo;; from &pound;200",
+					"&bull; <strong>Signature programme page</strong>: 12-week; 6-month; group vs 1-2-1; milestones; investment (high-ticket clients need transparency); from &pound;200",
+					"&bull; <strong>Credentials &amp; training</strong>: ICF (PCC/MCC); EMCC (EIA); ILM Level 7; NLP Master Practitioner (ANLP); accreditation matters for corporate B2B clients; from &pound;100",
+					"&bull; <strong>Case studies with measurable outcomes</strong>: &ldquo;Promoted to MD within 9 months&rdquo;; &ldquo;Launched 6-figure business&rdquo;; story arc: situation &rarr; challenge &rarr; result; from &pound;200",
+					"&bull; <strong>Discovery / chemistry call booking</strong>: 20-min free call; Calendly; low-friction first step for &pound;2,000+ programmes; from &pound;200",
+					"&bull; <strong>Free resource / lead magnet</strong>: &ldquo;The 5 Mindset Shifts&rdquo; PDF; email list; ConvertKit / Mailchimp; highest ROI acquisition for coaches; from &pound;150",
+					"&bull; <strong>Speaking &amp; media page</strong>: podcast appearances; keynote topics; press logos; from &pound;150",
+					"&bull; <strong>Retreat / group event page</strong>: Eventbrite or Stripe direct booking; from &pound;150",
+					"&bull; <strong>Blog or podcast embed</strong>: thought leadership; SEO; repurposes content from social; from &pound;100/post",
+					"From &pound;600 &mdash; &pound;1,400+",
+				];
+				return $nl($parts);
+			}
+
 			// 0d-pre59-a) Speech and language therapist / SALT / stammering / AAC
 			if ($has(['speech therapist website','speech and language therapist website','salt website','stammering website','stuttering website','communication difficulties website','aphasia website','aac website','speech language pathology website','dysphasia website','dysarthria website','voice therapist website','speech therapy website','swallowing therapist website','dysphagia website','makaton website'])) {
 				$parts = [

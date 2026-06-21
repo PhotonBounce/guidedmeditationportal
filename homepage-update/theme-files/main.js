@@ -785,6 +785,34 @@
           _ntag.textContent = _matchedNiche.label;
           div.insertBefore(_ntag, div.firstChild);
         }
+
+      // R64: Price highlight — TreeWalker wraps £/$/ price mentions in bot replies with .pb-brain__price-spot.
+      if (cls === 'bot' && _textBody) {
+        var _prRe = /([£$€][0-9][0-9,]*(?:\.[0-9]{1,2})?(?:k|\+)?)/g
+        var _walker = document.createTreeWalker(_textBody, NodeFilter.SHOW_TEXT, null, false);
+        var _tnodes = [];
+        var _tw;
+        while ((_tw = _walker.nextNode())) _tnodes.push(_tw);
+        _tnodes.forEach(function(_t) {
+          if (!_prRe.test(_t.nodeValue)) { _prRe.lastIndex = 0; return; }
+          _prRe.lastIndex = 0;
+          var _frag = document.createDocumentFragment();
+          var _last = 0, _pm;
+          while ((_pm = _prRe.exec(_t.nodeValue))) {
+            if (_pm.index > _last) _frag.appendChild(document.createTextNode(_t.nodeValue.slice(_last, _pm.index)));
+            var _psp = document.createElement('span');
+            _psp.className = 'pb-brain__price-spot';
+            _psp.textContent = _pm[0];
+            _frag.appendChild(_psp);
+            _last = _pm.index + _pm[0].length;
+          }
+          _prRe.lastIndex = 0;
+          if (_last < _t.nodeValue.length) _frag.appendChild(document.createTextNode(_t.nodeValue.slice(_last)));
+          _t.parentNode.replaceChild(_frag, _t);
+        });
+      }
+
+
       }
 
       if (cls === 'bot' && navigator.clipboard) {

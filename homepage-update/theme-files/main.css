@@ -5373,3 +5373,17 @@ a.pb-brain__autolink::after{
 }
 .pb-brain__ac-item:last-child{ border-bottom:none; }
 .pb-brain__ac-item:hover,.pb-brain__ac-item--focus{ background:rgba(255,212,0,.1); color:rgba(255,212,0,.9); }
+/* R64 — price highlight spans in bot replies */
+.pb-brain__price-spot{
+  color:rgba(255,212,0,.95);
+  font-weight:500;
+  border-bottom:0.5px solid rgba(255,212,0,.45);
+  cursor:default;
+  transition:background .12s,color .12s;
+  border-radius:2px;
+  padding:0 1px;
+}
+.pb-brain__price-spot:hover{
+  background:rgba(255,212,0,.12);
+  color:rgba(255,212,0,1);
+}
