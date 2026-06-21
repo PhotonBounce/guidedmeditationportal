@@ -5091,3 +5091,25 @@ pre.pb-brain__code-block code{ font-size:inherit; background:none; border:none; 
   box-shadow:0 0 0 2px rgba(255,212,0,.07);
   transition:border-color .15s,box-shadow .15s;
 }
+/* R50 — ~~strikethrough~~ and >blockquote markdown in format() */
+.pb-brain__msg del{ text-decoration:line-through; color:rgba(255,255,255,.38); }
+.pb-brain__blockquote{
+  display:block; margin:4px 0; padding:3px 10px;
+  border-left:2px solid rgba(255,212,0,.4);
+  background:rgba(255,212,0,.04); border-radius:0 4px 4px 0;
+  color:rgba(255,255,255,.6); font-style:italic;
+}
+/* R50 — speech-bubble tails: triangle :before on bot (left) and user (right) */
+.pb-brain__msg--bot:not(.is-thinking)::before{
+  content:''; position:absolute; left:-6px; top:15px;
+  border:6px solid transparent;
+  border-right-color:rgba(255,212,0,.2); border-left:0;
+  width:0; height:0; pointer-events:none;
+}
+.pb-brain__msg--me{ position:relative; }
+.pb-brain__msg--me::before{
+  content:''; position:absolute; right:-6px; top:15px;
+  border:6px solid transparent;
+  border-left-color:rgba(255,255,255,.12); border-right:0;
+  width:0; height:0; pointer-events:none;
+}

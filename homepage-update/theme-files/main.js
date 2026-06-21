@@ -634,6 +634,8 @@
         .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
         .replace(/(?<!\w)_([^_\n]+)_(?!\w)/g, '<em>$1</em>')
+        .replace(/~~([^~\n]+)~~/g, '<del>$1</del>')
+        .replace(/^&gt;\s*(.+)/gm, '<blockquote class="pb-brain__blockquote">$1</blockquote>')
         .replace(/\[([^\]]+)\]\((https?:[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
         .replace(/(^|[\s(])((?:https?:\/\/|www\.)[^\s<)]+)/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>')
         .replace(/\n/g, '<br>');

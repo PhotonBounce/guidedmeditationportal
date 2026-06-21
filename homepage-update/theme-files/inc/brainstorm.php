@@ -667,6 +667,60 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre46-a) Hairdresser / barber / hair salon / barbershop / colourist website.
+	if ( $has( [ 'hairdresser website', 'hair salon website', 'barber website', 'barbershop website', 'hair stylist website', 'hair colourist website', 'hair colourist website', 'hair extensions website', 'blow dry bar website', 'keratin treatment website', 'afro hair salon website', 'men\'s hair salon website', 'ladies hairdresser website', 'mobile hairdresser website', 'wedding hair website', 'bridal hair website' ] ) ) {
+		return $nl( [
+			"Hair salon and barbershop websites convert on style portfolio and frictionless booking &mdash; the chair-fill rate is the core metric, so every page should direct to booking:",
+			'',
+			"&bull; <strong>Team and style portfolio</strong> &mdash; one page per stylist; high-quality before-and-after photos of haircuts, colour, and styling; filter by service type (balayage / highlights / men&rsquo;s cut / bridal / afro); from <strong>$250</strong>",
+			"&bull; <strong>Online booking</strong> &mdash; Treatwell, Fresha (free), or Shortcuts/Phorest integrated with your rota; service + stylist selector; deposit option (reduces no-shows); from <strong>$300</strong>",
+			"&bull; <strong>Services and pricing page</strong> &mdash; list every service with price range and duration; hidden prices lose enquiries; short hair / long hair pricing distinction; from <strong>$200</strong>",
+			"&bull; <strong>Colour services page</strong> &mdash; balayage / highlights / ombre / toner / colour correction / keratin; consultation required note for colour correction; from <strong>$150</strong>",
+			"&bull; <strong>Gift vouchers</strong> &mdash; WooCommerce; Christmas / Mother&rsquo;s Day / birthday; &ldquo;gift a blow-dry&rdquo; or full package; from <strong>$150</strong>",
+			"&bull; <strong>Bridal/special occasion page</strong> &mdash; trial session + day-of service; bridal party packages; from <strong>$150</strong>",
+			"&bull; <strong>Instagram feed embed</strong> &mdash; real-time style portfolio; most hair clients discover via Instagram so pulling the feed into the website closes the discovery-to-booking gap; from <strong>$150</strong>",
+			"&bull; <strong>From $550</strong> team portfolio + booking + pricing + Instagram; <strong>$1,000+</strong> with colour page + gift vouchers + bridal page",
+			'',
+			"Hair salon or barbershop? Mixed clientele or men&rsquo;s/women&rsquo;s only? Any specialist services (afro hair, extensions, keratin, colour correction)?",
+		] );
+	}
+
+	// 0d-pre46-b) Plumber / heating engineer / boiler installation / gas engineer website.
+	if ( $has( [ 'plumber website', 'plumbing website', 'heating engineer website', 'boiler installation website', 'gas engineer website', 'gas safe engineer website', 'boiler repair website', 'central heating website', 'underfloor heating website', 'bathroom installation website', 'kitchen plumbing website', 'emergency plumber website', 'drain unblocking website', 'bathroom fitter website', 'wet room website', 'plumbing company website' ] ) ) {
+		return $nl( [
+			"Plumber and heating engineer websites convert on emergency availability, Gas Safe credentials, and fixed-price transparency &mdash; the no-show-fee culture of some plumbers makes trust the primary conversion barrier:",
+			'',
+			"&bull; <strong>Emergency call-out page</strong> &mdash; 24/7 availability; response time; fixed call-out charge stated upfront; burst pipe / no hot water / boiler breakdown / blocked drain triage; most-visited page; from <strong>$200</strong>",
+			"&bull; <strong>Services pages</strong> &mdash; boiler installation / boiler service / boiler repair / central heating / underfloor heating / bathroom installation / wet room / kitchen plumbing / drain unblocking / leak detection; from <strong>$150</strong> per page",
+			"&bull; <strong>Gas Safe registration</strong> &mdash; Gas Safe Register number displayed prominently (legally required for all gas work in the UK); verify-online link to Gas Safe register; Boiler Plus compliance note (2018 regulations); from <strong>$100</strong>",
+			"&bull; <strong>Boiler brands and certifications</strong> &mdash; Worcester Bosch Accredited Installer / Vaillant Advanced Installer / Ideal Installer; manufacturer extended warranty only available through accredited installers (up to 12 years); critical upsell; from <strong>$150</strong>",
+			"&bull; <strong>Finance options page</strong> &mdash; 0% purchase plan or low-deposit monthly (Barclays Partner Finance / Novuna); most boiler replacements (&pound;2,500&ndash;&pound;4,000) are big-ticket; finance integration doubles conversion on quote pages; from <strong>$200</strong>",
+			"&bull; <strong>Free boiler quote form</strong> &mdash; property type + boiler make + age + fault description + postcode; acknowledge 24h response; from <strong>$200</strong>",
+			"&bull; <strong>Area pages</strong> &mdash; &ldquo;[area] plumber&rdquo; / &ldquo;[area] boiler installation&rdquo;; local reviews; from <strong>$100</strong> per page",
+			"&bull; <strong>From $600</strong> emergency page + services + Gas Safe badge + quote form; <strong>$1,200+</strong> with finance page + area pages + boiler brand certs",
+			'',
+			"Gas Safe registered? What brands do you install (Worcester/Vaillant/Ideal/Baxi)? Emergency callouts only, or planned installs and bathrooms too?",
+		] );
+	}
+
+	// 0d-pre46-c) Electrician / electrical contractor / NICEIC registered / EV charger installer website.
+	if ( $has( [ 'electrician website', 'electrical contractor website', 'electrical company website', 'niceic electrician website', 'napit electrician website', 'domestic electrician website', 'commercial electrician website', 'industrial electrician website', 'ev charger installation website', 'solar panel installation website', 'fuse box replacement website', 'electrical installation website', 'part p electrician website', 'rewiring website', 'smart home electrician website', 'emergency electrician website' ] ) ) {
+		return $nl( [
+			"Electrician websites convert on competency scheme registration, fixed quote transparency, and emergency availability &mdash; homeowners are risk-averse with electrical work, so credentials lead the page:",
+			'',
+			"&bull; <strong>NICEIC / NAPIT registration badge</strong> &mdash; displayed on homepage and every service page; click-through to verify on the NICEIC or NAPIT register; Part P compliance self-certification (Building Regulations) explained; mandatory trust signal; from <strong>$100</strong>",
+			"&bull; <strong>Services pages</strong> &mdash; fuse box / consumer unit replacement; full rewires; EV charger installation (OZEV-approved required for OLEV grant); solar PV and battery storage; smart home / Hive / Nest; outdoor lighting; commercial periodic inspection; from <strong>$150</strong> per page",
+			"&bull; <strong>EV charger installation page</strong> &mdash; OZEV-approved installer (required for any government grant claims); OLEV grant amounts (currently &pound;350 for homeowners); brands (Hypervolt / Ohme / Myenergi Zappi / Andersen A2); fastest-growing residential electrical service; from <strong>$200</strong>",
+			"&bull; <strong>Electrical certificate page</strong> &mdash; EICR (Electrical Installation Condition Report) for landlords (mandatory 5-year interval since July 2020); fixed fee quoted upfront; speeds up landlord decision; from <strong>$150</strong>",
+			"&bull; <strong>Free quote form</strong> &mdash; job type + number of circuits + property type + postcode + urgency; 24h response; from <strong>$200</strong>",
+			"&bull; <strong>Emergency electrician page</strong> &mdash; 24/7; trips / power outage / sparking sockets / burning smell; fixed call-out rate; most urgent + most valuable traffic; from <strong>$200</strong>",
+			"&bull; <strong>Area pages</strong> &mdash; &ldquo;[area] electrician&rdquo; / &ldquo;[area] EV charger installation&rdquo;; local reviews embed; from <strong>$100</strong> per page",
+			"&bull; <strong>From $600</strong> NICEIC badge + services + quote form + emergency page; <strong>$1,200+</strong> with EV page + EICR page + area pages",
+			'',
+			"NICEIC or NAPIT registered? Domestic, commercial, or both? Do you install EV chargers or solar? OZEV-approved?",
+		] );
+	}
+
 	// 0d-pre45-a) Estate agent / letting agent / property management company website.
 	if ( $has( [ 'estate agent website', 'estate agency website', 'letting agent website', 'letting agency website', 'property management website', 'property agent website', 'property finder website', 'residential estate agent website', 'commercial estate agent website', 'new homes estate agent website', 'independent estate agent website', 'high street estate agent website', 'online estate agent website', 'property developer website', 'buy to let website', 'property investment website', 'landlord letting website' ] ) ) {
 		return $nl( [
