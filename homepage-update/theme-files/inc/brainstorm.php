@@ -667,6 +667,69 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre49-a) Childminder / nursery / childcare / after-school club / day nursery website.
+	if ( $has( [ 'childminder website', 'nursery website', 'childcare website', 'day nursery website', 'after-school club website', 'childcare provider website', 'childminder site', 'pre-school website', 'preschool website', 'creche website', 'childcare setting website', 'childminding website', 'wrap around care website', 'out of school club website', 'holiday club website', 'daycare website' ] ) ) {
+		return $nl( [
+			"Childcare and nursery websites serve two equally important audiences: parents (who need confidence, safeguarding reassurance, and booking clarity) and Ofsted (whose registration number and grade should be immediately visible). Both must be satisfied before an enquiry is made:",
+			'',
+			"&bull; <strong>Ofsted grade and registration number</strong>: the single biggest trust signal for UK childcare; display prominently on the homepage and footer; link to the Ofsted inspection report on the official website (opens in new tab). Outstanding or Good grade in a badge/banner converts immediately. From \$100.",
+			"&bull; <strong>Availability and session booking page</strong>: term-time session availability (mornings/afternoons/full days); funded 15/30 hours eligibility and how to apply; a waitlist sign-up form for popular time slots; breakfast club/after-school/holiday club options; From \$250.",
+			"&bull; <strong>Fees and funding calculator</strong>: parents hate mystery pricing in childcare; even a simple grid of session fees per day + funded hours eligibility check removes the biggest friction point and reduces phone enquiries asking only about price; From \$200.",
+			"&bull; <strong>Safeguarding and DBS page</strong>: DBS check status for all staff; safeguarding policy PDF download; first aid certificates; food hygiene; Paediatric First Aid; these are non-negotiable for parent confidence and are legally required information in some formats; From \$150.",
+			"&bull; <strong>A day in the life / daily routine page</strong>: parents choosing a setting want to visualise their child&rsquo;s day; EYFS learning framework references; outdoor play; mealtimes; sleep routines for babies; ratio of staff to children by age group; From \$200.",
+			"&bull; <strong>Parent testimonials and gallery</strong>: real photos of the setting (not stock); children shown with explicit parental media consent note; Ofsted parent view link; From \$150.",
+			"&bull; <strong>Staff profiles page</strong>: parents form an attachment to the specific carer before their child starts; named staff with photo, qualifications (Level 3 CCLD, EYPS, QTS), years of experience, and a short personal note; From \$150.",
+			"&bull; <strong>Online registration / enquiry form</strong>: child&rsquo;s name + DOB + required sessions + start date + contact; integrated with email; From \$150.",
+			"&bull; <strong>Blog / newsletter archive</strong>: monthly updates showing recent activities, new resources, upcoming events; builds trust with prospective parents and keeps Google indexing fresh content; From \$100.",
+			'',
+			"From \$500 for a settings-led trust site &mdash; \$900+ with fee calculator, session booking, and Ofsted badge.",
+			'',
+			"Registered childminder or group setting? Do you take funded 15/30 hours? Any specialist provision (SEN, bilingual, Forest School)?",
+		] );
+	}
+
+	// 0d-pre49-b) Music teacher / music school / music tutor / singing teacher / instrument lessons.
+	if ( $has( [ 'music teacher website', 'music tutor website', 'music school website', 'music lessons website', 'singing teacher website', 'guitar teacher website', 'piano teacher website', 'drum teacher website', 'violin teacher website', 'music lesson website', 'music studio website', 'instrument lessons website', 'music academy website', 'online music lessons website', 'vocal coach website', 'music theory website' ] ) ) {
+		return $nl( [
+			"Music teacher websites need to communicate ability and personality before a parent books a trial lesson &mdash; the teacher IS the product, so the journey from &ldquo;found on Google&rdquo; to &ldquo;booked a trial&rdquo; should take under 60 seconds:",
+			'',
+			"&bull; <strong>Teacher profile / about page</strong>: performing experience; qualifications (ABRSM/RCM/Trinity teaching diploma; DBS check; music degree); teaching style (relaxed/classical/exam-focused/genre-specific); instruments and ages taught; own performing video if possible. The single most-visited page &mdash; From \$200.",
+			"&bull; <strong>Online lesson booking</strong>: Calendly, Acuity, or BookWhen; weekly availability in real-time; trial lesson booking separate from regular lesson booking; automatic Zoom/Google Meet link for online lessons; From \$250.",
+			"&bull; <strong>Lesson options and fees page</strong>: by instrument; by duration (20/30/45/60 min); in-person/online/hybrid; adult vs child rates; ABRSM/Trinity exam preparation packages; group vs individual; From \$150.",
+			"&bull; <strong>Student progress videos / audio samples</strong>: short clips of students performing (with parental permission); recital highlights; nothing converts a parent faster than hearing a real pupil who started 6 months ago; From \$150.",
+			"&bull; <strong>Exam results page</strong>: ABRSM/Trinity pass rates and distinctions; builds enormous credibility for exam-focused parents; even a simple &ldquo;100% pass rate across 47 candidates in 2024&rdquo; is powerful; From \$100.",
+			"&bull; <strong>FAQ page</strong>: &ldquo;What age can my child start?&rdquo;; &ldquo;Do we need a piano at home?&rdquo;; &ldquo;Do you teach adults?&rdquo;; &ldquo;What happens if we need to cancel?&rdquo;; &ldquo;Do you teach complete beginners?&rdquo; &mdash; reduces phone calls and reassures anxious parents; From \$150.",
+			"&bull; <strong>Genre and style showcase</strong>: classical vs jazz vs pop vs rock vs musical theatre; some parents specifically want their child to learn &lsquo;fun songs&rsquo; not just scales; targeting these genre searches (&ldquo;jazz piano teacher London&rdquo;) captures high-intent traffic; From \$100.",
+			"&bull; <strong>Local SEO page</strong>: &ldquo;Piano teacher in [area]&rdquo;; &ldquo;Guitar lessons near [town]&rdquo;; one page per instrument per location for multi-teacher schools; Google Business profile integrated; From \$150.",
+			"&bull; <strong>Online lessons page</strong>: post-pandemic, many teachers now teach nationally via Zoom; this page opens up a national market &mdash; &ldquo;piano lessons anywhere in the UK&rdquo;; From \$150.",
+			'',
+			"From \$450 for a tutor-led profile site &mdash; \$850+ with real-time booking, exam results, student showcase, and local SEO.",
+			'',
+			"Solo teacher or music school with multiple teachers? Which instruments? Primarily children, adults, or both? Exam-focused or recreational?",
+		] );
+	}
+
+	// 0d-pre49-c) Personal trainer / PT studio / fitness instructor / online coach / gym website.
+	if ( $has( [ 'personal trainer website', 'pt website', 'fitness trainer website', 'personal training website', 'fitness instructor website', 'online coach website', 'online coaching website', 'fitness coach website', 'gym website', 'pt studio website', 'fitness studio website', 'bootcamp website', 'nutrition coach website', 'strength coach website', 'crossfit website', 'pilates instructor website' ] ) ) {
+		return $nl( [
+			"Personal trainer websites convert on transformation proof and personality &mdash; before a client commits to 3 months of training they need to believe both that you can get them results AND that they&rsquo;ll enjoy working with you:",
+			'',
+			"&bull; <strong>Before/after transformation gallery</strong>: the highest-converting element on any PT website; real client results with written permission; body composition changes; performance milestones (&ldquo;ran first 5k&rdquo;, &ldquo;deadlifted 2x bodyweight&rdquo;); From \$200.",
+			"&bull; <strong>Services and packages page</strong>: 1-2-1 in-person; group PT; online coaching (asynchronous or live Zoom); nutrition coaching; hybrid packages; 4/8/12-week programmes; monthly recurring vs block booking. Price clearly or with a &lsquo;from&rsquo; anchor &mdash; mystery pricing increases bounce; From \$200.",
+			"&bull; <strong>Online coaching page</strong>: the scalable income stream; how it works (weekly check-ins, app, training programme delivery, WhatsApp support); which app (Trainerize, MyPTHub, TrueCoach); national and international clients; From \$150.",
+			"&bull; <strong>Free consultation / taster session booking</strong>: the primary CTA for in-person clients; Calendly or Acuity; 20-minute free call to discuss goals; the single highest-converting action a PT website can offer; From \$200.",
+			"&bull; <strong>Client testimonials with results</strong>: written testimonials alongside the transformation photo; specific numbers (&ldquo;lost 12kg in 16 weeks&rdquo;, &ldquo;increased bench press from 60 to 100kg&rdquo;); avoids vague &ldquo;great trainer&rdquo; reviews which convert poorly; From \$150.",
+			"&bull; <strong>About / credentials page</strong>: Level 2 Gym Instructor + Level 3 Personal Trainer (CIMSPA/REPs registered); specialist qualifications (pre/postnatal, sports performance, nutrition, corrective exercise); current DBS if working with minors; public liability insurance; From \$150.",
+			"&bull; <strong>Specialist niche page</strong>: pre/postnatal fitness; over-50s; powerlifting/strength; weight loss; running coaching; sport-specific conditioning; niching dramatically improves Google ranking and inquiry quality; From \$150.",
+			"&bull; <strong>Location and facilities page</strong>: if studio-based: equipment list, parking, changing facilities, location; if mobile PT: areas covered; if online-only: emphasise app and check-in process; From \$100.",
+			"&bull; <strong>Blog / content marketing</strong>: &ldquo;How many times a week should I train?&rdquo;, &ldquo;Best exercises for weight loss at home&rdquo;, &ldquo;What to eat before a workout&rdquo; &mdash; high-traffic informational content that attracts prospects at the top of funnel; From \$150/post.",
+			'',
+			"From \$500 for a trainer-led conversion site &mdash; \$950+ with before/after gallery, online coaching page, package builder, and booking.",
+			'',
+			"In-person, online, or hybrid? Any specialist niche (pre/postnatal, over-50s, sport-specific)? Solo trainer or team?",
+		] );
+	}
+
 	// 0d-pre48-a) Florist / wedding florist / flower shop / event florist website.
 	if ( $has( [ 'florist website', 'flower shop website', 'florist shop website', 'wedding florist website', 'event florist website', 'floral designer website', 'flower delivery website', 'local florist website', 'florist near me website', 'bouquet website', 'funeral flowers website', 'sympathy flowers website', 'corporate flowers website', 'flower subscription website', 'dried flower website', 'flower studio website' ] ) ) {
 		return $nl( [

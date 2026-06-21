@@ -878,6 +878,54 @@
           });
         }
       }
+      // R53: Smart per-response suggestion chips — context-aware follow-ups after every bot reply.
+      if (cls === 'bot') {
+        var _oldSmart = log.querySelector('.pb-brain__chips-smart');
+        if (_oldSmart) _oldSmart.remove();
+        var _smartChipsData = [
+          { k: ['price','cost','invest','budget','charg','fee','from $'], c: ['How long will it take?', 'Can I see examples of your work?', 'What’s included in the price?'] },
+          { k: ['seo','rank','google','search engine','keyword'], c: ['How long to see SEO results?', 'Do you write the content?', 'What about Google Ads?'] },
+          { k: ['ecommerce','shop','woocommerce','shopify','stripe','checkout'], c: ['Which platform do you recommend?', 'Can I manage products myself?', 'What payment methods can I accept?'] },
+          { k: ['booking','appointment','calendar','schedule','reservation'], c: ['Which booking system do you use?', 'Can it send automated reminders?', 'Does it sync with Google Calendar?'] },
+          { k: ['wedding','venue','ceremony','celebration'], c: ['Do you have a weddings portfolio?', 'What’s your booking lead time?', 'Do you offer day-of coordination?'] },
+          { k: ['maintenance','support','update','hosting','domain'], c: ['What’s included in ongoing support?', 'Do you offer managed hosting?', 'How do I update content myself?'] },
+          { k: ['mobile','responsive','phone','speed','performance','core web'], c: ['How do you test on mobile?', 'What about page speed scores?', 'Do you optimise images automatically?'] },
+          { k: ['brand','logo','design','colour','font','identity'], c: ['Do you offer logo design?', 'How many design revisions are included?', 'What if I already have a logo?'] },
+          { k: ['social','instagram','facebook','twitter','linkedin'], c: ['Do you manage social media too?', 'Can I embed an Instagram feed?', 'What about Open Graph previews?'] },
+          { k: ['architect','planning','building','extension','loft'], c: ['What’s your planning approval rate?', 'Do you handle listed buildings?', 'What RIBA stages do you cover?'] },
+          { k: ['interior','decorator','stager','staging','e-design'], c: ['Do you offer virtual e-design?', 'Can I see your portfolio?', 'What’s the discovery call process?'] },
+          { k: ['florist','flower','bouquet','arrangement'], c: ['Do you deliver same-day?', 'Can I see your floral portfolio?', 'Do you offer flower subscriptions?'] },
+          { k: ['childminder','nursery','childcare','child','ofsted'], c: ['How do parents book online?', 'Can I show term-time availability?', 'How do you handle safeguarding info?'] },
+          { k: ['music','teacher','tutor','lesson','instrument','singing','guitar','piano'], c: ['Can students book lessons online?', 'Do you offer trial lessons?', 'How do you show your teaching style?'] },
+          { k: ['personal trainer','fitness','gym','workout','coach','nutrition','pt '], c: ['Can clients book sessions online?', 'Do you offer online coaching?', 'How do you show client results?'] },
+        ];
+        var _smartDefaultChips = ['How much does this cost?', 'How long does it take?', 'Can I see past work?'];
+        var _lowerResp = plain(text).toLowerCase();
+        var _pickedChips = _smartDefaultChips;
+        for (var _scIdx = 0; _scIdx < _smartChipsData.length; _scIdx++) {
+          var _kws = _smartChipsData[_scIdx].k, _hit = false;
+          for (var _kIdx = 0; _kIdx < _kws.length; _kIdx++) {
+            if (_lowerResp.indexOf(_kws[_kIdx]) > -1) { _hit = true; break; }
+          }
+          if (_hit) { _pickedChips = _smartChipsData[_scIdx].c; break; }
+        }
+        var _scDiv = document.createElement('div');
+        _scDiv.className = 'pb-brain__chips-smart pb-brain__chips';
+        _scDiv.setAttribute('aria-label', 'Suggested follow-ups');
+        _pickedChips.forEach(function(label) {
+          var _scBtn = document.createElement('button');
+          _scBtn.type = 'button'; _scBtn.className = 'pb-brain__chip pb-brain__chip--smart';
+          _scBtn.textContent = label;
+          _scBtn.addEventListener('click', function() {
+            _scDiv.remove();
+            if (input && form) { input.value = label; form.dispatchEvent(new Event('submit', { bubbles: true })); }
+          });
+          _scDiv.appendChild(_scBtn);
+        });
+        _scDiv.classList.add('pb-chips-entering');
+        log.appendChild(_scDiv);
+        requestAnimationFrame(function() { requestAnimationFrame(function() { _scDiv.classList.remove('pb-chips-entering'); }); });
+      }
       if (cls !== 'err') { chatMsgs.push({ text: text, cls: cls }); saveChat(); }
       if (cls === 'bot') {
         if (brain && brain.hidden) _unreadCount++;

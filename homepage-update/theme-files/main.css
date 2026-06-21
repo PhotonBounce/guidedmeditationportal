@@ -5154,3 +5154,30 @@ pre.pb-brain__code-block code{ font-size:inherit; background:none; border:none; 
 }
 .pb-brain__tbl tr:last-child td{ border-bottom:none; }
 .pb-brain__tbl tr:hover td{ background:rgba(255,212,0,.04); }
+
+/* R53 — smart per-response suggestion chips */
+.pb-brain__chips-smart{
+  display:flex; flex-wrap:wrap; gap:5px;
+  padding:4px 12px 10px;
+  opacity:0; transform:translateY(5px);
+  transition:opacity .25s ease, transform .25s ease;
+}
+.pb-brain__chips-smart:not(.pb-chips-entering){
+  opacity:1; transform:translateY(0);
+}
+.pb-brain__chip--smart{
+  font-size:11px; padding:4px 11px;
+  border:1px solid rgba(255,255,255,.18);
+  color:rgba(255,255,255,.6);
+  background:transparent; border-radius:20px;
+  cursor:pointer; line-height:1.4;
+  transition:border-color .15s, color .15s, background .15s;
+  white-space:nowrap;
+}
+.pb-brain__chip--smart:hover,
+.pb-brain__chip--smart:focus-visible{
+  border-color:rgba(255,212,0,.55);
+  color:rgba(255,212,0,.9);
+  background:rgba(255,212,0,.06);
+  outline:none;
+}
