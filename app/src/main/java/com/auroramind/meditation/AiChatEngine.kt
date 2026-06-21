@@ -103,7 +103,8 @@ class AiChatEngine(private val context: Context) {
         any(lower, "sleep", "insomnia", "cant sleep", "can't sleep", "falling asleep",
             "bedtime", "tired", "fatigue", "exhausted", "wide awake", "cant switch off",
             "can't switch off", "racing mind", "racing thoughts", "nap", "night shift",
-            "shift work", "mind won't stop", "mind wont stop") ->
+            "shift work", "mind won't stop", "mind wont stop", "nightmares", "bad dreams",
+            "jet lag", "jet lagged", "jet-lagged") ->
             handleSleep().also { lastTopic = "sleep" }
         any(lower, "focus", "work", "study", "concentrate", "productivity",
             "read", "code", "writing", "attention", "adhd") ->
@@ -115,7 +116,9 @@ class AiChatEngine(private val context: Context) {
         any(lower, "relax", "calm", "stress", "anxiety", "anxious", "breathe",
             "unwind", "rest", "nervous", "tense", "panic", "overthink", "overthinking",
             "can't stop thinking", "cant stop thinking", "intrusive thoughts", "ruminating",
-            "social anxiety", "public speaking", "presentation nerves", "exam nerves") ->
+            "social anxiety", "public speaking", "presentation nerves", "exam nerves",
+            "pounding heart", "heart racing", "mind keeps wandering", "can't stop my mind",
+            "cant stop my mind", "racing heart") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
             handleTinnitus().also { lastTopic = "tinnitus" }
@@ -374,6 +377,11 @@ class AiChatEngine(private val context: Context) {
             else ->
                 SoundType.SOHAM to "eases the transition into a calm evening"
         }
+        val matchingFav = prefs.getFavorites()
+            .firstOrNull { it.mood == suggestion.mood && it != suggestion }
+        val favNote = if (matchingFav != null)
+            "\n\nYou've also saved ${matchingFav.emoji} ${matchingFav.displayName} — try that if you prefer something familiar."
+        else ""
         return Pair(
             "🤍 Spirit's Suggestion — Personalised to You\n\n" +
             "Based on:\n" +
@@ -381,7 +389,7 @@ class AiChatEngine(private val context: Context) {
             "Your most-played: ${mostPlayed.emoji} ${mostPlayed.displayName} (${favMood.label})\n" +
             "What's tended to settle you before\n\n" +
             "Right now, try: ${suggestion.emoji} ${suggestion.displayName}\n\n" +
-            "Why: $reason.\n\n" +
+            "Why: $reason.$favNote\n\n" +
             "Tap the card above to begin. 🎵",
             suggestion
         )
@@ -395,10 +403,21 @@ class AiChatEngine(private val context: Context) {
             minutes >= 60 -> " Over ${minutes} minutes in practice — that consistency shows."
             else          -> ""
         }
+        val activeProgram = Programs.all.firstOrNull {
+            val done = prefs.getProgramProgress(it.id)
+            done > 0 && done < it.days.size
+        }
+        val prog4 = if (activeProgram != null) {
+            val done = prefs.getProgramProgress(activeProgram.id)
+            "Wonderful! ${activeProgram.emoji} ${activeProgram.title} — Day ${done} done. Keep going, you're building something real. 🌱"
+        } else {
+            "So glad Spirit could help. Come back anytime — I'll be here. 🤍"
+        }
         val msgs = listOf(
             "You're so welcome.$milestoneNote Rest easy and be gentle with yourself. 🤍",
             "That makes me glad! 🌙 Showing up for your practice matters — even a few quiet minutes a day adds up.",
-            "Lovely!$milestoneNote Consistency is what makes a practice — you're doing beautifully. 💪"
+            "Lovely!$milestoneNote Consistency is what makes a practice — you're doing beautifully. 💪",
+            prog4
         )
         return Pair(msgs[turnsCount % msgs.size], null)
     }
