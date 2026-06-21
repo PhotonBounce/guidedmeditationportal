@@ -272,7 +272,10 @@ class AiChatEngine(private val context: Context) {
             "can't handle this", "cant handle this") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
         any(lower, "angry", "furious", "frustrated", "frustration",
-            "rage", "irritated", "irritable", "annoyed", "wound up", "agitated") ||
+            "rage", "irritated", "irritable", "annoyed", "wound up", "agitated",
+            "pissed off", "livid", "seething", "seeing red",
+            "lost my temper", "losing my temper", "lose my temper",
+            "about to explode", "about to snap", "lost it", "blow up") ||
         anyWord(lower, "mad", "anger", "angered") ->
             handleAnger().also { lastTopic = "anger" }
 

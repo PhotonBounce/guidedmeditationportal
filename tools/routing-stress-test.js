@@ -100,7 +100,11 @@ function route(lower, lastTopic) {
     "running on empty","meltdown","having a meltdown","on the edge","at my limit",
     "hit my limit","can't handle it","cant handle it","can't handle this",
     "cant handle this"])) return "overwhelm";
-  if(any(lower,["angry","furious","frustrated","frustration","rage","irritated","annoyed"]) ||
+  if(any(lower,["angry","furious","frustrated","frustration","rage",
+    "irritated","irritable","annoyed","wound up","agitated",
+    "pissed off","livid","seething","seeing red",
+    "lost my temper","losing my temper","lose my temper",
+    "about to explode","about to snap","lost it","blow up"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
   if(any(lower,["recommend","suggest","what should i play","pick something"])) return "recommend";
@@ -204,6 +208,14 @@ var tests = [
   ["i'm not doing well", "", "NOT:positive", "not doing well → sadness"],
   ["not myself lately", "", "NOT:positive", "not myself → sadness"],
   ["i'm feeling off today", "", "NOT:positive", "feeling off → sadness"],
+
+  // R63: anger vocabulary expansion
+  ["i'm so pissed off right now", "", "anger", "pissed off → anger"],
+  ["i'm absolutely livid", "", "anger", "livid → anger"],
+  ["i'm seething", "", "anger", "seething → anger"],
+  ["i lost my temper today", "", "anger", "lost my temper → anger"],
+  ["i'm about to explode", "", "anger", "about to explode → anger"],
+  ["i completely lost it", "", "anger", "lost it → anger"],
 
   // R62: distract→focus, seasonal affective→sadness, afternoon slump→energy
   ["i'm so distracted today", "", "focus", "distracted → focus (was in sim not Kotlin — now fixed)"],
