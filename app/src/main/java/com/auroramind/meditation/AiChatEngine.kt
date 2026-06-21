@@ -104,10 +104,12 @@ class AiChatEngine(private val context: Context) {
             "bedtime", "tired", "fatigue", "exhausted", "wide awake", "cant switch off",
             "can't switch off", "racing mind", "racing thoughts", "nap", "night shift",
             "shift work", "mind won't stop", "mind wont stop", "nightmares", "bad dreams",
-            "jet lag", "jet lagged", "jet-lagged") ->
+            "jet lag", "jet lagged", "jet-lagged", "restless", "restlessness",
+            "woke up at", "keep waking", "3am", "4am", "middle of the night") ->
             handleSleep().also { lastTopic = "sleep" }
         any(lower, "focus", "work", "study", "concentrate", "productivity",
-            "read", "code", "writing", "attention", "adhd") ->
+            "read", "code", "writing", "attention", "adhd",
+            "brain fog", "foggy", "mental clarity", "sharp", "clear mind") ->
             handleFocus().also { lastTopic = "focus" }
         any(lower, "energy", "energise", "energize", "wake up", "waking up",
             "uplift", "motivation", "motivated", "active", "exercise", "workout",
@@ -118,7 +120,8 @@ class AiChatEngine(private val context: Context) {
             "can't stop thinking", "cant stop thinking", "intrusive thoughts", "ruminating",
             "social anxiety", "public speaking", "presentation nerves", "exam nerves",
             "pounding heart", "heart racing", "mind keeps wandering", "can't stop my mind",
-            "cant stop my mind", "racing heart") ->
+            "cant stop my mind", "racing heart", "trauma", "traumatic", "ptsd",
+            "post-traumatic", "triggered") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
             handleTinnitus().also { lastTopic = "tinnitus" }
@@ -127,12 +130,13 @@ class AiChatEngine(private val context: Context) {
         any(lower, "meditat", "mindful", "yoga", "zen", "chakra", "mantra",
             "vipassana", "tonglen", "soham", "thien", "sumara", "muraqaba",
             "hesychasm", "dhikr", "hitbodedut", "zhan zhuang", "buddho",
-            "sufi", "tibetan", "qigong", "stoic", "stoicism") ->
+            "sufi", "tibetan", "qigong", "stoic", "stoicism", "spiritual") ->
             handleMeditation().also { lastTopic = "meditation" }
         any(lower, "technique", "breathwork", "breathing", "body scan", "loving-kindness",
             "loving kindness", "visualization", "visualisation", "how do i meditate",
             "how to meditate", "types of meditation", "autogenic", "box breath",
-            "4-7-8", "4 7 8", "physiological sigh", "progressive muscle", "metta") ->
+            "4-7-8", "4 7 8", "physiological sigh", "progressive muscle", "metta",
+            "self-compassion", "self compassion", "compassion practice", "kind to myself") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
@@ -140,7 +144,9 @@ class AiChatEngine(private val context: Context) {
             "lonely", "alone", "loneliness", "depressed", "depression",
             "cry", "crying", "upset", "miserable", "unhappy", "low mood",
             "empty inside", "feel empty", "feeling empty", "numb", "hopeless",
-            "hollow", "disconnected", "meaningless", "no motivation", "nothing matters") ->
+            "hollow", "disconnected", "meaningless", "no motivation", "nothing matters",
+            "breakup", "broke up", "split up", "feeling blue", "feeling lost",
+            "lost and", "i feel lost", "blue today", "can't find", "lost myself") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out",
             "too much", "cant cope", "can't cope", "too busy", "overloaded",
