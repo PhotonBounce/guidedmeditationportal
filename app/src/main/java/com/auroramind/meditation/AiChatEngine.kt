@@ -292,7 +292,9 @@ class AiChatEngine(private val context: Context) {
             "drinking to cope", "drink to cope", "alcohol to cope", "drink to forget",
             "drinking to forget", "using alcohol", "using drink",
             "blood pressure", "high blood pressure", "hypertension",
-            "cardiac stress", "heart health stress") ||
+            "cardiac stress", "heart health stress",
+            "social pressure", "peer pressure", "exam pressure",
+            "performance pressure", "pressure to perform") ||
         anyWord(lower, "rest", "tense", "rsd") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in",
@@ -512,7 +514,12 @@ class AiChatEngine(private val context: Context) {
             "feeling like an imposter",
             "addiction", "in recovery", "sobriety", "substance abuse",
             "drug addiction", "drug problem", "drinking problem", "alcohol problem",
-            "quitting drinking", "staying sober", "getting sober") ||
+            "quitting drinking", "staying sober", "getting sober",
+            "self-destruct", "self-destructive", "self-destructive behavior", "self-destructive patterns",
+            "self-punishment", "punishing myself", "self-punishing",
+            "emotional eating", "comfort eating", "eating my feelings",
+            "feel judged", "feeling judged", "being judged",
+            "fear of judgment", "fear of being judged", "feel watched") ||
         anyWord(lower, "sober") ->
             handleShameGuilt().also { lastTopic = "sadness" }
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out", "burning out",
@@ -656,10 +663,13 @@ class AiChatEngine(private val context: Context) {
             "encourage me", "daily tip", "today's practice", "what should i practice",
             "technique of the day", "something to try",
             "pep talk", "cheer me up", "lift my spirits", "give me a boost",
-            "need encouragement") ->
+            "need encouragement",
+            "daily inspiration", "inspiring message", "positive message",
+            "boost my mood") ->
             handleInspiration().also { lastTopic = "inspiration" }
         any(lower, "journey", "journeys", "program", "programs", "course",
-            "guided course", "structured", "7 day", "7-day", "5 day", "5-day", "challenge") ->
+            "guided course", "structured", "7 day", "7-day", "5 day", "5-day", "challenge",
+            "daily plan", "wellness plan", "structured plan", "learning path") ->
             handlePrograms().also { lastTopic = "" }
         any(lower, "my stats", "my progress", "how am i doing", "my history",
             "how long have i", "sessions", "minutes meditated", "progress report",

@@ -180,7 +180,9 @@ function route(lower, lastTopic) {
     "decompress","decompressing","need to decompress",
     "need a breather","catch my breath","need some space",
     "blood pressure","high blood pressure","hypertension",
-    "cardiac stress","heart health stress"]) ||
+    "cardiac stress","heart health stress",
+    "social pressure","peer pressure","exam pressure",
+    "performance pressure","pressure to perform"]) ||
     anyWord(lower,["rest","tense","rsd"])) return "relax";
   // 10. tinnitus
   if(any(lower,["tinnitus","ringing in","ear ring","hearing","buzz in my ear",
@@ -386,7 +388,12 @@ function route(lower, lastTopic) {
     "feeling like an imposter",
     "addiction","in recovery","sobriety","substance abuse",
     "drug addiction","drug problem","drinking problem","alcohol problem",
-    "quitting drinking","staying sober","getting sober"]) ||
+    "quitting drinking","staying sober","getting sober",
+    "self-destruct","self-destructive","self-destructive behavior","self-destructive patterns",
+    "self-punishment","punishing myself","self-punishing",
+    "emotional eating","comfort eating","eating my feelings",
+    "feel judged","feeling judged","being judged",
+    "fear of judgment","fear of being judged","feel watched"]) ||
     anyWord(lower,["sober"])) return "shameGuilt";
   // 16. overwhelm
   if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","burning out","too much",
@@ -518,10 +525,13 @@ function route(lower, lastTopic) {
   if(any(lower,["inspire me","inspiration","quote","affirmation","motivate me",
     "pep talk","cheer me up","lift my spirits","give me a boost","need encouragement",
     "encourage me","daily tip","today's practice","what should i practice",
-    "technique of the day","something to try"])) return "inspire";
+    "technique of the day","something to try",
+    "daily inspiration","inspiring message","positive message",
+    "boost my mood"])) return "inspire";
   // 29. programs
   if(any(lower,["journey","journeys","program","programs","course","guided course",
-    "structured","7 day","7-day","5 day","5-day","challenge"])) return "programs";
+    "structured","7 day","7-day","5 day","5-day","challenge",
+    "daily plan","wellness plan","structured plan","learning path"])) return "programs";
   // 30. stats
   if(any(lower,["my stats","my streak","my progress","sessions","total time","day streak",
     "how long have i","my history","minutes meditated",
@@ -722,6 +732,17 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R104: shameGuilt (self-punishment/emotional eating/feel judged), relax (social pressure/exam pressure), inspire (motivation/words of encouragement), programs (daily plan)
+  ["I tend to self-destruct when things are going well", "", "shameGuilt", "self-destruct → shameGuilt"],
+  ["I keep punishing myself for past mistakes", "", "shameGuilt", "punishing myself → shameGuilt"],
+  ["I struggle with emotional eating a lot", "", "shameGuilt", "emotional eating → shameGuilt"],
+  ["I use comfort eating to cope with my feelings", "", "shameGuilt", "comfort eating → shameGuilt"],
+  ["I always feel judged in social settings", "", "shameGuilt", "feel judged → shameGuilt"],
+  ["I'm under a lot of social pressure at university", "", "relax", "social pressure → relax"],
+  ["exam pressure is getting to me this month", "", "relax", "exam pressure → relax"],
+  ["send me a positive message today", "", "inspire", "positive message → inspire (uplift→energy dead code removed)"],
+  ["I want to start a daily plan for my wellbeing", "", "programs", "daily plan → programs (avoids meditation preemption)"],
 
   // R103: baby (pregnant/IVF), relax (performance review/hormonal changes), sadness (complicated grief/cancer/aging)
   ["I just found out I'm pregnant and feeling overwhelmed", "", "baby", "pregnant → baby"],
