@@ -1393,6 +1393,86 @@
       });
     }
 
+    // R63: Niche autocomplete — shows up to 3 matching suggestions as user types; click auto-fills + submits.
+    if (input && form && !window._pbAcInited) {
+      window._pbAcInited = true;
+      var _acWords = [
+        'solicitor website','dental practice website','wedding photographer website',
+        'estate agent website','hotel website','bed and breakfast website',
+        'car garage website','hair salon website','personal trainer website',
+        'childminder website','restaurant website','pub website',
+        'plumber website','electrician website','accountant website',
+        'florist website','dog trainer website','jeweller website',
+        'copywriter website','funeral director website','optician website',
+        'physiotherapist website','architect website','veterinary website',
+        'mortgage broker website','removal company website','podiatrist website',
+        'insurance broker website','social media agency website','translation agency website',
+        'chartered surveyor website','graphic designer website','catering company website',
+        'private chef website','yoga instructor website','life coach website',
+        'speech therapist website','hypnotherapist website','drone pilot website',
+        'tattoo studio website','beauty therapist website','nutritionist website',
+      ];
+      var _acPanel = document.createElement('div');
+      _acPanel.className = 'pb-brain__ac-panel';
+      _acPanel.setAttribute('role', 'listbox');
+      _acPanel.style.display = 'none';
+      if (input.parentNode) input.parentNode.appendChild(_acPanel);
+      var _acActive = -1;
+
+      function _acRender(matches) {
+        _acPanel.innerHTML = '';
+        _acActive = -1;
+        if (!matches.length) { _acPanel.style.display = 'none'; return; }
+        matches.forEach(function(m, i) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'pb-brain__ac-item';
+          btn.setAttribute('role', 'option');
+          btn.setAttribute('data-idx', i);
+          btn.textContent = 'I need a ' + m;
+          btn.addEventListener('mousedown', function(e) {
+            e.preventDefault(); // keep input focused
+            input.value = 'I need a ' + m;
+            _acPanel.style.display = 'none';
+            input.focus();
+            form.dispatchEvent(new Event('submit', { bubbles: true }));
+          });
+          _acPanel.appendChild(btn);
+        });
+        _acPanel.style.display = 'block';
+      }
+
+      input.addEventListener('input', function() {
+        var q = input.value.trim().toLowerCase();
+        if (q.length < 2) { _acPanel.style.display = 'none'; return; }
+        var hits = _acWords.filter(function(w) { return w.indexOf(q) > -1; }).slice(0, 3);
+        _acRender(hits);
+      });
+
+      input.addEventListener('keydown', function(e) {
+        var items = _acPanel.querySelectorAll('.pb-brain__ac-item');
+        if (!items.length || _acPanel.style.display === 'none') return;
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          _acActive = Math.min(_acActive + 1, items.length - 1);
+          items.forEach(function(el, i) { el.classList.toggle('pb-brain__ac-item--focus', i === _acActive); });
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          _acActive = Math.max(_acActive - 1, -1);
+          items.forEach(function(el, i) { el.classList.toggle('pb-brain__ac-item--focus', i === _acActive); });
+        } else if (e.key === 'Enter' && _acActive > -1) {
+          e.stopImmediatePropagation();
+          items[_acActive].dispatchEvent(new Event('mousedown', { bubbles: true }));
+        } else if (e.key === 'Escape') {
+          _acPanel.style.display = 'none';
+        }
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!_acPanel.contains(e.target) && e.target !== input) _acPanel.style.display = 'none';
+      });
+    }
+
     form.addEventListener('submit', async e => {
       e.preventDefault();
       const text = input.value.trim();

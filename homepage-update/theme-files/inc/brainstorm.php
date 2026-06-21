@@ -671,6 +671,59 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 
 
 
+
+			// 0d-pre59-a) Speech and language therapist / SALT / stammering / AAC
+			if ($has(['speech therapist website','speech and language therapist website','salt website','stammering website','stuttering website','communication difficulties website','aphasia website','aac website','speech language pathology website','dysphasia website','dysarthria website','voice therapist website','speech therapy website','swallowing therapist website','dysphagia website','makaton website'])) {
+				$parts = [
+					"<strong>Speech &amp; Language Therapy website</strong> &mdash; HCPC-registered, RCSLT-member credibility from the first sentence.",
+					"&bull; <strong>HCPC registration</strong>: SLT is a protected title; HCPC registration number above the fold is mandatory for legal practice; RCSLT membership badge; from &pound;100",
+					"&bull; <strong>Condition &amp; service pages</strong>: stammering/stuttering; aphasia (post-stroke); dyslexia &amp; dyspraxia (children); selective mutism; voice disorders; dysarthria; dysphagia (swallowing); AAC (Augmentative &amp; Alternative Communication); Makaton; each page targets &ldquo;[condition] therapy [city]&rdquo;; from &pound;150/page",
+					"&bull; <strong>Children vs adults split</strong>: paediatric (late talkers; language delay; social communication; ASD; ADHD co-occurrence) vs adult (neurological; oncology; acquired conditions); separate pathways reduce bounce; from &pound;200",
+					"&bull; <strong>Video introduction</strong>: parents and adult clients report it reduces first-session anxiety; Loom or embedded YouTube; from &pound;150",
+					"&bull; <strong>Online booking</strong>: Cliniko; WriteUpp; Jane App; video therapy sessions (Zoom/Whereby); from &pound;250",
+					"&bull; <strong>School &amp; NHS referral pathway</strong>: explains EHCP; SEND Code of Practice; waiting list context; converts self-funders unwilling to wait; from &pound;150",
+					"&bull; <strong>Resources &amp; parent guides</strong>: &ldquo;5 ways to support a child&rsquo;s speech at home&rdquo;; email opt-in; from &pound;100/guide",
+					"&bull; <strong>Testimonials with specifics</strong>: &ldquo;Our son went from 10 words to sentences in 12 weeks&rdquo;; anonymised per GDPR; from &pound;100",
+					"From &pound;600 &mdash; &pound;1,400+",
+				];
+				return $nl($parts);
+			}
+
+			// 0d-pre59-b) Hypnotherapist / clinical hypnotherapy / NLP / smoking cessation / weight loss
+			if ($has(['hypnotherapist website','hypnotherapy website','clinical hypnotherapy website','hypnosis website','nlp practitioner website','smoking cessation website','stop smoking website','weight loss hypnotherapy website','phobia treatment website','anxiety hypnotherapy website','sleep hypnotherapy website','hypnobirthing website','past life regression website','solution focused hypnotherapy website','hypnotherapy for ibs website','hypnotherapy for confidence website'])) {
+				$parts = [
+					"<strong>Hypnotherapy website</strong> &mdash; build credibility for an often-sceptical visitor in the first scroll.",
+					"&bull; <strong>Credentials above fold</strong>: GHR (General Hypnotherapy Register) or CNHC (Complementary &amp; Natural Healthcare Council, UKAS-accredited); NCH (National Council for Hypnotherapy); BWRT practitioner; these distinguish clinical practitioners from stage performers; from &pound;100",
+					"&bull; <strong>Issue-specific landing pages</strong>: stop smoking (NHS Smokefree evidence cited); weight loss (gastric band hypnosis; mindful eating); anxiety &amp; stress; phobias; insomnia; IBS (NICE guidelines now reference gut-directed hypnotherapy); confidence; exam nerves; performance anxiety; each ranks for &ldquo;hypnotherapy for [issue] [city]&rdquo;; from &pound;150/page",
+					"&bull; <strong>How hypnotherapy works</strong>: science-first explainer dispels myths (&ldquo;you can&rsquo;t be made to do anything against your will&rdquo;); references to neuroscience; builds pre-visit trust; from &pound;200",
+					"&bull; <strong>Solution Focused vs traditional</strong>: SFBT integration; forward-focus; most preferred by NHS-adjacent practitioners; from &pound;150",
+					"&bull; <strong>Online sessions</strong>: Zoom; secure link; works for travel phobias or housebound clients; from &pound;150",
+					"&bull; <strong>Free discovery call booking</strong>: Calendly; reduces barrier for sceptical first-timers; from &pound;200",
+					"&bull; <strong>Audio download / free resource</strong>: relaxation MP3 opt-in; email list; from &pound;100",
+					"&bull; <strong>Testimonials by issue</strong>: one for smoking, one for weight, one for anxiety; specific outcomes; from &pound;100",
+					"&bull; <strong>FAQ</strong>: &ldquo;How many sessions?&rdquo;; &ldquo;Is it safe?&rdquo;; &ldquo;Can I be made to cluck like a chicken?&rdquo;; from &pound;100",
+					"From &pound;550 &mdash; &pound;1,300+",
+				];
+				return $nl($parts);
+			}
+
+			// 0d-pre59-c) Drone pilot / UAV operator / aerial photography / drone survey / FPV
+			if ($has(['drone pilot website','drone operator website','uav website','uav operator website','aerial photography website','aerial videography website','drone survey website','drone inspection website','drone mapping website','fpv website','commercial drone website','drone services website','aerial survey website','lidar drone website','thermal drone website','drone cinematography website'])) {
+				$parts = [
+					"<strong>Commercial drone / UAV operator website</strong> &mdash; CAA authorisation and insurance front-and-centre.",
+					"&bull; <strong>CAA authorisation</strong>: GVC (General Visual Line of Sight Certificate) holder; PDRA-G01/G02; Specific Operational Authorisation; UAS Operator ID; without these displayed, commercial clients won&rsquo;t sign off; from &pound;100",
+					"&bull; <strong>Service pages by sector</strong>: aerial photography &amp; videography (property; events; weddings; tourism); construction progress monitoring; roof &amp; building inspection (NDT); agricultural mapping (NDVI; crop health); land survey &amp; topographic mapping; infrastructure inspection (pylons; bridges; wind turbines); search &amp; rescue support; FPV creative; from &pound;150/page",
+					"&bull; <strong>Insurance proof</strong>: minimum &pound;1M public liability (most clients require &pound;5M); certificate of insurance download; from &pound;100",
+					"&bull; <strong>Portfolio / showreel</strong>: 90-second drone reel embedded (Vimeo; YouTube); before/after inspection images; from &pound;250",
+					"&bull; <strong>Equipment list</strong>: DJI Matrice; M3T thermal; LiDAR payload; RTK GPS accuracy specs (&plusmn;1cm); multi-rotor vs fixed-wing for mapping; from &pound;150",
+					"&bull; <strong>Deliverables page</strong>: 4K/6K video; RAW stills; orthomosaics; point clouds; Agisoft Metashape; DroneDeploy; from &pound;150",
+					"&bull; <strong>Flight area coverage</strong>: counties covered; controlled airspace experience (A2 CoC); NOTAM filing; from &pound;100/area page",
+					"&bull; <strong>Quote request form</strong>: location; date; project type; area size (ha); required deliverables; from &pound;200",
+					"From &pound;600 &mdash; &pound;1,500+",
+				];
+				return $nl($parts);
+			}
+
 				// 0d-pre58-a) Dog trainer / dog behaviourist / puppy training / canine training / dog obedience / dog agility.
 				if ($has(['dog trainer website','dog training website','dog behaviourist website','puppy training website','canine trainer website','dog obedience website','dog agility website','k9 trainer website','gundog trainer website','dog socialisation website','reactive dog trainer website','dog behaviour consultant website','force free dog trainer website','positive reinforcement dog website','dog training classes website','dog walking training website'])) {
 				  $parts = [
