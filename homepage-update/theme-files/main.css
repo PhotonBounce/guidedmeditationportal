@@ -5050,3 +5050,9 @@ html.pb-brain-open { overflow: hidden; }
   to{ transform:none; }
 }
 .pb-brain__msg{ animation:pbMsgIn .14s ease-out; }
+/* R46 — gold ring ping on new message arrival; --new class on non-err messages */
+@keyframes pbMsgPing{
+  from{ box-shadow:0 0 0 0 rgba(255,212,0,.28); }
+  to{   box-shadow:0 0 0 8px rgba(255,212,0,0); }
+}
+.pb-brain__msg--new{ animation:pbMsgIn .14s ease-out, pbMsgPing .6s ease-out; }

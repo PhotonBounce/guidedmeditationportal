@@ -667,6 +667,60 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre42-a) Dentist / dental practice / dental clinic / orthodontist website.
+	if ( $has( [ 'dentist website', 'dental practice website', 'dental clinic website', 'nhs dentist website', 'private dentist website', 'orthodontist website', 'cosmetic dentist website', 'dental implants website', 'dental hygienist website', 'teeth whitening website', 'invisalign website', 'braces website', 'emergency dentist website', 'childrens dentist website', 'smile clinic website', 'dental surgery website' ] ) ) {
+		return $nl( [
+			"Dental practice websites convert on trust and availability &mdash; GDC registration and emergency access are the two conversion anchors:",
+			'',
+			"&bull; <strong>Treatment pages</strong> &mdash; one per treatment (check-up / hygienist / composite bonding / veneers / whitening / implants / Invisalign / fixed braces / extractions / root canal / emergency / children&rsquo;s dentistry); what to expect description; price or NHS charge band; from <strong>$200</strong> per page",
+			"&bull; <strong>Online booking</strong> &mdash; Dentally / Software of Excellence / Exact; NHS vs private slot types; new patient registration form; 24-hour SMS reminder; from <strong>$300</strong>",
+			"&bull; <strong>GDC and CQC compliance</strong> &mdash; GDC registration number for every named dentist (required by GDC Standards for Dental Professionals); CQC registration number and most recent inspection outcome (England); practice indemnity insurance; patient feedback and complaints procedure link",
+			"&bull; <strong>NHS and private fees page</strong> &mdash; NHS charge bands (Band 1: &pound;26.80 / Band 2: &pound;73.50 / Band 3: &pound;319.10 in England); private fee guide; mixed NHS and private options explained; the most-asked patient question and you should answer it clearly; from <strong>$200</strong>",
+			"&bull; <strong>Cosmetic before / after gallery</strong> &mdash; composite bonding / Invisalign / whitening / veneers; patient consent photographs; paired images labelled by treatment; from <strong>$200</strong>",
+			"&bull; <strong>Emergency appointments page</strong> &mdash; same-day slots vs 111 referral pathway; emergency call-out fee; knocked-out tooth first-aid guide (re-implant within 30 minutes, milk transport); ranks strongly for &ldquo;[area] emergency dentist&rdquo;; from <strong>$150</strong>",
+			"&bull; <strong>Patient testimonials</strong> &mdash; Google Reviews widget; condition-specific quotes (anxiety / implants / children&rsquo;s first visit); video testimonials where available; builds rapport pre-appointment",
+			"&bull; <strong>From $600</strong> treatment pages + booking + GDC compliance + NHS fees; <strong>$1,200+</strong> with cosmetic gallery + emergency page + CQC badge",
+			'',
+			"NHS, private, or mixed? General dentistry, cosmetic, or orthodontics focus? Do you offer sedation for anxious patients?",
+		] );
+	}
+
+	// 0d-pre42-b) Optician / optical practice / optometrist / contact lens specialist website.
+	if ( $has( [ 'optician website', 'optical practice website', 'optometrist website', 'contact lens specialist website', 'glasses website', 'prescription glasses website', 'sunglasses website', 'eye test website', 'eye examination website', 'childrens eye test website', 'dry eye clinic website', 'myopia management website', 'ophthalmologist website', 'vision therapy website', 'spectacle website', 'eyewear website' ] ) ) {
+		return $nl( [
+			"Optical practice websites convert on GOC trust signals and the frame selection experience &mdash; these are your two highest-converting pages:",
+			'',
+			"&bull; <strong>Eye examination page</strong> &mdash; GOC registered optometrist credentials; standard sight test price (&pound;30&ndash;&pound;55 typical); OCT scan premium add-on; diabetes / glaucoma / AMD screening; children&rsquo;s NHS-funded sight tests; what to bring and how long it takes; from <strong>$200</strong>",
+			"&bull; <strong>Online appointment booking</strong> &mdash; Optinet / Acuity / Phorest; test type selector (routine / contact lens fit / OCT / emergency / children); practitioner preference; from <strong>$300</strong>",
+			"&bull; <strong>GOC compliance</strong> &mdash; GOC (General Optical Council) registration number for every named optometrist (required); CQC registration if applicable; patient feedback and complaints link; professional indemnity statement",
+			"&bull; <strong>Frames and lenses page</strong> &mdash; designer brands stocked (Ray-Ban / Oakley / Tom Ford / Lindberg / Silhouette); lens types (single vision / bifocal / varifocal / photochromic / thinned); coatings (UV / anti-reflective / blue light filter / scratch-resistant); price ranges; from <strong>$250</strong>",
+			"&bull; <strong>Virtual try-on</strong> &mdash; Ditto or Fittingbox embed; reduces frame-selection anxiety and returns; link to brand virtual try-on tools if native embed isn&rsquo;t feasible; from <strong>$200</strong>",
+			"&bull; <strong>Contact lens page</strong> &mdash; daily / monthly / toric / multifocal / extended-wear; reorder subscription link (Contactlensesuk / Vision Direct affiliate); contact lens check-up booking; from <strong>$200</strong>",
+			"&bull; <strong>Myopia management page</strong> &mdash; growing specialist area; Ortho-K / MiSight contact lenses / low-dose atropine drops; evidence base summary; parent-focused content; from <strong>$200</strong>",
+			"&bull; <strong>From $550</strong> exam page + booking + GOC compliance; <strong>$1,100+</strong> with frames page + virtual try-on + myopia management",
+			'',
+			"Independent or franchise? Specialisms: myopia management, low vision, dry eye, or sports eyewear? Do you handle hearing aids too?",
+		] );
+	}
+
+	// 0d-pre42-c) Chiropractor / physiotherapist / osteopath / sports therapist website.
+	if ( $has( [ 'chiropractor website', 'physiotherapist website', 'physio website', 'osteopath website', 'sports therapist website', 'massage therapist website', 'sports massage website', 'back pain clinic website', 'neck pain website', 'sports injury website', 'rehabilitation clinic website', 'acupuncturist website', 'manual therapist website', 'musculoskeletal clinic website', 'msk clinic website', 'sports clinic website', 'chiropractic website' ] ) ) {
+		return $nl( [
+			"Musculoskeletal clinic websites convert best on condition pages, not treatment pages &mdash; patients search for their problem, not the modality:",
+			'',
+			"&bull; <strong>Condition pages (not treatment pages)</strong> &mdash; build pages for conditions (lower back pain / sciatica / neck pain / shoulder pain / knee pain / hip pain / sports injury / post-operative rehab / headaches and migraines / pregnancy-related pain); patients search &ldquo;lower back pain treatment&rdquo;, not &ldquo;chiropractic adjustment&rdquo;; from <strong>$150</strong> per condition page",
+			"&bull; <strong>Online booking</strong> &mdash; Cliniko / Power Diary / Jane App; appointment type + practitioner + location; new patient vs follow-up distinction; from <strong>$300</strong>",
+			"&bull; <strong>Regulatory registration</strong> &mdash; GCC (General Chiropractic Council) number for chiropractors (required by law under the Chiropractors Act 1994); HCPC registration number for physiotherapists (required by law); GOSC for osteopaths (required by law); Complementary and Natural Healthcare Council for massage and sports therapists; display registration numbers prominently",
+			"&bull; <strong>Practitioner profiles</strong> &mdash; professional headshots + registration number + areas of specialism + CPD interests + any sport or activity they treat regularly; builds rapport before the appointment; from <strong>$150</strong> per profile",
+			"&bull; <strong>Condition-matched testimonials</strong> &mdash; display lower back testimonials on the lower back page, shoulder on the shoulder page; maximises trust signal relevance",
+			"&bull; <strong>Self-help video content</strong> &mdash; exercise rehabilitation guides for common conditions hosted on YouTube; &ldquo;when to seek professional help&rdquo; guidance; builds organic search and patient trust between appointments",
+			"&bull; <strong>Insurance and BUPA / AXA page</strong> &mdash; list accepted private health insurers; direct billing note where applicable; employer healthcare scheme note; from <strong>$150</strong>",
+			"&bull; <strong>From $500</strong> condition pages + booking + registration compliance; <strong>$1,000+</strong> with practitioner profiles + insurance page + self-help content",
+			'',
+			"Chiropractor, physio, osteopath, or sports therapist? Sole practitioner or a clinic? Sports injury focus or general MSK?",
+		] );
+	}
+
 	// 0d-pre41-a) Solicitor / law firm / barrister / legal services website.
 	if ( $has( [ 'solicitor website', 'law firm website', 'barrister website', 'lawyer website', 'legal services website', 'conveyancing solicitor website', 'family law website', 'employment law website', 'criminal defence website', 'personal injury website', 'immigration solicitor website', 'probate solicitor website', 'will writing website', 'commercial law website', 'litigation website', 'legal firm website', 'law practice website' ] ) ) {
 		return $nl( [

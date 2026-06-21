@@ -609,7 +609,8 @@
 
     function addMsg(text, cls) {
       const div = document.createElement('div');
-      div.className = 'pb-brain__msg pb-brain__msg--' + cls;
+      div.className = 'pb-brain__msg pb-brain__msg--' + (cls === 'bot' ? 'bot' : cls === 'err' ? 'err' : 'me');
+      if (cls !== 'err') div.classList.add('pb-brain__msg--new');
       if (cls === 'bot') {
         var _fmtLines = format(text).split('<br>');
         var _textBody = document.createElement('div');
@@ -705,7 +706,8 @@
       var _tsEl = document.createElement('time');
       _tsEl.className = 'pb-brain__ts';
       var _tn = new Date();
-      _tsEl.textContent = _tn.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      _tsEl.textContent = 'just now';
+      _tsEl.title = _tn.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ' · ' + _tn.toLocaleDateString();
       _tsEl.setAttribute('datetime', _tn.toISOString());
       div.appendChild(_tsEl);
       // Word count badge on bot replies — gives a sense of response length at a glance.
@@ -791,6 +793,25 @@
     function saveChat() {
       try { sessionStorage.setItem('pb_chat_v1', JSON.stringify(chatMsgs)); } catch(e) {}
     }
+
+    // Relative timestamps — rewrite pb-brain__ts textContent every 60s.
+    function _relTime(iso) {
+      var diff = Math.max(0, Math.round((Date.now() - new Date(iso).getTime()) / 1000));
+      if (diff < 60) return 'just now';
+      var m = Math.floor(diff / 60);
+      if (m < 60) return m + 'm ago';
+      var h = Math.floor(m / 60);
+      if (h < 24) return h + 'h ago';
+      return Math.floor(h / 24) + 'd ago';
+    }
+    function _updateTimestamps() {
+      var tss = log ? log.querySelectorAll('time.pb-brain__ts') : [];
+      [].forEach.call(tss, function(t) {
+        var iso = t.getAttribute('datetime');
+        if (iso) t.textContent = _relTime(iso);
+      });
+    }
+    setInterval(_updateTimestamps, 60000);
 
     function clearChat() {
       chatMsgs = []; history = [];
