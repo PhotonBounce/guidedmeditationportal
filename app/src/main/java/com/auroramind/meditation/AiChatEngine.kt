@@ -476,7 +476,11 @@ class AiChatEngine(private val context: Context) {
             "coercive control", "emotional manipulation",
             "codependency", "codependent", "codependent relationship",
             "avoidant attachment", "attachment wound", "attachment issues",
-            "fearful avoidant", "disorganized attachment") ||
+            "fearful avoidant", "disorganized attachment",
+            "feel empty", "feeling empty", "emotional emptiness", "inner emptiness",
+            "bipolar", "bipolar disorder",
+            "manic", "manic episode", "manic phase", "depressive episode",
+            "hypomania", "hypomanic") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
@@ -545,7 +549,8 @@ class AiChatEngine(private val context: Context) {
             "major life change", "big life change", "life upheaval",
             "relocating", "relocation stress",
             "sandwich generation", "caring for aging parents", "caring for elderly parents",
-            "caring for elderly", "elder care", "eldercare",
+            "caring for elderly", "caring for my", "elder care", "eldercare",
+            "caregiver", "carer", "looking after my", "looking after elderly",
             "quiet quitting", "quiet quit",
             "financial crisis", "financial pressure", "financial strain",
             "money pressure", "debt problems", "serious debt", "drowning in debt",

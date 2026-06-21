@@ -351,7 +351,11 @@ function route(lower, lastTopic) {
     "apathy","apathetic","feel apathetic","feeling apathetic",
     "numbness","feeling numb","feel numb","went numb","gone numb",
     "couples therapy","marriage counselling","marriage counseling",
-    "relationship counselling","relationship counseling"]) ||
+    "relationship counselling","relationship counseling",
+    "feel empty","feeling empty","emotional emptiness","inner emptiness",
+    "bipolar","bipolar disorder",
+    "manic","manic episode","manic phase","depressive episode",
+    "hypomania","hypomanic"]) ||
     anyWord(lower,["numb","died","vent"])) return "sadness";
   // 15. shameGuilt
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated",
@@ -417,7 +421,8 @@ function route(lower, lastTopic) {
     "major life change","big life change","life upheaval",
     "relocating","relocation stress",
     "sandwich generation","caring for aging parents","caring for elderly parents",
-    "caring for elderly","elder care","eldercare",
+    "caring for elderly","caring for my","elder care","eldercare",
+    "caregiver","carer","looking after my","looking after elderly",
     "quiet quitting","quiet quit",
     "financial crisis","financial pressure","financial strain",
     "money pressure","debt problems","serious debt","drowning in debt",
@@ -732,6 +737,16 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R105: sadness (feel empty/bipolar/manic), overwhelm (caregiver/carer/looking after)
+  ["I feel empty inside lately", "", "sadness", "feel empty → sadness"],
+  ["I've been diagnosed with bipolar disorder", "", "sadness", "bipolar disorder → sadness"],
+  ["I'm going through a depressive episode", "", "sadness", "depressive episode → sadness"],
+  ["I think I'm having a manic episode", "", "sadness", "manic episode → sadness"],
+  ["I've been experiencing hypomania", "", "sadness", "hypomania → sadness"],
+  ["I'm a full-time caregiver for my partner", "", "overwhelm", "caregiver → overwhelm"],
+  ["being a carer is taking everything out of me", "", "overwhelm", "carer → overwhelm"],
+  ["I'm looking after my elderly mother at home", "", "overwhelm", "looking after my → overwhelm"],
 
   // R104: shameGuilt (self-punishment/emotional eating/feel judged), relax (social pressure/exam pressure), inspire (motivation/words of encouragement), programs (daily plan)
   ["I tend to self-destruct when things are going well", "", "shameGuilt", "self-destruct → shameGuilt"],
