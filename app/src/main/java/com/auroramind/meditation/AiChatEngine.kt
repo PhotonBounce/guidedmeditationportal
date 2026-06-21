@@ -415,6 +415,8 @@ class AiChatEngine(private val context: Context) {
                 SoundType.TONGLEN to "you gravitate toward compassion practices — this opens the heart with warmth"
             favMood == Mood.ENERGY ->
                 SoundType.CIRCUIT_THUNDERCLAP to "you tend toward energising practices — this sparks focus and drive"
+            favMood == Mood.GROUNDING ->
+                SoundType.VIPASSANA to "you gravitate toward grounding practices — Vipassana's body-scan attention anchors you in the present moment"
             hour < 10 ->
                 SoundType.ZHAN_ZHUANG to "settles a busy mind before the day picks up speed"
             hour < 18 ->
