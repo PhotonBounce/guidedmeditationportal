@@ -176,6 +176,9 @@ class AiChatEngine(private val context: Context) {
             handlePositive().also { lastTopic = "" }
         any(lower, "timer", "sleep timer", "how long", "duration", "how many minutes") ->
             handleTimer().also { lastTopic = "" }
+        any(lower, "set alarm", "set an alarm", "morning alarm", "alarm for", "alarm at",
+            "alarm clock", "wake alarm", "daily alarm", "wake me up at", "schedule alarm") ->
+            handleAlarm().also { lastTopic = "" }
         any(lower, "track", "tracks", "session", "sessions", "library", "guided",
             "which track", "what track", "play list", "playlist") ->
             handleAmbient().also { lastTopic = "" }
@@ -829,6 +832,17 @@ class AiChatEngine(private val context: Context) {
         "it settles the mind so the words come more easily\n\n" +
         "Want Spirit to walk you through a brief loving-kindness practice to open the reflection? 🤍",
         SoundType.EVENING_REVIEW
+    )
+
+    private fun handleAlarm(): Pair<String, SoundType?> = Pair(
+        "⏰ Meditation Alarm\n\n" +
+        "Set a daily wake-up that eases you into the morning:\n\n" +
+        "Tap the ⏰ Alarm chip above, or visit the Alarm tab at the bottom of the screen.\n\n" +
+        "You can choose to wake with a gentle synthesised tone or with any meditation track from the library — " +
+        "a soft nudge into consciousness rather than a jolt.\n\n" +
+        "Spirit's pick for a morning wake: ${SoundType.SOHAM.emoji} ${SoundType.SOHAM.displayName} — " +
+        "a slow, grounding breath mantra that eases the nervous system into the day.",
+        null
     )
 
     private fun handleGeneral(input: String = ""): Pair<String, SoundType?> {

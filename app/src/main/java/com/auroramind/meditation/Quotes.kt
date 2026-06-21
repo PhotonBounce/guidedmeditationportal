@@ -64,6 +64,21 @@ object Quotes {
         "Take rest; a field that has rested gives a bountiful crop." to "Ovid",
         "Between stimulus and response there is a space. In that space is our freedom." to "Viktor Frankl",
         "The only way out is through, and the way through is gentle." to "Spirit",
+        "Within you is the dawn of a new day." to "Spirit",
+        "Peace is not absence of noise. It is presence of stillness within the noise." to "Spirit",
+        "We cannot direct the wind, but we can adjust the sails." to "Unknown",
+        "The mind is like water. When it's turbulent, it's difficult to see. When it's calm, everything becomes clear." to "Prasad Mahes",
+        "It is not the mountain we conquer but ourselves." to "Edmund Hillary",
+        "Awareness is the greatest agent for change." to "Eckhart Tolle",
+        "Don't wait for the storm to pass. Learn to dance in the rain." to "Vivian Greene",
+        "Act without expectation." to "Lao Tzu",
+        "All that we are is the result of what we have thought." to "Buddha",
+        "Muddy water, let stand, becomes clear." to "Lao Tzu",
+        "The wound is the place where the light enters you." to "Rumi",
+        "Out beyond ideas of wrongdoing and rightdoing, there is a field. I'll meet you there." to "Rumi",
+        "The present moment always will have been." to "Spirit",
+        "Not all those who wander are lost — and not all those who sit still are idle." to "Spirit",
+        "In the middle of difficulty lies opportunity." to "Albert Einstein",
     )
 
     /** Returns today's quote as (text, author). Stable per calendar day. */
