@@ -101,7 +101,9 @@ class AiChatEngine(private val context: Context) {
         any(lower, "hello", "hi", "hey", "good morning", "good evening", "good night", "yo", "sup") ->
             handleGreeting().also { lastTopic = "greeting" }
         any(lower, "sleep", "insomnia", "cant sleep", "can't sleep", "falling asleep",
-            "bedtime", "tired", "fatigue", "exhausted") ->
+            "bedtime", "tired", "fatigue", "exhausted", "wide awake", "cant switch off",
+            "can't switch off", "racing mind", "racing thoughts", "nap", "night shift",
+            "shift work", "mind won't stop", "mind wont stop") ->
             handleSleep().also { lastTopic = "sleep" }
         any(lower, "focus", "work", "study", "concentrate", "productivity",
             "read", "code", "writing", "attention", "adhd") ->
@@ -111,7 +113,9 @@ class AiChatEngine(private val context: Context) {
             "morning boost", "morning energy") ->
             handleEnergy().also { lastTopic = "energy" }
         any(lower, "relax", "calm", "stress", "anxiety", "anxious", "breathe",
-            "unwind", "rest", "nervous", "tense", "panic") ->
+            "unwind", "rest", "nervous", "tense", "panic", "overthink", "overthinking",
+            "can't stop thinking", "cant stop thinking", "intrusive thoughts", "ruminating",
+            "social anxiety", "public speaking", "presentation nerves", "exam nerves") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
             handleTinnitus().also { lastTopic = "tinnitus" }
@@ -127,7 +131,9 @@ class AiChatEngine(private val context: Context) {
         // Emotional intent handlers — sadness, overwhelm, anger
         any(lower, "sad", "grief", "grieving", "heartbreak", "heartbroken",
             "lonely", "alone", "loneliness", "depressed", "depression",
-            "cry", "crying", "upset", "miserable", "unhappy", "low mood") ->
+            "cry", "crying", "upset", "miserable", "unhappy", "low mood",
+            "empty inside", "feel empty", "feeling empty", "numb", "hopeless",
+            "hollow", "disconnected", "meaningless", "no motivation", "nothing matters") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out",
             "too much", "cant cope", "can't cope", "too busy", "overloaded",
@@ -157,6 +163,10 @@ class AiChatEngine(private val context: Context) {
         any(lower, "grateful", "gratitude", "journal", "journaling", "reflect",
             "reflection", "intention", "intentions", "thankful", "thankfulness") ->
             handleGratitude().also { lastTopic = "gratitude" }
+        any(lower, "inspire me", "inspiration", "quote", "affirmation", "motivate me",
+            "encourage me", "daily tip", "today's practice", "what should i practice",
+            "technique of the day", "something to try") ->
+            handleInspiration().also { lastTopic = "" }
         any(lower, "journey", "journeys", "program", "programs", "course",
             "guided course", "structured", "7 day", "7-day", "5 day", "5-day", "challenge") ->
             handlePrograms().also { lastTopic = "" }
@@ -386,17 +396,32 @@ class AiChatEngine(private val context: Context) {
         return Pair(msgs[turnsCount % msgs.size], null)
     }
 
-    private fun handleTimer(): Pair<String, SoundType?> = Pair(
-        "⏱️ Session Timer Guidance\n\n" +
-        "Spirit's gentle suggestions for session length:\n\n" +
-        "10–15 min — a short pause between moments of your day\n" +
-        "30 min — a standard wind-down or sitting practice\n" +
-        "90 min — a full restorative session\n" +
-        "8 hours — all-night gentle presence\n\n" +
-        "A slow fade-out tends to feel more natural than an abrupt stop.\n\n" +
-        "Tap Timer on the main screen to set your duration!",
-        null
-    )
+    private fun handleTimer(): Pair<String, SoundType?> {
+        val goalMood = prefs.getGoal()
+        val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        val rec = when {
+            goalMood == Mood.SLEEP || hour >= 21 || hour < 6 ->
+                "30–45 min — enough to guide you into sleep without waking you when it ends"
+            goalMood == Mood.FOCUS ->
+                "25 min (Pomodoro cycle) or 50 min — aligned with a natural focus sprint"
+            goalMood == Mood.STRESS ->
+                "10–20 min — short enough to commit to, long enough to actually land"
+            else ->
+                "20–30 min — a standard sitting or wind-down practice"
+        }
+        return Pair(
+            "⏱️ Session Timer\n\n" +
+            "Spirit's suggestion for your practice right now:\n\n" +
+            "$rec\n\n" +
+            "General reference:\n" +
+            "5–10 min — a micro-reset between tasks\n" +
+            "20–30 min — a full sit or breathwork session\n" +
+            "45–90 min — deep restorative or body-scan practice\n" +
+            "8 hours — all-night gentle presence for sleep\n\n" +
+            "Tap Timer on the main screen to set your duration. A fade-out feels more natural than an abrupt stop. 🌙",
+            null
+        )
+    }
 
     private fun handleAmbient(): Pair<String, SoundType?> = Pair(
         "🌌 Guided Meditation Library\n\n" +
@@ -414,6 +439,23 @@ class AiChatEngine(private val context: Context) {
         "${SoundType.TONGLEN.emoji} ${SoundType.TONGLEN.displayName} any time you need permission to simply rest.",
         SoundType.SOHAM
     )
+
+    private fun handleInspiration(): Pair<String, SoundType?> {
+        val today = MicroTechniques.today()
+        val goalMood = prefs.getGoal()
+        val goalTech = if (goalMood != null) MicroTechniques.forGoal(goalMood).randomOrNull() else null
+        val extra = if (goalTech != null && goalTech.title != today.title)
+            "\n\nMatched to your practice goal — ${goalTech.emoji} ${goalTech.title}: ${goalTech.teaser}"
+        else ""
+        return Pair(
+            "✨ Today's Technique — ${today.emoji} ${today.title}\n\n" +
+            "\"${today.teaser}\"\n\n" +
+            "${today.body}" +
+            extra +
+            "\n\nPair with ${mostPlayed.emoji} ${mostPlayed.displayName} for a grounded session. Want to go deeper?",
+            mostPlayed
+        )
+    }
 
     private fun handlePrograms(): Pair<String, SoundType?> {
         val lines = Programs.all.joinToString("\n\n") { prog ->
