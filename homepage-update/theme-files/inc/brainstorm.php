@@ -674,6 +674,60 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 
 
 
+
+			// 0d-pre62-a) Painter and decorator / painting and decorating / wallpaper hanger / decorator
+			if ($has(['painter and decorator website','painting and decorating website','decorator website','painter decorator website','decorating company website','wallpaper hanger website','interior painter website','exterior painter website','commercial painter website','painting contractor website','decorating contractor website','painting business website','house painter website','property painter website','decorating services website','painting services website'])) {
+				$parts = [
+					"<strong>Painter &amp; decorator website</strong> &mdash; show your finish quality before they call anyone else.",
+					"&bull; <strong>Portfolio gallery</strong>: before &amp; after; room type (bedroom; kitchen; exterior; commercial; feature wall; wallpaper); finish type (matt; silk; eggshell; specialist coatings; limewash); from &pound;200",
+					"&bull; <strong>Service pages</strong>: interior painting; exterior painting; wallpapering; feature walls; coving &amp; cornices; spray finishing; wood staining; commercial contracts; new-build decoration; from &pound;150/page",
+					"&bull; <strong>Online quote form</strong>: room count; surface area; prep required; desired finish; timeline; from &pound;200",
+					"&bull; <strong>Products &amp; paints page</strong>: Farrow &amp; Ball; Little Greene; Dulux Trade; Zinsser; Crown; brand association builds perceived quality; from &pound;100",
+					"&bull; <strong>Colour consultation</strong>: NCS/RAL colour matching; designer collaboration; from &pound;150",
+					"&bull; <strong>Insurance &amp; accreditation</strong>: Dulux Decorator Centre approved; Federation of Master Decorators; TrustMark; Guild of Master Craftsmen; from &pound;100",
+					"&bull; <strong>Google Reviews integration</strong>: schema markup; &ldquo;[city] painter reviews&rdquo; SEO; from &pound;100",
+					"&bull; <strong>FAQs</strong>: how long does a room take; do you move furniture; best time of year for exterior; from &pound;100",
+					"&bull; <strong>Coverage area pages</strong>: &ldquo;painter decorator [town]&rdquo;; from &pound;100/page",
+					"From &pound;500 &mdash; &pound;1,200+",
+				];
+				return $nl($parts);
+			}
+
+			// 0d-pre62-b) Pest control / pest exterminator / vermin control / rodent control / BPCA
+			if ($has(['pest control website','pest exterminator website','pest controller website','vermin control website','rodent control website','rat pest control website','mouse control website','wasp nest website','cockroach control website','bed bug website','ant control website','mole catcher website','pigeon control website','commercial pest control website','fumigation website','bpca pest control website'])) {
+				$parts = [
+					"<strong>Pest control website</strong> &mdash; urgency is the trigger; trust and 24-hour availability close the call.",
+					"&bull; <strong>Emergency callout page</strong>: 24/7 availability; same-day service; phone number above fold; call-tracking number; from &pound;200",
+					"&bull; <strong>Pest identification pages</strong>: rats; mice; wasps; hornets; cockroaches; bed bugs; ants; pigeons; moles; squirrels; fleas; moths; cluster flies; each page targets &ldquo;[pest] control [city]&rdquo;; highest organic traffic channel; from &pound;150/page",
+					"&bull; <strong>BPCA / RSPH credentials</strong>: British Pest Control Association member; Royal Society for Public Health; HSE-compliant insecticide use; distinguishes professional from DIY; from &pound;100",
+					"&bull; <strong>Domestic vs commercial split</strong>: homeowners (one-off treatment) vs commercial (contract; food safety; HACCP; BRC audit ready); from &pound;150",
+					"&bull; <strong>Proofing &amp; prevention services</strong>: rat proofing; bird netting; spike installation; fly screens; recurring revenue beyond treatments; from &pound;150",
+					"&bull; <strong>Online booking / quote form</strong>: pest type; property type; area size; urgency; from &pound;200",
+					"&bull; <strong>Case studies</strong>: &ldquo;Restaurant failed EHO visit &mdash; cleared in 48hrs&rdquo;; commercial social proof; from &pound;100",
+					"&bull; <strong>Coverage area pages</strong>: &ldquo;rat control [town]&rdquo;; &ldquo;wasp nest removal [town]&rdquo;; from &pound;100/page",
+					"From &pound;500 &mdash; &pound;1,200+",
+				];
+				return $nl($parts);
+			}
+
+			// 0d-pre62-c) Care home / residential care / domiciliary care / live-in care / CQC registered
+			if ($has(['care home website','residential care website','nursing home website','domiciliary care website','home care website','live in care website','live-in care website','cqc care website','elderly care website','dementia care website','supported living website','respite care website','care agency website','homecare website','adult social care website','disability care website'])) {
+				$parts = [
+					"<strong>Care home / domiciliary care website</strong> &mdash; families decide emotionally; CQC compliance and empathy close the choice.",
+					"&bull; <strong>CQC registration &amp; rating</strong>: CQC inspection rating (Outstanding/Good) displayed prominently; registration number; mandatory under Care Quality Commission guidelines; from &pound;100",
+					"&bull; <strong>Care type pages</strong>: residential care; nursing care; dementia &amp; Alzheimer&rsquo;s; respite; day care; live-in care; domiciliary (visiting care); supported living; learning disabilities; from &pound;150/page",
+					"&bull; <strong>Virtual tour &amp; gallery</strong>: families research remotely first; room types; communal areas; gardens; from &pound;250",
+					"&bull; <strong>Staff profiles</strong>: lead carers; nurses; activities coordinator; DBS checked; training (QCF/NVQ Level 2/3; Dementia Friends); builds trust with families; from &pound;150",
+					"&bull; <strong>Fees &amp; funding page</strong>: NHS Continuing Healthcare; Local Authority funding; self-funding; Attendance Allowance; transparency reduces enquiry friction; from &pound;150",
+					"&bull; <strong>Family resources page</strong>: &ldquo;How to choose a care home&rdquo;; CQC checklist; visiting rights post-COVID; from &pound;100",
+					"&bull; <strong>Activities &amp; wellbeing</strong>: weekly programme; reminiscence therapy; garden activities; outings; converts families reassessing quality of life; from &pound;100",
+					"&bull; <strong>Online enquiry / show-round booking</strong>: Calendly; low-friction first step; from &pound;200",
+					"&bull; <strong>Testimonials from families</strong>: specific (&ldquo;Mum settled within a week&rdquo;); GDPR-compliant consent; from &pound;100",
+					"From &pound;700 &mdash; &pound;1,800+",
+				];
+				return $nl($parts);
+			}
+
 			// 0d-pre61-a) Music teacher / guitar teacher / piano teacher / singing teacher / music school
 			if ($has(['music teacher website','guitar teacher website','piano teacher website','singing teacher website','music school website','drum teacher website','violin teacher website','music tutor website','music lessons website','online music lessons website','music academy website','singing lessons website','music studio website','music education website','rockschool teacher website','abrsm teacher website'])) {
 				$parts = [

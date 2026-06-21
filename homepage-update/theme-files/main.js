@@ -1506,6 +1506,50 @@
       });
     }
 
+    // R66: Topic quick-nav — sticky bar lists detected topic tags; click scrolls to first occurrence.
+    if (log && !window._pbQnInited) {
+      window._pbQnInited = true;
+      var _qnBar = document.createElement('div');
+      _qnBar.className = 'pb-brain__quicknav';
+      _qnBar.style.display = 'none';
+      log.insertBefore(_qnBar, log.firstChild);
+
+      function _qnBuild() {
+        var tags = log.querySelectorAll('.pb-brain__topic-tag');
+        var seen = {}, items = [];
+        for (var _qi = 0; _qi < tags.length; _qi++) {
+          var lbl = tags[_qi].textContent.trim();
+          if (!seen[lbl]) { seen[lbl] = tags[_qi]; items.push({ lbl: lbl, el: tags[_qi] }); }
+        }
+        if (items.length < 2) { _qnBar.style.display = 'none'; return; }
+        _qnBar.innerHTML = '<span class="pb-brain__quicknav-label">Jump to:</span>';
+        items.forEach(function(it) {
+          var _chip = document.createElement('button');
+          _chip.type = 'button';
+          _chip.className = 'pb-brain__quicknav-chip';
+          _chip.textContent = it.lbl;
+          (function(_it) {
+            _chip.addEventListener('click', function() {
+              _it.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              _it.el.classList.add('pb-brain__topic-tag--flash');
+              setTimeout(function() { _it.el.classList.remove('pb-brain__topic-tag--flash'); }, 900);
+            });
+          })(it);
+          _qnBar.appendChild(_chip);
+        });
+        _qnBar.style.display = 'flex';
+      }
+
+      var _qnMO = new MutationObserver(function(muts) {
+        var added = false;
+        muts.forEach(function(mu) {
+          mu.addedNodes.forEach(function(n) { if (n !== _qnBar) added = true; });
+        });
+        if (added) _qnBuild();
+      });
+      _qnMO.observe(log, { childList: true });
+    }
+
     form.addEventListener('submit', async e => {
       e.preventDefault();
       const text = input.value.trim();
