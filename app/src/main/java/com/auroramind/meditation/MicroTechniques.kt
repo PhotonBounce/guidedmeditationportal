@@ -146,6 +146,15 @@ object MicroTechniques {
             Mood.COMPASSION,
         ),
         Technique(
+            "Peaceful Place", "🏡",
+            "Picture a place where you feel completely safe — and stay there.",
+            "Close your eyes. Imagine a place — real or created — where you feel completely safe and still. " +
+            "It might be a beach at dusk, a quiet forest, a childhood room. Slowly fill in the details: " +
+            "what do you see around you? What sounds are present? What does the air feel like on your skin? " +
+            "Let yourself fully inhabit the scene. When thoughts intrude, gently return there.",
+            Mood.SLEEP,
+        ),
+        Technique(
             "Power Breath", "⚡",
             "20 quick belly pumps followed by a 5-count hold — a natural energy shot.",
             "Sit upright. Take a deep inhale. Now do 20 quick, sharp exhales through your nose, " +
