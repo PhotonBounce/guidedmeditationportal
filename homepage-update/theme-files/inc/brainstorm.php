@@ -614,6 +614,59 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre39-a) Flooring installer / floor layer / carpet fitter / flooring company website.
+	if ( $has( [ 'flooring installer website', 'flooring company website', 'carpet fitter website', 'floor layer website', 'carpet fitting website', 'hardwood floor website', 'laminate flooring website', 'vinyl flooring website', 'parquet floor website', 'carpet installer website', 'wood floor website', 'flooring contractor website', 'floor fitting website', 'floor installer website', 'lvt flooring website', 'amtico website', 'karndean website', 'engineered wood flooring website' ] ) ) {
+		return $nl( [
+			"Flooring customers decide on material first, then search for an installer &mdash; your site needs to rank for both:",
+			'',
+			"&bull; <strong>Flooring type pages</strong> &mdash; one per material (carpet / hardwood / engineered wood / LVT / laminate / parquet / polished concrete / Amtico / Karndean / herringbone); species / grade / construction notes; underfloor heating compatibility; from <strong>$150</strong> per page",
+			"&bull; <strong>Room calculator</strong> &mdash; input room dimensions &rarr; estimated m&sup2; with waste factor (10% for LVT and laminate, 15% for herringbone and carpet seaming) &rarr; material quantity; optional labour rate for rough total; from <strong>$350</strong>",
+			"&bull; <strong>Before / after gallery</strong> &mdash; filterable by room type (bedroom / kitchen / hallway / open-plan / staircase / office) and material; transformation proof is the highest-converting flooring content; from <strong>$250</strong>",
+			"&bull; <strong>Showroom / sample page</strong> &mdash; Matterport 3D tour embed or sample-request form; reduces decision anxiety before the site visit; from <strong>$200</strong>",
+			"&bull; <strong>Trade supply page</strong> &mdash; contractor pricing for developers and property managers; bulk order enquiry; sample service; B2B tone; from <strong>$200</strong>",
+			"&bull; <strong>Aftercare and maintenance guides</strong> &mdash; cleaning guide per material (LVT, hardwood, carpet); warranty info; reinforces expertise and reduces support calls",
+			"&bull; <strong>From $500</strong> type pages + calculator + gallery; <strong>$900+</strong> with showroom page + trade supply + aftercare content",
+			'',
+			"Residential, commercial, or both? Which materials do you specialise in? Supply-and-fit or fit-only?",
+		] );
+	}
+
+	// 0d-pre39-b) Cleaning company / office cleaner / domestic cleaner / end-of-tenancy cleaning website.
+	if ( $has( [ 'cleaning company website', 'cleaning service website', 'office cleaning website', 'commercial cleaning website', 'domestic cleaning website', 'house cleaning website', 'end of tenancy cleaning website', 'deep cleaning website', 'industrial cleaning website', 'contract cleaning website', 'office cleaner website', 'carpet cleaning website', 'window cleaning website', 'oven cleaning website', 'home cleaning website', 'professional cleaning website', 'cleaning business website' ] ) ) {
+		return $nl( [
+			"Cleaning sites convert on contract frequency and trust &mdash; these are the pages that win enquiries:",
+			'',
+			"&bull; <strong>Service pages</strong> &mdash; one per service type (office contract cleaning / domestic regular / end-of-tenancy / carpet extraction / window cleaning / oven cleaning / event cleaning / post-construction clean); scope and frequency options per service; from <strong>$200</strong> per page",
+			"&bull; <strong>Online quote form</strong> &mdash; property type + approximate square footage + frequency (one-off / weekly / fortnightly / monthly) + access method (key-hold / alarm code) + optional add-ons; email quote within 24h; from <strong>$250</strong>",
+			"&bull; <strong>DBS-checked staff page</strong> &mdash; enhanced DBS note; uniformed and ID-badged engineers; key-holding and alarm-code procedures; public liability and employer&rsquo;s liability insurance amounts displayed; the most-read page for contract cleaning prospects",
+			"&bull; <strong>COSHH / eco-cleaning section</strong> &mdash; COSHH-assessed product list; eco option (Force of Nature / Delphis Eco); biodegradable consumables; critical trust signal for food-prep, healthcare, and school contracts",
+			"&bull; <strong>End-of-tenancy guarantee</strong> &mdash; re-clean within 72 hours if deposit is deducted due to cleaning; the strongest differentiator in tenant cleaning; from <strong>$150</strong> to add to EOT service page",
+			"&bull; <strong>Checklist downloads</strong> &mdash; end-of-tenancy checklist PDF; office handover checklist; helps the client plan AND positions the company as the authority; from <strong>$150</strong>",
+			"&bull; <strong>Case studies</strong> &mdash; contract wins (office name / sq ft / frequency / scope if client permits); before and after carpet extraction photos; from <strong>$150</strong> per case study",
+			"&bull; <strong>From $550</strong> service pages + quote form + DBS page; <strong>$1,000+</strong> with EOT guarantee + checklists + case studies",
+			'',
+			"Domestic, commercial contract, or both? Do you cover end-of-tenancy, carpet cleaning, or specialist cleans?",
+		] );
+	}
+
+	// 0d-pre39-c) Locksmith / emergency locksmith / security company / safe installer / CCTV installer website.
+	if ( $has( [ 'locksmith website', 'emergency locksmith website', 'locksmith near me website', 'key cutter website', 'security company website', 'lock company website', 'safe installer website', 'cctv installer website', 'access control website', 'security systems website', 'door entry system website', 'master key system website', 'commercial locksmith website', 'residential locksmith website', 'locksmith business website' ] ) ) {
+		return $nl( [
+			"Locksmith sites have two trust barriers &mdash; emergency pricing suspicion and &ldquo;is this engineer legitimate?&rdquo; &mdash; here&rsquo;s how to clear both:",
+			'',
+			"&bull; <strong>Emergency call-out page</strong> &mdash; 24/7 availability; typical response time (20&ndash;30 min radius); NON-DESTRUCTIVE entry emphasis (85% of lock-outs can be opened without drilling &mdash; most customers don&rsquo;t know this and it&rsquo;s your strongest differentiator); fixed call-out rate displayed (avoid &ldquo;from &pound;X&rdquo; which triggers bait-and-switch suspicion); from <strong>$200</strong>",
+			"&bull; <strong>Service pages</strong> &mdash; residential (lock change / upgrade / duplicate key / window lock) / commercial (master key system / access control / panic hardware / mortice) / auto (vehicle lock-out / transponder key programming) / emergency (24/7 lock-out / boarding up after break-in); from <strong>$150</strong> per page",
+			"&bull; <strong>Cylinder and lock standards page</strong> &mdash; BS EN 1303 / TS 007 3-star / Secured by Design; Ultion / Mul-T-Lock / ASSA ABLOY / Chubb cylinder recommendations; spec comparison; customers who research online know these terms and this page earns the quote",
+			"&bull; <strong>Security survey enquiry</strong> &mdash; free security survey &rarr; written quotation &rarr; install pipeline; conversion path for CCTV and access control upsell; from <strong>$200</strong>",
+			"&bull; <strong>Trust signals</strong> &mdash; Master Locksmith Association (MLA) approved company badge (fewer than 2,000 in the UK &mdash; display prominently); DBS-checked engineers; public liability insurance amount; no call-out fee (if applicable); genuine Google reviews embed",
+			"&bull; <strong>CCTV and access control page</strong> &mdash; CCTV survey + Hikvision / Dahua / Avigilon systems; Paxton / HID access control; door entry and intercom; from <strong>$300</strong>",
+			"&bull; <strong>Area pages</strong> &mdash; &ldquo;[area] locksmith&rdquo; + response time + local reviews; up to five radius towns; Local Business schema; from <strong>$100</strong> per page",
+			"&bull; <strong>From $500</strong> emergency page + service pages + trust signals; <strong>$1,000+</strong> with CCTV / access control + cylinder standards + area pages",
+			'',
+			"Residential, commercial, or both? Do you cover auto / vehicle lock-outs? CCTV and access control, or locks only?",
+		] );
+	}
+
 	// 0d-pre37-a) Music school / music lessons / instrument teacher / music tuition website.
 	if ( $has( [ 'music school website', 'music lessons website', 'guitar teacher website', 'piano teacher website', 'guitar lessons website', 'piano lessons website', 'drum lessons website', 'violin lessons website', 'singing lessons website', 'voice lessons website', 'music tuition website', 'music academy website', 'instrument lessons website', 'online music lessons website', 'music teacher website', 'music studio website' ] ) ) {
 		return $nl( [

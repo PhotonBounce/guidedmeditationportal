@@ -332,6 +332,23 @@
     if (_nearBottom()) _newMsgChip.classList.remove('pb-brain__newmsg--vis');
   });
 
+  // Scroll progress strip — sticky 2px bar at top of log; gold fill shows % scrolled.
+  var _scrollProg = document.createElement('div');
+  _scrollProg.className = 'pb-brain__scrollprog';
+  _scrollProg.setAttribute('aria-hidden', 'true');
+  var _scrollProgBar = document.createElement('div');
+  _scrollProgBar.className = 'pb-brain__scrollprog-bar';
+  _scrollProg.appendChild(_scrollProgBar);
+  if (log) log.insertBefore(_scrollProg, log.firstChild);
+  function _updateScrollProg() {
+    if (!log) return;
+    var range = log.scrollHeight - log.clientHeight;
+    if (range < 40) { _scrollProg.style.display = 'none'; return; }
+    _scrollProg.style.display = '';
+    _scrollProgBar.style.width = Math.min(100, Math.round(log.scrollTop / range * 100)) + '%';
+  }
+  if (log) log.addEventListener('scroll', _updateScrollProg, { passive: true });
+
   // SR-only live region — screen readers announce new bot replies automatically.
   var _srLive = document.createElement('div');
   _srLive.className = 'pb-brain__sr-live';
@@ -1119,7 +1136,7 @@
           '<span><kbd>Shift</kbd>+<kbd>Enter</kbd> New line</span>',
           '<span><kbd>Enter</kbd> Send message</span>',
           '<span><kbd>Esc</kbd> Close / cancel search</span>',
-          '<span><kbd>Ctrl</kbd>+<kbd>↑</kbd> Edit last message</span>',
+          '<span><kbd>↑</kbd> / <kbd>↓</kbd> Browse sent messages</span>',
         ].join('');
         brainHead.appendChild(_helpPanel);
         helpBtn.addEventListener('click', function() {

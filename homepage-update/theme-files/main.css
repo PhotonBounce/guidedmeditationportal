@@ -5023,3 +5023,13 @@ html.pb-brain-open { overflow: hidden; }
   color:rgba(244,246,251,.72);
 }
 @media(max-width:600px){ .pb-faq__q{ font-size:14px; } .pb-faq__a{ font-size:14px; } }
+/* R43 — Scroll progress strip */
+.pb-brain__scrollprog{
+  position:sticky; top:0; z-index:3; height:2px;
+  background:rgba(255,255,255,.06); pointer-events:none; display:none;
+}
+.pb-brain__scrollprog-bar{
+  height:100%; width:0;
+  background:linear-gradient(90deg,rgba(255,212,0,.6),rgba(255,180,0,.35));
+  transition:width .08s linear; border-radius:0 1px 1px 0;
+}
