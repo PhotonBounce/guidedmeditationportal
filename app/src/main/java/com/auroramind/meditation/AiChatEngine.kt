@@ -119,7 +119,7 @@ class AiChatEngine(private val context: Context) {
 
         any(lower, "hello", "good morning", "good evening", "good night") ||
         anyWord(lower, "hi", "hey", "yo", "sup") ->
-            handleGreeting().also { lastTopic = "greeting" }
+            handleGreeting().also { lastTopic = "" }
         // Baby+sleep compounds must come before the bare "sleep" route to win
         any(lower, "baby sleep", "baby won't sleep", "baby can't sleep", "baby keeps waking",
             "infant sleep", "toddler sleep", "toddler won't sleep", "child won't sleep") ->
