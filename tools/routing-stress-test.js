@@ -42,7 +42,8 @@ function route(lower, lastTopic) {
     "dissociation","dissociating","dissociated","derealization","depersonalization",
     "feel unreal","feeling unreal","not feeling real","feel detached","ocd","obsessive",
     "compulsive thoughts","freaking out","freak out","losing my mind","losing it",
-    "can't cope with","cant cope with","spiralling","spiraling"]) ||
+    "can't cope with","cant cope with","spiralling","spiraling",
+    "dwell on","dwelling on","can't stop dwelling","keep dwelling"]) ||
     anyWord(lower,["rest","tense"])) return "relax";
   if(any(lower,["sad","grief","grieving","heartbreak","heartbroken","lonely","alone","loneliness",
     "depressed","depression","cry","crying","upset","miserable","unhappy","low mood","empty inside",
@@ -54,7 +55,9 @@ function route(lower, lastTopic) {
     "feel invisible","feel unseen","feel unloved","unlovable","not loved","no one cares",
     "not great","not so great","not feeling great","not doing great",
     "feeling off","bit off","not myself","off today","not okay","not ok today",
-    "not doing ok","not doing well"]) ||
+    "not doing ok","not doing well",
+    "unwell","not well","not feeling well","feeling unwell",
+    "not fine","i'm not fine","im not fine"]) ||
     anyWord(lower,["numb","died","vent"])) return "sadness";
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated","self-blame",
     "blame myself","hate my body","feel worthless","not good enough",
@@ -171,6 +174,13 @@ var tests = [
   ["i'm not doing well", "", "NOT:positive", "not doing well → sadness"],
   ["not myself lately", "", "NOT:positive", "not myself → sadness"],
   ["i'm feeling off today", "", "NOT:positive", "feeling off → sadness"],
+
+  // R57: isWell false positive fix + dwell rumination
+  ["i'm not feeling well", "", "sadness", "not feeling well → sadness, not isWell in general"],
+  ["i'm feeling unwell", "", "sadness", "unwell → sadness (not well substring-match)"],
+  ["i'm not fine", "", "NOT:positive", "not fine → sadness, not positive"],
+  ["i keep dwelling on the past", "", "relax", "dwelling on → relax (rumination)"],
+  ["i keep dwelling on what happened", "", "relax", "dwelling on → relax"],
 
   // R56: followUp sim sync + relax sim sync
   ["go ahead", "sleep", "followUp", "go ahead with lastTopic → followUp"],

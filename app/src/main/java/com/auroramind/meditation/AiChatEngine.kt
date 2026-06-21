@@ -172,7 +172,8 @@ class AiChatEngine(private val context: Context) {
             "feel unreal", "feeling unreal", "not feeling real", "feel detached",
             "ocd", "obsessive", "compulsive thoughts",
             "freaking out", "freak out", "losing my mind", "losing it",
-            "can't cope with", "cant cope with", "spiralling", "spiraling") ||
+            "can't cope with", "cant cope with", "spiralling", "spiraling",
+            "dwell on", "dwelling on", "can't stop dwelling", "keep dwelling") ||
         anyWord(lower, "rest", "tense") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
@@ -225,7 +226,9 @@ class AiChatEngine(private val context: Context) {
             "unlovable", "not loved", "no one cares",
             "not great", "not so great", "not feeling great", "not doing great",
             "feeling off", "bit off", "not myself", "off today", "not okay",
-            "not ok today", "not doing ok", "not doing well") ||
+            "not ok today", "not doing ok", "not doing well",
+            "unwell", "not well", "not feeling well", "feeling unwell",
+            "not fine", "i'm not fine", "im not fine") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
