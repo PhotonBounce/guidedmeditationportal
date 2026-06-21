@@ -5138,3 +5138,19 @@ pre.pb-brain__code-block code{ font-size:inherit; background:none; border:none; 
   border-radius:2px;
   animation:pb-confetti-fall 1.7s cubic-bezier(.25,.8,.25,1) both;
 }
+/* R52 — markdown table rendering in format() */
+.pb-brain__tbl{
+  display:table; width:100%; border-collapse:collapse;
+  margin:6px 0; font-size:12.5px; line-height:1.45;
+}
+.pb-brain__tbl th{
+  background:rgba(255,212,0,.1); color:rgba(255,212,0,.9);
+  font-weight:600; text-align:left;
+  padding:5px 10px; border-bottom:1px solid rgba(255,212,0,.25);
+}
+.pb-brain__tbl td{
+  padding:4px 10px; color:rgba(255,255,255,.82);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.pb-brain__tbl tr:last-child td{ border-bottom:none; }
+.pb-brain__tbl tr:hover td{ background:rgba(255,212,0,.04); }

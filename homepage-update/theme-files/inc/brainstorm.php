@@ -667,6 +667,68 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
+	// 0d-pre48-a) Florist / wedding florist / flower shop / event florist website.
+	if ( $has( [ 'florist website', 'flower shop website', 'florist shop website', 'wedding florist website', 'event florist website', 'floral designer website', 'flower delivery website', 'local florist website', 'florist near me website', 'bouquet website', 'funeral flowers website', 'sympathy flowers website', 'corporate flowers website', 'flower subscription website', 'dried flower website', 'flower studio website' ] ) ) {
+		return $nl( [
+			"Florist websites convert on visual impact and instant ordering &mdash; the photography IS the product, and the booking/order journey must be frictionless:",
+			'',
+			"&bull; <strong>Gallery with occasion tabs</strong>: weddings; funerals; corporate; birthday; new baby; get well; anniversary; seasonal. Professional photography essential &mdash; phone photos lose orders. Each image should show the finished arrangement in situ (not just on a white background). From $250.",
+			"&bull; <strong>Online ordering / e-commerce</strong>: WooCommerce or Shopify; product pages per arrangement style with size/price variants; same-day delivery option prominently displayed; local delivery postcode checker; From $400.",
+			"&bull; <strong>Wedding consultation page</strong>: the single highest-value page for a florist site; bride-specific landing page with bridal bouquets, table centres, ceremony arches, buttonholes; consultation booking form (date + venue + style + approximate budget); From $250.",
+			"&bull; <strong>Seasonal collections / occasion pages</strong>: Valentine&rsquo;s Day, Mother&rsquo;s Day, Christmas, and Sympathy separate pages; keyword-rich; Google seasonal search spikes; From $100/page.",
+			"&bull; <strong>Funeral flowers page</strong>: sympathetic tone; tribute types (coffin sprays, wreaths, posies, hearts, letters); direct order or phone; free delivery to funeral directors often converts. This page generates significant revenue and is under-invested in by most florists. From $200.",
+			"&bull; <strong>Flower subscriptions</strong>: weekly or fortnightly bouquet delivery; Stripe recurring billing; gifting option (&ldquo;send flowers for 3 months&rdquo;); growing revenue stream. From $250.",
+			"&bull; <strong>Corporate accounts page</strong>: reception flowers, event centrepieces, office deliveries, account invoicing; B2B buyer different mindset from B2C; From $150.",
+			"&bull; <strong>Real wedding gallery / blog</strong>: one post per wedding (couple consent); each post ranks for &ldquo;[venue name] florist&rdquo; and &ldquo;[area] wedding florist&rdquo;; From $100/post.",
+			"&bull; <strong>Google Business integration</strong>: link from website to Google Reviews; &ldquo;florist near me&rdquo; searches convert best via Google Maps, so the site should reinforce the local address. From $100.",
+			'',
+			"From \$450 for a gallery-led shop site &mdash; \$900+ with e-commerce ordering, wedding consultation landing page, and subscription billing.",
+			'',
+			"What&rsquo;s the primary focus &mdash; retail orders, weddings, or corporate? Delivery only, or walk-in shop too?",
+		] );
+	}
+
+	// 0d-pre48-b) Interior designer / interior decorator / home stager / design consultant website.
+	if ( $has( [ 'interior designer website', 'interior design website', 'interior decorator website', 'home stager website', 'home staging website', 'interior design studio website', 'interior design consultant website', 'residential interior designer website', 'commercial interior designer website', 'kitchen designer website', 'bathroom designer website', 'home renovation website', 'soft furnishings website', 'colour consultant website', 'e-design website', 'virtual interior design website' ] ) ) {
+		return $nl( [
+			"Interior design websites sell a vision before a relationship &mdash; the portfolio must make the buyer feel their home could look like that, before they pick up the phone:",
+			'',
+			"&bull; <strong>Portfolio / project pages</strong>: one page per project with before/after photography, room type, brief/challenge/solution narrative; minimum 8 projects live; RIBA/BIID accreditation logo if applicable. Photography is the single biggest investment &mdash; bad photos kill good work. From $300.",
+			"&bull; <strong>Style quiz or consultation request</strong>: 5-question style quiz (modern/traditional/eclectic/maximalist/Scandi etc.) that leads to a tailored package recommendation; or simply a &ldquo;Book a discovery call&rdquo; form (project type + budget range + timeline). Discovery calls convert at 40&ndash;60&% for well-qualified leads. From $250.",
+			"&bull; <strong>Services and process page</strong>: full design (concept to completion); soft furnishings only; e-design / virtual design service (flat-fee, remote); one-off colour consultation; hourly design advice. Process breakdown (step 1-5) reduces &ldquo;I didn&rsquo;t know what I was getting into&rdquo; cancellations. From $200.",
+			"&bull; <strong>E-design / virtual service</strong>: flat-fee remote service (popular post-pandemic); questionnaire + mood board + supplier list + room plan; can serve national market not just local; from $150.",
+			"&bull; <strong>Investment / pricing page</strong>: publishing even a price range (e.g. &ldquo;projects typically start at \$5,000&rdquo;) filters out low-budget enquiries and improves lead quality dramatically. Second-most-visited page; from $200.",
+			"&bull; <strong>Supplier and trade partnerships</strong>: &ldquo;Access to trade-only pricing from [brand names]&rdquo; is a major differentiator; BIID / NEC3 contract template mention reassures commercial clients; from $150.",
+			"&bull; <strong>Press and features</strong>: if the designer has been featured in House Beautiful, Homes &amp; Gardens, AD, or similar, a press page dramatically increases perceived credibility. From $150.",
+			"&bull; <strong>Interior design blog</strong>: &ldquo;How much does interior design cost?&rdquo;, &ldquo;The difference between an interior designer and decorator&rdquo;, &ldquo;2025 colour trends&rdquo; &mdash; high-traffic informational content that funnels to enquiries. From $150/post.",
+			'',
+			"From \$550 for a portfolio-led site &mdash; \$1,100+ with e-design service, style quiz, investment page, and blog.",
+			'',
+			"Residential, commercial, or both? Do you offer virtual design, full service, or both?",
+		] );
+	}
+
+	// 0d-pre48-c) Architect / architectural practice / planning consultant website.
+	if ( $has( [ 'architect website', 'architectural practice website', 'architecture firm website', 'architectural design website', 'planning consultant website', 'planning architect website', 'residential architect website', 'commercial architect website', 'listed building architect website', 'conservation architect website', 'extension architect website', 'loft conversion architect website', 'new build architect website', 'landscape architect website', 'architectural drawings website', 'aps architect website' ] ) ) {
+		return $nl( [
+			"Architect websites convert on portfolio credibility and clearly articulated process &mdash; clients are committing to a long-term professional relationship, so trust signals and expertise proof are everything:",
+			'',
+			"&bull; <strong>Project portfolio</strong>: one page per project with drone/professional photography; project type + location + scope; planning reference number (signals planning success rate); RIBA stage completed. Filter by type (residential extension / loft / new build / commercial / heritage / landscape). From $400.",
+			"&bull; <strong>Services and RIBA stages</strong>: explain what you actually do at each RIBA Stage (0-7): feasibility, concept design, planning, technical design, construction, handover. Most clients don&rsquo;t understand what an architect does beyond &ldquo;draws plans&rdquo; &mdash; explaining the full service justifies the fee. From $250.",
+			"&bull; <strong>ARB / RIBA registration</strong>: ARB (Architects Registration Board) registration is a legal requirement to use the title &lsquo;architect&rsquo; in the UK; RIBA chartered member logo; both should be displayed prominently with verify links. From $100.",
+			"&bull; <strong>Planning application success rate</strong>: &ldquo;98% planning approval rate&rdquo; or &ldquo;[N] successful planning applications&rdquo; is a powerful conversion signal on the homepage or services page. From $150.",
+			"&bull; <strong>Free initial consultation CTA</strong>: most architects offer a free 30-minute feasibility call; this is the primary lead-gen action; Calendly or MS Bookings embed; project type + address + brief. From $200.",
+			"&bull; <strong>Planning and permitted development guide</strong>: &ldquo;Do I need planning permission for my extension?&rdquo; is the single most searched question by homeowners considering works; a comprehensive guide page ranks well and positions the practice as expert advisers. From $200.",
+			"&bull; <strong>Heritage and conservation page</strong>: listed buildings (Grade I / II* / II) require different consents (LBC); conservation area constraints; IHBC/SPAB membership; niche but high-fee and rarely well-served online. From $200.",
+			"&bull; <strong>Testimonials and planning references</strong>: planning reference numbers link directly to the local authority&rsquo;s public planning portal &mdash; clients can verify approval themselves. Unique credibility signal no other profession can replicate. From $150.",
+			"&bull; <strong>Fees and process page</strong>: percentage-of-construction-cost model (typically 8&ndash;15%) or fixed-stage fees; publishing even a guide removes the &ldquo;how much does an architect cost&rdquo; Google search and keeps traffic on your site. From $150.",
+			'',
+			"From \$600 for a portfolio-led practice site &mdash; \$1,400+ with RIBA stage explainer, planning guide, heritage page, and Calendly booking.",
+			'',
+			"Primarily residential or commercial? Any heritage / conservation specialisation? UK or international practice?",
+		] );
+	}
+
 	// 0d-pre47-a) Dog groomer / pet groomer / mobile dog groomer / dog salon website.
 	if ( $has( [ 'dog groomer website', 'dog grooming website', 'pet groomer website', 'pet grooming website', 'mobile dog groomer website', 'mobile grooming website', 'dog salon website', 'dog parlour website', 'pet salon website', 'puppy groomer website', 'cat groomer website', 'dog wash website', 'hand strip groomer website', 'show dog groomer website', 'dog grooming van website', 'dog spa website' ] ) ) {
 		return $nl( [

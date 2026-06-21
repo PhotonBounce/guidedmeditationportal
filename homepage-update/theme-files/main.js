@@ -430,6 +430,11 @@
         e.preventDefault();
         clearChat();
       }
+      // Ctrl+E — export chat as Markdown
+      if (e.ctrlKey && (e.key === 'e' || e.key === 'E')) {
+        e.preventDefault();
+        if (typeof exportChat === 'function') exportChat();
+      }
     });
     // "Enter ↵ to send" hint — reveals after 800ms typing pause, hides on blur or submit.
     var _sendHint = document.createElement('span');
@@ -651,6 +656,23 @@
         }).join('') + '</ul>';
         _listBlocks.push(html); return '\x00LB' + (_listBlocks.length - 1) + '\x00';
       });
+      var _tblBlocks = [];
+      text = text.replace(/((?:(?:^|\n)\|[^\n]+)+)/g, function(block) {
+        var rows = block.trim().split('\n').filter(Boolean);
+        var sepIdx = -1;
+        for (var _ri = 0; _ri < rows.length; _ri++) {
+          if (/^\|[-:| ]+\|$/.test(rows[_ri].trim())) { sepIdx = _ri; break; }
+        }
+        if (sepIdx < 1 || !rows.slice(sepIdx + 1).some(function(r) { return r.indexOf('|') > -1; })) return block;
+        var _tcols = function(row) { return row.trim().replace(/^\||\|$/g, '').split('|').map(function(c) { return c.trim(); }); };
+        var _tHtml = '<table class="pb-brain__tbl"><thead><tr>' +
+          _tcols(rows[sepIdx - 1]).map(function(c) { return '<th>' + _fmtItem(c) + '</th>'; }).join('') +
+          '</tr></thead><tbody>' +
+          rows.slice(sepIdx + 1).filter(function(r) { return r.trim() && r.indexOf('|') > -1; }).map(function(row) {
+            return '<tr>' + _tcols(row).map(function(c) { return '<td>' + _fmtItem(c) + '</td>'; }).join('') + '</tr>';
+          }).join('') + '</tbody></table>';
+        _tblBlocks.push(_tHtml); return '\x00TB' + (_tblBlocks.length - 1) + '\x00';
+      });
       text = text
         .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
@@ -663,6 +685,7 @@
       _codeBlocks.forEach(function(h, i) { text = text.replace('\x00CB' + i + '\x00', h); });
       _inlineCodes.forEach(function(h, i) { text = text.replace('\x00IC' + i + '\x00', h); });
       _listBlocks.forEach(function(h, i) { text = text.replace('\x00LB' + i + '\x00', h); });
+      _tblBlocks.forEach(function(h, i) { text = text.replace('\x00TB' + i + '\x00', h); });
       return text;
     }
 
@@ -676,10 +699,13 @@
         _textBody.className = 'pb-brain__text';
         var _lh = '';
         _fmtLines.forEach(function(ln, i) {
-          var isBlk = ln.trimStart().startsWith('<pre');
-          if (!isBlk && i > 0 && !_fmtLines[i-1].trimStart().startsWith('<pre')) _lh += '<br>';
-          _lh += isBlk
+          var _trimLn = ln.trimStart();
+          var isBlk = /^<(pre|ol|ul|blockquote|table)[\s>]/.test(_trimLn);
+          var isPreBlk = _trimLn.startsWith('<pre');
+          if (!isBlk && i > 0 && !/^<(pre|ol|ul|blockquote|table)[\s>]/.test(_fmtLines[i-1].trimStart())) _lh += '<br>';
+          _lh += isPreBlk
             ? '<div class="pb-brain__line pb-brain__line--code">' + ln + '</div>'
+            : isBlk ? ln
             : '<span class="pb-brain__line" style="animation-delay:' + (i * 70) + 'ms">' + ln + '</span>';
         });
         _textBody.innerHTML = _lh;
@@ -1272,6 +1298,7 @@
           '<span><kbd>Esc</kbd> Close / cancel search</span>',
           '<span><kbd>↑</kbd> / <kbd>↓</kbd> Browse sent messages</span>',
           '<span><kbd>Ctrl</kbd>+<kbd>K</kbd> Clear chat</span>',
+          '<span><kbd>Ctrl</kbd>+<kbd>E</kbd> Export chat</span>',
         ].join('');
         brainHead.appendChild(_helpPanel);
         helpBtn.addEventListener('click', function() {
