@@ -331,7 +331,7 @@ class AiChatEngine(private val context: Context) {
             "🌿 Today's Technique — ${today.emoji} ${today.title}\n\n" +
             "${today.body}\n\n" +
             "── Other paths into stillness ──\n\n" +
-            "Box Breathing 🫧 — breathe a slow square: in 4 · hold 4 · out 4 · hold 4\n" +
+            "Box Breathing 🫧 — in 4 · hold 4 · out 4 · hold 4 (or tap Breathe on the main screen for a visual pacer)\n" +
             "Body Scan 🦶 — sweep attention from toes to head, softening as you go\n" +
             "Loving-Kindness 🤍 — offer warmth to yourself, then gently outward\n" +
             "Physiological Sigh 🌬️ — two short inhales, one long exhale; fastest real-time calm\n\n" +
@@ -489,11 +489,13 @@ class AiChatEngine(private val context: Context) {
         val extra = if (goalTech != null && goalTech.title != today.title)
             "\n\nMatched to your practice goal — ${goalTech.emoji} ${goalTech.title}: ${goalTech.teaser}"
         else ""
+        val quote = Quotes.today()
         return Pair(
             "✨ Today's Technique — ${today.emoji} ${today.title}\n\n" +
             "\"${today.teaser}\"\n\n" +
             "${today.body}" +
             extra +
+            "\n\n💬 \"${quote.first}\"\n— ${quote.second}" +
             "\n\nPair with ${mostPlayed.emoji} ${mostPlayed.displayName} for a grounded session. Want to go deeper?",
             mostPlayed
         )

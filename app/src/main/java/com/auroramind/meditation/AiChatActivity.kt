@@ -124,6 +124,23 @@ class AiChatActivity : AppCompatActivity() {
             }
         }.also { binding.chipGroupQuick.addView(it) }
 
+        // Breathe — direct-launch to the interactive box-breathing pacer
+        Chip(this).apply {
+            text = "🌬️ Breathe"
+            isCheckable = false
+            setTextColor(getColor(R.color.accent_iris))
+            chipBackgroundColor = ColorStateList.valueOf(getColor(R.color.card_bg))
+            chipStrokeColor = ColorStateList.valueOf(getColor(R.color.accent_iris))
+            chipStrokeWidth = 1.5f
+            textSize = 12f
+            setOnClickListener {
+                haptic.tick()
+                sfx.tap()
+                startActivity(Intent(this@AiChatActivity, BreathingActivity::class.java))
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            }
+        }.also { binding.chipGroupQuick.addView(it) }
+
         // Struggling chip — accent_rose to signal empathy, distinct from productivity chips
         Chip(this).apply {
             text = "😔 Struggling"
