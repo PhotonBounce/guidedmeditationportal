@@ -44,7 +44,7 @@ function route(lower, lastTopic) {
     "woke up couldn't move","woke up cant move"])) return "sleepParalysis";
   // 6. sleep
   if(any(lower,["sleep","insomnia","cant sleep","can't sleep","falling asleep",
-    "bedtime","tired","fatigue","exhausted","wide awake","cant switch off","can't switch off",
+    "bedtime","tired","fatigue","exhausted","exhaustion","wide awake","cant switch off","can't switch off",
     "racing mind","racing thoughts","napping","night shift","shift work",
     "mind won't stop","mind wont stop","nightmare","nightmares","bad dreams",
     "jet lag","jet lagged","jet-lagged","restless","restlessness",
@@ -162,7 +162,8 @@ function route(lower, lastTopic) {
     "no purpose","lack of purpose","feel purposeless","existential",
     "winter blues","lack of sunlight","low in winter",
     "seasonal affective","seasonal depression","sad disorder",
-    "widowed","widow","ghosted"]) ||
+    "widowed","widow","ghosted",
+    "empty nest","empty nester","kids moved out","children left home"]) ||
     anyWord(lower,["numb","died","vent"])) return "sadness";
   // 15. shameGuilt
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated",
@@ -192,7 +193,9 @@ function route(lower, lastTopic) {
     "always putting others first","never put myself first","spread too thin",
     "running on empty","meltdown","having a meltdown","on the edge","at my limit",
     "hit my limit","can't handle it","cant handle it","can't handle this",
-    "cant handle this","can't keep up","cant keep up","hostile work"]) ||
+    "cant handle this","can't keep up","cant keep up","hostile work",
+    "single parent","single mum","single mom","single dad",
+    "sole parent","solo parenting","solo parent"]) ||
     anyWord(lower,["toxic"])) return "overwhelm";
   // 17. anger
   if(any(lower,["angry","furious","frustrated","frustration","rage",
@@ -208,7 +211,8 @@ function route(lower, lastTopic) {
   // 18. vip
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
   // 19. recommend
-  if(any(lower,["recommend","suggest","what should i play","pick something"])) return "recommend";
+  if(any(lower,["recommend","suggest","what should","which sound","best sound",
+    "what sound","pick a sound","help me choose"])) return "recommend";
   // 20. positive
   if(any(lower,["thank","thanks","awesome","perfect","love it","amazing","nice"])) return "positive";
   // 21. timer
@@ -447,6 +451,15 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R77: sim recommend fix, exhaustion, empty nest, single parent
+  ["what sound should i listen to", "", "recommend", "what sound → recommend (sim was missing)"],
+  ["help me choose a track", "", "recommend", "help me choose → recommend (sim was missing)"],
+  ["i'm suffering from mental exhaustion", "", "sleep", "exhaustion → sleep"],
+  ["the empty nest is hitting me hard", "", "sadness", "empty nest → sadness"],
+  ["its hard being a single parent sometimes", "", "overwhelm", "single parent → overwhelm"],
+  ["im basically solo parenting while he travels", "", "overwhelm", "solo parenting → overwhelm"],
+  ["being a single parent is really hard", "", "overwhelm", "single parent → overwhelm"],
 
   // R76: burden fix (like such a burden), eating disorders, bipolar, sleep (wake up tired), gratitude expansions
   ["i feel like such a burden to my family", "", "crisis", "like such a burden → crisis"],

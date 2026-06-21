@@ -150,7 +150,7 @@ class AiChatEngine(private val context: Context) {
             "cant move when waking", "can't move when waking") ->
             handleSleepParalysis().also { lastTopic = "relax" }
         any(lower, "sleep", "insomnia", "cant sleep", "can't sleep", "falling asleep",
-            "bedtime", "tired", "fatigue", "exhausted", "wide awake", "cant switch off",
+            "bedtime", "tired", "fatigue", "exhausted", "exhaustion", "wide awake", "cant switch off",
             "can't switch off", "racing mind", "racing thoughts", "napping", "night shift",
             "shift work", "mind won't stop", "mind wont stop", "nightmare", "nightmares", "bad dreams",
             "jet lag", "jet lagged", "jet-lagged", "restless", "restlessness",
@@ -271,6 +271,7 @@ class AiChatEngine(private val context: Context) {
             "seasonal affective", "seasonal depression", "sad disorder",
             "no purpose", "lack of purpose", "feel purposeless", "existential",
             "longing", "longing for", "miss him", "miss her",
+            "empty nest", "empty nester", "kids moved out", "children left home",
             "miscarriage", "stillbirth", "pregnancy loss", "child loss", "infertility",
             "lost my baby", "lost our baby",
             "feel rejected", "feel abandoned", "abandoned", "rejection", "been rejected",
@@ -311,6 +312,8 @@ class AiChatEngine(private val context: Context) {
             "feeling stuck", "feel stuck", "stuck in a rut", "stuck in life",
             "deadline", "under pressure", "work pressure", "pressure at work",
             "work-life balance", "work life balance", "no time for myself", "no time for me",
+            "single parent", "single mum", "single mom", "single dad",
+            "sole parent", "solo parenting", "solo parent",
             "people pleaser", "people-pleaser", "cant say no", "can't say no",
             "always putting others first", "never put myself first", "spread too thin",
             "running on empty", "meltdown", "having a meltdown", "on the edge",
