@@ -199,7 +199,8 @@ class AiChatEngine(private val context: Context) {
             "afternoon slump", "afternoon crash", "2pm slump", "post-lunch dip",
             "pick me up", "need a boost", "feeling flat", "flat today",
             "drained", "wiped out", "run down", "worn out", "no drive",
-            "groggy", "grogginess", "brain dead", "zombie mode") ->
+            "groggy", "grogginess", "brain dead", "zombie mode",
+            "recharge", "recharging", "need to recharge", "fully recharged") ->
             handleEnergy().also { lastTopic = "energy" }
         any(lower, "relax", "calm", "stress", "anxiety", "anxious", "breathe",
             "unwind", "nervous", "panic", "overthink", "overthinking",
@@ -243,7 +244,9 @@ class AiChatEngine(private val context: Context) {
             "unsettled", "uncertainty", "uncertain", "uneasy",
             "mind chatter", "mental chatter", "busy mind",
             "chattering mind", "monkey mind",
-            "stuck in my head", "living in my head", "all in my head") ||
+            "stuck in my head", "living in my head", "all in my head",
+            "decompress", "decompressing", "need to decompress",
+            "need a breather", "catch my breath", "need some space") ||
         anyWord(lower, "rest", "tense") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
@@ -353,7 +356,10 @@ class AiChatEngine(private val context: Context) {
             "doom and gloom",
             "find my purpose", "finding my purpose", "life purpose",
             "searching for meaning", "search for meaning",
-            "find meaning", "sense of meaning") ||
+            "find meaning", "sense of meaning",
+            "rough patch", "going through a rough time", "going through a hard time",
+            "in a dark place", "dark place", "bad place right now",
+            "hard time right now", "difficult place") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
@@ -378,6 +384,8 @@ class AiChatEngine(private val context: Context) {
             "inner critic", "critical of myself", "critical voice",
             "i'm my own worst enemy", "im my own worst enemy",
             "my own worst enemy",
+            "not measuring up", "not living up to", "can't live up to",
+            "cant live up to", "don't feel good enough", "dont feel good enough",
             "inner child", "inner child work", "reparenting", "re-parenting",
             "imposter syndrome", "impostor syndrome",
             "feel like a fraud", "feel like such a fraud",
@@ -405,7 +413,9 @@ class AiChatEngine(private val context: Context) {
             "can't handle this", "cant handle this",
             "can't keep up", "cant keep up", "hostile work",
             "drowning in", "drowning at work", "drowning in work",
-            "hate my job", "hate this job", "hate going to work", "hate my work") ||
+            "hate my job", "hate this job", "hate going to work", "hate my work",
+            "can't catch a break", "cant catch a break",
+            "just need a break", "need a break") ||
         anyWord(lower, "toxic") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
         any(lower, "angry", "furious", "frustrated", "frustration",

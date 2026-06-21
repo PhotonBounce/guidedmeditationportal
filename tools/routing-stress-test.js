@@ -90,7 +90,8 @@ function route(lower, lastTopic) {
     "afternoon slump","afternoon crash","2pm slump","post-lunch dip",
     "pick me up","need a boost","feeling flat","flat today",
     "drained","wiped out","run down","worn out","no drive",
-    "groggy","grogginess","brain dead","zombie mode"])) return "energy";
+    "groggy","grogginess","brain dead","zombie mode",
+    "recharge","recharging","need to recharge","fully recharged"])) return "energy";
   // 9. relax
   if(any(lower,["relax","calm","stress","anxiety","anxious","breathe","unwind","nervous","panic",
     "overthink","overthinking","can't stop thinking","cant stop thinking",
@@ -131,7 +132,9 @@ function route(lower, lastTopic) {
     "unsettled","uncertainty","uncertain","uneasy",
     "mind chatter","mental chatter","busy mind",
     "chattering mind","monkey mind",
-    "stuck in my head","living in my head","all in my head"]) ||
+    "stuck in my head","living in my head","all in my head",
+    "decompress","decompressing","need to decompress",
+    "need a breather","catch my breath","need some space"]) ||
     anyWord(lower,["rest","tense"])) return "relax";
   // 10. tinnitus
   if(any(lower,["tinnitus","ringing in","ear ring","hearing","buzz in my ear"])) return "tinnitus";
@@ -222,6 +225,9 @@ function route(lower, lastTopic) {
     "find my purpose","finding my purpose","life purpose",
     "searching for meaning","search for meaning",
     "find meaning","sense of meaning",
+    "rough patch","going through a rough time","going through a hard time",
+    "in a dark place","dark place","bad place right now",
+    "hard time right now","difficult place",
     "in a funk","bit of a funk","in a bit of a funk",
     "in my feelings","in the dumps","down in the dumps",
     "need hope","need some hope","lost all hope",
@@ -253,6 +259,8 @@ function route(lower, lastTopic) {
     "self-sabotage","self sabotage","self-sabotaging",
     "inner critic","critical of myself","critical voice",
     "my own worst enemy",
+    "not measuring up","not living up to","can't live up to",
+    "cant live up to","don't feel good enough","dont feel good enough",
     "inner child","inner child work","reparenting","re-parenting",
     "imposter syndrome","impostor syndrome",
     "feel like a fraud","feel like such a fraud",
@@ -278,7 +286,9 @@ function route(lower, lastTopic) {
     "single parent","single mum","single mom","single dad",
     "sole parent","solo parenting","solo parent",
     "drowning in","drowning at work","drowning in work",
-    "hate my job","hate this job","hate going to work","hate my work"]) ||
+    "hate my job","hate this job","hate going to work","hate my work",
+    "can't catch a break","cant catch a break",
+    "just need a break","need a break"]) ||
     anyWord(lower,["toxic"])) return "overwhelm";
   // 17. anger
   if(any(lower,["angry","furious","frustrated","frustration","rage",
@@ -552,6 +562,16 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R90: relax (decompress/breather), energy (recharge), sadness (rough patch/dark place), shameGuilt (not measuring up), overwhelm (need a break)
+  ["I need to decompress after a long day", "", "relax", "decompress → relax"],
+  ["just need a breather right now", "", "relax", "need a breather → relax"],
+  ["I'm completely depleted and need to recharge", "", "energy", "recharge → energy"],
+  ["going through a rough patch at the moment", "", "sadness", "rough patch → sadness"],
+  ["I'm in a really dark place right now", "", "sadness", "in a dark place → sadness"],
+  ["I always feel like I'm not measuring up", "", "shameGuilt", "not measuring up → shameGuilt"],
+  ["I just need a break from everything", "", "overwhelm", "need a break → overwhelm"],
+  ["I can't catch a break no matter what I do", "", "overwhelm", "can't catch a break → overwhelm"],
 
   // R89: focus (executive dysfunction/working memory), sadness (life purpose/meaning), anger (disrespected/dismissed)
   ["I struggle with executive dysfunction every day", "", "focus", "executive dysfunction → focus"],
