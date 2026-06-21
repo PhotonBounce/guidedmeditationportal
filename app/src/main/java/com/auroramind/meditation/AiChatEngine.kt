@@ -364,7 +364,8 @@ class AiChatEngine(private val context: Context) {
         "${SoundType.WORK_FOCUS_CHILLOUT_3.emoji} ${SoundType.WORK_FOCUS_CHILLOUT_3.displayName} — a clean synthesizer soundscape to sharpen your thoughts\n\n" +
         "Or try these guided practices:\n" +
         "${SoundType.VIPASSANA.emoji} ${SoundType.VIPASSANA.displayName} — body-scanning to sharpen awareness\n" +
-        "${SoundType.BUDDHO.emoji} ${SoundType.BUDDHO.displayName} — Thai forest recitation to align the breath with wakefulness" +
+        "${SoundType.BUDDHO.emoji} ${SoundType.BUDDHO.displayName} — Thai forest recitation to align the breath with wakefulness\n\n" +
+        "Want a quick Pre-Focus Reset before you start? (2 minutes — sets the tone for the whole session)" +
         progLine("focus7"),
         SoundType.WORK_FOCUS_CHILLOUT
     )
