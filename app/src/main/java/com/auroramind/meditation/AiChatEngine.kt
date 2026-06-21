@@ -140,7 +140,10 @@ class AiChatEngine(private val context: Context) {
             "shift work", "mind won't stop", "mind wont stop", "nightmare", "nightmares", "bad dreams",
             "jet lag", "jet lagged", "jet-lagged", "restless", "restlessness",
             "woke up at", "keep waking", "3am", "4am", "middle of the night",
-            "drift off", "drifting off", "can't drift") ||
+            "drift off", "drifting off", "can't drift",
+            "counting sheep", "wired at night", "wired tonight", "can't wind down",
+            "cant wind down", "light sleeper", "heavy sleeper", "sleep hygiene",
+            "body clock", "circadian", "night terrors") ||
         anyWord(lower, "nap") ->
             handleSleep().also { lastTopic = "sleep" }
         any(lower, "focus", "study", "concentrate", "productivity",

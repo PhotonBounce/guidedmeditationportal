@@ -19,9 +19,15 @@ function route(lower, lastTopic) {
   if(any(lower,["hello","good morning","good afternoon","good evening","good night",
     "howdy","greetings","what's up","whats up"]) ||
     anyWord(lower,["hi","hey","yo","sup"])) return "greeting";
-  if(any(lower,["sleep","insomnia","nightmare","cant sleep","woke up at","keep waking","3am","4am",
-    "middle of the night","drift off","drifting off","restless night","night terrors","sleepy",
-    "tired","exhausted","racing mind at night","cant switch off","napping"]) ||
+  if(any(lower,["sleep","insomnia","cant sleep","can't sleep","falling asleep",
+    "bedtime","tired","fatigue","exhausted","wide awake","cant switch off","can't switch off",
+    "racing mind","racing thoughts","napping","night shift","shift work",
+    "mind won't stop","mind wont stop","nightmare","nightmares","bad dreams",
+    "jet lag","jet lagged","jet-lagged","restless","restlessness",
+    "woke up at","keep waking","3am","4am","middle of the night",
+    "drift off","drifting off","can't drift",
+    "counting sheep","wired at night","wired tonight","can't wind down","cant wind down",
+    "light sleeper","heavy sleeper","sleep hygiene","body clock","circadian","night terrors"]) ||
     anyWord(lower,["nap"])) return "sleep";
   if(any(lower,["focus","study","concentrate","productivity","procrastinat","brain fog","adhd",
     "foggy","mental clarity","sharp","clear mind","attention","distract",
@@ -209,6 +215,18 @@ var tests = [
   ["not myself lately", "", "NOT:positive", "not myself → sadness"],
   ["i'm feeling off today", "", "NOT:positive", "feeling off → sadness"],
 
+  // R64: sleep simulation sync + new sleep keywords + night terrors
+  ["i have terrible night terrors", "", "sleep", "night terrors → sleep"],
+  ["i'm wide awake at 2am", "", "sleep", "wide awake → sleep"],
+  ["i have chronic fatigue", "", "sleep", "fatigue → sleep"],
+  ["i work the night shift", "", "sleep", "night shift → sleep"],
+  ["jet lag is destroying me", "", "sleep", "jet lag → sleep"],
+  ["i'm just counting sheep again", "", "sleep", "counting sheep → sleep"],
+  ["i can't wind down after work", "", "sleep", "can't wind down → sleep"],
+  ["i need tips on sleep hygiene", "", "sleep", "sleep hygiene → sleep"],
+  ["my body clock is all over the place", "", "sleep", "body clock → sleep"],
+  ["wired at night but exhausted in the day", "", "sleep", "wired at night → sleep (not energy)"],
+
   // R63: anger vocabulary expansion
   ["i'm so pissed off right now", "", "anger", "pissed off → anger"],
   ["i'm absolutely livid", "", "anger", "livid → anger"],
@@ -247,7 +265,7 @@ var tests = [
   ["negative body image is really affecting me", "", "shameGuilt", "negative body image → shameGuilt"],
   ["i keep having negative thoughts", "", "relax", "negative thoughts → relax"],
   ["my thoughts are spiralling", "", "relax", "thought spirals → relax (spiralling keyword)"],
-  ["i have racing thoughts at night", "", "relax", "racing thoughts → relax"],
+  ["i have racing thoughts at night", "", "sleep", "racing thoughts → sleep (sleep route fires before relax)"],
   ["negative thinking is hard to stop", "", "relax", "negative thinking → relax"],
 
   // R58: emotional vocabulary gaps in sadness
