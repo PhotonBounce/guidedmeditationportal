@@ -1315,6 +1315,49 @@
       }
     }
 
+
+    // R61: Placeholder cycling — rotates hint questions in the input while empty and unfocused.
+    if (input && !window._pbPlCycleInited) {
+      window._pbPlCycleInited = true;
+      var _plHints = [
+        'What type of website do you need?',
+        'Try: "I run a dental practice..."',
+        'Try: "I\'m a wedding photographer..."',
+        'Try: "I have a B&B in Cornwall"',
+        'Try: "I need a website for my cafe"',
+        'Try: "I\'m a solicitor in Manchester"',
+        'Ask about pricing, timelines, or features',
+        'Try: "I\'m a personal trainer..."',
+        'Try: "I run a hair salon..."',
+        'What kind of business do you have?',
+      ];
+      var _plIdx = 0;
+      var _plDefault = input.placeholder || '';
+      input.placeholder = _plHints[0];
+      var _plTimer = setInterval(function() {
+        if (document.activeElement === input || input.value.trim()) return;
+        input.classList.remove('pb-brain__input--pl');
+        void input.offsetWidth;
+        _plIdx = (_plIdx + 1) % _plHints.length;
+        input.placeholder = _plHints[_plIdx];
+        input.classList.add('pb-brain__input--pl');
+      }, 4000);
+      input.addEventListener('focus', function() {
+        input.placeholder = _plDefault;
+        input.classList.remove('pb-brain__input--pl');
+      });
+      input.addEventListener('blur', function() {
+        if (!input.value.trim()) input.placeholder = _plHints[_plIdx];
+      });
+      input.addEventListener('keydown', function _plStop(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          clearInterval(_plTimer);
+          input.placeholder = _plDefault;
+          input.removeEventListener('keydown', _plStop);
+        }
+      });
+    }
+
     form.addEventListener('submit', async e => {
       e.preventDefault();
       const text = input.value.trim();

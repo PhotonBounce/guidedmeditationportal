@@ -669,6 +669,63 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 
 
 
+
+				// 0d-pre57-a) Removal company / house removals / man and van / storage / office removals / international removals.
+				if ($has(['removal company website','removals website','house removals website','man and van website','moving company website','office removals website','commercial removals website','furniture removals website','piano removals website','international removals website','overseas removals website','european removals website','student removals website','storage company website','self storage website','shipping container storage website'])) {
+				  $parts = [
+				    "<strong>Removal company / man and van website</strong> &mdash; instant quote + trust over price",
+				    "&bull; <strong>Instant online quote form</strong>: from postcode; to postcode; property size; number of bedrooms; access notes (stairs, lift, parking); move date; estimated volume; SMS confirmation; from \$300",
+				    "&bull; <strong>Volume calculator / survey tool</strong>: interactive room-by-room inventory; eliminates underquoting; from \$250",
+				    "&bull; <strong>Services pages</strong>: domestic house moves; commercial office removals; man and van; packing service; packing materials; storage; piano removals; antiques; art; each as own page; from \$200",
+				    "&bull; <strong>Storage page</strong>: container storage; self-storage; containerised storage at depot; short-term; long-term; business archive; from \$150",
+				    "&bull; <strong>International / European removals</strong>: groupage vs full-load; customs documentation; HMRC approved; Road Haulage Association (RHA); BAR (British Association of Removers) accreditation; from \$150",
+				    "&bull; <strong>BAR accreditation display</strong>: British Association of Removers; Approved Remover mark; trusted third-party dispute resolution; builds immediate trust; from \$100",
+				    "&bull; <strong>Google Reviews / Trustpilot</strong>: &ldquo;[town] removals reviews&rdquo; SEO; schema markup; from \$100",
+				    "&bull; <strong>Packing tips blog / moving house guide</strong>: &ldquo;How to pack a kitchen&rdquo;; &ldquo;Moving with pets&rdquo;; high-intent traffic; from \$100/post",
+				    "&bull; <strong>Fleet / team page</strong>: HGV; 3.5T Luton; GPS tracked; uniformed crews; trained in dismantling; from \$100",
+				    "&bull; <strong>Insurance display</strong>: goods in transit; public liability; employer&rsquo;s; amounts clearly stated; from \$100",
+				    "From \$600 &mdash; \$1,400+ with volume calculator and instant quote."
+				  ];
+				  return $nl($parts);
+				}
+
+				// 0d-pre57-b) Insurance broker / insurance adviser / protection broker / general insurance / commercial insurance / life insurance / home insurance.
+				if ($has(['insurance broker website','insurance website','insurance adviser website','protection broker website','life insurance website','home insurance website','commercial insurance website','business insurance website','van insurance website','fleet insurance website','tradesman insurance website','liability insurance website','professional indemnity website','employers liability website','public liability website','income protection website'])) {
+				  $parts = [
+				    "<strong>Insurance broker / protection adviser website</strong> &mdash; trust + clarity over price-comparison jargon",
+				    "&bull; <strong>FCA authorisation</strong>: FCA reference number; firm name as on the FCA Register; &ldquo;appointed representative&rdquo; or &ldquo;directly authorised&rdquo; status; must appear on all pages; from \$100",
+				    "&bull; <strong>Product / cover pages</strong>: life insurance; critical illness; income protection; mortgage protection; key person insurance; shareholder protection; business interruption; public liability; professional indemnity; employer&rsquo;s liability; each as own page; from \$150/page",
+				    "&bull; <strong>Business insurance hub</strong>: trades covered (builder; electrician; plumber; accountant; consultant; IT contractor); each sub-page ranks for &ldquo;[trade] insurance UK&rdquo;; from \$200",
+				    "&bull; <strong>Fact find / needs analysis form</strong>: pre-qualifies before call; reduces mis-sell risk; from \$250",
+				    "&bull; <strong>Calculators</strong>: life cover calculator; income replacement calculator; critical illness sum assured; &ldquo;how much cover do I need?&rdquo; is the most-asked question; from \$300",
+				    "&bull; <strong>Protection vs GI vs commercial hub</strong>: most clients don&rsquo;t know the difference; clear signposting converts multi-product clients; from \$150",
+				    "&bull; <strong>Claims support page</strong>: what to do when you need to claim; broker advocacy; builds post-sale loyalty; from \$100",
+				    "&bull; <strong>Blog / guides</strong>: &ldquo;Do I need key person insurance?&rdquo;; &ldquo;Relevant life plan vs death-in-service&rdquo;; long-tail SEO at low competition; from \$100/post",
+				    "&bull; <strong>BIBA / CII / PFS membership</strong>: British Insurance Brokers&rsquo; Association; Chartered Insurance Institute; Personal Finance Society; trust signals; from \$100",
+				    "From \$600 &mdash; \$1,400+ with cover calculators, needs analysis form, and trade pages."
+				  ];
+				  return $nl($parts);
+				}
+
+				// 0d-pre57-c) Podiatrist / chiropodist / foot clinic / nail technician (medical) / biomechanics / orthotics.
+				if ($has(['podiatrist website','chiropodist website','foot clinic website','podiatry clinic website','biomechanics website','orthotics website','gait analysis website','ingrown toenail website','diabetic foot website','verruca treatment website','corn removal website','foot health practitioner website','nail surgery website','sports podiatrist website','podiatric surgeon website','HCPC podiatrist website'])) {
+				  $parts = [
+				    "<strong>Podiatrist / chiropodist / foot clinic website</strong> &mdash; HCPC credentials + condition-specific SEO",
+				    "&bull; <strong>HCPC registration</strong>: Health and Care Professions Council; &ldquo;podiatrist&rdquo; and &ldquo;chiropodist&rdquo; are both HCPC-protected titles; registration number above the fold; from \$100",
+				    "&bull; <strong>Condition / treatment pages</strong>: ingrown toenail (nail surgery &amp; bracing); verruca (needling; SWIFT microwave; acid); corn &amp; callus; fungal nail (laser; topical); heel pain (plantar fasciitis; Sever&rsquo;s); bunion advice; hard skin; each ranks for &ldquo;[condition] treatment [city]&rdquo;; from \$150/page",
+				    "&bull; <strong>Diabetic foot care page</strong>: NHS commissioned services; vascular assessment; monofilament testing; high-risk foot; NICE guidelines compliance; essential for any NHS-contracted podiatrist; from \$200",
+				    "&bull; <strong>Biomechanics &amp; gait analysis</strong>: video gait analysis; 3D pressure mapping (Novel, Zebris); custom orthotic insoles (CAD/CAM); sports biomechanics; from \$200",
+				    "&bull; <strong>Online booking</strong>: Cliniko; Jane App; WriteUpp; Acuity; first appointment slots; NHS vs private pricing; from \$250",
+				    "&bull; <strong>Sports podiatry page</strong>: running injuries; shin splints; Achilles tendinopathy; plantar fasciitis; forefoot pain; taping techniques; from \$150",
+				    "&bull; <strong>Children&rsquo;s foot health page</strong>: flat feet; in-toeing; growing pains; Sever&rsquo;s disease; school checks; from \$150",
+				    "&bull; <strong>NHS vs private page</strong>: explains referral routes; GP letter; direct access; price transparency; converts self-funding patients; from \$100",
+				    "&bull; <strong>Professional memberships</strong>: The College of Podiatry (FCP); Society of Chiropodists and Podiatrists; HCPC Registration; from \$100",
+				    "From \$600 &mdash; \$1,400+ with condition pages, booking, and biomechanics section."
+				  ];
+				  return $nl($parts);
+				}
+
+
 				// 0d-pre56-a) Chartered surveyor / building surveyor / RICS surveyor / homebuyer survey / structural survey / valuation surveyor.
 				if ($has(['surveyor website','chartered surveyor website','building surveyor website','rics surveyor website','homebuyer survey website','structural survey website','home survey website','valuation surveyor website','party wall surveyor website','dilapidations surveyor website','quantity surveyor website','rics website','surveying firm website','building consultancy website','property surveyor website','snagging surveyor website'])) {
 				  $parts = [

@@ -5324,3 +5324,7 @@ a.pb-brain__autolink::after{
   user-select:none;
 }
 .pb-brain__hist-indicator.pb-brain__hist-indicator--vis{ opacity:1; }
+
+/* R61 — placeholder text cycling (rotates hint questions while input is empty) */
+@keyframes pb-pl-fade{ from{opacity:.2} to{opacity:.65} }
+.pb-brain__input--pl::placeholder{ animation:pb-pl-fade .4s ease forwards; }
