@@ -60,7 +60,7 @@ object ReminderScheduler {
         // Every ping teaches a quick technique tuned to the user's goal — turns a
         // nag into a genuinely useful 30-second practice (no audio required).
         val goal = PrefsManager(context).getGoal()
-        val tech = MicroTechniques.forGoal(goal)
+        val tech = MicroTechniques.forGoal(goal).firstOrNull() ?: MicroTechniques.today()
         val streakLine = if (streak > 0) "🔥 $streak-day streak — keep it alive.\n\n" else ""
         val body = "$streakLine${tech.emoji} ${tech.title}\n${tech.body}"
 

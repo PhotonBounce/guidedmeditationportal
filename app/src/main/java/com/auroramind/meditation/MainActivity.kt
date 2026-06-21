@@ -621,7 +621,7 @@ class MainActivity : AppCompatActivity() {
 
     /** Today's bite-sized technique, tuned to the user's onboarding goal. */
     private fun showTechniqueDialog() {
-        val tech = MicroTechniques.forGoal(prefs.getGoal())
+        val tech = MicroTechniques.forGoal(prefs.getGoal()).firstOrNull() ?: MicroTechniques.today()
         AlertDialog.Builder(this, R.style.AlertDialogDark)
             .setTitle("${tech.emoji}  ${tech.title}")
             .setMessage(tech.body + "\n\nFor: ${tech.mood.emoji} ${tech.mood.label}")
