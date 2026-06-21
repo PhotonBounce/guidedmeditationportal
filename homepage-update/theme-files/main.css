@@ -5268,29 +5268,33 @@ a.pb-brain__autolink::after{
   opacity:.55;
 }
 
-/* R57 — per-message thumbs rating */
-.pb-brain__rating{
-  display:flex; justify-content:flex-end; gap:4px;
-  padding:4px 8px 2px;
-  opacity:0; transition:opacity .4s ease;
+/* R58 — conversion CTA card (book-a-call prompt on pricing replies) */
+.pb-brain__cta-card{
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+  gap:10px; margin:6px 12px 4px;
+  padding:10px 14px;
+  background:rgba(255,212,0,.07);
+  border:1px solid rgba(255,212,0,.28);
+  border-radius:10px;
+  opacity:0; transform:translateY(5px);
+  transition:opacity .3s ease, transform .3s ease;
 }
-.pb-brain__rating.pb-brain__rating--vis{ opacity:1; }
-.pb-brain__rate-btn{
-  background:none; border:1px solid rgba(255,255,255,.12);
-  border-radius:6px; cursor:pointer; font-size:14px;
-  line-height:1; padding:3px 7px;
-  transition:background .15s, border-color .15s, transform .1s;
-  color:inherit;
+.pb-brain__cta-card.pb-brain__cta-card--vis{
+  opacity:1; transform:translateY(0);
 }
-.pb-brain__rate-btn:hover{
-  background:rgba(255,255,255,.07);
-  border-color:rgba(255,255,255,.28);
-  transform:scale(1.15);
+.pb-brain__cta-msg{
+  font-size:12px; color:rgba(255,255,255,.7); line-height:1.3;
 }
-.pb-brain__rate-btn--on{
-  background:rgba(255,212,0,.12);
-  border-color:rgba(255,212,0,.5);
+.pb-brain__cta-btn{
+  background:rgba(255,212,0,.15);
+  border:1px solid rgba(255,212,0,.5);
+  border-radius:8px; cursor:pointer;
+  font-size:12px; font-weight:500; padding:5px 12px;
+  color:rgba(255,212,0,.95);
+  transition:background .15s, border-color .15s;
+  white-space:nowrap;
 }
-.pb-brain__rate-btn--on:hover{
-  background:rgba(255,212,0,.18);
+.pb-brain__cta-btn:hover{
+  background:rgba(255,212,0,.25);
+  border-color:rgba(255,212,0,.75);
 }

@@ -880,7 +880,7 @@
         }
       }
       // R55: Remove empty-state hints on first user message
-      if (cls === 'user') { var _ehEl = log.querySelector('.pb-brain__empty-hints'); if (_ehEl) _ehEl.remove(); }
+      if (cls === 'user') { var _ehEl = log.querySelector('.pb-brain__empty-hints'); if (_ehEl) _ehEl.remove(); var _ctaEl = log.querySelector('.pb-brain__cta-card'); if (_ctaEl) _ctaEl.remove(); }
       log.appendChild(div);
       // After the 2nd bot message (first substantive reply), inject follow-up action chips.
       if (cls === 'bot') {
@@ -965,22 +965,23 @@
         requestAnimationFrame(function() { requestAnimationFrame(function() { _scDiv.classList.remove('pb-chips-entering'); }); });
       }
      
-      // R57: Thumbs rating on every bot reply — records feedback in data-attr, toggles on re-click.
+      // R58: Conversion CTA card — injects a book-a-call prompt when bot reply mentions pricing or booking.
       if (cls === 'bot') {
-        var _rb = document.createElement('div');
-        _rb.className = 'pb-brain__rating';
-        _rb.innerHTML = '<button type=\"button\" class=\"pb-brain__rate-btn\" data-v=\"up\" aria-label=\"Helpful\">&#128077;</button><button type=\"button\" class=\"pb-brain__rate-btn\" data-v=\"down\" aria-label=\"Not helpful\">&#128078;</button>';
-        _rb.querySelectorAll('.pb-brain__rate-btn').forEach(function(btn) {
-          btn.addEventListener('click', function() {
-            var _v = btn.dataset.v;
-            div.dataset.ratingVal = (div.dataset.ratingVal === _v) ? '' : _v;
-            _rb.querySelectorAll('.pb-brain__rate-btn').forEach(function(b) {
-              b.classList.toggle('pb-brain__rate-btn--on', b.dataset.v === div.dataset.ratingVal);
-            });
+        var _lrp = plain(text).toLowerCase();
+        var _hasCta = /from \$|from £|\/month|\$\d|£\d|book a|free call|get in touch|contact us|starting from|from just|our prices|pricing|get started/.test(_lrp);
+        if (_hasCta) {
+          var _oldCta = log.querySelector('.pb-brain__cta-card');
+          if (_oldCta) _oldCta.remove();
+          var _cta = document.createElement('div');
+          _cta.className = 'pb-brain__cta-card';
+          _cta.innerHTML = '<span class="pb-brain__cta-msg">Ready to get started?</span><button type="button" class="pb-brain__cta-btn">Book a free 15-min call &#8599;</button>';
+          _cta.querySelector('.pb-brain__cta-btn').addEventListener('click', function() {
+            _cta.remove();
+            if (input && form) { input.value = 'Book a free 15-min call'; form.dispatchEvent(new Event('submit', { bubbles: true })); }
           });
-        });
-        div.appendChild(_rb);
-        setTimeout(function() { _rb.classList.add('pb-brain__rating--vis'); }, 800);
+          log.appendChild(_cta);
+          requestAnimationFrame(function() { requestAnimationFrame(function() { _cta.classList.add('pb-brain__cta-card--vis'); }); });
+        }
       } if (cls !== 'err') { chatMsgs.push({ text: text, cls: cls }); saveChat(); }
       if (cls === 'bot') {
         if (brain && brain.hidden) _unreadCount++;

@@ -667,7 +667,73 @@ function pb_aurora_brainstorm_local( $msg, $history, $context = [] ) {
 		] );
 	}
 
-			// 0d-pre53-a) Solicitor / law firm / barrister / legal practice / conveyancer.
+				// 0d-pre54-a) Estate agent / lettings agent / property developer / property management.
+	if ( $has( [ 'estate agent website', 'letting agent website', 'property developer website', 'property management website', 'property website', 'estate agency website', 'real estate website', 'property listing website', 'house sales website', 'property portal website', 'hmo management website', 'buy to let management website', 'property investment website', 'new homes developer website', 'property finder website', 'block management website' ] ) ) {
+		return $nl( [
+			"Estate agent and property websites must handle a fundamental three-audience problem: vendors wanting the highest price, buyers wanting the lowest price, and landlords/tenants with entirely different priorities &mdash; each needs their own journey through the site:",
+			'',
+			"&bull; <strong>Property listing and search</strong>: the technical core of any estate agent website; Rightmove and Zoopla data feed integration (CML/REAPIT/Alto/Jupix feed); search by area, price, beds, type; save property and email alert signup; ValPal or similar instant online valuation widget; live listings convert browsers to enquiries; From \$400.",
+			"&bull; <strong>Rightmove and Zoopla advertising pages</strong>: UK estate agents are judged by their Rightmove Featured Agent status and Zoopla Premier Agent badges; a page explaining your portal presence builds trust with vendors; From \$100.",
+			"&bull; <strong>Instant online valuation (IOV)</strong>: ValPal, Hometrack, or Sprift-powered valuation widget; captures vendor contact details; the #1 lead-generation tool for estate agents; vendors who use an IOV are 4&times; more likely to book a market appraisal; From \$200.",
+			"&bull; <strong>Vendor guides and market reports</strong>: &ldquo;How to prepare your home for sale&rdquo;; &ldquo;What is my home worth in [area]?&rdquo;; area price trend data from Land Registry; positions the agent as the local expert before the vendor even contacts them; From \$150.",
+			"&bull; <strong>Landlord services page</strong>: fully managed vs rent collection vs let-only fee comparison; Tenant Fees Act 2019 compliance (banned fees clearly stated); deposit protection scheme membership (TDS, DPS, myDeposits); Client Money Protection (CMP) scheme membership display (legally required); ARLA Propertymark member logo; HMO licensing explained; From \$200.",
+			"&bull; <strong>Client Money Protection (CMP) compliance</strong>: since April 2019 all letting agents in England must belong to a CMP scheme and display their membership certificate; non-compliance is a criminal offence with up to \$30,000 fine; a dedicated compliance page (CMP + redress scheme + deposit scheme) is legally required; From \$100.",
+			"&bull; <strong>Tenant area</strong>: how to apply for a property; referencing process (Goodlord, Vouch, or similar); tenant responsibilities; reporting repairs; deposit protection; right to rent checks; EPC minimum rating C (proposed 2028); From \$150.",
+			"&bull; <strong>Property management / block management page</strong>: service charge collection; Section 20 consultation; ground rent demands; building insurance procurement; contractor management; a dedicated page converts landlord inquiries that national agencies handle poorly; From \$150.",
+			"&bull; <strong>Redress scheme membership</strong>: all UK estate agents and letting agents must belong to a government-approved redress scheme (Property Ombudsman or Property Redress Scheme); logo and membership number must appear on the website; non-display is an offence; From \$80.",
+			"&bull; <strong>Area pages / local market insight</strong>: hyper-local content for each neighbourhood served (&ldquo;Harrogate property market&rdquo;); average sold prices; school catchments; commute times; outranks national portals for long-tail local searches; From \$150/page.",
+			'',
+			"From \$600 for a Rightmove-connected estate agent site with IOV &mdash; \$1,500+ with live listings, area reports, landlord portal, and full compliance pages.",
+			'',
+			"Sales, lettings, or both? Geographic area? Residential, commercial, or HMO specialist? Existing CRM (Reapit, Alto, Jupix)?",
+		] );
+	}
+
+	// 0d-pre54-b) Hotel / boutique hotel / B&B / holiday cottage / serviced apartment / glamping.
+	if ( $has( [ 'hotel website', 'boutique hotel website', 'bed and breakfast website', 'bb website', 'holiday cottage website', 'holiday let website', 'holiday rental website', 'serviced apartment website', 'glamping website', 'guest house website', 'airbnb website', 'self catering website', 'lodge website', 'resort website', 'country house hotel website', 'wedding venue website' ] ) ) {
+		return $nl( [
+			"Hotel and holiday accommodation websites have one overriding job: convert the guest who has already found you &mdash; either on Booking.com, TripAdvisor, or via Google &mdash; to book direct instead of through the OTA so you keep the 15-25% commission:",
+			'',
+			"&bull; <strong>Direct booking engine</strong>: the most important element on any accommodation website; Booking.com, Expedia, and Airbnb take 15-25% commission; a channel manager with a booking engine (Beds24, Lodgify, Hostelworld, ResNexus, Little Hotelier, Booking.com Pulse, Rezovation) embedded on the site converts direct bookings at zero commission; rate parity clause awareness; From \$300.",
+			"&bull; <strong>Best rate guarantee banner</strong>: legally confirming that the direct price will always match or beat OTA price (within rate parity constraints); converts OTA lookers to direct bookers; some payment systems can trigger an automatic 10% &ldquo;book direct&rdquo; discount; From \$100.",
+			"&bull; <strong>Rooms and accommodation pages</strong>: each room or cottage as its own page with professional photography; dimensions; maximum occupancy; bed configuration; view; ensuite vs shared facilities; accessibility information; prices per night/week; minimum stay; high-quality copy that sells the experience not just lists facts; From \$200.",
+			"&bull; <strong>Photography and virtual tour</strong>: the most ROI-positive investment for any accommodation website; professional hospitality photography; 360&deg; virtual tour (Matterport); drone exterior; seasonal shots; photography increases direct conversion rates by up to 40% vs stock or phone images; From \$250 (photography budget separate).",
+			"&bull; <strong>Experiences and local area guide</strong>: what to do in [area]; recommended restaurants; local attractions; seasonal events; walking routes; this content both ranks for destination searches and reduces guest anxiety about visiting a new area; From \$150.",
+			"&bull; <strong>Gift vouchers</strong>: online gift voucher sale via GiftPro, Giftpak, or WooCommerce; high-margin, zero-inventory revenue; especially effective around Christmas, Valentine&rsquo;s Day, Mother&rsquo;s Day; From \$200.",
+			"&bull; <strong>Weddings and events page</strong>: if the property hosts weddings or private events; capacity; catering options; accommodation for guests; exclusive hire; this page often generates the highest average transaction value on the entire site; From \$200.",
+			"&bull; <strong>Spa and dining menus</strong>: downloadable PDF menus updated seasonally; spa treatment list and prices; afternoon tea; private dining; upsell opportunities embedded at the time of booking; From \$150.",
+			"&bull; <strong>TripAdvisor and Google Reviews integration</strong>: schema markup for hotel reviews; TripAdvisor certificate of excellence widget; Google star rating in search results; social proof reduces booking anxiety; From \$100.",
+			"&bull; <strong>Accessibility statement</strong>: required under the Equality Act 2010; step-free access; hearing loops; adapted bathrooms; parking; specific requirements page converts guests who cannot book blind; From \$100.",
+			'',
+			"From \$600 for a direct-booking hotel site with channel manager integration &mdash; \$1,500+ with virtual tour, gift vouchers, weddings page, and spa/dining.",
+			'',
+			"Hotel, B&B, self-catering cottage, or glamping? Number of rooms/units? Existing channel manager or booking system? Weddings or events?",
+		] );
+	}
+
+	// 0d-pre54-c) Event photographer / wedding photographer / videographer / commercial photographer.
+	if ( $has( [ 'photographer website', 'photography website', 'wedding photographer website', 'event photographer website', 'videographer website', 'commercial photographer website', 'portrait photographer website', 'family photographer website', 'newborn photographer website', 'product photographer website', 'aerial photographer website', 'drone photographer website', 'corporate photographer website', 'music photographer website', 'sports photographer website', 'fashion photographer website' ] ) ) {
+		return $nl( [
+			"Photography websites live or die on two things: the speed at which the portfolio loads and how quickly a potential client can imagine YOU telling their story &mdash; the biggest mistake photographers make is a slow site with beautiful photos, or a fast site with generic copy:",
+			'',
+			"&bull; <strong>Portfolio gallery (optimised)</strong>: the centrepiece of any photographer website; WebP or AVIF compressed images (no JPEG for web); lazy loading; gallery organised by genre (weddings, events, portraits, commercial) not chronologically; Squarespace, Format, SmugMug, or custom WordPress with Envira Gallery; 15-25 curated hero images per gallery not 150 mediocre ones; full-bleed layout; From \$300.",
+			"&bull; <strong>Image optimisation pipeline</strong>: a slow portfolio is the death of a photography website; full-resolution images served as-is can exceed 6MB per photo; WebP conversion + responsive srcset + CDN delivery (Cloudflare or BunnyCDN); Google PageSpeed target 90+ on mobile; From \$200.",
+			"&bull; <strong>Packages and pricing page</strong>: wedding photography pricing is notoriously opaque; couples who cannot find pricing bounce to the next photographer; clear packages (coverage hours, albums, engagement session, second shooter); elopement vs full day; corporate day rates vs half-day; From \$150.",
+			"&bull; <strong>Inquiry form and availability calendar</strong>: HoneyBook, Dubsado, or Calendly integration; check-availability without requiring a call; captures name, date, venue, style preferences, budget range; automated inquiry response email; wedding photographers lose 40% of leads to slow follow-up; From \$200.",
+			"&bull; <strong>Testimonials and styled real weddings</strong>: full-day real wedding blog posts (&ldquo;Sophie &amp; James at [Venue Name]&rdquo;) rank for &ldquo;[venue] wedding photographer&rdquo; searches; structured as storytelling editorial not just a gallery dump; 800+ words including venue name, florist, dress designer, cake maker for full cross-referencing SEO; From \$150/post.",
+			"&bull; <strong>About page with story</strong>: clients hire the photographer not the camera; personality, approach, what happens on the day, how to feel comfortable in front of a lens; this converts the undecided lead who is choosing between three photographers on identical pricing; From \$150.",
+			"&bull; <strong>Style guide / FAQ page</strong>: what to wear for a portrait session; what happens if it rains on your wedding day; how long until you receive your images; what is the delivery format; how many images to expect; anticipates every pre-booking anxiety; From \$100.",
+			"&bull; <strong>Location pages</strong>: &ldquo;Wedding photographer in [City]&rdquo;; &ldquo;Event photographer [Region]&rdquo;; each as a separate page; photographers who cover multiple cities need location pages for each market; ranks before larger directories for specific searches; From \$100/page.",
+			"&bull; <strong>Client galleries / delivery portal</strong>: Pixieset, Pic-Time, or Shootproof for private client gallery delivery; download, print ordering, album design; embedded on the photographer&rsquo;s own domain for brand consistency; also displays client work as a proof-of-expertise portfolio; From \$200.",
+			"&bull; <strong>Styled shoot collaborations page</strong>: industry partnerships with venues, florists, stylists; tagged features in wedding blogs (Junebug Weddings, Styled Shoots UK, Wedding Wire); establishes authority in the luxury wedding market; From \$100.",
+			'',
+			"From \$550 for a portfolio-led photographer site with inquiry form &mdash; \$1,200+ with real-wedding blog posts, location pages, client gallery portal, and image optimisation.",
+			'',
+			"Wedding, event, portrait, or commercial specialism? How many locations do you cover? Existing booking/CRM system (HoneyBook, Dubsado)?",
+		] );
+	}
+
+// 0d-pre53-a) Solicitor / law firm / barrister / legal practice / conveyancer.
 	if ( $has( [ 'solicitor website', 'law firm website', 'lawyer website', 'legal practice website', 'conveyancer website', 'conveyancing website', 'barrister website', 'family law website', 'employment law website', 'immigration lawyer website', 'personal injury website', 'criminal solicitor website', 'commercial law website', 'property lawyer website', 'wills solicitor website', 'probate solicitor website' ] ) ) {
 		return $nl( [
 			"Legal websites must thread a very specific needle: they must project authority and expertise while remaining completely accessible to a lay client who is often frightened, confused, or in the middle of a crisis:",
