@@ -230,9 +230,9 @@ class AiChatEngine(private val context: Context) {
             "feeling stuck", "feel stuck", "stuck in a rut", "stuck in life",
             "deadline", "under pressure", "work pressure", "pressure at work") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
-        any(lower, "angry", "anger", "furious", "frustrated", "frustration",
+        any(lower, "angry", "furious", "frustrated", "frustration",
             "rage", "irritated", "irritable", "annoyed", "wound up", "agitated") ||
-        anyWord(lower, "mad") ->
+        anyWord(lower, "mad", "anger", "angered") ->
             handleAnger().also { lastTopic = "anger" }
 
         any(lower, "vip", "upgrade", "pro plan", "subscription", "pricing",

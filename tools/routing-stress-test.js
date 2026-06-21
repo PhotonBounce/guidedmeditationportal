@@ -37,22 +37,26 @@ function route(lower, lastTopic) {
     "depressed","depression","cry","crying","upset","miserable","unhappy","low mood","empty inside",
     "hopeless","hollow","disconnected","meaningless","no motivation","nothing matters",
     "bereaved","bereavement","loss of","lost someone","longing","miss him","miss her",
-    "miscarriage","stillbirth","pregnancy loss","child loss","infertility","lost my baby","lost our baby"]) ||
-    anyWord(lower,["numb","died"])) return "sadness";
+    "miscarriage","stillbirth","pregnancy loss","child loss","infertility","lost my baby","lost our baby",
+    "need to vent","venting"]) ||
+    anyWord(lower,["numb","died","vent"])) return "sadness";
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated","self-blame",
     "blame myself","hate my body","feel worthless","not good enough",
     "low confidence","build confidence"])) return "shameGuilt";
   if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","too much","cant cope",
     "too busy","work stress","work anxiety","feeling stuck","feel stuck",
     "deadline","under pressure","work pressure","pressure at work"])) return "overwhelm";
-  if(any(lower,["angry","anger","furious","frustrated","frustration","rage","irritated","annoyed"]) ||
-    anyWord(lower,["mad"])) return "anger";
+  if(any(lower,["angry","furious","frustrated","frustration","rage","irritated","annoyed"]) ||
+    anyWord(lower,["mad","anger","angered"])) return "anger";
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
   if(any(lower,["recommend","suggest","what should i play","pick something"])) return "recommend";
   if(any(lower,["my stats","my streak","my progress","sessions","total time","day streak"])) return "stats";
   if(any(lower,["technique","breathwork","body scan","box breathing","physiological sigh",
     "self-compassion","self esteem","low confidence","build confidence","worth",
     "confidence","stretching","morning routine","bored","boredom"])) return "techniques";
+  if(any(lower,["headache","migraine","ache","sore","tension headache","physical","body tension",
+    "muscle tension","stiff","chronic pain","chronic illness","fibromyalgia","arthritis","back pain",
+    "painful","pains","in pain"]) || anyWord(lower,["pain"])) return "pain";
   return "general";
 }
 
@@ -106,6 +110,21 @@ var tests = [
   ["i had a miscarriage", "", "sadness", "miscarriage → sadness"],
   ["struggling with infertility", "", "sadness", "infertility → sadness"],
   ["pregnancy loss is devastating", "", "sadness", "pregnancy loss → sadness"],
+
+  // R45: vent word-boundary fix
+  ["i have an event this weekend", "", "NOT:sadness", "event should not trigger sadness via vent"],
+  ["lets go on an adventure", "", "NOT:sadness", "adventure should not trigger sadness via vent"],
+  ["i want to vent about today", "", "sadness", "standalone vent → sadness"],
+  ["i have been venting", "", "sadness", "venting → sadness"],
+  // R45: pain word-boundary fix
+  ["i enjoy painting as therapy", "", "NOT:pain", "painting does not trigger pain handler"],
+  ["my back pain is bad", "", "pain", "pain standalone → handlePain"],
+  ["this is so painful", "", "pain", "painful → handlePain"],
+  // R46: anger word-boundary fix
+  ["that feels dangerous to me", "", "NOT:anger", "danger should not trigger anger via anger substring"],
+  ["i feel endangered at work", "", "NOT:anger", "endanger should not trigger anger"],
+  ["i feel so much anger", "", "anger", "standalone anger → handleAnger"],
+  ["i was really angered by that", "", "anger", "angered → handleAnger"],
 
   // R44: nap word-boundary fix — snap should NOT route to sleep
   ["i'm about to snap", "", "NOT:sleep", "snap does not contain nap at word boundary"],
