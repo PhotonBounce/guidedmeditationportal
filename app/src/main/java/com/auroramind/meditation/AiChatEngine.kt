@@ -292,7 +292,9 @@ class AiChatEngine(private val context: Context) {
 
     private fun handleRelax(): Pair<String, SoundType?> = Pair(
         "🌊 Relaxation Practice\n\n" +
-        "Let's ease the tension:\n\n" +
+        "If you're in acute panic or struggling to breathe: two sharp inhales through the nose, then one long exhale — " +
+        "the Physiological Sigh. Fastest nervous-system reset known. Do 3 rounds before anything else.\n\n" +
+        "Then, when you're ready:\n\n" +
         "${SoundType.SOHAM.emoji} ${SoundType.SOHAM.displayName} — listen to the natural mantra of the breath\n" +
         "${SoundType.AUTOGENIC_CALM.emoji} ${SoundType.AUTOGENIC_CALM.displayName} — somatic relaxation through quiet autosuggestions\n" +
         "${SoundType.THIEN.emoji} ${SoundType.THIEN.displayName} — breathe and smile in the middle of daily life\n\n" +
@@ -507,6 +509,7 @@ class AiChatEngine(private val context: Context) {
         "✨ Daily inspiration — 'inspire me' for today's rotating practice\n" +
         "📊 Progress & favorites — 'my stats' or 'my favorites'\n" +
         "🗓️ Structured journeys — 'journeys' to see your guided programs\n" +
+        "⏰ Alarm — 'set alarm' or tap the Alarm chip above to set a meditation wake-up\n" +
         "⏱️ Timer help — 'how long should I meditate'\n" +
         "👶 Tinnitus & baby tracks — just say what you need\n\n" +
         "What would you like to explore first?",
