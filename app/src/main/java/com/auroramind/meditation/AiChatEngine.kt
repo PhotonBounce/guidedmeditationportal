@@ -160,23 +160,43 @@ class AiChatEngine(private val context: Context) {
 
     private fun any(input: String, vararg kws: String) = kws.any { input.contains(it) }
 
+    private fun progLine(programId: String): String {
+        val prog = Programs.all.find { it.id == programId } ?: return ""
+        val done = prefs.getProgramProgress(programId)
+        val status = when {
+            done >= prog.days.size -> "✓ Complete"
+            done == 0              -> "not started — find it under Journeys on the main screen"
+            else                   -> "Day $done of ${prog.days.size} — tap Journeys to continue"
+        }
+        return "\n\n${prog.emoji} Structured journey: ${prog.title} — ${prog.blurb}\n($status)"
+    }
+
     // ── Handlers ──────────────────────────────────────────────────────────────
 
     private fun handleGreeting(): Pair<String, SoundType?> {
         val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         val isLate = hour >= 21 || hour < 6
-        return if (isLate) Pair(
-            "Hey there. Late hour — a good time to let the day go. 🌙\n\n" +
-            "Based on what's soothed you before, I'd suggest starting with " +
-            "${mostPlayed.emoji} ${mostPlayed.displayName} for tonight's wind-down.\n\n" +
-            "Tell me: rest, relax, or want a specific sound?",
-            mostPlayed
-        ) else Pair(
-            "Hello! ☀️ Spirit here, ready to set the mood for your practice.\n\n" +
-            "I've noticed what tends to settle you — you're building a lovely habit. " +
-            "What's the focus right now: focus, relax, or something else?",
-            null
-        )
+        val streak = stats.currentStreak()
+        return if (isLate) {
+            val streakLine = if (streak >= 2) "${streak}-day streak — keep going. " else ""
+            Pair(
+                "Hey there. Late hour — a good time to let the day go. 🌙\n\n" +
+                "${streakLine}Based on what's settled you before, " +
+                "${mostPlayed.emoji} ${mostPlayed.displayName} is a lovely place to start tonight.\n\n" +
+                "Tell me: rest, relax, or a specific sound?",
+                mostPlayed
+            )
+        } else {
+            val intro = when {
+                streak >= 7 -> "Great to see you. ${streak} days in a row — a real practice is forming. ✨\n\n"
+                streak >= 2 -> "Good to see you again. ${streak} days running — the habit is taking shape. 🌱\n\n"
+                else        -> "Hello! ☀️ Spirit here.\n\n"
+            }
+            Pair(
+                "${intro}What's the focus right now — sleep, relax, focus, or something else?",
+                null
+            )
+        }
     }
 
     private fun handleSleep(): Pair<String, SoundType?> {
@@ -184,11 +204,12 @@ class AiChatEngine(private val context: Context) {
         return Pair(
             "🌙 Wind-Down Practice\n\n" +
             "A gentle stack to ease you toward rest:\n\n" +
-            "1. ${rec.emoji} ${rec.displayName} — a Stoic nightly reflection to review the day with honesty and patient self-compassion\n" +
-            "2. Timer: 30–45 min — drift off as the narration gently fades with you\n" +
-            "3. Volume: 60–70% — present enough to anchor you, gentle enough not to intrude\n\n" +
-            "A slow yogic breath like 'Soham' is also lovely right before sleep.\n\n" +
-            "Want me to walk you through a wind-down breathing pattern? 🤍",
+            "${rec.emoji} ${rec.displayName} — a Stoic nightly reflection to review the day with honesty and self-compassion\n" +
+            "${SoundType.SOHAM.emoji} ${SoundType.SOHAM.displayName} — ancient yogic breath-mantra; drifts you toward sleep naturally\n" +
+            "${SoundType.SUMARA.emoji} ${SoundType.SUMARA.displayName} — unhurried Javanese surrender; lovely for those who can't switch off\n\n" +
+            "Timer: 30–45 min. Volume: 60–70% — present enough to anchor, soft enough to release.\n\n" +
+            "Want me to walk you through a wind-down breathing pattern?" +
+            progLine("sleep7"),
             rec
         )
     }
@@ -196,24 +217,25 @@ class AiChatEngine(private val context: Context) {
     private fun handleFocus(): Pair<String, SoundType?> = Pair(
         "🧠 Focus & Concentration\n\n" +
         "A grounding stack for clear, settled attention:\n\n" +
-        "Workspace Flow 🧠 — warm chords and a gentle beat to ease you into deep concentration\n" +
-        "Creative Catalyst 💻 — inspiring electronic ambient backdrop for coding or design\n" +
-        "Cognitive Clarity 💡 — a clean, bright synthesizer soundscape to sharpen your thoughts\n\n" +
+        "${SoundType.WORK_FOCUS_CHILLOUT.emoji} ${SoundType.WORK_FOCUS_CHILLOUT.displayName} — warm chords and a gentle beat to ease you into deep concentration\n" +
+        "${SoundType.WORK_FOCUS_CHILLOUT_1.emoji} ${SoundType.WORK_FOCUS_CHILLOUT_1.displayName} — inspiring electronic ambient for coding or design\n" +
+        "${SoundType.WORK_FOCUS_CHILLOUT_3.emoji} ${SoundType.WORK_FOCUS_CHILLOUT_3.displayName} — a clean synthesizer soundscape to sharpen your thoughts\n\n" +
         "Or try these guided practices:\n" +
-        "Vipassana ⚡ — systematic body-scanning to sharpen awareness and release tension\n" +
-        "Buddho ☸️ — Thai forest recitation to align the breath with wakefulness\n\n" +
-        "Your favourite so far: ${mostPlayed.emoji} ${mostPlayed.displayName} — a great anchor for steady attention!",
+        "${SoundType.VIPASSANA.emoji} ${SoundType.VIPASSANA.displayName} — body-scanning to sharpen awareness\n" +
+        "${SoundType.BUDDHO.emoji} ${SoundType.BUDDHO.displayName} — Thai forest recitation to align the breath with wakefulness" +
+        progLine("focus7"),
         SoundType.WORK_FOCUS_CHILLOUT
     )
 
     private fun handleRelax(): Pair<String, SoundType?> = Pair(
         "🌊 Relaxation Practice\n\n" +
-        "Let's ease the tension. My recommendation:\n\n" +
-        "Soham 🧘 — listen to the natural mantra of the breath\n" +
-        "Autogenic Calm ❄️ — somatic relaxation through quiet autosuggestions\n" +
-        "Thien 🎋 — breathe and smile in the middle of daily life\n\n" +
+        "Let's ease the tension:\n\n" +
+        "${SoundType.SOHAM.emoji} ${SoundType.SOHAM.displayName} — listen to the natural mantra of the breath\n" +
+        "${SoundType.AUTOGENIC_CALM.emoji} ${SoundType.AUTOGENIC_CALM.displayName} — somatic relaxation through quiet autosuggestions\n" +
+        "${SoundType.THIEN.emoji} ${SoundType.THIEN.displayName} — breathe and smile in the middle of daily life\n\n" +
         "Try a slow 4-count inhale, 6-count exhale alongside any of these.\n\n" +
-        "Spirit can also walk you through a full breathwork or body-scan practice — just ask.",
+        "Spirit can walk you through breathwork or a body scan — just ask." +
+        progLine("anxiety5"),
         SoundType.SOHAM
     )
 
