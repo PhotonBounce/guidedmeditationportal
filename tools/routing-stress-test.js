@@ -41,7 +41,12 @@ function route(lower, lastTopic) {
     "hopeless","hollow","disconnected","meaningless","no motivation","nothing matters",
     "bereaved","bereavement","loss of","lost someone","longing","miss him","miss her",
     "miscarriage","stillbirth","pregnancy loss","child loss","infertility","lost my baby","lost our baby",
-    "need to vent","venting"]) ||
+    "need to vent","venting",
+    "feel rejected","feel abandoned","abandoned","rejection","been rejected",
+    "feel invisible","feel unseen","feel unloved","unlovable","not loved","no one cares",
+    "not great","not so great","not feeling great","not doing great",
+    "feeling off","bit off","not myself","off today","not okay","not ok today",
+    "not doing ok","not doing well"]) ||
     anyWord(lower,["numb","died","vent"])) return "sadness";
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated","self-blame",
     "blame myself","hate my body","feel worthless","not good enough",
@@ -56,6 +61,7 @@ function route(lower, lastTopic) {
     anyWord(lower,["mad","anger","angered"])) return "anger";
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
   if(any(lower,["recommend","suggest","what should i play","pick something"])) return "recommend";
+  if(any(lower,["thank","thanks","awesome","perfect","love it","amazing","nice"])) return "positive";
   if(any(lower,["timer","sleep timer","how long should","how long to meditate","how long for","duration","how many minutes"])) return "timer";
   if(any(lower,["my stats","my streak","my progress","sessions","total time","day streak","how long have i","my history","minutes meditated"])) return "stats";
   if(any(lower,["technique","breathwork","body scan","box breathing","physiological sigh",
@@ -137,6 +143,14 @@ var tests = [
   ["i'm about to snap", "", "NOT:sleep", "snap does not contain nap at word boundary"],
   ["i need a nap", "", "sleep", "nap (standalone) → sleep"],
   ["napping this afternoon", "", "sleep", "napping → sleep"],
+
+  // R54: "not great" / "not okay" — must NOT hit positive route
+  ["i'm not feeling so great today", "", "NOT:positive", "not great must not trigger positive"],
+  ["i'm feeling great today", "", "general", "feeling great → general (isWell branch says 'lovely to hear')"],
+  ["not feeling ok", "", "NOT:positive", "not ok → sadness, not positive"],
+  ["i'm not doing well", "", "NOT:positive", "not doing well → sadness"],
+  ["not myself lately", "", "NOT:positive", "not myself → sadness"],
+  ["i'm feeling off today", "", "NOT:positive", "feeling off → sadness"],
 
   // R53: relax + overwhelm gaps
   ["i'm freaking out", "", "relax", "freaking out → relax"],

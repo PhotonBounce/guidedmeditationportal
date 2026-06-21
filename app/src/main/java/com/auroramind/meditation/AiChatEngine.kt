@@ -222,7 +222,10 @@ class AiChatEngine(private val context: Context) {
             "lost my baby", "lost our baby",
             "feel rejected", "feel abandoned", "abandoned", "rejection", "been rejected",
             "feel invisible", "feel unseen", "feel unloved", "feel unlovable",
-            "unlovable", "not loved", "no one cares") ||
+            "unlovable", "not loved", "no one cares",
+            "not great", "not so great", "not feeling great", "not doing great",
+            "feeling off", "bit off", "not myself", "off today", "not okay",
+            "not ok today", "not doing ok", "not doing well") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
@@ -260,7 +263,7 @@ class AiChatEngine(private val context: Context) {
         any(lower, "recommend", "suggest", "what should", "which sound",
             "best sound", "what sound", "pick a sound", "help me choose") ->
             handleRecommendation().also { lastTopic = "recommendation" }
-        any(lower, "thank", "thanks", "awesome", "great", "perfect",
+        any(lower, "thank", "thanks", "awesome", "perfect",
             "love it", "amazing", "nice") ->
             handlePositive().also { lastTopic = "" }
         any(lower, "timer", "sleep timer", "how long should", "how long to meditate",
