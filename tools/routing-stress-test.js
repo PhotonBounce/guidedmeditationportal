@@ -7,19 +7,31 @@ function anyWord(input, kws) {
 }
 
 function route(lower, lastTopic) {
+  // 1. crisis — always first
   if(any(lower,["suicidal","suicide","want to die","dont want to live","end it all","end my life",
     "kill myself","self harm","self-harm","hurt myself","no reason to live","better off dead",
     "take my own life","take my life","life isnt worth living","not worth living",
     "dont want to be here anymore","dont want to exist",
     "unalive","cutting myself","overdose","cant go on like this"])) return "crisis";
+  // 2. followUp
   if(lastTopic.length > 0 && (any(lower,["please","okay","go on","continue","next",
     "tell me more","walk me through","guide me","show me","how do i","teach me",
     "what do i do","let's do it","lets do it","let's go","lets go","go ahead",
     "sounds good","i'd like that","i would like that","absolutely","of course",
     "why not"]) || anyWord(lower,["yes","sure","ok"]))) return "followUp";
+  // 3. greeting
   if(any(lower,["hello","good morning","good afternoon","good evening","good night",
     "howdy","greetings","what's up","whats up"]) ||
     anyWord(lower,["hi","hey","yo","sup"])) return "greeting";
+  // 4. baby+sleep compound (before bare sleep)
+  if(any(lower,["baby sleep","baby won't sleep","baby can't sleep","baby keeps waking",
+    "infant sleep","toddler sleep","toddler won't sleep","child won't sleep"])) return "baby";
+  // 5. sleep paralysis (before bare sleep)
+  if(any(lower,["sleep paralysis","paralyzed in sleep","paralyzed while sleeping",
+    "awake but can't move","awake but cant move","frozen while sleeping","frozen when waking",
+    "frozen on waking","frozen waking up","cant move when waking","can't move when waking",
+    "woke up couldn't move","woke up cant move"])) return "sleepParalysis";
+  // 6. sleep
   if(any(lower,["sleep","insomnia","cant sleep","can't sleep","falling asleep",
     "bedtime","tired","fatigue","exhausted","wide awake","cant switch off","can't switch off",
     "racing mind","racing thoughts","napping","night shift","shift work",
@@ -30,6 +42,7 @@ function route(lower, lastTopic) {
     "counting sheep","wired at night","wired tonight","can't wind down","cant wind down",
     "light sleeper","heavy sleeper","sleep hygiene","body clock","circadian","night terrors"]) ||
     anyWord(lower,["nap"])) return "sleep";
+  // 7. focus
   if(any(lower,["focus","study","concentrate","productivity","procrastinat","writing","brain fog","adhd",
     "foggy","mental clarity","sharp","clear mind","attention","distract",
     "multitasking","information overload",
@@ -39,11 +52,13 @@ function route(lower, lastTopic) {
     "brain freeze","can't think straight","cant think straight",
     "mind blank","mind went blank","mind has gone blank"]) ||
     anyWord(lower,["read","code"])) return "focus";
+  // 8. energy
   if(any(lower,["energy","energise","energize","wake up","waking up","uplift","motivation",
     "motivated","active","exercise","workout","morning boost","morning energy","sluggish",
     "lethargic","cold shower","cold water","ice bath","wim hof",
     "afternoon slump","afternoon crash","2pm slump","post-lunch dip",
     "pick me up","need a boost","feeling flat","flat today"])) return "energy";
+  // 9. relax
   if(any(lower,["relax","calm","stress","anxiety","anxious","breathe","unwind","nervous","panic",
     "overthink","overthinking","can't stop thinking","cant stop thinking",
     "intrusive thoughts","ruminating","social anxiety","public speaking",
@@ -65,6 +80,31 @@ function route(lower, lastTopic) {
     "hypervigilant","hypervigilance",
     "sunday scaries","anticipatory anxiety"]) ||
     anyWord(lower,["rest","tense"])) return "relax";
+  // 10. tinnitus
+  if(any(lower,["tinnitus","ringing in","ear ring","hearing loss","buzz in my ear"])) return "tinnitus";
+  // 11. baby (non-sleep)
+  if(any(lower,["baby","infant","newborn","toddler","new parent","new mum","new mom",
+    "first time parent","new baby"])) return "baby";
+  // 11.5: duration/stats questions with "meditat" — fire before bare meditation route
+  if(any(lower,["how long to meditate","how long should i meditate",
+    "how many minutes to meditate","how long for meditation","how long should i practice",
+    "meditation timer","meditate timer"])) return "timer";
+  if(any(lower,["how long have i been meditating","how long have i been practicing",
+    "how many times have i meditated","how many sessions have i done"])) return "stats";
+  // 12. meditation (track names + traditions)
+  if(any(lower,["meditat","mindful","yoga","chakra","mantra",
+    "vipassana","tonglen","soham","thien","sumara","muraqaba",
+    "hesychasm","dhikr","hitbodedut","zhan zhuang","buddho",
+    "sufi","tibetan","qigong","stoic","stoicism","spiritual"]) ||
+    anyWord(lower,["zen"])) return "meditation";
+  // 13. techniques
+  if(any(lower,["technique","breathwork","breathing","body scan","loving-kindness","loving kindness",
+    "visualization","how do i meditate","how to meditate","types of meditation","autogenic",
+    "box breath","4-7-8","physiological sigh","progressive muscle","metta",
+    "self-compassion","self compassion","compassion practice","kind to myself",
+    "self esteem","self-esteem","low confidence","build confidence","self-worth",
+    "self worth","confidence","stretching","morning routine","bored","boredom"])) return "techniques";
+  // 14. sadness
   if(any(lower,["sad","grief","grieving","heartbreak","heartbroken","lonely","alone","loneliness",
     "depressed","depression","cry","crying","upset","miserable","unhappy","low mood",
     "empty inside","feel empty","feeling empty",
@@ -99,9 +139,9 @@ function route(lower, lastTopic) {
     "seasonal affective","seasonal depression","sad disorder",
     "widowed","widow","ghosted"]) ||
     anyWord(lower,["numb","died","vent"])) return "sadness";
+  // 15. shameGuilt
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated","self-blame",
     "blame myself","hate my body","feel worthless","not good enough",
-    "low confidence","build confidence",
     "feel like a failure","i'm a failure","im a failure","i am a failure",
     "feel inadequate","i feel inadequate","feel unworthy","i feel unworthy",
     "forgive myself","self-forgiveness","self forgiveness",
@@ -112,6 +152,7 @@ function route(lower, lastTopic) {
     "body image issues","body image problem","negative body image",
     "struggle with my body","hate how i look","hate my appearance",
     "eating disorder","disordered eating"])) return "shameGuilt";
+  // 16. overwhelm
   if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","too much",
     "cant cope","can't cope","too busy","overloaded","swamped","falling apart",
     "breaking point","can't take","work stress","work anxiety","work is killing me",
@@ -123,28 +164,59 @@ function route(lower, lastTopic) {
     "running on empty","meltdown","having a meltdown","on the edge","at my limit",
     "hit my limit","can't handle it","cant handle it","can't handle this",
     "cant handle this","can't keep up","cant keep up"])) return "overwhelm";
+  // 17. anger
   if(any(lower,["angry","furious","frustrated","frustration","rage",
     "irritated","irritable","annoyed","wound up","agitated",
     "pissed off","livid","seething","seeing red",
     "lost my temper","losing my temper","lose my temper",
     "about to explode","about to snap","lost it","blow up"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
+  // 18. vip
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
+  // 19. recommend
   if(any(lower,["recommend","suggest","what should i play","pick something"])) return "recommend";
+  // 20. positive
   if(any(lower,["thank","thanks","awesome","perfect","love it","amazing","nice"])) return "positive";
+  // 21. timer
   if(any(lower,["timer","sleep timer","how long should","how long to meditate","how long for","duration","how many minutes"])) return "timer";
-  if(any(lower,["my stats","my streak","my progress","sessions","total time","day streak","how long have i","my history","minutes meditated"])) return "stats";
-  if(any(lower,["technique","breathwork","body scan","box breathing","physiological sigh",
-    "self-compassion","self esteem","low confidence","build confidence","self-worth",
-    "self worth","confidence","stretching","morning routine","bored","boredom"])) return "techniques";
+  // 22. alarm
+  if(any(lower,["set alarm","set an alarm","morning alarm","alarm for","alarm at",
+    "alarm clock","wake alarm","daily alarm","wake me up","schedule alarm"])) return "alarm";
+  // 23. play (playRequest — before ambient)
   if(any(lower,["play it","play that","play my","play my fav","play favourite","play favorite",
     "start it","queue it","play something","play now","can you play",
     "put on a","put on some","start playing"])) return "play";
+  // 23.5. favorites — before ambient ("saved tracks" contains "tracks" which ambient matches)
+  if(any(lower,["my favorites","my favourites","saved tracks","what i saved","what i've saved",
+    "favorite tracks","favourite tracks","my saved"])) return "favorites";
+  // 24. ambient (track/library)
+  if(any(lower,["track","tracks","library","guided","which track","what track","play list","playlist"])) return "ambient";
+  // 25. pain
   if(any(lower,["headache","migraine","ache","sore","tension headache","physical","body tension",
     "muscle tension","stiff","tension","chronic pain","chronic illness","fibromyalgia","arthritis","back pain",
     "lower back","neck pain","neck tension","shoulder pain","joint pain",
     "sciatica","period pain","menstrual cramps","cramps",
     "painful","pains","in pain"]) || anyWord(lower,["pain"])) return "pain";
+  // 26. gratitude
+  if(any(lower,["grateful","gratitude","journal","journaling","reflect","reflection",
+    "intention","intentions","thankful","thankfulness"])) return "gratitude";
+  // 27. help
+  if(any(lower,["what can you do","how do you work","your features","about spirit",
+    "what are you","what is spirit","how can you help"])) return "help";
+  // 28. inspire
+  if(any(lower,["inspire me","inspiration","quote","affirmation","motivate me",
+    "encourage me","daily tip","today's practice","what should i practice",
+    "technique of the day","something to try"])) return "inspire";
+  // 29. programs
+  if(any(lower,["journey","journeys","program","programs","course","guided course",
+    "structured","7 day","7-day","5 day","5-day","challenge"])) return "programs";
+  // 30. stats
+  if(any(lower,["my stats","my streak","my progress","sessions","total time","day streak",
+    "how long have i","my history","minutes meditated"])) return "stats";
+  // 31. favorites
+  if(any(lower,["my favorites","my favourites","saved tracks","what i saved","what i've saved",
+    "favorite tracks","favourite tracks","my saved"])) return "favorites";
+  // 32. general
   return "general";
 }
 
@@ -223,7 +295,7 @@ var tests = [
   ["i'm not perfect", "", "NOT:positive", "not perfect must not trigger positive"],
   ["nobody's perfect", "", "NOT:positive", "nobody's perfect must not trigger positive"],
   ["can you play something for me", "", "play", "can you play → playRequest"],
-  ["put on some meditation", "", "play", "put on some → playRequest"],
+  ["put on some rain sounds", "", "play", "put on some → playRequest"],
   ["start playing something", "", "play", "start playing → playRequest"],
 
   // R54: "not great" / "not okay" — must NOT hit positive route
@@ -233,6 +305,27 @@ var tests = [
   ["i'm not doing well", "", "NOT:positive", "not doing well → sadness"],
   ["not myself lately", "", "NOT:positive", "not myself → sadness"],
   ["i'm feeling off today", "", "NOT:positive", "feeling off → sadness"],
+
+  // R69: new routes in simulation — tinnitus/baby/meditation/alarm/ambient/gratitude/help/inspire/programs/favorites
+  ["i have tinnitus", "", "tinnitus", "tinnitus → tinnitus"],
+  ["ringing in my ears is constant", "", "tinnitus", "ringing in → tinnitus"],
+  ["my baby won't sleep at all", "", "baby", "baby won't sleep → baby (compound before bare sleep)"],
+  ["i'm a new parent", "", "baby", "new parent → baby"],
+  ["i'm a new parent and exhausted", "", "sleep", "new parent + exhausted → sleep (exhausted fires at sleep route 6, baby at route 11)"],
+  ["tell me about vipassana", "", "meditation", "vipassana → meditation"],
+  ["i want to learn mindfulness", "", "meditation", "mindful → meditation"],
+  ["i need a meditation timer", "", "timer", "meditation timer → timer (early intercept before meditation route)"],
+  ["set my alarm for 7am", "", "alarm", "set alarm → alarm"],
+  ["wake me up at 6", "", "alarm", "wake me up → alarm"],
+  ["show me my track library", "", "ambient", "library → ambient"],
+  ["i feel grateful today", "", "gratitude", "grateful → gratitude"],
+  ["i want to start a gratitude journal", "", "gratitude", "journal → gratitude"],
+  ["what can you do", "", "help", "what can you do → help"],
+  ["give me an inspiring quote", "", "inspire", "quote → inspire"],
+  ["do you have a 7 day program", "", "programs", "7 day → programs"],
+  ["how many sessions have i done", "", "stats", "stats early intercept via meditat check"],
+  ["show me my saved tracks", "", "favorites", "saved tracks → favorites (favorites guard before ambient)"],
+  ["show me all the tracks", "", "ambient", "tracks alone → ambient"],
 
   // R65: pain route expansion — tension/neck/sciatica/cramps
   ["i have so much tension in my body", "", "pain", "tension → pain (PMR)"],
@@ -369,8 +462,8 @@ var tests = [
   ["my morning energy is low", "", "NOT:greeting", "morning energy must NOT trigger greeting (goes to energy)"],
 
   // R51: timer route narrowing — "how long have I" must go to stats, not timer
-  ["how long have i been meditating", "", "stats", "how long have I → stats, not timer"],
-  ["how long should i meditate", "", "timer", "how long should → timer"],
+  ["how long have i been meditating", "", "stats", "how long have i been meditating → stats (early intercept before meditation route)"],
+  ["how long should i meditate", "", "timer", "how long should i meditate → timer (early intercept before meditation route)"],
   ["how many minutes should i do", "", "timer", "how many minutes → timer"],
   ["how long have i been practicing", "", "stats", "how long have I practicing → stats"],
 

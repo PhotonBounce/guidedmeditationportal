@@ -197,6 +197,14 @@ class AiChatEngine(private val context: Context) {
         any(lower, "baby", "infant", "newborn", "toddler", "child", "kids",
             "new parent", "new mum", "new mom", "first time parent", "new baby") ->
             handleBaby().also { lastTopic = "baby" }
+        // Duration/stats questions containing "meditat" must fire before the bare meditation route
+        any(lower, "how long to meditate", "how long should i meditate",
+            "how many minutes to meditate", "how long for meditation",
+            "how long should i practice", "meditation timer", "meditate timer") ->
+            handleTimer().also { lastTopic = "" }
+        any(lower, "how long have i been meditating", "how long have i been practicing",
+            "how many times have i meditated", "how many sessions have i done") ->
+            handleStats().also { lastTopic = "" }
         any(lower, "meditat", "mindful", "yoga", "chakra", "mantra",
             "vipassana", "tonglen", "soham", "thien", "sumara", "muraqaba",
             "hesychasm", "dhikr", "hitbodedut", "zhan zhuang", "buddho",
@@ -310,6 +318,10 @@ class AiChatEngine(private val context: Context) {
             "start it", "queue it", "play something", "play now", "can you play",
             "put on a", "put on some", "start playing") ->
             handlePlayRequest().also { lastTopic = "" }
+        // Favorites before ambient — "saved tracks" contains "tracks" which ambient matches first
+        any(lower, "my favorites", "my favourites", "saved tracks", "what i saved",
+            "what i've saved", "favorite tracks", "favourite tracks", "my saved") ->
+            handleFavorites().also { lastTopic = "" }
         any(lower, "track", "tracks", "library", "guided",
             "which track", "what track", "play list", "playlist") ->
             handleAmbient().also { lastTopic = "" }
