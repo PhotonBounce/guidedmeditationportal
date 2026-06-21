@@ -43,7 +43,9 @@ function route(lower, lastTopic) {
     "feel unreal","feeling unreal","not feeling real","feel detached","ocd","obsessive",
     "compulsive thoughts","freaking out","freak out","losing my mind","losing it",
     "can't cope with","cant cope with","spiralling","spiraling",
-    "dwell on","dwelling on","can't stop dwelling","keep dwelling"]) ||
+    "dwell on","dwelling on","can't stop dwelling","keep dwelling",
+    "negative thoughts","negative thinking","negative self-talk",
+    "thought spiral","thought spirals","racing thoughts"]) ||
     anyWord(lower,["rest","tense"])) return "relax";
   if(any(lower,["sad","grief","grieving","heartbreak","heartbroken","lonely","alone","loneliness",
     "depressed","depression","cry","crying","upset","miserable","unhappy","low mood","empty inside",
@@ -66,7 +68,10 @@ function route(lower, lastTopic) {
     "blame myself","hate my body","feel worthless","not good enough",
     "low confidence","build confidence",
     "i'm not perfect","im not perfect","i am not perfect",
-    "nobody's perfect","nobody is perfect","nothing is perfect"])) return "shameGuilt";
+    "nobody's perfect","nobody is perfect","nothing is perfect",
+    "body image issues","body image problem","negative body image",
+    "struggle with my body","hate how i look","hate my appearance",
+    "eating disorder","disordered eating"])) return "shameGuilt";
   if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","too much","cant cope",
     "too busy","work stress","work anxiety","feeling stuck","feel stuck",
     "deadline","under pressure","work pressure","pressure at work",
@@ -177,6 +182,15 @@ var tests = [
   ["i'm not doing well", "", "NOT:positive", "not doing well → sadness"],
   ["not myself lately", "", "NOT:positive", "not myself → sadness"],
   ["i'm feeling off today", "", "NOT:positive", "feeling off → sadness"],
+
+  // R59: body image → shameGuilt, negative thoughts → relax
+  ["i have body image issues", "", "shameGuilt", "body image issues → shameGuilt"],
+  ["i have an eating disorder", "", "shameGuilt", "eating disorder → shameGuilt (compassion response)"],
+  ["negative body image is really affecting me", "", "shameGuilt", "negative body image → shameGuilt"],
+  ["i keep having negative thoughts", "", "relax", "negative thoughts → relax"],
+  ["my thoughts are spiralling", "", "relax", "thought spirals → relax (spiralling keyword)"],
+  ["i have racing thoughts at night", "", "relax", "racing thoughts → relax"],
+  ["negative thinking is hard to stop", "", "relax", "negative thinking → relax"],
 
   // R58: emotional vocabulary gaps in sadness
   ["i've been feeling low lately", "", "sadness", "feeling low → sadness"],

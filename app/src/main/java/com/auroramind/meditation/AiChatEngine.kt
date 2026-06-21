@@ -173,7 +173,9 @@ class AiChatEngine(private val context: Context) {
             "ocd", "obsessive", "compulsive thoughts",
             "freaking out", "freak out", "losing my mind", "losing it",
             "can't cope with", "cant cope with", "spiralling", "spiraling",
-            "dwell on", "dwelling on", "can't stop dwelling", "keep dwelling") ||
+            "dwell on", "dwelling on", "can't stop dwelling", "keep dwelling",
+            "negative thoughts", "negative thinking", "negative self-talk",
+            "thought spiral", "thought spirals", "racing thoughts") ||
         anyWord(lower, "rest", "tense") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
@@ -245,7 +247,10 @@ class AiChatEngine(private val context: Context) {
             "perfectionism", "perfectionist", "never good enough", "hard on myself",
             "i'm not perfect", "im not perfect", "i am not perfect",
             "nobody's perfect", "nobody is perfect", "nothing is perfect",
-            "too hard on myself", "self-critical", "self critical") ->
+            "too hard on myself", "self-critical", "self critical",
+            "body image issues", "body image problem", "negative body image",
+            "struggle with my body", "hate how i look", "hate my appearance",
+            "eating disorder", "disordered eating") ->
             handleShameGuilt().also { lastTopic = "sadness" }
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out",
             "too much", "cant cope", "can't cope", "too busy", "overloaded",
