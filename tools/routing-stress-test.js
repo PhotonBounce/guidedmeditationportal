@@ -120,7 +120,11 @@ function route(lower, lastTopic) {
     "vagus nerve","vagal","somatic therapy","somatic healing","somatic exercises",
     "nervous system regulation","regulate my nervous system",
     "emotional regulation","regulate my emotions","emotional dysregulation",
-    "can't regulate","cant regulate"]) ||
+    "can't regulate","cant regulate",
+    "muscle tension","body tension","physical tension",
+    "neck tension","shoulder tension",
+    "pms","pmdd","premenstrual","period symptoms",
+    "hormonal anxiety","hormonal mood"]) ||
     anyWord(lower,["rest","tense"])) return "relax";
   // 10. tinnitus
   if(any(lower,["tinnitus","ringing in","ear ring","hearing","buzz in my ear"])) return "tinnitus";
@@ -202,6 +206,10 @@ function route(lower, lastTopic) {
     "empty nest","empty nester","kids moved out","children left home",
     "feel like giving up","want to give up","ready to give up",
     "thinking of giving up","about to give up",
+    "what's the point","whats the point","what is the point",
+    "no sense of belonging","don't belong","dont belong",
+    "no one understands","nobody understands",
+    "feel misunderstood","always misunderstood",
     "in a funk","bit of a funk","in a bit of a funk",
     "in my feelings","in the dumps","down in the dumps",
     "need hope","need some hope","lost all hope",
@@ -230,6 +238,9 @@ function route(lower, lastTopic) {
     "anorexia","anorexic","bulimia","bulimic","binge eating","binge and purge",
     "comparing myself","comparison trap","always comparing",
     "compare myself","social comparison",
+    "self-sabotage","self sabotage","self-sabotaging",
+    "inner critic","critical of myself","critical voice",
+    "my own worst enemy",
     "inner child","inner child work","reparenting","re-parenting",
     "imposter syndrome","impostor syndrome",
     "feel like a fraud","feel like such a fraud",
@@ -526,6 +537,17 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R87: relax (muscle tension/PMS), sadness (what's the point/belonging), shameGuilt (self-sabotage/inner critic)
+  ["I carry so much muscle tension in my shoulders", "", "relax", "muscle tension → relax"],
+  ["my PMS this month has been awful", "", "relax", "PMS → relax"],
+  ["I have PMDD and it's really affecting me", "", "relax", "PMDD → relax"],
+  ["what's the point of trying anymore", "", "sadness", "what's the point → sadness"],
+  ["I feel like I don't belong anywhere", "", "sadness", "don't belong → sadness"],
+  ["nobody understands what I'm going through", "", "sadness", "nobody understands → sadness"],
+  ["I keep self-sabotaging every good thing in my life", "", "shameGuilt", "self-sabotage → shameGuilt"],
+  ["my inner critic is so harsh and relentless", "", "shameGuilt", "inner critic → shameGuilt"],
+  ["I am my own worst enemy", "", "shameGuilt", "own worst enemy → shameGuilt"],
 
   // R86: sadness (abandonment/apathy/numbness/couples therapy), anger (arguing/bickering/silent treatment)
   ["I struggle with abandonment issues from childhood", "", "sadness", "abandonment → sadness"],

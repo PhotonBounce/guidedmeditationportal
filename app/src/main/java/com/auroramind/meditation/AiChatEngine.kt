@@ -232,7 +232,11 @@ class AiChatEngine(private val context: Context) {
             "emotional regulation", "regulate my emotions", "emotional dysregulation",
             "can't regulate", "cant regulate",
             "drinking to cope", "drink to cope", "alcohol to cope", "drink to forget",
-            "drinking to forget", "using alcohol", "using drink") ||
+            "drinking to forget", "using alcohol", "using drink",
+            "muscle tension", "body tension", "physical tension",
+            "neck tension", "shoulder tension",
+            "pms", "pmdd", "premenstrual", "period symptoms",
+            "hormonal anxiety", "hormonal mood") ||
         anyWord(lower, "rest", "tense") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
@@ -333,7 +337,11 @@ class AiChatEngine(private val context: Context) {
             "feeling down", "feel down", "been feeling down", "really down", "so down",
             "widowed", "widow", "ghosted",
             "feel like giving up", "want to give up", "ready to give up",
-            "thinking of giving up", "about to give up") ||
+            "thinking of giving up", "about to give up",
+            "what's the point", "whats the point", "what is the point",
+            "no sense of belonging", "don't belong", "dont belong",
+            "no one understands", "nobody understands",
+            "feel misunderstood", "always misunderstood") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
@@ -354,6 +362,10 @@ class AiChatEngine(private val context: Context) {
             "anorexia", "anorexic", "bulimia", "bulimic", "binge eating", "binge and purge",
             "comparing myself", "comparison trap", "always comparing",
             "compare myself", "social comparison",
+            "self-sabotage", "self sabotage", "self-sabotaging",
+            "inner critic", "critical of myself", "critical voice",
+            "i'm my own worst enemy", "im my own worst enemy",
+            "my own worst enemy",
             "inner child", "inner child work", "reparenting", "re-parenting",
             "imposter syndrome", "impostor syndrome",
             "feel like a fraud", "feel like such a fraud",
