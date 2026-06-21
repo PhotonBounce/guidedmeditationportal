@@ -104,9 +104,12 @@ class AiChatEngine(private val context: Context) {
         any(lower, "suicidal", "suicide", "want to die", "don't want to live", "dont want to live",
             "end it all", "end my life", "kill myself", "self harm", "self-harm",
             "hurt myself", "no reason to live", "better off dead",
-            "take my own life", "life isn't worth living", "life isnt worth living",
+            "take my own life", "take my life",
+            "life isn't worth living", "life isnt worth living", "not worth living",
             "don't want to be here anymore", "dont want to be here anymore",
-            "unalive", "cutting myself", "cant go on like this", "can't go on like this") ->
+            "don't want to exist", "dont want to exist",
+            "unalive", "cutting myself", "overdose",
+            "cant go on like this", "can't go on like this") ->
             handleCrisis()
 
         // Follow-up detection — must come first so "yes please" gets context-aware reply
@@ -183,7 +186,10 @@ class AiChatEngine(private val context: Context) {
             "can't cope with", "cant cope with", "spiralling", "spiraling",
             "dwell on", "dwelling on", "can't stop dwelling", "keep dwelling",
             "negative thoughts", "negative thinking", "negative self-talk",
-            "thought spiral", "thought spirals", "racing thoughts") ||
+            "thought spiral", "thought spirals", "racing thoughts",
+            "dread", "dreading", "sense of dread",
+            "hypervigilant", "hypervigilance",
+            "sunday scaries", "anticipatory anxiety") ||
         anyWord(lower, "rest", "tense") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in") ->
@@ -273,7 +279,8 @@ class AiChatEngine(private val context: Context) {
             "always putting others first", "never put myself first", "spread too thin",
             "running on empty", "meltdown", "having a meltdown", "on the edge",
             "at my limit", "hit my limit", "can't handle it", "cant handle it",
-            "can't handle this", "cant handle this") ->
+            "can't handle this", "cant handle this",
+            "can't keep up", "cant keep up") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
         any(lower, "angry", "furious", "frustrated", "frustration",
             "rage", "irritated", "irritable", "annoyed", "wound up", "agitated",

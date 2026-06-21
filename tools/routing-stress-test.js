@@ -9,8 +9,9 @@ function anyWord(input, kws) {
 function route(lower, lastTopic) {
   if(any(lower,["suicidal","suicide","want to die","dont want to live","end it all","end my life",
     "kill myself","self harm","self-harm","hurt myself","no reason to live","better off dead",
-    "take my own life","life isnt worth living","dont want to be here anymore",
-    "unalive","cutting myself","cant go on like this"])) return "crisis";
+    "take my own life","take my life","life isnt worth living","not worth living",
+    "dont want to be here anymore","dont want to exist",
+    "unalive","cutting myself","overdose","cant go on like this"])) return "crisis";
   if(lastTopic.length > 0 && (any(lower,["please","okay","go on","continue","next",
     "tell me more","walk me through","guide me","show me","how do i","teach me",
     "what do i do","let's do it","lets do it","let's go","lets go","go ahead",
@@ -59,7 +60,10 @@ function route(lower, lastTopic) {
     "can't cope with","cant cope with","spiralling","spiraling",
     "dwell on","dwelling on","can't stop dwelling","keep dwelling",
     "negative thoughts","negative thinking","negative self-talk",
-    "thought spiral","thought spirals","racing thoughts"]) ||
+    "thought spiral","thought spirals","racing thoughts",
+    "dread","dreading","sense of dread",
+    "hypervigilant","hypervigilance",
+    "sunday scaries","anticipatory anxiety"]) ||
     anyWord(lower,["rest","tense"])) return "relax";
   if(any(lower,["sad","grief","grieving","heartbreak","heartbroken","lonely","alone","loneliness",
     "depressed","depression","cry","crying","upset","miserable","unhappy","low mood",
@@ -118,7 +122,7 @@ function route(lower, lastTopic) {
     "always putting others first","never put myself first","spread too thin",
     "running on empty","meltdown","having a meltdown","on the edge","at my limit",
     "hit my limit","can't handle it","cant handle it","can't handle this",
-    "cant handle this"])) return "overwhelm";
+    "cant handle this","can't keep up","cant keep up"])) return "overwhelm";
   if(any(lower,["angry","furious","frustrated","frustration","rage",
     "irritated","irritable","annoyed","wound up","agitated",
     "pissed off","livid","seething","seeing red",
@@ -237,6 +241,17 @@ var tests = [
   ["my shoulder pain won't go away", "", "pain", "shoulder pain → pain"],
   ["i have sciatica", "", "pain", "sciatica → pain"],
   ["period cramps are so bad today", "", "pain", "cramps → pain"],
+
+  // R67: crisis (overdose/not worth living/take my life) + relax (dread/hypervig) + overwhelm
+  ["i want to take my life", "", "crisis", "take my life → crisis"],
+  ["my life is not worth living", "", "crisis", "not worth living → crisis"],
+  ["i dont want to exist anymore", "", "crisis", "dont want to exist → crisis"],
+  ["i took an overdose", "", "crisis", "overdose → crisis"],
+  ["i have the sunday scaries so bad", "", "relax", "sunday scaries → relax"],
+  ["i dread going to work every day", "", "relax", "dread → relax"],
+  ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
+  ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
+  ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
 
   // R66: sadness sim sync — pre-R62 keywords were missing; + widowed/ghosted
   ["we just broke up", "", "sadness", "broke up → sadness"],
