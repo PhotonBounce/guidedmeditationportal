@@ -169,6 +169,9 @@ function route(lower, lastTopic) {
     "freeze response","fawn response","fawn mode",
     "hyperarousal","hypoarousal",
     "polyvagal","job interview","going for a job interview",
+    "performance review","annual review","appraisal",
+    "hormonal changes","hormone changes","hormone imbalance",
+    "hormones all over the place",
     "nervous system dysregulation",
     "unsettled","uncertainty","uncertain","uneasy",
     "mind chatter","mental chatter","busy mind",
@@ -188,7 +191,10 @@ function route(lower, lastTopic) {
     "new dad","new father","first time parent","new baby",
     "postpartum","postnatal","post natal","post-natal",
     "breastfeeding","breast feeding","nursing baby",
-    "colic","baby blues","maternity leave","paternity leave"])) return "baby";
+    "colic","baby blues","maternity leave","paternity leave",
+    "pregnant","expecting a baby","expecting baby",
+    "trying to conceive","ivf","fertility treatment",
+    "first trimester","second trimester","third trimester"])) return "baby";
   // 11.5: "how long" meditat queries — must fire before bare meditation route
   if(any(lower,["how long to meditate","how long should i meditate",
     "how many minutes to meditate","how long for meditation","how long should i practice"])) return "timer";
@@ -266,6 +272,11 @@ function route(lower, lastTopic) {
     "cheated on","been cheated","trust issues","can't trust",
     "feel like a burden","i'm a burden","am a burden",
     "miscarriage","stillbirth","pregnancy loss","child loss","infertility","lost my baby","lost our baby",
+    "complicated grief","anticipatory grief","disenfranchised grief","ambiguous loss",
+    "cancer diagnosis","cancer treatment","living with cancer",
+    "terminal illness","terminal diagnosis","life-limiting illness",
+    "feeling old","getting older","fear of aging","fear of getting old",
+    "growing old","not young anymore",
     "feel rejected","feel abandoned","abandoned","rejection","been rejected",
     "feel invisible","feel unseen","feel unloved","unlovable","not loved","no one cares",
     "not great","not so great","not feeling great","not doing great",
@@ -711,6 +722,18 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R103: baby (pregnant/IVF), relax (performance review/hormonal changes), sadness (complicated grief/cancer/aging)
+  ["I just found out I'm pregnant and feeling overwhelmed", "", "baby", "pregnant → baby"],
+  ["we've been trying IVF for the past year", "", "baby", "ivf → baby"],
+  ["I'm in my third trimester and preparing for birth", "", "baby", "third trimester → baby"],
+  ["my annual performance review is next week", "", "relax", "performance review → relax"],
+  ["my hormonal changes are making me anxious", "", "relax", "hormonal changes → relax"],
+  ["I'm going through complicated grief after losing my dad", "", "sadness", "complicated grief → sadness"],
+  ["I'm experiencing anticipatory grief as my mum is terminal", "", "sadness", "anticipatory grief → sadness"],
+  ["I've just received a cancer diagnosis", "", "sadness", "cancer diagnosis → sadness"],
+  ["I'm feeling old and out of touch", "", "sadness", "feeling old → sadness"],
+  ["getting older is making me feel lost and low", "", "sadness", "getting older → sadness"],
 
   // R102: sleep (melatonin), focus (brain training/memory), energy (thyroid), relax (blood pressure), tinnitus (hyperacusis/misophonia), overwhelm (choice overload), shameGuilt (orthorexia/body shaming), anger (revenge), positive (things looking up)
   ["I've been taking melatonin to help me sleep", "", "sleep", "melatonin → sleep"],

@@ -279,6 +279,9 @@ class AiChatEngine(private val context: Context) {
             "freeze response", "fawn response", "fawn mode",
             "hyperarousal", "hypoarousal",
             "polyvagal", "job interview", "going for a job interview",
+            "performance review", "annual review", "appraisal",
+            "hormonal changes", "hormone changes", "hormone imbalance",
+            "hormones all over the place",
             "nervous system dysregulation",
             "unsettled", "uncertainty", "uncertain", "uneasy",
             "mind chatter", "mental chatter", "busy mind",
@@ -301,7 +304,10 @@ class AiChatEngine(private val context: Context) {
             "first time parent", "new baby",
             "postpartum", "postnatal", "post natal", "post-natal",
             "breastfeeding", "breast feeding", "nursing baby",
-            "colic", "baby blues", "maternity leave", "paternity leave") ->
+            "colic", "baby blues", "maternity leave", "paternity leave",
+            "pregnant", "expecting a baby", "expecting baby",
+            "trying to conceive", "ivf", "fertility treatment",
+            "first trimester", "second trimester", "third trimester") ->
             handleBaby().also { lastTopic = "baby" }
         // "How long" queries containing "meditat" must fire before the bare meditation route
         any(lower, "how long to meditate", "how long should i meditate",
@@ -394,6 +400,12 @@ class AiChatEngine(private val context: Context) {
             "empty nest", "empty nester", "kids moved out", "children left home",
             "miscarriage", "stillbirth", "pregnancy loss", "child loss", "infertility",
             "lost my baby", "lost our baby",
+            "complicated grief", "anticipatory grief", "disenfranchised grief",
+            "ambiguous loss",
+            "cancer diagnosis", "cancer treatment", "living with cancer",
+            "terminal illness", "terminal diagnosis", "life-limiting illness",
+            "feeling old", "getting older", "fear of aging", "fear of getting old",
+            "growing old", "not young anymore",
             "feel rejected", "feel abandoned", "abandoned", "abandonment", "abandonment issues",
             "rejection", "been rejected",
             "apathy", "apathetic", "feel apathetic", "feeling apathetic",
