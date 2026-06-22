@@ -384,6 +384,8 @@ function route(lower, lastTopic) {
     "feel rejected","feel abandoned","abandoned","rejection","been rejected",
     "feel invisible","feel unseen","feel unloved","unlovable","not loved","no one cares",
     "feel forgotten","feeling forgotten","feel unvalued",
+    "lost interest in things","lost interest in everything","losing interest",
+    "no longer interested","interest has gone",
     "dementia","parent with dementia","loved one with dementia",
     "caring for someone with dementia",
     "unloved","nobody loves me","no one loves me","nobody cares",
@@ -735,6 +737,7 @@ function route(lower, lastTopic) {
     "everything is against me","everyone is against me",
     "glass ceiling","hit a glass ceiling","hitting a glass ceiling",
     "sibling rivalry","sibling conflict","sibling jealousy","jealous of my sibling",
+    "walk on eggshells","walking on eggshells","have to walk on eggshells",
     "pay gap","pay inequality","wage gap",
     "feel small","made to feel small","feel diminished",
     "belittled","talked down to","talks down to","talking down to",
@@ -771,6 +774,8 @@ function route(lower, lastTopic) {
     "got promoted","just got promoted","i got promoted",
     "small win","small wins","little victory","little victories",
     "little win","little wins",
+    "turned a corner","turning a corner","light at the end of the tunnel",
+    "finally getting somewhere","things are finally clicking",
     "making progress","made great progress","great progress today",
     "sense of accomplishment","feel accomplished","feeling accomplished",
     "got engaged","just got engaged","we got engaged",
@@ -1047,6 +1052,15 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R144: sadness (lost interest), anger (walk on eggshells), positive (turned a corner/light at end of tunnel)
+  ["I've lost interest in everything I used to enjoy", "", "sadness", "lost interest in everything → sadness"],
+  ["I'm losing interest in things I normally love", "", "sadness", "losing interest → sadness"],
+  ["I have to walk on eggshells around my partner", "", "anger", "walk on eggshells → anger"],
+  ["I'm always walking on eggshells at home", "", "anger", "walking on eggshells → anger"],
+  ["I feel like I've finally turned a corner", "", "positive", "turned a corner → positive"],
+  ["I can see the light at the end of the tunnel now", "", "positive", "light at the end of the tunnel → positive"],
+  ["things are finally clicking into place for me", "", "positive", "things are finally clicking → positive"],
 
   // R143: positive (making progress/sense of accomplishment), shameGuilt (shame spiral/feel ashamed), overwhelm (falling behind)
   ["I'm making progress on my goals every single day", "", "positive", "making progress → positive"],
