@@ -217,7 +217,10 @@ function route(lower, lastTopic) {
     "wind down","wind-down","winding down","need to wind down",
     "socially awkward","social awkwardness","feel awkward around","awkward in social situations",
     "sense of doom","feeling of doom","impending doom","feel doomed",
-    "health scare","cancer scare","medical scare"]) ||
+    "health scare","cancer scare","medical scare",
+    "nerves","bundle of nerves","bag of nerves","my nerves are shot",
+    "my nerves are fraying","keyed up","on tenterhooks",
+    "heart in my mouth"]) ||
     anyWord(lower,["rest","tense","rsd"])) return "relax";
   // 10. tinnitus
   if(any(lower,["tinnitus","ringing in","ear ring","hearing","buzz in my ear",
@@ -445,7 +448,12 @@ function route(lower, lastTopic) {
     "nobody understands me","no one understands me",
     "nobody gets me","no one gets me",
     "disappointed","disappointment","let me down","let down",
-    "feel let down","fell short","expected more"]) ||
+    "feel let down","fell short","expected more",
+    "in a dark place","dark place","going through a dark time",
+    "rough patch","going through a rough patch","rough time","rough period",
+    "hard time","tough time","going through a tough time",
+    "can't move on","cant move on","can't get over it","cant get over it",
+    "letting go","learning to let go","let go of"]) ||
     anyWord(lower,["numb","died","vent"])) return "sadness";
   // 15. shameGuilt
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated",
@@ -591,7 +599,9 @@ function route(lower, lastTopic) {
     "not appreciated","feel taken for granted","taken for granted",
     "feel overlooked","being overlooked","always overlooked",
     "passed over","passed over for",
-    "feel underestimated"]) ||
+    "feel underestimated",
+    "workplace politics","office politics","work politics",
+    "power games","power play","being pushed out","being squeezed out"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   // 18. vip
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -886,6 +896,20 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R122: sadness (dark place/rough patch/letting go/can't move on), relax (nerves/keyed up), anger (office politics/power games)
+  ["I'm in a really dark place right now", "", "sadness", "dark place → sadness"],
+  ["I'm going through a rough patch at the moment", "", "sadness", "rough patch → sadness"],
+  ["I'm having such a hard time lately", "", "sadness", "hard time → sadness"],
+  ["I'm going through a really tough time right now", "", "sadness", "tough time → sadness"],
+  ["I just can't move on from what happened", "", "sadness", "can't move on → sadness"],
+  ["I'm trying to learn to let go of the past", "", "sadness", "letting go → sadness"],
+  ["I'm a complete bundle of nerves today", "", "relax", "bundle of nerves → relax"],
+  ["I feel completely keyed up and can't calm down", "", "relax", "keyed up → relax"],
+  ["I'm on tenterhooks waiting for the result", "", "relax", "on tenterhooks → relax"],
+  ["there's so much workplace politics going on", "", "anger", "workplace politics → anger"],
+  ["the office politics at my company never end", "", "anger", "office politics → anger"],
+  ["there are so many power games happening at work", "", "anger", "power games → anger"],
 
   // R121: sadness (disappointed/let down/fell short), focus (unproductive/can't get started), relax (health scare/cancer scare)
   ["I feel so disappointed right now", "", "sadness", "disappointed → sadness"],

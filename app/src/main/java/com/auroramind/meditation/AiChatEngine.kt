@@ -329,7 +329,10 @@ class AiChatEngine(private val context: Context) {
             "wind down", "wind-down", "winding down", "need to wind down",
             "socially awkward", "social awkwardness", "feel awkward around", "awkward in social situations",
             "sense of doom", "feeling of doom", "impending doom", "feel doomed",
-            "health scare", "cancer scare", "medical scare") ||
+            "health scare", "cancer scare", "medical scare",
+            "nerves", "bundle of nerves", "bag of nerves", "my nerves are shot",
+            "my nerves are fraying", "keyed up", "on tenterhooks",
+            "heart in my mouth") ||
         anyWord(lower, "rest", "tense", "rsd") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in",
@@ -571,7 +574,12 @@ class AiChatEngine(private val context: Context) {
             "nobody understands me", "no one understands me",
             "nobody gets me", "no one gets me",
             "disappointed", "disappointment", "let me down", "let down",
-            "feel let down", "fell short", "expected more") ||
+            "feel let down", "fell short", "expected more",
+            "in a dark place", "dark place", "going through a dark time",
+            "rough patch", "going through a rough patch", "rough time", "rough period",
+            "hard time", "tough time", "going through a tough time",
+            "can't move on", "cant move on", "can't get over it", "cant get over it",
+            "letting go", "learning to let go", "let go of") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
@@ -720,7 +728,9 @@ class AiChatEngine(private val context: Context) {
             "not appreciated", "feel taken for granted", "taken for granted",
             "feel overlooked", "being overlooked", "always overlooked",
             "passed over", "passed over for",
-            "feel underestimated") ||
+            "feel underestimated",
+            "workplace politics", "office politics", "work politics",
+            "power games", "power play", "being pushed out", "being squeezed out") ||
         anyWord(lower, "mad", "anger", "angered") ->
             handleAnger().also { lastTopic = "anger" }
 
