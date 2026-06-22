@@ -449,7 +449,9 @@ class AiChatEngine(private val context: Context) {
             "see a therapist", "seeing a therapist", "find a therapist",
             "talk therapy", "talking therapy",
             "in therapy", "going to therapy", "go to therapy",
-            "need counseling", "need counselling") ->
+            "need counseling", "need counselling",
+            "coping skills", "coping strategies", "coping mechanisms",
+            "cope better", "healthy coping", "coping tools") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
@@ -665,7 +667,10 @@ class AiChatEngine(private val context: Context) {
             "failing at everything", "failing at life",
             "always making excuses", "keep making excuses", "make excuses",
             "always quitting", "always quit", "always give up", "keep giving up",
-            "keep quitting") ||
+            "keep quitting",
+            "i'm not enough", "im not enough", "not enough for anyone",
+            "never enough", "i'll never be enough", "i am not enough",
+            "never good enough", "never feel good enough") ||
         anyWord(lower, "sober") ->
             handleShameGuilt().also { lastTopic = "sadness" }
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out", "burning out",
@@ -789,7 +794,10 @@ class AiChatEngine(private val context: Context) {
             "punch a wall", "smash something",
             "at boiling point", "at my boiling point",
             "about to lose it", "on the verge of losing it",
-            "on my last nerve", "blow a fuse", "about to snap") ||
+            "on my last nerve", "blow a fuse", "about to snap",
+            "feel small", "made to feel small", "feel diminished",
+            "belittled", "talked down to", "talks down to", "talking down to",
+            "speaking down to me", "spoken down to") ||
         anyWord(lower, "mad", "anger", "angered") ->
             handleAnger().also { lastTopic = "anger" }
 

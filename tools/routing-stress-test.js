@@ -331,7 +331,9 @@ function route(lower, lastTopic) {
     "see a therapist","seeing a therapist","find a therapist",
     "talk therapy","talking therapy",
     "in therapy","going to therapy","go to therapy",
-    "need counseling","need counselling"])) return "techniques";
+    "need counseling","need counselling",
+    "coping skills","coping strategies","coping mechanisms",
+    "cope better","healthy coping","coping tools"])) return "techniques";
   // 14. sadness
   if(any(lower,["sad","grief","grieving","heartbreak","heartbroken","lonely","alone","loneliness",
     "depressed","depression","cry","crying","sobbing","weeping","in tears","tearing up",
@@ -538,7 +540,10 @@ function route(lower, lastTopic) {
     "failing at everything","failing at life",
     "always making excuses","keep making excuses","make excuses",
     "always quitting","always quit","always give up","keep giving up",
-    "keep quitting"]) ||
+    "keep quitting",
+    "i'm not enough","im not enough","not enough for anyone",
+    "never enough","i'll never be enough","i am not enough",
+    "never good enough","never feel good enough"]) ||
     anyWord(lower,["sober"])) return "shameGuilt";
   // 16. overwhelm
   if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","burning out","too much",
@@ -660,7 +665,10 @@ function route(lower, lastTopic) {
     "punch a wall","smash something",
     "at boiling point","at my boiling point",
     "about to lose it","on the verge of losing it",
-    "on my last nerve","blow a fuse","about to snap"]) ||
+    "on my last nerve","blow a fuse","about to snap",
+    "feel small","made to feel small","feel diminished",
+    "belittled","talked down to","talks down to","talking down to",
+    "speaking down to me","spoken down to"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   // 18. vip
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -960,6 +968,19 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R131: shameGuilt (not enough/never enough), techniques (coping skills/strategies), anger (feel small/belittled/talked down to)
+  ["I feel like I'm just not enough for anyone", "", "shameGuilt", "not enough → shameGuilt"],
+  ["I'm never enough no matter how hard I try", "", "shameGuilt", "never enough → shameGuilt"],
+  ["I never feel good enough compared to others", "", "shameGuilt", "never feel good enough → shameGuilt"],
+  ["I never feel good enough and it's exhausting", "", "shameGuilt", "never good enough → shameGuilt"],
+  ["I need better coping skills when I'm struggling", "", "techniques", "coping skills → techniques"],
+  ["can you suggest some coping strategies for me", "", "techniques", "coping strategies → techniques"],
+  ["I want to develop healthier coping mechanisms", "", "techniques", "coping mechanisms → techniques"],
+  ["I want to learn to cope better with difficult emotions", "", "techniques", "cope better → techniques"],
+  ["they always make me feel small and stupid", "", "anger", "feel small → anger"],
+  ["I've been belittled by my manager for months", "", "anger", "belittled → anger"],
+  ["he always talks down to me in meetings", "", "anger", "talks down to → anger"],
 
   // R130: anger (boiling point/about to lose it/blow a fuse), sadness (glass half empty/lump in throat/difficult family), inspire (hopeful/upbeat)
   ["I'm absolutely at boiling point with this situation", "", "anger", "at boiling point → anger"],
