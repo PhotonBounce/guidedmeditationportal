@@ -151,7 +151,11 @@ function route(lower, lastTopic) {
     "cant face the day","dragging","dragging myself",
     "struggle to get up","struggling to get up",
     "hit a wall","hitting a wall",
-    "midday slump","midday crash","3pm slump"])) return "energy";
+    "midday slump","midday crash","3pm slump",
+    "people drain me","people draining me","drained by people",
+    "people exhaust me","drains me","exhausts me",
+    "introvert","introverted","social battery",
+    "socially drained","need alone time"])) return "energy";
   // 9. relax
   if(any(lower,["relax","calm","stress","anxiety","anxious","breathe","unwind","nervous","panic",
     "overthink","overthinking","can't stop thinking","cant stop thinking",
@@ -368,6 +372,8 @@ function route(lower, lastTopic) {
     "unloved","nobody loves me","no one loves me","nobody cares",
     "drifting through life","life is drifting by","drifting through my life",
     "can't see a future","no future for me","can't see where this is going",
+    "retiring","retirement","career change","career transition",
+    "changing career","changing careers",
     "not great","not so great","not feeling great","not doing great",
     "feeling off","bit off","not myself","off today","not okay","not ok today",
     "not doing ok","not doing well",
@@ -647,7 +653,9 @@ function route(lower, lastTopic) {
     "feel cheated","being cheated",
     "outraged","i'm outraged","absolutely outraged",
     "how dare","how dare they","how dare you",
-    "indignant","feel insulted","insulted by"]) ||
+    "indignant","feel insulted","insulted by",
+    "want to throw something","want to smash","want to punch",
+    "punch a wall","smash something"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   // 18. vip
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -945,6 +953,19 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R129: energy (people drain me/introvert/social battery), sadness (retiring/career change), anger (want to throw/punch a wall)
+  ["being around people really drains me after a while", "", "energy", "drains me → energy"],
+  ["I'm an introvert and social events exhaust me", "", "energy", "introvert → energy"],
+  ["my social battery is completely empty", "", "energy", "social battery → energy"],
+  ["I'm so socially drained after that event", "", "energy", "socially drained → energy"],
+  ["I sometimes need alone time to recharge", "", "energy", "need alone time → energy"],
+  ["I'm approaching retirement and I don't know what to expect", "", "sadness", "retirement → sadness"],
+  ["I want to make a career change but it's daunting", "", "sadness", "career change → sadness"],
+  ["going through a career transition right now", "", "sadness", "career transition → sadness"],
+  ["I want to throw something I'm so angry", "", "anger", "want to throw something → anger"],
+  ["I feel like punching a wall right now", "", "anger", "punch a wall → anger"],
+  ["I just want to smash something", "", "anger", "smash something → anger"],
 
   // R128: anger (outraged/indignant/insulted), sadness (drifting through life/can't see a future), techniques (fresh start/new chapter/back on track)
   ["I'm absolutely outraged at what they did", "", "anger", "outraged → anger"],

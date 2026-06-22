@@ -260,7 +260,11 @@ class AiChatEngine(private val context: Context) {
             "cant face the day", "dragging", "dragging myself",
             "struggle to get up", "struggling to get up",
             "hit a wall", "hitting a wall",
-            "midday slump", "midday crash", "3pm slump") ->
+            "midday slump", "midday crash", "3pm slump",
+            "people drain me", "people draining me", "drained by people",
+            "people exhaust me", "drains me", "exhausts me",
+            "introvert", "introverted", "social battery",
+            "socially drained", "need alone time") ->
             handleEnergy().also { lastTopic = "energy" }
         any(lower, "relax", "calm", "stress", "anxiety", "anxious", "breathe",
             "unwind", "nervous", "panic", "overthink", "overthinking",
@@ -504,6 +508,8 @@ class AiChatEngine(private val context: Context) {
             "unloved", "nobody loves me", "no one loves me", "nobody cares",
             "drifting through life", "life is drifting by", "drifting through my life",
             "can't see a future", "no future for me", "can't see where this is going",
+            "retiring", "retirement", "career change", "career transition",
+            "changing career", "changing careers",
             "not great", "not so great", "not feeling great", "not doing great",
             "feeling off", "bit off", "not myself", "off today", "not okay",
             "not ok today", "not doing ok", "not doing well",
@@ -776,7 +782,9 @@ class AiChatEngine(private val context: Context) {
             "feel cheated", "being cheated",
             "outraged", "i'm outraged", "absolutely outraged",
             "how dare", "how dare they", "how dare you",
-            "indignant", "feel insulted", "insulted by") ||
+            "indignant", "feel insulted", "insulted by",
+            "want to throw something", "want to smash", "want to punch",
+            "punch a wall", "smash something") ||
         anyWord(lower, "mad", "anger", "angered") ->
             handleAnger().also { lastTopic = "anger" }
 
