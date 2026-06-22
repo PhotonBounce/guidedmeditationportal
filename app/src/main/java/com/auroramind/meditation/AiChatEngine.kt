@@ -451,7 +451,10 @@ class AiChatEngine(private val context: Context) {
             "in therapy", "going to therapy", "go to therapy",
             "need counseling", "need counselling",
             "coping skills", "coping strategies", "coping mechanisms",
-            "cope better", "healthy coping", "coping tools") ->
+            "cope better", "healthy coping", "coping tools",
+            "self-reflection", "self reflection", "self-reflect",
+            "working on myself", "work on myself",
+            "self-discovery", "finding myself", "inner work") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
@@ -579,6 +582,10 @@ class AiChatEngine(private val context: Context) {
             "withdrawing from people", "withdrawing from everyone",
             "pulling away from everyone", "pulling away from people",
             "distancing myself from everyone",
+            "feel defeated", "feeling defeated", "utterly defeated",
+            "gloomy", "feeling gloomy", "in a gloomy mood",
+            "hollow inside", "feel hollow", "feeling hollow",
+            "life feels bleak", "feel bleak", "bleak outlook",
             "finding my calling", "what am i here for", "why am i here",
             "cyclothymia", "dysthymia", "persistent depressive",
             "love bombing", "situationship", "situationships",

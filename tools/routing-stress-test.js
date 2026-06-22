@@ -333,7 +333,10 @@ function route(lower, lastTopic) {
     "in therapy","going to therapy","go to therapy",
     "need counseling","need counselling",
     "coping skills","coping strategies","coping mechanisms",
-    "cope better","healthy coping","coping tools"])) return "techniques";
+    "cope better","healthy coping","coping tools",
+    "self-reflection","self reflection","self-reflect",
+    "working on myself","work on myself",
+    "self-discovery","finding myself","inner work"])) return "techniques";
   // 14. sadness
   if(any(lower,["sad","grief","grieving","heartbreak","heartbroken","lonely","alone","loneliness",
     "depressed","depression","cry","crying","sobbing","weeping","in tears","tearing up",
@@ -444,6 +447,10 @@ function route(lower, lastTopic) {
     "withdrawing from people","withdrawing from everyone",
     "pulling away from everyone","pulling away from people",
     "distancing myself from everyone",
+    "feel defeated","feeling defeated","utterly defeated",
+    "gloomy","feeling gloomy","in a gloomy mood",
+    "hollow inside","feel hollow","feeling hollow",
+    "life feels bleak","feel bleak","bleak outlook",
     "lost my zest","no zest for life",
     "finding my calling","what am i here for","why am i here",
     "cyclothymia","dysthymia","persistent depressive",
@@ -996,6 +1003,16 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R135: sadness (feel defeated/gloomy/hollow/bleak), techniques (self-reflection/working on myself/self-discovery)
+  ["I feel utterly defeated right now", "", "sadness", "utterly defeated → sadness"],
+  ["I've been feeling gloomy all week", "", "sadness", "gloomy → sadness"],
+  ["I just feel hollow inside and I don't know why", "", "sadness", "hollow inside → sadness"],
+  ["life feels bleak at the moment", "", "sadness", "life feels bleak → sadness"],
+  ["I need some self-reflection time", "", "techniques", "self-reflection → techniques"],
+  ["I've been working on myself lately", "", "techniques", "working on myself → techniques"],
+  ["I'm on a self-discovery journey", "", "techniques", "self-discovery → techniques"],
+  ["I want to do some inner work to heal", "", "techniques", "inner work → techniques"],
 
   // R134: sadness (can't enjoy/withdrawing from people/life feels grey), shameGuilt (second-guess), overwhelm (treading water/going nowhere/spinning wheels)
   ["I can't enjoy anything anymore", "", "sadness", "can't enjoy anything → sadness"],
