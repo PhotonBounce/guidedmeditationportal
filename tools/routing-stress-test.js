@@ -127,7 +127,9 @@ function route(lower, lastTopic) {
     "can't organise my thoughts","can't organize my thoughts",
     "disorganised thinking","disorganized thinking",
     "zone out","zoning out","zoned out",
-    "tunnel vision","can't tune out","distracted by everything"]) ||
+    "tunnel vision","can't tune out","distracted by everything",
+    "can't prioritize","cant prioritize","struggling to prioritize",
+    "priorities all over the place","can't figure out my priorities"]) ||
     anyWord(lower,["read","code"])) return "focus";
   // 8. energy
   if(any(lower,["energy","energise","energize","wake up","waking up","uplift","motivat",
@@ -384,6 +386,9 @@ function route(lower, lastTopic) {
     "feel rejected","feel abandoned","abandoned","rejection","been rejected",
     "feel invisible","feel unseen","feel unloved","unlovable","not loved","no one cares",
     "feel forgotten","feeling forgotten","feel unvalued",
+    "feel fragile","emotionally fragile","feeling fragile",
+    "silently suffering","suffer in silence",
+    "putting on a brave face","brave face","pretending everything is fine",
     "lost interest in things","lost interest in everything","losing interest",
     "no longer interested","interest has gone",
     "dementia","parent with dementia","loved one with dementia",
@@ -591,6 +596,10 @@ function route(lower, lastTopic) {
     "second-guess myself","second-guessing myself",
     "second-guess everything","second-guessing everything",
     "second-guessing every decision","second-guess every decision",
+    "hate what i've become","hate what ive become",
+    "don't like who i've become","dont like who ive become",
+    "become someone i don't recognise","become someone i dont recognise",
+    "body issues","body concerns",
     "shame spiral","shame attack","shame storm",
     "feel ashamed","feel ashamed of myself","deeply ashamed",
     "deep shame","overwhelmed by shame"]) ||
@@ -775,6 +784,8 @@ function route(lower, lastTopic) {
     "small win","small wins","little victory","little victories",
     "little win","little wins",
     "turned a corner","turning a corner","light at the end of the tunnel",
+    "achievement","major achievement","huge achievement","big achievement",
+    "achieved something","actually achieved",
     "finally getting somewhere","things are finally clicking",
     "making progress","made great progress","great progress today",
     "sense of accomplishment","feel accomplished","feeling accomplished",
@@ -1052,6 +1063,17 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R145: focus (can't prioritize), sadness (fragile/brave face), shameGuilt (hate what I've become/body issues), positive (achievement)
+  ["I can't prioritize anything right now, everything feels urgent", "", "focus", "can't prioritize → focus"],
+  ["I'm struggling to prioritize my tasks at work", "", "focus", "struggling to prioritize → focus"],
+  ["I've been feeling fragile emotionally these days", "", "sadness", "feeling fragile → sadness"],
+  ["I'm silently suffering and no one knows", "", "sadness", "silently suffering → sadness"],
+  ["I've been putting on a brave face for everyone", "", "sadness", "brave face → sadness"],
+  ["I hate what I've become over the past year", "", "shameGuilt", "hate what I've become → shameGuilt"],
+  ["I have a lot of body issues that get me down", "", "shameGuilt", "body issues → shameGuilt"],
+  ["I just had a massive achievement at work today", "", "positive", "huge achievement → positive"],
+  ["I feel like I've actually achieved something important", "", "positive", "achieved something → positive"],
 
   // R144: sadness (lost interest), anger (walk on eggshells), positive (turned a corner/light at end of tunnel)
   ["I've lost interest in everything I used to enjoy", "", "sadness", "lost interest in everything → sadness"],

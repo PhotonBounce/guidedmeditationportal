@@ -235,7 +235,9 @@ class AiChatEngine(private val context: Context) {
             "can't organise my thoughts", "can't organize my thoughts",
             "disorganised thinking", "disorganized thinking",
             "zone out", "zoning out", "zoned out",
-            "tunnel vision", "can't tune out", "distracted by everything") ||
+            "tunnel vision", "can't tune out", "distracted by everything",
+            "can't prioritize", "cant prioritize", "struggling to prioritize",
+            "priorities all over the place", "can't figure out my priorities") ||
         anyWord(lower, "read", "code") ->
             handleFocus().also { lastTopic = "focus" }
         any(lower, "energy", "energise", "energize", "wake up", "waking up",
@@ -520,6 +522,9 @@ class AiChatEngine(private val context: Context) {
             "feel invisible", "feel unseen", "feel unloved", "feel unlovable",
             "unlovable", "not loved", "no one cares",
             "feel forgotten", "feeling forgotten", "feel unvalued",
+            "feel fragile", "emotionally fragile", "feeling fragile",
+            "silently suffering", "suffer in silence",
+            "putting on a brave face", "brave face", "pretending everything is fine",
             "lost interest in things", "lost interest in everything", "losing interest",
             "no longer interested", "interest has gone",
             "dementia", "parent with dementia", "loved one with dementia",
@@ -718,6 +723,10 @@ class AiChatEngine(private val context: Context) {
             "second-guess myself", "second-guessing myself",
             "second-guess everything", "second-guessing everything",
             "second-guessing every decision", "second-guess every decision",
+            "hate what i've become", "hate what ive become",
+            "don't like who i've become", "dont like who ive become",
+            "become someone i don't recognise", "become someone i dont recognise",
+            "body issues", "body concerns",
             "shame spiral", "shame attack", "shame storm",
             "feel ashamed", "feel ashamed of myself", "deeply ashamed",
             "deep shame", "overwhelmed by shame") ||
@@ -907,6 +916,8 @@ class AiChatEngine(private val context: Context) {
             "small win", "small wins", "little victory", "little victories",
             "little win", "little wins",
             "turned a corner", "turning a corner", "light at the end of the tunnel",
+            "achievement", "major achievement", "huge achievement", "big achievement",
+            "achieved something", "actually achieved",
             "finally getting somewhere", "things are finally clicking",
             "making progress", "made great progress", "great progress today",
             "sense of accomplishment", "feel accomplished", "feeling accomplished",
