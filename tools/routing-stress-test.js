@@ -356,6 +356,9 @@ function route(lower, lastTopic) {
     "isolated","feeling isolated","so isolated",
     "got fired","just fired","lost my job","lost their job","laid off",
     "made redundant","partner left me","been left",
+    "emotionally unavailable","closed off emotionally","emotionally closed",
+    "can't open up","cant open up","unable to open up",
+    "struggling to communicate","communication breakdown",
     "relationship","divorce","divorc","separation","separated from",
     "i feel low","feel so low","feeling so low","feeling very low",
     "life feels pointless","feels pointless","feel pointless",
@@ -707,6 +710,8 @@ function route(lower, lastTopic) {
     "picking on me","always picking on me",
     "feel like the world is against me","the world is against me",
     "everything is against me","everyone is against me",
+    "glass ceiling","hit a glass ceiling","hitting a glass ceiling",
+    "pay gap","pay inequality","wage gap",
     "feel small","made to feel small","feel diminished",
     "belittled","talked down to","talks down to","talking down to",
     "speaking down to me","spoken down to"]) ||
@@ -1013,6 +1018,14 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R138: sadness (emotionally unavailable/can't open up/communication breakdown), anger (glass ceiling/pay gap)
+  ["he's emotionally unavailable and I feel so alone in this", "", "sadness", "emotionally unavailable → sadness"],
+  ["I can't open up to anyone about how I'm feeling", "", "sadness", "can't open up → sadness"],
+  ["there's been a communication breakdown between us", "", "sadness", "communication breakdown → sadness"],
+  ["I'm struggling to communicate with the people closest to me", "", "sadness", "struggling to communicate → sadness"],
+  ["I've hit a glass ceiling at work and I'm furious about it", "", "anger", "glass ceiling → anger"],
+  ["the pay gap here is unacceptable and I'm done tolerating it", "", "anger", "pay gap → anger"],
 
   // R137: sleep (sleep cycle/schedule/pattern), sadness (looking for meaning/seeking meaning/questioning purpose), anger (world is against me)
   ["my sleep cycle is completely messed up", "", "sleep", "sleep cycle → sleep"],

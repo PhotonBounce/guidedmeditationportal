@@ -478,6 +478,9 @@ class AiChatEngine(private val context: Context) {
             "isolated", "feeling isolated", "so isolated",
             "got fired", "just fired", "lost my job", "lost their job", "laid off",
             "made redundant", "partner left me", "been left",
+            "emotionally unavailable", "closed off emotionally", "emotionally closed",
+            "can't open up", "cant open up", "unable to open up",
+            "struggling to communicate", "communication breakdown",
             "relationship", "divorce", "divorc", "separation", "separated from",
             "feeling down", "feel down", "i feel down", "feeling low", "feel low",
             "i feel low", "feel so low", "feeling so low", "feeling very low",
@@ -836,6 +839,8 @@ class AiChatEngine(private val context: Context) {
             "picking on me", "always picking on me",
             "feel like the world is against me", "the world is against me",
             "everything is against me", "everyone is against me",
+            "glass ceiling", "hit a glass ceiling", "hitting a glass ceiling",
+            "pay gap", "pay inequality", "wage gap",
             "feel small", "made to feel small", "feel diminished",
             "belittled", "talked down to", "talks down to", "talking down to",
             "speaking down to me", "spoken down to") ||
