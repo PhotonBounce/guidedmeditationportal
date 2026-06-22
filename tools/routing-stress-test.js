@@ -320,6 +320,8 @@ function route(lower, lastTopic) {
     "inner parts","self parts","exile","exiles",
     "shadow work","shadow self","exploring my shadow",
     "somatic experiencing",
+    "limiting belief","limiting beliefs","negative beliefs",
+    "core belief","core beliefs","challenging my beliefs",
     "reframing","cognitive reframing","reframe my thoughts",
     "thought patterns","unhelpful thoughts","unhelpful thinking",
     "mindset shift","shift my mindset","mindset work","growth mindset",
@@ -399,6 +401,8 @@ function route(lower, lastTopic) {
     "sentimental","feeling sentimental","wistful","feeling wistful",
     "broken inside","feel broken inside","shattered","feel shattered",
     "left in pieces","feel left in pieces",
+    "end of an era","everything is changing","change feels overwhelming",
+    "everything around me is changing","life keeps changing",
     "can't shake this feeling","can't shake it off","can't shake this mood",
     "can't shake the sadness","can't shake off the sadness",
     "self-pity","wallowing in self-pity","wallowing in sadness",
@@ -812,6 +816,7 @@ function route(lower, lastTopic) {
     "little win","little wins",
     "birthday","it's my birthday","my birthday today","it is my birthday",
     "good vibes","great vibes","positive vibes",
+    "new beginning","brand new start","turning over a new leaf",
     "in a good place","in such a good place","feeling good today","feeling really good",
     "i did it","i actually did it","finally did it","can't believe i did it",
     "i can't believe i did it","i cant believe i did it",
@@ -1097,6 +1102,15 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R152: sadness (end of an era/everything changing), techniques (limiting beliefs/core beliefs), positive (fresh start/new chapter)
+  ["it feels like the end of an era in my life", "", "sadness", "end of an era → sadness"],
+  ["everything is changing and I don't know how to feel", "", "sadness", "everything is changing → sadness"],
+  ["I want to work on my limiting beliefs this year", "", "techniques", "limiting beliefs → techniques"],
+  ["I'm trying to identify my negative core beliefs", "", "techniques", "core beliefs → techniques"],
+  ["I feel like I'm embarking on a new beginning", "", "positive", "new beginning → positive"],
+  ["I'm turning over a new leaf and ready for change", "", "positive", "turning over a new leaf → positive"],
+  ["I'm turning over a new leaf and it feels great", "", "positive", "turning over a new leaf → positive"],
 
   // R151: sadness (broken inside/shattered), anger (scapegoated), overwhelm (always behind/catch-up), positive (good vibes/in a good place)
   ["I feel completely broken inside right now", "", "sadness", "broken inside → sadness"],
