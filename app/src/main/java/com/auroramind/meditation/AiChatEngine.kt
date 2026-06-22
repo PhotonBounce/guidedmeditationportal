@@ -230,7 +230,9 @@ class AiChatEngine(private val context: Context) {
             "pomodoro", "pomodoro technique",
             "scattered thoughts", "scattered brain", "scattered thinking",
             "can't organise my thoughts", "can't organize my thoughts",
-            "disorganised thinking", "disorganized thinking") ||
+            "disorganised thinking", "disorganized thinking",
+            "zone out", "zoning out", "zoned out",
+            "tunnel vision", "can't tune out", "distracted by everything") ||
         anyWord(lower, "read", "code") ->
             handleFocus().also { lastTopic = "focus" }
         any(lower, "energy", "energise", "energize", "wake up", "waking up",
@@ -256,7 +258,9 @@ class AiChatEngine(private val context: Context) {
             "in a slump", "creative slump", "mental slump", "under the weather",
             "can't get out of bed", "cant get out of bed", "can't face the day",
             "cant face the day", "dragging", "dragging myself",
-            "struggle to get up", "struggling to get up") ->
+            "struggle to get up", "struggling to get up",
+            "hit a wall", "hitting a wall",
+            "midday slump", "midday crash", "3pm slump") ->
             handleEnergy().also { lastTopic = "energy" }
         any(lower, "relax", "calm", "stress", "anxiety", "anxious", "breathe",
             "unwind", "nervous", "panic", "overthink", "overthinking",
@@ -690,7 +694,10 @@ class AiChatEngine(private val context: Context) {
             "cant manage anymore", "cant manage it all",
             "too many things", "so many things", "too many responsibilities",
             "so much to do", "can't keep track", "cant keep track",
-            "so many tasks") ||
+            "so many tasks",
+            "spinning plates", "spinning too many plates",
+            "too many balls in the air", "juggling everything", "juggling too much",
+            "can't juggle it all") ||
         anyWord(lower, "toxic") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
         any(lower, "angry", "furious", "frustrated", "frustration",

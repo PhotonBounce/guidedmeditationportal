@@ -122,7 +122,9 @@ function route(lower, lastTopic) {
     "pomodoro","pomodoro technique",
     "scattered thoughts","scattered brain","scattered thinking",
     "can't organise my thoughts","can't organize my thoughts",
-    "disorganised thinking","disorganized thinking"]) ||
+    "disorganised thinking","disorganized thinking",
+    "zone out","zoning out","zoned out",
+    "tunnel vision","can't tune out","distracted by everything"]) ||
     anyWord(lower,["read","code"])) return "focus";
   // 8. energy
   if(any(lower,["energy","energise","energize","wake up","waking up","uplift","motivat",
@@ -147,7 +149,9 @@ function route(lower, lastTopic) {
     "in a slump","creative slump","mental slump","under the weather",
     "can't get out of bed","cant get out of bed","can't face the day",
     "cant face the day","dragging","dragging myself",
-    "struggle to get up","struggling to get up"])) return "energy";
+    "struggle to get up","struggling to get up",
+    "hit a wall","hitting a wall",
+    "midday slump","midday crash","3pm slump"])) return "energy";
   // 9. relax
   if(any(lower,["relax","calm","stress","anxiety","anxious","breathe","unwind","nervous","panic",
     "overthink","overthinking","can't stop thinking","cant stop thinking",
@@ -561,7 +565,10 @@ function route(lower, lastTopic) {
     "cant manage anymore","cant manage it all",
     "too many things","so many things","too many responsibilities",
     "so much to do","can't keep track","cant keep track",
-    "so many tasks"]) ||
+    "so many tasks",
+    "spinning plates","spinning too many plates",
+    "too many balls in the air","juggling everything","juggling too much",
+    "can't juggle it all"]) ||
     anyWord(lower,["toxic"])) return "overwhelm";
   // 17. anger
   if(any(lower,["angry","furious","frustrated","frustration","rage",
@@ -931,6 +938,18 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R127: focus (zone out/tunnel vision), energy (hit a wall/midday slump), overwhelm (spinning plates/juggling)
+  ["I keep zoning out during meetings", "", "focus", "zoning out → focus"],
+  ["I have terrible tunnel vision when stressed", "", "focus", "tunnel vision → focus"],
+  ["I'm completely distracted by everything today", "", "focus", "distracted by everything → focus"],
+  ["I hit a wall around 11am every day", "", "energy", "hit a wall → energy"],
+  ["the midday slump is real right now", "", "energy", "midday slump → energy"],
+  ["I always feel the 3pm slump after lunch", "", "energy", "3pm slump → energy"],
+  ["I'm spinning too many plates at the same time", "", "overwhelm", "spinning too many plates → overwhelm"],
+  ["there are too many balls in the air right now", "", "overwhelm", "too many balls → overwhelm"],
+  ["I'm juggling too much and I can't cope", "", "overwhelm", "juggling too much → overwhelm"],
+  ["I can't juggle it all on my own", "", "overwhelm", "can't juggle → overwhelm"],
 
   // R126: sadness (unloved/nobody loves me), techniques (talk therapy/see a therapist/counselling), anger (unfair/wronged/feel cheated)
   ["I just feel so unloved by everyone around me", "", "sadness", "unloved → sadness"],
