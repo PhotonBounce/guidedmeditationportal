@@ -76,7 +76,11 @@ function route(lower, lastTopic) {
     "strange dream","weird dream","unsettling dream","dreams every night",
     "had a dream","keep having dreams","dream last night",
     "dreamed about","dreamt about","keep dreaming","remember my dreams",
-    "disturbing dreams","disturbing dream"]) ||
+    "disturbing dreams","disturbing dream",
+    "tossed and turned","tossing and turning",
+    "overslept","oversleeping","slept too much",
+    "lie awake","lying awake","lay awake",
+    "can't switch my brain off","cant switch my brain off"]) ||
     anyWord(lower,["nap","rls"])) return "sleep";
   // 7. focus
   if(any(lower,["focus","study","concentrat","productivity","procrastinat","writing","brain fog","adhd",
@@ -500,7 +504,10 @@ function route(lower, lastTopic) {
     "hate myself so much","hate myself for",
     "feel like i'm failing","feel like im failing","i'm failing at",
     "im failing at","failing as a parent","failing as a partner",
-    "failing at everything","failing at life"]) ||
+    "failing at everything","failing at life",
+    "always making excuses","keep making excuses","make excuses",
+    "always quitting","always quit","always give up","keep giving up",
+    "keep quitting"]) ||
     anyWord(lower,["sober"])) return "shameGuilt";
   // 16. overwhelm
   if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","burning out","too much",
@@ -601,7 +608,9 @@ function route(lower, lastTopic) {
     "passed over","passed over for",
     "feel underestimated",
     "workplace politics","office politics","work politics",
-    "power games","power play","being pushed out","being squeezed out"]) ||
+    "power games","power play","being pushed out","being squeezed out",
+    "ignored","being ignored","ignoring me",
+    "sidelined","being sidelined"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   // 18. vip
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -896,6 +905,19 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R123: sleep (tossed & turned/overslept/lie awake), shameGuilt (always making excuses/giving up), anger (feel ignored/sidelined)
+  ["I tossed and turned all night long", "", "sleep", "tossed and turned → sleep"],
+  ["I overslept this morning and feel awful", "", "sleep", "overslept → sleep"],
+  ["I just lie awake for hours staring at the ceiling", "", "sleep", "lie awake → sleep"],
+  ["I can't switch my brain off at bedtime", "", "sleep", "can't switch my brain off → sleep"],
+  ["I'm always making excuses for why I don't follow through", "", "shameGuilt", "always making excuses → shameGuilt"],
+  ["I keep giving up when things get hard", "", "shameGuilt", "keep giving up → shameGuilt"],
+  ["I always quit when something gets difficult", "", "shameGuilt", "always quit → shameGuilt"],
+  ["I feel like I always give up on myself", "", "shameGuilt", "always give up → shameGuilt"],
+  ["I feel so ignored by my team at work", "", "anger", "feel ignored → anger"],
+  ["my manager is ignoring me completely", "", "anger", "ignoring me → anger"],
+  ["I feel completely sidelined in meetings", "", "anger", "feel sidelined → anger"],
 
   // R122: sadness (dark place/rough patch/letting go/can't move on), relax (nerves/keyed up), anger (office politics/power games)
   ["I'm in a really dark place right now", "", "sadness", "dark place → sadness"],

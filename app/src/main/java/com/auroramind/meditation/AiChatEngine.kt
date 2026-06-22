@@ -183,7 +183,11 @@ class AiChatEngine(private val context: Context) {
             "strange dream", "weird dream", "unsettling dream", "dreams every night",
             "had a dream", "keep having dreams", "dream last night",
             "dreamed about", "dreamt about", "keep dreaming", "remember my dreams",
-            "disturbing dreams", "disturbing dream") ||
+            "disturbing dreams", "disturbing dream",
+            "tossed and turned", "tossing and turning",
+            "overslept", "oversleeping", "slept too much",
+            "lie awake", "lying awake", "lay awake",
+            "can't switch my brain off", "cant switch my brain off") ||
         anyWord(lower, "nap", "rls") ->
             handleSleep().also { lastTopic = "sleep" }
         any(lower, "focus", "study", "concentrat", "productivity",
@@ -627,7 +631,10 @@ class AiChatEngine(private val context: Context) {
             "hate myself so much", "hate myself for",
             "feel like i'm failing", "feel like im failing", "i'm failing at",
             "im failing at", "failing as a parent", "failing as a partner",
-            "failing at everything", "failing at life") ||
+            "failing at everything", "failing at life",
+            "always making excuses", "keep making excuses", "make excuses",
+            "always quitting", "always quit", "always give up", "keep giving up",
+            "keep quitting") ||
         anyWord(lower, "sober") ->
             handleShameGuilt().also { lastTopic = "sadness" }
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out", "burning out",
@@ -730,7 +737,9 @@ class AiChatEngine(private val context: Context) {
             "passed over", "passed over for",
             "feel underestimated",
             "workplace politics", "office politics", "work politics",
-            "power games", "power play", "being pushed out", "being squeezed out") ||
+            "power games", "power play", "being pushed out", "being squeezed out",
+            "ignored", "being ignored", "ignoring me",
+            "sidelined", "being sidelined") ||
         anyWord(lower, "mad", "anger", "angered") ->
             handleAnger().also { lastTopic = "anger" }
 
