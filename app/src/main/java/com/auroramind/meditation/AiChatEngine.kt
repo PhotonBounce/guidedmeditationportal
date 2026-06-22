@@ -197,6 +197,7 @@ class AiChatEngine(private val context: Context) {
             "brain freeze", "can't think straight", "cant think straight",
             "mind blank", "mind went blank", "mind has gone blank",
             "analysis paralysis", "decision paralysis", "overthinking decisions",
+            "indecisive", "indecision",
             "hyperfocus", "hyperfocusing", "can't switch tasks",
             "cant switch tasks", "task switching",
             "poor memory", "memory problems", "memory issues", "bad memory",
@@ -321,7 +322,9 @@ class AiChatEngine(private val context: Context) {
             "body memories", "trauma response", "trauma trigger",
             "hypochondria", "hypochondriac", "health anxiety disorder",
             "illness anxiety", "medical anxiety",
-            "wind down", "wind-down", "winding down", "need to wind down") ||
+            "wind down", "wind-down", "winding down", "need to wind down",
+            "socially awkward", "social awkwardness", "feel awkward around", "awkward in social situations",
+            "sense of doom", "feeling of doom", "impending doom", "feel doomed") ||
         anyWord(lower, "rest", "tense", "rsd") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in",
@@ -391,6 +394,8 @@ class AiChatEngine(private val context: Context) {
             "evening routine", "wind down routine", "wind-down routine",
             "setting boundaries", "healthy boundaries", "set boundaries",
             "establish boundaries", "learn to say no",
+            "assertive", "assertiveness", "be more assertive", "speak up for myself",
+            "learn to speak up", "assert myself", "find my voice", "stand up for myself",
             "window of tolerance", "nervous system reset",
             "polyvagal theory", "co-regulation", "coregulation",
             "pranayama", "alternate nostril", "pranic breathing",
@@ -693,7 +698,12 @@ class AiChatEngine(private val context: Context) {
             "boss is terrible", "awful manager", "terrible manager", "manager is awful",
             "manager is terrible", "my boss keeps",
             "family conflict", "family drama", "family argument",
-            "family feud", "family row", "had a row with", "falling out with my") ||
+            "family feud", "family row", "had a row with", "falling out with my",
+            "undervalued", "feel unappreciated", "unappreciated",
+            "not appreciated", "feel taken for granted", "taken for granted",
+            "feel overlooked", "being overlooked", "always overlooked",
+            "passed over", "passed over for",
+            "feel underestimated") ||
         anyWord(lower, "mad", "anger", "angered") ->
             handleAnger().also { lastTopic = "anger" }
 

@@ -89,6 +89,7 @@ function route(lower, lastTopic) {
     "brain freeze","can't think straight","cant think straight",
     "mind blank","mind went blank","mind has gone blank",
     "analysis paralysis","decision paralysis","overthinking decisions",
+    "indecisive","indecision",
     "hyperfocus","hyperfocusing","can't switch tasks",
     "cant switch tasks","task switching",
     "poor memory","memory problems","memory issues","bad memory",
@@ -209,7 +210,9 @@ function route(lower, lastTopic) {
     "body memories","trauma response","trauma trigger",
     "hypochondria","hypochondriac","health anxiety disorder",
     "illness anxiety","medical anxiety",
-    "wind down","wind-down","winding down","need to wind down"]) ||
+    "wind down","wind-down","winding down","need to wind down",
+    "socially awkward","social awkwardness","feel awkward around","awkward in social situations",
+    "sense of doom","feeling of doom","impending doom","feel doomed"]) ||
     anyWord(lower,["rest","tense","rsd"])) return "relax";
   // 10. tinnitus
   if(any(lower,["tinnitus","ringing in","ear ring","hearing","buzz in my ear",
@@ -271,6 +274,8 @@ function route(lower, lastTopic) {
     "body doubling","pomodoro","time blocking",
     "setting boundaries","healthy boundaries","set boundaries",
     "establish boundaries","learn to say no",
+    "assertive","assertiveness","be more assertive","speak up for myself",
+    "learn to speak up","assert myself","find my voice","stand up for myself",
     "window of tolerance","nervous system reset",
     "polyvagal theory","co-regulation","coregulation",
     "pranayama","alternate nostril","pranic breathing",
@@ -564,7 +569,12 @@ function route(lower, lastTopic) {
     "boss is terrible","awful manager","terrible manager","manager is awful",
     "manager is terrible","my boss keeps",
     "family conflict","family drama","family argument",
-    "family feud","family row","had a row with","falling out with my"]) ||
+    "family feud","family row","had a row with","falling out with my",
+    "undervalued","feel unappreciated","unappreciated",
+    "not appreciated","feel taken for granted","taken for granted",
+    "feel overlooked","being overlooked","always overlooked",
+    "passed over","passed over for",
+    "feel underestimated"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   // 18. vip
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -859,6 +869,24 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R119: relax (social awkwardness, impending doom), focus (decision fatigue/indecision), techniques (assertiveness), anger (undervalued/overlooked)
+  ["I feel so socially awkward at parties", "", "relax", "socially awkward → relax"],
+  ["I have this feeling of impending doom", "", "relax", "impending doom → relax"],
+  ["I feel doomed no matter what I do", "", "relax", "feel doomed → relax"],
+  ["I'm in a state of complete indecision about my life", "", "focus", "indecision → focus"],
+  ["I'm so indecisive about everything in my life", "", "focus", "indecisive → focus"],
+  ["I feel completely paralysed and indecisive", "", "focus", "indecisive → focus"],
+  ["I want to work on my assertiveness", "", "techniques", "assertiveness → techniques"],
+  ["I struggle to speak up for myself", "", "techniques", "speak up for myself → techniques"],
+  ["I need help learning to stand up for myself", "", "techniques", "stand up for myself → techniques"],
+  ["I want to find my voice and use it", "", "techniques", "find my voice → techniques"],
+  ["I'm completely undervalued at work", "", "anger", "undervalued → anger"],
+  ["I feel completely unappreciated by everyone", "", "anger", "unappreciated → anger"],
+  ["I always feel taken for granted", "", "anger", "taken for granted → anger"],
+  ["I feel like I'm always being overlooked", "", "anger", "feel overlooked → anger"],
+  ["I was passed over for promotion again", "", "anger", "passed over → anger"],
+  ["I'm always being overlooked for opportunities at work", "", "anger", "being overlooked → anger"],
 
   // R118: sadness (coming-out/LGBTQ, faith crisis), shameGuilt (failing at life/parent), anger (boss hate, family conflict)
   ["I'm coming out to my parents next week", "", "sadness", "coming out → sadness"],
