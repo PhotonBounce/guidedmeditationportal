@@ -404,6 +404,7 @@ function route(lower, lastTopic) {
     "sentimental","feeling sentimental","wistful","feeling wistful",
     "broken inside","feel broken inside","shattered","feel shattered",
     "emotional shutdown","shutting down emotionally","emotionally shut down",
+    "feel left behind","feeling left behind","left behind socially",
     "crying for no reason","cry for no reason","crying out of nowhere",
     "crying and i don't know why",
     "left in pieces","feel left in pieces",
@@ -681,6 +682,7 @@ function route(lower, lastTopic) {
     "impossible workload","crushing workload","unmanageable workload",
     "falling behind","fell behind","getting behind","behind on everything",
     "playing catch-up","playing catchup","always behind","constantly behind",
+    "survival mode","in survival mode","just surviving","barely surviving",
     "in over my head","way in over my head","out of my depth","way out of my depth",
     "at my wit's end","at my wits end","at wits end",
     "stretched to my limit","pushed to my limit",
@@ -759,6 +761,7 @@ function route(lower, lastTopic) {
     "push my buttons","pushed my buttons","pushing my buttons",
     "last straw","that was the last straw","this is the last straw",
     "scapegoated","being scapegoated","the scapegoat","scapegoating",
+    "being exploited","feel exploited","feeling exploited",
     "crossed a line","crossed the line","that crossed a line",
     "treated unfairly","being treated unfairly","not being treated fairly",
     "treated poorly","treat me poorly","treating me badly",
@@ -827,6 +830,7 @@ function route(lower, lastTopic) {
     "birthday","it's my birthday","my birthday today","it is my birthday",
     "good vibes","great vibes","positive vibes",
     "milestone","hit a milestone","reached a milestone","major milestone",
+    "thriving","i'm thriving","absolutely thriving",
     "new beginning","brand new start","turning over a new leaf",
     "in a good place","in such a good place","feeling good today","feeling really good",
     "i did it","i actually did it","finally did it","can't believe i did it",
@@ -863,6 +867,8 @@ function route(lower, lastTopic) {
   // 25. pain
   if(any(lower,["headache","migraine","ache","sore","tension headache","physical","body tension",
     "muscle tension","stiff","tension","chronic pain","chronic illness","fibromyalgia","arthritis","back pain",
+    "recovering from surgery","post-surgery","after surgery",
+    "recovering from an operation","post-operation recovery",
     "lower back","neck pain","neck tension","shoulder pain","joint pain",
     "sciatica","period pain","menstrual cramps","cramps",
     "jaw pain","jaw tension","jaw clenching","teeth grinding","grind my teeth","grinding my teeth","bruxism",
@@ -1113,6 +1119,15 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R155: pain (recovering from surgery), sadness (feel left behind), overwhelm (survival mode), anger (being exploited), positive (thriving)
+  ["I'm recovering from surgery and the pain is rough", "", "pain", "recovering from surgery → pain"],
+  ["the post-surgery period has been really difficult", "", "pain", "post-surgery → pain"],
+  ["I feel left behind while everyone else moves forward", "", "sadness", "feel left behind → sadness"],
+  ["I've been in survival mode for months now", "", "overwhelm", "survival mode → overwhelm"],
+  ["I'm just surviving each day rather than living", "", "overwhelm", "just surviving → overwhelm"],
+  ["I feel like I'm being exploited by my employer", "", "anger", "being exploited → anger"],
+  ["honestly I'm absolutely thriving right now", "", "positive", "thriving → positive"],
 
   // R154: positive (milestone), anger (crossed a line), sadness (crying for no reason), techniques (behavioral activation), overwhelm (in over my head)
   ["I just hit a major milestone in my recovery", "", "positive", "milestone → positive"],
