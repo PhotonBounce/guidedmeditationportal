@@ -56,6 +56,7 @@ function route(lower, lastTopic) {
     "drift off","drifting off","can't drift",
     "counting sheep","wired at night","wired tonight","can't wind down","cant wind down",
     "light sleeper","heavy sleeper","sleep hygiene","body clock","circadian","night terrors",
+    "sleep cycle","sleep schedule","sleep pattern","sleeping pattern",
     "night sweats","hot flashes","hot flush","menopause","perimenopause",
     "can't turn off","cant turn off","turn my brain off",
     "brain won't stop","brain wont stop",
@@ -415,6 +416,8 @@ function route(lower, lastTopic) {
     "doom and gloom",
     "find my purpose","finding my purpose","life purpose",
     "searching for meaning","search for meaning",
+    "looking for meaning","seeking meaning",
+    "questioning my purpose","questioning the point",
     "find meaning","sense of meaning",
     "rough patch","going through a rough time","going through a hard time",
     "in a dark place","dark place","bad place right now",
@@ -702,6 +705,8 @@ function route(lower, lastTopic) {
     "constantly criticized","always being criticized","always criticized",
     "always put down","always being put down",
     "picking on me","always picking on me",
+    "feel like the world is against me","the world is against me",
+    "everything is against me","everyone is against me",
     "feel small","made to feel small","feel diminished",
     "belittled","talked down to","talks down to","talking down to",
     "speaking down to me","spoken down to"]) ||
@@ -1008,6 +1013,16 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R137: sleep (sleep cycle/schedule/pattern), sadness (looking for meaning/seeking meaning/questioning purpose), anger (world is against me)
+  ["my sleep cycle is completely messed up", "", "sleep", "sleep cycle → sleep"],
+  ["I need to fix my sleep schedule", "", "sleep", "sleep schedule → sleep"],
+  ["my sleeping pattern has been all over the place", "", "sleep", "sleeping pattern → sleep"],
+  ["I'm looking for meaning in my life right now", "", "sadness", "looking for meaning → sadness"],
+  ["I've been seeking meaning in everything I do", "", "sadness", "seeking meaning → sadness"],
+  ["I keep questioning my purpose and it's exhausting", "", "sadness", "questioning my purpose → sadness"],
+  ["I feel like the world is against me no matter what I do", "", "anger", "feel like the world is against me → anger"],
+  ["everything is against me lately and I can't win", "", "anger", "everything is against me → anger"],
 
   // R136: shameGuilt (overeating/food guilt/mindless eating), inspire (uninspired), pain (flare-up)
   ["I've been overeating again and I feel terrible about it", "", "shameGuilt", "overeating → shameGuilt"],
