@@ -510,6 +510,8 @@ class AiChatEngine(private val context: Context) {
             "can't see a future", "no future for me", "can't see where this is going",
             "retiring", "retirement", "career change", "career transition",
             "changing career", "changing careers",
+            "glass half empty", "lump in my throat",
+            "difficult relationship", "difficult family", "hard family situation",
             "not great", "not so great", "not feeling great", "not doing great",
             "feeling off", "bit off", "not myself", "off today", "not okay",
             "not ok today", "not doing ok", "not doing well",
@@ -784,7 +786,10 @@ class AiChatEngine(private val context: Context) {
             "how dare", "how dare they", "how dare you",
             "indignant", "feel insulted", "insulted by",
             "want to throw something", "want to smash", "want to punch",
-            "punch a wall", "smash something") ||
+            "punch a wall", "smash something",
+            "at boiling point", "at my boiling point",
+            "about to lose it", "on the verge of losing it",
+            "on my last nerve", "blow a fuse", "about to snap") ||
         anyWord(lower, "mad", "anger", "angered") ->
             handleAnger().also { lastTopic = "anger" }
 
@@ -887,7 +892,9 @@ class AiChatEngine(private val context: Context) {
             "daily inspiration", "inspiring message", "positive message",
             "boost my mood", "inspiring", "something inspiring",
             "words of wisdom", "wise words", "words of hope",
-            "something meaningful", "meaningful message") ->
+            "something meaningful", "meaningful message",
+            "feel hopeful", "feeling hopeful", "something hopeful",
+            "upbeat", "something upbeat", "feel upbeat") ->
             handleInspiration().also { lastTopic = "inspiration" }
         any(lower, "journey", "journeys", "program", "programs", "course",
             "guided course", "structured", "7 day", "7-day", "5 day", "5-day", "challenge",

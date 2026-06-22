@@ -374,6 +374,8 @@ function route(lower, lastTopic) {
     "can't see a future","no future for me","can't see where this is going",
     "retiring","retirement","career change","career transition",
     "changing career","changing careers",
+    "glass half empty","lump in my throat",
+    "difficult relationship","difficult family","hard family situation",
     "not great","not so great","not feeling great","not doing great",
     "feeling off","bit off","not myself","off today","not okay","not ok today",
     "not doing ok","not doing well",
@@ -655,7 +657,10 @@ function route(lower, lastTopic) {
     "how dare","how dare they","how dare you",
     "indignant","feel insulted","insulted by",
     "want to throw something","want to smash","want to punch",
-    "punch a wall","smash something"]) ||
+    "punch a wall","smash something",
+    "at boiling point","at my boiling point",
+    "about to lose it","on the verge of losing it",
+    "on my last nerve","blow a fuse","about to snap"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   // 18. vip
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -748,7 +753,9 @@ function route(lower, lastTopic) {
     "daily inspiration","inspiring message","positive message",
     "boost my mood","inspiring","something inspiring",
     "words of wisdom","wise words","words of hope",
-    "something meaningful","meaningful message"])) return "inspire";
+    "something meaningful","meaningful message",
+    "feel hopeful","feeling hopeful","something hopeful",
+    "upbeat","something upbeat","feel upbeat"])) return "inspire";
   // 29. programs
   if(any(lower,["journey","journeys","program","programs","course","guided course",
     "structured","7 day","7-day","5 day","5-day","challenge",
@@ -953,6 +960,19 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R130: anger (boiling point/about to lose it/blow a fuse), sadness (glass half empty/lump in throat/difficult family), inspire (hopeful/upbeat)
+  ["I'm absolutely at boiling point with this situation", "", "anger", "at boiling point → anger"],
+  ["I'm about to lose it completely", "", "anger", "about to lose it → anger"],
+  ["this is getting on my last nerve", "", "anger", "on my last nerve → anger"],
+  ["I'm about to blow a fuse", "", "anger", "blow a fuse → anger"],
+  ["I tend to see the glass half empty", "", "sadness", "glass half empty → sadness"],
+  ["I have a lump in my throat and I can't stop crying", "", "sadness", "lump in my throat → sadness"],
+  ["I'm going through a difficult relationship right now", "", "sadness", "difficult relationship → sadness"],
+  ["I come from a really difficult family background", "", "sadness", "difficult family → sadness"],
+  ["I want to feel hopeful again", "", "inspire", "feel hopeful → inspire"],
+  ["I need something upbeat to lift my day", "", "inspire", "something upbeat → inspire"],
+  ["I'm looking for a more upbeat mindset", "", "inspire", "upbeat → inspire"],
 
   // R129: energy (people drain me/introvert/social battery), sadness (retiring/career change), anger (want to throw/punch a wall)
   ["being around people really drains me after a while", "", "energy", "drains me → energy"],
