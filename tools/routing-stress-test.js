@@ -588,7 +588,10 @@ function route(lower, lastTopic) {
     "never good enough","never feel good enough",
     "second-guess myself","second-guessing myself",
     "second-guess everything","second-guessing everything",
-    "second-guessing every decision","second-guess every decision"]) ||
+    "second-guessing every decision","second-guess every decision",
+    "shame spiral","shame attack","shame storm",
+    "feel ashamed","feel ashamed of myself","deeply ashamed",
+    "deep shame","overwhelmed by shame"]) ||
     anyWord(lower,["sober"])) return "shameGuilt";
   // 16. overwhelm
   if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","burning out","too much",
@@ -633,6 +636,7 @@ function route(lower, lastTopic) {
     "too many balls in the air","juggling everything","juggling too much",
     "can't juggle it all",
     "impossible workload","crushing workload","unmanageable workload",
+    "falling behind","fell behind","getting behind","behind on everything",
     "at my wit's end","at my wits end","at wits end",
     "stretched to my limit","pushed to my limit",
     "barely functioning","barely coping","barely keeping it together",
@@ -767,6 +771,8 @@ function route(lower, lastTopic) {
     "got promoted","just got promoted","i got promoted",
     "small win","small wins","little victory","little victories",
     "little win","little wins",
+    "making progress","made great progress","great progress today",
+    "sense of accomplishment","feel accomplished","feeling accomplished",
     "got engaged","just got engaged","we got engaged",
     "getting married","we're getting married","just got married",
     "we just got married","we got married"])) return "positive";
@@ -1041,6 +1047,17 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R143: positive (making progress/sense of accomplishment), shameGuilt (shame spiral/feel ashamed), overwhelm (falling behind)
+  ["I'm making progress on my goals every single day", "", "positive", "making progress → positive"],
+  ["I made great progress today and I'm pleased", "", "positive", "great progress today → positive"],
+  ["I have a real sense of accomplishment tonight", "", "positive", "sense of accomplishment → positive"],
+  ["I feel accomplished after finishing that project", "", "positive", "feel accomplished → positive"],
+  ["I'm in a shame spiral and can't get out of it", "", "shameGuilt", "shame spiral → shameGuilt"],
+  ["I had a shame attack at work today", "", "shameGuilt", "shame attack → shameGuilt"],
+  ["I feel deeply ashamed of something I did", "", "shameGuilt", "deeply ashamed → shameGuilt"],
+  ["I'm falling behind on everything at work this week", "", "overwhelm", "falling behind → overwhelm"],
+  ["I've been getting behind on all my responsibilities", "", "overwhelm", "getting behind → overwhelm"],
 
   // R142: relax (feel insecure), sadness (feel flat/redundancy), anger (injustice/unjust), overwhelm (job insecurity)
   ["I've been feeling really insecure about myself lately", "", "relax", "feeling insecure → relax"],
