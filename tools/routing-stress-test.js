@@ -381,6 +381,9 @@ function route(lower, lastTopic) {
     "feel like i'm disappearing","feel like im disappearing",
     "i'm disappearing","im disappearing",
     "feel like i'm fading away","losing my identity","losing myself",
+    "nostalgic","nostalgia","longing for the past","miss the old days",
+    "miss how things used to be","things were better before",
+    "nobody supports me","no support system","feel unsupported",
     "not great","not so great","not feeling great","not doing great",
     "feeling off","bit off","not myself","off today","not okay","not ok today",
     "not doing ok","not doing well",
@@ -673,6 +676,9 @@ function route(lower, lastTopic) {
     "on my last nerve","blow a fuse","about to snap",
     "had it up to here","i've had it","ive had it",
     "done with it all","done with all of this","done with this",
+    "constantly criticized","always being criticized","always criticized",
+    "always put down","always being put down",
+    "picking on me","always picking on me",
     "feel small","made to feel small","feel diminished",
     "belittled","talked down to","talks down to","talking down to",
     "speaking down to me","spoken down to"]) ||
@@ -705,7 +711,9 @@ function route(lower, lastTopic) {
     "finally did it","i finally did it","just did it",
     "aced it","aced my","aced the","i aced","smashed it","absolutely smashed","killed it today",
     "got a raise","got a pay rise","pay rise","getting a raise",
-    "got promoted","just got promoted","i got promoted"])) return "positive";
+    "got promoted","just got promoted","i got promoted",
+    "small win","small wins","little victory","little victories",
+    "little win","little wins"])) return "positive";
   // 21. timer
   if(any(lower,["timer","sleep timer","how long should","how long to meditate","how long for","duration","how many minutes"])) return "timer";
   // 22. alarm
@@ -975,6 +983,20 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R133: sadness (nostalgia/nobody supports me), anger (constantly criticized/always put down), positive (small wins/little victories)
+  ["I'm feeling really nostalgic today and it's making me sad", "", "sadness", "nostalgic → sadness"],
+  ["nostalgia is hitting me hard right now", "", "sadness", "nostalgia → sadness"],
+  ["I'm longing for the past so much lately", "", "sadness", "longing for the past → sadness"],
+  ["I miss the old days and how simple things were", "", "sadness", "miss the old days → sadness"],
+  ["I feel like nobody supports me in what I do", "", "sadness", "nobody supports me → sadness"],
+  ["I have no support system around me", "", "sadness", "no support system → sadness"],
+  ["I'm constantly criticized no matter what I do", "", "anger", "constantly criticized → anger"],
+  ["I feel like I'm always being criticized at work", "", "anger", "always being criticized → anger"],
+  ["I'm always put down when I try to speak up", "", "anger", "always put down → anger"],
+  ["my sister is always picking on me", "", "anger", "picking on me → anger"],
+  ["I had a small win today and I want to celebrate it", "", "positive", "small win → positive"],
+  ["we had a few little victories this week", "", "positive", "little victories → positive"],
 
   // R132: overwhelm (barely functioning/i'm a mess), sadness (feel like disappearing/losing identity), anger (had it up to here/done with it all)
   ["I'm barely functioning right now", "", "overwhelm", "barely functioning → overwhelm"],

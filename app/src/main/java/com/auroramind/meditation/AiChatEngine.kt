@@ -517,6 +517,9 @@ class AiChatEngine(private val context: Context) {
             "feel like i'm disappearing", "feel like im disappearing",
             "i'm disappearing", "im disappearing",
             "feel like i'm fading away", "losing my identity", "losing myself",
+            "nostalgic", "nostalgia", "longing for the past", "miss the old days",
+            "miss how things used to be", "things were better before",
+            "nobody supports me", "no support system", "feel unsupported",
             "not great", "not so great", "not feeling great", "not doing great",
             "feeling off", "bit off", "not myself", "off today", "not okay",
             "not ok today", "not doing ok", "not doing well",
@@ -802,6 +805,9 @@ class AiChatEngine(private val context: Context) {
             "on my last nerve", "blow a fuse", "about to snap",
             "had it up to here", "i've had it", "ive had it",
             "done with it all", "done with all of this", "done with this",
+            "constantly criticized", "always being criticized", "always criticized",
+            "always put down", "always being put down",
+            "picking on me", "always picking on me",
             "feel small", "made to feel small", "feel diminished",
             "belittled", "talked down to", "talks down to", "talking down to",
             "speaking down to me", "spoken down to") ||
@@ -837,7 +843,9 @@ class AiChatEngine(private val context: Context) {
             "finally did it", "i finally did it", "just did it",
             "aced it", "aced my", "aced the", "i aced", "smashed it", "absolutely smashed", "killed it today",
             "got a raise", "got a pay rise", "pay rise", "getting a raise",
-            "got promoted", "just got promoted", "i got promoted") ->
+            "got promoted", "just got promoted", "i got promoted",
+            "small win", "small wins", "little victory", "little victories",
+            "little win", "little wins") ->
             handlePositive().also { lastTopic = "" }
         any(lower, "timer", "sleep timer", "how long should", "how long to meditate",
             "how long for", "duration", "how many minutes") ->
