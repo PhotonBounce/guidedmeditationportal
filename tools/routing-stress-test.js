@@ -317,7 +317,11 @@ function route(lower, lastTopic) {
     "positive thinking","think positively","positive thoughts",
     "self-love","self love","self love practice",
     "goal setting","setting goals","set my goals","goal planning",
-    "vision board","vision boarding"])) return "techniques";
+    "vision board","vision boarding",
+    "see a therapist","seeing a therapist","find a therapist",
+    "talk therapy","talking therapy",
+    "in therapy","going to therapy","go to therapy",
+    "need counseling","need counselling"])) return "techniques";
   // 14. sadness
   if(any(lower,["sad","grief","grieving","heartbreak","heartbroken","lonely","alone","loneliness",
     "depressed","depression","cry","crying","sobbing","weeping","in tears","tearing up",
@@ -355,6 +359,7 @@ function route(lower, lastTopic) {
     "growing old","not young anymore",
     "feel rejected","feel abandoned","abandoned","rejection","been rejected",
     "feel invisible","feel unseen","feel unloved","unlovable","not loved","no one cares",
+    "unloved","nobody loves me","no one loves me","nobody cares",
     "not great","not so great","not feeling great","not doing great",
     "feeling off","bit off","not myself","off today","not okay","not ok today",
     "not doing ok","not doing well",
@@ -625,7 +630,10 @@ function route(lower, lastTopic) {
     "stabbed in the back","fake friends","fake people",
     "makes my blood boil","blood boils","my blood is boiling",
     "push my buttons","pushed my buttons","pushing my buttons",
-    "last straw","that was the last straw","this is the last straw"]) ||
+    "last straw","that was the last straw","this is the last straw",
+    "unfair","so unfair","not fair","that's not fair","it's not fair",
+    "been wronged","feel wronged","feeling wronged",
+    "feel cheated","being cheated"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   // 18. vip
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -923,6 +931,20 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R126: sadness (unloved/nobody loves me), techniques (talk therapy/see a therapist/counselling), anger (unfair/wronged/feel cheated)
+  ["I just feel so unloved by everyone around me", "", "sadness", "unloved → sadness"],
+  ["nobody loves me no matter what I do", "", "sadness", "nobody loves me → sadness"],
+  ["no one loves me and I feel so alone", "", "sadness", "no one loves me → sadness"],
+  ["nobody cares whether I'm okay or not", "", "sadness", "nobody cares → sadness"],
+  ["I'm thinking about starting talk therapy", "", "techniques", "talk therapy → techniques"],
+  ["should I see a therapist about this", "", "techniques", "see a therapist → techniques"],
+  ["I'm already going to therapy but still struggling", "", "techniques", "going to therapy → techniques"],
+  ["I need counselling but don't know where to start", "", "techniques", "need counselling → techniques"],
+  ["life is so unfair and I'm sick of it", "", "anger", "unfair → anger"],
+  ["that's completely not fair and I'm angry", "", "anger", "not fair → anger"],
+  ["I feel like I've been wronged at every turn", "", "anger", "feel wronged → anger"],
+  ["I feel cheated by the system", "", "anger", "feel cheated → anger"],
 
   // R125: positive (aced it/pay rise/got promoted), techniques (positive thinking/self-love/goal setting/vision board), anger (blood boil/pushed buttons/last straw)
   ["I totally aced my presentation today", "", "positive", "aced it → positive"],

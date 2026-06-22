@@ -435,7 +435,11 @@ class AiChatEngine(private val context: Context) {
             "positive thinking", "think positively", "positive thoughts",
             "self-love", "self love", "self love practice",
             "goal setting", "setting goals", "set my goals", "goal planning",
-            "vision board", "vision boarding") ->
+            "vision board", "vision boarding",
+            "see a therapist", "seeing a therapist", "find a therapist",
+            "talk therapy", "talking therapy",
+            "in therapy", "going to therapy", "go to therapy",
+            "need counseling", "need counselling") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
@@ -491,6 +495,7 @@ class AiChatEngine(private val context: Context) {
             "relationship counselling", "relationship counseling",
             "feel invisible", "feel unseen", "feel unloved", "feel unlovable",
             "unlovable", "not loved", "no one cares",
+            "unloved", "nobody loves me", "no one loves me", "nobody cares",
             "not great", "not so great", "not feeling great", "not doing great",
             "feeling off", "bit off", "not myself", "off today", "not okay",
             "not ok today", "not doing ok", "not doing well",
@@ -754,7 +759,10 @@ class AiChatEngine(private val context: Context) {
             "stabbed in the back", "fake friends", "fake people",
             "makes my blood boil", "blood boils", "my blood is boiling",
             "push my buttons", "pushed my buttons", "pushing my buttons",
-            "last straw", "that was the last straw", "this is the last straw") ||
+            "last straw", "that was the last straw", "this is the last straw",
+            "unfair", "so unfair", "not fair", "that's not fair", "it's not fair",
+            "been wronged", "feel wronged", "feeling wronged",
+            "feel cheated", "being cheated") ||
         anyWord(lower, "mad", "anger", "angered") ->
             handleAnger().also { lastTopic = "anger" }
 
