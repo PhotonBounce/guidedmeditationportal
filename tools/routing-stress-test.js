@@ -195,6 +195,7 @@ function route(lower, lastTopic) {
     "on edge","jittery","jitters","butterflies in",
     "trembling","can't stop shaking","cant stop shaking",
     "shortness of breath","breathlessness","out of breath",
+    "shallow breathing","breathing is shallow","breathing feels tight",
     "palpitations","heart palpitations","heart flutters",
     "vagus nerve","vagal","somatic therapy","somatic healing","somatic exercises",
     "nervous system regulation","regulate my nervous system",
@@ -405,6 +406,7 @@ function route(lower, lastTopic) {
     "broken inside","feel broken inside","shattered","feel shattered",
     "emotional shutdown","shutting down emotionally","emotionally shut down",
     "feel left behind","feeling left behind","left behind socially",
+    "second-rate","feel second-rate","second-class",
     "crying for no reason","cry for no reason","crying out of nowhere",
     "crying and i don't know why",
     "left in pieces","feel left in pieces",
@@ -762,6 +764,7 @@ function route(lower, lastTopic) {
     "last straw","that was the last straw","this is the last straw",
     "scapegoated","being scapegoated","the scapegoat","scapegoating",
     "being exploited","feel exploited","feeling exploited",
+    "feel threatened","feeling threatened","threatened by",
     "crossed a line","crossed the line","that crossed a line",
     "treated unfairly","being treated unfairly","not being treated fairly",
     "treated poorly","treat me poorly","treating me badly",
@@ -831,6 +834,7 @@ function route(lower, lastTopic) {
     "good vibes","great vibes","positive vibes",
     "milestone","hit a milestone","reached a milestone","major milestone",
     "thriving","i'm thriving","absolutely thriving",
+    "feel blessed","feeling blessed","life is beautiful",
     "new beginning","brand new start","turning over a new leaf",
     "in a good place","in such a good place","feeling good today","feeling really good",
     "i did it","i actually did it","finally did it","can't believe i did it",
@@ -1119,6 +1123,14 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R156: sadness (second-rate), anger (feel threatened), relax (shallow breathing), positive (feel blessed/life is beautiful)
+  ["I feel second-rate compared to everyone around me", "", "sadness", "second-rate → sadness"],
+  ["I feel threatened by someone at work and it's unnerving", "", "anger", "feel threatened → anger"],
+  ["my breathing is shallow and I can't seem to relax", "", "relax", "breathing is shallow → relax"],
+  ["I keep breathing in a shallow way when I'm nervous", "", "relax", "shallow breathing → relax"],
+  ["I feel blessed in so many ways right now", "", "positive", "feel blessed → positive"],
+  ["life is beautiful and I want to savour every moment", "", "positive", "life is beautiful → positive"],
 
   // R155: pain (recovering from surgery), sadness (feel left behind), overwhelm (survival mode), anger (being exploited), positive (thriving)
   ["I'm recovering from surgery and the pain is rough", "", "pain", "recovering from surgery → pain"],
