@@ -546,7 +546,13 @@ class AiChatEngine(private val context: Context) {
             "hate my life", "hate this life", "hate life", "i hate my life",
             "hate everything",
             "layoff", "layoffs", "being laid off", "facing layoff",
-            "retrenchment", "downsizing", "made redundant") ||
+            "retrenchment", "downsizing", "made redundant",
+            "coming out", "coming out to my", "came out as", "came out to",
+            "gender dysphoria", "queer identity", "questioning my sexuality",
+            "questioning my gender",
+            "losing my faith", "lost my faith", "faith crisis", "crisis of faith",
+            "deconstructing my faith", "deconversion", "leaving my religion",
+            "leaving the church") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
@@ -591,7 +597,10 @@ class AiChatEngine(private val context: Context) {
             "feel judged", "feeling judged", "being judged",
             "fear of judgment", "fear of being judged", "feel watched",
             "hate myself", "i hate myself", "hate who i am", "i hate who i am",
-            "hate myself so much", "hate myself for") ||
+            "hate myself so much", "hate myself for",
+            "feel like i'm failing", "feel like im failing", "i'm failing at",
+            "im failing at", "failing as a parent", "failing as a partner",
+            "failing at everything", "failing at life") ||
         anyWord(lower, "sober") ->
             handleShameGuilt().also { lastTopic = "sadness" }
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out", "burning out",
@@ -679,7 +688,12 @@ class AiChatEngine(private val context: Context) {
             "took credit for my work", "taking credit for my work", "stole my idea", "takes credit",
             "blame me for everything", "blames me for everything", "always my fault",
             "manipulative", "manipulator", "being manipulated",
-            "controlling partner", "controlling behavior", "controlling behaviour") ||
+            "controlling partner", "controlling behavior", "controlling behaviour",
+            "hate my boss", "bad boss", "horrible boss", "boss is awful",
+            "boss is terrible", "awful manager", "terrible manager", "manager is awful",
+            "manager is terrible", "my boss keeps",
+            "family conflict", "family drama", "family argument",
+            "family feud", "family row", "had a row with", "falling out with my") ||
         anyWord(lower, "mad", "anger", "angered") ->
             handleAnger().also { lastTopic = "anger" }
 

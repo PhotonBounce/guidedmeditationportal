@@ -420,7 +420,13 @@ function route(lower, lastTopic) {
     "hate my life","hate this life","hate life","i hate my life",
     "hate everything",
     "layoff","layoffs","being laid off","facing layoff",
-    "retrenchment","downsizing","made redundant"]) ||
+    "retrenchment","downsizing","made redundant",
+    "coming out","coming out to my","came out as","came out to",
+    "gender dysphoria","queer identity","questioning my sexuality",
+    "questioning my gender",
+    "losing my faith","lost my faith","faith crisis","crisis of faith",
+    "deconstructing my faith","deconversion","leaving my religion",
+    "leaving the church"]) ||
     anyWord(lower,["numb","died","vent"])) return "sadness";
   // 15. shameGuilt
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated",
@@ -464,7 +470,10 @@ function route(lower, lastTopic) {
     "feel judged","feeling judged","being judged",
     "fear of judgment","fear of being judged","feel watched",
     "hate myself","i hate myself","hate who i am","i hate who i am",
-    "hate myself so much","hate myself for"]) ||
+    "hate myself so much","hate myself for",
+    "feel like i'm failing","feel like im failing","i'm failing at",
+    "im failing at","failing as a parent","failing as a partner",
+    "failing at everything","failing at life"]) ||
     anyWord(lower,["sober"])) return "shameGuilt";
   // 16. overwhelm
   if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","burning out","too much",
@@ -550,7 +559,12 @@ function route(lower, lastTopic) {
     "took credit for my work","taking credit for my work","stole my idea","takes credit",
     "blame me for everything","blames me for everything","always my fault",
     "manipulative","manipulator","being manipulated",
-    "controlling partner","controlling behavior","controlling behaviour"]) ||
+    "controlling partner","controlling behavior","controlling behaviour",
+    "hate my boss","bad boss","horrible boss","boss is awful",
+    "boss is terrible","awful manager","terrible manager","manager is awful",
+    "manager is terrible","my boss keeps",
+    "family conflict","family drama","family argument",
+    "family feud","family row","had a row with","falling out with my"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   // 18. vip
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -845,6 +859,24 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R118: sadness (coming-out/LGBTQ, faith crisis), shameGuilt (failing at life/parent), anger (boss hate, family conflict)
+  ["I'm coming out to my parents next week", "", "sadness", "coming out → sadness"],
+  ["I came out as gay last month and feel exposed", "", "sadness", "came out as → sadness"],
+  ["I'm experiencing gender dysphoria", "", "sadness", "gender dysphoria → sadness"],
+  ["I'm questioning my sexuality and feel confused", "", "sadness", "questioning my sexuality → sadness"],
+  ["I've been losing my faith recently", "", "sadness", "losing my faith → sadness"],
+  ["I'm going through a faith crisis", "", "sadness", "faith crisis → sadness"],
+  ["I'm deconstructing my faith and feel lost", "", "sadness", "deconstructing my faith → sadness"],
+  ["I'm leaving my religion and it's so painful", "", "sadness", "leaving my religion → sadness"],
+  ["I feel like I'm failing at everything", "", "shameGuilt", "failing at everything → shameGuilt"],
+  ["I'm failing as a parent and it's destroying me", "", "shameGuilt", "failing as a parent → shameGuilt"],
+  ["I absolutely hate my boss", "", "anger", "hate my boss → anger"],
+  ["my manager is awful to me", "", "anger", "manager is awful → anger"],
+  ["there's so much family conflict at home", "", "anger", "family conflict → anger"],
+  ["we've been having family drama for months", "", "anger", "family drama → anger"],
+  ["we're having a huge family feud", "", "anger", "family feud → anger"],
+  ["I had a row with my sister last night", "", "anger", "had a row with → anger"],
 
   // R117: techniques (habit formation/morning practice), relax (wind down), positive (breakthrough/proud moment), sadness (layoff), focus (doom loop)
   ["I want to work on habit formation", "", "techniques", "habit formation → techniques"],
