@@ -90,6 +90,8 @@ function route(lower, lastTopic) {
     "mind blank","mind went blank","mind has gone blank",
     "analysis paralysis","decision paralysis","overthinking decisions",
     "indecisive","indecision",
+    "can't finish","cant finish","never follow through",
+    "can't stay on task","cant stay on task","can't complete",
     "hyperfocus","hyperfocusing","can't switch tasks",
     "cant switch tasks","task switching",
     "poor memory","memory problems","memory issues","bad memory",
@@ -136,7 +138,8 @@ function route(lower, lastTopic) {
     "morning slump","mid-morning slump",
     "no enthusiasm","lacking enthusiasm","no passion",
     "caffeine crash","coffee crash","sugar crash",
-    "need coffee","running low","low battery"])) return "energy";
+    "need coffee","running low","low battery",
+    "in a slump","creative slump","mental slump","under the weather"])) return "energy";
   // 9. relax
   if(any(lower,["relax","calm","stress","anxiety","anxious","breathe","unwind","nervous","panic",
     "overthink","overthinking","can't stop thinking","cant stop thinking",
@@ -431,7 +434,14 @@ function route(lower, lastTopic) {
     "questioning my gender",
     "losing my faith","lost my faith","faith crisis","crisis of faith",
     "deconstructing my faith","deconversion","leaving my religion",
-    "leaving the church"]) ||
+    "leaving the church",
+    "what's the point","what is the point","no point to it all",
+    "seems pointless",
+    "feel nothing","feeling nothing","can't feel anything",
+    "dont feel anything","don't feel anything",
+    "feel misunderstood","feeling misunderstood","feel so misunderstood",
+    "nobody understands me","no one understands me",
+    "nobody gets me","no one gets me"]) ||
     anyWord(lower,["numb","died","vent"])) return "sadness";
   // 15. shameGuilt
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated",
@@ -514,7 +524,10 @@ function route(lower, lastTopic) {
     "overwhelmed by options","too many options",
     "stretched too thin","stretched so thin",
     "can't manage anymore","can't manage it all","can't manage everything",
-    "cant manage anymore","cant manage it all"]) ||
+    "cant manage anymore","cant manage it all",
+    "too many things","so many things","too many responsibilities",
+    "so much to do","can't keep track","cant keep track",
+    "so many tasks"]) ||
     anyWord(lower,["toxic"])) return "overwhelm";
   // 17. anger
   if(any(lower,["angry","furious","frustrated","frustration","rage",
@@ -869,6 +882,24 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R120: sadness (feel nothing/misunderstood/no point), overwhelm (too many things/responsibilities), focus (can't finish/follow through), energy (slump/under the weather)
+  ["I feel like what's the point of anything", "", "sadness", "what's the point → sadness"],
+  ["everything just seems pointless right now", "", "sadness", "everything seems pointless → sadness"],
+  ["I feel nothing inside anymore", "", "sadness", "feel nothing → sadness"],
+  ["I don't feel anything at all lately", "", "sadness", "don't feel anything → sadness"],
+  ["I feel so misunderstood by everyone", "", "sadness", "feel misunderstood → sadness"],
+  ["nobody understands me no matter what I say", "", "sadness", "nobody understands me → sadness"],
+  ["I have too many things on my plate right now", "", "overwhelm", "too many things → overwhelm"],
+  ["I just have so many responsibilities I can't cope", "", "overwhelm", "too many responsibilities → overwhelm"],
+  ["there's so much to do and I can't keep track", "", "overwhelm", "cant keep track → overwhelm"],
+  ["I have so many tasks I don't know where to start", "", "overwhelm", "so many tasks → overwhelm"],
+  ["I start things but I can never follow through", "", "focus", "never follow through → focus"],
+  ["I just can't finish anything I start", "", "focus", "can't finish → focus"],
+  ["I can't stay on task for more than five minutes", "", "focus", "can't stay on task → focus"],
+  ["I'm in a creative slump and feeling stuck", "", "energy", "creative slump → energy"],
+  ["I'm a bit under the weather and feeling low", "", "energy", "under the weather → energy"],
+  ["I've been in a real mental slump this week", "", "energy", "mental slump → energy"],
 
   // R119: relax (social awkwardness, impending doom), focus (decision fatigue/indecision), techniques (assertiveness), anger (undervalued/overlooked)
   ["I feel so socially awkward at parties", "", "relax", "socially awkward → relax"],

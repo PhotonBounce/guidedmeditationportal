@@ -198,6 +198,8 @@ class AiChatEngine(private val context: Context) {
             "mind blank", "mind went blank", "mind has gone blank",
             "analysis paralysis", "decision paralysis", "overthinking decisions",
             "indecisive", "indecision",
+            "can't finish", "cant finish", "never follow through",
+            "can't stay on task", "cant stay on task", "can't complete",
             "hyperfocus", "hyperfocusing", "can't switch tasks",
             "cant switch tasks", "task switching",
             "poor memory", "memory problems", "memory issues", "bad memory",
@@ -245,7 +247,8 @@ class AiChatEngine(private val context: Context) {
             "morning slump", "mid-morning slump",
             "no enthusiasm", "lacking enthusiasm", "no passion",
             "caffeine crash", "coffee crash", "sugar crash",
-            "need coffee", "running low", "low battery") ->
+            "need coffee", "running low", "low battery",
+            "in a slump", "creative slump", "mental slump", "under the weather") ->
             handleEnergy().also { lastTopic = "energy" }
         any(lower, "relax", "calm", "stress", "anxiety", "anxious", "breathe",
             "unwind", "nervous", "panic", "overthink", "overthinking",
@@ -557,7 +560,14 @@ class AiChatEngine(private val context: Context) {
             "questioning my gender",
             "losing my faith", "lost my faith", "faith crisis", "crisis of faith",
             "deconstructing my faith", "deconversion", "leaving my religion",
-            "leaving the church") ||
+            "leaving the church",
+            "what's the point", "what is the point", "no point to it all",
+            "seems pointless",
+            "feel nothing", "feeling nothing", "can't feel anything",
+            "dont feel anything", "don't feel anything",
+            "feel misunderstood", "feeling misunderstood", "feel so misunderstood",
+            "nobody understands me", "no one understands me",
+            "nobody gets me", "no one gets me") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
@@ -643,7 +653,10 @@ class AiChatEngine(private val context: Context) {
             "overwhelmed by options", "too many options",
             "stretched too thin", "stretched so thin",
             "can't manage anymore", "can't manage it all", "can't manage everything",
-            "cant manage anymore", "cant manage it all") ||
+            "cant manage anymore", "cant manage it all",
+            "too many things", "so many things", "too many responsibilities",
+            "so much to do", "can't keep track", "cant keep track",
+            "so many tasks") ||
         anyWord(lower, "toxic") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
         any(lower, "angry", "furious", "frustrated", "frustration",
