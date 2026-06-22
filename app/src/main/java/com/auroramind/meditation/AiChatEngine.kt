@@ -678,6 +678,9 @@ class AiChatEngine(private val context: Context) {
             "self-destruct", "self-destructive", "self-destructive behavior", "self-destructive patterns",
             "self-punishment", "punishing myself", "self-punishing",
             "emotional eating", "comfort eating", "eating my feelings",
+            "eating for comfort", "overeating", "overeat",
+            "food guilt", "food shame", "mindless eating",
+            "unhealthy eating habits", "bad eating habits", "eating habits",
             "feel judged", "feeling judged", "being judged",
             "fear of judgment", "fear of being judged", "feel watched",
             "hate myself", "i hate myself", "hate who i am", "i hate who i am",
@@ -903,6 +906,7 @@ class AiChatEngine(private val context: Context) {
             "tight muscles", "muscle tightness", "muscle knots", "knotted muscles",
             "hip flexor", "it band", "iliotibial",
             "tennis elbow", "golfer's elbow", "rsi injury",
+            "pain flare", "flare up", "flare-up", "in a flare", "having a flare",
             "painful", "pains", "in pain") ||
         anyWord(lower, "pain") ->
             handlePain().also { lastTopic = "pain" }
@@ -937,7 +941,8 @@ class AiChatEngine(private val context: Context) {
             "words of wisdom", "wise words", "words of hope",
             "something meaningful", "meaningful message",
             "feel hopeful", "feeling hopeful", "something hopeful",
-            "upbeat", "something upbeat", "feel upbeat") ->
+            "upbeat", "something upbeat", "feel upbeat",
+            "uninspired", "feel uninspired", "feeling uninspired") ->
             handleInspiration().also { lastTopic = "inspiration" }
         any(lower, "journey", "journeys", "program", "programs", "course",
             "guided course", "structured", "7 day", "7-day", "5 day", "5-day", "challenge",

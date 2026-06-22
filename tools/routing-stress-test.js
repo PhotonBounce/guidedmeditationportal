@@ -551,6 +551,9 @@ function route(lower, lastTopic) {
     "self-destruct","self-destructive","self-destructive behavior","self-destructive patterns",
     "self-punishment","punishing myself","self-punishing",
     "emotional eating","comfort eating","eating my feelings",
+    "eating for comfort","overeating","overeat",
+    "food guilt","food shame","mindless eating",
+    "unhealthy eating habits","bad eating habits","eating habits",
     "feel judged","feeling judged","being judged",
     "fear of judgment","fear of being judged","feel watched",
     "hate myself","i hate myself","hate who i am","i hate who i am",
@@ -766,6 +769,7 @@ function route(lower, lastTopic) {
     "tight muscles","muscle tightness","muscle knots","knotted muscles",
     "hip flexor","it band","iliotibial",
     "tennis elbow","golfer's elbow","rsi injury",
+    "pain flare","flare up","flare-up","in a flare","having a flare",
     "painful","pains","in pain"]) || anyWord(lower,["pain"])) return "pain";
   // 26. gratitude
   if(any(lower,["grateful","gratitude","journal","journaling","reflect","reflection",
@@ -798,7 +802,8 @@ function route(lower, lastTopic) {
     "words of wisdom","wise words","words of hope",
     "something meaningful","meaningful message",
     "feel hopeful","feeling hopeful","something hopeful",
-    "upbeat","something upbeat","feel upbeat"])) return "inspire";
+    "upbeat","something upbeat","feel upbeat",
+    "uninspired","feel uninspired","feeling uninspired"])) return "inspire";
   // 29. programs
   if(any(lower,["journey","journeys","program","programs","course","guided course",
     "structured","7 day","7-day","5 day","5-day","challenge",
@@ -1003,6 +1008,17 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R136: shameGuilt (overeating/food guilt/mindless eating), inspire (uninspired), pain (flare-up)
+  ["I've been overeating again and I feel terrible about it", "", "shameGuilt", "overeating → shameGuilt"],
+  ["I have so much food guilt after eating", "", "shameGuilt", "food guilt → shameGuilt"],
+  ["I struggle with mindless eating in the evenings", "", "shameGuilt", "mindless eating → shameGuilt"],
+  ["I want to improve my eating habits and stop the cycle", "", "shameGuilt", "eating habits → shameGuilt"],
+  ["I feel eating for comfort has become a habit", "", "shameGuilt", "eating for comfort → shameGuilt"],
+  ["I feel completely uninspired about everything", "", "inspire", "uninspired → inspire"],
+  ["I've been feeling uninspired for weeks", "", "inspire", "feeling uninspired → inspire"],
+  ["my arthritis is in a flare and it's really bad", "", "pain", "in a flare → pain"],
+  ["I'm having a pain flare from my condition", "", "pain", "pain flare → pain"],
 
   // R135: sadness (feel defeated/gloomy/hollow/bleak), techniques (self-reflection/working on myself/self-discovery)
   ["I feel utterly defeated right now", "", "sadness", "utterly defeated → sadness"],
