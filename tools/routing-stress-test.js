@@ -322,6 +322,8 @@ function route(lower, lastTopic) {
     "self-love","self love","self love practice",
     "goal setting","setting goals","set my goals","goal planning",
     "vision board","vision boarding",
+    "fresh start","making a fresh start","new chapter",
+    "back on track","turning point",
     "see a therapist","seeing a therapist","find a therapist",
     "talk therapy","talking therapy",
     "in therapy","going to therapy","go to therapy",
@@ -364,6 +366,8 @@ function route(lower, lastTopic) {
     "feel rejected","feel abandoned","abandoned","rejection","been rejected",
     "feel invisible","feel unseen","feel unloved","unlovable","not loved","no one cares",
     "unloved","nobody loves me","no one loves me","nobody cares",
+    "drifting through life","life is drifting by","drifting through my life",
+    "can't see a future","no future for me","can't see where this is going",
     "not great","not so great","not feeling great","not doing great",
     "feeling off","bit off","not myself","off today","not okay","not ok today",
     "not doing ok","not doing well",
@@ -640,7 +644,10 @@ function route(lower, lastTopic) {
     "last straw","that was the last straw","this is the last straw",
     "unfair","so unfair","not fair","that's not fair","it's not fair",
     "been wronged","feel wronged","feeling wronged",
-    "feel cheated","being cheated"]) ||
+    "feel cheated","being cheated",
+    "outraged","i'm outraged","absolutely outraged",
+    "how dare","how dare they","how dare you",
+    "indignant","feel insulted","insulted by"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   // 18. vip
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -938,6 +945,19 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R128: anger (outraged/indignant/insulted), sadness (drifting through life/can't see a future), techniques (fresh start/new chapter/back on track)
+  ["I'm absolutely outraged at what they did", "", "anger", "outraged → anger"],
+  ["how dare they treat me like that", "", "anger", "how dare → anger"],
+  ["I feel completely insulted by their behaviour", "", "anger", "insulted by → anger"],
+  ["I'm feeling indignant about the whole situation", "", "anger", "indignant → anger"],
+  ["I feel like I'm just drifting through life", "", "sadness", "drifting through life → sadness"],
+  ["I can't see a future for myself right now", "", "sadness", "can't see a future → sadness"],
+  ["I can't see where this is going anymore", "", "sadness", "can't see where this is going → sadness"],
+  ["I want to make a fresh start this month", "", "techniques", "fresh start → techniques"],
+  ["I feel like I'm starting a new chapter", "", "techniques", "new chapter → techniques"],
+  ["I want to get back on track with my life", "", "techniques", "back on track → techniques"],
+  ["this feels like a real turning point for me", "", "techniques", "turning point → techniques"],
 
   // R127: focus (zone out/tunnel vision), energy (hit a wall/midday slump), overwhelm (spinning plates/juggling)
   ["I keep zoning out during meetings", "", "focus", "zoning out → focus"],

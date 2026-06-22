@@ -440,6 +440,8 @@ class AiChatEngine(private val context: Context) {
             "self-love", "self love", "self love practice",
             "goal setting", "setting goals", "set my goals", "goal planning",
             "vision board", "vision boarding",
+            "fresh start", "making a fresh start", "new chapter",
+            "back on track", "turning point",
             "see a therapist", "seeing a therapist", "find a therapist",
             "talk therapy", "talking therapy",
             "in therapy", "going to therapy", "go to therapy",
@@ -500,6 +502,8 @@ class AiChatEngine(private val context: Context) {
             "feel invisible", "feel unseen", "feel unloved", "feel unlovable",
             "unlovable", "not loved", "no one cares",
             "unloved", "nobody loves me", "no one loves me", "nobody cares",
+            "drifting through life", "life is drifting by", "drifting through my life",
+            "can't see a future", "no future for me", "can't see where this is going",
             "not great", "not so great", "not feeling great", "not doing great",
             "feeling off", "bit off", "not myself", "off today", "not okay",
             "not ok today", "not doing ok", "not doing well",
@@ -769,7 +773,10 @@ class AiChatEngine(private val context: Context) {
             "last straw", "that was the last straw", "this is the last straw",
             "unfair", "so unfair", "not fair", "that's not fair", "it's not fair",
             "been wronged", "feel wronged", "feeling wronged",
-            "feel cheated", "being cheated") ||
+            "feel cheated", "being cheated",
+            "outraged", "i'm outraged", "absolutely outraged",
+            "how dare", "how dare they", "how dare you",
+            "indignant", "feel insulted", "insulted by") ||
         anyWord(lower, "mad", "anger", "angered") ->
             handleAnger().also { lastTopic = "anger" }
 
