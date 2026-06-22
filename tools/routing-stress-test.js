@@ -437,6 +437,13 @@ function route(lower, lastTopic) {
     "anhedonia","going through the motions","on autopilot",
     "feel like a robot","feeling like a robot","like a zombie",
     "nothing brings me joy","joy has gone","lost my spark",
+    "can't enjoy things anymore","can't enjoy anything",
+    "nothing feels enjoyable","can't find enjoyment",
+    "life has lost its color","life feels grey","life feels gray",
+    "everything feels grey","everything feels gray",
+    "withdrawing from people","withdrawing from everyone",
+    "pulling away from everyone","pulling away from people",
+    "distancing myself from everyone",
     "lost my zest","no zest for life",
     "finding my calling","what am i here for","why am i here",
     "cyclothymia","dysthymia","persistent depressive",
@@ -549,7 +556,10 @@ function route(lower, lastTopic) {
     "keep quitting",
     "i'm not enough","im not enough","not enough for anyone",
     "never enough","i'll never be enough","i am not enough",
-    "never good enough","never feel good enough"]) ||
+    "never good enough","never feel good enough",
+    "second-guess myself","second-guessing myself",
+    "second-guess everything","second-guessing everything",
+    "second-guessing every decision","second-guess every decision"]) ||
     anyWord(lower,["sober"])) return "shameGuilt";
   // 16. overwhelm
   if(any(lower,["overwhelm","overwhelmed","burnout","burnt out","burned out","burning out","too much",
@@ -593,7 +603,10 @@ function route(lower, lastTopic) {
     "too many balls in the air","juggling everything","juggling too much",
     "can't juggle it all",
     "barely functioning","barely coping","barely keeping it together",
-    "i'm a mess","im a mess","complete mess"]) ||
+    "i'm a mess","im a mess","complete mess",
+    "treading water","just treading water","feel like i'm treading water",
+    "going nowhere","getting nowhere","spinning my wheels",
+    "feel like i'm going in circles","going around in circles"]) ||
     anyWord(lower,["toxic"])) return "overwhelm";
   // 17. anger
   if(any(lower,["angry","furious","frustrated","frustration","rage",
@@ -983,6 +996,19 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R134: sadness (can't enjoy/withdrawing from people/life feels grey), shameGuilt (second-guess), overwhelm (treading water/going nowhere/spinning wheels)
+  ["I can't enjoy anything anymore", "", "sadness", "can't enjoy anything → sadness"],
+  ["nothing feels enjoyable lately no matter what I try", "", "sadness", "nothing feels enjoyable → sadness"],
+  ["life has lost its color for me", "", "sadness", "life has lost its color → sadness"],
+  ["everything feels grey right now", "", "sadness", "everything feels grey → sadness"],
+  ["I've been withdrawing from people I care about", "", "sadness", "withdrawing from people → sadness"],
+  ["I'm pulling away from everyone around me", "", "sadness", "pulling away from everyone → sadness"],
+  ["I keep second-guessing myself at every turn", "", "shameGuilt", "second-guessing myself → shameGuilt"],
+  ["I second-guess every decision I make", "", "shameGuilt", "second-guess every → shameGuilt"],
+  ["I feel like I'm just treading water right now", "", "overwhelm", "treading water → overwhelm"],
+  ["we're spinning our wheels and going nowhere", "", "overwhelm", "going nowhere → overwhelm"],
+  ["no matter how hard I try I'm just spinning my wheels", "", "overwhelm", "spinning my wheels → overwhelm"],
 
   // R133: sadness (nostalgia/nobody supports me), anger (constantly criticized/always put down), positive (small wins/little victories)
   ["I'm feeling really nostalgic today and it's making me sad", "", "sadness", "nostalgic → sadness"],

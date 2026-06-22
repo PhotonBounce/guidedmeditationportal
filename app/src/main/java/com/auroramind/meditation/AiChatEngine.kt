@@ -572,6 +572,13 @@ class AiChatEngine(private val context: Context) {
             "feel like a robot", "feeling like a robot", "like a zombie",
             "nothing brings me joy", "joy has gone", "lost my spark",
             "lost my zest", "no zest for life",
+            "can't enjoy things anymore", "can't enjoy anything",
+            "nothing feels enjoyable", "can't find enjoyment",
+            "life has lost its color", "life feels grey", "life feels gray",
+            "everything feels grey", "everything feels gray",
+            "withdrawing from people", "withdrawing from everyone",
+            "pulling away from everyone", "pulling away from people",
+            "distancing myself from everyone",
             "finding my calling", "what am i here for", "why am i here",
             "cyclothymia", "dysthymia", "persistent depressive",
             "love bombing", "situationship", "situationships",
@@ -676,7 +683,10 @@ class AiChatEngine(private val context: Context) {
             "keep quitting",
             "i'm not enough", "im not enough", "not enough for anyone",
             "never enough", "i'll never be enough", "i am not enough",
-            "never good enough", "never feel good enough") ||
+            "never good enough", "never feel good enough",
+            "second-guess myself", "second-guessing myself",
+            "second-guess everything", "second-guessing everything",
+            "second-guessing every decision", "second-guess every decision") ||
         anyWord(lower, "sober") ->
             handleShameGuilt().also { lastTopic = "sadness" }
         any(lower, "overwhelm", "overwhelmed", "burnout", "burnt out", "burned out", "burning out",
@@ -722,7 +732,10 @@ class AiChatEngine(private val context: Context) {
             "too many balls in the air", "juggling everything", "juggling too much",
             "can't juggle it all",
             "barely functioning", "barely coping", "barely keeping it together",
-            "i'm a mess", "im a mess", "complete mess") ||
+            "i'm a mess", "im a mess", "complete mess",
+            "treading water", "just treading water", "feel like i'm treading water",
+            "going nowhere", "getting nowhere", "spinning my wheels",
+            "feel like i'm going in circles", "going around in circles") ||
         anyWord(lower, "toxic") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
         any(lower, "angry", "furious", "frustrated", "frustration",
