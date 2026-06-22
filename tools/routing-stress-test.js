@@ -163,6 +163,7 @@ function route(lower, lastTopic) {
     "struggle to get up","struggling to get up",
     "hit a wall","hitting a wall",
     "running on fumes","running on empty now",
+    "no willpower","willpower is gone","lacking willpower",
     "midday slump","midday crash","3pm slump",
     "people drain me","people draining me","drained by people",
     "people exhaust me","drains me","exhausts me",
@@ -420,6 +421,7 @@ function route(lower, lastTopic) {
     "emotional shutdown","shutting down emotionally","emotionally shut down",
     "feel left behind","feeling left behind","left behind socially",
     "second-rate","feel second-rate","second-class",
+    "anniversary of a death","death anniversary","grief anniversary",
     "can't stop crying","keep crying","can't stop the tears",
     "friendship ended","a friendship ended","lost a friend",
     "lost my purpose","no sense of purpose","lost all sense of purpose",
@@ -806,6 +808,7 @@ function route(lower, lastTopic) {
     "been wronged","feel wronged","feeling wronged",
     "feel cheated","being cheated",
     "outraged","i'm outraged","absolutely outraged",
+    "feel silenced","being silenced","feel unheard","feeling unheard",
     "how dare","how dare they","how dare you",
     "indignant","feel insulted","insulted by",
     "want to throw something","want to smash","want to punch",
@@ -866,6 +869,7 @@ function route(lower, lastTopic) {
     "feel blessed",
     "making memories","creating memories","cherish","cherishing","feeling blessed","life is beautiful",
     "feel content","feeling content","sense of contentment",
+    "things falling into place","everything coming together","all coming together",
     "got a new job","got the job","dream job","landed the job",
     "hard work paid off","paid off","all that hard work paid off",
     "overcame a challenge","overcome a challenge","overcame this","successfully overcame",
@@ -1157,6 +1161,15 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R164: energy (willpower), sadness (death anniversary), anger (feel silenced/unheard), positive (things falling into place)
+  ["I have no willpower left to keep going today", "", "energy", "no willpower → energy"],
+  ["today is the anniversary of a death in my family", "", "sadness", "anniversary of a death → sadness"],
+  ["it's the grief anniversary and I'm struggling hard", "", "sadness", "grief anniversary → sadness"],
+  ["I feel silenced whenever I try to speak up", "", "anger", "feel silenced → anger"],
+  ["I feel unheard no matter what I say to them", "", "anger", "feel unheard → anger"],
+  ["it's all coming together for me now", "", "positive", "all coming together → positive"],
+  ["I can see things falling into place now and it's amazing", "", "positive", "things falling into place → positive"],
 
   // R163: relax (agoraphobia), techniques (thought-stopping/learned-helplessness), sadness (can't stop crying), positive (feel content)
   ["I've had agoraphobia for years and rarely leave the house", "", "relax", "agoraphobia → relax"],
