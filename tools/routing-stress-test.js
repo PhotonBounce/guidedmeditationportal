@@ -378,6 +378,9 @@ function route(lower, lastTopic) {
     "growing old","not young anymore",
     "feel rejected","feel abandoned","abandoned","rejection","been rejected",
     "feel invisible","feel unseen","feel unloved","unlovable","not loved","no one cares",
+    "feel forgotten","feeling forgotten","feel unvalued",
+    "dementia","parent with dementia","loved one with dementia",
+    "caring for someone with dementia",
     "unloved","nobody loves me","no one loves me","nobody cares",
     "drifting through life","life is drifting by","drifting through my life",
     "can't see a future","no future for me","can't see where this is going",
@@ -618,6 +621,7 @@ function route(lower, lastTopic) {
     "spinning plates","spinning too many plates",
     "too many balls in the air","juggling everything","juggling too much",
     "can't juggle it all",
+    "impossible workload","crushing workload","unmanageable workload",
     "barely functioning","barely coping","barely keeping it together",
     "i'm a mess","im a mess","complete mess",
     "treading water","just treading water","feel like i'm treading water",
@@ -711,6 +715,7 @@ function route(lower, lastTopic) {
     "feel like the world is against me","the world is against me",
     "everything is against me","everyone is against me",
     "glass ceiling","hit a glass ceiling","hitting a glass ceiling",
+    "sibling rivalry","sibling conflict","sibling jealousy","jealous of my sibling",
     "pay gap","pay inequality","wage gap",
     "feel small","made to feel small","feel diminished",
     "belittled","talked down to","talks down to","talking down to",
@@ -1018,6 +1023,16 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R139: sadness (feel forgotten/feel unvalued/dementia), overwhelm (impossible/crushing workload), anger (sibling rivalry)
+  ["I feel forgotten by everyone around me", "", "sadness", "feel forgotten → sadness"],
+  ["I feel unvalued in every area of my life", "", "sadness", "feel unvalued → sadness"],
+  ["my mum has dementia and it's breaking my heart", "", "sadness", "dementia → sadness"],
+  ["caring for someone with dementia is really wearing me down", "", "sadness", "caring for someone with dementia → sadness"],
+  ["I have an impossible workload right now and can't cope", "", "overwhelm", "impossible workload → overwhelm"],
+  ["I have a crushing workload and no end in sight", "", "overwhelm", "crushing workload → overwhelm"],
+  ["there's a lot of sibling rivalry in my family", "", "anger", "sibling rivalry → anger"],
+  ["I have constant sibling conflict with my brother", "", "anger", "sibling conflict → anger"],
 
   // R138: sadness (emotionally unavailable/can't open up/communication breakdown), anger (glass ceiling/pay gap)
   ["he's emotionally unavailable and I feel so alone in this", "", "sadness", "emotionally unavailable → sadness"],
