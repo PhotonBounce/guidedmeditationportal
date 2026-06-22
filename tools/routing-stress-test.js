@@ -62,6 +62,8 @@ function route(lower, lastTopic) {
     "brain won't stop","brain wont stop",
     "never feel rested","never fully rested","wake up exhausted",
     "wake up tired","wake up unrested",
+    "all-nighter","pulling an all-nighter","all nighter",
+    "stayed up all night","been up all night",
     "lucid dreaming","lucid dream","have lucid dreams",
     "long covid","post covid","post-covid","post-viral fatigue",
     "chronic fatigue syndrome","me/cfs",
@@ -416,6 +418,8 @@ function route(lower, lastTopic) {
     "feel like a ghost","feeling like a ghost","fading into the background",
     "empty nest","empty nester","kids moved out","children left home",
     "feel like giving up","want to give up","ready to give up",
+    "need closure","seeking closure","can't get closure","cant get closure",
+    "no closure","trying to move on","moving on from","hard to move on",
     "thinking of giving up","about to give up",
     "what's the point","whats the point","what is the point",
     "no sense of belonging","don't belong","dont belong",
@@ -756,7 +760,10 @@ function route(lower, lastTopic) {
     "got a raise","got a pay rise","pay rise","getting a raise",
     "got promoted","just got promoted","i got promoted",
     "small win","small wins","little victory","little victories",
-    "little win","little wins"])) return "positive";
+    "little win","little wins",
+    "got engaged","just got engaged","we got engaged",
+    "getting married","we're getting married","just got married",
+    "we just got married","we got married"])) return "positive";
   // 21. timer
   if(any(lower,["timer","sleep timer","how long should","how long to meditate","how long for","duration","how many minutes"])) return "timer";
   // 22. alarm
@@ -1028,6 +1035,16 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R141: sleep (all-nighter/stayed-up-all-night), sadness (need closure/trying to move on), positive (got engaged/getting married)
+  ["I pulled an all-nighter last night and I'm wrecked", "", "sleep", "all-nighter → sleep"],
+  ["I've been up all night and can't function", "", "sleep", "been up all night → sleep"],
+  ["I need closure from this experience", "", "sadness", "need closure → sadness"],
+  ["I'm trying to move on but it's so hard", "", "sadness", "trying to move on → sadness"],
+  ["I'm moving on from a long relationship", "", "sadness", "moving on from → sadness"],
+  ["we just got engaged last night", "", "positive", "got engaged → positive"],
+  ["we're getting married next spring", "", "positive", "getting married → positive"],
+  ["we just got married last week", "", "positive", "just got married → positive"],
 
   // R140: techniques (anger management/conflict resolution/difficult conversations), sadness (feel like a ghost/fading into background), overwhelm (at wit's end/stretched to limit)
   ["I want to learn anger management techniques", "", "techniques", "anger management → techniques"],

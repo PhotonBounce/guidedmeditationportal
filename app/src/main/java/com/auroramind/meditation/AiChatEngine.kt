@@ -169,6 +169,8 @@ class AiChatEngine(private val context: Context) {
             "brain won't stop", "brain wont stop",
             "never feel rested", "never fully rested", "wake up exhausted",
             "wake up tired", "wake up unrested",
+            "all-nighter", "pulling an all-nighter", "all nighter",
+            "stayed up all night", "been up all night",
             "lucid dreaming", "lucid dream", "have lucid dreams",
             "long covid", "post covid", "post-covid", "post-viral fatigue",
             "chronic fatigue syndrome", "me/cfs",
@@ -550,6 +552,8 @@ class AiChatEngine(private val context: Context) {
             "widowed", "widow", "ghosted",
             "feel like a ghost", "feeling like a ghost", "fading into the background",
             "feel like giving up", "want to give up", "ready to give up",
+            "need closure", "seeking closure", "can't get closure", "cant get closure",
+            "no closure", "trying to move on", "moving on from", "hard to move on",
             "thinking of giving up", "about to give up",
             "what's the point", "whats the point", "what is the point",
             "no sense of belonging", "don't belong", "dont belong",
@@ -888,7 +892,10 @@ class AiChatEngine(private val context: Context) {
             "got a raise", "got a pay rise", "pay rise", "getting a raise",
             "got promoted", "just got promoted", "i got promoted",
             "small win", "small wins", "little victory", "little victories",
-            "little win", "little wins") ->
+            "little win", "little wins",
+            "got engaged", "just got engaged", "we got engaged",
+            "getting married", "we're getting married", "just got married",
+            "we just got married", "we got married") ->
             handlePositive().also { lastTopic = "" }
         any(lower, "timer", "sleep timer", "how long should", "how long to meditate",
             "how long for", "duration", "how many minutes") ->
