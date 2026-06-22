@@ -144,7 +144,10 @@ function route(lower, lastTopic) {
     "no enthusiasm","lacking enthusiasm","no passion",
     "caffeine crash","coffee crash","sugar crash",
     "need coffee","running low","low battery",
-    "in a slump","creative slump","mental slump","under the weather"])) return "energy";
+    "in a slump","creative slump","mental slump","under the weather",
+    "can't get out of bed","cant get out of bed","can't face the day",
+    "cant face the day","dragging","dragging myself",
+    "struggle to get up","struggling to get up"])) return "energy";
   // 9. relax
   if(any(lower,["relax","calm","stress","anxiety","anxious","breathe","unwind","nervous","panic",
     "overthink","overthinking","can't stop thinking","cant stop thinking",
@@ -457,7 +460,10 @@ function route(lower, lastTopic) {
     "rough patch","going through a rough patch","rough time","rough period",
     "hard time","tough time","going through a tough time",
     "can't move on","cant move on","can't get over it","cant get over it",
-    "letting go","learning to let go","let go of"]) ||
+    "letting go","learning to let go","let go of",
+    "can't forgive","cant forgive","struggle to forgive",
+    "learning to forgive","learn to forgive","need to forgive",
+    "forgiving someone","forgiving them","forgive and forget"]) ||
     anyWord(lower,["numb","died","vent"])) return "sadness";
   // 15. shameGuilt
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated",
@@ -610,7 +616,9 @@ function route(lower, lastTopic) {
     "workplace politics","office politics","work politics",
     "power games","power play","being pushed out","being squeezed out",
     "ignored","being ignored","ignoring me",
-    "sidelined","being sidelined"]) ||
+    "sidelined","being sidelined",
+    "two-faced","two faced","backstabber","back stabber",
+    "stabbed in the back","fake friends","fake people"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   // 18. vip
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -906,6 +914,20 @@ var tests = [
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
 
+  // R124: sadness (can't forgive / forgiveness), energy (can't get out of bed / dragging), anger (two-faced / backstabber / stabbed in the back)
+  ["I just can't forgive what he did to me", "", "sadness", "can't forgive → sadness"],
+  ["I'm learning to forgive my parents", "", "sadness", "learning to forgive → sadness"],
+  ["I need to forgive her but I don't know how", "", "sadness", "need to forgive → sadness"],
+  ["I struggle to forgive and forget", "", "sadness", "forgive and forget → sadness"],
+  ["I just can't get out of bed in the morning", "", "energy", "can't get out of bed → energy"],
+  ["I'm just dragging myself through every day", "", "energy", "dragging myself → energy"],
+  ["I can't face the day anymore", "", "energy", "can't face the day → energy"],
+  ["I'm struggling to get up each morning", "", "energy", "struggling to get up → energy"],
+  ["I found out my best friend is two-faced", "", "anger", "two-faced → anger"],
+  ["there's a backstabber in my team and I'm furious", "", "anger", "backstabber → anger"],
+  ["I feel like I was stabbed in the back by my colleague", "", "anger", "stabbed in the back → anger"],
+  ["I'm surrounded by fake friends who don't care", "", "anger", "fake friends → anger"],
+
   // R123: sleep (tossed & turned/overslept/lie awake), shameGuilt (always making excuses/giving up), anger (feel ignored/sidelined)
   ["I tossed and turned all night long", "", "sleep", "tossed and turned → sleep"],
   ["I overslept this morning and feel awful", "", "sleep", "overslept → sleep"],
@@ -1052,7 +1074,7 @@ var tests = [
   ["I hate myself for what I did", "", "shameGuilt", "hate myself → shameGuilt"],
   ["I hate who I am right now", "", "shameGuilt", "hate who i am → shameGuilt"],
   ["I hate my life at the moment", "", "sadness", "hate my life → sadness"],
-  ["she lied to me and I can't forgive her for it", "", "anger", "she lied → anger (avoid 'betrayed' → sadness preemption)"],
+  ["she lied to me repeatedly and now I'm furious", "", "anger", "she lied → anger"],
   ["they went behind my back and told my boss", "", "anger", "behind my back → anger"],
   ["my colleague took credit for my work again", "", "anger", "took credit for my work → anger"],
   ["my partner is being so manipulative lately", "", "anger", "manipulative → anger"],

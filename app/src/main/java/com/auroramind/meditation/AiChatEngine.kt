@@ -253,7 +253,10 @@ class AiChatEngine(private val context: Context) {
             "no enthusiasm", "lacking enthusiasm", "no passion",
             "caffeine crash", "coffee crash", "sugar crash",
             "need coffee", "running low", "low battery",
-            "in a slump", "creative slump", "mental slump", "under the weather") ->
+            "in a slump", "creative slump", "mental slump", "under the weather",
+            "can't get out of bed", "cant get out of bed", "can't face the day",
+            "cant face the day", "dragging", "dragging myself",
+            "struggle to get up", "struggling to get up") ->
             handleEnergy().also { lastTopic = "energy" }
         any(lower, "relax", "calm", "stress", "anxiety", "anxious", "breathe",
             "unwind", "nervous", "panic", "overthink", "overthinking",
@@ -583,7 +586,10 @@ class AiChatEngine(private val context: Context) {
             "rough patch", "going through a rough patch", "rough time", "rough period",
             "hard time", "tough time", "going through a tough time",
             "can't move on", "cant move on", "can't get over it", "cant get over it",
-            "letting go", "learning to let go", "let go of") ||
+            "letting go", "learning to let go", "let go of",
+            "can't forgive", "cant forgive", "struggle to forgive",
+            "learning to forgive", "learn to forgive", "need to forgive",
+            "forgiving someone", "forgiving them", "forgive and forget") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
@@ -739,7 +745,9 @@ class AiChatEngine(private val context: Context) {
             "workplace politics", "office politics", "work politics",
             "power games", "power play", "being pushed out", "being squeezed out",
             "ignored", "being ignored", "ignoring me",
-            "sidelined", "being sidelined") ||
+            "sidelined", "being sidelined",
+            "two-faced", "two faced", "backstabber", "back stabber",
+            "stabbed in the back", "fake friends", "fake people") ||
         anyWord(lower, "mad", "anger", "angered") ->
             handleAnger().also { lastTopic = "anger" }
 
