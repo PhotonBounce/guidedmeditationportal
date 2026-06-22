@@ -431,7 +431,11 @@ class AiChatEngine(private val context: Context) {
             "personal development", "personal growth journey", "self-improvement",
             "self-development",
             "self-care", "self care", "self care routine", "self-care routine",
-            "breath of fire", "kapalbhati", "ujjayi", "pranayama") ->
+            "breath of fire", "kapalbhati", "ujjayi", "pranayama",
+            "positive thinking", "think positively", "positive thoughts",
+            "self-love", "self love", "self love practice",
+            "goal setting", "setting goals", "set my goals", "goal planning",
+            "vision board", "vision boarding") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
@@ -747,7 +751,10 @@ class AiChatEngine(private val context: Context) {
             "ignored", "being ignored", "ignoring me",
             "sidelined", "being sidelined",
             "two-faced", "two faced", "backstabber", "back stabber",
-            "stabbed in the back", "fake friends", "fake people") ||
+            "stabbed in the back", "fake friends", "fake people",
+            "makes my blood boil", "blood boils", "my blood is boiling",
+            "push my buttons", "pushed my buttons", "pushing my buttons",
+            "last straw", "that was the last straw", "this is the last straw") ||
         anyWord(lower, "mad", "anger", "angered") ->
             handleAnger().also { lastTopic = "anger" }
 
@@ -777,7 +784,10 @@ class AiChatEngine(private val context: Context) {
             "had a breakthrough", "just had a breakthrough", "big breakthrough",
             "proud moment", "really proud", "so proud of myself",
             "achieved my goal", "hit my goal", "reached my goal",
-            "finally did it", "i finally did it", "just did it") ->
+            "finally did it", "i finally did it", "just did it",
+            "aced it", "aced my", "aced the", "i aced", "smashed it", "absolutely smashed", "killed it today",
+            "got a raise", "got a pay rise", "pay rise", "getting a raise",
+            "got promoted", "just got promoted", "i got promoted") ->
             handlePositive().also { lastTopic = "" }
         any(lower, "timer", "sleep timer", "how long should", "how long to meditate",
             "how long for", "duration", "how many minutes") ->

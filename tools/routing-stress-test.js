@@ -313,7 +313,11 @@ function route(lower, lastTopic) {
     "self-care","self care","self-care routine","self care routine",
     "self-care practice","taking care of myself","look after myself",
     "evening routine","wind down routine","wind-down routine",
-    "breath of fire","kapalbhati","ujjayi","pranayama"])) return "techniques";
+    "breath of fire","kapalbhati","ujjayi","pranayama",
+    "positive thinking","think positively","positive thoughts",
+    "self-love","self love","self love practice",
+    "goal setting","setting goals","set my goals","goal planning",
+    "vision board","vision boarding"])) return "techniques";
   // 14. sadness
   if(any(lower,["sad","grief","grieving","heartbreak","heartbroken","lonely","alone","loneliness",
     "depressed","depression","cry","crying","sobbing","weeping","in tears","tearing up",
@@ -618,7 +622,10 @@ function route(lower, lastTopic) {
     "ignored","being ignored","ignoring me",
     "sidelined","being sidelined",
     "two-faced","two faced","backstabber","back stabber",
-    "stabbed in the back","fake friends","fake people"]) ||
+    "stabbed in the back","fake friends","fake people",
+    "makes my blood boil","blood boils","my blood is boiling",
+    "push my buttons","pushed my buttons","pushing my buttons",
+    "last straw","that was the last straw","this is the last straw"]) ||
     anyWord(lower,["mad","anger","angered"])) return "anger";
   // 18. vip
   if(any(lower,["vip","upgrade","pro plan","subscription","pricing","plans","cost","buy","purchase"])) return "vip";
@@ -645,7 +652,10 @@ function route(lower, lastTopic) {
     "had a breakthrough","just had a breakthrough","big breakthrough",
     "proud moment","really proud","so proud of myself",
     "achieved my goal","hit my goal","reached my goal",
-    "finally did it","i finally did it","just did it"])) return "positive";
+    "finally did it","i finally did it","just did it",
+    "aced it","aced my","aced the","i aced","smashed it","absolutely smashed","killed it today",
+    "got a raise","got a pay rise","pay rise","getting a raise",
+    "got promoted","just got promoted","i got promoted"])) return "positive";
   // 21. timer
   if(any(lower,["timer","sleep timer","how long should","how long to meditate","how long for","duration","how many minutes"])) return "timer";
   // 22. alarm
@@ -913,6 +923,18 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R125: positive (aced it/pay rise/got promoted), techniques (positive thinking/self-love/goal setting/vision board), anger (blood boil/pushed buttons/last straw)
+  ["I totally aced my presentation today", "", "positive", "aced it → positive"],
+  ["I got a pay rise at work this week", "", "positive", "pay rise → positive"],
+  ["I just got promoted at my company", "", "positive", "got promoted → positive"],
+  ["I want to work on positive thinking", "", "techniques", "positive thinking → techniques"],
+  ["I want to practice self-love every day", "", "techniques", "self-love → techniques"],
+  ["I need help with goal setting this year", "", "techniques", "goal setting → techniques"],
+  ["I'm making a vision board for the new year", "", "techniques", "vision board → techniques"],
+  ["that really makes my blood boil", "", "anger", "makes my blood boil → anger"],
+  ["they know exactly how to push my buttons", "", "anger", "pushed my buttons → anger"],
+  ["this is the last straw with my roommate", "", "anger", "last straw → anger"],
 
   // R124: sadness (can't forgive / forgiveness), energy (can't get out of bed / dragging), anger (two-faced / backstabber / stabbed in the back)
   ["I just can't forgive what he did to me", "", "sadness", "can't forgive → sadness"],
