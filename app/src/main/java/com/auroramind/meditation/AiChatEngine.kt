@@ -312,6 +312,7 @@ class AiChatEngine(private val context: Context) {
             "release tension", "releasing tension", "let go of tension",
             "on high alert", "always on high alert", "state of high alert",
             "rumination", "ruminate",
+            "agoraphobia", "agoraphobic",
             "claustrophobia", "feeling claustrophobic", "claustrophobic",
             "palpitations", "heart palpitations", "heart flutters",
             "vagus nerve", "vagal", "somatic therapy", "somatic healing", "somatic exercises",
@@ -485,6 +486,8 @@ class AiChatEngine(private val context: Context) {
             "self-reflection", "self reflection", "self-reflect",
             "working on myself", "work on myself",
             "self-discovery", "finding myself", "inner work",
+            "thought stopping", "stop automatic thoughts", "automatic thoughts",
+            "learned helplessness",
             "victim mentality", "victim mindset", "playing the victim",
             "empath", "being an empath", "highly sensitive person", "hsp") ->
             handleTechniques().also { lastTopic = "techniques" }
@@ -553,6 +556,7 @@ class AiChatEngine(private val context: Context) {
             "emotional shutdown", "shutting down emotionally", "emotionally shut down",
             "feel left behind", "feeling left behind", "left behind socially",
             "second-rate", "feel second-rate", "second-class",
+            "can't stop crying", "keep crying", "can't stop the tears",
             "friendship ended", "a friendship ended", "lost a friend",
             "lost my purpose", "no sense of purpose", "lost all sense of purpose",
             "miss my old life",
@@ -999,6 +1003,7 @@ class AiChatEngine(private val context: Context) {
             "thriving", "i'm thriving", "absolutely thriving",
             "feel blessed",
             "making memories", "creating memories", "cherish", "cherishing",
+            "feel content", "feeling content", "sense of contentment",
             "got a new job", "got the job", "dream job", "landed the job",
             "hard work paid off", "paid off", "all that hard work paid off",
             "overcame a challenge", "overcome a challenge", "overcame this",

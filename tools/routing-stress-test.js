@@ -202,6 +202,7 @@ function route(lower, lastTopic) {
     "release tension","releasing tension","let go of tension",
     "on high alert","always on high alert","state of high alert",
     "rumination","ruminate",
+    "agoraphobia","agoraphobic",
     "claustrophobia","feeling claustrophobic","claustrophobic",
     "palpitations","heart palpitations","heart flutters",
     "vagus nerve","vagal","somatic therapy","somatic healing","somatic exercises",
@@ -367,6 +368,8 @@ function route(lower, lastTopic) {
     "self-reflection","self reflection","self-reflect",
     "working on myself","work on myself",
     "self-discovery","finding myself","inner work",
+    "thought stopping","stop automatic thoughts","automatic thoughts",
+    "learned helplessness",
     "victim mentality","victim mindset","playing the victim",
     "empath","being an empath","highly sensitive person","hsp"])) return "techniques";
   // 14. sadness
@@ -417,6 +420,7 @@ function route(lower, lastTopic) {
     "emotional shutdown","shutting down emotionally","emotionally shut down",
     "feel left behind","feeling left behind","left behind socially",
     "second-rate","feel second-rate","second-class",
+    "can't stop crying","keep crying","can't stop the tears",
     "friendship ended","a friendship ended","lost a friend",
     "lost my purpose","no sense of purpose","lost all sense of purpose",
     "miss my old life",
@@ -861,6 +865,7 @@ function route(lower, lastTopic) {
     "thriving","i'm thriving","absolutely thriving",
     "feel blessed",
     "making memories","creating memories","cherish","cherishing","feeling blessed","life is beautiful",
+    "feel content","feeling content","sense of contentment",
     "got a new job","got the job","dream job","landed the job",
     "hard work paid off","paid off","all that hard work paid off",
     "overcame a challenge","overcome a challenge","overcame this","successfully overcame",
@@ -1152,6 +1157,14 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R163: relax (agoraphobia), techniques (thought-stopping/learned-helplessness), sadness (can't stop crying), positive (feel content)
+  ["I've had agoraphobia for years and rarely leave the house", "", "relax", "agoraphobia → relax"],
+  ["I'm working on thought stopping for my negative spirals", "", "techniques", "thought stopping → techniques"],
+  ["I think I'm experiencing learned helplessness in my life", "", "techniques", "learned helplessness → techniques"],
+  ["I can't stop crying and I don't know why", "", "sadness", "can't stop crying → sadness"],
+  ["I've been keep crying all day over nothing specific", "", "sadness", "keep crying → sadness"],
+  ["I feel content with where I am in life right now", "", "positive", "feel content → positive"],
 
   // R162: sleep (dozing off/microsleep), relax (rumination), anger (can't let it go), positive (dream job/new job)
   ["I keep dozing off during the day even though I sleep at night", "", "sleep", "dozing off → sleep"],
