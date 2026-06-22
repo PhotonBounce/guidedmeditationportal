@@ -514,6 +514,9 @@ class AiChatEngine(private val context: Context) {
             "changing career", "changing careers",
             "glass half empty", "lump in my throat",
             "difficult relationship", "difficult family", "hard family situation",
+            "feel like i'm disappearing", "feel like im disappearing",
+            "i'm disappearing", "im disappearing",
+            "feel like i'm fading away", "losing my identity", "losing myself",
             "not great", "not so great", "not feeling great", "not doing great",
             "feeling off", "bit off", "not myself", "off today", "not okay",
             "not ok today", "not doing ok", "not doing well",
@@ -714,7 +717,9 @@ class AiChatEngine(private val context: Context) {
             "so many tasks",
             "spinning plates", "spinning too many plates",
             "too many balls in the air", "juggling everything", "juggling too much",
-            "can't juggle it all") ||
+            "can't juggle it all",
+            "barely functioning", "barely coping", "barely keeping it together",
+            "i'm a mess", "im a mess", "complete mess") ||
         anyWord(lower, "toxic") ->
             handleOverwhelm().also { lastTopic = "overwhelm" }
         any(lower, "angry", "furious", "frustrated", "frustration",
@@ -795,6 +800,8 @@ class AiChatEngine(private val context: Context) {
             "at boiling point", "at my boiling point",
             "about to lose it", "on the verge of losing it",
             "on my last nerve", "blow a fuse", "about to snap",
+            "had it up to here", "i've had it", "ive had it",
+            "done with it all", "done with all of this", "done with this",
             "feel small", "made to feel small", "feel diminished",
             "belittled", "talked down to", "talks down to", "talking down to",
             "speaking down to me", "spoken down to") ||

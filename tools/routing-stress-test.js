@@ -378,6 +378,9 @@ function route(lower, lastTopic) {
     "changing career","changing careers",
     "glass half empty","lump in my throat",
     "difficult relationship","difficult family","hard family situation",
+    "feel like i'm disappearing","feel like im disappearing",
+    "i'm disappearing","im disappearing",
+    "feel like i'm fading away","losing my identity","losing myself",
     "not great","not so great","not feeling great","not doing great",
     "feeling off","bit off","not myself","off today","not okay","not ok today",
     "not doing ok","not doing well",
@@ -585,7 +588,9 @@ function route(lower, lastTopic) {
     "so many tasks",
     "spinning plates","spinning too many plates",
     "too many balls in the air","juggling everything","juggling too much",
-    "can't juggle it all"]) ||
+    "can't juggle it all",
+    "barely functioning","barely coping","barely keeping it together",
+    "i'm a mess","im a mess","complete mess"]) ||
     anyWord(lower,["toxic"])) return "overwhelm";
   // 17. anger
   if(any(lower,["angry","furious","frustrated","frustration","rage",
@@ -666,6 +671,8 @@ function route(lower, lastTopic) {
     "at boiling point","at my boiling point",
     "about to lose it","on the verge of losing it",
     "on my last nerve","blow a fuse","about to snap",
+    "had it up to here","i've had it","ive had it",
+    "done with it all","done with all of this","done with this",
     "feel small","made to feel small","feel diminished",
     "belittled","talked down to","talks down to","talking down to",
     "speaking down to me","spoken down to"]) ||
@@ -968,6 +975,19 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R132: overwhelm (barely functioning/i'm a mess), sadness (feel like disappearing/losing identity), anger (had it up to here/done with it all)
+  ["I'm barely functioning right now", "", "overwhelm", "barely functioning → overwhelm"],
+  ["I'm barely coping with everything on my plate", "", "overwhelm", "barely coping → overwhelm"],
+  ["I'm just a complete mess at the moment", "", "overwhelm", "complete mess → overwhelm"],
+  ["I'm barely keeping it together right now", "", "overwhelm", "barely keeping it together → overwhelm"],
+  ["I feel like I'm disappearing as a person", "", "sadness", "feel like I'm disappearing → sadness"],
+  ["I feel like I'm fading away and nobody notices", "", "sadness", "feel like fading away → sadness"],
+  ["I'm losing my identity in this relationship", "", "sadness", "losing my identity → sadness"],
+  ["I'm losing myself in this role as a carer", "", "sadness", "losing myself → sadness"],
+  ["I've had it up to here with this situation", "", "anger", "had it up to here → anger"],
+  ["I've had it with all of them", "", "anger", "i've had it → anger"],
+  ["I'm done with it all and I want out", "", "anger", "done with it all → anger"],
 
   // R131: shameGuilt (not enough/never enough), techniques (coping skills/strategies), anger (feel small/belittled/talked down to)
   ["I feel like I'm just not enough for anyone", "", "shameGuilt", "not enough → shameGuilt"],
