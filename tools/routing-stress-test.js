@@ -50,6 +50,7 @@ function route(lower, lastTopic) {
   if(any(lower,["sleep","insomnia","cant sleep","can't sleep","falling asleep",
     "bedtime","tired","fatigue","exhausted","exhaustion","wide awake","cant switch off","can't switch off",
     "racing mind","racing thoughts","napping","night shift","shift work",
+    "dozing off","doze off","microsleep","falling asleep at work",
     "mind won't stop","mind wont stop","nightmare","nightmares","bad dreams",
     "jet lag","jet lagged","jet-lagged","restless","restlessness",
     "woke up at","keep waking","3am","4am","middle of the night",
@@ -200,6 +201,7 @@ function route(lower, lastTopic) {
     "shallow breathing","breathing is shallow","breathing feels tight",
     "release tension","releasing tension","let go of tension",
     "on high alert","always on high alert","state of high alert",
+    "rumination","ruminate",
     "claustrophobia","feeling claustrophobic","claustrophobic",
     "palpitations","heart palpitations","heart flutters",
     "vagus nerve","vagal","somatic therapy","somatic healing","somatic exercises",
@@ -783,6 +785,7 @@ function route(lower, lastTopic) {
     "last straw","that was the last straw","this is the last straw",
     "scapegoated","being scapegoated","the scapegoat","scapegoating",
     "being exploited","feel exploited","feeling exploited",
+    "can't let it go","can't let this go","cannot let it go",
     "holding me back","they're holding me back",
     "invaded my privacy","violated my privacy","my privacy was violated",
     "feel controlled","being controlled","feel like i'm being controlled",
@@ -858,6 +861,7 @@ function route(lower, lastTopic) {
     "thriving","i'm thriving","absolutely thriving",
     "feel blessed",
     "making memories","creating memories","cherish","cherishing","feeling blessed","life is beautiful",
+    "got a new job","got the job","dream job","landed the job",
     "hard work paid off","paid off","all that hard work paid off",
     "overcame a challenge","overcome a challenge","overcame this","successfully overcame",
     "new beginning","brand new start","turning over a new leaf",
@@ -1148,6 +1152,15 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R162: sleep (dozing off/microsleep), relax (rumination), anger (can't let it go), positive (dream job/new job)
+  ["I keep dozing off during the day even though I sleep at night", "", "sleep", "dozing off → sleep"],
+  ["I think I'm having microsleep episodes at work", "", "sleep", "microsleep → sleep"],
+  ["I can't stop my rumination cycle at night", "", "relax", "rumination → relax"],
+  ["I need to learn to ruminate less and just be present", "", "relax", "ruminate → relax"],
+  ["I can't let it go and it's consuming me", "", "anger", "can't let it go → anger"],
+  ["I just got a new job and I'm absolutely thrilled", "", "positive", "got a new job → positive"],
+  ["I landed the job of my dreams", "", "positive", "dream job → positive"],
 
   // R161: techniques (victim mentality/empath/HSP), sadness (lost a friend), overwhelm (powerless)
   ["I think I have a victim mentality and want to change it", "", "techniques", "victim mentality → techniques"],
