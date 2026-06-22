@@ -335,6 +335,8 @@ function route(lower, lastTopic) {
     "need counseling","need counselling",
     "coping skills","coping strategies","coping mechanisms",
     "cope better","healthy coping","coping tools",
+    "anger management","conflict resolution",
+    "difficult conversations","having difficult conversations","hard conversations",
     "self-reflection","self reflection","self-reflect",
     "working on myself","work on myself",
     "self-discovery","finding myself","inner work"])) return "techniques";
@@ -411,6 +413,7 @@ function route(lower, lastTopic) {
     "winter blues","lack of sunlight","low in winter",
     "seasonal affective","seasonal depression","sad disorder",
     "widowed","widow","ghosted",
+    "feel like a ghost","feeling like a ghost","fading into the background",
     "empty nest","empty nester","kids moved out","children left home",
     "feel like giving up","want to give up","ready to give up",
     "thinking of giving up","about to give up",
@@ -622,6 +625,8 @@ function route(lower, lastTopic) {
     "too many balls in the air","juggling everything","juggling too much",
     "can't juggle it all",
     "impossible workload","crushing workload","unmanageable workload",
+    "at my wit's end","at my wits end","at wits end",
+    "stretched to my limit","pushed to my limit",
     "barely functioning","barely coping","barely keeping it together",
     "i'm a mess","im a mess","complete mess",
     "treading water","just treading water","feel like i'm treading water",
@@ -1023,6 +1028,16 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R140: techniques (anger management/conflict resolution/difficult conversations), sadness (feel like a ghost/fading into background), overwhelm (at wit's end/stretched to limit)
+  ["I want to learn anger management techniques", "", "techniques", "anger management → techniques"],
+  ["I need help with conflict resolution at work", "", "techniques", "conflict resolution → techniques"],
+  ["I need help approaching difficult conversations with my team", "", "techniques", "difficult conversations → techniques"],
+  ["I need to have some hard conversations and don't know how", "", "techniques", "hard conversations → techniques"],
+  ["I feel like a ghost in my own life", "", "sadness", "feel like a ghost → sadness"],
+  ["I'm just fading into the background and no one notices", "", "sadness", "fading into the background → sadness"],
+  ["I am at my wit's end with all of this", "", "overwhelm", "at my wit's end → overwhelm"],
+  ["I've been stretched to my limit and can't take any more", "", "overwhelm", "stretched to my limit → overwhelm"],
 
   // R139: sadness (feel forgotten/feel unvalued/dementia), overwhelm (impossible/crushing workload), anger (sibling rivalry)
   ["I feel forgotten by everyone around me", "", "sadness", "feel forgotten → sadness"],
