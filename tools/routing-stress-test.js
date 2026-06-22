@@ -92,6 +92,7 @@ function route(lower, lastTopic) {
     "indecisive","indecision",
     "can't finish","cant finish","never follow through",
     "can't stay on task","cant stay on task","can't complete",
+    "unproductive","can't get started","cant get started",
     "hyperfocus","hyperfocusing","can't switch tasks",
     "cant switch tasks","task switching",
     "poor memory","memory problems","memory issues","bad memory",
@@ -215,7 +216,8 @@ function route(lower, lastTopic) {
     "illness anxiety","medical anxiety",
     "wind down","wind-down","winding down","need to wind down",
     "socially awkward","social awkwardness","feel awkward around","awkward in social situations",
-    "sense of doom","feeling of doom","impending doom","feel doomed"]) ||
+    "sense of doom","feeling of doom","impending doom","feel doomed",
+    "health scare","cancer scare","medical scare"]) ||
     anyWord(lower,["rest","tense","rsd"])) return "relax";
   // 10. tinnitus
   if(any(lower,["tinnitus","ringing in","ear ring","hearing","buzz in my ear",
@@ -441,7 +443,9 @@ function route(lower, lastTopic) {
     "dont feel anything","don't feel anything",
     "feel misunderstood","feeling misunderstood","feel so misunderstood",
     "nobody understands me","no one understands me",
-    "nobody gets me","no one gets me"]) ||
+    "nobody gets me","no one gets me",
+    "disappointed","disappointment","let me down","let down",
+    "feel let down","fell short","expected more"]) ||
     anyWord(lower,["numb","died","vent"])) return "sadness";
   // 15. shameGuilt
   if(any(lower,["shame","ashamed","guilt","guilty","embarrassed","humiliated",
@@ -882,6 +886,20 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R121: sadness (disappointed/let down/fell short), focus (unproductive/can't get started), relax (health scare/cancer scare)
+  ["I feel so disappointed right now", "", "sadness", "disappointed → sadness"],
+  ["I'm dealing with a lot of disappointment lately", "", "sadness", "disappointment → sadness"],
+  ["people always let me down in the end", "", "sadness", "let me down → sadness"],
+  ["I feel so let down by my closest friends", "", "sadness", "feel let down → sadness"],
+  ["I expected more from this and feel disappointed", "", "sadness", "expected more → sadness"],
+  ["I just fell short of my own expectations again", "", "sadness", "fell short → sadness"],
+  ["I feel so unproductive today", "", "focus", "unproductive → focus"],
+  ["I just can't get started on my work today", "", "focus", "can't get started → focus"],
+  ["I feel completely unproductive and stuck", "", "focus", "unproductive → focus"],
+  ["I had a health scare at the doctor's this week", "", "relax", "health scare → relax"],
+  ["I had a cancer scare last month and I'm scared", "", "relax", "cancer scare → relax"],
+  ["I had a medical scare last week and need to calm down", "", "relax", "medical scare → relax"],
 
   // R120: sadness (feel nothing/misunderstood/no point), overwhelm (too many things/responsibilities), focus (can't finish/follow through), energy (slump/under the weather)
   ["I feel like what's the point of anything", "", "sadness", "what's the point → sadness"],

@@ -200,6 +200,7 @@ class AiChatEngine(private val context: Context) {
             "indecisive", "indecision",
             "can't finish", "cant finish", "never follow through",
             "can't stay on task", "cant stay on task", "can't complete",
+            "unproductive", "can't get started", "cant get started",
             "hyperfocus", "hyperfocusing", "can't switch tasks",
             "cant switch tasks", "task switching",
             "poor memory", "memory problems", "memory issues", "bad memory",
@@ -327,7 +328,8 @@ class AiChatEngine(private val context: Context) {
             "illness anxiety", "medical anxiety",
             "wind down", "wind-down", "winding down", "need to wind down",
             "socially awkward", "social awkwardness", "feel awkward around", "awkward in social situations",
-            "sense of doom", "feeling of doom", "impending doom", "feel doomed") ||
+            "sense of doom", "feeling of doom", "impending doom", "feel doomed",
+            "health scare", "cancer scare", "medical scare") ||
         anyWord(lower, "rest", "tense", "rsd") ->
             handleRelax().also { lastTopic = "relax" }
         any(lower, "tinnitus", "ringing", "ear ring", "hearing", "buzz in",
@@ -567,7 +569,9 @@ class AiChatEngine(private val context: Context) {
             "dont feel anything", "don't feel anything",
             "feel misunderstood", "feeling misunderstood", "feel so misunderstood",
             "nobody understands me", "no one understands me",
-            "nobody gets me", "no one gets me") ||
+            "nobody gets me", "no one gets me",
+            "disappointed", "disappointment", "let me down", "let down",
+            "feel let down", "fell short", "expected more") ||
         anyWord(lower, "numb", "died", "vent") ->
             handleSadness().also { lastTopic = "sadness" }
         any(lower, "shame", "ashamed", "guilt", "guilty", "i feel guilty",
