@@ -134,6 +134,7 @@ function route(lower, lastTopic) {
   // 8. energy
   if(any(lower,["energy","energise","energize","wake up","waking up","uplift","motivat",
     "active","exercise","workout","morning boost","morning energy","sluggish",
+    "low vibe","low vibes","low vibration","bad vibes",
     "lethargic","cold shower","cold water","ice bath","wim hof",
     "afternoon slump","afternoon crash","2pm slump","post-lunch dip",
     "pick me up","need a boost","feeling flat","flat today",
@@ -181,6 +182,7 @@ function route(lower, lastTopic) {
     "thought spiral","thought spirals","racing thoughts",
     "dread","dreading","sense of dread",
     "hypervigilant","hypervigilance",
+    "paranoid","feel paranoid","feeling paranoid","paranoia",
     "sunday scaries","anticipatory anxiety",
     "drinking to cope","drink to cope","alcohol to cope","drink to forget",
     "drinking to forget","using alcohol","using drink",
@@ -391,6 +393,7 @@ function route(lower, lastTopic) {
     "feel forgotten","feeling forgotten","feel unvalued",
     "feel fragile","emotionally fragile","feeling fragile",
     "disillusioned","feel disillusioned","feeling disillusioned","disillusionment",
+    "sentimental","feeling sentimental","wistful","feeling wistful",
     "self-pity","wallowing in self-pity","wallowing in sadness",
     "feeling sorry for myself","feel sorry for myself",
     "silently suffering","suffer in silence",
@@ -732,6 +735,8 @@ function route(lower, lastTopic) {
     "makes my blood boil","blood boils","my blood is boiling",
     "push my buttons","pushed my buttons","pushing my buttons",
     "last straw","that was the last straw","this is the last straw",
+    "treated unfairly","being treated unfairly","not being treated fairly",
+    "treated poorly","treat me poorly","treating me badly",
     "petty","pettiness","being petty","vindictive","vindictiveness",
     "spiteful","spite","acting out of spite","mean-spirited",
     "injustice","injustices","sense of injustice","experiencing injustice",
@@ -1074,6 +1079,15 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R148: relax (paranoid), sadness (sentimental/wistful), anger (treated unfairly), energy (low vibe)
+  ["I've been feeling really paranoid about things", "", "relax", "paranoid → relax"],
+  ["I feel paranoid that people are talking about me", "", "relax", "feel paranoid → relax"],
+  ["I'm in such a sentimental mood today", "", "sadness", "sentimental → sadness"],
+  ["I feel really wistful about how things used to be", "", "sadness", "wistful → sadness"],
+  ["I keep being treated unfairly at my workplace", "", "anger", "treated unfairly → anger"],
+  ["I'm being treated poorly by people around me", "", "anger", "treated poorly → anger"],
+  ["I've got such low vibes today, really dragging", "", "energy", "low vibes → energy"],
 
   // R147: positive (birthday), sadness (self-pity/wallowing), techniques (radical acceptance/NVC), overwhelm (nobody helps me)
   ["today is my birthday and I feel great", "", "positive", "birthday → positive"],
