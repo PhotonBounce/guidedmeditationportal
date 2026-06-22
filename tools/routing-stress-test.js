@@ -364,7 +364,9 @@ function route(lower, lastTopic) {
     "difficult conversations","having difficult conversations","hard conversations",
     "self-reflection","self reflection","self-reflect",
     "working on myself","work on myself",
-    "self-discovery","finding myself","inner work"])) return "techniques";
+    "self-discovery","finding myself","inner work",
+    "victim mentality","victim mindset","playing the victim",
+    "empath","being an empath","highly sensitive person","hsp"])) return "techniques";
   // 14. sadness
   if(any(lower,["sad","grief","grieving","heartbreak","heartbroken","lonely","alone","loneliness",
     "depressed","depression","cry","crying","sobbing","weeping","in tears","tearing up",
@@ -413,6 +415,7 @@ function route(lower, lastTopic) {
     "emotional shutdown","shutting down emotionally","emotionally shut down",
     "feel left behind","feeling left behind","left behind socially",
     "second-rate","feel second-rate","second-class",
+    "friendship ended","a friendship ended","lost a friend",
     "lost my purpose","no sense of purpose","lost all sense of purpose",
     "miss my old life",
     "feel dead inside","dead inside","emotionally dead","miss who i used to be","miss my former self",
@@ -699,6 +702,7 @@ function route(lower, lastTopic) {
     "falling behind","fell behind","getting behind","behind on everything",
     "playing catch-up","playing catchup","always behind","constantly behind",
     "plate is full","my plate is full","so much on my plate",
+    "feel powerless","feeling powerless","powerless",
     "survival mode","in survival mode","just surviving","barely surviving",
     "in over my head","way in over my head","out of my depth","way out of my depth",
     "at my wit's end","at my wits end","at wits end",
@@ -1144,6 +1148,14 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R161: techniques (victim mentality/empath/HSP), sadness (lost a friend), overwhelm (powerless)
+  ["I think I have a victim mentality and want to change it", "", "techniques", "victim mentality → techniques"],
+  ["being an empath is so draining for me", "", "techniques", "being an empath → techniques"],
+  ["I think I'm a highly sensitive person and it's hard", "", "techniques", "highly sensitive person → techniques"],
+  ["a long friendship ended and it broke my heart", "", "sadness", "friendship ended → sadness"],
+  ["I lost a friend and I don't know how to cope", "", "sadness", "lost a friend → sadness"],
+  ["I feel completely powerless in this situation", "", "overwhelm", "feel powerless → overwhelm"],
 
   // R160: relax (high alert), sadness (lost my purpose), shameGuilt (let myself down), anger (holding me back), positive (paid off)
   ["I'm always on high alert and can't relax my guard", "", "relax", "on high alert → relax"],

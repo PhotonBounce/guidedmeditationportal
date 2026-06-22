@@ -482,7 +482,9 @@ class AiChatEngine(private val context: Context) {
             "difficult conversations", "having difficult conversations", "hard conversations",
             "self-reflection", "self reflection", "self-reflect",
             "working on myself", "work on myself",
-            "self-discovery", "finding myself", "inner work") ->
+            "self-discovery", "finding myself", "inner work",
+            "victim mentality", "victim mindset", "playing the victim",
+            "empath", "being an empath", "highly sensitive person", "hsp") ->
             handleTechniques().also { lastTopic = "techniques" }
 
         // Emotional intent handlers — sadness, overwhelm, anger
@@ -549,6 +551,7 @@ class AiChatEngine(private val context: Context) {
             "emotional shutdown", "shutting down emotionally", "emotionally shut down",
             "feel left behind", "feeling left behind", "left behind socially",
             "second-rate", "feel second-rate", "second-class",
+            "friendship ended", "a friendship ended", "lost a friend",
             "lost my purpose", "no sense of purpose", "lost all sense of purpose",
             "miss my old life",
             "feel dead inside", "dead inside", "emotionally dead", "miss who i used to be", "miss my former self",
@@ -828,6 +831,7 @@ class AiChatEngine(private val context: Context) {
             "falling behind", "fell behind", "getting behind", "behind on everything",
             "playing catch-up", "playing catchup", "always behind", "constantly behind",
             "plate is full", "my plate is full", "so much on my plate",
+            "feel powerless", "feeling powerless", "powerless",
             "survival mode", "in survival mode", "just surviving", "barely surviving",
             "in over my head", "way in over my head", "out of my depth", "way out of my depth",
             "at my wit's end", "at my wits end", "at wits end",
