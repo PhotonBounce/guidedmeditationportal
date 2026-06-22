@@ -128,6 +128,8 @@ function route(lower, lastTopic) {
     "disorganised thinking","disorganized thinking",
     "zone out","zoning out","zoned out",
     "tunnel vision","can't tune out","distracted by everything",
+    "can't retain information","information doesn't stick","information doesn't go in",
+    "can't remember what i read","can't remember what i just read",
     "can't prioritize","cant prioritize","struggling to prioritize",
     "priorities all over the place","can't figure out my priorities"]) ||
     anyWord(lower,["read","code"])) return "focus";
@@ -737,6 +739,7 @@ function route(lower, lastTopic) {
     "last straw","that was the last straw","this is the last straw",
     "treated unfairly","being treated unfairly","not being treated fairly",
     "treated poorly","treat me poorly","treating me badly",
+    "brushed off","brush me off","dismissive","dismissive behavior","being dismissive",
     "petty","pettiness","being petty","vindictive","vindictiveness",
     "spiteful","spite","acting out of spite","mean-spirited",
     "injustice","injustices","sense of injustice","experiencing injustice",
@@ -799,6 +802,8 @@ function route(lower, lastTopic) {
     "small win","small wins","little victory","little victories",
     "little win","little wins",
     "birthday","it's my birthday","my birthday today","it is my birthday",
+    "pulled through","came through it","made it through","got through it",
+    "came out the other side","survived it",
     "turned a corner","turning a corner","light at the end of the tunnel",
     "achievement","major achievement","huge achievement","big achievement",
     "achieved something","actually achieved",
@@ -1079,6 +1084,15 @@ var tests = [
   ["i feel hypervigilant all the time", "", "relax", "hypervigilant → relax"],
   ["i'm having a nervous breakdown", "", "relax", "nervous breakdown → relax (nervous hits relax route 9 before overwhelm 16)"],
   ["i just cant keep up with everything", "", "overwhelm", "cant keep up → overwhelm"],
+
+  // R149: focus (can't retain info), anger (brushed off/dismissive), positive (pulled through/came through)
+  ["I can't retain information no matter how hard I try", "", "focus", "can't retain information → focus"],
+  ["the information doesn't stick no matter how many times I read it", "", "focus", "information doesn't stick → focus"],
+  ["I keep getting brushed off whenever I raise a concern", "", "anger", "brushed off → anger"],
+  ["my manager is being so dismissive of my ideas", "", "anger", "dismissive → anger"],
+  ["I finally pulled through that really dark period", "", "positive", "pulled through → positive"],
+  ["I made it through the hardest year of my life", "", "positive", "made it through → positive"],
+  ["I came out the other side stronger than before", "", "positive", "came out the other side → positive"],
 
   // R148: relax (paranoid), sadness (sentimental/wistful), anger (treated unfairly), energy (low vibe)
   ["I've been feeling really paranoid about things", "", "relax", "paranoid → relax"],

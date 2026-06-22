@@ -236,6 +236,8 @@ class AiChatEngine(private val context: Context) {
             "disorganised thinking", "disorganized thinking",
             "zone out", "zoning out", "zoned out",
             "tunnel vision", "can't tune out", "distracted by everything",
+            "can't retain information", "information doesn't stick", "information doesn't go in",
+            "can't remember what i read", "can't remember what i just read",
             "can't prioritize", "cant prioritize", "struggling to prioritize",
             "priorities all over the place", "can't figure out my priorities") ||
         anyWord(lower, "read", "code") ->
@@ -866,6 +868,7 @@ class AiChatEngine(private val context: Context) {
             "last straw", "that was the last straw", "this is the last straw",
             "treated unfairly", "being treated unfairly", "not being treated fairly",
             "treated poorly", "treat me poorly", "treating me badly",
+            "brushed off", "brush me off", "dismissive", "dismissive behavior", "being dismissive",
             "petty", "pettiness", "being petty", "vindictive", "vindictiveness",
             "spiteful", "spite", "acting out of spite", "mean-spirited",
             "injustice", "injustices", "sense of injustice", "experiencing injustice",
@@ -937,6 +940,8 @@ class AiChatEngine(private val context: Context) {
             "making progress", "made great progress", "great progress today",
             "sense of accomplishment", "feel accomplished", "feeling accomplished",
             "birthday", "it's my birthday", "my birthday today", "it is my birthday",
+            "pulled through", "came through it", "made it through", "got through it",
+            "came out the other side", "survived it",
             "got engaged", "just got engaged", "we got engaged",
             "getting married", "we're getting married", "just got married",
             "we just got married", "we got married") ->
