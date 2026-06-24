@@ -1,9 +1,6 @@
 name: Deploy Privacy & Terms Pages
 
 on:
-  push:
-    paths:
-      - 'docs/meditation-portal/**'
   workflow_dispatch:
     inputs:
       ftp_pass:
