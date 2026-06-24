@@ -1,0 +1,44 @@
+name: Deploy Privacy & Terms Pages
+
+on:
+  push:
+    paths:
+      - 'docs/meditation-portal/**'
+  workflow_dispatch:
+    inputs:
+      ftp_pass:
+        description: 'FTP password for ftp.photon-bounce.com'
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Upload privacy and terms pages via FTP
+        env:
+          FTP_PASS: ${{ github.event_name == 'workflow_dispatch' && inputs.ftp_pass || secrets.FTP_PASS }}
+        run: |
+          pip install ftputil --quiet
+          python3 - <<'PYEOF'
+          import ftputil, os, pathlib
+
+          host   = "ftp.photon-bounce.com"
+          user   = "photonb"
+          passwd = os.environ["FTP_PASS"]
+          remote_dir = "guidedmeditation/meditation-portal"
+
+          with ftputil.FTPHost(host, user, passwd) as ftp:
+              try:
+                  ftp.makedirs(remote_dir)
+              except Exception:
+                  pass
+              local_dir = pathlib.Path("docs/meditation-portal")
+              for f in local_dir.glob("*.html"):
+                  remote_path = f"{remote_dir}/{f.name}"
+                  ftp.upload(str(f), remote_path)
+                  print(f"Uploaded {f.name} → {remote_path}")
+
+          print("Done — privacy and terms pages deployed.")
+          PYEOF
