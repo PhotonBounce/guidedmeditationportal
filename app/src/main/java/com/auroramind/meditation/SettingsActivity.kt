@@ -158,8 +158,7 @@ class SettingsActivity : AppCompatActivity() {
                         putExtra(MainActivity.EXTRA_SHOW_UNLOCK, true)
                     }
                 }
-                startActivity(intent)
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                startActivityFading(intent)
                 true
             } else false
         }

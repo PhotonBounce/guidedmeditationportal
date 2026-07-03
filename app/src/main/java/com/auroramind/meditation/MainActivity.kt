@@ -339,16 +339,14 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AiChatActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
             }
-            startActivity(intent)
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            startActivityFading(intent)
         }
         binding.cardAlarm.setOnClickListener {
             haptic.tick(); sfx.tap()
             val intent = Intent(this, AlarmActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
             }
-            startActivity(intent)
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            startActivityFading(intent)
         }
         binding.btnPrevious.setOnClickListener {
             haptic.click()
@@ -460,8 +458,7 @@ class MainActivity : AppCompatActivity() {
         binding.cardBreathe.setOnClickListener {
             haptic.click(); sfx.chime()
             binding.nightSky.react(NightSkyView.ReactionKind.TIMER)
-            startActivity(Intent(this, BreathingActivity::class.java))
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            startActivityFading(Intent(this, BreathingActivity::class.java))
         }
 
         // Quick Calm — a one-tap 60-second reset (also box breathing, credits a session)
@@ -469,8 +466,7 @@ class MainActivity : AppCompatActivity() {
             haptic.click(); sfx.chime()
             binding.nightSky.react(NightSkyView.ReactionKind.PLAY)
             Toast.makeText(this, "⚡ 60-second reset — follow the orb", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, BreathingActivity::class.java))
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            startActivityFading(Intent(this, BreathingActivity::class.java))
         }
 
         // Mood filter chips
@@ -560,8 +556,7 @@ class MainActivity : AppCompatActivity() {
             .setTitle("${tech.emoji}  ${tech.title}")
             .setMessage(tech.body + "\n\nFor: ${tech.mood.emoji} ${tech.mood.label}")
             .setPositiveButton("Try it now") { _, _ ->
-                startActivity(Intent(this, BreathingActivity::class.java))
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                startActivityFading(Intent(this, BreathingActivity::class.java))
             }
             .setNegativeButton("Close", null)
             .show()
@@ -1103,8 +1098,7 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this, targetClass).apply {
                     flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                 }
-                startActivity(intent)
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                startActivityFading(intent)
                 true
             } else false
         }

@@ -65,7 +65,7 @@ class InsightsActivity : AppCompatActivity() {
             text = "Money saved, building daily"; setTextColor(muted); textSize = 13f
             setPadding(0, dp(20), 0, dp(8))
         })
-        col.addView(barChart(gold))
+        col.addView(barChart())
 
         scroll.addView(col)
         scroll.clipToPadding = false
@@ -104,7 +104,7 @@ class InsightsActivity : AppCompatActivity() {
         return row
     }
 
-    private fun barChart(gold: Int): View {
+    private fun barChart(): View {
         val chart = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL; gravity = Gravity.BOTTOM
             setPadding(dp(12), dp(12), dp(12), dp(12))

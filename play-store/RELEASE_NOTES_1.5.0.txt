@@ -1,0 +1,73 @@
+POWER OF MIND — RELEASE NOTES
+Version 1.5.0 (versionCode 12) — July 3, 2026
+
+================================================================
+PLAY CONSOLE "WHAT'S NEW" (paste into the release notes box, <500 chars)
+================================================================
+
+• Full Android 15 support — every screen now draws edge-to-edge with
+  polished status and navigation bar handling
+• Smoother cross-fade transitions between screens
+• Better keyboard handling in the coach chat and the quiz
+• Updated Google Play billing for faster, more reliable subscription
+  checkout
+• Stability and performance improvements under the hood
+
+================================================================
+FULL CHANGELOG (internal)
+================================================================
+
+POLICY / COMPLIANCE
+- Google Play Billing Library upgraded 6.2.1 -> 7.1.1 (Play requires
+  7.0.0+ for all app updates since Aug 30, 2025). BillingManager migrated
+  to the PendingPurchasesParams API. Clears the "App must use Google Play
+  Billing Library version 7.0.0 or later" policy issue.
+- Privacy policy URL corrected to HTTPS everywhere:
+  https://photon-bounce.com/pom/privacy.html (Play rejected the http://
+  form as an invalid privacy policy).
+
+ANDROID 15 / EDGE-TO-EDGE (SDK 35)
+- New EdgeToEdge.kt helper: enableEdgeToEdge() + window-insets padding +
+  immersive system-bar hiding.
+- All 18 activities migrated; content no longer collides with the status
+  bar, navigation bar, or display cutouts on Android 15.
+- Keyboard (IME)-aware insets on the coach chat and quiz free-text step —
+  adjustResize is ignored for edge-to-edge windows on Android 11+, so the
+  input now tracks the keyboard explicitly.
+- Removed every deprecated window attribute/API Play flags:
+  statusBarColor, navigationBarColor, windowLightStatusBar,
+  windowFullscreen, setDecorFitsSystemWindows.
+- Immersive full-bleed screens (splash, breathing orb, affirmation
+  player, milestone celebration) hide the bars via
+  WindowInsetsControllerCompat; a swipe reveals them transiently.
+
+ANDROID 16 / LARGE SCREENS
+- Portrait stays the phone experience by design. The manifest opts out of
+  forced large-screen resizability (PROPERTY_COMPAT_ALLOW_RESTRICTED_
+  RESIZABILITY) until tablet layouts are tested. The Play Console
+  large-screen note is informational and does not block release.
+
+QUALITY
+- Deprecated overridePendingTransition replaced with
+  ActivityOptions.makeCustomAnimation across all 10 call sites (new
+  Transitions.kt helper) — same cross-fade, no deprecated APIs.
+- Android Gradle Plugin 8.4.2 -> 8.6.1 (first AGP tested with
+  compileSdk 35).
+- Settings screen: scrolled content now draws under the transparent
+  status bar instead of clipping (clipToPadding fix).
+- Removed dead fitsSystemWindows attributes and fixed compiler warnings
+  (unused parameters).
+
+RELEASE PIPELINE / WEB
+- Release workflow now also builds a signed release APK artifact
+  (power-of-mind-release-apk) alongside the AAB.
+- Deploy Website workflow publishes that APK to
+  https://photon-bounce.com/pom/PowerOfMind.apk with each site deploy.
+- Microsite: added a real "Download for Android — v1.5.0" button and
+  version footer; live demo (web emulator) verified against app content.
+
+VERSIONS
+- versionCode 12, versionName 1.5.0
+- compileSdk / targetSdk 35, minSdk 21
+- Billing 7.1.1, AGP 8.6.1, Kotlin 1.9.22, Gradle 8.7
+- Signing: persisted CI upload key (SHA256 94:83:6A:C8...), valid to 2053

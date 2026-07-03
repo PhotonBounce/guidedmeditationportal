@@ -81,8 +81,7 @@ class SplashActivity : AppCompatActivity() {
     private fun startNext() {
         val next = if (PrefsManager(this).isQuizCompleted())
             DashboardActivity::class.java else QuizActivity::class.java
-        startActivity(Intent(this, next))
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+        startActivityFading(Intent(this, next))
         finish()
     }
 

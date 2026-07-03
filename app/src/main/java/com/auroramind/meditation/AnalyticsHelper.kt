@@ -21,7 +21,8 @@ object AnalyticsHelper {
     private const val TAG = "MeditationPortalAnalytics"
     private var initialized = false
 
-    fun init(context: Context) {
+    // context is unused today but kept so wiring Firebase later needs no call-site changes
+    fun init(@Suppress("UNUSED_PARAMETER") context: Context) {
         initialized = true
     }
 

@@ -16,11 +16,33 @@ on:
         required: false
         type: string
 
+permissions:
+  contents: read
+  actions: read   # to download the release APK artifact
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # Publish the signed APK next to the site so the "Download for Android"
+      # button works: photon-bounce.com/pom/PowerOfMind.apk. Soft-fails so a
+      # site-only deploy still goes out (the previously uploaded APK stays
+      # live on the host — deploy_shield never deletes remote files).
+      - name: Fetch latest signed release APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          run_id=$(gh run list --workflow "Release AAB (signed)" --status success \
+                     --limit 1 --json databaseId -q '.[0].databaseId' || true)
+          if [ -n "$run_id" ] && gh run download "$run_id" -n power-of-mind-release-apk -D apk_tmp; then
+            mv apk_tmp/app-release.apk microsite/PowerOfMind.apk
+            ls -lh microsite/PowerOfMind.apk
+          else
+            echo "::warning::No release APK artifact found — deploying site without refreshing the APK."
+          fi
 
       - name: Upload microsite via FTP
         env:

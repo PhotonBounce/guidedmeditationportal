@@ -121,8 +121,7 @@ class AiChatActivity : AppCompatActivity() {
                 val intent = Intent(this@AiChatActivity, AlarmActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                 }
-                startActivity(intent)
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                startActivityFading(intent)
             }
         }.also { binding.chipGroupQuick.addView(it) }
 
@@ -244,8 +243,7 @@ class AiChatActivity : AppCompatActivity() {
                         putExtra(MainActivity.EXTRA_SHOW_UNLOCK, true)
                     }
                 }
-                startActivity(intent)
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                startActivityFading(intent)
                 true
             } else false
         }
