@@ -28,6 +28,9 @@ class BillingManager(
         const val SKU_UNLOCK = "meditation_portal_unlock"
     }
 
+    /** Optional: invoked when billing setup or a purchases query fails. */
+    var onQueryFailed: (() -> Unit)? = null
+
     private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
     @Volatile private var connected = false
     @Volatile private var connecting = false
@@ -55,6 +58,7 @@ class BillingManager(
                     queryPurchases()
                 } else {
                     Log.w(TAG, "Billing setup failed: ${result.debugMessage}")
+                    onQueryFailed?.invoke()
                 }
             }
             override fun onBillingServiceDisconnected() {
@@ -110,6 +114,7 @@ class BillingManager(
                 // Query FAILED (Play outage, service disconnect, …) — keep the
                 // cached premium state rather than revoking a paying user.
                 Log.w(TAG, "Purchase query failed: ${inappResult.billingResult.debugMessage}")
+                onQueryFailed?.invoke()
                 return@launch
             }
 
@@ -133,7 +138,17 @@ class BillingManager(
 
     private fun launchPurchase(productId: String, productType: String) {
         if (!connected) {
-            Log.w(TAG, "Billing not connected — ignoring purchase")
+            // Retry the connection and tell the user instead of silently
+            // swallowing the tap (e.g. offline, Play Store unavailable)
+            Log.w(TAG, "Billing not connected — retrying connection")
+            connect()
+            activity.runOnUiThread {
+                android.widget.Toast.makeText(
+                    activity,
+                    "Google Play unavailable — check your connection and try again",
+                    android.widget.Toast.LENGTH_SHORT
+                ).show()
+            }
             return
         }
         val queryParams = QueryProductDetailsParams.newBuilder()

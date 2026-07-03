@@ -49,7 +49,7 @@
 ### 🔧 Technical changelog (v11 → v12)
 
 **Play Store compliance (fixes the Policy status issues):**
-- **Privacy Policy** — comprehensive GDPR/CCPA policy now covers AdMob, Play Billing, AI chat (Anthropic Claude), data retention & deletion. Canonical URL (enter in Play Console → App content → Privacy policy):
+- **Privacy Policy** — comprehensive GDPR/CCPA policy now covers AdMob, Play Billing, the fully on-device Spirit chat, data retention & deletion. Canonical URL (enter in Play Console → App content → Privacy policy):
   `https://www.photon-bounce.com/guidedmeditation/privacy.html`
 - **Google Play Billing 6.2.1 → 8.2.0** — clears the "must use 7.0.0+" violation AND the upcoming "must use 8.0.0+ from Aug 31, 2026" deadline in one move
 - **Edge-to-edge (Android 15 / SDK 35)** — removed every deprecated window API (`statusBarColor`, `navigationBarColor`, `enforceStatusBarContrast`, `windowFullscreen`); all 8 screens migrated to `enableEdgeToEdge()` with proper window-insets handling

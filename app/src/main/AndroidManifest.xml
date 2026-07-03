@@ -115,9 +115,15 @@
             android:exported="false"
             android:foregroundServiceType="mediaPlayback" />
 
-        <!-- Fires the scheduled meditation alarm and re-arms it after a reboot -->
+        <!-- Fires the scheduled meditation alarm (PendingIntents only — not
+             exported, so no third-party app can spoof-trigger the ring) -->
         <receiver
             android:name=".AlarmReceiver"
+            android:exported="false" />
+
+        <!-- Re-arms alarm + reminder after reboot (BOOT_COMPLETED must be exported) -->
+        <receiver
+            android:name=".BootReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

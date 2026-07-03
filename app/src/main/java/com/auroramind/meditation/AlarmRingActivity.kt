@@ -1,6 +1,9 @@
 package com.auroramind.meditation
 
+import android.media.AudioAttributes
+import android.media.AudioManager
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.PowerManager
@@ -37,6 +40,8 @@ class AlarmRingActivity : AppCompatActivity() {
         binding = ActivityAlarmRingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         prefs = PrefsManager(this)
+        // Hardware volume keys control the ALARM stream on this screen
+        volumeControlStream = AudioManager.STREAM_ALARM
 
         // Edge-to-edge: keep Dismiss / Snooze clear of the system bars
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
@@ -105,12 +110,29 @@ class AlarmRingActivity : AppCompatActivity() {
     private fun startRinging() {
         if (prefs.getAlarmSourceType() == "TRACK") {
             val track = prefs.getAlarmTrack()
-            mediaPlayer = MediaPlayer.create(this, track.rawResId)?.apply {
-                isLooping = true
-                start()
-            }
+            // Play on the ALARM stream — MediaPlayer.create() defaults to the
+            // media stream, which is silent when media volume is turned down
+            mediaPlayer = runCatching {
+                MediaPlayer().apply {
+                    setAudioAttributes(
+                        AudioAttributes.Builder()
+                            .setUsage(AudioAttributes.USAGE_ALARM)
+                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                            .build()
+                    )
+                    setDataSource(
+                        this@AlarmRingActivity,
+                        Uri.parse("android.resource://$packageName/${track.rawResId}")
+                    )
+                    isLooping = true
+                    prepare()
+                    start()
+                }
+            }.getOrNull()
         } else {
-            audioEngine = AudioEngine().apply { start(prefs.getAlarmTone()) }
+            audioEngine = AudioEngine().apply {
+                start(prefs.getAlarmTone(), AudioAttributes.USAGE_ALARM)
+            }
         }
     }
 

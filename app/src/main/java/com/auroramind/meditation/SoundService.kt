@@ -93,12 +93,18 @@ class SoundService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        if (intent?.action == ACTION_STOP) {
+        if (intent == null) {
+            // START_STICKY restart after process death — don't surprise the
+            // user by auto-playing a default track out of nowhere
+            stopSelf()
+            return START_NOT_STICKY
+        }
+        if (intent.action == ACTION_STOP) {
             stopPlaybackAndSelf()
             return START_NOT_STICKY
         }
 
-        val name = intent?.getStringExtra("SOUND_TYPE") ?: currentSound.name
+        val name = intent.getStringExtra("SOUND_TYPE") ?: currentSound.name
         currentSound = runCatching { SoundType.valueOf(name) }.getOrDefault(currentSound)
 
         acquireWakeLock()
@@ -265,6 +271,7 @@ class SoundService : Service() {
     }
 
     override fun onDestroy() {
+        onStoppedExternally = null
         releaseMediaPlayer()
         abandonAudioFocus()
         wakeLock?.let { if (it.isHeld) it.release() }
@@ -350,6 +357,23 @@ class SoundService : Service() {
     // Audio focus
     // ─────────────────────────────────────────────────────────────────────────
 
+    // Apply duck/restore DIRECTLY to the player — never via setVolume(), which
+    // would overwrite the user's stored volume. Permanent LOSS (another app
+    // took over for good) fully stops playback instead of muting forever.
+    private val focusChangeListener = AudioManager.OnAudioFocusChangeListener { change ->
+        when (change) {
+            AudioManager.AUDIOFOCUS_LOSS ->
+                stopPlaybackAndSelf()
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ->
+                mediaPlayer?.setVolume(0.25f * currentVolume, 0.25f * currentVolume)
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK ->
+                mediaPlayer?.setVolume(0.4f * currentVolume, 0.4f * currentVolume)
+            AudioManager.AUDIOFOCUS_GAIN ->
+                mediaPlayer?.setVolume(currentVolume, currentVolume)
+        }
+    }
+
+    @Suppress("DEPRECATION")
     private fun requestAudioFocus() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val attrs = AudioAttributes.Builder()
@@ -358,30 +382,24 @@ class SoundService : Service() {
                 .build()
             focusRequest = AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
                 .setAudioAttributes(attrs)
-                .setOnAudioFocusChangeListener { change ->
-                    // Apply duck/restore DIRECTLY to the player — never via setVolume(), which
-                    // would overwrite the user's stored volume. (The old code clobbered
-                    // currentVolume to 0 on any transient focus blip and never recovered →
-                    // playback ran permanently muted.)
-                    when (change) {
-                        AudioManager.AUDIOFOCUS_LOSS ->
-                            mediaPlayer?.setVolume(0f, 0f)
-                        AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ->
-                            mediaPlayer?.setVolume(0.25f * currentVolume, 0.25f * currentVolume)
-                        AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK ->
-                            mediaPlayer?.setVolume(0.4f * currentVolume, 0.4f * currentVolume)
-                        AudioManager.AUDIOFOCUS_GAIN ->
-                            mediaPlayer?.setVolume(currentVolume, currentVolume)
-                    }
-                }
+                .setOnAudioFocusChangeListener(focusChangeListener)
                 .build()
             audioManager.requestAudioFocus(focusRequest!!)
+        } else {
+            // API 23-25 have no AudioFocusRequest — without this branch the
+            // app never took focus at all on those devices
+            audioManager.requestAudioFocus(
+                focusChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN
+            )
         }
     }
 
+    @Suppress("DEPRECATION")
     private fun abandonAudioFocus() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             focusRequest?.let { audioManager.abandonAudioFocusRequest(it) }
+        } else {
+            audioManager.abandonAudioFocus(focusChangeListener)
         }
     }
 

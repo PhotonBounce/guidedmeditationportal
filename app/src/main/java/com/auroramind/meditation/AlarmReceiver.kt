@@ -6,14 +6,18 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.media.AudioAttributes
 import android.os.Build
+import android.provider.Settings
 import androidx.core.app.NotificationCompat
 
 /**
- * Fires the scheduled Meditation Alarm and re-arms it after each ring or
- * device reboot. On Android 10+ a BroadcastReceiver cannot launch an
- * activity directly, so the ring screen is delivered via a full-screen
- * intent notification (USE_FULL_SCREEN_INTENT).
+ * Fires the scheduled Meditation Alarm and re-arms it after each ring.
+ * (Boot re-arm lives in the separate, exported [BootReceiver] — this one is
+ * NOT exported so no third-party app can spoof-trigger the alarm.)
+ * On Android 10+ a BroadcastReceiver cannot launch an activity directly, so
+ * the ring screen is delivered via a full-screen intent notification
+ * (USE_FULL_SCREEN_INTENT).
  */
 class AlarmReceiver : BroadcastReceiver() {
 
@@ -24,16 +28,14 @@ class AlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent?) {
         when (intent?.action) {
-            Intent.ACTION_BOOT_COMPLETED -> {
-                AlarmScheduler.reschedule(context)
-                ReminderScheduler.reschedule(context)
-            }
             ReminderScheduler.ACTION_REMINDER -> ReminderScheduler.fireNotification(context)
             AlarmScheduler.ACTION_FIRE -> {
                 showRingScreen(context)
                 // Re-arm for tomorrow so the alarm repeats daily.
                 AlarmScheduler.reschedule(context)
             }
+            // Snooze one-shot: ring again but DON'T touch the daily schedule
+            AlarmScheduler.ACTION_SNOOZE -> showRingScreen(context)
         }
     }
 
@@ -59,6 +61,16 @@ class AlarmReceiver : BroadcastReceiver() {
                 ).apply {
                     description = "Rings when your scheduled meditation alarm fires"
                     setBypassDnd(true)
+                    // Alarm-attributed channel sound: if the full-screen intent is
+                    // blocked (Android 14+ FSI permission revoked), the alarm still
+                    // makes noise on the alarm stream
+                    setSound(
+                        Settings.System.DEFAULT_ALARM_ALERT_URI,
+                        AudioAttributes.Builder()
+                            .setUsage(AudioAttributes.USAGE_ALARM)
+                            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                            .build()
+                    )
                 }
             )
         }

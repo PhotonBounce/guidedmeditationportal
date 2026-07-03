@@ -88,7 +88,20 @@ class AboutActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-            }.also { billing = it }
+            }.also {
+                it.onQueryFailed = {
+                    runOnUiThread {
+                        if (!isFinishing && !isDestroyed) {
+                            Toast.makeText(
+                                this,
+                                "Could not reach Google Play — try again later",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
+                billing = it
+            }
             // First tap: the manager auto-queries once connected. Later taps re-query.
             manager.queryPurchases()
         }

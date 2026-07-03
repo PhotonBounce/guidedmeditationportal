@@ -216,6 +216,9 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         if (bound) {
+            // Clear the callback first — the foreground service outlives us and
+            // would otherwise retain this destroyed Activity (and its views)
+            service?.onStoppedExternally = null
             unbindService(connection)
             bound = false
             service = null   // clear stale binder ref — prevents false "bound" checks on resume
@@ -851,10 +854,13 @@ class MainActivity : AppCompatActivity() {
             mapOf("sound" to type.name)
         )
 
-        if (bound && service != null) {
-            // Already running — change sound via binder only (avoid double startSound)
+        if (bound && service?.isPlaying() == true) {
+            // Actively playing — change sound via binder only (avoid double startSound)
             service!!.changeSound(type)
         } else {
+            // Not playing (fresh start, or the service was stopped externally and
+            // is a bound-only zombie) — go through onStartCommand so the wake
+            // lock, audio focus and foreground notification are re-acquired.
             val intent = Intent(this, SoundService::class.java).apply {
                 putExtra("SOUND_TYPE", type.name)
             }
@@ -879,6 +885,7 @@ class MainActivity : AppCompatActivity() {
 
         countdown?.cancel(); countdown = null
         binding.timerRing.stop()
+        service?.onStoppedExternally = null
         stopService(Intent(this, SoundService::class.java))
         if (bound) { unbindService(connection); bound = false }
         service = null
@@ -1053,6 +1060,13 @@ class MainActivity : AppCompatActivity() {
         adapter.update(current, premium)
 
         binding.cardPremium.visibility = if (premium) View.GONE else View.VISIBLE
+        if (premium && bannerAdView != null) {
+            // Tear the banner down completely — a hidden AdView keeps auto-
+            // refreshing (ad requests for a paying user + AdMob hidden-ad risk)
+            bannerAdView?.destroy()
+            binding.adContainer.removeAllViews()
+            bannerAdView = null
+        }
         binding.adContainer.visibility = if (premium) View.GONE else View.VISIBLE
 
         syncJukeboxControls()

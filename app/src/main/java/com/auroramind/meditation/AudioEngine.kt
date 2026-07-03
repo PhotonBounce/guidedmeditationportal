@@ -60,7 +60,7 @@ class AudioEngine {
     // Public API
     // ─────────────────────────────────────────────────────────────────────────
 
-    fun start(type: SynthTone) {
+    fun start(type: SynthTone, usage: Int = AudioAttributes.USAGE_MEDIA) {
         stop()
         currentType = type
         resetState()
@@ -71,7 +71,7 @@ class AudioEngine {
         audioTrack = AudioTrack.Builder()
             .setAudioAttributes(
                 AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .setUsage(usage)
                     .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                     .build()
             )

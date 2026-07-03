@@ -2,6 +2,7 @@ package com.auroramind.meditation
 
 import android.Manifest
 import android.app.AlarmManager
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -127,6 +128,27 @@ class AlarmActivity : AppCompatActivity() {
             Toast.makeText(
                 this, "Allow notifications so the alarm can ring", Toast.LENGTH_LONG
             ).show()
+        }
+
+        // Android 14+ can revoke the full-screen-intent permission — without it
+        // the ring screen can't appear over the lock screen (channel sound still
+        // plays as a fallback). Send the user to the toggle if it's off.
+        if (enabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            if (!nm.canUseFullScreenIntent()) {
+                Toast.makeText(
+                    this, "Allow full-screen alarms so the wake-up screen can appear",
+                    Toast.LENGTH_LONG
+                ).show()
+                runCatching {
+                    startActivity(
+                        Intent(
+                            Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT,
+                            Uri.parse("package:$packageName")
+                        )
+                    )
+                }
+            }
         }
 
         // Always arm the alarm — the scheduler falls back to an inexact alarm
