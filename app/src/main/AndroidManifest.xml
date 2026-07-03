@@ -31,7 +31,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MeditationPortal"
-        tools:targetApi="34">
+        tools:targetApi="35">
+
+        <!-- Android 16 ignores orientation/resizability restrictions on large
+             screens (foldables, tablets) once an app targets SDK 36. The app is
+             deliberately portrait-first on phones; this property keeps the
+             current large-screen behavior until the layouts are tablet-tested
+             (temporary opt-out, honored until targetSdk 37). -->
+        <property
+            android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY"
+            android:value="true" />
 
         <!-- AdMob App ID — driven from build.gradle manifestPlaceholders.admobAppId
              Currently the official Google TEST ID. Edit one line in build.gradle

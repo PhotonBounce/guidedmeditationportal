@@ -78,8 +78,13 @@ class QuizActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        goEdgeToEdge()
         binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(AuraBackground.wrap(this, binding.root))
+        // Inset the content only (aura stays full-bleed); ime=true keeps the
+        // free-text step clear of the keyboard on API 30+ where adjustResize
+        // is ignored for edge-to-edge windows.
+        binding.root.padSystemBars(ime = true)
 
         prefs = PrefsManager(this)
         habitStats = HabitStatsManager(this)

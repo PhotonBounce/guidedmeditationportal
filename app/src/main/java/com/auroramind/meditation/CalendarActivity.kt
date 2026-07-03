@@ -24,6 +24,7 @@ class CalendarActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        goEdgeToEdge()
         val habit = HabitStatsManager(this)
         val cream = ContextCompat.getColor(this, R.color.text_primary)
         val muted = ContextCompat.getColor(this, R.color.text_secondary)
@@ -100,6 +101,8 @@ class CalendarActivity : AppCompatActivity() {
         })
 
         scroll.addView(col)
+        scroll.clipToPadding = false
+        scroll.padSystemBars()
         setContentView(AuraBackground.wrap(this, scroll))
     }
 

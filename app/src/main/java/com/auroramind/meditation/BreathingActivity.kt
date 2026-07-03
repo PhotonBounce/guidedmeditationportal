@@ -13,7 +13,6 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
 import com.google.android.material.button.MaterialButton
 import kotlin.math.*
 
@@ -33,7 +32,8 @@ class BreathingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        goEdgeToEdge()
+        hideSystemBars()
 
         val root = FrameLayout(this).apply {
             setBackgroundColor(Color.parseColor("#140D08"))

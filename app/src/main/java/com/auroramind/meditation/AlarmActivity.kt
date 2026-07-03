@@ -25,8 +25,11 @@ class AlarmActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        goEdgeToEdge()
         binding = ActivityAlarmBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.root.clipToPadding = false
+        binding.root.padSystemBars()
         prefs = PrefsManager(this)
 
         supportActionBar?.title = "Alarm"

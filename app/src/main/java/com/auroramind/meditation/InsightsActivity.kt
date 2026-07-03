@@ -27,6 +27,7 @@ class InsightsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        goEdgeToEdge()
         val habit = HabitStatsManager(this)
         val cream = ContextCompat.getColor(this, R.color.text_primary)
         val muted = ContextCompat.getColor(this, R.color.text_secondary)
@@ -67,6 +68,8 @@ class InsightsActivity : AppCompatActivity() {
         col.addView(barChart(gold))
 
         scroll.addView(col)
+        scroll.clipToPadding = false
+        scroll.padSystemBars()
         setContentView(AuraBackground.wrap(this, scroll))
     }
 

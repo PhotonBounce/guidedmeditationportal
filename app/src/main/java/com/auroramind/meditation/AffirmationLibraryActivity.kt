@@ -25,6 +25,7 @@ class AffirmationLibraryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        goEdgeToEdge()
         val d = resources.displayMetrics.density
         fun dp(v: Int) = (v * d).toInt()
         val cream = ContextCompat.getColor(this, R.color.text_primary)
@@ -51,6 +52,8 @@ class AffirmationLibraryActivity : AppCompatActivity() {
         })
 
         scroll.addView(col)
+        scroll.clipToPadding = false
+        scroll.padSystemBars()
         setContentView(AuraBackground.wrap(this, scroll))
     }
 

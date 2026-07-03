@@ -9,8 +9,8 @@ Copy/paste these fields into Play Console → **Grow → Store presence → Main
 | Category | Health & Fitness |
 | Tags | affirmations, quit, habit, mindfulness, motivation |
 | Contact email | support@photon-bounce.com |
-| Website | http://photon-bounce.com/pom/ |
-| Privacy policy URL | http://photon-bounce.com/pom/privacy.html |
+| Website | https://photon-bounce.com/pom/ |
+| Privacy policy URL | https://photon-bounce.com/pom/privacy.html |
 
 ## Short description (max 80 chars)
 ```

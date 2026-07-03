@@ -6,7 +6,8 @@ import com.android.billingclient.api.*
 import kotlinx.coroutines.*
 
 /**
- * Wraps Google Play Billing Library 6.x.
+ * Wraps Google Play Billing Library 7.x (Play policy requires 7.0.0+ for
+ * app updates from Aug 30, 2025).
  *
  * Products to create in Google Play Console (Monetize → Products):
  *   In-app product  → meditation_portal_unlock   ($0.49 one-time)   "Meditation Portal — Full Unlock"
@@ -48,7 +49,13 @@ class BillingManager(
 
     private val client = BillingClient.newBuilder(activity)
         .setListener(this)
-        .enablePendingPurchases()
+        // Billing 7.x: pending-purchase support is opted into per product
+        // category; we only sell one-time + subscription products.
+        .enablePendingPurchases(
+            PendingPurchasesParams.newBuilder()
+                .enableOneTimeProducts()
+                .build()
+        )
         .build()
 
     init {

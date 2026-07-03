@@ -32,6 +32,8 @@ class MilestoneActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        goEdgeToEdge()
+        hideSystemBars()
         days = intent.getIntExtra(EXTRA_DAYS, 1)
 
         val d = resources.displayMetrics.density

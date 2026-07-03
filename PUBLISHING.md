@@ -26,6 +26,17 @@ These don't affect the debug build you're testing; do them when ready to publish
    finished session); subscribers are ad-free. No rewarded unit yet — add one if wanted.
 3. **Support email / website** in the privacy + terms pages are `support@photon-bounce.com`
    — change if needed.
+4. **Play policy compliance (2026-07).** ✅ Done —
+   - Billing Library upgraded to **7.1.1** (Play rejects updates on <7.0.0 since Aug 30 2025).
+   - **Android 15 edge-to-edge**: every activity now calls `enableEdgeToEdge()` (via
+     `EdgeToEdge.kt`) and handles window insets; the deprecated `statusBarColor` /
+     `navigationBarColor` / `windowLightStatusBar` / `windowFullscreen` theme attributes and
+     `setDecorFitsSystemWindows` calls were removed.
+   - **Android 16 large screens**: portrait lock is kept on phones (deliberate UX);
+     the manifest opts out of forced large-screen resizability via
+     `PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY` until layouts are tablet-tested.
+     Play Console may still show an *informational* large-screen advisory — it does not
+     block release.
 
 ## 2. Build the signed AAB (for Play)
 The **"Release AAB (signed)"** workflow signs the bundle. It needs these repo secrets
@@ -63,7 +74,8 @@ Or build locally with `START.bat`.
 3. **Internal testing track** → upload `app-release.aab` → add yourself as a tester first.
 4. **Main store listing** → fill from `play-store/LISTING.md`; upload `play-store/icon_512.png`,
    `play-store/feature_graphic_1024x500.png`, and `play-store/screenshots/play_1..5.png`.
-5. **Privacy policy** → `http://photon-bounce.com/pom/privacy.html`
+5. **Privacy policy** → `https://photon-bounce.com/pom/privacy.html` (enter the **https**
+   URL — Play rejects listings whose privacy link doesn't resolve cleanly).
 6. **Content rating** questionnaire → likely Teen (supportive references to quitting).
 7. **Data safety** form → per `play-store/LISTING.md`.
 8. **Monetize → Subscriptions** → create `pom_annual` at **$1.99/year** (annual only —
@@ -72,7 +84,7 @@ Or build locally with `START.bat`.
 9. Promote internal → closed → production when happy.
 
 ## 5. Web (marketing site + legal)
-Already live at **http://photon-bounce.com/pom/** (privacy: `/pom/privacy.html`, terms:
+Already live at **https://photon-bounce.com/pom/** (privacy: `/pom/privacy.html`, terms:
 `/pom/terms.html`). To redeploy after changes: **Actions → "Deploy Website" → Run workflow**
 (enter the FTP password as the input). Source is in `microsite/`.
 

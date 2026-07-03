@@ -40,6 +40,7 @@ class ResourcesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        goEdgeToEdge()
         val d = resources.displayMetrics.density
         fun dp(v: Int) = (v * d).toInt()
         val gold = ContextCompat.getColor(this, R.color.accent_iris)
@@ -83,6 +84,8 @@ class ResourcesActivity : AppCompatActivity() {
         })
 
         scroll.addView(col)
+        scroll.clipToPadding = false
+        scroll.padSystemBars()
         setContentView(AuraBackground.wrap(this, scroll))
     }
 

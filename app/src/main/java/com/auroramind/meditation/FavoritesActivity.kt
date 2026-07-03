@@ -18,6 +18,7 @@ class FavoritesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        goEdgeToEdge()
         val cream = ContextCompat.getColor(this, R.color.text_primary)
         val muted = ContextCompat.getColor(this, R.color.text_secondary)
         val ember = ContextCompat.getColor(this, R.color.accent_rose)
@@ -63,6 +64,8 @@ class FavoritesActivity : AppCompatActivity() {
         }
 
         scroll.addView(col)
+        scroll.clipToPadding = false
+        scroll.padSystemBars()
         setContentView(AuraBackground.wrap(this, scroll))
     }
 }

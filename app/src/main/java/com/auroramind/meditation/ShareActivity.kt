@@ -39,6 +39,7 @@ class ShareActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        goEdgeToEdge()
         val habit = HabitStatsManager(this)
         val prefs = PrefsManager(this)
         val days = habit.daysClean()
@@ -81,6 +82,8 @@ class ShareActivity : AppCompatActivity() {
             setOnClickListener { share() }
         })
         setContentView(root)
+        // The gradient background still fills the padded area, so it stays full-bleed.
+        root.padSystemBars()
     }
 
     private fun share() {

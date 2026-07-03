@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.core.widget.doOnTextChanged
@@ -43,18 +42,21 @@ class AiChatActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        goEdgeToEdge()
         binding = ActivityAiChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         sfx = SoundEffects(this)
         haptic = HapticHelper(this)
 
-        // Edge-to-edge insets — push header below status bar, bottom nav above nav bar
+        // Edge-to-edge insets — push header below status bar, bottom nav above nav bar.
+        // adjustResize is ignored for edge-to-edge windows on API 30+, so the bottom
+        // padding also tracks the keyboard to keep the chat input above it.
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
             val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val ime  = insets.getInsets(WindowInsetsCompat.Type.ime())
             binding.header.updatePadding(top = bars.top + 8)
-            binding.bottomNavigation.updatePadding(bottom = bars.bottom)
+            binding.bottomNavigation.updatePadding(bottom = maxOf(bars.bottom, ime.bottom))
             insets
         }
 

@@ -22,8 +22,10 @@ class AlarmRingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        goEdgeToEdge()
         binding = ActivityAlarmRingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.root.padSystemBars()
         prefs = PrefsManager(this)
 
         showOverLockScreen()

@@ -43,8 +43,14 @@ class AffirmationPlayerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        goEdgeToEdge()
+        hideSystemBars()
         binding = ActivityAffirmationPlayerBinding.inflate(layoutInflater)
         setContentView(AuraBackground.wrap(this, binding.root))
+        // Bars are hidden (zero insets), but the mute/fav/close controls hug the
+        // top edge — pad the inner content so they stay tappable around a display
+        // cutout and if the user swipes the bars back in.
+        binding.root.padSystemBars()
 
         prefs = PrefsManager(this)
         val theme = AffirmationContent.getTheme(intent.getStringExtra(EXTRA_THEME))

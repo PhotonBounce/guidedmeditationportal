@@ -37,8 +37,11 @@ class DashboardActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        goEdgeToEdge()
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(AuraBackground.wrap(this, binding.root))
+        // Inset the content only — the aura backdrop keeps painting under the bars.
+        binding.root.padSystemBars()
 
         prefs = PrefsManager(this)
         habitStats = HabitStatsManager(this)

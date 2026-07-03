@@ -29,8 +29,11 @@ class AboutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        goEdgeToEdge()
         val binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.root.clipToPadding = false
+        binding.root.padSystemBars()
 
         supportActionBar?.title = getString(R.string.about_title)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
