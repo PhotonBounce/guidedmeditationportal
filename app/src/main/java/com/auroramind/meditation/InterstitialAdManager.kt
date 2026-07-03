@@ -38,6 +38,11 @@ class InterstitialAdManager(private val context: Context) {
     }
 
     private var ad: InterstitialAd? = null
+
+    /** Drop the cached ad (e.g. consent withdrawn) so nothing pre-consented shows. */
+    fun clear() {
+        ad = null
+    }
     private var isLoading = false
     private var lastShownAt = 0L
     private val sessionStart = System.currentTimeMillis()

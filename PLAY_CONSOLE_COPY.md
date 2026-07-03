@@ -121,7 +121,7 @@ Spirit offers general wellness guidance and is not a substitute for professional
 
 **Collects or shares user data?** → Yes
 
-1. **Advertising ID** (Device or other IDs) — Collected: Yes · Shared: No · Required · Purpose: Advertising (non-personalized) · Encrypted in transit: Yes · Deletion: No (resettable in Android settings)
+1. **Advertising ID** (Device or other IDs) — Collected: Yes · Shared: Yes (with Google AdMob) · Required · Purpose: Advertising or marketing · Encrypted in transit: Yes · Deletion: No (resettable in Android settings)
 2. **App interactions / crash logs** (App activity) — Collected: Yes · Shared: No · Required · Purpose: App functionality, Analytics · Encrypted: Yes · Deletion: No (cleared on uninstall)
 3. **Purchase history** (Financial info) — Collected: Yes · Shared: No · Required · Purpose: App functionality (unlock) · Encrypted: Yes · Deletion: No (refund via Play)
 
@@ -219,10 +219,10 @@ Beruhige deinen Geist: geführte Meditationen, Atemcoach, Serien & Begleiter.
 ```
 Guided Meditation Portal — ein ruhigerer Geist, Atemzug für Atemzug.
 
-23 sanft gesprochene geführte Meditationen, ein Atemcoach, ein Begleiter namens Spirit und ein sanfter Meditationswecker — in einer lebendigen, kosmischen Oberfläche, die mit jedem Track die Farbe wechselt. Keine Abos. Nur Ruhe.
+Über 55 Tracks in vier Genres — geführte Meditationen, Schlafklänge, Focus- und Energy-Musik — dazu ein Atemcoach, ein Begleiter namens Spirit und ein sanfter Meditationswecker, in einer lebendigen, kosmischen Oberfläche, die mit jedem Track die Farbe wechselt. Keine Abos. Nur Ruhe.
 
-🧘 23 GEFÜHRTE MEDITATIONEN
-Sitzungen für Schlaf, Stress & Angst, Fokus, Erdung und Selbstmitgefühl. Starte kostenlos mit drei vollständigen Meditationen — schalte den Rest für immer frei.
+🧘 55+ TRACKS · 4 GENRES
+Geführte Meditationen für Schlaf, Stress & Angst, Fokus, Erdung und Selbstmitgefühl — plus Schlafklänge sowie Focus- und Energy-Musik. Starte kostenlos mit drei vollständigen Meditationen — schalte den Rest für immer frei.
 
 🫧 ATEMCOACH & QUICK CALM
 Folge einer leuchtenden Kugel durch beruhigendes Box-Breathing. Oder tippe auf Quick Calm für einen 60-Sekunden-Reset.
@@ -264,10 +264,10 @@ Apaisez votre esprit : méditations guidées, respiration, séries & compagnon.
 ```
 Guided Meditation Portal — un esprit plus calme, une respiration à la fois.
 
-23 méditations guidées doucement narrées, un coach respiratoire, un compagnon nommé Spirit et un réveil méditation — dans une interface cosmique vivante qui change de couleur avec chaque piste. Pas d'abonnement. Juste du calme.
+Plus de 55 pistes en quatre genres — méditations guidées, sons pour dormir, musiques Focus et Energy — avec un coach respiratoire, un compagnon nommé Spirit et un réveil méditation, dans une interface cosmique vivante qui change de couleur avec chaque piste. Pas d'abonnement. Juste du calme.
 
-🧘 23 MÉDITATIONS GUIDÉES
-Des séances pour le sommeil, le stress et l'anxiété, la concentration, l'ancrage et l'auto-compassion. Commencez gratuitement avec trois méditations complètes — débloquez le reste pour toujours.
+🧘 55+ PISTES · 4 GENRES
+Méditations guidées pour le sommeil, le stress et l'anxiété, la concentration, l'ancrage et l'auto-compassion — plus des sons pour dormir et des musiques Focus et Energy. Commencez gratuitement avec trois méditations complètes — débloquez le reste pour toujours.
 
 🫧 COACH RESPIRATOIRE & QUICK CALM
 Suivez un orbe lumineux dans une respiration carrée apaisante. Ou touchez Quick Calm pour une pause de 60 secondes.
@@ -309,10 +309,10 @@ Calma tu mente: meditaciones guiadas, respiración, rachas y un compañero.
 ```
 Guided Meditation Portal — una mente más tranquila, respiración a respiración.
 
-23 meditaciones guiadas narradas con suavidad, un coach de respiración, un compañero llamado Spirit y una alarma de meditación — en una interfaz cósmica viva que cambia de color con cada pista. Sin suscripciones. Solo calma.
+Más de 55 pistas en cuatro géneros — meditaciones guiadas, sonidos para dormir, música Focus y Energy — junto a un coach de respiración, un compañero llamado Spirit y una alarma de meditación, en una interfaz cósmica viva que cambia de color con cada pista. Sin suscripciones. Solo calma.
 
-🧘 23 MEDITACIONES GUIADAS
-Sesiones para dormir, estrés y ansiedad, concentración, conexión a tierra y autocompasión. Empieza gratis con tres meditaciones completas — desbloquea el resto para siempre.
+🧘 55+ PISTAS · 4 GÉNEROS
+Meditaciones guiadas para dormir, estrés y ansiedad, concentración, conexión a tierra y autocompasión — además de sonidos para dormir y música Focus y Energy. Empieza gratis con tres meditaciones completas — desbloquea el resto para siempre.
 
 🫧 COACH DE RESPIRACIÓN & QUICK CALM
 Sigue un orbe brillante en una respiración cuadrada calmante. O toca Quick Calm para un reinicio de 60 segundos.

@@ -71,6 +71,9 @@ class MainActivity : AppCompatActivity() {
             service?.setBgVolume(prefs.getBgVolume())
             service?.setShuffleEnabled(prefs.isShuffleEnabled())
             service?.onStoppedExternally = { runOnUiThread { handleExternalStop() } }
+            // Playback may have ended while we were unbound (callback cleared in
+            // onStop) — reconcile the session clock and timer now
+            if (sessionStartMs > 0L && service?.isPlaying() != true) handleExternalStop()
             syncUI()
         }
         override fun onServiceDisconnected(name: ComponentName?) {
@@ -135,7 +138,11 @@ class MainActivity : AppCompatActivity() {
         stats        = StatsManager(this)
         billing  = BillingManager(this) { isPremium ->
             prefs.setPremium(isPremium)
-            runOnUiThread { syncUI() }
+            runOnUiThread {
+                // Refund mid-session: bring the free tier's ads back (consent allowing)
+                if (!isPremium && !adsInitialized && consent.canRequestAds()) setupAds()
+                syncUI()
+            }
         }
 
         setupRecyclerView()
@@ -167,16 +174,20 @@ class MainActivity : AppCompatActivity() {
 
         maybeAskForRating()
 
-        if (intent?.getBooleanExtra(EXTRA_SHOW_UNLOCK, false) == true) {
-            showUpgradeDialog(null)
-        }
+        // Only honor launch extras on a genuinely fresh launch — after process-
+        // death restore the stale intent would replay autoplay/the dialog
+        if (savedInstanceState == null) {
+            if (intent?.getBooleanExtra(EXTRA_SHOW_UNLOCK, false) == true) {
+                showUpgradeDialog(null)
+            }
 
-        // Handle LAUNCH_SOUND when MainActivity is freshly created (e.g. process restart)
-        // Normal case (activity already running) is handled by onNewIntent().
-        intent?.getStringExtra("LAUNCH_SOUND")?.let { name ->
-            runCatching { SoundType.valueOf(name) }.getOrNull()?.let { sound ->
-                // Post so the layout is fully ready before we start the service/animation
-                binding.root.post { playSound(sound) }
+            // Handle LAUNCH_SOUND when MainActivity is freshly created.
+            // Normal case (activity already running) is handled by onNewIntent().
+            intent?.getStringExtra("LAUNCH_SOUND")?.let { name ->
+                runCatching { SoundType.valueOf(name) }.getOrNull()?.let { sound ->
+                    // Post so the layout is fully ready before we start the service/animation
+                    binding.root.post { playSound(sound) }
+                }
             }
         }
     }
@@ -198,6 +209,8 @@ class MainActivity : AppCompatActivity() {
             bannerAdView?.destroy()
             binding.adContainer.removeAllViews()
             bannerAdView = null
+            interstitial.clear()
+            rewarded.clear()
             adsInitialized = false
         }
         bannerAdView?.resume()
@@ -236,6 +249,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
+        setIntent(intent)   // keep getIntent() current; avoids stale-extra replays
         intent.getStringExtra("LAUNCH_SOUND")?.let { name ->
             runCatching { SoundType.valueOf(name) }.getOrNull()?.let { sound ->
                 // Service was already started by AiChatActivity — just bind and sync UI.
@@ -243,7 +257,14 @@ class MainActivity : AppCompatActivity() {
                 if (SoundService.isRunning && !bound) {
                     val si = Intent(this, SoundService::class.java)
                     bindService(si, connection, Context.BIND_AUTO_CREATE)
-                    // Queue a UI sync once binding confirms (onServiceConnected does this).
+                    // Credit the Spirit-launched session (playSound normally does this)
+                    if (sessionStartMs == 0L) {
+                        prefs.setLastSound(sound)
+                        prefs.incrementPlayCount(sound)
+                        stats.recordSessionStart()
+                        sessionStartMs = System.currentTimeMillis()
+                        refreshStats()
+                    }
                 } else {
                     playSound(sound)
                 }
@@ -893,8 +914,7 @@ class MainActivity : AppCompatActivity() {
             sessionStartMs = 0L
             refreshStats()
         }
-        countdown?.cancel(); countdown = null
-        binding.timerRing.stop()
+        cancelTimer()
         syncUI()
     }
 
@@ -996,7 +1016,7 @@ class MainActivity : AppCompatActivity() {
         val labels = mutableListOf<String>()
         val actions = mutableListOf<() -> Unit>()
 
-        if (forSound != null && rewarded.isAdAvailable()) {
+        if (forSound != null && adsInitialized && rewarded.isAdAvailable()) {
             labels  += "▶ Watch ad — unlock for tonight"
             actions += { watchAdForSound(forSound) }
         }

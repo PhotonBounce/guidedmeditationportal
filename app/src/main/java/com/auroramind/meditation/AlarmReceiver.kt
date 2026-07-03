@@ -1,5 +1,7 @@
 package com.auroramind.meditation
 
+import android.app.ActivityManager
+import android.app.KeyguardManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -8,6 +10,8 @@ import android.content.Context
 import android.content.Intent
 import android.media.AudioAttributes
 import android.os.Build
+import android.os.PowerManager
+import android.os.Process
 import android.provider.Settings
 import androidx.core.app.NotificationCompat
 
@@ -57,9 +61,23 @@ class AlarmReceiver : BroadcastReceiver() {
         )
 
         val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        // Can the ring screen actually appear? (FSI permission revocable on 34+)
-        val canShowRingScreen = Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE ||
+        // Will the ring screen ACTUALLY appear? Three requirements:
+        //  1. FSI permission not revoked (Android 14+)
+        //  2. The system only auto-launches a full-screen intent when the device
+        //     is locked / screen off; with the screen on and unlocked it degrades
+        //     to a heads-up card — UNLESS our own app is foregrounded, where the
+        //     direct startActivity() below succeeds instead.
+        val fsiAllowed = Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE ||
             nm.canUseFullScreenIntent()
+        val pm = context.getSystemService(Context.POWER_SERVICE) as PowerManager
+        val km = context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+        val screenAwakeUnlocked = pm.isInteractive && !km.isKeyguardLocked
+        val appInForeground = (context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager)
+            .runningAppProcesses?.any {
+                it.pid == Process.myPid() &&
+                it.importance <= ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND
+            } == true
+        val canShowRingScreen = (fsiAllowed && !screenAwakeUnlocked) || appInForeground
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             nm.deleteNotificationChannel(LEGACY_CHANNEL_ID)
             // Silent channel: AlarmRingActivity is the sole audio source, so the
@@ -110,8 +128,8 @@ class AlarmReceiver : BroadcastReceiver() {
 
         nm.notify(RING_NOTIFICATION_ID, notification)
 
-        // Direct launch still works when the app is in the foreground or on
-        // older Android versions; harmless no-op when blocked.
-        runCatching { context.startActivity(ringIntent) }
+        // Direct launch works when our app is in the foreground (background
+        // activity starts are blocked on Android 10+).
+        if (appInForeground) runCatching { context.startActivity(ringIntent) }
     }
 }

@@ -79,4 +79,9 @@ class RewardedAdManager(private val context: Context) {
     }
 
     fun isAdAvailable(): Boolean = rewardedAd != null
+
+    /** Drop the cached ad (e.g. consent withdrawn) so nothing pre-consented shows. */
+    fun clear() {
+        rewardedAd = null
+    }
 }
