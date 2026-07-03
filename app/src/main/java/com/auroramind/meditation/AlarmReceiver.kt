@@ -22,7 +22,12 @@ import androidx.core.app.NotificationCompat
 class AlarmReceiver : BroadcastReceiver() {
 
     companion object {
-        private const val RING_CHANNEL_ID = "meditation_alarm_ring"
+        // v2: the original "meditation_alarm_ring" channel shipped without a
+        // sound and channel attributes are immutable once created — new IDs
+        // (and deleting the old channel) are the only way to migrate updaters.
+        private const val RING_CHANNEL_ID = "meditation_alarm_ring_v2"        // silent — ring screen supplies audio
+        private const val FALLBACK_CHANNEL_ID = "meditation_alarm_fallback"   // audible — used when FSI is revoked
+        private const val LEGACY_CHANNEL_ID = "meditation_alarm_ring"
         const val RING_NOTIFICATION_ID = 4201   // cancelled by AlarmRingActivity
     }
 
@@ -52,18 +57,34 @@ class AlarmReceiver : BroadcastReceiver() {
         )
 
         val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        // Can the ring screen actually appear? (FSI permission revocable on 34+)
+        val canShowRingScreen = Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE ||
+            nm.canUseFullScreenIntent()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            nm.deleteNotificationChannel(LEGACY_CHANNEL_ID)
+            // Silent channel: AlarmRingActivity is the sole audio source, so the
+            // notification itself must not blast the system klaxon over it
             nm.createNotificationChannel(
                 NotificationChannel(
                     RING_CHANNEL_ID,
                     "Meditation Alarm",
                     NotificationManager.IMPORTANCE_HIGH
                 ).apply {
-                    description = "Rings when your scheduled meditation alarm fires"
+                    description = "Shows the wake-up screen when your meditation alarm fires"
                     setBypassDnd(true)
-                    // Alarm-attributed channel sound: if the full-screen intent is
-                    // blocked (Android 14+ FSI permission revoked), the alarm still
-                    // makes noise on the alarm stream
+                    setSound(null, null)
+                }
+            )
+            // Audible fallback: only used when the full-screen intent is blocked
+            // (Android 14+ permission revoked) and our ring screen can't appear
+            nm.createNotificationChannel(
+                NotificationChannel(
+                    FALLBACK_CHANNEL_ID,
+                    "Meditation Alarm (sound fallback)",
+                    NotificationManager.IMPORTANCE_HIGH
+                ).apply {
+                    description = "Rings audibly when the full-screen alarm is not allowed"
+                    setBypassDnd(true)
                     setSound(
                         Settings.System.DEFAULT_ALARM_ALERT_URI,
                         AudioAttributes.Builder()
@@ -75,7 +96,8 @@ class AlarmReceiver : BroadcastReceiver() {
             )
         }
 
-        val notification = NotificationCompat.Builder(context, RING_CHANNEL_ID)
+        val channelId = if (canShowRingScreen) RING_CHANNEL_ID else FALLBACK_CHANNEL_ID
+        val notification = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle("Meditation Alarm")
             .setContentText("Time to wake gently — tap to open")

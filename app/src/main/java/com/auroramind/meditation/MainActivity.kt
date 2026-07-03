@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
             service?.setVolume(prefs.getVolume())
             service?.setBgVolume(prefs.getBgVolume())
             service?.setShuffleEnabled(prefs.isShuffleEnabled())
-            service?.onStoppedExternally = { runOnUiThread { syncUI() } }
+            service?.onStoppedExternally = { runOnUiThread { handleExternalStop() } }
             syncUI()
         }
         override fun onServiceDisconnected(name: ComponentName?) {
@@ -191,6 +191,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        // Consent may have been withdrawn in Settings ("reset consent") while we
+        // sat in the back stack — stop ALL ad serving immediately (EU consent
+        // policy), don't wait for the next cold start.
+        if (adsInitialized && !consent.canRequestAds()) {
+            bannerAdView?.destroy()
+            binding.adContainer.removeAllViews()
+            bannerAdView = null
+            adsInitialized = false
+        }
         bannerAdView?.resume()
         billing.queryPurchases()
         binding.bottomNavigation.selectedItemId = R.id.tab_sounds
@@ -867,7 +876,25 @@ class MainActivity : AppCompatActivity() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) startForegroundService(intent)
             else startService(intent)
             if (!bound) bindService(intent, connection, Context.BIND_AUTO_CREATE)
+            // Already-bound zombie restart gets no onServiceConnected — re-sync
+            // shortly after the service has processed the start command
+            binding.root.postDelayed({ syncUI() }, 400)
         }
+        syncUI()
+    }
+
+    /** Playback ended outside our control (notification Stop, headset,
+     *  playlist end, focus loss) — bank the session and stop the timer UI,
+     *  but no stop-count/interstitial: the user didn't tap anything. */
+    private fun handleExternalStop() {
+        if (sessionStartMs > 0L) {
+            val mins = ((System.currentTimeMillis() - sessionStartMs) / 60_000L).toInt()
+            stats.addMinutes(mins)
+            sessionStartMs = 0L
+            refreshStats()
+        }
+        countdown?.cancel(); countdown = null
+        binding.timerRing.stop()
         syncUI()
     }
 

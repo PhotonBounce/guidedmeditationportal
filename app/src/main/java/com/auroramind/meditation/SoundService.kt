@@ -361,15 +361,22 @@ class SoundService : Service() {
     // would overwrite the user's stored volume. Permanent LOSS (another app
     // took over for good) fully stops playback instead of muting forever.
     private val focusChangeListener = AudioManager.OnAudioFocusChangeListener { change ->
+        val bgVol = currentBgVolume * currentVolume
         when (change) {
             AudioManager.AUDIOFOCUS_LOSS ->
                 stopPlaybackAndSelf()
-            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ->
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> {
                 mediaPlayer?.setVolume(0.25f * currentVolume, 0.25f * currentVolume)
-            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK ->
+                bgMediaPlayer?.setVolume(0.25f * bgVol, 0.25f * bgVol)
+            }
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
                 mediaPlayer?.setVolume(0.4f * currentVolume, 0.4f * currentVolume)
-            AudioManager.AUDIOFOCUS_GAIN ->
+                bgMediaPlayer?.setVolume(0.4f * bgVol, 0.4f * bgVol)
+            }
+            AudioManager.AUDIOFOCUS_GAIN -> {
                 mediaPlayer?.setVolume(currentVolume, currentVolume)
+                bgMediaPlayer?.setVolume(bgVol, bgVol)
+            }
         }
     }
 
