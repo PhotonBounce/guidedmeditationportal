@@ -6,7 +6,7 @@ import com.android.billingclient.api.*
 import kotlinx.coroutines.*
 
 /**
- * Wraps Google Play Billing Library 6.x.
+ * Wraps Google Play Billing Library 8.x.
  *
  * Products to create in Google Play Console (Monetize → Products):
  *   In-app product  → meditation_portal_unlock   ($0.49 one-time)   "Meditation Portal — Full Unlock"
@@ -33,7 +33,10 @@ class BillingManager(
 
     private val client = BillingClient.newBuilder(activity)
         .setListener(this)
-        .enablePendingPurchases()
+        // Billing 8: the parameterless enablePendingPurchases() was removed
+        .enablePendingPurchases(
+            PendingPurchasesParams.newBuilder().enableOneTimeProducts().build()
+        )
         .build()
 
     init {
@@ -119,24 +122,29 @@ class BillingManager(
             Log.w(TAG, "Billing not connected — ignoring purchase")
             return
         }
-        scope.launch {
-            val result = client.queryProductDetails(
-                QueryProductDetailsParams.newBuilder()
-                    .setProductList(
-                        listOf(
-                            QueryProductDetailsParams.Product.newBuilder()
-                                .setProductId(productId)
-                                .setProductType(productType)
-                                .build()
-                        )
-                    )
-                    .build()
+        val queryParams = QueryProductDetailsParams.newBuilder()
+            .setProductList(
+                listOf(
+                    QueryProductDetailsParams.Product.newBuilder()
+                        .setProductId(productId)
+                        .setProductType(productType)
+                        .build()
+                )
             )
+            .build()
 
-            val productDetails = result.productDetailsList?.firstOrNull()
+        // Billing 8: the response listener now receives a QueryProductDetailsResult
+        // (productDetailsList + unfetchedProductList) instead of a plain list.
+        client.queryProductDetailsAsync(queryParams) { result, detailsResult ->
+            if (result.responseCode != BillingClient.BillingResponseCode.OK) {
+                Log.w(TAG, "Product details query failed: ${result.debugMessage}")
+                return@queryProductDetailsAsync
+            }
+
+            val productDetails = detailsResult.productDetailsList.firstOrNull()
             if (productDetails == null) {
                 Log.w(TAG, "No product details for $productId — is it Active in Play Console?")
-                return@launch
+                return@queryProductDetailsAsync
             }
 
             val paramsBuilder = BillingFlowParams.ProductDetailsParams.newBuilder()
@@ -148,7 +156,7 @@ class BillingManager(
                     ?.firstOrNull()?.offerToken
                 if (offerToken == null) {
                     Log.w(TAG, "No subscription offer for $productId")
-                    return@launch
+                    return@queryProductDetailsAsync
                 }
                 paramsBuilder.setOfferToken(offerToken)
             }
@@ -157,7 +165,9 @@ class BillingManager(
                 .setProductDetailsParamsList(listOf(paramsBuilder.build()))
                 .build()
 
-            withContext(Dispatchers.Main) {
+            // Billing callbacks arrive on a binder thread — the purchase flow
+            // must launch from the main thread.
+            scope.launch {
                 client.launchBillingFlow(activity, flowParams)
             }
         }

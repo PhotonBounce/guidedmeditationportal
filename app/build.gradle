@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.auroramind.meditation"
-        minSdk 21
+        minSdk 23        // Google Mobile Ads SDK 24+ requires API 23 (Android 6.0)
         targetSdk 35
         versionCode 12
         versionName "1.4.1"
@@ -118,13 +118,14 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
 
     // Google Play Billing (for in-app purchases & subscriptions)
-    implementation 'com.android.billingclient:billing-ktx:7.1.1'
+    // v8+ required by Play for all app updates from Aug 31, 2026
+    implementation 'com.android.billingclient:billing-ktx:8.2.0'
 
     // AdMob (for free tier banner, rewarded, and interstitial ads)
-    implementation 'com.google.android.gms:play-services-ads:23.1.0'
+    implementation 'com.google.android.gms:play-services-ads:25.4.0'
 
     // User Messaging Platform (GDPR/CCPA consent for AdMob in EU/UK)
-    implementation 'com.google.android.ump:user-messaging-platform:2.2.0'
+    implementation 'com.google.android.ump:user-messaging-platform:4.0.0'
 
     // Play In-App Review (3-5x higher completion than market:// intent)
     implementation 'com.google.android.play:review-ktx:2.0.1'
