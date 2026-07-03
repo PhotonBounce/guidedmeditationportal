@@ -9,6 +9,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.media.AudioAttributes
+import android.media.AudioManager
 import android.os.Build
 import android.os.PowerManager
 import android.os.Process
@@ -115,7 +116,7 @@ class AlarmReceiver : BroadcastReceiver() {
         }
 
         val channelId = if (canShowRingScreen) RING_CHANNEL_ID else FALLBACK_CHANNEL_ID
-        val notification = NotificationCompat.Builder(context, channelId)
+        val builder = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle("Meditation Alarm")
             .setContentText("Time to wake gently — tap to open")
@@ -124,9 +125,15 @@ class AlarmReceiver : BroadcastReceiver() {
             .setFullScreenIntent(fullScreenPi, true)
             .setContentIntent(fullScreenPi)
             .setAutoCancel(true)
-            .build()
 
-        nm.notify(RING_NOTIFICATION_ID, notification)
+        // Pre-O has no channels — the audible fallback needs the sound on the
+        // builder (ignored on O+ where the channel's sound applies instead)
+        if (channelId == FALLBACK_CHANNEL_ID) {
+            @Suppress("DEPRECATION")
+            builder.setSound(Settings.System.DEFAULT_ALARM_ALERT_URI, AudioManager.STREAM_ALARM)
+        }
+
+        nm.notify(RING_NOTIFICATION_ID, builder.build())
 
         // Direct launch works when our app is in the foreground (background
         // activity starts are blocked on Android 10+).

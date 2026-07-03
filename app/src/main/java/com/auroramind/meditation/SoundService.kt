@@ -262,6 +262,22 @@ class SoundService : Service() {
      *  stops from the notification, headset, playlist end, or task removal. */
     var onStoppedExternally: (() -> Unit)? = null
 
+    // ── Sleep timer (authoritative) — survives the Activity being destroyed ──
+    private val stopTimerHandler = Handler(Looper.getMainLooper())
+    private var stopTimerRunnable: Runnable? = null
+
+    fun setStopTimer(ms: Long) {
+        cancelStopTimer()
+        if (ms <= 0) return
+        stopTimerRunnable = Runnable { stopPlaybackAndSelf() }
+            .also { stopTimerHandler.postDelayed(it, ms) }
+    }
+
+    fun cancelStopTimer() {
+        stopTimerRunnable?.let { stopTimerHandler.removeCallbacks(it) }
+        stopTimerRunnable = null
+    }
+
     private fun stopPlaybackAndSelf() {
         releaseMediaPlayer()
         abandonAudioFocus()
@@ -271,6 +287,7 @@ class SoundService : Service() {
     }
 
     override fun onDestroy() {
+        cancelStopTimer()
         onStoppedExternally = null
         releaseMediaPlayer()
         abandonAudioFocus()

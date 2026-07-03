@@ -139,8 +139,11 @@ class MainActivity : AppCompatActivity() {
         billing  = BillingManager(this) { isPremium ->
             prefs.setPremium(isPremium)
             runOnUiThread {
-                // Refund mid-session: bring the free tier's ads back (consent allowing)
-                if (!isPremium && !adsInitialized && consent.canRequestAds()) setupAds()
+                // Refund mid-session: bring the free tier's ads back (consent
+                // allowing). Gate on the EFFECTIVE premium state — the raw billing
+                // flag is false during the 14-day trial, and initializing ads that
+                // syncUI immediately hides would be hidden-ad/invalid traffic.
+                if (!prefs.isPremium() && !adsInitialized && consent.canRequestAds()) setupAds()
                 syncUI()
             }
         }
@@ -202,6 +205,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        // Playback may have ended (and the service died) while we were unbound —
+        // close the session clock and reset the timer UI before anything else
+        if (!SoundService.isRunning && sessionStartMs > 0L) handleExternalStop()
         // Consent may have been withdrawn in Settings ("reset consent") while we
         // sat in the back stack — stop ALL ad serving immediately (EU consent
         // policy), don't wait for the next cold start.
@@ -977,6 +983,9 @@ class MainActivity : AppCompatActivity() {
         cancelTimer()
         prefs.setTimerMs(ms)
         binding.timerRing.start(ms)     // visual ring sweep
+        // The service owns the authoritative stop deadline — the Activity
+        // CountDownTimer below is display-only and dies with the Activity
+        service?.setStopTimer(ms)
         countdown = object : CountDownTimer(ms, 1000) {
             override fun onTick(left: Long) {
                 val m = left / 60_000
@@ -996,6 +1005,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun cancelTimer() {
+        service?.cancelStopTimer()
         countdown?.cancel(); countdown = null
         binding.timerRing.stop()
         binding.tvTimer.text = ""

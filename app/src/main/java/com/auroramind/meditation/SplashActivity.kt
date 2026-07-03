@@ -66,7 +66,11 @@ class SplashActivity : AppCompatActivity() {
 
         // Advance to MainActivity after the animation finishes
         handler.postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
+            // CLEAR_TOP|SINGLE_TOP: reuse a running MainActivity (widget /
+            // reminder taps route through here) instead of stacking a duplicate
+            val intent = Intent(this, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            }
             startActivity(intent)
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
