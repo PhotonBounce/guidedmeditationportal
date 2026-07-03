@@ -9,6 +9,7 @@ import android.view.View
 import android.view.WindowManager
 import android.view.animation.DecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -45,7 +46,12 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // Full-screen immersive: no status bar, no nav bar
-        enableEdgeToEdge()
+        enableEdgeToEdge(
+            // The app is always dark — force light bar icons regardless of the
+            // device theme (default auto() would draw dark icons on our dark UI)
+            statusBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT)
+        )
         WindowInsetsControllerCompat(window, window.decorView).apply {
             hide(WindowInsetsCompat.Type.systemBars())
             systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE

@@ -12,7 +12,7 @@ from ftplib import FTP
 
 HOST = "ftp.photon-bounce.com"
 USER = "photonb"
-APK = "GuidedMeditationPortal-v1.4.0.apk"
+APK = "GuidedMeditationPortal-v1.4.1.apk"
 REMOTE_DIR = "public_html/guidedmeditation"
 
 

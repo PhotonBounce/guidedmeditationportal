@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
+import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
@@ -29,7 +30,12 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge(
+            // The app is always dark — force light bar icons regardless of the
+            // device theme (default auto() would draw dark icons on our dark UI)
+            statusBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT)
+        )
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         prefs = PrefsManager(this)

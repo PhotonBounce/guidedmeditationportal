@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -18,22 +19,29 @@ import com.auroramind.meditation.databinding.ActivityAboutBinding
  * IMPORTANT: photon-bounce.com/ausis/ hosts the privacy/terms pages for a
  * DIFFERENT app ("Ausis — Sleep, Focus & Workout Sounds"). Submitting this
  * app with that URL would misrepresent our data practices to Play reviewers
- * and users. This app's own pages live in their own path:
- * Upload docs/meditation-portal/privacy.html → https://www.photon-bounce.com/meditation-portal/privacy.html
- *         docs/meditation-portal/terms.html  → https://www.photon-bounce.com/meditation-portal/terms.html
+ * and users. This app's own pages ship inside meditation-portal-site.zip and
+ * deploy (deploy-site.yml or deploy-docs.yml) to:
+ *   https://www.photon-bounce.com/guidedmeditation/privacy.html
+ *   https://www.photon-bounce.com/guidedmeditation/terms.html
+ * The same URL goes into Play Console → App content → Privacy policy.
  */
 class AboutActivity : AppCompatActivity() {
 
     companion object {
-        const val PRIVACY_URL   = "https://www.photon-bounce.com/meditation-portal/privacy.html"
-        const val TERMS_URL     = "https://www.photon-bounce.com/meditation-portal/terms.html"
+        const val PRIVACY_URL   = "https://www.photon-bounce.com/guidedmeditation/privacy.html"
+        const val TERMS_URL     = "https://www.photon-bounce.com/guidedmeditation/terms.html"
         const val SUPPORT_EMAIL = "support.meditationportal@gmail.com"
         const val WEBSITE_URL   = "https://www.photon-bounce.com"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge(
+            // The app is always dark — force light bar icons regardless of the
+            // device theme (default auto() would draw dark icons on our dark UI)
+            statusBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT)
+        )
         val binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

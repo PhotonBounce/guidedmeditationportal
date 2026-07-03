@@ -3,6 +3,7 @@ package com.auroramind.meditation
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.PowerManager
+import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -26,7 +27,12 @@ class AlarmRingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge(
+            // The app is always dark — force light bar icons regardless of the
+            // device theme (default auto() would draw dark icons on our dark UI)
+            statusBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT)
+        )
         binding = ActivityAlarmRingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         prefs = PrefsManager(this)

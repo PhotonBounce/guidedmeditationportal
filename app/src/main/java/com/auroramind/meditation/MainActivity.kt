@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
+import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
@@ -102,7 +103,12 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         // Edge-to-edge: cosmic gradient draws under the status / nav bars.
-        // enableEdgeToEdge() is the Android 15+ sanctioned API (replaces the
+        // enableEdgeToEdge(
+            // The app is always dark — force light bar icons regardless of the
+            // device theme (default auto() would draw dark icons on our dark UI)
+            statusBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT)
+        ) is the Android 15+ sanctioned API (replaces the
         // deprecated statusBarColor/navigationBarColor window attributes).
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)

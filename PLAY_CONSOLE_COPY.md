@@ -106,7 +106,7 @@ Spirit offers general wellness guidance and is not a substitute for professional
 
 | Task | Answer |
 |---|---|
-| Privacy policy | `https://www.photon-bounce.com/meditation-portal/privacy.html` |
+| Privacy policy | `https://www.photon-bounce.com/guidedmeditation/privacy.html` |
 | App access | All functionality available without restrictions |
 | Ads | **Yes**, contains ads (AdMob banner/interstitial/rewarded; removed by unlock) |
 | Content rating | Run questionnaire → all "None"; expected **Everyone** |
