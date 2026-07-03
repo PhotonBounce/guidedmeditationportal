@@ -187,7 +187,7 @@ class SoundService : Service() {
         }
 
         if (next == null) {
-            stopSelf()
+            stopPlaybackAndSelf()
         } else {
             changeSound(next)
         }
@@ -252,11 +252,16 @@ class SoundService : Service() {
      * bound: the service stays alive and audio keeps playing, so the
      * notification Stop button and headset pause appeared to do nothing.
      */
+    /** Set by the bound MainActivity so its UI refreshes when playback
+     *  stops from the notification, headset, playlist end, or task removal. */
+    var onStoppedExternally: (() -> Unit)? = null
+
     private fun stopPlaybackAndSelf() {
         releaseMediaPlayer()
         abandonAudioFocus()
         ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
         stopSelf()
+        onStoppedExternally?.invoke()
     }
 
     override fun onDestroy() {
@@ -462,6 +467,6 @@ class SoundService : Service() {
 
     override fun onTaskRemoved(rootIntent: Intent?) {
         super.onTaskRemoved(rootIntent)
-        stopSelf()
+        stopPlaybackAndSelf()
     }
 }

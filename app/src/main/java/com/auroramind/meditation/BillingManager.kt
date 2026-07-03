@@ -9,7 +9,7 @@ import kotlinx.coroutines.*
  * Wraps Google Play Billing Library 8.x.
  *
  * Products to create in Google Play Console (Monetize → Products):
- *   In-app product  → meditation_portal_unlock   ($0.49 one-time)   "Meditation Portal — Full Unlock"
+ *   In-app product  → meditation_portal_unlock   ($2.00 one-time)   "Meditation Portal — Full Unlock"
  *
  * The single unlock purchase removes ads and opens the full guided
  * meditation library + Spirit + alarm forever.
@@ -30,6 +30,7 @@ class BillingManager(
 
     private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
     @Volatile private var connected = false
+    @Volatile private var connecting = false
 
     private val client = BillingClient.newBuilder(activity)
         .setListener(this)
@@ -44,8 +45,11 @@ class BillingManager(
     }
 
     private fun connect() {
+        if (connecting) return
+        connecting = true
         client.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(result: BillingResult) {
+                connecting = false
                 if (result.responseCode == BillingClient.BillingResponseCode.OK) {
                     connected = true
                     queryPurchases()
@@ -54,6 +58,7 @@ class BillingManager(
                 }
             }
             override fun onBillingServiceDisconnected() {
+                connecting = false
                 connected = false
                 // Reconnect with simple back-off (Play Store handles its own retry)
                 scope.launch {
@@ -87,7 +92,13 @@ class BillingManager(
     // ─────────────────────────────────────────────────────────────────────────
 
     fun queryPurchases() {
-        if (!connected) return
+        if (!connected) {
+            // A failed initial setup would otherwise wedge billing for the
+            // activity's lifetime — retry the connection; a successful setup
+            // re-runs this query automatically.
+            connect()
+            return
+        }
         scope.launch {
             // One-time INAPP unlock
             val inappResult = client.queryPurchasesAsync(
@@ -117,7 +128,7 @@ class BillingManager(
     // Launch purchase flows
     // ─────────────────────────────────────────────────────────────────────────
 
-    /** One-time unlock purchase: removes ads, opens the full library ($0.49) */
+    /** One-time unlock purchase: removes ads, opens the full library ($2.00) */
     fun purchaseUnlock() = launchPurchase(SKU_UNLOCK, BillingClient.ProductType.INAPP)
 
     private fun launchPurchase(productId: String, productType: String) {
