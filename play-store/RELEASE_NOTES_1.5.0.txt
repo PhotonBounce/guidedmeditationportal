@@ -3,15 +3,21 @@ Version 1.5.0 (versionCode 12) — July 3, 2026
 
 ================================================================
 PLAY CONSOLE "WHAT'S NEW" (paste into the release notes box, <500 chars)
+These show at the top of the Play listing's update section — written to sell.
 ================================================================
 
-• Full Android 15 support — every screen now draws edge-to-edge with
-  polished status and navigation bar handling
-• Smoother cross-fade transitions between screens
-• Better keyboard handling in the coach chat and the quiz
-• Updated Google Play billing for faster, more reliable subscription
-  checkout
-• Stability and performance improvements under the hood
+✨ Power of Mind 1.5.0 — our smoothest release yet.
+
+• Rebuilt for Android 15: gorgeous edge-to-edge design on every screen
+• Silkier screen transitions throughout
+• Smarter keyboard handling in Coach chat and the quiz
+• Faster, more reliable subscription checkout
+• Rock-solid stability tune-ups under the hood
+
+Break free, one clean day at a time — your streak, your savings, your
+freedom.
+
+From the makers at www.photon-bounce.com
 
 ================================================================
 FULL CHANGELOG (internal)
