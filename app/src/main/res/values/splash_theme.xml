@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Full-screen theme for SplashActivity — no action bar, no system UI chrome -->
+    <!-- Full-screen theme for SplashActivity — no action bar, no system UI chrome.
+         System bars are hidden at runtime via WindowInsetsControllerCompat;
+         statusBarColor/navigationBarColor/windowFullscreen are deprecated in
+         Android 15 and must not be set here. -->
     <style name="Theme.MeditationPortal.FullScreen" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:windowBackground">@color/cosmic_indigo_top</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowFullscreen">true</item>
         <item name="colorPrimary">@color/accent_iris</item>
     </style>
 

@@ -19,7 +19,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
+import androidx.activity.enableEdgeToEdge
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.GridLayoutManager
@@ -101,8 +101,10 @@ class MainActivity : AppCompatActivity() {
         // the regular theme once we're ready to draw the UI.
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        // Edge-to-edge: cosmic gradient draws under the status / nav bars
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        // Edge-to-edge: cosmic gradient draws under the status / nav bars.
+        // enableEdgeToEdge() is the Android 15+ sanctioned API (replaces the
+        // deprecated statusBarColor/navigationBarColor window attributes).
+        enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)

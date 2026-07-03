@@ -3,7 +3,11 @@ package com.auroramind.meditation
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.PowerManager
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.auroramind.meditation.databinding.ActivityAlarmRingBinding
 
 /**
@@ -22,9 +26,17 @@ class AlarmRingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         binding = ActivityAlarmRingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         prefs = PrefsManager(this)
+
+        // Edge-to-edge: keep Dismiss / Snooze clear of the system bars
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(top = bars.top, bottom = bars.bottom)
+            insets
+        }
 
         showOverLockScreen()
         acquireWakeLock()

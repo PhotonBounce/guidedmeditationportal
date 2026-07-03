@@ -9,7 +9,11 @@ import android.os.Bundle
 import android.provider.Settings
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.auroramind.meditation.databinding.ActivityAlarmBinding
 
 /**
@@ -26,9 +30,17 @@ class AlarmActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         binding = ActivityAlarmBinding.inflate(layoutInflater)
         setContentView(binding.root)
         prefs = PrefsManager(this)
+
+        // Edge-to-edge: keep scroll content clear of the status / nav bars
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(top = bars.top, bottom = bars.bottom)
+            insets
+        }
 
         supportActionBar?.title = "Alarm"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

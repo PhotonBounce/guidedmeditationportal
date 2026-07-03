@@ -5,7 +5,11 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.auroramind.meditation.databinding.ActivityAboutBinding
 
 /**
@@ -29,8 +33,16 @@ class AboutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         val binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Edge-to-edge: keep scroll content clear of the status / nav bars
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(top = bars.top, bottom = bars.bottom)
+            insets
+        }
 
         supportActionBar?.title = getString(R.string.about_title)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
