@@ -279,6 +279,7 @@ class SoundService : Service() {
     }
 
     private fun stopPlaybackAndSelf() {
+        cancelStopTimer()
         releaseMediaPlayer()
         abandonAudioFocus()
         ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)

@@ -74,6 +74,12 @@ class MainActivity : AppCompatActivity() {
             // Playback may have ended while we were unbound (callback cleared in
             // onStop) — reconcile the session clock and timer now
             if (sessionStartMs > 0L && service?.isPlaying() != true) handleExternalStop()
+            // Timer may have been set before the service existed (timer-first
+            // flow) — arm the authoritative deadline now that we're connected
+            if (timerDeadlineMs > 0L) {
+                val left = timerDeadlineMs - SystemClock.elapsedRealtime()
+                if (left > 0) service?.setStopTimer(left) else cancelTimer()
+            }
             syncUI()
         }
         override fun onServiceDisconnected(name: ComponentName?) {
@@ -85,6 +91,8 @@ class MainActivity : AppCompatActivity() {
 
     // ── Session timer ───────────────────────────────────────────────────────────
     private var countdown: CountDownTimer? = null
+    /** Authoritative deadline (elapsedRealtime); re-arms the service on (re)bind. */
+    private var timerDeadlineMs: Long = 0L
 
     // ── Scrub bar ───────────────────────────────────────────────────────────────
     /** True while the user is dragging the scrub thumb — pauses position polling. */
@@ -903,8 +911,12 @@ class MainActivity : AppCompatActivity() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) startForegroundService(intent)
             else startService(intent)
             if (!bound) bindService(intent, connection, Context.BIND_AUTO_CREATE)
-            // Already-bound zombie restart gets no onServiceConnected — re-sync
-            // shortly after the service has processed the start command
+            // Already-bound zombie restart gets no onServiceConnected — re-arm
+            // the timer deadline and re-sync after the start command lands
+            if (timerDeadlineMs > 0L) {
+                val left = timerDeadlineMs - SystemClock.elapsedRealtime()
+                if (left > 0) service?.setStopTimer(left)
+            }
             binding.root.postDelayed({ syncUI() }, 400)
         }
         syncUI()
@@ -936,8 +948,7 @@ class MainActivity : AppCompatActivity() {
             refreshStats()
         }
 
-        countdown?.cancel(); countdown = null
-        binding.timerRing.stop()
+        cancelTimer()
         service?.onStoppedExternally = null
         stopService(Intent(this, SoundService::class.java))
         if (bound) { unbindService(connection); bound = false }
@@ -984,7 +995,10 @@ class MainActivity : AppCompatActivity() {
         prefs.setTimerMs(ms)
         binding.timerRing.start(ms)     // visual ring sweep
         // The service owns the authoritative stop deadline — the Activity
-        // CountDownTimer below is display-only and dies with the Activity
+        // CountDownTimer below is display-only and dies with the Activity.
+        // If the service isn't bound yet (timer set before play), the deadline
+        // is re-armed in onServiceConnected / playSound from timerDeadlineMs.
+        timerDeadlineMs = SystemClock.elapsedRealtime() + ms
         service?.setStopTimer(ms)
         countdown = object : CountDownTimer(ms, 1000) {
             override fun onTick(left: Long) {
@@ -993,6 +1007,7 @@ class MainActivity : AppCompatActivity() {
                 binding.tvTimer.text = "⏱ %02d:%02d".format(m, s)
             }
             override fun onFinish() {
+                timerDeadlineMs = 0L
                 stopSound()
                 binding.tvTimer.text = ""
                 binding.btnTimer.setTextColor(getColor(R.color.accent_teal))
@@ -1005,6 +1020,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun cancelTimer() {
+        timerDeadlineMs = 0L
         service?.cancelStopTimer()
         countdown?.cancel(); countdown = null
         binding.timerRing.stop()

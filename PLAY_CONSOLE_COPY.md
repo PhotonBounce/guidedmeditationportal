@@ -1,7 +1,7 @@
 # Play Console — Copy-Paste Reference (Guided Meditation Portal)
 
 Every field Google asks for, pre-written for the current app. Paste verbatim.
-Last updated for **v1.4.0 (versionCode 11)**.
+Last updated for **v1.4.1 (versionCode 12)**.
 
 ---
 
@@ -148,10 +148,24 @@ Security: ✓ Encrypted in transit. (Do not claim independent security review.)
 
 ### Release name
 ```
-1.4.0 — New Genres, Scrub Bar & Track Names
+1.4.1 — Android 15 Polish & Compliance
 ```
 
 ### What's new (≤500 chars)
+```
+✨ What's new in 1.4.1
+• Full Android 15 edge-to-edge display — beautiful on every screen
+• Breathing exercise is fully immersive again
+• Chat: the keyboard no longer covers your message box
+• Updated billing, ads & privacy compliance (Play Billing 8)
+• Bug fixes and polish throughout
+```
+
+> The DE/FR/ES 1.4.1 What's-new translations are in RELEASE_NOTES_v1.4.1.md —
+> paste those into the localized release notes fields.
+
+<details><summary>Previous release (1.4.0) — for reference only</summary>
+
 ```
 • New: Focus Music & Energy Music genres — 23 fresh tracks.
 • New: scrub bar — drag to any point in a track.
@@ -186,6 +200,8 @@ Security: ✓ Encrypted in transit. (Do not claim independent security review.)
 • Pantalla de inicio más limpia y fondo cósmico renovado.
 • Más todo lo de la 1.3: rachas, viajes, coach de respiración, widget.
 ```
+
+</details>
 
 ---
 
