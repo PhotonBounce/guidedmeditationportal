@@ -27,6 +27,9 @@ import com.auroramind.meditation.databinding.ActivityAboutBinding
  */
 class AboutActivity : AppCompatActivity() {
 
+    /** Created on first "Restore purchases" tap, reused after, destroyed with us. */
+    private var billing: BillingManager? = null
+
     companion object {
         const val PRIVACY_URL   = "https://www.photon-bounce.com/guidedmeditation/privacy.html"
         const val TERMS_URL     = "https://www.photon-bounce.com/guidedmeditation/terms.html"
@@ -73,9 +76,11 @@ class AboutActivity : AppCompatActivity() {
         }
         binding.restorePurchases.setOnClickListener {
             Toast.makeText(this, "Checking for previous purchases…", Toast.LENGTH_SHORT).show()
-            // Trigger a fresh purchase query via a lightweight BillingManager instance
-            BillingManager(this) { isPremium ->
+            // One BillingManager for the screen's lifetime — a new instance per
+            // tap leaked a connected BillingClient (and this activity) each time
+            val manager = billing ?: BillingManager(this) { isPremium ->
                 runOnUiThread {
+                    if (isFinishing || isDestroyed) return@runOnUiThread
                     PrefsManager(this).setPremium(isPremium)
                     Toast.makeText(
                         this,
@@ -83,12 +88,20 @@ class AboutActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-            }
+            }.also { billing = it }
+            // First tap: the manager auto-queries once connected. Later taps re-query.
+            manager.queryPurchases()
         }
     }
 
     override fun onSupportNavigateUp(): Boolean {
         finish(); return true
+    }
+
+    override fun onDestroy() {
+        billing?.destroy()
+        billing = null
+        super.onDestroy()
     }
 
     private fun openUrl(url: String) {

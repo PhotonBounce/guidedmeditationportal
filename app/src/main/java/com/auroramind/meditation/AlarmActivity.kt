@@ -1,5 +1,6 @@
 package com.auroramind.meditation
 
+import android.Manifest
 import android.app.AlarmManager
 import android.content.Context
 import android.content.Intent
@@ -12,6 +13,8 @@ import android.widget.Toast
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
@@ -113,13 +116,30 @@ class AlarmActivity : AppCompatActivity() {
             prefs.setAlarmTone(tones[binding.spinnerSound.selectedItemPosition])
         }
 
+        // The ring screen is delivered via a full-screen intent NOTIFICATION —
+        // on Android 13+ the alarm can't ring if notifications are denied.
+        if (enabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            !NotificationManagerCompat.from(this).areNotificationsEnabled()
+        ) {
+            ActivityCompat.requestPermissions(
+                this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 1001
+            )
+            Toast.makeText(
+                this, "Allow notifications so the alarm can ring", Toast.LENGTH_LONG
+            ).show()
+        }
+
+        // Always arm the alarm — the scheduler falls back to an inexact alarm
+        // when exact-alarm permission is missing, so the alarm still rings
+        // (within a few minutes) even if the user skips the permission screen.
+        AlarmScheduler.reschedule(this)
+        updateStatus()
+
         if (enabled && !canScheduleExact()) {
             requestExactAlarmPermission()
             return
         }
 
-        AlarmScheduler.reschedule(this)
-        updateStatus()
         val timeStr = "%02d:%02d".format(hour, minute)
         val msg = if (enabled) "✅ Alarm saved — rings at $timeStr" else "Alarm disabled"
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
@@ -141,6 +161,9 @@ class AlarmActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        // Re-arm after returning from the exact-alarm permission screen so a
+        // freshly granted permission upgrades the pending alarm to exact.
+        if (prefs.isAlarmEnabled()) AlarmScheduler.reschedule(this)
         updateStatus()
     }
 

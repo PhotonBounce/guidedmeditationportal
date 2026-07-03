@@ -89,22 +89,25 @@ class BillingManager(
     fun queryPurchases() {
         if (!connected) return
         scope.launch {
-            var hasPremium = false
-
             // One-time INAPP unlock
             val inappResult = client.queryPurchasesAsync(
                 QueryPurchasesParams.newBuilder()
                     .setProductType(BillingClient.ProductType.INAPP)
                     .build()
             )
-            if (inappResult.billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                hasPremium = hasPremium || inappResult.purchasesList.any { p ->
-                    p.products.contains(SKU_UNLOCK) &&
-                    p.purchaseState == Purchase.PurchaseState.PURCHASED
-                }
-                // Auto-acknowledge any unacked purchases (otherwise Google refunds after 3 days!)
-                inappResult.purchasesList.forEach { if (!it.isAcknowledged) acknowledge(it) }
+            if (inappResult.billingResult.responseCode != BillingClient.BillingResponseCode.OK) {
+                // Query FAILED (Play outage, service disconnect, …) — keep the
+                // cached premium state rather than revoking a paying user.
+                Log.w(TAG, "Purchase query failed: ${inappResult.billingResult.debugMessage}")
+                return@launch
             }
+
+            val hasPremium = inappResult.purchasesList.any { p ->
+                p.products.contains(SKU_UNLOCK) &&
+                p.purchaseState == Purchase.PurchaseState.PURCHASED
+            }
+            // Auto-acknowledge any unacked purchases (otherwise Google refunds after 3 days!)
+            inappResult.purchasesList.forEach { if (!it.isAcknowledged) acknowledge(it) }
 
             onPremiumChanged(hasPremium)
         }

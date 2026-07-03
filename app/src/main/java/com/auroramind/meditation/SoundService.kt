@@ -11,6 +11,7 @@ import android.os.*
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.core.app.NotificationCompat
+import androidx.core.app.ServiceCompat
 import androidx.media.app.NotificationCompat.MediaStyle
 
 class SoundService : Service() {
@@ -75,8 +76,8 @@ class SoundService : Service() {
     private fun initMediaSession() {
         mediaSession = MediaSessionCompat(this, "Portal").apply {
             setCallback(object : MediaSessionCompat.Callback() {
-                override fun onStop() { stopSelf() }
-                override fun onPause() { stopSelf() }
+                override fun onStop() { stopPlaybackAndSelf() }
+                override fun onPause() { stopPlaybackAndSelf() }
             })
             setPlaybackState(
                 PlaybackStateCompat.Builder()
@@ -93,7 +94,7 @@ class SoundService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if (intent?.action == ACTION_STOP) {
-            stopSelf()
+            stopPlaybackAndSelf()
             return START_NOT_STICKY
         }
 
@@ -245,10 +246,23 @@ class SoundService : Service() {
         }
     }
 
+    /**
+     * Full stop — releases playback, focus and the foreground notification.
+     * stopSelf() alone is NOT enough while MainActivity keeps the service
+     * bound: the service stays alive and audio keeps playing, so the
+     * notification Stop button and headset pause appeared to do nothing.
+     */
+    private fun stopPlaybackAndSelf() {
+        releaseMediaPlayer()
+        abandonAudioFocus()
+        ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
+        stopSelf()
+    }
+
     override fun onDestroy() {
         releaseMediaPlayer()
         abandonAudioFocus()
-        wakeLock?.release()
+        wakeLock?.let { if (it.isHeld) it.release() }
         runCatching { mediaSession.isActive = false; mediaSession.release() }
         isRunning = false
         super.onDestroy()

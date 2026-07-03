@@ -1,6 +1,7 @@
 package com.auroramind.meditation
 
 import android.media.MediaPlayer
+import android.os.Build
 import android.os.Bundle
 import android.os.PowerManager
 import androidx.activity.SystemBarStyle
@@ -62,8 +63,17 @@ class AlarmRingActivity : AppCompatActivity() {
 
     @Suppress("DEPRECATION")
     private fun showOverLockScreen() {
-        setShowWhenLocked(true)
-        setTurnScreenOn(true)
+        // setShowWhenLocked/setTurnScreenOn only exist on API 27+ — calling
+        // them on API 23-26 crashes with NoSuchMethodError when the alarm fires
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+        } else {
+            window.addFlags(
+                android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                android.view.WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+            )
+        }
         window.addFlags(
             android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
             android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
@@ -111,6 +121,10 @@ class AlarmRingActivity : AppCompatActivity() {
         audioEngine = null
         wakeLock?.run { if (isHeld) release() }
         wakeLock = null
+        // Remove the full-screen-intent notification — otherwise it lingers
+        // after dismissal and tapping it re-rings the alarm.
+        androidx.core.app.NotificationManagerCompat.from(this)
+            .cancel(AlarmReceiver.RING_NOTIFICATION_ID)
     }
 
     override fun onDestroy() {

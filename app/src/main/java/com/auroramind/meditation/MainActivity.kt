@@ -885,8 +885,13 @@ class MainActivity : AppCompatActivity() {
         service = null
         prefs.incrementStopCount()
 
-        // Free users see an interstitial every 3rd stop (with cadence guards)
-        if (!prefs.isPremium()) {
+        // Free users see an interstitial every 3rd stop (with cadence guards).
+        // Only when ads were consent-initialized (GDPR — never request ads for
+        // consent-denied users) and the app is actually in the foreground
+        // (stopSound can fire from the session-timer while backgrounded).
+        if (!prefs.isPremium() && adsInitialized &&
+            lifecycle.currentState.isAtLeast(androidx.lifecycle.Lifecycle.State.RESUMED)
+        ) {
             interstitial.maybeShowOnStop(this, prefs.getStopCount())
         }
         syncUI()

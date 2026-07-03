@@ -19,7 +19,7 @@ class AlarmReceiver : BroadcastReceiver() {
 
     companion object {
         private const val RING_CHANNEL_ID = "meditation_alarm_ring"
-        private const val RING_NOTIFICATION_ID = 4201
+        const val RING_NOTIFICATION_ID = 4201   // cancelled by AlarmRingActivity
     }
 
     override fun onReceive(context: Context, intent: Intent?) {
@@ -72,7 +72,6 @@ class AlarmReceiver : BroadcastReceiver() {
             .setFullScreenIntent(fullScreenPi, true)
             .setContentIntent(fullScreenPi)
             .setAutoCancel(true)
-            .setOngoing(true)
             .build()
 
         nm.notify(RING_NOTIFICATION_ID, notification)
