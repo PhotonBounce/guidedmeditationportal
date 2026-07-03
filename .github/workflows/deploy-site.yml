@@ -35,7 +35,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -e
-          run_id=$(gh run list --workflow "Release AAB (signed)" --status success \
+          # Reference the workflow by file name — name-based lookup only works
+          # for workflows already on the default branch.
+          run_id=$(gh run list --workflow release-aab.yml --status success \
                      --limit 1 --json databaseId -q '.[0].databaseId' || true)
           if [ -n "$run_id" ] && gh run download "$run_id" -n power-of-mind-release-apk -D apk_tmp; then
             mv apk_tmp/app-release.apk microsite/PowerOfMind.apk
