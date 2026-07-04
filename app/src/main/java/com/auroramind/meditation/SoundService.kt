@@ -11,6 +11,7 @@ import android.os.*
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.core.app.NotificationCompat
+import androidx.core.app.ServiceCompat
 import androidx.media.app.NotificationCompat.MediaStyle
 
 class SoundService : Service() {
@@ -75,8 +76,8 @@ class SoundService : Service() {
     private fun initMediaSession() {
         mediaSession = MediaSessionCompat(this, "Portal").apply {
             setCallback(object : MediaSessionCompat.Callback() {
-                override fun onStop() { stopSelf() }
-                override fun onPause() { stopSelf() }
+                override fun onStop() { stopPlaybackAndSelf() }
+                override fun onPause() { stopPlaybackAndSelf() }
             })
             setPlaybackState(
                 PlaybackStateCompat.Builder()
@@ -92,12 +93,18 @@ class SoundService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        if (intent?.action == ACTION_STOP) {
+        if (intent == null) {
+            // START_STICKY restart after process death — don't surprise the
+            // user by auto-playing a default track out of nowhere
             stopSelf()
             return START_NOT_STICKY
         }
+        if (intent.action == ACTION_STOP) {
+            stopPlaybackAndSelf()
+            return START_NOT_STICKY
+        }
 
-        val name = intent?.getStringExtra("SOUND_TYPE") ?: currentSound.name
+        val name = intent.getStringExtra("SOUND_TYPE") ?: currentSound.name
         currentSound = runCatching { SoundType.valueOf(name) }.getOrDefault(currentSound)
 
         acquireWakeLock()
@@ -186,7 +193,7 @@ class SoundService : Service() {
         }
 
         if (next == null) {
-            stopSelf()
+            stopPlaybackAndSelf()
         } else {
             changeSound(next)
         }
@@ -245,10 +252,47 @@ class SoundService : Service() {
         }
     }
 
-    override fun onDestroy() {
+    /**
+     * Full stop — releases playback, focus and the foreground notification.
+     * stopSelf() alone is NOT enough while MainActivity keeps the service
+     * bound: the service stays alive and audio keeps playing, so the
+     * notification Stop button and headset pause appeared to do nothing.
+     */
+    /** Set by the bound MainActivity so its UI refreshes when playback
+     *  stops from the notification, headset, playlist end, or task removal. */
+    var onStoppedExternally: (() -> Unit)? = null
+
+    // ── Sleep timer (authoritative) — survives the Activity being destroyed ──
+    private val stopTimerHandler = Handler(Looper.getMainLooper())
+    private var stopTimerRunnable: Runnable? = null
+
+    fun setStopTimer(ms: Long) {
+        cancelStopTimer()
+        if (ms <= 0) return
+        stopTimerRunnable = Runnable { stopPlaybackAndSelf() }
+            .also { stopTimerHandler.postDelayed(it, ms) }
+    }
+
+    fun cancelStopTimer() {
+        stopTimerRunnable?.let { stopTimerHandler.removeCallbacks(it) }
+        stopTimerRunnable = null
+    }
+
+    private fun stopPlaybackAndSelf() {
+        cancelStopTimer()
         releaseMediaPlayer()
         abandonAudioFocus()
-        wakeLock?.release()
+        ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
+        stopSelf()
+        onStoppedExternally?.invoke()
+    }
+
+    override fun onDestroy() {
+        cancelStopTimer()
+        onStoppedExternally = null
+        releaseMediaPlayer()
+        abandonAudioFocus()
+        wakeLock?.let { if (it.isHeld) it.release() }
         runCatching { mediaSession.isActive = false; mediaSession.release() }
         isRunning = false
         super.onDestroy()
@@ -331,6 +375,30 @@ class SoundService : Service() {
     // Audio focus
     // ─────────────────────────────────────────────────────────────────────────
 
+    // Apply duck/restore DIRECTLY to the player — never via setVolume(), which
+    // would overwrite the user's stored volume. Permanent LOSS (another app
+    // took over for good) fully stops playback instead of muting forever.
+    private val focusChangeListener = AudioManager.OnAudioFocusChangeListener { change ->
+        val bgVol = currentBgVolume * currentVolume
+        when (change) {
+            AudioManager.AUDIOFOCUS_LOSS ->
+                stopPlaybackAndSelf()
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> {
+                mediaPlayer?.setVolume(0.25f * currentVolume, 0.25f * currentVolume)
+                bgMediaPlayer?.setVolume(0.25f * bgVol, 0.25f * bgVol)
+            }
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
+                mediaPlayer?.setVolume(0.4f * currentVolume, 0.4f * currentVolume)
+                bgMediaPlayer?.setVolume(0.4f * bgVol, 0.4f * bgVol)
+            }
+            AudioManager.AUDIOFOCUS_GAIN -> {
+                mediaPlayer?.setVolume(currentVolume, currentVolume)
+                bgMediaPlayer?.setVolume(bgVol, bgVol)
+            }
+        }
+    }
+
+    @Suppress("DEPRECATION")
     private fun requestAudioFocus() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val attrs = AudioAttributes.Builder()
@@ -339,30 +407,24 @@ class SoundService : Service() {
                 .build()
             focusRequest = AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
                 .setAudioAttributes(attrs)
-                .setOnAudioFocusChangeListener { change ->
-                    // Apply duck/restore DIRECTLY to the player — never via setVolume(), which
-                    // would overwrite the user's stored volume. (The old code clobbered
-                    // currentVolume to 0 on any transient focus blip and never recovered →
-                    // playback ran permanently muted.)
-                    when (change) {
-                        AudioManager.AUDIOFOCUS_LOSS ->
-                            mediaPlayer?.setVolume(0f, 0f)
-                        AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ->
-                            mediaPlayer?.setVolume(0.25f * currentVolume, 0.25f * currentVolume)
-                        AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK ->
-                            mediaPlayer?.setVolume(0.4f * currentVolume, 0.4f * currentVolume)
-                        AudioManager.AUDIOFOCUS_GAIN ->
-                            mediaPlayer?.setVolume(currentVolume, currentVolume)
-                    }
-                }
+                .setOnAudioFocusChangeListener(focusChangeListener)
                 .build()
             audioManager.requestAudioFocus(focusRequest!!)
+        } else {
+            // API 23-25 have no AudioFocusRequest — without this branch the
+            // app never took focus at all on those devices
+            audioManager.requestAudioFocus(
+                focusChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN
+            )
         }
     }
 
+    @Suppress("DEPRECATION")
     private fun abandonAudioFocus() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             focusRequest?.let { audioManager.abandonAudioFocusRequest(it) }
+        } else {
+            audioManager.abandonAudioFocus(focusChangeListener)
         }
     }
 
@@ -448,6 +510,6 @@ class SoundService : Service() {
 
     override fun onTaskRemoved(rootIntent: Intent?) {
         super.onTaskRemoved(rootIntent)
-        stopSelf()
+        stopPlaybackAndSelf()
     }
 }

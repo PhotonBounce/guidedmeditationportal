@@ -1,6 +1,8 @@
 package com.auroramind.meditation
 
+import android.Manifest
 import android.app.AlarmManager
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -9,7 +11,14 @@ import android.os.Bundle
 import android.provider.Settings
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.auroramind.meditation.databinding.ActivityAlarmBinding
 
 /**
@@ -26,9 +35,22 @@ class AlarmActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge(
+            // The app is always dark — force light bar icons regardless of the
+            // device theme (default auto() would draw dark icons on our dark UI)
+            statusBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT)
+        )
         binding = ActivityAlarmBinding.inflate(layoutInflater)
         setContentView(binding.root)
         prefs = PrefsManager(this)
+
+        // Edge-to-edge: keep scroll content clear of the status / nav bars
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(top = bars.top, bottom = bars.bottom)
+            insets
+        }
 
         supportActionBar?.title = "Alarm"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -95,16 +117,59 @@ class AlarmActivity : AppCompatActivity() {
             prefs.setAlarmTone(tones[binding.spinnerSound.selectedItemPosition])
         }
 
-        if (enabled && !canScheduleExact()) {
-            requestExactAlarmPermission()
-            return
-        }
-
+        // Always arm the alarm first — the scheduler falls back to an inexact
+        // alarm when exact-alarm permission is missing, so the alarm still
+        // rings even if the user skips every permission screen below.
         AlarmScheduler.reschedule(this)
         updateStatus()
-        val timeStr = "%02d:%02d".format(hour, minute)
-        val msg = if (enabled) "✅ Alarm saved — rings at $timeStr" else "Alarm disabled"
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+
+        // Ask for at most ONE missing permission per save, in priority order —
+        // firing the runtime dialog and Settings screens together cancels
+        // whichever came first. Each subsequent save (or onResume re-arm)
+        // walks to the next missing one.
+        val prompted = enabled && when {
+            // 1. Android 13+: the ring is a notification — nothing works without it
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+                !NotificationManagerCompat.from(this).areNotificationsEnabled() -> {
+                ActivityCompat.requestPermissions(
+                    this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 1001
+                )
+                Toast.makeText(
+                    this, "Allow notifications so the alarm can ring", Toast.LENGTH_LONG
+                ).show()
+                true
+            }
+            // 2. Android 14+: full-screen intent needed for the wake-up screen
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE &&
+                !(getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)
+                    .canUseFullScreenIntent() -> {
+                Toast.makeText(
+                    this, "Allow full-screen alarms so the wake-up screen can appear",
+                    Toast.LENGTH_LONG
+                ).show()
+                runCatching {
+                    startActivity(
+                        Intent(
+                            Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT,
+                            Uri.parse("package:$packageName")
+                        )
+                    )
+                }
+                true
+            }
+            // 3. Android 12+: exact-alarm permission for to-the-minute rings
+            !canScheduleExact() -> {
+                requestExactAlarmPermission()
+                true
+            }
+            else -> false
+        }
+
+        if (!prompted) {
+            val timeStr = "%02d:%02d".format(hour, minute)
+            val msg = if (enabled) "✅ Alarm saved — rings at $timeStr" else "Alarm disabled"
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun canScheduleExact(): Boolean {
@@ -115,14 +180,23 @@ class AlarmActivity : AppCompatActivity() {
 
     private fun requestExactAlarmPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            startActivity(
-                Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM, Uri.parse("package:$packageName"))
-            )
+            runCatching {
+                startActivity(
+                    Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM, Uri.parse("package:$packageName"))
+                )
+            }.onFailure {
+                Toast.makeText(
+                    this, "Open system settings to allow exact alarms", Toast.LENGTH_LONG
+                ).show()
+            }
         }
     }
 
     override fun onResume() {
         super.onResume()
+        // Re-arm after returning from the exact-alarm permission screen so a
+        // freshly granted permission upgrades the pending alarm to exact.
+        if (prefs.isAlarmEnabled()) AlarmScheduler.reschedule(this)
         updateStatus()
     }
 

@@ -1,0 +1,53 @@
+name: Deploy Privacy & Terms Pages
+
+# Fast path to publish just the legal pages (canonical URLs used by the app
+# and Play Console):
+#   https://www.photon-bounce.com/guidedmeditation/privacy.html
+#   https://www.photon-bounce.com/guidedmeditation/terms.html
+# The pages live inside meditation-portal-site.zip (single source of truth);
+# deploy-site.yml publishes them too as part of the full site.
+
+on:
+  workflow_dispatch:
+    inputs:
+      ftp_pass:
+        description: 'FTP password for ftp.photon-bounce.com'
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Upload privacy and terms pages via FTP
+        env:
+          FTP_PASS: ${{ inputs.ftp_pass }}
+        run: |
+          python3 - <<'PYEOF'
+          import os, zipfile
+          from ftplib import FTP
+
+          with zipfile.ZipFile("meditation-portal-site.zip") as z:
+              for name in ("privacy.html", "terms.html"):
+                  z.extract(name)
+
+          ftp = FTP("ftp.photon-bounce.com", timeout=60)
+          ftp.login("photonb", os.environ["FTP_PASS"])
+          print("[OK] Logged in")
+
+          for part in "public_html/guidedmeditation".split("/"):
+              try:
+                  ftp.cwd(part)
+              except Exception:
+                  ftp.mkd(part)
+                  ftp.cwd(part)
+
+          for name in ("privacy.html", "terms.html"):
+              with open(name, "rb") as f:
+                  ftp.storbinary(f"STOR {name}", f)
+              print(f"[OK] Uploaded {name}")
+
+          ftp.quit()
+          print("Done — legal pages live at photon-bounce.com/guidedmeditation/")
+          PYEOF

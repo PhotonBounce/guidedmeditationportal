@@ -1,6 +1,6 @@
 name: APK to Website
 
-# Publishes the v1.4.0 test APK to photon-bounce.com/guidedmeditation/ so a
+# Publishes the v1.4.1 test APK to photon-bounce.com/guidedmeditation/ so a
 # phone can download and install it directly (the GitHub release needs a
 # login because the repo is private; the website does not).
 
@@ -23,7 +23,7 @@ jobs:
       - name: Download release APK
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release download v1.4.0-test --pattern '*.apk'
+        run: gh release download v1.4.1-test --pattern '*.apk'
 
       - name: Upload APK via FTP
         env:

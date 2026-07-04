@@ -19,7 +19,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.GridLayoutManager
@@ -69,6 +70,16 @@ class MainActivity : AppCompatActivity() {
             service?.setVolume(prefs.getVolume())
             service?.setBgVolume(prefs.getBgVolume())
             service?.setShuffleEnabled(prefs.isShuffleEnabled())
+            service?.onStoppedExternally = { runOnUiThread { handleExternalStop() } }
+            // Playback may have ended while we were unbound (callback cleared in
+            // onStop) — reconcile the session clock and timer now
+            if (sessionStartMs > 0L && service?.isPlaying() != true) handleExternalStop()
+            // Timer may have been set before the service existed (timer-first
+            // flow) — arm the authoritative deadline now that we're connected
+            if (timerDeadlineMs > 0L) {
+                val left = timerDeadlineMs - SystemClock.elapsedRealtime()
+                if (left > 0) service?.setStopTimer(left) else cancelTimer()
+            }
             syncUI()
         }
         override fun onServiceDisconnected(name: ComponentName?) {
@@ -80,6 +91,8 @@ class MainActivity : AppCompatActivity() {
 
     // ── Session timer ───────────────────────────────────────────────────────────
     private var countdown: CountDownTimer? = null
+    /** Authoritative deadline (elapsedRealtime); re-arms the service on (re)bind. */
+    private var timerDeadlineMs: Long = 0L
 
     // ── Scrub bar ───────────────────────────────────────────────────────────────
     /** True while the user is dragging the scrub thumb — pauses position polling. */
@@ -101,8 +114,13 @@ class MainActivity : AppCompatActivity() {
         // the regular theme once we're ready to draw the UI.
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        // Edge-to-edge: cosmic gradient draws under the status / nav bars
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        // Edge-to-edge: cosmic gradient draws under the status / nav bars.
+        // The app is always dark — force light bar icons regardless of the
+        // device theme (default auto() would draw dark icons on our dark UI).
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT)
+        )
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
@@ -128,7 +146,14 @@ class MainActivity : AppCompatActivity() {
         stats        = StatsManager(this)
         billing  = BillingManager(this) { isPremium ->
             prefs.setPremium(isPremium)
-            runOnUiThread { syncUI() }
+            runOnUiThread {
+                // Refund mid-session: bring the free tier's ads back (consent
+                // allowing). Gate on the EFFECTIVE premium state — the raw billing
+                // flag is false during the 14-day trial, and initializing ads that
+                // syncUI immediately hides would be hidden-ad/invalid traffic.
+                if (!prefs.isPremium() && !adsInitialized && consent.canRequestAds()) setupAds()
+                syncUI()
+            }
         }
 
         setupRecyclerView()
@@ -160,16 +185,20 @@ class MainActivity : AppCompatActivity() {
 
         maybeAskForRating()
 
-        if (intent?.getBooleanExtra(EXTRA_SHOW_UNLOCK, false) == true) {
-            showUpgradeDialog(null)
-        }
+        // Only honor launch extras on a genuinely fresh launch — after process-
+        // death restore the stale intent would replay autoplay/the dialog
+        if (savedInstanceState == null) {
+            if (intent?.getBooleanExtra(EXTRA_SHOW_UNLOCK, false) == true) {
+                showUpgradeDialog(null)
+            }
 
-        // Handle LAUNCH_SOUND when MainActivity is freshly created (e.g. process restart)
-        // Normal case (activity already running) is handled by onNewIntent().
-        intent?.getStringExtra("LAUNCH_SOUND")?.let { name ->
-            runCatching { SoundType.valueOf(name) }.getOrNull()?.let { sound ->
-                // Post so the layout is fully ready before we start the service/animation
-                binding.root.post { playSound(sound) }
+            // Handle LAUNCH_SOUND when MainActivity is freshly created.
+            // Normal case (activity already running) is handled by onNewIntent().
+            intent?.getStringExtra("LAUNCH_SOUND")?.let { name ->
+                runCatching { SoundType.valueOf(name) }.getOrNull()?.let { sound ->
+                    // Post so the layout is fully ready before we start the service/animation
+                    binding.root.post { playSound(sound) }
+                }
             }
         }
     }
@@ -184,6 +213,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        // Playback may have ended (and the service died) while we were unbound —
+        // close the session clock and reset the timer UI before anything else
+        if (!SoundService.isRunning && sessionStartMs > 0L) handleExternalStop()
+        // Consent may have been withdrawn in Settings ("reset consent") while we
+        // sat in the back stack — stop ALL ad serving immediately (EU consent
+        // policy), don't wait for the next cold start.
+        if (adsInitialized && !consent.canRequestAds()) {
+            bannerAdView?.destroy()
+            binding.adContainer.removeAllViews()
+            bannerAdView = null
+            interstitial.clear()
+            rewarded.clear()
+            adsInitialized = false
+        }
         bannerAdView?.resume()
         billing.queryPurchases()
         binding.bottomNavigation.selectedItemId = R.id.tab_sounds
@@ -209,6 +252,9 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         if (bound) {
+            // Clear the callback first — the foreground service outlives us and
+            // would otherwise retain this destroyed Activity (and its views)
+            service?.onStoppedExternally = null
             unbindService(connection)
             bound = false
             service = null   // clear stale binder ref — prevents false "bound" checks on resume
@@ -217,6 +263,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
+        setIntent(intent)   // keep getIntent() current; avoids stale-extra replays
         intent.getStringExtra("LAUNCH_SOUND")?.let { name ->
             runCatching { SoundType.valueOf(name) }.getOrNull()?.let { sound ->
                 // Service was already started by AiChatActivity — just bind and sync UI.
@@ -224,7 +271,14 @@ class MainActivity : AppCompatActivity() {
                 if (SoundService.isRunning && !bound) {
                     val si = Intent(this, SoundService::class.java)
                     bindService(si, connection, Context.BIND_AUTO_CREATE)
-                    // Queue a UI sync once binding confirms (onServiceConnected does this).
+                    // Credit the Spirit-launched session (playSound normally does this)
+                    if (sessionStartMs == 0L) {
+                        prefs.setLastSound(sound)
+                        prefs.incrementPlayCount(sound)
+                        stats.recordSessionStart()
+                        sessionStartMs = System.currentTimeMillis()
+                        refreshStats()
+                    }
                 } else {
                     playSound(sound)
                 }
@@ -844,17 +898,41 @@ class MainActivity : AppCompatActivity() {
             mapOf("sound" to type.name)
         )
 
-        if (bound && service != null) {
-            // Already running — change sound via binder only (avoid double startSound)
+        if (bound && service?.isPlaying() == true) {
+            // Actively playing — change sound via binder only (avoid double startSound)
             service!!.changeSound(type)
         } else {
+            // Not playing (fresh start, or the service was stopped externally and
+            // is a bound-only zombie) — go through onStartCommand so the wake
+            // lock, audio focus and foreground notification are re-acquired.
             val intent = Intent(this, SoundService::class.java).apply {
                 putExtra("SOUND_TYPE", type.name)
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) startForegroundService(intent)
             else startService(intent)
             if (!bound) bindService(intent, connection, Context.BIND_AUTO_CREATE)
+            // Already-bound zombie restart gets no onServiceConnected — re-arm
+            // the timer deadline and re-sync after the start command lands
+            if (timerDeadlineMs > 0L) {
+                val left = timerDeadlineMs - SystemClock.elapsedRealtime()
+                if (left > 0) service?.setStopTimer(left)
+            }
+            binding.root.postDelayed({ syncUI() }, 400)
         }
+        syncUI()
+    }
+
+    /** Playback ended outside our control (notification Stop, headset,
+     *  playlist end, focus loss) — bank the session and stop the timer UI,
+     *  but no stop-count/interstitial: the user didn't tap anything. */
+    private fun handleExternalStop() {
+        if (sessionStartMs > 0L) {
+            val mins = ((System.currentTimeMillis() - sessionStartMs) / 60_000L).toInt()
+            stats.addMinutes(mins)
+            sessionStartMs = 0L
+            refreshStats()
+        }
+        cancelTimer()
         syncUI()
     }
 
@@ -870,15 +948,20 @@ class MainActivity : AppCompatActivity() {
             refreshStats()
         }
 
-        countdown?.cancel(); countdown = null
-        binding.timerRing.stop()
+        cancelTimer()
+        service?.onStoppedExternally = null
         stopService(Intent(this, SoundService::class.java))
         if (bound) { unbindService(connection); bound = false }
         service = null
         prefs.incrementStopCount()
 
-        // Free users see an interstitial every 3rd stop (with cadence guards)
-        if (!prefs.isPremium()) {
+        // Free users see an interstitial every 3rd stop (with cadence guards).
+        // Only when ads were consent-initialized (GDPR — never request ads for
+        // consent-denied users) and the app is actually in the foreground
+        // (stopSound can fire from the session-timer while backgrounded).
+        if (!prefs.isPremium() && adsInitialized &&
+            lifecycle.currentState.isAtLeast(androidx.lifecycle.Lifecycle.State.RESUMED)
+        ) {
             interstitial.maybeShowOnStop(this, prefs.getStopCount())
         }
         syncUI()
@@ -911,6 +994,12 @@ class MainActivity : AppCompatActivity() {
         cancelTimer()
         prefs.setTimerMs(ms)
         binding.timerRing.start(ms)     // visual ring sweep
+        // The service owns the authoritative stop deadline — the Activity
+        // CountDownTimer below is display-only and dies with the Activity.
+        // If the service isn't bound yet (timer set before play), the deadline
+        // is re-armed in onServiceConnected / playSound from timerDeadlineMs.
+        timerDeadlineMs = SystemClock.elapsedRealtime() + ms
+        service?.setStopTimer(ms)
         countdown = object : CountDownTimer(ms, 1000) {
             override fun onTick(left: Long) {
                 val m = left / 60_000
@@ -918,6 +1007,7 @@ class MainActivity : AppCompatActivity() {
                 binding.tvTimer.text = "⏱ %02d:%02d".format(m, s)
             }
             override fun onFinish() {
+                timerDeadlineMs = 0L
                 stopSound()
                 binding.tvTimer.text = ""
                 binding.btnTimer.setTextColor(getColor(R.color.accent_teal))
@@ -930,6 +1020,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun cancelTimer() {
+        timerDeadlineMs = 0L
+        service?.cancelStopTimer()
         countdown?.cancel(); countdown = null
         binding.timerRing.stop()
         binding.tvTimer.text = ""
@@ -950,7 +1042,7 @@ class MainActivity : AppCompatActivity() {
         val labels = mutableListOf<String>()
         val actions = mutableListOf<() -> Unit>()
 
-        if (forSound != null && rewarded.isAdAvailable()) {
+        if (forSound != null && adsInitialized && rewarded.isAdAvailable()) {
             labels  += "▶ Watch ad — unlock for tonight"
             actions += { watchAdForSound(forSound) }
         }
@@ -1041,6 +1133,13 @@ class MainActivity : AppCompatActivity() {
         adapter.update(current, premium)
 
         binding.cardPremium.visibility = if (premium) View.GONE else View.VISIBLE
+        if (premium && bannerAdView != null) {
+            // Tear the banner down completely — a hidden AdView keeps auto-
+            // refreshing (ad requests for a paying user + AdMob hidden-ad risk)
+            bannerAdView?.destroy()
+            binding.adContainer.removeAllViews()
+            bannerAdView = null
+        }
         binding.adContainer.visibility = if (premium) View.GONE else View.VISIBLE
 
         syncJukeboxControls()

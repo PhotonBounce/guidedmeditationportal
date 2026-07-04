@@ -1,11 +1,11 @@
-name: Release AAB
+name: Release AAB (signed)
 
-# Builds the signed release bundle for Play Console upload.
-# Requires these repository secrets (Settings → Secrets and variables → Actions):
-#   KEYSTORE_BASE64           — the .jks keystore file, base64-encoded
-#   MEDITATION_KEY_ALIAS      — key alias
-#   MEDITATION_STORE_PASSWORD — keystore password
-#   MEDITATION_KEY_PASSWORD   — key password
+# Builds the signed release AAB for Play Console upload.
+# Requires 4 repo secrets (Settings → Secrets and variables → Actions):
+#   KEYSTORE_BASE64            — the release .jks file, base64-encoded
+#   MEDITATION_KEY_ALIAS       — key alias inside the keystore
+#   MEDITATION_STORE_PASSWORD  — keystore password
+#   MEDITATION_KEY_PASSWORD    — key password
 
 on:
   workflow_dispatch:
@@ -13,6 +13,8 @@ on:
 jobs:
   build-aab:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
 

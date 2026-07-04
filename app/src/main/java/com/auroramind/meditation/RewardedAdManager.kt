@@ -3,6 +3,7 @@ package com.auroramind.meditation
 import android.app.Activity
 import android.content.Context
 import android.util.Log
+import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
@@ -63,6 +64,14 @@ class RewardedAdManager(private val context: Context) {
                 rewardedAd = null
                 preload()   // queue up the next one
             }
+            override fun onAdFailedToShowFullScreenContent(error: AdError) {
+                // Without this, a failed show leaves the stale ad cached and
+                // every future "watch ad to unlock" tap silently no-ops.
+                Log.w(TAG, "Rewarded show failed: ${error.message}")
+                rewardedAd = null
+                preload()
+                onUnavailable()
+            }
         }
         ad.show(activity) { _: RewardItem ->
             onReward()
@@ -70,4 +79,9 @@ class RewardedAdManager(private val context: Context) {
     }
 
     fun isAdAvailable(): Boolean = rewardedAd != null
+
+    /** Drop the cached ad (e.g. consent withdrawn) so nothing pre-consented shows. */
+    fun clear() {
+        rewardedAd = null
+    }
 }

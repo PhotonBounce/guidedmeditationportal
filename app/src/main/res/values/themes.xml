@@ -12,12 +12,11 @@
         <item name="android:colorBackground">@color/cosmic_indigo_top</item>
         <item name="colorOnBackground">@color/text_primary</item>
         <item name="android:windowBackground">@drawable/bg_cosmic_gradient</item>
-        <!-- Edge-to-edge: transparent system bars, content draws under them -->
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <!-- Edge-to-edge is enabled at runtime via enableEdgeToEdge() in each
+             activity. statusBarColor/navigationBarColor theme attrs are
+             deprecated in Android 15 and must not be set here. -->
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:enforceNavigationBarContrast" tools:targetApi="29">false</item>
-        <item name="android:enforceStatusBarContrast"      tools:targetApi="29">false</item>
     </style>
 
     <!-- Dark alert dialog style — used for upgrade, timer, journeys & progress dialogs.

@@ -14,12 +14,24 @@ import java.util.Calendar
 object AlarmScheduler {
 
     const val ACTION_FIRE = "com.auroramind.meditation.ALARM_FIRE"
+    const val ACTION_SNOOZE = "com.auroramind.meditation.ALARM_SNOOZE"
     private const val REQUEST_CODE = 4242
+    private const val SNOOZE_REQUEST_CODE = 4243
 
     private fun pendingIntent(context: Context): PendingIntent {
         val intent = Intent(context, AlarmReceiver::class.java).apply { action = ACTION_FIRE }
         return PendingIntent.getBroadcast(
             context, REQUEST_CODE, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+    }
+
+    // Distinct request code + action: reschedule()/cancel() of the daily alarm
+    // must never cancel a pending snooze (opening AlarmActivity re-arms daily)
+    private fun snoozePendingIntent(context: Context): PendingIntent {
+        val intent = Intent(context, AlarmReceiver::class.java).apply { action = ACTION_SNOOZE }
+        return PendingIntent.getBroadcast(
+            context, SNOOZE_REQUEST_CODE, intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
     }
@@ -52,7 +64,7 @@ object AlarmScheduler {
     fun scheduleSnooze(context: Context, minutes: Int) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val triggerAt = System.currentTimeMillis() + minutes * 60_000L
-        val pi = pendingIntent(context)
+        val pi = snoozePendingIntent(context)
         val canExact = Build.VERSION.SDK_INT < Build.VERSION_CODES.S || alarmManager.canScheduleExactAlarms()
         if (canExact) {
             alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pi)
@@ -64,6 +76,7 @@ object AlarmScheduler {
     fun cancel(context: Context) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.cancel(pendingIntent(context))
+        alarmManager.cancel(snoozePendingIntent(context))
     }
 
     private fun nextOccurrence(hour: Int, minute: Int): Long {

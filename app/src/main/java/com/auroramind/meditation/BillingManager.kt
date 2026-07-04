@@ -6,10 +6,10 @@ import com.android.billingclient.api.*
 import kotlinx.coroutines.*
 
 /**
- * Wraps Google Play Billing Library 6.x.
+ * Wraps Google Play Billing Library 8.x.
  *
  * Products to create in Google Play Console (Monetize → Products):
- *   In-app product  → meditation_portal_unlock   ($0.49 one-time)   "Meditation Portal — Full Unlock"
+ *   In-app product  → meditation_portal_unlock   ($2.00 one-time)   "Meditation Portal — Full Unlock"
  *
  * The single unlock purchase removes ads and opens the full guided
  * meditation library + Spirit + alarm forever.
@@ -28,12 +28,19 @@ class BillingManager(
         const val SKU_UNLOCK = "meditation_portal_unlock"
     }
 
+    /** Optional: invoked when billing setup or a purchases query fails. */
+    var onQueryFailed: (() -> Unit)? = null
+
     private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
     @Volatile private var connected = false
+    @Volatile private var connecting = false
 
     private val client = BillingClient.newBuilder(activity)
         .setListener(this)
-        .enablePendingPurchases()
+        // Billing 8: the parameterless enablePendingPurchases() was removed
+        .enablePendingPurchases(
+            PendingPurchasesParams.newBuilder().enableOneTimeProducts().build()
+        )
         .build()
 
     init {
@@ -41,16 +48,21 @@ class BillingManager(
     }
 
     private fun connect() {
+        if (connecting) return
+        connecting = true
         client.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(result: BillingResult) {
+                connecting = false
                 if (result.responseCode == BillingClient.BillingResponseCode.OK) {
                     connected = true
                     queryPurchases()
                 } else {
                     Log.w(TAG, "Billing setup failed: ${result.debugMessage}")
+                    onQueryFailed?.invoke()
                 }
             }
             override fun onBillingServiceDisconnected() {
+                connecting = false
                 connected = false
                 // Reconnect with simple back-off (Play Store handles its own retry)
                 scope.launch {
@@ -84,24 +96,34 @@ class BillingManager(
     // ─────────────────────────────────────────────────────────────────────────
 
     fun queryPurchases() {
-        if (!connected) return
+        if (!connected) {
+            // A failed initial setup would otherwise wedge billing for the
+            // activity's lifetime — retry the connection; a successful setup
+            // re-runs this query automatically.
+            connect()
+            return
+        }
         scope.launch {
-            var hasPremium = false
-
             // One-time INAPP unlock
             val inappResult = client.queryPurchasesAsync(
                 QueryPurchasesParams.newBuilder()
                     .setProductType(BillingClient.ProductType.INAPP)
                     .build()
             )
-            if (inappResult.billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                hasPremium = hasPremium || inappResult.purchasesList.any { p ->
-                    p.products.contains(SKU_UNLOCK) &&
-                    p.purchaseState == Purchase.PurchaseState.PURCHASED
-                }
-                // Auto-acknowledge any unacked purchases (otherwise Google refunds after 3 days!)
-                inappResult.purchasesList.forEach { if (!it.isAcknowledged) acknowledge(it) }
+            if (inappResult.billingResult.responseCode != BillingClient.BillingResponseCode.OK) {
+                // Query FAILED (Play outage, service disconnect, …) — keep the
+                // cached premium state rather than revoking a paying user.
+                Log.w(TAG, "Purchase query failed: ${inappResult.billingResult.debugMessage}")
+                onQueryFailed?.invoke()
+                return@launch
             }
+
+            val hasPremium = inappResult.purchasesList.any { p ->
+                p.products.contains(SKU_UNLOCK) &&
+                p.purchaseState == Purchase.PurchaseState.PURCHASED
+            }
+            // Auto-acknowledge any unacked purchases (otherwise Google refunds after 3 days!)
+            inappResult.purchasesList.forEach { if (!it.isAcknowledged) acknowledge(it) }
 
             onPremiumChanged(hasPremium)
         }
@@ -111,32 +133,47 @@ class BillingManager(
     // Launch purchase flows
     // ─────────────────────────────────────────────────────────────────────────
 
-    /** One-time unlock purchase: removes ads, opens the full library ($0.49) */
+    /** One-time unlock purchase: removes ads, opens the full library ($2.00) */
     fun purchaseUnlock() = launchPurchase(SKU_UNLOCK, BillingClient.ProductType.INAPP)
 
     private fun launchPurchase(productId: String, productType: String) {
         if (!connected) {
-            Log.w(TAG, "Billing not connected — ignoring purchase")
+            // Retry the connection and tell the user instead of silently
+            // swallowing the tap (e.g. offline, Play Store unavailable)
+            Log.w(TAG, "Billing not connected — retrying connection")
+            connect()
+            activity.runOnUiThread {
+                android.widget.Toast.makeText(
+                    activity,
+                    "Google Play unavailable — check your connection and try again",
+                    android.widget.Toast.LENGTH_SHORT
+                ).show()
+            }
             return
         }
-        scope.launch {
-            val result = client.queryProductDetails(
-                QueryProductDetailsParams.newBuilder()
-                    .setProductList(
-                        listOf(
-                            QueryProductDetailsParams.Product.newBuilder()
-                                .setProductId(productId)
-                                .setProductType(productType)
-                                .build()
-                        )
-                    )
-                    .build()
+        val queryParams = QueryProductDetailsParams.newBuilder()
+            .setProductList(
+                listOf(
+                    QueryProductDetailsParams.Product.newBuilder()
+                        .setProductId(productId)
+                        .setProductType(productType)
+                        .build()
+                )
             )
+            .build()
 
-            val productDetails = result.productDetailsList?.firstOrNull()
+        // Billing 8: the response listener now receives a QueryProductDetailsResult
+        // (productDetailsList + unfetchedProductList) instead of a plain list.
+        client.queryProductDetailsAsync(queryParams) { result, detailsResult ->
+            if (result.responseCode != BillingClient.BillingResponseCode.OK) {
+                Log.w(TAG, "Product details query failed: ${result.debugMessage}")
+                return@queryProductDetailsAsync
+            }
+
+            val productDetails = detailsResult.productDetailsList.firstOrNull()
             if (productDetails == null) {
                 Log.w(TAG, "No product details for $productId — is it Active in Play Console?")
-                return@launch
+                return@queryProductDetailsAsync
             }
 
             val paramsBuilder = BillingFlowParams.ProductDetailsParams.newBuilder()
@@ -148,7 +185,7 @@ class BillingManager(
                     ?.firstOrNull()?.offerToken
                 if (offerToken == null) {
                     Log.w(TAG, "No subscription offer for $productId")
-                    return@launch
+                    return@queryProductDetailsAsync
                 }
                 paramsBuilder.setOfferToken(offerToken)
             }
@@ -157,7 +194,9 @@ class BillingManager(
                 .setProductDetailsParamsList(listOf(paramsBuilder.build()))
                 .build()
 
-            withContext(Dispatchers.Main) {
+            // Billing callbacks arrive on a binder thread — the purchase flow
+            // must launch from the main thread.
+            scope.launch {
                 client.launchBillingFlow(activity, flowParams)
             }
         }

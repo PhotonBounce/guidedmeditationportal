@@ -12,7 +12,8 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.core.widget.doOnTextChanged
@@ -43,18 +44,29 @@ class AiChatActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        enableEdgeToEdge(
+            // The app is always dark — force light bar icons regardless of the
+            // device theme (default auto() would draw dark icons on our dark UI)
+            statusBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT)
+        )
         binding = ActivityAiChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         sfx = SoundEffects(this)
         haptic = HapticHelper(this)
 
-        // Edge-to-edge insets — push header below status bar, bottom nav above nav bar
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
+        // Edge-to-edge insets — push header below status bar, bottom nav above
+        // nav bar, and lift the whole layout above the keyboard when it opens
+        // (adjustResize is inert under edge-to-edge; IME insets must be applied
+        // manually).
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
+            val imeOpen = ime.bottom > bars.bottom
             binding.header.updatePadding(top = bars.top + 8)
-            binding.bottomNavigation.updatePadding(bottom = bars.bottom)
+            binding.bottomNavigation.updatePadding(bottom = if (imeOpen) 0 else bars.bottom)
+            v.updatePadding(bottom = if (imeOpen) ime.bottom else 0)
             insets
         }
 
