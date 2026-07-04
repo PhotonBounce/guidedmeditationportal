@@ -107,6 +107,20 @@ jobs:
           keytool -list -v -keystore "$KS" -alias "$ALIAS" -storepass "$STOREPW" \
             | grep -E "Valid from|Owner|SHA256" || true
 
+          # Public certificate only (no key material) — lets you nominate this
+          # already-working CI key via Play Console's "Request upload key
+          # reset" flow, instead of juggling yet another new keystore.
+          keytool -exportcert -rfc -keystore "$KS" -alias "$ALIAS" -storepass "$STOREPW" \
+            > "$RUNNER_TEMP/upload_certificate.pem"
+
+      - name: Upload signing certificate (for Play Console upload-key reset)
+        uses: actions/upload-artifact@v4
+        with:
+          name: power-of-mind-upload-certificate
+          path: ${{ runner.temp }}/upload_certificate.pem
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Build signed release AAB
         env:
           POM_KEYSTORE: ${{ runner.temp }}/upload.jks
