@@ -55,3 +55,4 @@ jobs:
           name: GuidedMeditationPortal-release-aab
           path: app/build/outputs/bundle/release/app-release.aab
           if-no-files-found: error
+          retention-days: 30
