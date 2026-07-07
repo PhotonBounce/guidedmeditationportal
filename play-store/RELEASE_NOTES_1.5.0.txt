@@ -3,21 +3,37 @@ Version 1.5.0 (versionCode 12) — July 3, 2026
 
 ================================================================
 PLAY CONSOLE "WHAT'S NEW" (paste into the release notes box, <500 chars)
-These show at the top of the Play listing's update section — written to sell.
+This is the copy Google Play shows shoppers on the app's store page —
+written to sell, not just document. (453 chars)
 ================================================================
 
-✨ Power of Mind 1.5.0 — our smoothest release yet.
+🚀 Power of Mind just leveled up.
 
-• Rebuilt for Android 15: gorgeous edge-to-edge design on every screen
-• Silkier screen transitions throughout
-• Smarter keyboard handling in Coach chat and the quiz
-• Faster, more reliable subscription checkout
-• Rock-solid stability tune-ups under the hood
+✨ Reborn for Android 15 — stunning edge-to-edge design on every screen
+⚡ Buttery-smooth transitions from tap to tap
+⌨️ Smarter keyboard support in Coach chat and your quiz
+💳 Faster, more reliable subscription checkout
+💪 Rock-solid stability, so nothing stands between you and your streak
 
-Break free, one clean day at a time — your streak, your savings, your
-freedom.
+Your comeback story deserves an app that keeps up. Break free, one clean
+day at a time.
 
-From the makers at www.photon-bounce.com
+— Power of Mind, by www.photon-bounce.com
+
+----------------------------------------------------------------
+ALTERNATE (shorter, no emoji — pick this instead if Play flags emoji
+in your locale/region, some do): (268 chars)
+----------------------------------------------------------------
+
+Power of Mind, rebuilt for the road ahead.
+
+- Stunning new edge-to-edge design for Android 15
+- Buttery-smooth transitions everywhere
+- Smarter keyboard support in Coach chat and the quiz
+- Faster subscription checkout, rock-solid stability
+
+Break free, one clean day at a time.
+— www.photon-bounce.com
 
 ================================================================
 FULL CHANGELOG (internal)
