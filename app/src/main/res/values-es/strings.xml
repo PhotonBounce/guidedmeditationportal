@@ -19,13 +19,13 @@
     <string name="notif_action_stop">Detener</string>
 
     <!-- About / Legal / Support -->
-    <string name="about_title">Acerca de Guided Meditation Portal</string>
+    <string name="about_title">Acerca de Power of Mind</string>
     <string name="privacy_policy">Política de Privacidad</string>
     <string name="terms_of_service">Términos del Servicio</string>
     <string name="contact_support">Contactar Soporte</string>
     <string name="about_menu">Acerca de y Legal</string>
     <string name="about_version">Versión %1$s</string>
-    <string name="about_credits">Hecho con ♥ por Aurora Mind • auroramind.app</string>
+    <string name="about_credits">Hecho con ♥ por Photon Bounce • photon-bounce.com</string>
 
     <!-- Rewarded ads -->
     <string name="reward_unlock_cta">Ver anuncio — desbloquear esta noche</string>

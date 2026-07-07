@@ -8,7 +8,7 @@
     <string name="premium_desc">Unlock the full guided meditation library · Spirit companion · Meditation alarm · Remove ads</string>
     <string name="btn_unlock">Unlock forever — $2.00</string>
     <string name="premium_coming_soon">🔜 More meditations &amp; new languages coming soon!</string>
-    <string name="widget_description">Your meditation streak + today\'s quick technique</string>
+    <string name="widget_description">Your clean-day streak + today\'s quick technique</string>
 
     <!-- Timer -->
     <string name="timer_off">No Timer</string>
@@ -20,13 +20,13 @@
     <string name="notif_action_stop">Stop</string>
 
     <!-- About / Legal / Support -->
-    <string name="about_title">About Guided Meditation Portal</string>
+    <string name="about_title">About Power of Mind</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="terms_of_service">Terms of Service</string>
     <string name="contact_support">Contact Support</string>
     <string name="about_menu">About &amp; Legal</string>
     <string name="about_version">Version %1$s</string>
-    <string name="about_credits">Made with ♥ by Aurora Mind • auroramind.app</string>
+    <string name="about_credits">Made with ♥ by Photon Bounce • photon-bounce.com</string>
 
     <!-- Rewarded ads (also see rewarded_ad_strings.xml) -->
     <string name="reward_unlock_cta">Watch ad — unlock for tonight</string>

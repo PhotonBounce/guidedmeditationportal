@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="🪷 Guided Meditation Portal"
+            android:text="🔥 Power of Mind"
             android:textColor="@color/text_primary"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -97,7 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="🌐  auroramind.app"
+            android:text="🌐  photon-bounce.com"
             android:textColor="@color/accent_iris"
             app:strokeColor="@color/accent_iris" />
 

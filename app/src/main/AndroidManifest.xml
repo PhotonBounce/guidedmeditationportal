@@ -5,8 +5,6 @@
     <!-- ── Permissions ───────────────────────────────────────────────────── -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="com.android.vending.BILLING" />
@@ -54,7 +52,7 @@
             android:name="com.google.android.gms.ads.DELAY_APP_MEASUREMENT_INIT"
             android:value="true" />
 
-        <!-- Splash screen — procedural 3D opener; leads to MainActivity -->
+        <!-- Splash screen — procedural 3D opener; leads to Quiz (first run) or Dashboard -->
         <activity
             android:name=".SplashActivity"
             android:exported="true"
@@ -77,14 +75,14 @@
         <activity
             android:name=".AboutActivity"
             android:exported="true"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".DashboardActivity"
             android:screenOrientation="portrait" />
 
         <!-- Settings: haptics / sounds / subscription / consent -->
         <activity
             android:name=".SettingsActivity"
             android:exported="true"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".DashboardActivity"
             android:screenOrientation="portrait" />
 
         <!-- Breathing pacer — interactive box-breathing orb -->
@@ -202,11 +200,12 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <!-- Foreground service for background audio playback -->
+        <!-- Legacy sound-library service — currently unreachable from any live
+             navigation path (see SettingsActivity); kept declared since
+             SoundService.kt still compiles against it. -->
         <service
             android:name=".SoundService"
-            android:exported="false"
-            android:foregroundServiceType="mediaPlayback" />
+            android:exported="false" />
 
         <!-- Fires the scheduled meditation alarm and re-arms it after a reboot -->
         <receiver

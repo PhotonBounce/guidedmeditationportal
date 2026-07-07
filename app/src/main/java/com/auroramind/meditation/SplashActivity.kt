@@ -463,7 +463,7 @@ private class SplashCanvas(context: Context) : View(context) {
             canvas.drawCircle(cx, cy, logoR, ringPaint)
         }
 
-        // ── Title: "Guided Meditation Portal" ─────────────────────────────
+        // ── Title: "Power of Mind" ─────────────────────────────────────────
         if (titleAlpha > 0f) {
             val titleY = cy + sphereRadius + 90f * d
             val titleSize = (20f * d).coerceAtLeast(18f)
@@ -484,7 +484,7 @@ private class SplashCanvas(context: Context) : View(context) {
             val tagY = cy + sphereRadius + 118f * d
             tagPaint.textSize = (12f * d).coerceAtLeast(11f)
             tagPaint.color    = Color.argb((taglineAlpha * 180).toInt(), 255, 230, 168)
-            canvas.drawText("Breathe  ·  Reflect  ·  Restore", cx, tagY, tagPaint)
+            canvas.drawText("Break free  ·  Stay free", cx, tagY, tagPaint)
         }
     }
 }

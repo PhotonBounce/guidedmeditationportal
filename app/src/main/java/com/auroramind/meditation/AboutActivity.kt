@@ -11,20 +11,17 @@ import com.auroramind.meditation.databinding.ActivityAboutBinding
 /**
  * About / Legal / Support screen.
  *
- * IMPORTANT: photon-bounce.com/ausis/ hosts the privacy/terms pages for a
- * DIFFERENT app ("Ausis — Sleep, Focus & Workout Sounds"). Submitting this
- * app with that URL would misrepresent our data practices to Play reviewers
- * and users. This app's own pages live in their own path:
- * Upload docs/meditation-portal/privacy.html → https://www.photon-bounce.com/meditation-portal/privacy.html
- *         docs/meditation-portal/terms.html  → https://www.photon-bounce.com/meditation-portal/terms.html
+ * These must stay in sync with play-store/LISTING.md and the live microsite
+ * (deployed to public_html/pom via deploy-site.yml) — that's the one Play
+ * Console's App content → Privacy policy field also points to.
  */
 class AboutActivity : AppCompatActivity() {
 
     companion object {
-        const val PRIVACY_URL   = "https://www.photon-bounce.com/meditation-portal/privacy.html"
-        const val TERMS_URL     = "https://www.photon-bounce.com/meditation-portal/terms.html"
-        const val SUPPORT_EMAIL = "support.meditationportal@gmail.com"
-        const val WEBSITE_URL   = "https://www.photon-bounce.com"
+        const val PRIVACY_URL   = "https://photon-bounce.com/pom/privacy.html"
+        const val TERMS_URL     = "https://photon-bounce.com/pom/terms.html"
+        const val SUPPORT_EMAIL = "support@photon-bounce.com"
+        const val WEBSITE_URL   = "https://photon-bounce.com/pom/"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +44,7 @@ class AboutActivity : AppCompatActivity() {
         binding.contactSupport.setOnClickListener {
             val intent = Intent(Intent.ACTION_SENDTO).apply {
                 data = Uri.parse("mailto:$SUPPORT_EMAIL")
-                putExtra(Intent.EXTRA_SUBJECT, "Portal Support — v${BuildConfig.VERSION_NAME}")
+                putExtra(Intent.EXTRA_SUBJECT, "Power of Mind Support — v${BuildConfig.VERSION_NAME}")
             }
             try { startActivity(intent) }
             catch (e: ActivityNotFoundException) {

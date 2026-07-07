@@ -11,10 +11,9 @@ import androidx.core.app.NotificationCompat
 import java.util.Calendar
 
 /**
- * Schedules a gentle daily "time to meditate" reminder notification — the
- * single most effective retention lever after streaks. Distinct from the
- * Meditation Alarm (which plays audio / opens a full-screen ring): the
- * reminder is a quiet, tappable notification that opens the app.
+ * Schedules a gentle daily check-in reminder notification — the single most
+ * effective retention lever after streaks. A quiet, tappable notification
+ * that opens the app, no audio or full-screen ring involved.
  */
 object ReminderScheduler {
 
@@ -74,7 +73,7 @@ object ReminderScheduler {
 
         val notif = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_tab_sounds)
-            .setContentTitle("Time to meditate 🌙  ·  ${tech.title}")
+            .setContentTitle("Stay strong 💪  ·  ${tech.title}")
             .setContentText(tech.teaser)
             .setStyle(NotificationCompat.BigTextStyle().bigText(body))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -99,7 +98,7 @@ object ReminderScheduler {
                     NotificationChannel(
                         CHANNEL_ID, "Daily reminder",
                         NotificationManager.IMPORTANCE_DEFAULT
-                    ).apply { description = "A gentle daily nudge to meditate" }
+                    ).apply { description = "A gentle daily nudge to stay on track" }
                 )
             }
         }

@@ -6,9 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
 import com.auroramind.meditation.databinding.ActivitySettingsBinding
 
 /**
@@ -35,16 +32,10 @@ class SettingsActivity : AppCompatActivity() {
         sfx = SoundEffects(this)
         haptic = HapticHelper(this)
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
-            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            binding.root.getChildAt(0).updatePadding(top = bars.top)
-            binding.bottomNavigation.updatePadding(bottom = bars.bottom)
-            insets
-        }
+        binding.root.getChildAt(0).padSystemBars()
 
         supportActionBar?.title = getString(R.string.settings_title)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        setupBottomNavigation()
 
         binding.switchHaptics.isChecked = prefs.isHapticsEnabled()
         binding.switchHaptics.setOnCheckedChangeListener { _, on ->
@@ -88,12 +79,11 @@ class SettingsActivity : AppCompatActivity() {
         binding.btnShare.setOnClickListener {
             haptic.tick(); sfx.tap()
             val link = "https://play.google.com/store/apps/details?id=$packageName"
-            val text = "I've been using Guided Meditation Portal to breathe easier and sleep better 🌙 " +
-                       "23 narrated meditations, a breathing coach, and a companion called Spirit — " +
-                       "one-time \$2, no subscriptions. $link"
+            val text = "I've been using Power of Mind to break free from a habit that was holding me back 🔥 " +
+                       "daily audio affirmations, a clean-day streak, and a panic button for cravings. $link"
             val share = Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"
-                putExtra(Intent.EXTRA_SUBJECT, "Guided Meditation Portal")
+                putExtra(Intent.EXTRA_SUBJECT, "Power of Mind")
                 putExtra(Intent.EXTRA_TEXT, text)
             }
             runCatching { startActivity(Intent.createChooser(share, "Share with a friend")) }
@@ -132,35 +122,4 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean { finish(); return true }
-
-    override fun onResume() {
-        super.onResume()
-        binding.bottomNavigation.selectedItemId = R.id.tab_settings
-    }
-
-    private fun setupBottomNavigation() {
-        binding.bottomNavigation.selectedItemId = R.id.tab_settings
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
-            if (item.itemId == R.id.tab_settings) return@setOnItemSelectedListener true
-            haptic.tick()
-            sfx.tap()
-            val targetClass = when (item.itemId) {
-                R.id.tab_sounds   -> MainActivity::class.java
-                R.id.tab_alarm    -> AlarmActivity::class.java
-                R.id.tab_aria     -> AiChatActivity::class.java
-                R.id.tab_unlock   -> MainActivity::class.java
-                else              -> null
-            }
-            if (targetClass != null) {
-                val intent = Intent(this, targetClass).apply {
-                    flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-                    if (item.itemId == R.id.tab_unlock) {
-                        putExtra(MainActivity.EXTRA_SHOW_UNLOCK, true)
-                    }
-                }
-                startActivityFading(intent)
-                true
-            } else false
-        }
-    }
 }

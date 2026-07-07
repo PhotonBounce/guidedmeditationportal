@@ -156,7 +156,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Daily meditation reminder"
+                                android:text="Daily affirmation reminder"
                                 android:textColor="@color/text_primary"
                                 android:textSize="16sp" />
 
@@ -230,16 +230,5 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <!-- ── Premium Bottom Navigation Bar (Pinned) ──────────────────── -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#F00B0B1E"
-        app:menu="@menu/menu_bottom_nav"
-        app:itemIconTint="@color/accent_iris"
-        app:itemTextColor="@color/text_secondary"
-        app:labelVisibilityMode="labeled" />
 
 </LinearLayout>
