@@ -22,7 +22,7 @@ day at a time.
 
 ----------------------------------------------------------------
 ALTERNATE (shorter, no emoji — pick this instead if Play flags emoji
-in your locale/region, some do): (268 chars)
+in your locale/region, some do): (302 chars)
 ----------------------------------------------------------------
 
 Power of Mind, rebuilt for the road ahead.
