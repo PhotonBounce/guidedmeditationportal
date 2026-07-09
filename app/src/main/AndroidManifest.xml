@@ -6,15 +6,16 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="com.android.vending.BILLING" />
 
-    <!-- Meditation Alarm — wake at a scheduled time to a track or gentle tone -->
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <!-- Daily reminder notification, re-armed after a reboot. The reminder uses
+         an inexact alarm (setAndAllowWhileIdle), so no SCHEDULE_EXACT_ALARM /
+         USE_EXACT_ALARM is needed — those and USE_FULL_SCREEN_INTENT are
+         restricted to alarm-clock/dialer apps and were removed to satisfy the
+         Play "core purpose" policy. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
-    <uses-permission android:name="android.permission.VIBRATE" />
 
     <!-- AdMob ad ID for personalized ads tracking (Android 13+) -->
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
@@ -101,14 +102,16 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
 
-        <!-- Meditation Alarm — wake to a guided track or gentle tone -->
+        <!-- Legacy meditation-alarm screen — unreachable from the live app
+             (only the old, now-orphaned nav linked here). Kept declared so the
+             code compiles; slated for removal in a later cleanup. -->
         <activity
             android:name=".AlarmActivity"
-            android:exported="true"
-            android:parentActivityName=".MainActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
-        <!-- Alarm ringing screen — shown full-screen when an alarm fires -->
+        <!-- Legacy alarm-ring screen. No longer wired to a full-screen-intent
+             notification (that restricted permission was removed); unreachable. -->
         <activity
             android:name=".AlarmRingActivity"
             android:exported="false"

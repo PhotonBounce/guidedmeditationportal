@@ -1,5 +1,6 @@
 POWER OF MIND — RELEASE NOTES
-Version 1.5.0 (versionCode 12) — July 3, 2026
+Version 1.5.1 (versionCode 13) — July 9, 2026
+(supersedes 1.5.0/12, which was rejected for the full-screen-intent permission)
 
 ================================================================
 PLAY CONSOLE "WHAT'S NEW" (paste into the release notes box, <500 chars)
@@ -40,6 +41,14 @@ FULL CHANGELOG (internal)
 ================================================================
 
 POLICY / COMPLIANCE
+- Removed restricted permissions the app doesn't qualify for (1.5.1): the
+  manifest declared USE_FULL_SCREEN_INTENT (never actually used — no
+  setFullScreenIntent call existed) plus USE_EXACT_ALARM and
+  SCHEDULE_EXACT_ALARM. All three are reserved for alarm-clock/dialer apps;
+  Play rejected 1.5.0 under the Full-Screen Intent "core purpose" policy and
+  would have rejected the exact-alarm siblings next. The daily reminder still
+  works — it uses an inexact alarm + a normal notification, which need none
+  of these.
 - Google Play Billing Library upgraded 6.2.1 -> 7.1.1 (Play requires
   7.0.0+ for all app updates since Aug 30, 2025). BillingManager migrated
   to the PendingPurchasesParams API. Clears the "App must use Google Play
