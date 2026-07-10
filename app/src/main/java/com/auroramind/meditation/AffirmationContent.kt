@@ -5,8 +5,8 @@ import android.content.Context
 /**
  * Affirmation scripts for the player, blended per the user's habit.
  *
- * The lines and theme names live in res/values*/affirmations.xml so they
- * localize with the app language (see LocaleManager). Text-first by design:
+ * The lines and theme names live in the affirmations.xml string resources so
+ * they localize with the app language (see LocaleManager). Text-first by design:
  * these drive the on-screen affirmation sequence over a soundscape today, and
  * become the scripts for spoken voice-over once recordings exist. Phrased in
  * the present tense ("I am …"), the model used by the highest-grossing
