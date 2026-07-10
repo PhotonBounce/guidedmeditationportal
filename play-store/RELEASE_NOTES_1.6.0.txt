@@ -1,0 +1,68 @@
+POWER OF MIND — RELEASE NOTES
+Version 1.6.0 (versionCode 15) — July 10, 2026
+
+================================================================
+PLAY CONSOLE "WHAT'S NEW" (paste into the release notes box, <500 chars)
+================================================================
+
+🌍 Power of Mind now speaks your language.
+
+• 8 languages: English, Українська, Русский, עברית, ייִדיש, Español, Français, Deutsch
+• Tap the 🌐 globe on your dashboard to switch anytime
+• Your affirmations, streak and screens — translated
+• Right-to-left support for Hebrew and Yiddish
+
+Break free, one clean day at a time — in the words that feel like home.
+
+— Power of Mind, by www.photon-bounce.com
+
+----------------------------------------------------------------
+STORE LISTING NOTE
+----------------------------------------------------------------
+Google Play lets you add a localized store listing (title, description,
+screenshots) per language. The in-app content is already translated; adding
+localized store listings for uk/ru/he/yi/es/fr/de will lift install rates in
+those markets. Copy can be adapted from play-store/LISTING.md.
+
+================================================================
+FULL CHANGELOG (internal)
+================================================================
+
+MULTILINGUAL (new)
+- Per-app language switching via AppCompatDelegate.setApplicationLocales
+  (LocaleManager.kt) + res/xml/locales_config.xml for Android 13+ system
+  integration, persisted across launches (AppLocalesMetadataHolderService).
+- In-app language picker reachable two ways: a 🌐 globe button in the
+  dashboard header and a row in Settings.
+- 8 languages: en + Ukrainian, Russian, Spanish, French, German (LTR) and
+  Hebrew, Yiddish (RTL, in the values-b+he / values-b+yi BCP47 folders).
+- Affirmation content moved to string-array resources (affirmations.xml) so
+  all 100+ lines and the 7 theme names localize with the app language.
+- Every locale carries the full 57-string UI set + 129 affirmation items;
+  validated in CI for well-formedness, no missing/duplicate keys, and matching
+  array counts.
+- Microsite (photon-bounce.com/pom): nav language switcher, all copy
+  translated into the same 8 languages, RTL mirroring for Hebrew/Yiddish, and
+  the choice remembered in the browser.
+
+CARRIED FROM 1.5.x (all still in this build)
+- Google Play Billing 7.1.1 (policy requirement).
+- Android 15 edge-to-edge across every screen; modern transitions.
+- Removed restricted permissions the app doesn't qualify for
+  (USE_FULL_SCREEN_INTENT, USE_EXACT_ALARM, SCHEDULE_EXACT_ALARM), forced out
+  of the merged manifest via tools:node="remove" and asserted absent in CI.
+- Corrected in-app legal links and brand/copy after the rebrand.
+
+VERSIONS
+- versionCode 15, versionName 1.6.0
+- compileSdk / targetSdk 35, minSdk 21; Billing 7.1.1; AGP 8.6.1
+
+REVIEW NOTES (honest)
+- RTL (Hebrew/Yiddish) is compile-verified and the switcher works, but the
+  layouts haven't been checked on a physical RTL device — worth a quick look
+  before promoting to production.
+- Yiddish is AI-translated and leans on loanwords for modern tech terms; a
+  native review would refine it. The other languages are high quality.
+- Dashboard "days free / best streak / milestone" counters and some secondary
+  screens (quiz, insights, calendar) still render in English — a fast follow-up
+  can extend coverage to those.
