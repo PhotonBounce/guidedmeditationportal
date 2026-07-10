@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Power of Mind</string>
+    <string name="app_tagline">װער פֿרײַ · בלײַב פֿרײַ</string>
+
+    <!-- Language selector -->
+    <string name="language_title">שפּראַך</string>
+    <string name="settings_language">🌐  שפּראַך</string>
+    <string name="share_progress">טײל דײַן פֿאָרשריט</string>
+
+    <!-- Dashboard (home) -->
+    <string name="dash_greeting">בלײַב פֿרײַ הײַנט.</string>
+    <string name="dash_days_free">טעג פֿרײַ</string>
+    <string name="dash_day_free">טאָג פֿרײַ</string>
+    <string name="dash_your_why">דײַן פֿאַרװאָס</string>
+    <string name="dash_money_label">💰  געשפּאָרט געלט</string>
+    <string name="dash_urges_label">🛡️  באַזיגטע דראַנגען</string>
+    <string name="dash_today_affirmation">▶   הײַנטיקע באַשטעטיקונג</string>
+    <string name="dash_panic">🆘   איך שפּיר אַ דראַנג</string>
+    <string name="dash_help">🆘  אין אַ קריזיס אָדער האָסט עס שװער? באַקום איצט הילף</string>
+    <string name="dash_insights">📊  זע דײַנע אײַנבליקן</string>
+    <string name="dash_reset">איך האָב זיך געגליטשט — שטעל צוריק מײַן צײלער</string>
+
+    <!-- Affirmation library -->
+    <string name="lib_title">באַשטעטיקונגען</string>
+    <string name="lib_subtitle">רײען באַשטעטיקונגען אין אַ גערעדטן סטיל, צוגעפּאַסט צו װוּ דו האַלטסט. קלײַב אױס אײנעם און לאָז יעדע שורה אַרײַנדרינגען איבער די קלאַנגען.</string>
+    <string name="lib_favorites_title">באַליבטע</string>
+    <string name="lib_favorites_subtitle">דײַנע אָפּגעהיטע שורות</string>
+    <string name="lib_locked_subtitle">🔒  פּרעמיום — טאַפּ צו אױפֿשליסן</string>
+    <string name="lib_affirmation_count">%1$d באַשטעטיקונגען</string>
+    <string name="aff_fallback_line">איך בין פֿרײַ, אײן אָטעם נאָך אַ צװײטן.</string>
+
+    <!-- Premium -->
+    <string name="premium_title">פּאָרטאַל אױפֿשליסן</string>
+    <string name="premium_desc">שליס אױף די גאַנצע ביבליאָטעק פֿון געפֿירטע מעדיטאַציעס · גײַסט-באַגלײטער · מעדיטאַציע-װעקער · אַװעקנעמען רעקלאַמעס</string>
+    <string name="btn_unlock">אױפֿשליסן אױף אײביק — $2.00</string>
+    <string name="premium_coming_soon">🔜 נאָך מעדיטאַציעס &amp; נײַע שפּראַכן קומען באַלד!</string>
+    <string name="widget_description">דײַן סעריע פֿון רײנע טעג + הײַנטיקע גיכע טעכניק</string>
+
+    <!-- Timer -->
+    <string name="timer_off">אָן טײַמער</string>
+    <string name="sweet_dreams">רו זיך אָפּ 🌙</string>
+
+    <!-- Notifications -->
+    <string name="notif_channel_name">פּאָרטאַל אָפּשפּיל</string>
+    <string name="notif_channel_desc">מעדיטאַציע-אָפּשפּיל אין הינטערגרונט</string>
+    <string name="notif_action_stop">שטעל אָפּ</string>
+
+    <!-- About / Legal / Support -->
+    <string name="about_title">װעגן Power of Mind</string>
+    <string name="privacy_policy">פּריװאַטקײט-פּאָליטיק</string>
+    <string name="terms_of_service">באַדינגונגען פֿון סערװיס</string>
+    <string name="contact_support">פֿאַרבינד זיך מיט שטיצע</string>
+    <string name="about_menu">װעגן &amp; יורידיש</string>
+    <string name="about_version">װערסיע %1$s</string>
+    <string name="about_credits">געמאַכט מיט ♥ פֿון Photon Bounce • photon-bounce.com</string>
+
+    <!-- Rewarded ads (also see rewarded_ad_strings.xml) -->
+    <string name="reward_unlock_cta">קוק אַ רעקלאַמע — שליס אױף פֿאַר הײַנט בײַ נאַכט</string>
+
+    <!-- Settings -->
+    <string name="settings_title">אײַנשטעלונגען</string>
+    <string name="settings_menu">אײַנשטעלונגען</string>
+    <string name="settings_haptics">האַפּטישער אָפּרוף</string>
+    <string name="settings_haptics_desc">פֿײַנע װיבראַציעס בײַם טאַפּן</string>
+    <string name="settings_ui_sounds">אינטערפֿײס-קלאַנגען</string>
+    <string name="settings_ui_sounds_desc">װײכע טאַפּ- און גלעקל-קלאַנגען</string>
+    <string name="settings_manage_subscription">פֿאַרװאַלט דעם אַבאָנעמענט</string>
+    <string name="settings_reset_consent">שטעל צוריק די רעקלאַמע-פֿאָרצוגן</string>
+    <string name="settings_replay_onboarding">שפּיל נאָך אַ מאָל די אַרײַנפֿירונג</string>
+    <string name="settings_consent_reset_done">רעקלאַמע-הסכּמה צוריקגעשטעלט — מע װעט דיך פֿרעגן נאָך אַ מאָל בײַם קומעדיקן אָנהײב</string>
+    <string name="settings_onboarding_reset_done">די אַרײַנפֿירונג װעט זיך װידער שפּילן בײַם קומעדיקן אָנהײב</string>
+
+    <!-- Misc UI -->
+    <string name="now_playing_placeholder">טאַפּ אַ מעדיטאַציע צו אָנהײבן</string>
+    <string name="play_last">▶ שפּיל דעם לעצטן</string>
+    <string name="play_stop">⏹ שטעל אָפּ</string>
+    <string name="timer">⏱ טײַמער</string>
+    <string name="cancel_timer">אַנוליר דעם טײַמער</string>
+</resources>
