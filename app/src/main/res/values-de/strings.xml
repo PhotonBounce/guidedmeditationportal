@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Power of Mind</string>
-    <string name="app_tagline">Atmen · Reflektieren · Erholen</string>
+    <string name="app_tagline">Befreie dich · Bleib frei</string>
+
+    <!-- Language selector -->
+    <string name="language_title">Sprache</string>
+    <string name="settings_language">🌐  Sprache</string>
+    <string name="share_progress">Fortschritt teilen</string>
+
+    <!-- Affirmation library -->
+    <string name="lib_title">Affirmationen</string>
+    <string name="lib_subtitle">Gesprochene Affirmations-Sets, abgestimmt auf deinen Moment. Wähle eines und lass jede Zeile über der Klangkulisse wirken.</string>
+    <string name="lib_favorites_title">Favoriten</string>
+    <string name="lib_favorites_subtitle">deine gespeicherten Zeilen</string>
+    <string name="lib_locked_subtitle">🔒  Premium — zum Freischalten tippen</string>
+    <string name="lib_affirmation_count">%1$d Affirmationen</string>
+    <string name="aff_fallback_line">Ich bin frei, Atemzug für Atemzug.</string>
 
     <!-- Premium -->
     <string name="premium_title">Portal freischalten</string>
-    <string name="premium_desc">Gesamte Meditationsbibliothek · Spirit-Begleiter · Meditationswecker · Werbefrei</string>
-    <string name="btn_unlock">Für immer freischalten — $2,00</string>
-    <string name="premium_coming_soon">🔜 Mehr Meditationen &amp; neue Sprachen kommen bald!</string>
+    <string name="premium_desc">Schalte die komplette Meditationsbibliothek frei · Spiritueller Begleiter · Meditations-Wecker · Werbung entfernen</string>
+    <string name="btn_unlock">Für immer freischalten — 2,00 $</string>
+    <string name="premium_coming_soon">🔜 Weitere Meditationen &amp; neue Sprachen folgen bald!</string>
+    <string name="widget_description">Deine Serie cleaner Tage + die schnelle Technik für heute</string>
 
     <!-- Timer -->
     <string name="timer_off">Kein Timer</string>
-    <string name="sweet_dreams">Gute Erholung 🌙</string>
+    <string name="sweet_dreams">Schlaf gut 🌙</string>
 
     <!-- Notifications -->
-    <string name="notif_channel_name">Portal Wiedergabe</string>
-    <string name="notif_channel_desc">Hintergrund-Meditationswiedergabe</string>
+    <string name="notif_channel_name">Portal-Wiedergabe</string>
+    <string name="notif_channel_desc">Meditations-Wiedergabe im Hintergrund</string>
     <string name="notif_action_stop">Stopp</string>
 
     <!-- About / Legal / Support -->
@@ -23,30 +38,43 @@
     <string name="privacy_policy">Datenschutzerklärung</string>
     <string name="terms_of_service">Nutzungsbedingungen</string>
     <string name="contact_support">Support kontaktieren</string>
-    <string name="about_menu">Info &amp; Rechtliches</string>
+    <string name="about_menu">Über &amp; Rechtliches</string>
     <string name="about_version">Version %1$s</string>
-    <string name="about_credits">Mit ♥ von Photon Bounce • photon-bounce.com</string>
+    <string name="about_credits">Mit ♥ erstellt von Photon Bounce • photon-bounce.com</string>
 
-    <!-- Rewarded ads -->
-    <string name="reward_unlock_cta">Werbung ansehen — heute Nacht freischalten</string>
+    <!-- Rewarded ads (also see rewarded_ad_strings.xml) -->
+    <string name="reward_unlock_cta">Werbung ansehen — für heute Nacht freischalten</string>
 
     <!-- Settings -->
     <string name="settings_title">Einstellungen</string>
     <string name="settings_menu">Einstellungen</string>
     <string name="settings_haptics">Haptisches Feedback</string>
-    <string name="settings_haptics_desc">Sanfte Vibrationen beim Tippen</string>
-    <string name="settings_ui_sounds">UI-Sounds</string>
-    <string name="settings_ui_sounds_desc">Leise Tipp- und Glockentöne</string>
+    <string name="settings_haptics_desc">Dezente Vibrationen beim Tippen</string>
+    <string name="settings_ui_sounds">UI-Töne</string>
+    <string name="settings_ui_sounds_desc">Sanfte Tipp- und Klingeltöne</string>
     <string name="settings_manage_subscription">Abo verwalten</string>
     <string name="settings_reset_consent">Werbeeinstellungen zurücksetzen</string>
-    <string name="settings_replay_onboarding">Einführung wiederholen</string>
-    <string name="settings_consent_reset_done">Einwilligung zurückgesetzt — wird beim nächsten Start neu abgefragt</string>
-    <string name="settings_onboarding_reset_done">Einführung erscheint beim nächsten Start</string>
+    <string name="settings_replay_onboarding">Einführung erneut abspielen</string>
+    <string name="settings_consent_reset_done">Werbe-Einwilligung zurückgesetzt — du wirst beim nächsten Start erneut gefragt</string>
+    <string name="settings_onboarding_reset_done">Die Einführung wird beim nächsten Start erneut abgespielt</string>
 
     <!-- Misc UI -->
-    <string name="now_playing_placeholder">Tippe eine Meditation an</string>
-    <string name="play_last">▶ Letzten abspielen</string>
+    <string name="now_playing_placeholder">Tippe auf eine Meditation, um zu beginnen</string>
+    <string name="play_last">▶ Letzte abspielen</string>
     <string name="play_stop">⏹ Stopp</string>
     <string name="timer">⏱ Timer</string>
     <string name="cancel_timer">Timer abbrechen</string>
+
+    <!-- Dashboard (home) -->
+    <string name="dash_greeting">Bleib heute frei.</string>
+    <string name="dash_days_free">TAGE FREI</string>
+    <string name="dash_day_free">TAG FREI</string>
+    <string name="dash_your_why">DEIN WARUM</string>
+    <string name="dash_money_label">💰  Gespartes Geld</string>
+    <string name="dash_urges_label">🛡️  Besiegte Impulse</string>
+    <string name="dash_today_affirmation">▶   Affirmation des Tages</string>
+    <string name="dash_panic">🆘   Ich habe einen Drang</string>
+    <string name="dash_help">🆘  In einer Krise oder in Not? Hol dir jetzt Hilfe</string>
+    <string name="dash_insights">📊  Deine Einblicke ansehen</string>
+    <string name="dash_reset">Ich hatte einen Ausrutscher — Zähler zurücksetzen</string>
 </resources>

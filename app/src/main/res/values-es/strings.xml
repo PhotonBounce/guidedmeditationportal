@@ -1,52 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Power of Mind</string>
-    <string name="app_tagline">Respirar · Reflexionar · Restaurar</string>
+    <string name="app_tagline">Libérate · Mantente libre</string>
+
+    <!-- Language selector -->
+    <string name="language_title">Idioma</string>
+    <string name="settings_language">🌐  Idioma</string>
+    <string name="share_progress">Compartir progreso</string>
+
+    <!-- Affirmation library -->
+    <string name="lib_title">Afirmaciones</string>
+    <string name="lib_subtitle">Series de afirmaciones habladas, ajustadas a tu momento. Elige una y deja que cada frase resuene sobre el paisaje sonoro.</string>
+    <string name="lib_favorites_title">Favoritos</string>
+    <string name="lib_favorites_subtitle">tus frases guardadas</string>
+    <string name="lib_locked_subtitle">🔒  Premium — toca para desbloquear</string>
+    <string name="lib_affirmation_count">%1$d afirmaciones</string>
+    <string name="aff_fallback_line">Soy libre, una respiración a la vez.</string>
 
     <!-- Premium -->
     <string name="premium_title">Desbloqueo del Portal</string>
-    <string name="premium_desc">Desbloquea toda la biblioteca de meditaciones · Spirit · Alarma de meditación · Sin anuncios</string>
-    <string name="btn_unlock">Desbloquear para siempre — $2.00</string>
-    <string name="premium_coming_soon">🔜 ¡Más meditaciones y nuevos idiomas próximamente!</string>
+    <string name="premium_desc">Desbloquea la biblioteca completa de meditaciones guiadas · Compañero espiritual · Alarma de meditación · Sin anuncios</string>
+    <string name="btn_unlock">Desbloquea para siempre — $2.00</string>
+    <string name="premium_coming_soon">🔜 ¡Pronto más meditaciones &amp; nuevos idiomas!</string>
+    <string name="widget_description">Tu racha de días limpios + la técnica rápida de hoy</string>
 
     <!-- Timer -->
-    <string name="timer_off">Sin Temporizador</string>
+    <string name="timer_off">Sin temporizador</string>
     <string name="sweet_dreams">Descansa bien 🌙</string>
 
     <!-- Notifications -->
-    <string name="notif_channel_name">Reproducción Portal</string>
-    <string name="notif_channel_desc">Reproducción de meditaciones en segundo plano</string>
+    <string name="notif_channel_name">Reproducción del Portal</string>
+    <string name="notif_channel_desc">Reproducción de meditación en segundo plano</string>
     <string name="notif_action_stop">Detener</string>
 
     <!-- About / Legal / Support -->
     <string name="about_title">Acerca de Power of Mind</string>
-    <string name="privacy_policy">Política de Privacidad</string>
-    <string name="terms_of_service">Términos del Servicio</string>
-    <string name="contact_support">Contactar Soporte</string>
-    <string name="about_menu">Acerca de y Legal</string>
+    <string name="privacy_policy">Política de privacidad</string>
+    <string name="terms_of_service">Términos del servicio</string>
+    <string name="contact_support">Contactar con soporte</string>
+    <string name="about_menu">Acerca de &amp; aspectos legales</string>
     <string name="about_version">Versión %1$s</string>
     <string name="about_credits">Hecho con ♥ por Photon Bounce • photon-bounce.com</string>
 
-    <!-- Rewarded ads -->
-    <string name="reward_unlock_cta">Ver anuncio — desbloquear esta noche</string>
+    <!-- Rewarded ads (also see rewarded_ad_strings.xml) -->
+    <string name="reward_unlock_cta">Ver anuncio — desbloquear por esta noche</string>
 
     <!-- Settings -->
     <string name="settings_title">Ajustes</string>
     <string name="settings_menu">Ajustes</string>
-    <string name="settings_haptics">Vibración háptica</string>
+    <string name="settings_haptics">Respuesta háptica</string>
     <string name="settings_haptics_desc">Vibraciones sutiles al tocar</string>
-    <string name="settings_ui_sounds">Sonidos de interfaz</string>
-    <string name="settings_ui_sounds_desc">Toques y campanitas suaves</string>
+    <string name="settings_ui_sounds">Sonidos de la interfaz</string>
+    <string name="settings_ui_sounds_desc">Sonidos suaves de toque y campanilla</string>
     <string name="settings_manage_subscription">Gestionar suscripción</string>
     <string name="settings_reset_consent">Restablecer preferencias de anuncios</string>
     <string name="settings_replay_onboarding">Repetir introducción</string>
-    <string name="settings_consent_reset_done">Consentimiento restablecido — se preguntará de nuevo al iniciar</string>
-    <string name="settings_onboarding_reset_done">La introducción se repetirá al iniciar</string>
+    <string name="settings_consent_reset_done">Consentimiento de anuncios restablecido — se te preguntará de nuevo en el próximo inicio</string>
+    <string name="settings_onboarding_reset_done">La introducción se repetirá en el próximo inicio</string>
 
     <!-- Misc UI -->
     <string name="now_playing_placeholder">Toca una meditación para empezar</string>
-    <string name="play_last">▶ Reproducir Último</string>
+    <string name="play_last">▶ Reproducir última</string>
     <string name="play_stop">⏹ Detener</string>
     <string name="timer">⏱ Temporizador</string>
-    <string name="cancel_timer">Cancelar Temporizador</string>
+    <string name="cancel_timer">Cancelar temporizador</string>
+
+    <!-- Dashboard (home) -->
+    <string name="dash_greeting">Mantente libre hoy.</string>
+    <string name="dash_days_free">DÍAS DE LIBERTAD</string>
+    <string name="dash_day_free">DÍA DE LIBERTAD</string>
+    <string name="dash_your_why">TU PORQUÉ</string>
+    <string name="dash_money_label">💰  Dinero ahorrado</string>
+    <string name="dash_urges_label">🛡️  Impulsos vencidos</string>
+    <string name="dash_today_affirmation">▶   Afirmación de hoy</string>
+    <string name="dash_panic">🆘   Tengo un impulso</string>
+    <string name="dash_help">🆘  ¿En crisis o luchando? Busca ayuda ahora</string>
+    <string name="dash_insights">📊  Ver tus estadísticas</string>
+    <string name="dash_reset">Tuve un desliz — reiniciar mi contador</string>
 </resources>

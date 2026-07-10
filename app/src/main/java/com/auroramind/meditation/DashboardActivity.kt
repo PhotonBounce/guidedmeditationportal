@@ -145,7 +145,7 @@ class DashboardActivity : AppCompatActivity() {
     private fun refresh() {
         val days = habitStats.daysClean()
         binding.daysNumber.text = days.toString()
-        binding.daysLabel.text = if (days == 1) "DAY FREE" else "DAYS FREE"
+        binding.daysLabel.text = getString(if (days == 1) R.string.dash_day_free else R.string.dash_days_free)
 
         val habit = habitDisplay(prefs.getHabitType())
         val best = maxOf(habitStats.longestCleanDays(), days)
@@ -165,7 +165,7 @@ class DashboardActivity : AppCompatActivity() {
 
         // "Your why" card — the freedom goal captured in the quiz.
         val freedom = prefs.getFreedomGoal()
-        binding.dashGreeting.text = "Stay free today."
+        binding.dashGreeting.text = getString(R.string.dash_greeting)
         if (freedom.isNotBlank()) {
             binding.whyText.text = freedom
             binding.whyCard.visibility = View.VISIBLE

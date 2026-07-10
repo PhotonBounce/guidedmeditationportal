@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Power of Mind</string>
+    <string name="app_tagline">Звільнись · Залишайся вільним</string>
+
+    <!-- Language selector -->
+    <string name="language_title">Мова</string>
+    <string name="settings_language">🌐  Мова</string>
+    <string name="share_progress">Поділитися прогресом</string>
+
+    <!-- Affirmation library -->
+    <string name="lib_title">Афірмації</string>
+    <string name="lib_subtitle">Набори афірмацій у розмовному стилі, налаштовані під те, де ти зараз. Обери один і дай кожному рядку прозвучати на тлі звукового пейзажу.</string>
+    <string name="lib_favorites_title">Улюблене</string>
+    <string name="lib_favorites_subtitle">твої збережені рядки</string>
+    <string name="lib_locked_subtitle">🔒  Преміум — торкнись, щоб розблокувати</string>
+    <string name="lib_affirmation_count">%1$d афірмацій</string>
+    <string name="aff_fallback_line">Я вільний, вдих за вдихом.</string>
+
+    <!-- Premium -->
+    <string name="premium_title">Розблокування Порталу</string>
+    <string name="premium_desc">Розблокуй повну бібліотеку керованих медитацій · Духовний супутник · Будильник для медитації · Прибери рекламу</string>
+    <string name="btn_unlock">Розблокувати назавжди — $2.00</string>
+    <string name="premium_coming_soon">🔜 Більше медитацій &amp; нові мови незабаром!</string>
+    <string name="widget_description">Твоя серія чистих днів + сьогоднішня швидка техніка</string>
+
+    <!-- Timer -->
+    <string name="timer_off">Без таймера</string>
+    <string name="sweet_dreams">Спокійного відпочинку 🌙</string>
+
+    <!-- Notifications -->
+    <string name="notif_channel_name">Відтворення Порталу</string>
+    <string name="notif_channel_desc">Фонове відтворення медитації</string>
+    <string name="notif_action_stop">Зупинити</string>
+
+    <!-- About / Legal / Support -->
+    <string name="about_title">Про Power of Mind</string>
+    <string name="privacy_policy">Політика конфіденційності</string>
+    <string name="terms_of_service">Умови використання</string>
+    <string name="contact_support">Зв\'язатися з підтримкою</string>
+    <string name="about_menu">Про застосунок &amp; юридична інформація</string>
+    <string name="about_version">Версія %1$s</string>
+    <string name="about_credits">Створено з ♥ від Photon Bounce • photon-bounce.com</string>
+
+    <!-- Rewarded ads (also see rewarded_ad_strings.xml) -->
+    <string name="reward_unlock_cta">Переглянь рекламу — розблокуй на сьогодні</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Налаштування</string>
+    <string name="settings_menu">Налаштування</string>
+    <string name="settings_haptics">Тактильний відгук</string>
+    <string name="settings_haptics_desc">Легкі вібрації при дотиках</string>
+    <string name="settings_ui_sounds">Звуки інтерфейсу</string>
+    <string name="settings_ui_sounds_desc">М\'які звуки дотиків та дзвіночків</string>
+    <string name="settings_manage_subscription">Керувати підпискою</string>
+    <string name="settings_reset_consent">Скинути налаштування реклами</string>
+    <string name="settings_replay_onboarding">Повторити ознайомлення</string>
+    <string name="settings_consent_reset_done">Згоду на рекламу скинуто — тебе запитають знову при наступному запуску</string>
+    <string name="settings_onboarding_reset_done">Ознайомлення повториться при наступному запуску</string>
+
+    <!-- Misc UI -->
+    <string name="now_playing_placeholder">Торкнись медитації, щоб почати</string>
+    <string name="play_last">▶ Відтворити останнє</string>
+    <string name="play_stop">⏹ Зупинити</string>
+    <string name="timer">⏱ Таймер</string>
+    <string name="cancel_timer">Скасувати таймер</string>
+
+    <!-- Dashboard (home) -->
+    <string name="dash_greeting">Залишайся вільним сьогодні.</string>
+    <string name="dash_days_free">днів свободи</string>
+    <string name="dash_day_free">день свободи</string>
+    <string name="dash_your_why">Твоє «чому»</string>
+    <string name="dash_money_label">💰  Заощаджено грошей</string>
+    <string name="dash_urges_label">🛡️  Подолано тяг</string>
+    <string name="dash_today_affirmation">▶   Афірмація дня</string>
+    <string name="dash_panic">🆘   У мене тяга</string>
+    <string name="dash_help">🆘  У кризі чи важко? Звернись по допомогу зараз</string>
+    <string name="dash_insights">📊  Переглянути свою статистику</string>
+    <string name="dash_reset">Я зірвався — скинути лічильник</string>
+</resources>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Affirmation content for the player and library. Localized per language in
+     values-<lang>/affirmations.xml. Present-tense "I am…" phrasing throughout.
+     Keep each translation's item count aligned with the English source. -->
+<resources>
+
+    <!-- Theme display names (library grid + player) -->
+    <string name="aff_theme_free">אני חופשי</string>
+    <string name="aff_theme_craving">מוחץ הדחפים</string>
+    <string name="aff_theme_morning">עוצמת הבוקר</string>
+    <string name="aff_theme_calm">רגוע &amp; יציב</string>
+    <string name="aff_theme_sleep">שינה &amp; שחרור</string>
+    <string name="aff_theme_strength">כוח &amp; נחישות</string>
+    <string name="aff_theme_worth">ראוי &amp; שלם</string>
+
+    <!-- Personalized opener built from the quiz free-text goal (%1$s). -->
+    <string name="aff_freedom_opener">חופש, בשבילי, הוא %1$s.</string>
+
+    <string-array name="aff_free">
+        <item>אני חופשי, נשימה אחת בכל פעם.</item>
+        <item>אני לא ההרגל שלי — אני זה שבחר להפסיק.</item>
+        <item>כל שעה נקייה בונה אותי מחדש.</item>
+        <item>אני בוחר את האדם שאני הופך להיות.</item>
+        <item>החופש מרגיש טוב יותר מכפי שההרגל הרגיש אי פעם.</item>
+        <item>אני כבר מסוג האנשים שלא זקוקים לזה.</item>
+        <item>החופש שלי הוא שלי, ושום דחף לא יכול לקחת אותו.</item>
+        <item>אני כותב סיפור חדש, יום נקי אחד בכל פעם.</item>
+        <item>אני מרפה מהאני הישן בלי חרטה.</item>
+        <item>אני קליל יותר, צלול יותר, ויותר עצמי בכל יום.</item>
+        <item>זה מי שאני עכשיו: חופשי.</item>
+        <item>אני סומך על עצמי להישאר בדרך הזו.</item>
+    </string-array>
+
+    <string-array name="aff_craving">
+        <item>הדחף הזה יחלוף — בין אם אזין אותו ובין אם לא.</item>
+        <item>אני יכול להרגיש את הדחף ועדיין לא לזוז.</item>
+        <item>הגל עולה, הגל יורד. אני החוף.</item>
+        <item>כבר צלחתי את זה בעבר. אני עושה זאת שוב עכשיו.</item>
+        <item>חמש דקות — אני רק צריך להחזיק מעמד חמש דקות.</item>
+        <item>דחף הוא רק תחושה, ותחושות עוברות דרכי.</item>
+        <item>אני גדול מהרגע הזה.</item>
+        <item>אני לא חייב לפעול לפי כל מחשבה שעולה בי.</item>
+        <item>הדחף רועש, אבל אני רועש יותר.</item>
+        <item>אני נושם דרכו, והאחיזה שלו מתרופפת.</item>
+        <item>כל דחף שאני שורד מחליש את הבא אחריו.</item>
+        <item>אני מנצח, ממש עכשיו, פשוט על ידי המתנה.</item>
+    </string-array>
+
+    <string-array name="aff_morning">
+        <item>היום אני מתחיל נקי וצלול.</item>
+        <item>אני מחליט מי אני היום, ואני בוחר חופשי.</item>
+        <item>האנרגיה שלי היא שלי, להשקיע במה שחשוב.</item>
+        <item>אני מקבל את פני היום הזה בתודעה יציבה.</item>
+        <item>הבוקר, אני בוחר בעצמי.</item>
+        <item>אני ער, חי, ובשליטה.</item>
+        <item>היום הוא עוד יום נקי שאני יכול להתגאות בו.</item>
+        <item>אני מציב את הכוונה שלי: חופשי, ממוקד, רגוע.</item>
+        <item>שום דבר שאתמודד איתו היום אינו גדול מהנחישות שלי.</item>
+        <item>אני קם, ואני קם חופשי.</item>
+        <item>האני העתידי שלי נבנה ממה שאני עושה היום.</item>
+        <item>אני מוכן ליום הזה.</item>
+    </string-array>
+
+    <string-array name="aff_calm">
+        <item>השלווה שלי שייכת לי.</item>
+        <item>אני שואף יציבות, אני נושף את הדחף.</item>
+        <item>אני מקורקע, אני בטוח, אני מספיק.</item>
+        <item>השקט הוא הכוח שלי.</item>
+        <item>אני חוזר אל הנשימה שלי, והנשימה מחזירה אותי אל עצמי.</item>
+        <item>אני השלווה בתוך הסערה שלי.</item>
+        <item>השלווה היא מקום בתוכי שאליו אני תמיד יכול להגיע.</item>
+        <item>אני מאט, והדחף מאט יחד איתי.</item>
+        <item>אני יציב, גם כשהדברים אינם.</item>
+        <item>אין צורך למהר בכלום. אני כאן.</item>
+        <item>הגוף שלי לומד שבטוח לנוח.</item>
+        <item>אני רגוע, והרוגע מספיק.</item>
+    </string-array>
+
+    <string-array name="aff_sleep">
+        <item>אני מרפה מהיום ונח בתוך ההתקדמות שלי.</item>
+        <item>הגוף שלי מתרפא כשאני ישן, נקי ורגוע.</item>
+        <item>אני משחרר את מה שאיני יכול לשלוט בו.</item>
+        <item>מחר אני מתעורר חופשי.</item>
+        <item>עשיתי מספיק היום. אני יכול לנוח עכשיו.</item>
+        <item>אני סולח לעצמי על מה שהיה קשה.</item>
+        <item>כל לילה נקי הוא לילה שבו הגוף שלי מתקן את עצמו.</item>
+        <item>אני מניח את היום כמו תיק שאיני נושא יותר.</item>
+        <item>השינה משקמת אותי, ואני מרשה לה.</item>
+        <item>אני גאה בהיום, ואני נח בתוך זה.</item>
+        <item>התודעה שלי נרגעת, הגוף שלי שוקט.</item>
+        <item>אני נרדם חופשי, ומתעורר חופשי.</item>
+    </string-array>
+
+    <string-array name="aff_strength">
+        <item>אני חזק מהדחף הזה.</item>
+        <item>עשיתי דברים קשים בעבר. אני עושה אחד כזה עכשיו.</item>
+        <item>הנחישות שלי עמוקה מכל דחף.</item>
+        <item>אני מקיים את ההבטחות שלי לעצמי.</item>
+        <item>כל \"לא\" שאני אומר עושה אותי חזק יותר.</item>
+        <item>אני בנוי בשביל זה.</item>
+        <item>אי הנוחות היא רק כוח שנוצר.</item>
+        <item>אני לא מוותר על עצמי.</item>
+        <item>אני ממושמע, והמשמעת משחררת אותי.</item>
+        <item>כוח הרצון שלי גדל בכל פעם שאני משתמש בו.</item>
+        <item>אני בוחר בנכון הקשה על פני הקל השגוי.</item>
+        <item>אני איתן במה שאני רוצה.</item>
+    </string-array>
+
+    <string-array name="aff_worth">
+        <item>אני ראוי לחיים הנקיים שאני בונה.</item>
+        <item>אני מספיק, בדיוק כפי שאני עכשיו.</item>
+        <item>מגיע לי להרגיש טוב בלי זה.</item>
+        <item>אני מתייחס לעצמי בסבלנות ובכבוד.</item>
+        <item>אני שלם — שום דבר מחוצה לי לא יכול להשלים אותי או לשבור אותי.</item>
+        <item>אני גאה במי שאני הופך להיות.</item>
+        <item>אני חשוב, והבריאות שלי חשובה.</item>
+        <item>אני סולח לעבר שלי ובוחר את העתיד שלי.</item>
+        <item>אני מישהו ששווה להילחם למענו.</item>
+        <item>הערך שלי מעולם לא היה בהרגל.</item>
+        <item>אני מדבר אל עצמי כמו אל מישהו שאני אוהב.</item>
+        <item>אני הופך להיות האדם שתמיד הייתי בפנים.</item>
+    </string-array>
+
+    <!-- Personalized session pool: general lines shown to everyone. -->
+    <string-array name="aff_general">
+        <item>אני חזק מהדחף הזה.</item>
+        <item>הדחף הזה יחלוף — בין אם אזין אותו ובין אם לא.</item>
+        <item>כל שעה נקייה בונה אותי מחדש.</item>
+        <item>אני בוחר את האדם שאני הופך להיות.</item>
+        <item>אני לא זקוק לזה. מעולם לא באמת הייתי זקוק.</item>
+        <item>השלווה שלי שייכת לי.</item>
+        <item>אני חופשי, נשימה אחת בכל פעם.</item>
+        <item>אי הנוחות זמנית. החופש שלי הוא העיקר.</item>
+        <item>עשיתי דברים קשים בעבר. אני עושה אחד כזה עכשיו.</item>
+        <item>אני גאה בכברת הדרך שכבר עברתי.</item>
+        <item>כל יום נקי עושה את הבא אחריו לקל יותר.</item>
+        <item>אני זה ששולט עכשיו.</item>
+        <item>האני העתידי שלי מודה לי ממש עכשיו.</item>
+        <item>אני קם בכל פעם, ואני קם עכשיו.</item>
+        <item>אני בדיוק מסוג האנשים שיכולים לעשות את זה.</item>
+    </string-array>
+
+    <!-- Habit-specific lines mixed into a personalized session. -->
+    <string-array name="aff_vaping">
+        <item>הריאות שלי מתרפאות בכל נשימה נקייה.</item>
+        <item>אני נושם עמוק, כי אני יכול.</item>
+        <item>אני לא מעשן. אני חופשי.</item>
+        <item>כל נשימה שאני נושם נקייה יותר מהקודמת.</item>
+        <item>אני לא צריך סיגריה אלקטרונית כדי לצלוח את הרגע הזה.</item>
+        <item>הגוף שלי מתאושש, ואני יכול להרגיש את זה.</item>
+    </string-array>
+
+    <string-array name="aff_smoking">
+        <item>כל שעה ללא עישון היא מתנה לאני העתידי שלי.</item>
+        <item>אני נקי, צלול, ובשליטה.</item>
+        <item>הגוף שלי מודה לי על כל דחף שאני צולח.</item>
+        <item>אני נושם בקלות רבה יותר וחי זמן רב יותר בכל יום נקי.</item>
+        <item>סיימתי לתת לסיגריות לנהל את חיי.</item>
+        <item>הדחף דוהה; החופש שלי נשאר.</item>
+    </string-array>
+
+    <string-array name="aff_social_media">
+        <item>תשומת הלב שלי שייכת לי.</item>
+        <item>אני נוכח לגמרי בחיים האמיתיים שלי.</item>
+        <item>הפיד יכול לחכות. החיים שלי לא.</item>
+        <item>אני בוחר ברגעים אמיתיים על פני גלילה אינסופית.</item>
+        <item>הערך שלי לא נמדד בלייקים.</item>
+        <item>אני מניח את הטלפון ומרגיש את עצמי חוזר.</item>
+    </string-array>
+
+    <string-array name="aff_doomscrolling">
+        <item>אני מניח את הטלפון ומרים את החיים שלי.</item>
+        <item>התודעה שלי רגועה כשאני מפסיק להזין אותה ברעש.</item>
+        <item>אני מחליט מה ראוי לתשומת הלב שלי.</item>
+        <item>אני לא צריך לדעת הכול כדי להיות בשלווה.</item>
+        <item>תשומת הלב שלי יקרה, ואני מקדיש אותה במכוון.</item>
+        <item>אני סוגר את המסך ופותח את החיים שלי.</item>
+    </string-array>
+
+    <string-array name="aff_alcohol">
+        <item>אני מתעורר צלול, ואני גאה בזה.</item>
+        <item>אני לא צריך משקה כדי להרגיש בנוח.</item>
+        <item>צלילות היא המצב הטבעי שלי.</item>
+        <item>אני רגוע ויציב יותר בלעדיו.</item>
+        <item>אני מתמודד עם הרגשות שלי; אני לא מטביע אותם.</item>
+        <item>כל בוקר צלול הוא הוכחה למי שאני עכשיו.</item>
+    </string-array>
+
+</resources>

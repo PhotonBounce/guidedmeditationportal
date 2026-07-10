@@ -8,6 +8,19 @@
     <string name="settings_language">🌐  Language</string>
     <string name="share_progress">Share progress</string>
 
+    <!-- Dashboard (home) -->
+    <string name="dash_greeting">Stay free today.</string>
+    <string name="dash_days_free">DAYS FREE</string>
+    <string name="dash_day_free">DAY FREE</string>
+    <string name="dash_your_why">YOUR WHY</string>
+    <string name="dash_money_label">💰  Money saved</string>
+    <string name="dash_urges_label">🛡️  Urges beaten</string>
+    <string name="dash_today_affirmation">▶   Today\'s affirmation</string>
+    <string name="dash_panic">🆘   I\'m having an urge</string>
+    <string name="dash_help">🆘  In crisis or struggling? Get help now</string>
+    <string name="dash_insights">📊  See your insights</string>
+    <string name="dash_reset">I slipped — reset my counter</string>
+
     <!-- Affirmation library -->
     <string name="lib_title">Affirmations</string>
     <string name="lib_subtitle">Spoken-style affirmation sets, tuned to where you are. Pick one and let each line land over the soundscape.</string>

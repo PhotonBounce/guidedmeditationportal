@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Power of Mind</string>
+    <string name="app_tagline">Освободись · Оставайся свободным</string>
+
+    <!-- Language selector -->
+    <string name="language_title">Язык</string>
+    <string name="settings_language">🌐  Язык</string>
+    <string name="share_progress">Поделиться прогрессом</string>
+
+    <!-- Dashboard (home) -->
+    <string name="dash_greeting">Оставайся свободным сегодня.</string>
+    <string name="dash_days_free">ДНЕЙ СВОБОДЫ</string>
+    <string name="dash_day_free">ДЕНЬ СВОБОДЫ</string>
+    <string name="dash_your_why">ТВОЯ ПРИЧИНА</string>
+    <string name="dash_money_label">💰  Сэкономлено денег</string>
+    <string name="dash_urges_label">🛡️  Позывов побеждено</string>
+    <string name="dash_today_affirmation">▶   Аффирмация на сегодня</string>
+    <string name="dash_panic">🆘   Меня тянет</string>
+    <string name="dash_help">🆘  В кризисе или тяжело? Получи помощь сейчас</string>
+    <string name="dash_insights">📊  Посмотри свою статистику</string>
+    <string name="dash_reset">Я сорвался — сбросить счётчик</string>
+
+    <!-- Affirmation library -->
+    <string name="lib_title">Аффирмации</string>
+    <string name="lib_subtitle">Наборы аффирмаций в разговорном стиле, настроенные под то, где ты сейчас. Выбери один и дай каждой строке прозвучать на фоне звукового пейзажа.</string>
+    <string name="lib_favorites_title">Избранное</string>
+    <string name="lib_favorites_subtitle">твои сохранённые строки</string>
+    <string name="lib_locked_subtitle">🔒  Премиум — нажми, чтобы разблокировать</string>
+    <string name="lib_affirmation_count">%1$d аффирмаций</string>
+    <string name="aff_fallback_line">Я свободен, вдох за вдохом.</string>
+
+    <!-- Premium -->
+    <string name="premium_title">Разблокировка Портала</string>
+    <string name="premium_desc">Разблокируй полную библиотеку медитаций с сопровождением · Духовный спутник · Будильник для медитации · Убери рекламу</string>
+    <string name="btn_unlock">Разблокировать навсегда — $2.00</string>
+    <string name="premium_coming_soon">🔜 Больше медитаций &amp; новые языки уже скоро!</string>
+    <string name="widget_description">Твоя серия чистых дней + быстрая техника на сегодня</string>
+
+    <!-- Timer -->
+    <string name="timer_off">Без таймера</string>
+    <string name="sweet_dreams">Спокойного отдыха 🌙</string>
+
+    <!-- Notifications -->
+    <string name="notif_channel_name">Воспроизведение Портала</string>
+    <string name="notif_channel_desc">Фоновое воспроизведение медитации</string>
+    <string name="notif_action_stop">Остановить</string>
+
+    <!-- About / Legal / Support -->
+    <string name="about_title">О Power of Mind</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="terms_of_service">Условия использования</string>
+    <string name="contact_support">Связаться с поддержкой</string>
+    <string name="about_menu">О приложении &amp; правовая информация</string>
+    <string name="about_version">Версия %1$s</string>
+    <string name="about_credits">Создано с ♥ от Photon Bounce • photon-bounce.com</string>
+
+    <!-- Rewarded ads (also see rewarded_ad_strings.xml) -->
+    <string name="reward_unlock_cta">Посмотри рекламу — разблокируй на сегодня</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Настройки</string>
+    <string name="settings_menu">Настройки</string>
+    <string name="settings_haptics">Тактильный отклик</string>
+    <string name="settings_haptics_desc">Лёгкая вибрация при нажатиях</string>
+    <string name="settings_ui_sounds">Звуки интерфейса</string>
+    <string name="settings_ui_sounds_desc">Мягкие звуки нажатий и колокольчиков</string>
+    <string name="settings_manage_subscription">Управление подпиской</string>
+    <string name="settings_reset_consent">Сбросить настройки рекламы</string>
+    <string name="settings_replay_onboarding">Повторить ознакомление</string>
+    <string name="settings_consent_reset_done">Согласие на рекламу сброшено — тебя спросят снова при следующем запуске</string>
+    <string name="settings_onboarding_reset_done">Ознакомление повторится при следующем запуске</string>
+
+    <!-- Misc UI -->
+    <string name="now_playing_placeholder">Нажми на медитацию, чтобы начать</string>
+    <string name="play_last">▶ Воспроизвести последнее</string>
+    <string name="play_stop">⏹ Остановить</string>
+    <string name="timer">⏱ Таймер</string>
+    <string name="cancel_timer">Отменить таймер</string>
+</resources>

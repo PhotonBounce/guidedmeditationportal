@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Affirmation content for the player and library. Localized per language in
+     values-<lang>/affirmations.xml. Present-tense "I am…" phrasing throughout.
+     Keep each translation's item count aligned with the English source. -->
+<resources>
+
+    <!-- Theme display names (library grid + player) -->
+    <string name="aff_theme_free">Ich bin frei</string>
+    <string name="aff_theme_craving">Verlangen bezwingen</string>
+    <string name="aff_theme_morning">Morgenkraft</string>
+    <string name="aff_theme_calm">Ruhig &amp; gefasst</string>
+    <string name="aff_theme_sleep">Schlaf &amp; Loslassen</string>
+    <string name="aff_theme_strength">Stärke &amp; Entschlossenheit</string>
+    <string name="aff_theme_worth">Wertvoll &amp; ganz</string>
+
+    <!-- Personalized opener built from the quiz free-text goal (%1$s). -->
+    <string name="aff_freedom_opener">Freiheit bedeutet für mich %1$s.</string>
+
+    <string-array name="aff_free">
+        <item>Ich bin frei, Atemzug für Atemzug.</item>
+        <item>Ich bin nicht meine Gewohnheit — ich bin der Mensch, der sich entschieden hat aufzuhören.</item>
+        <item>Jede clean verbrachte Stunde baut mich neu auf.</item>
+        <item>Ich wähle den Menschen, der ich werde.</item>
+        <item>Freiheit fühlt sich besser an, als die Gewohnheit es je tat.</item>
+        <item>Ich bin bereits der Mensch, der es nicht braucht.</item>
+        <item>Meine Freiheit gehört mir, und kein Verlangen kann sie mir nehmen.</item>
+        <item>Ich schreibe eine neue Geschichte, einen cleanen Tag nach dem anderen.</item>
+        <item>Ich lasse mein altes Ich ohne Reue los.</item>
+        <item>Ich bin jeden Tag leichter, klarer und mehr ich selbst.</item>
+        <item>Das bin ich jetzt: frei.</item>
+        <item>Ich vertraue mir, auf diesem Weg zu bleiben.</item>
+    </string-array>
+
+    <string-array name="aff_craving">
+        <item>Dieses Verlangen geht vorüber — ob ich ihm nachgebe oder nicht.</item>
+        <item>Ich kann den Drang spüren und mich trotzdem nicht rühren.</item>
+        <item>Die Welle steigt, die Welle fällt. Ich bin das Ufer.</item>
+        <item>Ich habe das schon durchgestanden. Ich tue es jetzt wieder.</item>
+        <item>Fünf Minuten — ich muss nur fünf Minuten überstehen.</item>
+        <item>Ein Verlangen ist nur ein Gefühl, und Gefühle ziehen durch mich hindurch.</item>
+        <item>Ich bin größer als dieser Moment.</item>
+        <item>Ich muss nicht jedem Gedanken folgen, den ich habe.</item>
+        <item>Der Drang ist laut, aber ich bin lauter.</item>
+        <item>Ich atme hindurch, und er lockert seinen Griff.</item>
+        <item>Jedes Verlangen, das ich überstehe, macht das nächste schwächer.</item>
+        <item>Ich gewinne, genau jetzt, indem ich einfach warte.</item>
+    </string-array>
+
+    <string-array name="aff_morning">
+        <item>Heute beginne ich clean und klar.</item>
+        <item>Ich entscheide heute, wer ich bin, und ich wähle frei.</item>
+        <item>Meine Energie gehört mir, für das, was zählt.</item>
+        <item>Ich begegne diesem Tag mit einem ruhigen Geist.</item>
+        <item>Heute Morgen wähle ich mich selbst.</item>
+        <item>Ich bin wach, lebendig und habe die Kontrolle.</item>
+        <item>Heute ist ein weiterer cleaner Tag, auf den ich stolz sein darf.</item>
+        <item>Ich setze meine Absicht: frei, fokussiert, ruhig.</item>
+        <item>Nichts, dem ich heute begegne, ist größer als meine Entschlossenheit.</item>
+        <item>Ich stehe auf, und ich stehe frei auf.</item>
+        <item>Mein zukünftiges Ich entsteht durch das, was ich heute tue.</item>
+        <item>Ich bin bereit für diesen Tag.</item>
+    </string-array>
+
+    <string-array name="aff_calm">
+        <item>Meine Ruhe gehört mir.</item>
+        <item>Ich atme Gelassenheit ein, ich atme den Drang aus.</item>
+        <item>Ich bin geerdet, ich bin sicher, ich bin genug.</item>
+        <item>Stille ist meine Stärke.</item>
+        <item>Ich kehre zu meinem Atem zurück, und mein Atem bringt mich zu mir zurück.</item>
+        <item>Ich bin die Ruhe in meinem eigenen Sturm.</item>
+        <item>Frieden ist ein Ort in mir, den ich immer erreichen kann.</item>
+        <item>Ich werde langsamer, und das Verlangen wird mit mir langsamer.</item>
+        <item>Ich bin gefasst, selbst wenn es die Dinge nicht sind.</item>
+        <item>Nichts muss überstürzt werden. Ich bin hier.</item>
+        <item>Mein Körper lernt, dass es sicher ist zu ruhen.</item>
+        <item>Ich bin ruhig, und Ruhe ist genug.</item>
+    </string-array>
+
+    <string-array name="aff_sleep">
+        <item>Ich lasse den heutigen Tag los und ruhe in meinem Fortschritt.</item>
+        <item>Mein Körper heilt, während ich schlafe, clean und ruhig.</item>
+        <item>Ich lasse los, was ich nicht kontrollieren kann.</item>
+        <item>Morgen wache ich frei auf.</item>
+        <item>Ich habe heute genug getan. Ich kann jetzt ruhen.</item>
+        <item>Ich vergebe mir für das, was schwer war.</item>
+        <item>Jede clean verbrachte Nacht ist eine Nacht, in der mein Körper sich repariert.</item>
+        <item>Ich lege den Tag ab wie eine Tasche, die ich nicht mehr trage.</item>
+        <item>Schlaf gibt mir Kraft zurück, und ich lasse es zu.</item>
+        <item>Ich bin stolz auf heute, und darin ruhe ich.</item>
+        <item>Mein Geist wird ruhig, mein Körper wird still.</item>
+        <item>Ich gleite frei in den Schlaf und wache frei auf.</item>
+    </string-array>
+
+    <string-array name="aff_strength">
+        <item>Ich bin stärker als dieses Verlangen.</item>
+        <item>Ich habe schon Schweres geschafft. Ich schaffe gerade etwas.</item>
+        <item>Meine Entschlossenheit ist tiefer als jeder Drang.</item>
+        <item>Ich halte die Versprechen, die ich mir selbst gebe.</item>
+        <item>Jedes \"Nein\", das ich sage, macht mich stärker.</item>
+        <item>Ich bin dafür gemacht.</item>
+        <item>Unbehagen ist nur Stärke, die entsteht.</item>
+        <item>Ich gebe mich selbst nicht auf.</item>
+        <item>Ich bin diszipliniert, und Disziplin macht mich frei.</item>
+        <item>Meine Willenskraft wächst jedes Mal, wenn ich sie einsetze.</item>
+        <item>Ich wähle das schwere Richtige statt des einfachen Falschen.</item>
+        <item>Ich bin unerschütterlich in dem, was ich will.</item>
+    </string-array>
+
+    <string-array name="aff_worth">
+        <item>Ich bin des cleanen Lebens würdig, das ich mir aufbaue.</item>
+        <item>Ich bin genug, genau so, wie ich jetzt bin.</item>
+        <item>Ich verdiene es, mich ohne es gut zu fühlen.</item>
+        <item>Ich behandle mich mit Geduld und Respekt.</item>
+        <item>Ich bin ganz — nichts außerhalb von mir kann mich vervollständigen oder zerbrechen.</item>
+        <item>Ich bin stolz auf den Menschen, der ich werde.</item>
+        <item>Ich bin wichtig, und meine Gesundheit ist wichtig.</item>
+        <item>Ich vergebe meiner Vergangenheit und wähle meine Zukunft.</item>
+        <item>Ich bin es wert, dass man für mich kämpft.</item>
+        <item>Mein Wert lag nie in der Gewohnheit.</item>
+        <item>Ich spreche mit mir wie mit jemandem, den ich liebe.</item>
+        <item>Ich werde zu dem Menschen, der ich unter allem immer schon war.</item>
+    </string-array>
+
+    <!-- Personalized session pool: general lines shown to everyone. -->
+    <string-array name="aff_general">
+        <item>Ich bin stärker als dieses Verlangen.</item>
+        <item>Dieser Drang geht vorüber — ob ich ihm nachgebe oder nicht.</item>
+        <item>Jede clean verbrachte Stunde baut mich neu auf.</item>
+        <item>Ich wähle den Menschen, der ich werde.</item>
+        <item>Ich brauche es nicht. Ich habe es nie wirklich gebraucht.</item>
+        <item>Meine Ruhe gehört mir.</item>
+        <item>Ich bin frei, Atemzug für Atemzug.</item>
+        <item>Das Unbehagen ist vorübergehend. Meine Freiheit ist das Ziel.</item>
+        <item>Ich habe schon Schweres geschafft. Ich schaffe gerade etwas.</item>
+        <item>Ich bin stolz darauf, wie weit ich schon gekommen bin.</item>
+        <item>Jeder cleane Tag macht den nächsten leichter.</item>
+        <item>Ich habe jetzt die Kontrolle.</item>
+        <item>Mein zukünftiges Ich dankt mir gerade jetzt.</item>
+        <item>Ich stehe jedes Mal wieder auf, und ich stehe gerade jetzt auf.</item>
+        <item>Ich bin genau der Mensch, der das schaffen kann.</item>
+    </string-array>
+
+    <!-- Habit-specific lines mixed into a personalized session. -->
+    <string-array name="aff_vaping">
+        <item>Meine Lungen heilen mit jedem cleanen Atemzug.</item>
+        <item>Ich atme tief, weil ich es kann.</item>
+        <item>Ich bin kein Raucher. Ich bin frei.</item>
+        <item>Jeder Atemzug, den ich nehme, ist reiner als der letzte.</item>
+        <item>Ich brauche keine E-Zigarette, um diesen Moment zu überstehen.</item>
+        <item>Mein Körper erholt sich, und ich kann es spüren.</item>
+    </string-array>
+
+    <string-array name="aff_smoking">
+        <item>Jede rauchfreie Stunde ist ein Geschenk an mein zukünftiges Ich.</item>
+        <item>Ich bin clean, klar und habe die Kontrolle.</item>
+        <item>Mein Körper dankt mir für jedes Verlangen, das ich überstehe.</item>
+        <item>Ich atme leichter und lebe länger mit jedem cleanen Tag.</item>
+        <item>Ich lasse Zigaretten nicht länger mein Leben bestimmen.</item>
+        <item>Das Verlangen vergeht; meine Freiheit bleibt.</item>
+    </string-array>
+
+    <string-array name="aff_social_media">
+        <item>Meine Aufmerksamkeit gehört mir.</item>
+        <item>Ich bin ganz präsent in meinem echten Leben.</item>
+        <item>Der Feed kann warten. Mein Leben nicht.</item>
+        <item>Ich wähle echte Momente statt endlosem Scrollen.</item>
+        <item>Mein Wert bemisst sich nicht in Likes.</item>
+        <item>Ich lege das Handy weg und spüre, wie ich zu mir zurückkomme.</item>
+    </string-array>
+
+    <string-array name="aff_doomscrolling">
+        <item>Ich lege das Handy weg und nehme mein Leben in die Hand.</item>
+        <item>Mein Geist ist ruhig, wenn ich ihn nicht länger mit Lärm füttere.</item>
+        <item>Ich entscheide, was meine Aufmerksamkeit verdient.</item>
+        <item>Ich muss nicht alles wissen, um in Frieden zu sein.</item>
+        <item>Meine Aufmerksamkeit ist kostbar, und ich setze sie bewusst ein.</item>
+        <item>Ich schließe den Bildschirm und öffne mein Leben.</item>
+    </string-array>
+
+    <string-array name="aff_alcohol">
+        <item>Ich wache klar auf, und darauf bin ich stolz.</item>
+        <item>Ich brauche keinen Drink, um mich wohlzufühlen.</item>
+        <item>Ein klarer Kopf ist mein natürlicher Zustand.</item>
+        <item>Ich bin ruhiger und gefasster ohne es.</item>
+        <item>Ich gehe mit meinen Gefühlen um; ich ertränke sie nicht.</item>
+        <item>Jeder klare Morgen ist ein Beweis dafür, wer ich jetzt bin.</item>
+    </string-array>
+
+</resources>

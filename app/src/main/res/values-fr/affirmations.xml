@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Affirmation content for the player and library. Localized per language in
+     values-<lang>/affirmations.xml. Present-tense "I am…" phrasing throughout.
+     Keep each translation's item count aligned with the English source. -->
+<resources>
+
+    <!-- Theme display names (library grid + player) -->
+    <string name="aff_theme_free">Je suis libre</string>
+    <string name="aff_theme_craving">Briseur d\'envies</string>
+    <string name="aff_theme_morning">Énergie du matin</string>
+    <string name="aff_theme_calm">Calme &amp; stable</string>
+    <string name="aff_theme_sleep">Sommeil &amp; lâcher-prise</string>
+    <string name="aff_theme_strength">Force &amp; détermination</string>
+    <string name="aff_theme_worth">Digne &amp; entier</string>
+
+    <!-- Personalized opener built from the quiz free-text goal (%1$s). -->
+    <string name="aff_freedom_opener">Pour moi, la liberté, c\'est %1$s.</string>
+
+    <string-array name="aff_free">
+        <item>Je suis libre, une respiration à la fois.</item>
+        <item>Je ne suis pas mon habitude — je suis la personne qui a choisi d\'arrêter.</item>
+        <item>Chaque heure de liberté me reconstruit.</item>
+        <item>Je choisis la personne que je deviens.</item>
+        <item>La liberté fait plus de bien que l\'habitude ne m\'en a jamais fait.</item>
+        <item>Je suis déjà quelqu\'un qui n\'en a pas besoin.</item>
+        <item>Ma liberté m\'appartient, et aucune envie ne peut me la prendre.</item>
+        <item>J\'écris une nouvelle histoire, un jour libre à la fois.</item>
+        <item>Je laisse partir l\'ancien moi sans regret.</item>
+        <item>Chaque jour, je gagne en légèreté et en clarté, et je deviens plus moi-même.</item>
+        <item>Voilà qui je suis maintenant : libre.</item>
+        <item>J\'ai confiance en moi pour rester sur ce chemin.</item>
+    </string-array>
+
+    <string-array name="aff_craving">
+        <item>Cette envie passera — que je la nourrisse ou non.</item>
+        <item>Je peux ressentir l\'envie sans bouger pour autant.</item>
+        <item>La vague monte, la vague redescend. Je suis le rivage.</item>
+        <item>J\'ai déjà surmonté ça. Je le fais encore maintenant.</item>
+        <item>Cinq minutes — je n\'ai qu\'à tenir cinq minutes.</item>
+        <item>Une envie n\'est qu\'une sensation, et les sensations me traversent.</item>
+        <item>Ce moment ne me dépasse pas.</item>
+        <item>Je n\'ai pas à agir sur chacune de mes pensées.</item>
+        <item>L\'envie crie fort, mais je crie plus fort.</item>
+        <item>Je respire à travers elle, et son emprise se relâche.</item>
+        <item>Chaque envie que je surmonte affaiblit la suivante.</item>
+        <item>Je gagne, maintenant, simplement en attendant.</item>
+    </string-array>
+
+    <string-array name="aff_morning">
+        <item>Aujourd\'hui, je commence libre, l\'esprit clair.</item>
+        <item>Je décide qui je suis aujourd\'hui, et je choisis la liberté.</item>
+        <item>Mon énergie m\'appartient, pour ce qui compte vraiment.</item>
+        <item>J\'aborde cette journée l\'esprit serein.</item>
+        <item>Ce matin, je me choisis.</item>
+        <item>Je suis éveillé, en vie et aux commandes.</item>
+        <item>Aujourd\'hui est un nouveau jour de liberté dont je suis fier.</item>
+        <item>Je pose mon intention : liberté, concentration, calme.</item>
+        <item>Rien de ce que j\'affronte aujourd\'hui n\'est plus grand que ma détermination.</item>
+        <item>Je me lève, et je me lève libre.</item>
+        <item>Le moi de demain se construit par ce que je fais aujourd\'hui.</item>
+        <item>Je suis prêt pour cette journée.</item>
+    </string-array>
+
+    <string-array name="aff_calm">
+        <item>Mon calme m\'appartient.</item>
+        <item>J\'inspire la stabilité, j\'expire l\'envie.</item>
+        <item>Je suis ancré, en sécurité, et je suis assez.</item>
+        <item>La quiétude est ma force.</item>
+        <item>Je reviens à ma respiration, et ma respiration me ramène à moi.</item>
+        <item>Je suis le calme au cœur de ma propre tempête.</item>
+        <item>La paix est un lieu en moi que je peux toujours atteindre.</item>
+        <item>Je ralentis, et l\'envie ralentit avec moi.</item>
+        <item>Je reste stable, même quand tout ne l\'est pas.</item>
+        <item>Rien ne presse. Je suis là.</item>
+        <item>Mon corps apprend qu\'il peut se reposer en toute sécurité.</item>
+        <item>Je suis calme, et le calme suffit.</item>
+    </string-array>
+
+    <string-array name="aff_sleep">
+        <item>Je lâche prise sur cette journée et je me repose dans mes progrès.</item>
+        <item>Mon corps guérit pendant que je dors, libre et calme.</item>
+        <item>Je libère ce que je ne peux pas contrôler.</item>
+        <item>Demain, je me réveille libre.</item>
+        <item>J\'en ai fait assez aujourd\'hui. Je peux me reposer maintenant.</item>
+        <item>Je me pardonne pour ce qui a été difficile.</item>
+        <item>Chaque nuit de liberté est une nuit où mon corps se répare.</item>
+        <item>Je dépose la journée comme un sac que je ne porte plus.</item>
+        <item>Le sommeil me restaure, et je le laisse faire.</item>
+        <item>Je suis fier de cette journée, et je me repose là-dessus.</item>
+        <item>Mon esprit s\'apaise, mon corps s\'immobilise.</item>
+        <item>Je m\'endors libre, et je me réveille libre.</item>
+    </string-array>
+
+    <string-array name="aff_strength">
+        <item>Je suis plus fort que cette envie.</item>
+        <item>J\'ai déjà accompli des choses difficiles. J\'en accomplis une maintenant.</item>
+        <item>Ma détermination est plus profonde que n\'importe quelle envie.</item>
+        <item>Je tiens les promesses que je me fais.</item>
+        <item>Chaque « non » que je dis me rend plus fort.</item>
+        <item>Je suis fait pour ça.</item>
+        <item>L\'inconfort n\'est que de la force en train de naître.</item>
+        <item>Je ne m\'abandonne pas.</item>
+        <item>J\'ai de la discipline, et la discipline me libère.</item>
+        <item>Ma volonté grandit chaque fois que je m\'en sers.</item>
+        <item>Je choisis ce qui est juste mais difficile plutôt que ce qui est facile mais mauvais.</item>
+        <item>Je suis inébranlable dans ce que je veux.</item>
+    </string-array>
+
+    <string-array name="aff_worth">
+        <item>Je mérite la vie libre que je construis.</item>
+        <item>Je suis assez, exactement comme je suis en ce moment.</item>
+        <item>Je mérite de me sentir bien sans ça.</item>
+        <item>Je me traite avec patience et respect.</item>
+        <item>Je suis un tout — rien d\'extérieur ne peut me compléter ni me briser.</item>
+        <item>Je suis fier de la personne que je deviens.</item>
+        <item>Je compte, et ma santé compte.</item>
+        <item>Je pardonne mon passé et je choisis mon avenir.</item>
+        <item>Je suis quelqu\'un pour qui il vaut la peine de se battre.</item>
+        <item>Ma valeur n\'a jamais résidé dans l\'habitude.</item>
+        <item>Je me parle comme à une personne que j\'aime.</item>
+        <item>Je deviens la personne que j\'ai toujours été au fond de moi.</item>
+    </string-array>
+
+    <!-- Personalized session pool: general lines shown to everyone. -->
+    <string-array name="aff_general">
+        <item>Je suis plus fort que cette envie.</item>
+        <item>Cette envie passera — que je la nourrisse ou non.</item>
+        <item>Chaque heure de liberté me reconstruit.</item>
+        <item>Je choisis la personne que je deviens.</item>
+        <item>Je n\'en ai pas besoin. Je n\'en ai jamais vraiment eu besoin.</item>
+        <item>Mon calme m\'appartient.</item>
+        <item>Je suis libre, une respiration à la fois.</item>
+        <item>L\'inconfort est temporaire. Ma liberté, c\'est le but.</item>
+        <item>J\'ai déjà accompli des choses difficiles. J\'en accomplis une maintenant.</item>
+        <item>Je suis fier du chemin déjà parcouru.</item>
+        <item>Chaque jour de liberté rend le suivant plus facile.</item>
+        <item>C\'est moi qui commande maintenant.</item>
+        <item>Le moi de demain me remercie en ce moment même.</item>
+        <item>Je me relève à chaque fois, et je me relève maintenant.</item>
+        <item>Je suis exactement le genre de personne qui peut y arriver.</item>
+    </string-array>
+
+    <!-- Habit-specific lines mixed into a personalized session. -->
+    <string-array name="aff_vaping">
+        <item>Mes poumons guérissent à chaque respiration pure.</item>
+        <item>Je respire profondément, parce que je le peux.</item>
+        <item>Je ne fume pas. Je suis libre.</item>
+        <item>Chaque souffle que je prends est plus pur que le précédent.</item>
+        <item>Je n\'ai pas besoin de vapoter pour traverser ce moment.</item>
+        <item>Mon corps récupère, et je le sens.</item>
+    </string-array>
+
+    <string-array name="aff_smoking">
+        <item>Chaque heure sans cigarette est un cadeau au moi de demain.</item>
+        <item>Je suis libre, l\'esprit clair, et aux commandes.</item>
+        <item>Mon corps me remercie pour chaque envie que je surmonte.</item>
+        <item>Je respire mieux et je vis plus longtemps à chaque jour sans tabac.</item>
+        <item>J\'en ai fini de laisser les cigarettes gouverner ma vie.</item>
+        <item>L\'envie s\'estompe ; ma liberté demeure.</item>
+    </string-array>
+
+    <string-array name="aff_social_media">
+        <item>Mon attention m\'appartient.</item>
+        <item>Je suis pleinement présent dans ma vraie vie.</item>
+        <item>Le fil peut attendre. Ma vie, non.</item>
+        <item>Je choisis les vrais moments plutôt que le défilement sans fin.</item>
+        <item>Ma valeur ne se mesure pas en mentions J\'aime.</item>
+        <item>Je pose mon téléphone et je me sens revenir à moi.</item>
+    </string-array>
+
+    <string-array name="aff_doomscrolling">
+        <item>Je pose mon téléphone et je reprends ma vie en main.</item>
+        <item>Mon esprit est calme quand j\'arrête de le nourrir de bruit.</item>
+        <item>Je décide de ce qui mérite mon attention.</item>
+        <item>Je n\'ai pas besoin de tout savoir pour être en paix.</item>
+        <item>Mon attention est précieuse, et je choisis à quoi je la consacre.</item>
+        <item>Je ferme l\'écran et j\'ouvre ma vie.</item>
+    </string-array>
+
+    <string-array name="aff_alcohol">
+        <item>Je me réveille l\'esprit clair, et j\'en suis fier.</item>
+        <item>Je n\'ai pas besoin d\'un verre pour me sentir à l\'aise.</item>
+        <item>L\'esprit clair est mon état naturel.</item>
+        <item>Je suis plus calme et plus stable sans ça.</item>
+        <item>Je gère mes émotions ; je ne les noie pas.</item>
+        <item>Chaque matin l\'esprit clair est la preuve de qui je suis désormais.</item>
+    </string-array>
+
+</resources>

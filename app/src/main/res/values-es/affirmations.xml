@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Affirmation content for the player and library. Localized per language in
+     values-<lang>/affirmations.xml. Present-tense "I am…" phrasing throughout.
+     Keep each translation's item count aligned with the English source. -->
+<resources>
+
+    <!-- Theme display names (library grid + player) -->
+    <string name="aff_theme_free">Soy Libre</string>
+    <string name="aff_theme_craving">Vence el Antojo</string>
+    <string name="aff_theme_morning">Poder Matutino</string>
+    <string name="aff_theme_calm">Calma &amp; Firmeza</string>
+    <string name="aff_theme_sleep">Dormir &amp; Soltar</string>
+    <string name="aff_theme_strength">Fuerza &amp; Determinación</string>
+    <string name="aff_theme_worth">Valioso &amp; Completo</string>
+
+    <!-- Personalized opener built from the quiz free-text goal (%1$s). -->
+    <string name="aff_freedom_opener">La libertad, para mí, es %1$s.</string>
+
+    <string-array name="aff_free">
+        <item>Soy libre, una respiración a la vez.</item>
+        <item>No soy mi hábito — soy quien eligió dejarlo.</item>
+        <item>Cada hora limpia me reconstruye.</item>
+        <item>Elijo a la persona en quien me estoy convirtiendo.</item>
+        <item>La libertad se siente mejor de lo que jamás se sintió el hábito.</item>
+        <item>Ya soy el tipo de persona que no lo necesita.</item>
+        <item>Mi libertad es mía, y ningún antojo puede quitármela.</item>
+        <item>Estoy escribiendo una nueva historia, un día limpio a la vez.</item>
+        <item>Dejo ir a quien fui sin arrepentimiento.</item>
+        <item>Cada día estoy más ligero, más claro y más yo mismo.</item>
+        <item>Esto es lo que soy ahora: libre.</item>
+        <item>Confío en mí para mantenerme en este camino.</item>
+    </string-array>
+
+    <string-array name="aff_craving">
+        <item>Este antojo pasará — lo alimente o no.</item>
+        <item>Puedo sentir el impulso y aun así no moverme.</item>
+        <item>La ola sube, la ola baja. Yo soy la orilla.</item>
+        <item>Ya he superado esto antes. Lo hago de nuevo ahora.</item>
+        <item>Cinco minutos — solo necesito aguantar cinco minutos.</item>
+        <item>Un antojo es solo una emoción, y las emociones me atraviesan.</item>
+        <item>Soy más grande que este momento.</item>
+        <item>No tengo que actuar según cada pensamiento que tengo.</item>
+        <item>El impulso es fuerte, pero yo soy más fuerte.</item>
+        <item>Respiro a través de él, y afloja su agarre.</item>
+        <item>Cada antojo que supero debilita al siguiente.</item>
+        <item>Estoy ganando, ahora mismo, con solo esperar.</item>
+    </string-array>
+
+    <string-array name="aff_morning">
+        <item>Hoy comienzo limpio y claro.</item>
+        <item>Hoy decido quién soy, y elijo ser libre.</item>
+        <item>Mi energía es mía para gastarla en lo que importa.</item>
+        <item>Recibo este día con la mente firme.</item>
+        <item>Esta mañana, me elijo a mí mismo.</item>
+        <item>Estoy despierto, vivo y en control.</item>
+        <item>Hoy es otro día limpio del que puedo sentirme orgulloso.</item>
+        <item>Fijo mi intención: libre, enfocado, en calma.</item>
+        <item>Nada de lo que enfrente hoy es más grande que mi determinación.</item>
+        <item>Me levanto, y me levanto libre.</item>
+        <item>Mi yo futuro se construye con lo que hago hoy.</item>
+        <item>Estoy listo para este día.</item>
+    </string-array>
+
+    <string-array name="aff_calm">
+        <item>Mi calma me pertenece.</item>
+        <item>Inhalo firmeza, exhalo el impulso.</item>
+        <item>Estoy centrado, estoy a salvo, soy suficiente.</item>
+        <item>La quietud es mi fuerza.</item>
+        <item>Vuelvo a mi respiración, y mi respiración me devuelve a mí.</item>
+        <item>Soy la calma en mi propia tormenta.</item>
+        <item>La paz es un lugar dentro de mí al que siempre puedo llegar.</item>
+        <item>Voy más despacio, y el antojo se ralentiza conmigo.</item>
+        <item>Estoy firme, aun cuando las cosas no lo están.</item>
+        <item>Nada necesita apresurarse. Estoy aquí.</item>
+        <item>Mi cuerpo está aprendiendo que es seguro descansar.</item>
+        <item>Estoy en calma, y la calma es suficiente.</item>
+    </string-array>
+
+    <string-array name="aff_sleep">
+        <item>Suelto el día de hoy y descanso en mi progreso.</item>
+        <item>Mi cuerpo sana mientras duermo, limpio y en calma.</item>
+        <item>Suelto lo que no puedo controlar.</item>
+        <item>Mañana despierto libre.</item>
+        <item>He hecho suficiente hoy. Ahora puedo descansar.</item>
+        <item>Me perdono por lo que fue difícil.</item>
+        <item>Cada noche limpia es una noche en que mi cuerpo se repara.</item>
+        <item>Dejo el día como una bolsa que ya no cargo.</item>
+        <item>El sueño me restaura, y lo permito.</item>
+        <item>Estoy orgulloso de hoy, y descanso en ello.</item>
+        <item>Mi mente se aquieta, mi cuerpo se calma.</item>
+        <item>Me duermo libre, y despierto libre.</item>
+    </string-array>
+
+    <string-array name="aff_strength">
+        <item>Soy más fuerte que este antojo.</item>
+        <item>He hecho cosas difíciles antes. Estoy haciendo una ahora.</item>
+        <item>Mi determinación es más profunda que cualquier impulso.</item>
+        <item>Cumplo las promesas que me hago.</item>
+        <item>Cada \"no\" que digo me hace más fuerte.</item>
+        <item>Estoy hecho para esto.</item>
+        <item>La incomodidad es solo fuerza en formación.</item>
+        <item>No me rindo conmigo mismo.</item>
+        <item>Soy disciplinado, y la disciplina me libera.</item>
+        <item>Mi fuerza de voluntad crece cada vez que la uso.</item>
+        <item>Elijo lo correcto y difícil sobre lo fácil y equivocado.</item>
+        <item>Soy inquebrantable en lo que quiero.</item>
+    </string-array>
+
+    <string-array name="aff_worth">
+        <item>Soy digno de la vida limpia que estoy construyendo.</item>
+        <item>Soy suficiente, exactamente como soy ahora mismo.</item>
+        <item>Merezco sentirme bien sin ello.</item>
+        <item>Me trato con paciencia y respeto.</item>
+        <item>Estoy completo — nada fuera de mí puede completarme ni romperme.</item>
+        <item>Estoy orgulloso de en quien me estoy convirtiendo.</item>
+        <item>Yo importo, y mi salud importa.</item>
+        <item>Perdono mi pasado y elijo mi futuro.</item>
+        <item>Soy alguien por quien vale la pena luchar.</item>
+        <item>Mi valor nunca estuvo en el hábito.</item>
+        <item>Me hablo como a alguien a quien amo.</item>
+        <item>Me estoy convirtiendo en la persona que siempre fui por dentro.</item>
+    </string-array>
+
+    <!-- Personalized session pool: general lines shown to everyone. -->
+    <string-array name="aff_general">
+        <item>Soy más fuerte que este antojo.</item>
+        <item>Este impulso pasará — lo alimente o no.</item>
+        <item>Cada hora limpia me reconstruye.</item>
+        <item>Elijo a la persona en quien me estoy convirtiendo.</item>
+        <item>No lo necesito. En realidad nunca lo necesité.</item>
+        <item>Mi calma me pertenece.</item>
+        <item>Soy libre, una respiración a la vez.</item>
+        <item>La incomodidad es temporal. Mi libertad es lo que importa.</item>
+        <item>He hecho cosas difíciles antes. Estoy haciendo una ahora.</item>
+        <item>Estoy orgulloso de lo lejos que ya he llegado.</item>
+        <item>Cada día limpio hace que el siguiente sea más fácil.</item>
+        <item>Ahora yo soy quien tiene el control.</item>
+        <item>Mi yo futuro me lo está agradeciendo ahora mismo.</item>
+        <item>Me levanto siempre, y me estoy levantando ahora.</item>
+        <item>Soy exactamente el tipo de persona que puede lograr esto.</item>
+    </string-array>
+
+    <!-- Habit-specific lines mixed into a personalized session. -->
+    <string-array name="aff_vaping">
+        <item>Mis pulmones sanan con cada respiración limpia.</item>
+        <item>Respiro profundamente, porque puedo.</item>
+        <item>No soy fumador. Soy libre.</item>
+        <item>Cada respiración que tomo es más limpia que la anterior.</item>
+        <item>No necesito vapear para superar este momento.</item>
+        <item>Mi cuerpo se está recuperando, y puedo sentirlo.</item>
+    </string-array>
+
+    <string-array name="aff_smoking">
+        <item>Cada hora sin fumar es un regalo para mi yo futuro.</item>
+        <item>Estoy limpio, claro y en control.</item>
+        <item>Mi cuerpo me agradece cada antojo que supero.</item>
+        <item>Respiro mejor y vivo más con cada día limpio.</item>
+        <item>He terminado de dejar que los cigarrillos manejen mi vida.</item>
+        <item>El antojo se desvanece; mi libertad permanece.</item>
+    </string-array>
+
+    <string-array name="aff_social_media">
+        <item>Mi atención me pertenece.</item>
+        <item>Estoy plenamente presente en mi vida real.</item>
+        <item>El feed puede esperar. Mi vida no.</item>
+        <item>Elijo momentos reales en lugar del desplazamiento sin fin.</item>
+        <item>Mi valor no se mide en \"me gusta\".</item>
+        <item>Suelto el teléfono y siento que vuelvo a mí.</item>
+    </string-array>
+
+    <string-array name="aff_doomscrolling">
+        <item>Suelto el teléfono y retomo mi vida.</item>
+        <item>Mi mente está en calma cuando dejo de alimentarla con ruido.</item>
+        <item>Yo decido qué merece mi atención.</item>
+        <item>No necesito saberlo todo para estar en paz.</item>
+        <item>Mi atención es valiosa, y la dedico con intención.</item>
+        <item>Cierro la pantalla y abro mi vida.</item>
+    </string-array>
+
+    <string-array name="aff_alcohol">
+        <item>Despierto lúcido, y estoy orgulloso de eso.</item>
+        <item>No necesito una copa para sentirme a gusto.</item>
+        <item>La lucidez es mi estado natural.</item>
+        <item>Estoy más tranquilo y más firme sin ello.</item>
+        <item>Manejo mis emociones; no las ahogo.</item>
+        <item>Cada mañana lúcida es prueba de quien soy ahora.</item>
+    </string-array>
+
+</resources>

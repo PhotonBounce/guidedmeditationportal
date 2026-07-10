@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Power of Mind</string>
-    <string name="app_tagline">Respirer · Réfléchir · Restaurer</string>
+    <string name="app_tagline">Libère-toi · Reste libre</string>
+
+    <!-- Language selector -->
+    <string name="language_title">Langue</string>
+    <string name="settings_language">🌐  Langue</string>
+    <string name="share_progress">Partager mes progrès</string>
+
+    <!-- Affirmation library -->
+    <string name="lib_title">Affirmations</string>
+    <string name="lib_subtitle">Des séries d\'affirmations à dire à voix haute, adaptées à ce que tu vis. Choisis-en une et laisse chaque phrase résonner sur le fond sonore.</string>
+    <string name="lib_favorites_title">Favoris</string>
+    <string name="lib_favorites_subtitle">tes phrases enregistrées</string>
+    <string name="lib_locked_subtitle">🔒  Premium — touche pour déverrouiller</string>
+    <string name="lib_affirmation_count">%1$d affirmations</string>
+    <string name="aff_fallback_line">Je suis libre, une respiration à la fois.</string>
 
     <!-- Premium -->
-    <string name="premium_title">Débloquer le Portal</string>
-    <string name="premium_desc">Toute la bibliothèque de méditations · Spirit · Alarme de méditation · Sans publicité</string>
-    <string name="btn_unlock">Débloquer pour toujours — 2,00 $</string>
-    <string name="premium_coming_soon">🔜 Plus de méditations &amp; nouvelles langues bientôt!</string>
+    <string name="premium_title">Déverrouillage du portail</string>
+    <string name="premium_desc">Débloque toute la bibliothèque de méditations guidées · Compagnon spirituel · Alarme de méditation · Sans publicité</string>
+    <string name="btn_unlock">Débloquer à vie — 2,00 $</string>
+    <string name="premium_coming_soon">🔜 D\'autres méditations &amp; de nouvelles langues arrivent bientôt !</string>
+    <string name="widget_description">Ta série de jours sans + la technique rapide du jour</string>
 
     <!-- Timer -->
-    <string name="timer_off">Pas de minuteur</string>
-    <string name="sweet_dreams">Bonne récupération 🌙</string>
+    <string name="timer_off">Aucune minuterie</string>
+    <string name="sweet_dreams">Repose-toi bien 🌙</string>
 
     <!-- Notifications -->
-    <string name="notif_channel_name">Lecture Portal</string>
-    <string name="notif_channel_desc">Lecture de méditations en arrière-plan</string>
+    <string name="notif_channel_name">Lecture du portail</string>
+    <string name="notif_channel_desc">Lecture de méditation en arrière-plan</string>
     <string name="notif_action_stop">Arrêter</string>
 
     <!-- About / Legal / Support -->
@@ -23,30 +38,43 @@
     <string name="privacy_policy">Politique de confidentialité</string>
     <string name="terms_of_service">Conditions d\'utilisation</string>
     <string name="contact_support">Contacter le support</string>
-    <string name="about_menu">À propos &amp; Mentions légales</string>
+    <string name="about_menu">À propos &amp; mentions légales</string>
     <string name="about_version">Version %1$s</string>
-    <string name="about_credits">Fait avec ♥ par Photon Bounce • photon-bounce.com</string>
+    <string name="about_credits">Conçu avec ♥ par Photon Bounce • photon-bounce.com</string>
 
-    <!-- Rewarded ads -->
-    <string name="reward_unlock_cta">Regarder une pub — débloquer ce soir</string>
+    <!-- Rewarded ads (also see rewarded_ad_strings.xml) -->
+    <string name="reward_unlock_cta">Regarder une pub — débloquer pour ce soir</string>
 
     <!-- Settings -->
     <string name="settings_title">Paramètres</string>
     <string name="settings_menu">Paramètres</string>
     <string name="settings_haptics">Retour haptique</string>
     <string name="settings_haptics_desc">Vibrations subtiles au toucher</string>
-    <string name="settings_ui_sounds">Sons d\'interface</string>
-    <string name="settings_ui_sounds_desc">Sons doux de tape et de cloche</string>
+    <string name="settings_ui_sounds">Sons de l\'interface</string>
+    <string name="settings_ui_sounds_desc">Sons doux de touche et de carillon</string>
     <string name="settings_manage_subscription">Gérer l\'abonnement</string>
     <string name="settings_reset_consent">Réinitialiser les préférences publicitaires</string>
-    <string name="settings_replay_onboarding">Rejouer l\'introduction</string>
-    <string name="settings_consent_reset_done">Consentement réinitialisé — réapparaîtra au prochain lancement</string>
-    <string name="settings_onboarding_reset_done">L\'introduction réapparaîtra au prochain lancement</string>
+    <string name="settings_replay_onboarding">Revoir l\'introduction</string>
+    <string name="settings_consent_reset_done">Consentement publicitaire réinitialisé — la question te sera reposée au prochain lancement</string>
+    <string name="settings_onboarding_reset_done">L\'introduction sera rejouée au prochain lancement</string>
 
     <!-- Misc UI -->
-    <string name="now_playing_placeholder">Touchez une méditation pour commencer</string>
-    <string name="play_last">▶ Jouer le dernier</string>
+    <string name="now_playing_placeholder">Touche une méditation pour commencer</string>
+    <string name="play_last">▶ Reprendre la dernière</string>
     <string name="play_stop">⏹ Arrêter</string>
-    <string name="timer">⏱ Minuteur</string>
-    <string name="cancel_timer">Annuler le minuteur</string>
+    <string name="timer">⏱ Minuterie</string>
+    <string name="cancel_timer">Annuler la minuterie</string>
+
+    <!-- Dashboard (home) -->
+    <string name="dash_greeting">Reste libre aujourd\'hui.</string>
+    <string name="dash_days_free">JOURS DE LIBERTÉ</string>
+    <string name="dash_day_free">JOUR DE LIBERTÉ</string>
+    <string name="dash_your_why">TON POURQUOI</string>
+    <string name="dash_money_label">💰  Argent économisé</string>
+    <string name="dash_urges_label">🛡️  Envies vaincues</string>
+    <string name="dash_today_affirmation">▶   Affirmation du jour</string>
+    <string name="dash_panic">🆘   J\'ai une envie</string>
+    <string name="dash_help">🆘  En crise ou en difficulté ? Trouve de l\'aide maintenant</string>
+    <string name="dash_insights">📊  Voir tes statistiques</string>
+    <string name="dash_reset">J\'ai craqué — réinitialiser mon compteur</string>
 </resources>

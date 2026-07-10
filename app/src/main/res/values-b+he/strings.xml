@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Power of Mind</string>
+    <string name="app_tagline">להשתחרר · להישאר חופשי</string>
+
+    <!-- Language selector -->
+    <string name="language_title">שפה</string>
+    <string name="settings_language">🌐  שפה</string>
+    <string name="share_progress">שיתוף התקדמות</string>
+
+    <!-- Dashboard (home) -->
+    <string name="dash_greeting">הישאר חופשי היום.</string>
+    <string name="dash_days_free">ימים חופשיים</string>
+    <string name="dash_day_free">יום חופשי</string>
+    <string name="dash_your_why">הסיבה שלך</string>
+    <string name="dash_money_label">💰  כסף שנחסך</string>
+    <string name="dash_urges_label">🛡️  דחפים שהובסו</string>
+    <string name="dash_today_affirmation">▶   האפירמציה של היום</string>
+    <string name="dash_panic">🆘   יש לי דחף עכשיו</string>
+    <string name="dash_help">🆘  במשבר או מתקשה? קבל עזרה עכשיו</string>
+    <string name="dash_insights">📊  צפה בתובנות שלך</string>
+    <string name="dash_reset">מעדתי — אפס את המונה שלי</string>
+
+    <!-- Affirmation library -->
+    <string name="lib_title">אפירמציות</string>
+    <string name="lib_subtitle">אוספי אפירמציות בסגנון דיבור, מותאמים למקום שבו אתה נמצא. בחר אחד ותן לכל משפט לחלחל על רקע נוף הצליל.</string>
+    <string name="lib_favorites_title">מועדפים</string>
+    <string name="lib_favorites_subtitle">המשפטים ששמרת</string>
+    <string name="lib_locked_subtitle">🔒  פרימיום — הקש כדי לפתוח</string>
+    <string name="lib_affirmation_count">%1$d אפירמציות</string>
+    <string name="aff_fallback_line">אני חופשי, נשימה אחת בכל פעם.</string>
+
+    <!-- Premium -->
+    <string name="premium_title">פתיחת הפורטל</string>
+    <string name="premium_desc">פתיחת ספריית המדיטציות המודרכות המלאה · מלווה רוחני · שעון מדיטציה · הסרת פרסומות</string>
+    <string name="btn_unlock">פתיחה לתמיד — $2.00</string>
+    <string name="premium_coming_soon">🔜 עוד מדיטציות &amp; שפות חדשות בקרוב!</string>
+    <string name="widget_description">רצף הימים הנקיים שלך + הטכניקה המהירה של היום</string>
+
+    <!-- Timer -->
+    <string name="timer_off">ללא טיימר</string>
+    <string name="sweet_dreams">נוח בשלווה 🌙</string>
+
+    <!-- Notifications -->
+    <string name="notif_channel_name">השמעת הפורטל</string>
+    <string name="notif_channel_desc">השמעת מדיטציה ברקע</string>
+    <string name="notif_action_stop">עצור</string>
+
+    <!-- About / Legal / Support -->
+    <string name="about_title">אודות Power of Mind</string>
+    <string name="privacy_policy">מדיניות פרטיות</string>
+    <string name="terms_of_service">תנאי שימוש</string>
+    <string name="contact_support">יצירת קשר עם התמיכה</string>
+    <string name="about_menu">אודות &amp; מידע משפטי</string>
+    <string name="about_version">גרסה %1$s</string>
+    <string name="about_credits">נעשה באהבה ♥ על ידי Photon Bounce • photon-bounce.com</string>
+
+    <!-- Rewarded ads (also see rewarded_ad_strings.xml) -->
+    <string name="reward_unlock_cta">צפה בפרסומת — פתיחה להערב</string>
+
+    <!-- Settings -->
+    <string name="settings_title">הגדרות</string>
+    <string name="settings_menu">הגדרות</string>
+    <string name="settings_haptics">משוב מישושי</string>
+    <string name="settings_haptics_desc">רטט עדין בכל הקשה</string>
+    <string name="settings_ui_sounds">צלילי ממשק</string>
+    <string name="settings_ui_sounds_desc">צלילי הקשה ופעמון רכים</string>
+    <string name="settings_manage_subscription">ניהול מנוי</string>
+    <string name="settings_reset_consent">איפוס העדפות פרסום</string>
+    <string name="settings_replay_onboarding">הצגת ההדרכה מחדש</string>
+    <string name="settings_consent_reset_done">הסכמת הפרסום אופסה — תישאל שוב בהפעלה הבאה</string>
+    <string name="settings_onboarding_reset_done">ההדרכה תוצג שוב בהפעלה הבאה</string>
+
+    <!-- Misc UI -->
+    <string name="now_playing_placeholder">הקש על מדיטציה כדי להתחיל</string>
+    <string name="play_last">▶ נגן אחרונה</string>
+    <string name="play_stop">⏹ עצור</string>
+    <string name="timer">⏱ טיימר</string>
+    <string name="cancel_timer">ביטול טיימר</string>
+</resources>
