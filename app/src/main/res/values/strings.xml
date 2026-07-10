@@ -8,6 +8,15 @@
     <string name="settings_language">🌐  Language</string>
     <string name="share_progress">Share progress</string>
 
+    <!-- Affirmation library -->
+    <string name="lib_title">Affirmations</string>
+    <string name="lib_subtitle">Spoken-style affirmation sets, tuned to where you are. Pick one and let each line land over the soundscape.</string>
+    <string name="lib_favorites_title">Favorites</string>
+    <string name="lib_favorites_subtitle">your saved lines</string>
+    <string name="lib_locked_subtitle">🔒  Premium — tap to unlock</string>
+    <string name="lib_affirmation_count">%1$d affirmations</string>
+    <string name="aff_fallback_line">I am free, one breath at a time.</string>
+
     <!-- Premium -->
     <string name="premium_title">Portal Unlock</string>
     <string name="premium_desc">Unlock the full guided meditation library · Spirit companion · Meditation alarm · Remove ads</string>

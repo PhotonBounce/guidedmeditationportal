@@ -53,9 +53,9 @@ class AffirmationPlayerActivity : AppCompatActivity() {
         binding.root.padSystemBars()
 
         prefs = PrefsManager(this)
-        val theme = AffirmationContent.getTheme(intent.getStringExtra(EXTRA_THEME))
-        lines = theme?.lines ?: AffirmationContent.forHabit(prefs.getHabitType(), prefs.getFreedomGoal())
-        if (lines.isEmpty()) lines = listOf("I am free, one breath at a time.")
+        val theme = AffirmationContent.getTheme(this, intent.getStringExtra(EXTRA_THEME))
+        lines = theme?.lines ?: AffirmationContent.forHabit(this, prefs.getHabitType(), prefs.getFreedomGoal())
+        if (lines.isEmpty()) lines = listOf(getString(R.string.aff_fallback_line))
 
         binding.affirmationText.text = lines[0]
         updateFav()

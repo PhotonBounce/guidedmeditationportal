@@ -41,12 +41,12 @@ class AffirmationLibraryActivity : AppCompatActivity() {
         }
 
         col.addView(TextView(this).apply {
-            text = "Affirmations"
+            text = getString(R.string.lib_title)
             setTextColor(cream); textSize = 26f
             setTypeface(typeface, Typeface.BOLD)
         })
         col.addView(TextView(this).apply {
-            text = "Spoken-style affirmation sets, tuned to where you are. Pick one and let each line land over the soundscape."
+            text = getString(R.string.lib_subtitle)
             setTextColor(muted); textSize = 14f
             setPadding(0, dp(6), 0, dp(20))
         })
@@ -73,14 +73,15 @@ class AffirmationLibraryActivity : AppCompatActivity() {
         while (col.childCount > 2) col.removeViewAt(2)
 
         // Favorites shortcut
-        col.addView(themeCard("♥", "Favorites", "your saved lines", false, gold, cream, muted, cardBg, border) {
+        col.addView(themeCard("♥", getString(R.string.lib_favorites_title), getString(R.string.lib_favorites_subtitle), false, gold, cream, muted, cardBg, border) {
             startActivity(Intent(this, FavoritesActivity::class.java))
         })
 
         val premium = PrefsManager(this).isPremium()
-        for (t in AffirmationContent.THEMES) {
+        for (t in AffirmationContent.themes(this)) {
             val locked = t.premium && !premium
-            val subtitle = if (locked) "🔒  Premium — tap to unlock" else "${t.lines.size} affirmations"
+            val subtitle = if (locked) getString(R.string.lib_locked_subtitle)
+                           else getString(R.string.lib_affirmation_count, t.lines.size)
             col.addView(themeCard(t.emoji, t.title, subtitle, locked, gold, cream, muted, cardBg, border) {
                 if (locked) {
                     startActivity(

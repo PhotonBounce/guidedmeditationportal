@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Affirmation content for the player and library. Localized per language in
+     values-<lang>/affirmations.xml. Present-tense "I am…" phrasing throughout.
+     Keep each translation's item count aligned with the English source. -->
+<resources>
+
+    <!-- Theme display names (library grid + player) -->
+    <string name="aff_theme_free">I Am Free</string>
+    <string name="aff_theme_craving">Craving Crusher</string>
+    <string name="aff_theme_morning">Morning Power</string>
+    <string name="aff_theme_calm">Calm &amp; Steady</string>
+    <string name="aff_theme_sleep">Sleep &amp; Release</string>
+    <string name="aff_theme_strength">Strength &amp; Resolve</string>
+    <string name="aff_theme_worth">Worthy &amp; Whole</string>
+
+    <!-- Personalized opener built from the quiz free-text goal (%1$s). -->
+    <string name="aff_freedom_opener">Freedom, to me, is %1$s.</string>
+
+    <string-array name="aff_free">
+        <item>I am free, one breath at a time.</item>
+        <item>I am not my habit — I am the one who chose to stop.</item>
+        <item>Every clean hour is rebuilding me.</item>
+        <item>I choose the person I am becoming.</item>
+        <item>Freedom feels better than the habit ever did.</item>
+        <item>I am already the kind of person who doesn\'t need it.</item>
+        <item>My freedom is mine, and no craving can take it.</item>
+        <item>I am writing a new story, one clean day at a time.</item>
+        <item>I let the old me go without regret.</item>
+        <item>I am lighter, clearer, and more myself every day.</item>
+        <item>This is who I am now: free.</item>
+        <item>I trust myself to stay on this path.</item>
+    </string-array>
+
+    <string-array name="aff_craving">
+        <item>This craving will pass — whether I feed it or not.</item>
+        <item>I can feel the urge and still not move.</item>
+        <item>The wave rises, the wave falls. I am the shore.</item>
+        <item>I\'ve ridden this out before. I do it again now.</item>
+        <item>Five minutes — I only need to outlast five minutes.</item>
+        <item>A craving is just a feeling, and feelings move through me.</item>
+        <item>I am bigger than this moment.</item>
+        <item>I don\'t have to act on every thought I have.</item>
+        <item>The urge is loud, but I am louder.</item>
+        <item>I breathe through it, and it loosens its grip.</item>
+        <item>Each craving I outlast makes the next one weaker.</item>
+        <item>I am winning, right now, by simply waiting.</item>
+    </string-array>
+
+    <string-array name="aff_morning">
+        <item>Today I begin clean and clear.</item>
+        <item>I decide who I am today, and I choose free.</item>
+        <item>My energy is mine to spend on what matters.</item>
+        <item>I meet this day with a steady mind.</item>
+        <item>This morning, I choose myself.</item>
+        <item>I am awake, alive, and in control.</item>
+        <item>Today is another clean day I get to be proud of.</item>
+        <item>I set my intention: free, focused, calm.</item>
+        <item>Nothing I face today is bigger than my resolve.</item>
+        <item>I rise, and I rise free.</item>
+        <item>My future self is built by what I do today.</item>
+        <item>I am ready for this day.</item>
+    </string-array>
+
+    <string-array name="aff_calm">
+        <item>My calm belongs to me.</item>
+        <item>I breathe in steadiness, I breathe out the urge.</item>
+        <item>I am grounded, I am safe, I am enough.</item>
+        <item>Stillness is my strength.</item>
+        <item>I return to my breath, and my breath returns me to me.</item>
+        <item>I am the calm in my own storm.</item>
+        <item>Peace is a place inside me I can always reach.</item>
+        <item>I slow down, and the craving slows with me.</item>
+        <item>I am steady, even when things are not.</item>
+        <item>Nothing needs to be rushed. I am here.</item>
+        <item>My body is learning that it is safe to rest.</item>
+        <item>I am calm, and calm is enough.</item>
+    </string-array>
+
+    <string-array name="aff_sleep">
+        <item>I let go of today and rest in my progress.</item>
+        <item>My body heals as I sleep, clean and calm.</item>
+        <item>I release what I cannot control.</item>
+        <item>Tomorrow I wake up free.</item>
+        <item>I have done enough today. I can rest now.</item>
+        <item>I forgive myself for what was hard.</item>
+        <item>Each night clean is a night my body repairs.</item>
+        <item>I set down the day like a bag I no longer carry.</item>
+        <item>Sleep restores me, and I let it.</item>
+        <item>I am proud of today, and I rest in that.</item>
+        <item>My mind grows quiet, my body grows still.</item>
+        <item>I drift off free, and I wake up free.</item>
+    </string-array>
+
+    <string-array name="aff_strength">
+        <item>I am stronger than this craving.</item>
+        <item>I have done hard things before. I am doing one now.</item>
+        <item>My resolve is deeper than any urge.</item>
+        <item>I keep my promises to myself.</item>
+        <item>Every \"no\" I say makes me stronger.</item>
+        <item>I am built for this.</item>
+        <item>Discomfort is just strength being made.</item>
+        <item>I don\'t quit on myself.</item>
+        <item>I am disciplined, and discipline sets me free.</item>
+        <item>My willpower grows every time I use it.</item>
+        <item>I choose the hard right over the easy wrong.</item>
+        <item>I am unshakeable in what I want.</item>
+    </string-array>
+
+    <string-array name="aff_worth">
+        <item>I am worthy of the clean life I\'m building.</item>
+        <item>I am enough, exactly as I am right now.</item>
+        <item>I deserve to feel good without it.</item>
+        <item>I treat myself with patience and respect.</item>
+        <item>I am whole — nothing outside me can complete or break me.</item>
+        <item>I am proud of who I\'m becoming.</item>
+        <item>I matter, and my health matters.</item>
+        <item>I forgive my past and choose my future.</item>
+        <item>I am someone worth fighting for.</item>
+        <item>My value was never in the habit.</item>
+        <item>I speak to myself like someone I love.</item>
+        <item>I am becoming the person I always was underneath.</item>
+    </string-array>
+
+    <!-- Personalized session pool: general lines shown to everyone. -->
+    <string-array name="aff_general">
+        <item>I am stronger than this craving.</item>
+        <item>This urge will pass — whether I feed it or not.</item>
+        <item>Every clean hour is rebuilding me.</item>
+        <item>I choose the person I am becoming.</item>
+        <item>I don\'t need it. I never really did.</item>
+        <item>My calm belongs to me.</item>
+        <item>I am free, one breath at a time.</item>
+        <item>The discomfort is temporary. My freedom is the point.</item>
+        <item>I have done hard things before. I am doing one now.</item>
+        <item>I am proud of how far I\'ve already come.</item>
+        <item>Each clean day makes the next one easier.</item>
+        <item>I am the one in control now.</item>
+        <item>My future self is thanking me right now.</item>
+        <item>I rise every time, and I am rising now.</item>
+        <item>I am exactly the kind of person who can do this.</item>
+    </string-array>
+
+    <!-- Habit-specific lines mixed into a personalized session. -->
+    <string-array name="aff_vaping">
+        <item>My lungs are healing with every clean breath.</item>
+        <item>I breathe deeply, because I can.</item>
+        <item>I am not a smoker. I am free.</item>
+        <item>Each breath I take is cleaner than the last.</item>
+        <item>I don\'t need a vape to get through this moment.</item>
+        <item>My body is recovering, and I can feel it.</item>
+    </string-array>
+
+    <string-array name="aff_smoking">
+        <item>Each smoke-free hour is a gift to my future self.</item>
+        <item>I am clean, clear, and in control.</item>
+        <item>My body thanks me for every craving I ride out.</item>
+        <item>I breathe easier and live longer with every clean day.</item>
+        <item>I am done letting cigarettes run my life.</item>
+        <item>The craving fades; my freedom stays.</item>
+    </string-array>
+
+    <string-array name="aff_social_media">
+        <item>My attention belongs to me.</item>
+        <item>I am fully present in my real life.</item>
+        <item>The feed can wait. My life cannot.</item>
+        <item>I choose real moments over endless scrolling.</item>
+        <item>My worth is not measured in likes.</item>
+        <item>I put the phone down and I feel myself return.</item>
+    </string-array>
+
+    <string-array name="aff_doomscrolling">
+        <item>I put the phone down and pick my life up.</item>
+        <item>My mind is calm when I stop feeding it noise.</item>
+        <item>I decide what deserves my attention.</item>
+        <item>I don\'t need to know everything to be at peace.</item>
+        <item>My attention is precious, and I spend it on purpose.</item>
+        <item>I close the screen and open my life.</item>
+    </string-array>
+
+    <string-array name="aff_alcohol">
+        <item>I wake up clear, and I am proud of that.</item>
+        <item>I don\'t need a drink to feel at ease.</item>
+        <item>Clear-headed is my natural state.</item>
+        <item>I am calmer and steadier without it.</item>
+        <item>I handle my feelings; I don\'t drown them.</item>
+        <item>Every clear morning is proof of who I am now.</item>
+    </string-array>
+
+</resources>
