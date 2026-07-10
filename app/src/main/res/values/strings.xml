@@ -3,6 +3,11 @@
     <string name="app_name">Power of Mind</string>
     <string name="app_tagline">Break free · Stay free</string>
 
+    <!-- Language selector -->
+    <string name="language_title">Language</string>
+    <string name="settings_language">🌐  Language</string>
+    <string name="share_progress">Share progress</string>
+
     <!-- Premium -->
     <string name="premium_title">Portal Unlock</string>
     <string name="premium_desc">Unlock the full guided meditation library · Spirit companion · Meditation alarm · Remove ads</string>

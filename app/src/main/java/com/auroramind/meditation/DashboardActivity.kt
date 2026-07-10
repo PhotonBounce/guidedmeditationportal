@@ -64,6 +64,11 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(Intent(this, BreathingActivity::class.java))
         }
 
+        binding.languageBtn.setOnClickListener {
+            haptic.click(); sfx.tap()
+            LocaleManager.showPicker(this)
+        }
+
         binding.settingsBtn.setOnClickListener {
             haptic.click(); sfx.tap()
             startActivity(Intent(this, SettingsActivity::class.java))

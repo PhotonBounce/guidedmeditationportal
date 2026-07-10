@@ -29,6 +29,17 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="24dp" />
 
+            <!-- Language -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLanguage"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="@string/settings_language"
+                android:textColor="@color/accent_iris"
+                app:strokeColor="@color/accent_iris" />
+
             <!-- Haptics -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"

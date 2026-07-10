@@ -252,6 +252,10 @@ class PrefsManager(context: Context) {
     fun resetProgram(programId: String) =
         prefs.edit { putInt("$KEY_PROGRAM_PREFIX$programId", 0) }
 
+    // ── App language (BCP47 tag; "" = follow the system) ────────────────────────
+    fun getLanguageTag(): String = prefs.getString(KEY_LANG_TAG, "") ?: ""
+    fun setLanguageTag(tag: String) = prefs.edit { putString(KEY_LANG_TAG, tag) }
+
     // ── Daily reminder notification ─────────────────────────────────────────────
     fun isReminderEnabled(): Boolean = prefs.getBoolean(KEY_REMINDER_ON, false)
     fun setReminderEnabled(v: Boolean) = prefs.edit { putBoolean(KEY_REMINDER_ON, v) }
@@ -300,5 +304,6 @@ class PrefsManager(context: Context) {
         private const val KEY_REMINDER_HOUR     = "reminder_hour"
         private const val KEY_REMINDER_MINUTE   = "reminder_minute"
         private const val KEY_PROGRAM_PREFIX    = "program_"
+        private const val KEY_LANG_TAG          = "language_tag"
     }
 }

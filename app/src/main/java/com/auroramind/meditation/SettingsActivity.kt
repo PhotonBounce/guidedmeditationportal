@@ -37,6 +37,11 @@ class SettingsActivity : AppCompatActivity() {
         supportActionBar?.title = getString(R.string.settings_title)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        binding.btnLanguage.setOnClickListener {
+            haptic.tick(); sfx.tap()
+            LocaleManager.showPicker(this)
+        }
+
         binding.switchHaptics.isChecked = prefs.isHapticsEnabled()
         binding.switchHaptics.setOnCheckedChangeListener { _, on ->
             prefs.setHapticsEnabled(on)
