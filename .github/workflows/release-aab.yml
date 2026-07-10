@@ -132,6 +132,20 @@ jobs:
           # AAB for Play upload + APK for the microsite download (same key)
           ./gradlew bundleRelease assembleRelease --stacktrace
 
+      - name: Verify restricted permissions are stripped from the merged manifest
+        run: |
+          set -euo pipefail
+          AAPT=$(find "$ANDROID_HOME/build-tools" -name aapt | sort -V | tail -1)
+          APK=app/build/outputs/apk/release/app-release.apk
+          echo "Reading permissions from $APK"
+          PERMS=$("$AAPT" dump permissions "$APK")
+          echo "$PERMS"
+          if echo "$PERMS" | grep -Eq "USE_FULL_SCREEN_INTENT|USE_EXACT_ALARM|SCHEDULE_EXACT_ALARM"; then
+            echo "::error::A restricted alarm/full-screen-intent permission is still present in the merged manifest — Play will reject this build."
+            exit 1
+          fi
+          echo "OK — no restricted alarm/full-screen-intent permissions in the shipped manifest."
+
       - name: Upload AAB artifact
         uses: actions/upload-artifact@v4
         with:
