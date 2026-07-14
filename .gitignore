@@ -67,3 +67,7 @@ Thumbs.db
 # Editor
 *.swp
 .vscode/
+
+# Release binaries fetched at deploy time (never committed)
+microsite/PowerOfMind.apk
+microsite/PowerOfMind.aab

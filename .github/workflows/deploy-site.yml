@@ -26,11 +26,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Publish the signed APK next to the site so the "Download for Android"
-      # button works: photon-bounce.com/pom/PowerOfMind.apk. Soft-fails so a
-      # site-only deploy still goes out (the previously uploaded APK stays
-      # live on the host — deploy_shield never deletes remote files).
-      - name: Fetch latest signed release APK
+      # Publish the signed APK + AAB next to the site so they're plain, no-login
+      # download links: photon-bounce.com/pom/PowerOfMind.apk (sideload) and
+      # .../PowerOfMind.aab (for Play Console upload). Soft-fails so a site-only
+      # deploy still goes out.
+      - name: Fetch latest signed release APK + AAB
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -39,11 +39,22 @@ jobs:
           # for workflows already on the default branch.
           run_id=$(gh run list --workflow release-aab.yml --status success \
                      --limit 1 --json databaseId -q '.[0].databaseId' || true)
-          if [ -n "$run_id" ] && gh run download "$run_id" -n power-of-mind-release-apk -D apk_tmp; then
-            mv apk_tmp/app-release.apk microsite/PowerOfMind.apk
-            ls -lh microsite/PowerOfMind.apk
+          if [ -n "$run_id" ]; then
+            echo "Using release-aab run $run_id"
+            if gh run download "$run_id" -n power-of-mind-release-apk -D apk_tmp; then
+              mv apk_tmp/app-release.apk microsite/PowerOfMind.apk
+              ls -lh microsite/PowerOfMind.apk
+            else
+              echo "::warning::No release APK artifact found."
+            fi
+            if gh run download "$run_id" -n power-of-mind-release-aab -D aab_tmp; then
+              mv aab_tmp/app-release.aab microsite/PowerOfMind.aab
+              ls -lh microsite/PowerOfMind.aab
+            else
+              echo "::warning::No release AAB artifact found."
+            fi
           else
-            echo "::warning::No release APK artifact found — deploying site without refreshing the APK."
+            echo "::warning::No release run found — deploying site without refreshing the APK/AAB."
           fi
 
       - name: Upload microsite via FTP
