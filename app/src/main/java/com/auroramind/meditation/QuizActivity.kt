@@ -225,7 +225,20 @@ class QuizActivity : AppCompatActivity() {
 
     private fun startSubscription() {
         if (!upgradeOnly) persistProfile()
-        billing.purchaseAnnual()
+        // The button must never silently do nothing. If the Play billing flow
+        // can't launch (store not ready, or pom_annual not ACTIVE yet — the
+        // normal state during a first review), tell the user and let them into
+        // the app free; they can subscribe later from Settings.
+        billing.purchaseAnnual {
+            runOnUiThread {
+                Toast.makeText(
+                    this,
+                    "Subscriptions aren't available right now — you're all set to start free. You can upgrade anytime in Settings.",
+                    Toast.LENGTH_LONG
+                ).show()
+                if (upgradeOnly) finish() else goToDashboard()
+            }
+        }
     }
 
     private fun persistProfile() {

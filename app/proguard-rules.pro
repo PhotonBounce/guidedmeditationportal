@@ -1,5 +1,5 @@
 # ─────────────────────────────────────────────────────────────────────────
-# SoundPad — Release ProGuard / R8 rules
+# Power of Mind — Release ProGuard / R8 rules
 # minifyEnabled + shrinkResources are ON for release. These rules ensure
 # Billing, AdMob, and reflective code don't crash after obfuscation.
 # ─────────────────────────────────────────────────────────────────────────
@@ -40,9 +40,15 @@
     volatile <fields>;
 }
 
-# ── App: keep models / enums used reflectively via Kotlin's valueOf ────
--keep class com.soundpad.sleep.SoundType { *; }
--keepclassmembers enum com.soundpad.sleep.** { *; }
+# ── App: keep enums used reflectively via Kotlin's valueOf/values ──────
+# The package is com.auroramind.meditation (applicationId is com.powerofmind.app).
+# PrefsManager persists enum names and reads them back with valueOf(), so the
+# constants + accessors must survive R8 in the minified release build.
+-keepclassmembers enum com.auroramind.meditation.** {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+    <fields>;
+}
 
 # ── Native methods (just in case any library adds them) ────────────────
 -keepclasseswithmembernames class * { native <methods>; }

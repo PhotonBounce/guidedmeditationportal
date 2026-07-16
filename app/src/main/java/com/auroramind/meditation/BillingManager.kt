@@ -150,15 +150,28 @@ class BillingManager(
     /** One-time unlock purchase: removes ads, opens the full library ($0.49) */
     fun purchaseUnlock() = launchPurchase(SKU_UNLOCK, BillingClient.ProductType.INAPP)
 
-    /** Annual subscription — the primary plan offered on the post-quiz paywall. */
-    fun purchaseAnnual() = launchPurchase(SKU_ANNUAL, BillingClient.ProductType.SUBS)
+    /**
+     * Annual subscription — the primary plan offered on the post-quiz paywall.
+     *
+     * [onUnavailable] runs (on the main thread) when the purchase flow cannot
+     * even be launched — Billing not connected, or the product isn't ACTIVE in
+     * Play Console yet (the normal state during a first review). The caller uses
+     * it to guarantee the button never silently does nothing.
+     */
+    fun purchaseAnnual(onUnavailable: () -> Unit = {}) =
+        launchPurchase(SKU_ANNUAL, BillingClient.ProductType.SUBS, onUnavailable)
 
     /** Monthly subscription — the secondary plan on the paywall. */
     fun purchaseMonthly() = launchPurchase(SKU_MONTHLY, BillingClient.ProductType.SUBS)
 
-    private fun launchPurchase(productId: String, productType: String) {
+    private fun launchPurchase(
+        productId: String,
+        productType: String,
+        onUnavailable: () -> Unit = {},
+    ) {
         if (!connected) {
-            Log.w(TAG, "Billing not connected — ignoring purchase")
+            Log.w(TAG, "Billing not connected — cannot launch purchase")
+            onUnavailable()
             return
         }
         scope.launch {
@@ -178,6 +191,7 @@ class BillingManager(
             val productDetails = result.productDetailsList?.firstOrNull()
             if (productDetails == null) {
                 Log.w(TAG, "No product details for $productId — is it Active in Play Console?")
+                onUnavailable()
                 return@launch
             }
 
@@ -190,6 +204,7 @@ class BillingManager(
                     ?.firstOrNull()?.offerToken
                 if (offerToken == null) {
                     Log.w(TAG, "No subscription offer for $productId")
+                    onUnavailable()
                     return@launch
                 }
                 paramsBuilder.setOfferToken(offerToken)
