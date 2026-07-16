@@ -11,8 +11,8 @@ android {
         applicationId "com.powerofmind.app"
         minSdk 21
         targetSdk 35
-        versionCode 17
-        versionName "1.6.2"
+        versionCode 18
+        versionName "1.6.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -42,8 +42,15 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            // Minification is OFF. The app crashed on launch ONLY in the
+            // minified release build (Play "Broken Functionality: app does not
+            // open or load"); debug never minifies, so it was never seen. R8 is
+            // the difference. This app is ~250 MB of audio assets, not code, so
+            // code shrinking saved almost nothing — disabling R8 removes the
+            // crash risk at negligible size cost. Re-enable later only with
+            // verified keep rules and a real-device release smoke test.
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
 
