@@ -55,6 +55,11 @@ class ShareActivity : AppCompatActivity() {
             setPadding(dp(24), dp(44), dp(24), dp(28))
             gravity = Gravity.CENTER_HORIZONTAL
         }
+        // Top-left back affordance; force START gravity so the centered root
+        // doesn't centre it.
+        root.addView(backArrow().apply {
+            (layoutParams as LinearLayout.LayoutParams).gravity = Gravity.START
+        }, 0)
         root.addView(TextView(this).apply {
             text = "Share your progress"; setTextColor(cream); textSize = 22f
             setTypeface(typeface, Typeface.BOLD)

@@ -46,6 +46,7 @@ class InsightsActivity : AppCompatActivity() {
             orientation = LinearLayout.VERTICAL
             setPadding(dp(24), dp(40), dp(24), dp(32))
         }
+        addBackArrowTo(col)
         col.addView(TextView(this).apply {
             text = "Insights"; setTextColor(cream); textSize = 26f
             setTypeface(typeface, Typeface.BOLD)

@@ -62,10 +62,13 @@
 
     <TextView
         android:id="@+id/caption"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="36dp"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="48dp"
+        android:gravity="center"
         android:text="Breathe slowly  ·  let each line land"
         android:textColor="@color/text_tertiary"
         android:textSize="13sp" />

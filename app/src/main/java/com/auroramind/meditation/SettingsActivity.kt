@@ -34,6 +34,8 @@ class SettingsActivity : AppCompatActivity() {
 
         binding.root.getChildAt(0).padSystemBars()
 
+        binding.btnBack.setOnClickListener { finish() }
+
         supportActionBar?.title = getString(R.string.settings_title)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -41,6 +43,9 @@ class SettingsActivity : AppCompatActivity() {
             haptic.tick(); sfx.tap()
             LocaleManager.showPicker(this)
         }
+
+        // The app is free for everyone — there's no subscription to manage.
+        binding.btnManageSubscription.visibility = View.GONE
 
         binding.switchHaptics.isChecked = prefs.isHapticsEnabled()
         binding.switchHaptics.setOnCheckedChangeListener { _, on ->

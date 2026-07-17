@@ -13,26 +13,22 @@ import androidx.core.content.ContextCompat
 import com.auroramind.meditation.databinding.ActivityQuizBinding
 
 /**
- * Onboarding assessment quiz → hard paywall.
+ * Onboarding assessment quiz.
  *
- * This is the conversion funnel for the quit-habit + affirmations app: a short
- * series of questions that personalize the experience, ending on a subscription
- * paywall. Completing the quiz records the user's habit profile (via
- * [PrefsManager]) and starts the clean-time clock (via [HabitStatsManager]); the
- * paywall offers the annual/monthly plans through [BillingManager].
+ * A short series of questions that personalize the experience. The app is free
+ * for everyone (ad-supported) — there is no paywall. Completing the quiz records
+ * the user's habit profile (via [PrefsManager]), starts the clean-time clock
+ * (via [HabitStatsManager]), and goes straight to the dashboard.
  */
 class QuizActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQuizBinding
     private lateinit var prefs: PrefsManager
     private lateinit var habitStats: HabitStatsManager
-    private lateinit var billing: BillingManager
     private lateinit var haptic: HapticHelper
     private lateinit var sfx: SoundEffects
 
     private var stepIndex = 0
-    private var onPaywall = false
-    private var upgradeOnly = false
 
     private val singleAnswers = HashMap<Int, String>()
     private val multiAnswers = HashMap<Int, MutableSet<String>>()
@@ -90,35 +86,19 @@ class QuizActivity : AppCompatActivity() {
         habitStats = HabitStatsManager(this)
         haptic = HapticHelper(this)
         sfx = SoundEffects(this)
-        // Entered from a locked theme in the library? Jump straight to the paywall,
-        // and on success just return (the library refreshes), don't restart the funnel.
-        upgradeOnly = intent.getBooleanExtra(EXTRA_UPGRADE_ONLY, false)
-        billing = BillingManager(this) { premium ->
-            if (premium) runOnUiThread { if (upgradeOnly) finish() else goToDashboard() }
-        }
+
+        // The app is free for everyone (ad-supported) — no paywall. Hide any
+        // leftover paywall/subscription views from the layout.
+        binding.paywallGroup.visibility = View.GONE
+        binding.previewLink.visibility = View.GONE
+        binding.restoreLink.visibility = View.GONE
 
         binding.btnContinue.setOnClickListener {
             haptic.click(); sfx.tap()
-            if (onPaywall) startSubscription() else onContinue()
-        }
-        binding.restoreLink.setOnClickListener {
-            sfx.tap()
-            billing.queryPurchases()
-            Toast.makeText(this, "Checking for an existing subscription…", Toast.LENGTH_SHORT).show()
+            onContinue()
         }
 
-        // Free tier: anyone can skip the subscription and use the app with ads +
-        // the free affirmation theme. Always available (not debug-only).
-        binding.previewLink.visibility = View.VISIBLE
-        binding.previewLink.text = "Maybe later — continue free"
-        binding.previewLink.setOnClickListener {
-            sfx.tap()
-            if (upgradeOnly) { finish(); return@setOnClickListener }
-            persistProfile()
-            goToDashboard()
-        }
-
-        if (upgradeOnly) showPaywall() else renderStep()
+        renderStep()
     }
 
     private fun renderStep() {
@@ -194,7 +174,9 @@ class QuizActivity : AppCompatActivity() {
             stepIndex++
             renderStep()
         } else {
-            showPaywall()
+            // No paywall — personalize, then straight into the free app.
+            persistProfile()
+            goToDashboard()
         }
     }
 
@@ -205,40 +187,6 @@ class QuizActivity : AppCompatActivity() {
             if (child is AppCompatCheckBox && child.isChecked) set.add(child.text.toString())
         }
         return set
-    }
-
-    private fun showPaywall() {
-        onPaywall = true
-        binding.quizGroup.visibility = View.GONE
-        binding.paywallGroup.visibility = View.VISIBLE
-        binding.btnContinue.text = "Start my journey"
-
-        // Single annual plan at $1.99/yr — monthly removed.
-        binding.planMonthly.visibility = View.GONE
-        binding.planAnnual.isChecked = true
-        binding.planAnnual.text = "Annual  ·  \$1.99/year — unlock everything, no ads"
-
-        val habit = habitLabelLower(singleAnswers[0])
-        binding.paywallSub.text =
-            "Unlock every affirmation theme and remove ads — your daily path to stay free from $habit, plus a one-tap panic button for the hard moments."
-    }
-
-    private fun startSubscription() {
-        if (!upgradeOnly) persistProfile()
-        // The button must never silently do nothing. If the Play billing flow
-        // can't launch (store not ready, or pom_annual not ACTIVE yet — the
-        // normal state during a first review), tell the user and let them into
-        // the app free; they can subscribe later from Settings.
-        billing.purchaseAnnual {
-            runOnUiThread {
-                Toast.makeText(
-                    this,
-                    "Subscriptions aren't available right now — you're all set to start free. You can upgrade anytime in Settings.",
-                    Toast.LENGTH_LONG
-                ).show()
-                if (upgradeOnly) finish() else goToDashboard()
-            }
-        }
     }
 
     private fun persistProfile() {
@@ -264,11 +212,6 @@ class QuizActivity : AppCompatActivity() {
         else -> "other"
     }
 
-    private fun habitLabelLower(label: String?): String = when (label) {
-        null, "Something else" -> "the habit"
-        else -> label.lowercase()
-    }
-
     private fun costPerDay(label: String?): Float = when (label) {
         "Under $5" -> 3f
         "$5–$10" -> 7f
@@ -279,13 +222,8 @@ class QuizActivity : AppCompatActivity() {
 
     private fun dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
 
-    override fun onDestroy() {
-        billing.destroy()
-        super.onDestroy()
-    }
-
     companion object {
-        /** Launch QuizActivity straight to the paywall (e.g. from a locked theme). */
+        /** Retained for compatibility; the app has no paywall, so it is unused. */
         const val EXTRA_UPGRADE_ONLY = "upgrade_only"
     }
 }

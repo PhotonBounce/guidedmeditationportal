@@ -40,6 +40,8 @@ class AffirmationLibraryActivity : AppCompatActivity() {
             setPadding(dp(24), dp(40), dp(24), dp(32))
         }
 
+        addBackArrowTo(col)
+
         col.addView(TextView(this).apply {
             text = getString(R.string.lib_title)
             setTextColor(cream); textSize = 26f
@@ -69,31 +71,23 @@ class AffirmationLibraryActivity : AppCompatActivity() {
         val cardBg = ContextCompat.getColor(this, R.color.card_bg)
         val border = ContextCompat.getColor(this, R.color.card_border)
 
-        // Drop any previously-rendered cards, keeping the two header views.
-        while (col.childCount > 2) col.removeViewAt(2)
+        // Drop any previously-rendered cards, keeping the three header views
+        // (back arrow, title, subtitle).
+        while (col.childCount > 3) col.removeViewAt(3)
 
         // Favorites shortcut
         col.addView(themeCard("♥", getString(R.string.lib_favorites_title), getString(R.string.lib_favorites_subtitle), false, gold, cream, muted, cardBg, border) {
             startActivity(Intent(this, FavoritesActivity::class.java))
         })
 
-        val premium = PrefsManager(this).isPremium()
+        // The app is free for everyone (ad-supported) — every theme is unlocked.
         for (t in AffirmationContent.themes(this)) {
-            val locked = t.premium && !premium
-            val subtitle = if (locked) getString(R.string.lib_locked_subtitle)
-                           else getString(R.string.lib_affirmation_count, t.lines.size)
-            col.addView(themeCard(t.emoji, t.title, subtitle, locked, gold, cream, muted, cardBg, border) {
-                if (locked) {
-                    startActivity(
-                        Intent(this, QuizActivity::class.java)
-                            .putExtra(QuizActivity.EXTRA_UPGRADE_ONLY, true)
-                    )
-                } else {
-                    startActivity(
-                        Intent(this, AffirmationPlayerActivity::class.java)
-                            .putExtra(AffirmationPlayerActivity.EXTRA_THEME, t.id)
-                    )
-                }
+            val subtitle = getString(R.string.lib_affirmation_count, t.lines.size)
+            col.addView(themeCard(t.emoji, t.title, subtitle, false, gold, cream, muted, cardBg, border) {
+                startActivity(
+                    Intent(this, AffirmationPlayerActivity::class.java)
+                        .putExtra(AffirmationPlayerActivity.EXTRA_THEME, t.id)
+                )
             })
         }
 

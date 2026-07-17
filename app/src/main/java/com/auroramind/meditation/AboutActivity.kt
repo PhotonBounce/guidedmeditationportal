@@ -51,20 +51,8 @@ class AboutActivity : AppCompatActivity() {
                 Toast.makeText(this, "No email app installed", Toast.LENGTH_SHORT).show()
             }
         }
-        binding.restorePurchases.setOnClickListener {
-            Toast.makeText(this, "Checking for previous purchases…", Toast.LENGTH_SHORT).show()
-            // Trigger a fresh purchase query via a lightweight BillingManager instance
-            BillingManager(this) { isPremium ->
-                runOnUiThread {
-                    PrefsManager(this).setPremium(isPremium)
-                    Toast.makeText(
-                        this,
-                        if (isPremium) "Purchases restored ✓" else "No previous purchases found",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
+        // The app is free for everyone — there are no purchases to restore.
+        binding.restorePurchases.visibility = android.view.View.GONE
     }
 
     override fun onSupportNavigateUp(): Boolean {
