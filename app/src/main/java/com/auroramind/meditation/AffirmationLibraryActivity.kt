@@ -91,9 +91,9 @@ class AffirmationLibraryActivity : AppCompatActivity() {
             })
         }
 
-        // Bundled spoken recordings (if any) are a premium perk.
+        // Bundled spoken recordings (if any) — free for everyone.
         val bundled = AffirmationLibrary.list(this).size
-        if (bundled > 0 && premium) {
+        if (bundled > 0) {
             col.addView(themeCard("🎧", "Your spoken tracks", "$bundled recorded", false, gold, cream, muted, cardBg, border) {
                 startActivity(Intent(this, AffirmationPlayerActivity::class.java))
             })
