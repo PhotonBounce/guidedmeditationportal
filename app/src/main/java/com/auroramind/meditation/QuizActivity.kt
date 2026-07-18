@@ -111,7 +111,15 @@ class QuizActivity : AppCompatActivity() {
         binding.optionsCheckContainer.visibility = if (step.multi) View.VISIBLE else View.GONE
         binding.freedomInput.visibility = if (step.freeText) View.VISIBLE else View.GONE
 
+        // Reset the radio group's checked state. RadioGroup.removeAllViews()
+        // does NOT clear the remembered checkedRadioButtonId, so without this
+        // the group keeps returning the id of a button removed on a previous
+        // step. On a later step where the user hasn't picked anything, that
+        // stale id slips past the "nothing selected" guard in onContinue(),
+        // then findViewById(staleId) returns null → NullPointerException on
+        // getText(). Clearing it here makes every step start truly unselected.
         binding.optionsRadioGroup.removeAllViews()
+        binding.optionsRadioGroup.clearCheck()
         binding.optionsCheckContainer.removeAllViews()
 
         val accent = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.accent_iris))
@@ -162,11 +170,16 @@ class QuizActivity : AppCompatActivity() {
             }
             else -> {
                 val checkedId = binding.optionsRadioGroup.checkedRadioButtonId
-                if (checkedId == View.NO_ID) {
+                // Scope the lookup to the radio group (not the whole root) and
+                // null-check the result: a stale or removed id must never reach
+                // getText() on a null view.
+                val selected = if (checkedId != View.NO_ID)
+                    binding.optionsRadioGroup.findViewById<RadioButton>(checkedId) else null
+                if (selected == null) {
                     Toast.makeText(this, "Pick one to continue", Toast.LENGTH_SHORT).show()
                     return
                 }
-                singleAnswers[stepIndex] = binding.root.findViewById<RadioButton>(checkedId).text.toString()
+                singleAnswers[stepIndex] = selected.text.toString()
             }
         }
 
