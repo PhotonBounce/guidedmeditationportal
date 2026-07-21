@@ -27,6 +27,8 @@ on:
 jobs:
   bundle:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # create the public GitHub Release with the AAB/APK assets
     steps:
       - uses: actions/checkout@v4
 
@@ -161,6 +163,25 @@ jobs:
           path: app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
           retention-days: 14
+
+      - name: Publish public download links (GitHub Release)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          VN=$(grep -E '^\s*versionName ' app/build.gradle | head -1 | sed -E 's/.*versionName "([^"]+)".*/\1/')
+          VC=$(grep -E '^\s*versionCode ' app/build.gradle | head -1 | sed -E 's/.*versionCode ([0-9]+).*/\1/')
+          TAG="v${VN}"
+          cp app/build/outputs/bundle/release/app-release.aab PowerOfMind.aab
+          cp app/build/outputs/apk/release/app-release.apk PowerOfMind.apk
+          echo "Publishing GitHub Release $TAG (versionCode $VC)"
+          # Replace any existing release+tag for this version so re-runs refresh the assets cleanly.
+          gh release delete "$TAG" --yes --cleanup-tag 2>/dev/null || true
+          gh release create "$TAG" PowerOfMind.aab PowerOfMind.apk \
+            --title "Power of Mind $VN (build $VC)" \
+            --notes "Signed release build. **PowerOfMind.aab** → upload this to the Play Console. **PowerOfMind.apk** → sideload/testing. These are public direct-download links; no login required."
+          echo "AAB: https://github.com/${GITHUB_REPOSITORY}/releases/download/${TAG}/PowerOfMind.aab"
+          echo "APK: https://github.com/${GITHUB_REPOSITORY}/releases/download/${TAG}/PowerOfMind.apk"
 
       - name: Publish generated keystore (persist this!)
         if: steps.keystore.outputs.generated == 'true'
