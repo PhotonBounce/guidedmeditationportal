@@ -5,14 +5,14 @@ plugins {
 
 android {
     namespace 'com.auroramind.meditation'
-    compileSdk 35
+    compileSdk 36
 
     defaultConfig {
         applicationId "com.powerofmind.app"
         minSdk 21
-        targetSdk 35
-        versionCode 20
-        versionName "1.7.1"
+        targetSdk 36
+        versionCode 21
+        versionName "1.7.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -133,9 +133,11 @@ dependencies {
     // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
 
-    // Google Play Billing (for in-app purchases & subscriptions)
-    // Play policy requires 7.0.0+ for app updates from Aug 30, 2025
-    implementation 'com.android.billingclient:billing-ktx:7.1.1'
+    // Google Play Billing — REMOVED. The app is 100% free (ad-supported) with no
+    // in-app purchases or subscriptions, so the billing library is not bundled at
+    // all. This clears Play's "Billing Library 8.0.0+" update requirement (nothing
+    // to version) and keeps BillingManager as a no-op stub. Re-add only if paid
+    // products are reintroduced.
 
     // AdMob (for free tier banner, rewarded, and interstitial ads)
     implementation 'com.google.android.gms:play-services-ads:23.1.0'
