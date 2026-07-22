@@ -5,14 +5,14 @@ plugins {
 
 android {
     namespace 'com.auroramind.meditation'
-    compileSdk 35
+    compileSdk 36
 
     defaultConfig {
         applicationId "com.auroramind.meditation"
         minSdk 23        // Google Mobile Ads SDK 24+ requires API 23 (Android 6.0)
-        targetSdk 35
-        versionCode 12
-        versionName "1.4.1"
+        targetSdk 36
+        versionCode 13
+        versionName "1.4.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
