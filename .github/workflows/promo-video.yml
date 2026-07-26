@@ -1,0 +1,68 @@
+name: Promo Video (ElevenLabs VO)
+
+# Builds the 1080x1920 HD vertical explainer with premium ElevenLabs narration.
+# The GitHub runner (unlike the dev sandbox) can reach api.elevenlabs.io and
+# read the repo secret, so the whole video is produced here and published as a
+# public, no-login download link.
+#
+# Requires a repo secret: PB_ELEVENLABS_KEY  (Settings -> Secrets and variables
+# -> Actions -> New repository secret). XI_API_KEY / ELEVENLABS_API_KEY also work.
+
+on:
+  workflow_dispatch:
+    inputs:
+      voice_id:
+        description: 'ElevenLabs voice id (default Adam = deep narrator). Try 21m00Tcm4TlvDq8ikWAM (Rachel) or EXAVITQu4vr4xnSDxMaL (Bella).'
+        required: false
+        default: 'pNInz6obpgDQGcFmaJgB'
+
+permissions:
+  contents: write   # to publish the video as a GitHub Release asset
+
+jobs:
+  video:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install ffmpeg, fonts and Python deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg fonts-freefont-ttf fonts-dejavu-core
+          python -m pip install --quiet numpy Pillow
+
+      - name: Generate premium voiceover (ElevenLabs)
+        env:
+          PB_ELEVENLABS_KEY: ${{ secrets.PB_ELEVENLABS_KEY }}
+          XI_API_KEY: ${{ secrets.XI_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          VOICE_ID: ${{ github.event.inputs.voice_id }}
+        run: python promo/tts_elevenlabs.py
+
+      - name: Generate scene frames
+        run: python promo/gen_frames.py
+
+      - name: Build the vertical Short
+        run: python promo/build.py
+
+      - name: Upload video artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: powerofmind-promo-mp4
+          path: promo/PowerOfMind_Short.mp4
+          if-no-files-found: error
+
+      - name: Publish public download link (GitHub Release)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete promo-latest --yes --cleanup-tag 2>/dev/null || true
+          gh release create promo-latest promo/PowerOfMind_Short.mp4 \
+            --target "$GITHUB_SHA" \
+            --title "Power of Mind — Promo Short (vertical, HD)" \
+            --notes "1080x1920 HD vertical explainer with premium ElevenLabs narration. Public direct-download, no login required."
+          echo "Public link: https://github.com/$GITHUB_REPOSITORY/releases/download/promo-latest/PowerOfMind_Short.mp4"

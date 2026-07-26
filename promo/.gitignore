@@ -1,0 +1,10 @@
+# Generated build artifacts — CI regenerates these from the scripts + repo assets.
+frames/
+scenes/
+vo/
+__pycache__/
+video_only.mp4
+audio.m4a
+music.wav
+PowerOfMind_Short.mp4
+_buildlog.txt
