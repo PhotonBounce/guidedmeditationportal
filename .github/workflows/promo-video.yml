@@ -15,6 +15,14 @@ on:
         description: 'ElevenLabs voice id (default Adam = deep narrator). Try 21m00Tcm4TlvDq8ikWAM (Rachel) or EXAVITQu4vr4xnSDxMaL (Bella).'
         required: false
         default: 'pNInz6obpgDQGcFmaJgB'
+  # workflow_dispatch only works once this file is on the default branch, so
+  # while it lives on the working branch we also run it on push to that branch
+  # when the promo sources change. Remove this push block after merge to main.
+  push:
+    branches: [claude/laughing-hopper-dbfo9x]
+    paths:
+      - 'promo/**'
+      - '.github/workflows/promo-video.yml'
 
 permissions:
   contents: write   # to publish the video as a GitHub Release asset
