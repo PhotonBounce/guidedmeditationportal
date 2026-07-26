@@ -45,16 +45,39 @@ read -r -d '' SCRIPT << 'TXT' || true
 Stop. Your mind needs this. Guided Meditation Portal — over fifty-five tracks to calm, focus, or sleep. A breathing coach that actually works. Meet Spirit: a private guide that reads your mood, right on your device. Wake up gently — no more jarring alarms. Build a streak, and feel the change. And here's the best part: no subscriptions, ever. One tiny unlock. Everything, forever. Download Guided Meditation Portal. Your calmer life starts now.
 TXT
 python3 - "$VOICE_ID" "$SCRIPT" << 'PY'
-import os, sys, json, urllib.request
+import os, sys, json, urllib.request, urllib.error
 vid, text = sys.argv[1], sys.argv[2]
 key = os.environ["ELEVENLABS_API_KEY"]
+# Pre-flight: report the account's credit balance so we can tell
+# "out of credits" apart from "bad key" (both otherwise return 401).
+try:
+    sreq = urllib.request.Request("https://api.elevenlabs.io/v1/user/subscription",
+      headers={"xi-api-key": key})
+    with urllib.request.urlopen(sreq, timeout=30) as r:
+        sub = json.load(r)
+        used = sub.get("character_count"); lim = sub.get("character_limit")
+        print(f"ElevenLabs credits: used {used} of {lim} characters "
+              f"({(lim-used) if (lim is not None and used is not None) else '?'} remaining), "
+              f"tier={sub.get('tier')}")
+except urllib.error.HTTPError as e:
+    print("Could not read subscription:", e.code, e.read().decode(errors='replace')[:300])
 body = json.dumps({"text": text, "model_id": "eleven_multilingual_v2",
   "voice_settings": {"stability":0.45,"similarity_boost":0.8,"style":0.35,"use_speaker_boost":True}}).encode()
 req = urllib.request.Request(f"https://api.elevenlabs.io/v1/text-to-speech/{vid}",
   data=body, headers={"xi-api-key":key,"Content-Type":"application/json","Accept":"audio/mpeg"})
-with urllib.request.urlopen(req, timeout=120) as r, open("video/narration.mp3","wb") as f:
-    f.write(r.read())
-print("narration.mp3 written")
+try:
+    with urllib.request.urlopen(req, timeout=120) as r, open("video/narration.mp3","wb") as f:
+        f.write(r.read())
+    print("narration.mp3 written")
+except urllib.error.HTTPError as e:
+    detail = e.read().decode(errors='replace')
+    print(f"ElevenLabs error {e.code}: {detail[:500]}", file=sys.stderr)
+    # Surface the real cause explicitly for the run log
+    if "quota" in detail.lower():
+        print(">>> CAUSE: OUT OF CREDITS (quota_exceeded) — top up or upgrade your ElevenLabs plan.", file=sys.stderr)
+    elif e.code == 401:
+        print(">>> CAUSE: KEY REJECTED (invalid/expired API key) — update the ELEVENLABS_API_KEY secret.", file=sys.stderr)
+    sys.exit(1)
 PY
 
 echo "== 5/5 mix =="
