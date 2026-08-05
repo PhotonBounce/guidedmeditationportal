@@ -130,7 +130,20 @@ private class SplashCanvas(context: Context) : View(context) {
     private val nebulaPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
     // ── App logo (the hero of the splash) ─────────────────────────────────────
-    private val logo = BitmapFactory.decodeResource(resources, R.drawable.appicon)
+    // Downsample on decode: the source is 1024×1024 but it's only ever drawn at a
+    // few hundred px, so decoding at full size would waste ~4 MB of heap.
+    private val logo = run {
+        val opts = BitmapFactory.Options().apply {
+            inJustDecodeBounds = true
+            BitmapFactory.decodeResource(resources, R.drawable.appicon, this)
+            // Target ~512 px (comfortable headroom for the largest on-screen size)
+            var sample = 1
+            while (outWidth / (sample * 2) >= 512) sample *= 2
+            inSampleSize = sample
+            inJustDecodeBounds = false
+        }
+        BitmapFactory.decodeResource(resources, R.drawable.appicon, opts)
+    }
     private val logoPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { isFilterBitmap = true }
     private val logoGlowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         maskFilter = BlurMaskFilter(34f, BlurMaskFilter.Blur.NORMAL)
